@@ -1,0 +1,128 @@
+---
+title: "3-HarvestQAQC (CO2xComm)"
+output: html_document
+date: "2024-01-29"
+---
+
+```{r}
+######################################################################################
+###### 2022 PROGRAMS FOR ERROR CHECKING AND FILE PREPARATION OF HARVEST DATA #########
+######################################################################################
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+# Import the CSV file
+Harvest <- read_delim("S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/2022/Data/3-CO2xComm All Harvest (Filled Compiled).csv", 
+delim = ",", 
+escape_double = FALSE, 
+trim_ws = TRUE)
+
+```
+
+```{r}
+######################################################################################
+######### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING C4 HARVEST DATA ############
+######################################################################################
+ 
+HarvestQAQC <- Harvest
+ 
+HarvestQAQC$SC_Count[HarvestQAQC$SC_Count == -99] <- NA
+HarvestQAQC$SP_Count[HarvestQAQC$SP_Count == -99] <- NA
+HarvestQAQC$DI_Count[HarvestQAQC$DI_Count == -99] <- NA
+HarvestQAQC$SC_Mass[HarvestQAQC$SC_Mass == -99] <- NA
+HarvestQAQC$SP_Total_Mass[HarvestQAQC$SP_Total_Mass == -99] <- NA
+HarvestQAQC$DI_Total_Mass[HarvestQAQC$DI_Total_Mass == -99] <- NA
+# Any -99 value is converted into NA.
+# Note: SC_Mass versus SP_Total_Mass and DI_Total_Mass. Had to rename in code to match CSV column headings.
+
+HarvestQAQC$SCCFlag1 <- ifelse(HarvestQAQC$SC_Count > 15, 1, 0)
+HarvestQAQC$SPCFlag1 <- ifelse(HarvestQAQC$SP_Count > 58, 1, 0)
+HarvestQAQC$DICFlag1 <- ifelse(HarvestQAQC$DI_Count > 31, 1, 0)
+# Count QAQC by Spp.
+
+HarvestQAQC$SCMFlag <- ifelse(HarvestQAQC$SC_Mass > 10, 1, 0)
+HarvestQAQC$SPMFlag <- ifelse(HarvestQAQC$SP_Total_Mass > 8.9, 1, 0)
+HarvestQAQC$DIMFlag <- ifelse(HarvestQAQC$DI_Total_Mass > 5.1, 1, 0)
+# Mass QAQC by Spp.
+  
+HarvestQAQC$SCCFlag2 <- ifelse(HarvestQAQC$SC_Count != 0 & HarvestQAQC$SC_Mass == 0, 1, 0)
+HarvestQAQC$SPCFlag2 <- ifelse(HarvestQAQC$SP_Count != 0 & HarvestQAQC$SP_Total_Mass == 0, 1, 0)
+HarvestQAQC$DICFlag2 <- ifelse(HarvestQAQC$DI_Count != 0 & HarvestQAQC$DI_Total_Mass == 0, 1, 0)
+# QAQC Check by Spp.
+# If there is a count value but no mass value, the measurement is flagged.
+
+HarvestQAQC$SCCFlag <- ifelse(HarvestQAQC$SCCFlag1 == 1 | HarvestQAQC$SCCFlag2 == 1, 1, 0)
+HarvestQAQC$SPCFlag <- ifelse(HarvestQAQC$SPCFlag1 == 1 | HarvestQAQC$SPCFlag2 == 1, 1, 0)
+HarvestQAQC$DICFlag <- ifelse(HarvestQAQC$DICFlag1 == 1 | HarvestQAQC$DICFlag2 == 1, 1, 0)
+# Combined flags by Spp into one column.
+  
+HarvestQAQC$O1CFlag <- ifelse(HarvestQAQC$Other_1_Count > 35, 1, 0)
+HarvestQAQC$O1MFlag <- ifelse(HarvestQAQC$Other_1_Mass > 11.9, 1, 0)
+HarvestQAQC$O2CFlag <- ifelse(HarvestQAQC$Other_2_Count > 35, 1, 0)
+HarvestQAQC$O2MFlag <- ifelse(HarvestQAQC$Other_2_Mass > 11.9, 1, 0)
+# Other count and mass QAQC. 
+
+HarvestQAQC$O1Flag1 <- ifelse(HarvestQAQC$Other_1_Species == 'none' & HarvestQAQC$Other_1_Count != 0, 1, 0)
+HarvestQAQC$O1Flag2 <- ifelse(HarvestQAQC$Other_1_Species == 'none' & HarvestQAQC$Other_1_Mass != 0, 1, 0)
+HarvestQAQC$O2Flag1 <- ifelse(HarvestQAQC$Other_2_Species == 'none' & HarvestQAQC$Other_2_Count != 0, 1, 0)
+HarvestQAQC$O2Flag2 <- ifelse(HarvestQAQC$Other_2_Species == 'none' & HarvestQAQC$Other_2_Mass != 0, 1, 0)
+# If "none" other species were listed and there is a count or mass value entered, the measurement is flagged.
+  
+HarvestQAQC$O1Flag <- ifelse(HarvestQAQC$O1Flag1 == 1 | HarvestQAQC$O1Flag2 == 1, 1, 0)
+HarvestQAQC$O2Flag <- ifelse(HarvestQAQC$O2Flag1 == 1 | HarvestQAQC$O2Flag2 == 1, 1, 0)
+# Combined other spp count and mass flags into one column.
+
+HarvestQAQC <- subset(HarvestQAQC,selec = -c(SCCFlag1,SPCFlag1,DICFlag1,SCCFlag2,SPCFlag2,DICFlag2,O1Flag1,O1Flag2,O2Flag1,O2Flag2))
+# Removed all columns that were combined into one flagged column.
+
+HarvestQAQC <- subset(HarvestQAQC, O1Flag != 0 | O2Flag != 0 | SCCFlag != 0 | SPCFlag != 0 | DICFlag != 0 | SCMFlag != 0 | SPMFlag != 0 | DIMFlag != 0 | O1CFlag != 0 | O1MFlag != 0 | O2CFlag != 0 | O2MFlag != 0) 
+# This step deletes measurements that have "0" in all of the flag columns, meaning there are no errors. Any measurement with a flag (signified by a "1" value in a flag column), are kept and listed in the HarvestQAQC Error Report. 
+
+write_csv(HarvestQAQC, file = "S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/2022/Data/3-HarvestQAQC Error Report_SAS-R.csv")
+# Exports the HarvestQAQC Error Report.csv to the Shared drive.
+
+```
+
+```{r}
+#################################################################################
+########### STEP 2 -- GENERATE C4 HARVEST OUTPUT FILE FOR TRANSFER ###############
+#################################################################################
+
+# Import the CSV file
+Harvest <- read_delim("S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/2022/Data/3-CO2xComm All Harvest (Filled Compiled).csv", 
+delim = ",", 
+escape_double = FALSE, 
+trim_ws = TRUE)
+
+# Variables no longer collected are assigned a missing value "-99".
+HarvestTransfer <- Harvest %>%
+  mutate(
+    SP_Green_Mass = -99,
+    SP_Scenescent_Mass = -99,
+    DI_Green_Mass = -99,
+    DI_Scenescent_Mass = -99,
+    C3_Dead_Mass = -99,
+    C4_Dead_Mass = -99,
+    Other_Dead_Species = -99,
+    Other_Dead_Mass = -99,
+    Total_Dead_Mass = -99
+  ) %>%
+  select(
+    Year, Community, Chamber, Treatment, Quadrat, SC_Count, SC_Mass, SP_Count, SP_Green_Mass, SP_Scenescent_Mass, SP_Total_Mass,
+    DI_Count, DI_Green_Mass, DI_Scenescent_Mass, DI_Total_Mass, Other_1_Species, Other_1_Count, Other_1_Mass, Other_2_Species,
+    Other_2_Count, Other_2_Mass, C3_Dead_Mass, C4_Dead_Mass, Other_Dead_Species, Other_Dead_Mass, Total_Dead_Mass
+  )
+
+write_csv(HarvestTransfer, "S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/2022/Data/3-Harvest (for transfer)_SAS-R.csv")
+# Exports the Harvest (for transfer).csv to the Shared drive.
+
+
+# Updated on 2.13.24 by CN
+# Passed dummy data test on 2.13.24 by CN
+
+```
+
+

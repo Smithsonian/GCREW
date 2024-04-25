@@ -1,0 +1,89 @@
+---
+title: "3-CO2xN Harvest QAQC"
+output: html_document
+date: "2024-02-13"
+---
+
+```{r}
+######################################################################################
+###### 2022 PROGRAMS FOR ERROR CHECKING AND FILE PREPARATION OF HARVEST DATA #########
+######################################################################################
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+# Import the CSV file
+Harvest <- read_delim("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/3-CO2xN All Harvest (Filled).csv",
+delim = ",", 
+escape_double = FALSE, 
+trim_ws = TRUE)
+
+```
+
+
+```{r}
+######################################################################################
+######### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING C4 HARVEST DATA ############
+######################################################################################
+ 
+HarvestQAQC <- Harvest
+ 
+HarvestQAQC$SC_Count[HarvestQAQC$SC_Count == -99] <- NA
+HarvestQAQC$SP_Count[HarvestQAQC$SP_Count == -99] <- NA
+HarvestQAQC$DI_Count[HarvestQAQC$DI_Count == -99] <- NA
+HarvestQAQC$SC_Total_Mass[HarvestQAQC$SC_Total_Mass == -99] <- NA
+HarvestQAQC$SP_Total_Mass[HarvestQAQC$SP_Total_Mass == -99] <- NA
+HarvestQAQC$DI_Total_Mass[HarvestQAQC$DI_Total_Mass == -99] <- NA
+# Any -99 value is converted into NA.
+# Note: SC_Mass versus SP_Total_Mass and DI_Total_Mass. Had to rename in code to match CSV column headings.
+
+HarvestQAQC$SCCFlag1 <- ifelse(HarvestQAQC$SC_Count > 7, 1, 0) # Largest value in 2017 hand-written data sheets for CO2xN study
+HarvestQAQC$SPCFlag1 <- ifelse(HarvestQAQC$SP_Count > 58, 1, 0)
+HarvestQAQC$DICFlag1 <- ifelse(HarvestQAQC$DI_Count > 31, 1, 0)
+# Count QAQC by Spp.
+
+HarvestQAQC$SCMFlag <- ifelse(HarvestQAQC$SC_Total_Mass > 11, 1, 0)# Largest value in 2017 hand-written data sheets for CO2xN study
+HarvestQAQC$SPMFlag <- ifelse(HarvestQAQC$SP_Total_Mass > 8.9, 1, 0)
+HarvestQAQC$DIMFlag <- ifelse(HarvestQAQC$DI_Total_Mass > 5.1, 1, 0)
+# Mass QAQC by Spp.
+
+HarvestQAQC$ZFlag <- ifelse(is.na(HarvestQAQC$SC_Count) | is.na(HarvestQAQC$SP_Count) | is.na(HarvestQAQC$DI_Count) | is.na(HarvestQAQC$SC_Total_Mass) | is.na(HarvestQAQC$SP_Total_Mass) | is.na(HarvestQAQC$DI_Total_Mass), 1, NA)
+
+#HarvestQAQC <- subset(HarvestQAQC,select = -c(SCCFlag1,SPCFlag1,DICFlag1,SCMFlag,SPMFlag,DIMFlag,ZFlag))
+# Removed all columns that were combined into one flagged column.
+
+HarvestQAQC <- subset(HarvestQAQC, SCCFlag1 != 0 | SPCFlag1 != 0 | DICFlag1 != 0 | SCMFlag != 0 | SPMFlag != 0 | DIMFlag != 0 | ZFlag != 0)
+# This step deletes measurements that have "0" in all of the flag columns, meaning there are no errors. Any measurement with a flag (signified by a "1" value in a flag column), are kept and listed in the HarvestQAQC Error Report. 
+
+write_csv(HarvestQAQC, file = "S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/3-HarvestQAQC Error Report_SAS-R.csv")
+# Exports the HarvestQAQC Error Report.csv to the Shared drive.
+
+```
+
+```{r}
+#################################################################################
+########### STEP 2 -- GENERATE C4 HARVEST OUTPUT FILE FOR TRANSFER ##############
+#################################################################################
+
+# Import the CSV file
+HarvestTransfer <- read_delim("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/3-CO2xN All Harvest (Filled).csv", 
+delim = ",", 
+escape_double = FALSE, 
+trim_ws = TRUE)
+
+# Add variable from previous years
+HarvestTransfer$Litter_Total_Mass <- -99
+
+# Reorder columns to match archive
+HarvestTransfer <- HarvestTransfer %>%
+  select(Year, Chamber, Quadrat, In_Out, CO2, Nitrogen, Treatment, SC_Count, SC_Total_Mass, SP_Count, SP_Total_Mass, DI_Count, DI_Total_Mass, Litter_Total_Mass, Other_1_Species, Other_1_Count, Other_1_Mass, Other_2_Species, Other_2_Count, Other_2_Mass)
+
+# Exports the Harvest (for transfer).csv to the Shared drive.
+write_csv(HarvestTransfer, "S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/3-Harvest (for transfer)_SAS-R.csv")
+
+# Updated on 2.13.24 by CN
+# Passed dummy data test on 2.13.24 by CN
+
+```

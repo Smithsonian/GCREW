@@ -1,0 +1,112 @@
+---
+title: "1-CensusQAQC"
+output: html_document
+date: "2024-02-13"
+---
+
+
+```{r}
+######################################################################################
+############ 2022 PROGRAMS FOR ERROR CHECKING AND TRANSFERRING CENSUS DATA ###########
+######################################################################################
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+# Import the CSV file
+Census <- read_csv("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/1-CO2xN SC Census Data (Filled).csv") 
+# Note: CO2xN has slightly different CSV naming convention than other experiments. 
+
+```
+
+
+```{r}
+######################################################################################
+############ STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA #############
+######################################################################################
+
+# Data cleaning and flagging
+CensusQAQC <- Census %>%
+  mutate(HFlag = ifelse(Total_Height < Green_Height, 1, 0),
+         HFlag = ifelse(Total_Height > 223 | (Total_Height < 5 & Total_Height > 0), 1, HFlag),
+         WFlag = ifelse(Width > 8.4 | (Width < 0.2 & Width > 0), 1, 0),
+         ZFlag = ifelse(is.na(Total_Height) | is.na(Green_Height) | is.na(Width), 1, 0))
+CensusQAQC <- subset(CensusQAQC, HFlag != 0 | WFlag != 0 | ZFlag != 0)
+
+# Remove observations where Rep is 99
+CensusQAQC <- CensusQAQC %>%
+  filter(Rep != 99)
+
+# Export the cleaned data
+write_csv(CensusQAQC, "S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/1-CensusQAQC Error Report_SAS-R.csv")
+
+# In the SAS 1-CensusQAQC Error Report.csv, there is an additional flag called "FFlag". The SAS code does not indicate a line of code that would create this flag, but it is in the error report. Hmm.
+
+```
+
+
+```{r}
+######################################################################################
+############ STEP 2 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING DENSITY DATA ############
+######################################################################################
+
+# Import Density CSV file
+Density <- read_csv("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/2-CO2xN SC Density (Filled).csv") %>%
+  select(-Notes)
+
+# Creating DensityQAQC dataset
+DensityQAQC <- Density %>%
+  mutate(QDFlag = ifelse(Count_1 > 166 | Count_2 > 166, 1, 0),
+         ZFlag = ifelse(is.na(Count_1) | is.na(Count_2), 1, 0),
+         Count_Diff = Count_1 - Count_2,
+         DFlag = ifelse(Count_Diff < -4 | Count_Diff > 4, 1, 0))
+DensityQAQC <- subset(DensityQAQC, QDFlag != 0 | ZFlag != 0 | DFlag != 0)
+
+
+# Exporting the DensityQAQC dataset
+write_csv(DensityQAQC, "S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/2-DensityQAQC Error Report_SAS-R.csv")
+
+```
+
+
+```{r}
+############################################################################
+############ STEP 3 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ############
+############################################################################
+
+# Importing the Census dataset
+Census <- read_csv("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/1-CO2xN SC Census Data (Filled).csv") %>%
+  select(-Notes, -PassFail)
+
+# Creating CensusTransfer dataset
+CensusTransfer <- Census %>%
+  filter(Rep != 99) %>%
+  mutate(Miner = -99,
+         Rust = -99,
+         Flower = -99)
+
+# Exporting the CensusTransfer dataset
+write_csv(CensusTransfer %>% select(-Rep,-Miner, -Rust, -Flower), "S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/1-CO2xN Census Data (for transfer)_SAS-R.csv")
+
+```
+
+```{r}
+############################################################################
+############ STEP 4 -- GENERATE DENSITY OUTPUT FILE FOR TRANSFER  ##########
+############################################################################
+
+# Read the dataset into R
+DensityTransfer <- read_csv("S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/2-CO2xN SC Density (Filled).csv") %>%
+
+  select(-Notes) %>%
+  mutate(Stem_Count = -99,
+         Quadrat_Area = 0.09)
+
+# Export the data to CSV
+write_csv(DensityTransfer, 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/2022/Data/2-CO2xN Density Data (for transfer)_SAS-R.csv')
+
+# Updated on 2.13.24 by CN
+# Passed dummy data test on 2.13.24 by CN
+```

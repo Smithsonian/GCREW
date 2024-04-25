@@ -1,0 +1,64 @@
+---
+title: "RootQAQC - CO2xComm updated"
+output: html_document
+date: "2024-02-21"
+---
+
+```{r}
+######################################################################################
+############ 2022 PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ###########
+######################################################################################
+
+# This program was created in Apr 2020 by Pat Megonigal based on the 2016 version of the program which includes a new category of rhizomes called "Other_Rhiz_Mass". All observations were set to -99 (missing data) because no specific observations were made for this category. That will change in 2020 when root sorters will be instructed to note whether any of the rhizomes are not either sedge or grass
+
+# This script was converted from the RootQAQC SAS script into R by Chelsea Nitsch on 2.21.24.
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+  # Import the CSV file
+Root <- read_delim("S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Root Biomass Data/2022/CO2xComm Root Ingrowth (Filled).csv", delim = ",", col_types = cols(.default = col_guess()))
+```
+
+```{r}
+
+#################################################################################
+########### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ###############
+#################################################################################
+
+RootQAQC <- Root %>%
+  mutate(
+    Root_Mass = ifelse(Root_Mass == -99, NA, Root_Mass),
+    C3_Rhiz_Mass = ifelse(C3_Rhiz_Mass == -99, NA, C3_Rhiz_Mass),
+    C4_Rhiz_Mass = ifelse(C4_Rhiz_Mass == -99, NA, C4_Rhiz_Mass),
+    Other_Rhiz_Mass = ifelse(Other_Rhiz_Mass == -99, NA, Other_Rhiz_Mass),
+# Any -99 value is converted into NA.
+    RFlag = ifelse(Root_Mass > 4.38, 1,0),
+    C3RFlag = ifelse(C3_Rhiz_Mass > 7.37, 1,0),
+    C4RFlag = ifelse(C4_Rhiz_Mass > 1.37, 1,0),
+    OTRFlag = ifelse(Other_Rhiz_Mass == 0 | is.na(Other_Rhiz_Mass), 0, 1)
+  ) %>%
+  # This is a rare category so any entries should be double checked
+  filter((RFlag == 1 | C3RFlag == 1 | C4RFlag == 1 |   OTRFlag == 1))
+# Keep observations where any one of the flags is marked as 1
+
+
+write_csv(RootQAQC, 'S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Root Biomass Data/2022/Root QAQC_SAS-R.csv')
+# Exports the Root Ingrowth Data QAQC.csv to the Shared drive.
+
+```
+
+```{r}
+
+#################################################################################
+########### STEP 2 -- GENERATE ROOT INGROWTH OUTPUT FILE FOR TRANSFER ###############
+#################################################################################
+
+Root_transfer <- Root
+
+write_csv(Root_transfer, 'S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/1-Plant Biomass & CN Data/Root Biomass Data/2022/CO2xComm Root Ingrowth (for transfer)_SAS-R.csv')
+# Export the Root Ingrowth (For Transfer).csv to shared drive.
+
+```
