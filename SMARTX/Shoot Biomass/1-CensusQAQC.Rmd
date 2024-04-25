@@ -1,0 +1,95 @@
+---
+title: "Census QAQC 2023"
+output: html_document
+date: "2024-01-22"
+---
+
+```{r}
+###############################################################################
+######## 2023 PROGRAMS FOR ERROR CHECKING AND TRANSFERRING CENSUS DATA ######## 
+###############################################################################
+  
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+Census <- read_delim("S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/1-SMARTX SC Census (Filled).csv", delim = ",", col_types = cols())
+
+```
+
+
+```{r}
+###############################################################################
+######## STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA ##########
+###############################################################################
+  
+CensusQAQC <- Census
+CensusQAQC <- subset(CensusQAQC, Rep != 99)
+CensusQAQC$HFlag <- ifelse(CensusQAQC$Total_Height < CensusQAQC$Green_Height, 1, 0)
+CensusQAQC$HFlag <- ifelse(CensusQAQC$Total_Height > 223 | (0 < CensusQAQC$Total_Height & CensusQAQC$Total_Height < 5), 1, CensusQAQC$HFlag)
+CensusQAQC$WFlag <- ifelse(CensusQAQC$Width > 8.4 | (0 < CensusQAQC$Width & CensusQAQC$Width < 0.2), 1, 0)
+CensusQAQC$ZFlag <- ifelse(is.na(CensusQAQC$Total_Height) | is.na(CensusQAQC$Green_Height) | is.na(CensusQAQC$Width), 1, 0)
+CensusQAQC <- subset(CensusQAQC, HFlag != 0 | WFlag != 0 | ZFlag != 0)
+# This step deletes records that have "0" in all of the flag columns, meaning there are no errors, leaving for output those records with errors
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(CensusQAQC, file = "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/1-CensusQAQC Error Report_SAS-R.csv", row.names = FALSE)
+# Passed dummy data test on 1/17/23 CN
+
+```
+
+
+
+```{r}
+###############################################################################
+######## STEP 2 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING DENSITY DATA #########
+###############################################################################
+  
+Density <- read_delim("S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/2-Density (for transfer).csv", delim = ",", col_types = cols())
+DensityQAQC <- Density
+DensityQAQC$QDFlag <- ifelse(DensityQAQC$Count_1 > 180 | DensityQAQC$Count_2 > 180, 1, 0)
+DensityQAQC$ZFlag <- ifelse(is.na(DensityQAQC$Count_1) | is.na(DensityQAQC$Count_2), 1, 0)
+# this step adds an NA if there are any blank cells in the rows.
+DensityQAQC$Count_Diff <- DensityQAQC$Count_1 - DensityQAQC$Count_2
+DensityQAQC$DFlag <- ifelse(DensityQAQC$Count_Diff < -4 | DensityQAQC$Count_Diff > 4, 1, 0)
+DensityQAQC <- subset(DensityQAQC, QDFlag != 0 | ZFlag != 0 | DFlag != 0 | DFlag != 0)
+# is there a count difference # we want flagged?
+# This step deletes records that have "0" in all of the flag columns, meaning there are no errors, leaving for output those records with errors or NAs.
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(DensityQAQC, file = "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/2-Density Error Report_SAS-R.csv", row.names = FALSE)
+
+```
+
+
+
+
+```{r}
+###############################################################################
+######## STEP 3 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ################### 
+###############################################################################
+
+CensusTransfer <- Census[, c("Year", "Plot", "Temperature", "CO2", "Vegetation", "Subplot", "Total_Height", "Green_Height", "Width", "Flower_Cut")]
+write.csv(CensusTransfer, file = "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/1-Census (for transfer)_SAS-R.csv", row.names = FALSE)
+# File for transfer keeps flagged measurements in spreadsheet.
+
+```
+
+
+```{r}
+###############################################################################
+######## STEP 4 -- GENERATE DENSITY OUTPUT FILE FOR TRANSFER ##################
+###############################################################################
+  
+DensityTransfer <- Density %>%
+  mutate(Stem_Count = -99, Quadrat_Area = 0.09)
+
+write_delim(DensityTransfer, "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/2-Density (for transfer)_SAS-R.csv", delim = ",")
+# File for transfer keeps flagged measurements in spreadsheet.
+
+# Updated on 1.23.24 by CN
+# Passed dummy data test on 1.23.24 by CN
+```
+

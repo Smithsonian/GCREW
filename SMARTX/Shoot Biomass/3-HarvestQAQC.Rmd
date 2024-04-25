@@ -1,0 +1,95 @@
+---
+title: "3- HarvestQAQC"
+output: html_document
+date: "2024-01-23"
+---
+
+
+```{r}
+#######################################################################################
+######## 2022 PROGRAMS FOR ERROR CHECKING AND FILE PREPARATION OF HARVEST DATA ######## 
+#######################################################################################
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+Harvest <- read_delim("S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/3-SMARTX Harvest (Filled).csv", 
+                      delim = ",", 
+                      col_names = TRUE)
+```
+
+
+```{r}
+#######################################################################################
+########### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING C4HARVEST DATA ############
+#######################################################################################
+
+HarvestQAQC <- Harvest
+
+HarvestQAQC$SC_Count[HarvestQAQC$SC_Count == -99] <- NA
+HarvestQAQC$SP_Count[HarvestQAQC$SP_Count == -99] <- NA
+HarvestQAQC$DI_Count[HarvestQAQC$DI_Count == -99] <- NA
+HarvestQAQC$SC_Total_Mass[HarvestQAQC$SC_Total_Mass == -99] <- NA
+HarvestQAQC$SP_Total_Mass[HarvestQAQC$SP_Total_Mass == -99] <- NA
+HarvestQAQC$DI_Total_Mass[HarvestQAQC$DI_Total_Mass == -99] <- NA
+# Any -99 values are converted into NAs.
+
+HarvestQAQC$SCCFlag1 <- ifelse(HarvestQAQC$SC_Count > 15, 1, 0)
+HarvestQAQC$SPCFlag1 <- ifelse(HarvestQAQC$SP_Count > 58, 1, 0)
+HarvestQAQC$DICFlag1 <- ifelse(HarvestQAQC$DI_Count > 31, 1, 0)
+# Count QAQC by Spp.
+HarvestQAQC$SCMFlag <- ifelse(HarvestQAQC$SC_Total_Mass > 10, 1, 0)
+HarvestQAQC$SPMFlag <- ifelse(HarvestQAQC$SP_Total_Mass > 8.9, 1, 0)
+HarvestQAQC$DIMFlag <- ifelse(HarvestQAQC$DI_Total_Mass > 5.1, 1, 0)
+# Mass QAQC by Spp.
+  
+HarvestQAQC$SCCFlag2 <- ifelse(HarvestQAQC$SC_Count != 0 & HarvestQAQC$SC_Total_Mass == 0, 1, 0)
+HarvestQAQC$SPCFlag2 <- ifelse(HarvestQAQC$SP_Count != 0 & HarvestQAQC$SP_Total_Mass == 0, 1, 0)
+HarvestQAQC$DICFlag2 <- ifelse(HarvestQAQC$DI_Count != 0 & HarvestQAQC$DI_Total_Mass == 0, 1, 0)
+# QAQC Cceck by Spp.
+  
+HarvestQAQC$SCCFlag <- ifelse(HarvestQAQC$SCCFlag1 == 1 | HarvestQAQC$SCCFlag2 == 1, 1, 0)
+HarvestQAQC$SPCFlag <- ifelse(HarvestQAQC$SPCFlag1 == 1 | HarvestQAQC$SPCFlag2 == 1, 1, 0)
+HarvestQAQC$DICFlag <- ifelse(HarvestQAQC$DICFlag1 == 1 | HarvestQAQC$DICFlag2 == 1, 1, 0)
+# Combined flags by Spp into one column.
+  
+HarvestQAQC$O1CFlag <- ifelse(HarvestQAQC$Other_1_Count > 35, 1, 0)
+HarvestQAQC$O1MFlag <- ifelse(HarvestQAQC$Other_1_Mass > 11.9, 1, 0)
+HarvestQAQC$O2CFlag <- ifelse(HarvestQAQC$Other_2_Count > 35, 1, 0)
+HarvestQAQC$O2MFlag <- ifelse(HarvestQAQC$Other_2_Mass > 11.9, 1, 0)
+
+HarvestQAQC$O1Flag1 <- ifelse(HarvestQAQC$Other_1_Species == 'none' & HarvestQAQC$Other_1_Count != 0, 1, 0)
+HarvestQAQC$O1Flag2 <- ifelse(HarvestQAQC$Other_1_Species == 'none' & HarvestQAQC$Other_1_Mass != 0, 1, 0)
+HarvestQAQC$O2Flag1 <- ifelse(HarvestQAQC$Other_2_Species == 'none' & HarvestQAQC$Other_2_Count != 0, 1, 0)
+HarvestQAQC$O2Flag2 <- ifelse(HarvestQAQC$Other_2_Species == 'none' & HarvestQAQC$Other_2_Mass != 0, 1, 0)
+# Checks if "none" was listed under other species column bu there was a count or mass value entered. If so, a flag is signified by value of 1.
+  
+HarvestQAQC$O1Flag <- ifelse(HarvestQAQC$O1Flag1 == 1 | HarvestQAQC$O1Flag2 == 1, 1, 0)
+HarvestQAQC$O2Flag <- ifelse(HarvestQAQC$O2Flag1 == 1 | HarvestQAQC$O2Flag2 == 1, 1, 0)
+# Combined other Spp count and mass flags into one column.
+
+HarvestQAQC <- subset(HarvestQAQC,selec = -c(SCCFlag1,SPCFlag1,DICFlag1,SCCFlag2,SPCFlag2,DICFlag2,O1Flag1,O1Flag2,O2Flag1,O2Flag2))
+# Removed all columns that were combined into one flagged column.
+HarvestQAQC <- subset(HarvestQAQC, O1Flag != 0 | O2Flag != 0 | SCCFlag != 0 | SPCFlag != 0 | DICFlag != 0 | SCMFlag != 0 | SPMFlag != 0 | DIMFlag != 0 | O1CFlag != 0 | O1MFlag != 0 | O2CFlag != 0 | O2MFlag != 0)
+# This step deletes records that have "0" in all of the flag columns, meaning there are no errors, leaving for output those records with errors
+# Keep observations where any one of the flags is marked as 1
+
+write_csv(HarvestQAQC, file = "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/3-HarvestQAQC Error Report_SAS-R.csv")
+
+```
+
+
+```{r}
+#######################################################################################
+################ STEP 2 -- GENERATE C4 HARVEST OUTPUT FILE FOR TRANSFER ###############
+#######################################################################################
+
+write_csv(Harvest, file = "S:/Biogeochemistry/GCREW/4-SMARTX/3-Data/1-Plant biomass & CN data/Shoot Biomass Data/2023/Data/3-Harvest (for transfer)_SAS-R.csv")
+
+# Updated on 1.23.24 by CN
+# Passed dummy data test on 1.23.24 by CN
+
+```

@@ -1,0 +1,82 @@
+---
+title: "1-SMARTX Derived Sedge Shoot Biomass 2016-2023 (published 03-17-2023)"
+output: html_document
+date: "2024-03-07"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the sedge Schoenoplectus americanus (formerly Scirpus olneyi). They are from an experiment that began in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from two files. One file has the dimensions (height and width) of plants in each plot. This file is used to calculate the average mass of individual stems. The second file has the density of plants in each plot. The product of mass and density is plot biomass. Contact Pat Megonigal for details.
+
+# SAS-R Conversion 3.7.2024 by Chelsea Nitsch
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+```
+
+```{r}
+
+# Importing the Census CSV file
+SCcensus <- read.csv('S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/2-SC Census Data/SMARTX Master SC Census 2016-2023 (published 04-12-2024).csv', header = TRUE, sep = ",")
+
+# The code in this section uses the allometric equations developed by Jon Bakker to calculate the biomass of each stem measured.
+
+biomass <- SCcensus
+biomass$Total_Height[biomass$Total_Height == -99] <- NA  
+biomass$Width[biomass$Width == -99] <- NA
+# Take out missing values.
+biomass$Total_Height[biomass$Total_Height == 0] <- NA  
+# Take out zero values, these data were entered to occupy the columns. i.e. when the census stems were less than 30 stems per quadrat.
+biomass$Width[biomass$Width == 0] <- NA
+
+biomass$biomass <- ((0.0713672 + 0.0058842 * biomass$Total_Height + 0.0984255 * biomass$Width - 0.00027383247 * biomass$Total_Height * biomass$Width) ** 3)
+#From Jon's new equation (TotalHeight and Width). Ecology data paper, Final version.
+
+biomass <- biomass[order(biomass$Year, biomass$Plot, biomass$Temperature, biomass$CO2, biomass$Vegetation, biomass$Subplot), ]
+
+meanbiomass <- aggregate(biomass$biomass, by = list(biomass$Year, biomass$Plot, biomass$Temperature, biomass$CO2, biomass$Vegetation, biomass$Subplot), FUN = mean, na.rm = TRUE)
+colnames(meanbiomass) <- c("Year", "Plot", "Temperature", "CO2", "Vegetation", "Subplot", "meanplantbio")
+meanbiomass <- meanbiomass[order(meanbiomass$Year, meanbiomass$Plot, meanbiomass$Temperature, meanbiomass$CO2, meanbiomass$Vegetation, meanbiomass$Subplot, meanbiomass$meanplantbio), ]
+# This import step reads the census file with the stems count for each quadrat (2005-2014). Stem count (or density) is needed to convert the mass of individual stems in the step above to total chamber biomass
+
+```
+
+
+```{r}
+
+# Importing the Density CSV file
+SCdensity <- read.csv('S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/2-SC Census Data/SMARTX Master SC Density 2016-2023 (published 04-12-2024).csv', header = TRUE, sep = ",")
+
+Density <- SCdensity
+Density$Stem_Count[Density$Stem_Count == -99] <- NA
+Density$StemDoubleCount1[Density$StemDoubleCount1 == -99] <- NA
+Density$StemDoubleCount2[Density$StemDoubleCount2 == -99] <- NA
+
+Density$finalcount <- ifelse(!is.na(Density$StemDoubleCount1), 
+# Added 2023 to process density double counts (Fien).
+                             ifelse(is.na(Density$StemDoubleCount2), Density$StemDoubleCount1, 
+                                    ceiling((Density$StemDoubleCount1 + Density$StemDoubleCount2) / 2)), 
+# Calculate mean of two counts and round up.
+                             Density$Stem_Count)
+
+Density <- Density[order(Density$Year, Density$Plot, Density$Temperature, Density$CO2, Density$Vegetation, Density$Subplot), ]
+
+MergeData <- merge(meanbiomass, Density, by = c("Year", "Plot", "Temperature", "CO2", "Vegetation", "Subplot"))
+
+MergeData$SCmass_m2 <- MergeData$meanplantbio * MergeData$finalcount / MergeData$Quadrat_Area
+# Convert the total per quadrat to meter square by dividing by the area of the quadrat (0.09 m2).
+MergeData$SCdensity_m2 <- MergeData$finalcount / MergeData$Quadrat_Area
+# Convert the total number of stems per quadrat to meter square by dividing by the area of the quadrat.
+MergeData$SCmass_m2[MergeData$SCdensity_m2 == 0] <- 0
+
+SCshoots <- aggregate(cbind(SCmass_m2, SCdensity_m2) ~ Year + Plot + Temperature + CO2 + Vegetation, data = MergeData, FUN = mean)
+SCshoots <- SCshoots[order(SCshoots$Year, SCshoots$Plot, SCshoots$Temperature, SCshoots$CO2, SCshoots$Vegetation, SCshoots$SCmass_m2, SCshoots$SCdensity_m2), ]
+
+write_csv(SCshoots,'S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/1-SMARTX Sedge Shoot Biomass 2016-2023.csv')
+# Exports .csv to S Drive 
+
+```
+

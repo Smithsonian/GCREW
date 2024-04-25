@@ -1,0 +1,95 @@
+---
+title: "2-SMARTX Derived Non-Sedge Shoot Biomass 2016-2023"
+output: html_document
+date: "2024-04-12"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the non-sedge C4 grass Spartina patens (Aiton) Muhl. and Distichlis spicata (L.) Greene. They are from an experiment that began in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from the file that has stem count and dry weight from each clipped plot. This file is used to calculate the area based dry mass for C4 grass and litter. Contact Pat Megonigal for details.
+
+# SAS-R Conversion 4.12.2024 by Chelsea Nitsch
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+```
+
+```{r}
+#################################################################
+##### START QUADRAT-BASED HARVEST DATA FOR NON-SEDGE BIOMASS ####
+#################################################################
+
+# Importing the Master Harvest CSV file
+sp_biomass <- read_csv("S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/4-All Harvest Data/SMARTX Master Harvest 2016-2023 (published 04-12-2024).csv")
+
+# Order the data
+sp_biomass <- sp_biomass %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation, Subplot)
+
+# Assign NA's to -99 values in dataset
+sp_biomass <- sp_biomass %>%
+  mutate(SP_Count = ifelse(SP_Count == -99, NA, SP_Count),
+         SP_Total_Mass = ifelse(SP_Total_Mass == -99, NA, SP_Total_Mass),
+         DI_Count = ifelse(DI_Count == -99, NA, DI_Count),
+         DI_Total_Mass = ifelse(DI_Total_Mass == -99, NA, DI_Total_Mass),
+         Other_1_Count = ifelse(Other_1_Count == -99, NA, Other_1_Count),
+         Other_1_Mass = ifelse(Other_1_Mass == -99, NA, Other_1_Mass),
+         Other_2_Count = ifelse(Other_2_Count == -99, NA, Other_2_Count),
+         Other_2_Mass = ifelse(Other_2_Mass == -99, NA, Other_2_Mass))
+
+# Calculate the area-based dry mass and density
+sp_biomass <- sp_biomass %>%
+  mutate(SPmass_m2 = SP_Total_Mass / 0.0025,
+         DImass_m2 = DI_Total_Mass / 0.0025,
+         Other1mass_m2 = Other_1_Mass / 0.0025,
+         Other2mass_m2 = Other_2_Mass / 0.0025,
+         SPdensity_m2 = SP_Count / 0.0025,
+         DIdensity_m2 = DI_Count / 0.0025,
+         Other1density_m2 = Other_1_Count / 0.0025,
+         Other2density_m2 = Other_2_Count / 0.0025)
+
+# Calculate the mean values for each plot
+quadra_mass <- sp_biomass %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation, Subplot) %>%
+  summarize(SPdensity_m2 = mean(SPdensity_m2),
+            SPmass_m2 = mean(SPmass_m2),
+            DIdensity_m2 = mean(DIdensity_m2),
+            DImass_m2 = mean(DImass_m2),
+            Other1density_m2 = mean(Other1density_m2),
+            Other1mass_m2 = mean(Other1mass_m2),
+            Other2density_m2 = mean(Other2density_m2),
+            Other2mass_m2 = mean(Other2mass_m2))
+
+# Calculate the mean values for each chamber
+chamber_mass <- quadra_mass %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation) %>%
+  summarize(SPdensity_m2 = mean(SPdensity_m2),
+            SPmass_m2 = mean(SPmass_m2),
+            DIdensity_m2 = mean(DIdensity_m2),
+            DImass_m2 = mean(DImass_m2),
+            Other1density_m2 = mean(Other1density_m2),
+            Other1mass_m2 = mean(Other1mass_m2),
+            Other2density_m2 = mean(Other2density_m2),
+            Other2mass_m2 = mean(Other2mass_m2))
+
+# Create the final dataset
+all_non_sedge <- chamber_mass %>%
+  mutate(SPdensity_m2 = ifelse(is.na(SPdensity_m2), -99, SPdensity_m2),
+         SPmass_m2 = ifelse(is.na(SPmass_m2), -99, SPmass_m2),
+         DIdensity_m2 = ifelse(is.na(DIdensity_m2), -99, DIdensity_m2),
+         DImass_m2 = ifelse(is.na(DImass_m2), -99, DImass_m2),
+         Other1mass_m2 = ifelse(is.na(Other1mass_m2), 0, Other1mass_m2),
+         Other2mass_m2 = ifelse(is.na(Other2mass_m2), 0, Other2mass_m2),
+         Other1density_m2 = ifelse(is.na(Other1density_m2), 0, Other1density_m2),
+         Other2density_m2 = ifelse(is.na(Other2density_m2), 0, Other2density_m2))
+
+
+# Export the final dataset
+write_csv(all_non_sedge, "S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/2-SMARTX Non-Sedge Shoot Biomass 2016-2023.csv")
+
+
+```
+
