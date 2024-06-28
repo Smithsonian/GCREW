@@ -1042,3 +1042,44 @@ dup_removal <- function(source_dir){
   }
 }
 
+## ==================== Function 14: daily rain fall=========================================
+daily_rain <- function(year_path, output_dir, output_filename, year){
+  # Create list of file paths in source directory (year_path)
+   i <- list.files(year_path, pattern = paste0("min_", year), all.files = FALSE,
+                  full.names = TRUE, recursive = TRUE,
+                  ignore.case = FALSE)
+  
+  # Begin for loop to process all files
+  # Read in table 
+  dt <- fread(i, tz = "")
+  
+  # Format timestamp
+  dt$timestamp <- as.POSIXct(dt$timestamp, tz="UTC", format="%Y-%m-%d %H:%M:%S")
+  
+  # Order by timestamp
+  dt <- dt[order(dt$timestamp),]
+  
+  # Create column for just the date
+  dt <- dt %>%
+    mutate(date = date(timestamp))
+  
+  setDT(dt)
+  
+  # Select just the date and rain accumulation columns
+  dt_new <- subset(dt, select = c("date", "rain_cm_tot", "rain_in_tot"))
+  
+  # Summarize the rain accumulation by date by summing
+  dt_rain <- dt_new[, lapply(.SD, sum, na.rm = T), by = date]
+  
+  # Set column names
+  names(dt_rain) <- c("date", "total_rain_cm","total_rain_in")
+  
+  # Create new filename
+  filename <- paste0(output_filename, year, ".csv")
+  out_path <- file.path(output_dir, filename)
+  
+  # Save data
+  write.table(dt_rain, out_path, append = FALSE, quote = FALSE, sep = ",",
+              na = "NA", dec = ".", row.names = FALSE,
+              col.names = TRUE, qmethod = c("escape", "double"))
+}

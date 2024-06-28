@@ -15,7 +15,7 @@
 
 ## ======================== Load functions =====================================================
 # Source functions and packages from "0-SMARTX-origami-functions.R"
-source("workflow scripts/0-GCREW-workflow-functions.R")
+source("Loggernet processing/scripts/0-GCREW-workflow-functions.R")
 
 ## =========================== USER INPUT SECTION ==================================================
 # The user should edit the following variables as seen fit
@@ -30,36 +30,36 @@ mid_path <- file.path("C:", "Users", Sys.getenv("USERNAME"), "Dropbox (Smithsoni
 out_path <- file.path("C:", "Users", Sys.getenv("USERNAME"), "Dropbox (Smithsonian)", "GCREW_RESEARCHER_DATA")
 
 # Logger x project document for file organization
-logger_role <- file.path("design documents", "logger_x_project.csv")
+logger_role <- file.path("Loggernet processing", "design documents", "logger_x_project.csv")
 
 # ------------ Load design documents. Comment out and comment in the correct + corresponding documents -----------
 # SMARTX design
-design_table <- file.path("design documents", "SMARTX_design.csv")
-plot_names <- file.path("design documents", "SMARTX_plotnames.csv")
+design_table <- file.path("Loggernet processing", "design documents", "SMARTX_design.csv")
+plot_names <- file.path("Loggernet processing", "design documents", "SMARTX_plotnames.csv")
 # 
 # # # GENX design
-# design_table <- file.path("design documents", "GENX_design.csv")
-# plot_names <- file.path("design documents", "GENX_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "GENX_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "GENX_plotnames.csv")
 # 
 # # GENX organs design  
-# design_table <- file.path("design documents", "organs_design.csv")
-# plot_names <- file.path("design documents", "organs_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "organs_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "organs_plotnames.csv")
 # 
 # # Water level design
-# design_table <- file.path("design documents", "waterlevel_design.csv")
-# plot_names <- file.path("design documents", "site_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "waterlevel_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "site_plotnames.csv")
 
 # # # GCREW Met design
-# design_table <- file.path("design documents", "gcrewmet_design.csv")
-# plot_names <- file.path("design documents", "site_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "gcrewmet_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "site_plotnames.csv")
 
 # # GCREW Marsh Outlet Sontektable design
-# design_table <- file.path("design documents", "sontektable_design.csv")
-# plot_names <- file.path("design documents", "site_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "sontektable_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "site_plotnames.csv")
 
 # # Redox design
-# design_table <- file.path("design documents", "redox_design.csv")
-# plot_names <- file.path("design documents", "redox_plotnames.csv")
+# design_table <- file.path("Loggernet processing", "design documents", "redox_design.csv")
+# plot_names <- file.path("Loggernet processing", "design documents", "redox_plotnames.csv")
 
 ## =========================== Initial steps, which can apply to any tables in loggernet =========================================
 # Step 1: Create directory file paths and create the directories

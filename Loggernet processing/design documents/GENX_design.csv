@@ -1,0 +1,1086 @@
+﻿loggernet_variable,cr1000_name,design_scale_type,design_link,var_norm_split,research_name,logger,type,units,definition,table
+TIMESTAMP,timestamp,site,logger,n,timestamp,genx,number,YYYY-MM-DD HH:MM:SS,loggernet timestamp,genx_ardlog
+RECORD,record,site,logger,n,record,genx,number,NA,loggernet record number,genx_ardlog
+BattV_Min,battv_min,site,logger,n,battv_min,genx,number,volts,default CR1000 battery voltage measurement,genx_ardlog
+PTemp_C,ptemp_c,site,logger,n,ptemp_c,genx,number,degrees Celsius,default CR1000 wiring panel temperature measurement,genx_ardlog
+Flag,flag,site,logger,n,flag,genx,number,NA,NA,genx_ardlog
+co2(1),co21,plot,a0,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(2),co22,plot,c1,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(3),co23,plot,b2,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(4),co24,plot,a3,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(5),co25,plot,c4,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(6),co26,plot,b4,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(7),co27,plot,a5,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(8),co28,plot,c6,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(9),co29,plot,b6,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(10),co210,plot,a7,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(11),co211,plot,c8,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(12),co212,plot,b9,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2ave1(1),co2ave11,plot,a0,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(2),co2ave12,plot,c1,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(3),co2ave13,plot,b2,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(4),co2ave14,plot,a3,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(5),co2ave15,plot,c4,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(6),co2ave16,plot,b4,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(7),co2ave17,plot,a5,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(8),co2ave18,plot,c6,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(9),co2ave19,plot,b6,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(10),co2ave110,plot,a7,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(11),co2ave111,plot,c8,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(12),co2ave112,plot,b9,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+BMETemp(1),bmetemp1,plot,a0,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(2),bmetemp2,plot,c1,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(3),bmetemp3,plot,b2,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(4),bmetemp4,plot,a3,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(5),bmetemp5,plot,c4,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(6),bmetemp6,plot,b4,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(7),bmetemp7,plot,a5,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(8),bmetemp8,plot,c6,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(9),bmetemp9,plot,b6,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(10),bmetemp10,plot,a7,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(11),bmetemp11,plot,c8,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(12),bmetemp12,plot,b9,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMERH(1),bmerh1,plot,a0,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(2),bmerh2,plot,c1,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(3),bmerh3,plot,b2,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(4),bmerh4,plot,a3,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(5),bmerh5,plot,c4,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(6),bmerh6,plot,b4,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(7),bmerh7,plot,a5,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(8),bmerh8,plot,c6,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(9),bmerh9,plot,b6,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(10),bmerh10,plot,a7,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(11),bmerh11,plot,c8,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(12),bmerh12,plot,b9,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMEpressure(1),bmepressure1,plot,a0,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(2),bmepressure2,plot,c1,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(3),bmepressure3,plot,b2,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(4),bmepressure4,plot,a3,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(5),bmepressure5,plot,c4,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(6),bmepressure6,plot,b4,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(7),bmepressure7,plot,a5,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(8),bmepressure8,plot,c6,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(9),bmepressure9,plot,b6,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(10),bmepressure10,plot,a7,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(11),bmepressure11,plot,c8,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(12),bmepressure12,plot,b9,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEVOC(1),bmevoc1,plot,a0,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(2),bmevoc2,plot,c1,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(3),bmevoc3,plot,b2,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(4),bmevoc4,plot,a3,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(5),bmevoc5,plot,c4,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(6),bmevoc6,plot,b4,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(7),bmevoc7,plot,a5,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(8),bmevoc8,plot,c6,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(9),bmevoc9,plot,b6,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(10),bmevoc10,plot,a7,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(11),bmevoc11,plot,c8,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(12),bmevoc12,plot,b9,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+Therm10C(1),therm10c1,plot,a0,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(2),therm10c2,plot,c1,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(3),therm10c3,plot,b2,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(4),therm10c4,plot,a3,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(5),therm10c5,plot,c4,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(6),therm10c6,plot,b4,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(7),therm10c7,plot,a5,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(8),therm10c8,plot,c6,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(9),therm10c9,plot,b6,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(10),therm10c10,plot,a7,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(11),therm10c11,plot,c8,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(12),therm10c12,plot,b9,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm25C(1),therm25c1,plot,a0,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(2),therm25c2,plot,c1,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(3),therm25c3,plot,b2,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(4),therm25c4,plot,a3,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(5),therm25c5,plot,c4,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(6),therm25c6,plot,b4,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(7),therm25c7,plot,a5,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(8),therm25c8,plot,c6,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(9),therm25c9,plot,b6,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(10),therm25c10,plot,a7,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(11),therm25c11,plot,c8,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(12),therm25c12,plot,b9,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm10pin(1),therm10pin1,plot,a0,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(2),therm10pin2,plot,c1,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(3),therm10pin3,plot,b2,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(4),therm10pin4,plot,a3,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(5),therm10pin5,plot,c4,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(6),therm10pin6,plot,b4,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(7),therm10pin7,plot,a5,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(8),therm10pin8,plot,c6,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(9),therm10pin9,plot,b6,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(10),therm10pin10,plot,a7,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(11),therm10pin11,plot,c8,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(12),therm10pin12,plot,b9,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(1),therm90ext1,plot,a0,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(2),therm90ext2,plot,c1,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(3),therm90ext3,plot,b2,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(4),therm90ext4,plot,a3,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(5),therm90ext5,plot,c4,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(6),therm90ext6,plot,b4,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(7),therm90ext7,plot,a5,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(8),therm90ext8,plot,c6,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(9),therm90ext9,plot,b6,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(10),therm90ext10,plot,a7,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(11),therm90ext11,plot,c8,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(12),therm90ext12,plot,b9,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10amb,therm10amb,site,logger,n,therm10amb,genx,number,degrees Celsius,ambient average from Campbell,genx_ardlog
+CS_Code,cs_code,site,logger,n,cs_code,genx,number,NA,code for Campbell Scientific control of system,genx_ardlog
+BoxTemp(1),boxtemp1,site,logger,n,boxtemp1,genx,number,degrees Celsius,temperature in LGR box,genx_ardlog
+BoxTemp(2),boxtemp2,site,logger,n,boxtemp2,genx,number,degrees Celsius,temperature in LGR box,genx_ardlog
+Logger,logger,key,logger,key,logger,genx,character,NA,logger name,genx_ardlog
+Program,program,site,logger,n,program,genx,character,NA,program version,genx_ardlog
+Table,table,site,logger,n,table,genx,character,NA,loggernet table name,genx_ardlog
+co2(13),co213,plot,13_amb,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2(14),co214,plot,14_amb,y,co2,genx,number,parts per million,carbon dioxide concentration,genx_ardlog
+co2ave1(13),co2ave113,plot,13_amb,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+co2ave1(14),co2ave114,plot,14_amb,y,co2ave1,genx,number,parts per million,1 minute average of carbon dioxide concentration,genx_ardlog
+BMETemp(13),bmetemp13,plot,13_amb,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMETemp(14),bmetemp14,plot,14_amb,y,bmetemp,genx,number,degrees Celsius,air temperature,genx_ardlog
+BMERH(13),bmerh13,plot,13_amb,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMERH(14),bmerh14,plot,14_amb,y,bmerh,genx,number,%,relative humidity,genx_ardlog
+BMEpressure(13),bmepressure13,plot,13_amb,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEpressure(14),bmepressure14,plot,14_amb,y,bmepressure,genx,number,millibars,atmospheric pressure,genx_ardlog
+BMEVOC(13),bmevoc13,plot,13_amb,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+BMEVOC(14),bmevoc14,plot,14_amb,y,bmevoc,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_ardlog
+Therm10C(13),therm10c13,plot,13_amb,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm10C(14),therm10c14,plot,14_amb,y,therm10c,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_ardlog
+Therm25C(13),therm25c13,plot,13_amb,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm25C(14),therm25c14,plot,14_amb,y,therm25c,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_ardlog
+Therm10pin(13),therm10pin13,plot,13_amb,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm10pin(14),therm10pin14,plot,14_amb,y,therm10pin,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(13),therm90ext13,plot,13_amb,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+Therm90ext(14),therm90ext14,plot,14_amb,y,therm90ext,genx,number,degrees Celsius,NA,genx_ardlog
+rowid,rowid,key,logger,key,rowid,genx,character,NA,"unique id  for each orginal data row contatenate (timestamp, block, tabletype)",genx_ardlog
+time2,time2,key,logger,key,time2,genx,number,YYYY-MM-DD HH:MM:SS,posix time stamp (EST standard),genx_ardlog
+TIMESTAMP,timestamp,site,logger,n,timestamp,genx,number,YYYY-MM-DD HH:MM:SS,loggernet timestamp,genx_control
+RECORD,record,site,logger,n,record,genx,number,NA,loggernet record number,genx_control
+Statname,logger,key,logger,key,logger,genx,character,NA,logger name,genx_control
+BTemp(1),btemp1,plot,a0,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(2),btemp2,plot,b0,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(3),btemp3,plot,c0,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(4),btemp4,plot,a1,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(5),btemp5,plot,b1,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(6),btemp6,plot,c1,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(7),btemp7,plot,a2,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(8),btemp8,plot,b2,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(9),btemp9,plot,c2,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(10),btemp10,plot,a3,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(11),btemp11,plot,b3,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(12),btemp12,plot,c3,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(13),btemp13,plot,a4,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(14),btemp14,plot,b4,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(15),btemp15,plot,c4,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(16),btemp16,plot,a5,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(17),btemp17,plot,b5,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(18),btemp18,plot,c5,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(19),btemp19,plot,a6,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(20),btemp20,plot,b6,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(21),btemp21,plot,c6,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(22),btemp22,plot,a7,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(23),btemp23,plot,b7,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(24),btemp24,plot,c7,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(25),btemp25,plot,a8,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(26),btemp26,plot,b8,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(27),btemp27,plot,c8,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(28),btemp28,plot,a9,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(29),btemp29,plot,b9,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+BTemp(30),btemp30,plot,c9,y,btemp,genx,number,degrees Celsius,belowground pin and lag temperature,genx_control
+STemp_Avg(1),stemp_avg1,plot,a0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(2),stemp_avg2,plot,a1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(3),stemp_avg3,plot,a2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(4),stemp_avg4,plot,a3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(5),stemp_avg5,plot,a4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(6),stemp_avg6,plot,a5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(7),stemp_avg7,plot,a6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(8),stemp_avg8,plot,a7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(9),stemp_avg9,plot,a8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(10),stemp_avg10,plot,a9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(11),stemp_avg11,plot,b0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(12),stemp_avg12,plot,b1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(13),stemp_avg13,plot,b2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(14),stemp_avg14,plot,b3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(15),stemp_avg15,plot,b4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(16),stemp_avg16,plot,b5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(17),stemp_avg17,plot,b6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(18),stemp_avg18,plot,b7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(19),stemp_avg19,plot,b8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(20),stemp_avg20,plot,b9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(21),stemp_avg21,plot,c0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(22),stemp_avg22,plot,c1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(23),stemp_avg23,plot,c2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(24),stemp_avg24,plot,c3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(25),stemp_avg25,plot,c4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(26),stemp_avg26,plot,c5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(27),stemp_avg27,plot,c6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(28),stemp_avg28,plot,c7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(29),stemp_avg29,plot,c8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Avg(30),stemp_avg30,plot,c9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_control
+STemp_Raw_Std(1),stemp_raw_std1,plot,a0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(2),stemp_raw_std2,plot,a1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(3),stemp_raw_std3,plot,a2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(4),stemp_raw_std4,plot,a3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(5),stemp_raw_std5,plot,a4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(6),stemp_raw_std6,plot,a5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(7),stemp_raw_std7,plot,a6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(8),stemp_raw_std8,plot,a7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(9),stemp_raw_std9,plot,a8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(10),stemp_raw_std10,plot,a9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(11),stemp_raw_std11,plot,b0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(12),stemp_raw_std12,plot,b1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(13),stemp_raw_std13,plot,b2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(14),stemp_raw_std14,plot,b3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(15),stemp_raw_std15,plot,b4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(16),stemp_raw_std16,plot,b5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(17),stemp_raw_std17,plot,b6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(18),stemp_raw_std18,plot,b7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(19),stemp_raw_std19,plot,b8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(20),stemp_raw_std20,plot,b9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(21),stemp_raw_std21,plot,c0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(22),stemp_raw_std22,plot,c1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(23),stemp_raw_std23,plot,c2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(24),stemp_raw_std24,plot,c3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(25),stemp_raw_std25,plot,c4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(26),stemp_raw_std26,plot,c5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(27),stemp_raw_std27,plot,c6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(28),stemp_raw_std28,plot,c7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(29),stemp_raw_std29,plot,c8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Std(30),stemp_raw_std30,plot,c9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(1),stemp_raw_avg1,plot,a0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(2),stemp_raw_avg2,plot,a1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(3),stemp_raw_avg3,plot,a2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(4),stemp_raw_avg4,plot,a3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(5),stemp_raw_avg5,plot,a4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(6),stemp_raw_avg6,plot,a5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(7),stemp_raw_avg7,plot,a6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(8),stemp_raw_avg8,plot,a7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(9),stemp_raw_avg9,plot,a8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(10),stemp_raw_avg10,plot,a9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(11),stemp_raw_avg11,plot,b0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(12),stemp_raw_avg12,plot,b1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(13),stemp_raw_avg13,plot,b2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(14),stemp_raw_avg14,plot,b3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(15),stemp_raw_avg15,plot,b4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(16),stemp_raw_avg16,plot,b5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(17),stemp_raw_avg17,plot,b6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(18),stemp_raw_avg18,plot,b7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(19),stemp_raw_avg19,plot,b8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(20),stemp_raw_avg20,plot,b9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(21),stemp_raw_avg21,plot,c0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(22),stemp_raw_avg22,plot,c1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(23),stemp_raw_avg23,plot,c2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(24),stemp_raw_avg24,plot,c3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(25),stemp_raw_avg25,plot,c4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(26),stemp_raw_avg26,plot,c5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(27),stemp_raw_avg27,plot,c6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(28),stemp_raw_avg28,plot,c7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(29),stemp_raw_avg29,plot,c8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+STemp_Raw_Avg(30),stemp_raw_avg30,plot,c9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_control
+Flag(1),flag1,site,logger,n,flag1,genx,number,NA,treatments all on (-1),genx_control
+Flag(2),flag2,site,logger,n,flag2,genx,number,NA,relay switched for power reset on Arduino co2 loggers (-1),genx_control
+Flag(3),flag3,site,logger,n,flag3,genx,number,NA,belowground heating on (-1),genx_control
+Flag(4),flag4,site,logger,n,flag4,genx,number,NA,Arduino is communicating (-1),genx_control
+Flag(5),flag5,site,logger,n,flag5,genx,number,NA,everything is off (-1),genx_control
+Flag(6),flag6,site,logger,n,flag6,genx,number,NA,not assigned,genx_control
+Flag(7),flag7,site,logger,n,flag7,genx,number,NA,pulse A_DC to zero (-1),genx_control
+Flag(8),flag8,site,logger,n,flag8,genx,number,NA,not assigned,genx_control
+Flag(9),flag9,site,logger,n,flag9,genx,number,NA,not assigned,genx_control
+Flag(10),flag10,site,logger,n,flag10,genx,number,NA,not assigned,genx_control
+Flag(11),flag11,site,logger,n,flag11,genx,number,NA,Arduino diagnostic mode = full power (-1),genx_control
+Flag(12),flag12,site,logger,n,flag12,genx,number,NA,not assigned,genx_control
+Ard_Duty(7),ard_duty7,plot,a2,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(8),ard_duty8,plot,b2,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(9),ard_duty9,plot,c2,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(10),ard_duty10,plot,a3,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(11),ard_duty11,plot,b3,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(12),ard_duty12,plot,c3,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(13),ard_duty13,plot,a4,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(14),ard_duty14,plot,b4,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(15),ard_duty15,plot,c4,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(16),ard_duty16,plot,a5,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(17),ard_duty17,plot,b5,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(18),ard_duty18,plot,c5,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(19),ard_duty19,plot,a6,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(20),ard_duty20,plot,b6,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(21),ard_duty21,plot,c6,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(22),ard_duty22,plot,a7,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(23),ard_duty23,plot,b7,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(24),ard_duty24,plot,c7,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(25),ard_duty25,plot,a8,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(26),ard_duty26,plot,b8,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(27),ard_duty27,plot,c8,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(28),ard_duty28,plot,a9,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(29),ard_duty29,plot,b9,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+Ard_Duty(30),ard_duty30,plot,c9,y,ard_duty,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_DC(7),b_dc7,plot,a2,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(8),b_dc8,plot,b2,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(9),b_dc9,plot,c2,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(10),b_dc10,plot,a3,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(11),b_dc11,plot,b3,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(12),b_dc12,plot,c3,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(13),b_dc13,plot,a4,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(14),b_dc14,plot,b4,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(15),b_dc15,plot,c4,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(16),b_dc16,plot,a5,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(17),b_dc17,plot,b5,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(18),b_dc18,plot,c5,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(19),b_dc19,plot,a6,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(20),b_dc20,plot,b6,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(21),b_dc21,plot,c6,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(22),b_dc22,plot,a7,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(23),b_dc23,plot,b7,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(24),b_dc24,plot,c7,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(25),b_dc25,plot,a8,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(26),b_dc26,plot,b8,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(27),b_dc27,plot,c8,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(28),b_dc28,plot,a9,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(29),b_dc29,plot,b9,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC(30),b_dc30,plot,c9,y,b_dc,genx,number,NA,computed duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(7),b_dc_prev7,plot,a2,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(8),b_dc_prev8,plot,b2,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(9),b_dc_prev9,plot,c2,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(10),b_dc_prev10,plot,a3,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(11),b_dc_prev11,plot,b3,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(12),b_dc_prev12,plot,c3,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(13),b_dc_prev13,plot,a4,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(14),b_dc_prev14,plot,b4,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(15),b_dc_prev15,plot,c4,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(16),b_dc_prev16,plot,a5,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(17),b_dc_prev17,plot,b5,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(18),b_dc_prev18,plot,c5,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(19),b_dc_prev19,plot,a6,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(20),b_dc_prev20,plot,b6,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(21),b_dc_prev21,plot,c6,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(22),b_dc_prev22,plot,a7,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(23),b_dc_prev23,plot,b7,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(24),b_dc_prev24,plot,c7,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(25),b_dc_prev25,plot,a8,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(26),b_dc_prev26,plot,b8,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(27),b_dc_prev27,plot,c8,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(28),b_dc_prev28,plot,a9,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(29),b_dc_prev29,plot,b9,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+B_DC_prev(30),b_dc_prev30,plot,c9,y,b_dc_prev,genx,number,NA,previously computed (-15 seconds) duty cycle proportion belowground (0-1),genx_control
+BTemp_Avg(1),btemp_avg1,plot,a0,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(2),btemp_avg2,plot,b0,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(3),btemp_avg3,plot,c0,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(4),btemp_avg4,plot,a1,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(5),btemp_avg5,plot,b1,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(6),btemp_avg6,plot,c1,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(7),btemp_avg7,plot,a2,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(8),btemp_avg8,plot,b2,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(9),btemp_avg9,plot,c2,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(10),btemp_avg10,plot,a3,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(11),btemp_avg11,plot,b3,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(12),btemp_avg12,plot,c3,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(13),btemp_avg13,plot,a4,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(14),btemp_avg14,plot,b4,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(15),btemp_avg15,plot,c4,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(16),btemp_avg16,plot,a5,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(17),btemp_avg17,plot,b5,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(18),btemp_avg18,plot,c5,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(19),btemp_avg19,plot,a6,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(20),btemp_avg20,plot,b6,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(21),btemp_avg21,plot,c6,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(22),btemp_avg22,plot,a7,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(23),btemp_avg23,plot,b7,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(24),btemp_avg24,plot,c7,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(25),btemp_avg25,plot,a8,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(26),btemp_avg26,plot,b8,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(27),btemp_avg27,plot,c8,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(28),btemp_avg28,plot,a9,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(29),btemp_avg29,plot,b9,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+BTemp_Avg(30),btemp_avg30,plot,c9,y,btemp_avg,genx,number,degrees Celsius,average belowground pin and lag temperature,genx_control
+B_Duty(7),b_duty7,plot,a2,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(8),b_duty8,plot,b2,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(9),b_duty9,plot,c2,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(10),b_duty10,plot,a3,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(11),b_duty11,plot,b3,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(12),b_duty12,plot,c3,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(13),b_duty13,plot,a4,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(14),b_duty14,plot,b4,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(15),b_duty15,plot,c4,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(16),b_duty16,plot,a5,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(17),b_duty17,plot,b5,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(18),b_duty18,plot,c5,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(19),b_duty19,plot,a6,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(20),b_duty20,plot,b6,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(21),b_duty21,plot,c6,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(22),b_duty22,plot,a7,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(23),b_duty23,plot,b7,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(24),b_duty24,plot,c7,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(25),b_duty25,plot,a8,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(26),b_duty26,plot,b8,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(27),b_duty27,plot,c8,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(28),b_duty28,plot,a9,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(29),b_duty29,plot,b9,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+B_Duty(30),b_duty30,plot,c9,y,b_duty,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_control
+DIF_B_trt(1),dif_b_trt1,treatment,zone_0,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(2),dif_b_trt2,treatment,zone_1,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(3),dif_b_trt3,treatment,zone_2,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(4),dif_b_trt4,treatment,zone_3,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(5),dif_b_trt5,treatment,zone_4,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(6),dif_b_trt6,treatment,zone_5,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(7),dif_b_trt7,treatment,zone_6,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(8),dif_b_trt8,treatment,zone_7,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(9),dif_b_trt9,treatment,zone_8,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B_trt(10),dif_b_trt10,treatment,zone_9,y,dif_b_trt,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_control
+DIF_B(1),dif_b1,plot,a0,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(2),dif_b2,plot,b0,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(3),dif_b3,plot,c0,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(4),dif_b4,plot,a1,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(5),dif_b5,plot,b1,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(6),dif_b6,plot,c1,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(7),dif_b7,plot,a2,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(8),dif_b8,plot,b2,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(9),dif_b9,plot,c2,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(10),dif_b10,plot,a3,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(11),dif_b11,plot,b3,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(12),dif_b12,plot,c3,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(13),dif_b13,plot,a4,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(14),dif_b14,plot,b4,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(15),dif_b15,plot,c4,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(16),dif_b16,plot,a5,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(17),dif_b17,plot,b5,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(18),dif_b18,plot,c5,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(19),dif_b19,plot,a6,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(20),dif_b20,plot,b6,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(21),dif_b21,plot,c6,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(22),dif_b22,plot,a7,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(23),dif_b23,plot,b7,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(24),dif_b24,plot,c7,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(25),dif_b25,plot,a8,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(26),dif_b26,plot,b8,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(27),dif_b27,plot,c8,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(28),dif_b28,plot,a9,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(29),dif_b29,plot,b9,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+DIF_B(30),dif_b30,plot,c9,y,dif_b,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_control
+PIN_B(1),pin_b1,treatment,zone_0,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(2),pin_b2,treatment,zone_1,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(3),pin_b3,treatment,zone_2,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(4),pin_b4,treatment,zone_3,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(5),pin_b5,treatment,zone_4,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(6),pin_b6,treatment,zone_5,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(7),pin_b7,treatment,zone_6,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(8),pin_b8,treatment,zone_7,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(9),pin_b9,treatment,zone_8,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+PIN_B(10),pin_b10,treatment,zone_9,y,pin_b,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_control
+AMB_B,amb_b,site,logger,n,amb_b,genx,number,degrees Celsius,spatial average temperature in ambient plots,genx_control
+PIN_R(1),pin_r1,treatment,zone_0,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(2),pin_r2,treatment,zone_1,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(3),pin_r3,treatment,zone_2,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(4),pin_r4,treatment,zone_3,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(5),pin_r5,treatment,zone_4,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(6),pin_r6,treatment,zone_5,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(7),pin_r7,treatment,zone_6,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(8),pin_r8,treatment,zone_7,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(9),pin_r9,treatment,zone_8,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+PIN_R(10),pin_r10,treatment,zone_9,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_control
+AMB_R,amb_r,site,logger,n,amb_r,genx,number,degrees Celsius,running average temperature over 5 minutes in ambient plots,genx_control
+M_AMB,m_amb,site,logger,n,m_amb,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(7),m_pin7,plot,a2,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(8),m_pin8,plot,b2,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(9),m_pin9,plot,c2,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(10),m_pin10,plot,a3,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(11),m_pin11,plot,b3,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(12),m_pin12,plot,c3,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(13),m_pin13,plot,a4,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(14),m_pin14,plot,b4,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(15),m_pin15,plot,c4,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(16),m_pin16,plot,a5,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(17),m_pin17,plot,b5,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(18),m_pin18,plot,c5,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(19),m_pin19,plot,a6,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(20),m_pin20,plot,b6,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(21),m_pin21,plot,c6,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(22),m_pin22,plot,a7,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(23),m_pin23,plot,b7,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(24),m_pin24,plot,c7,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(25),m_pin25,plot,a8,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(26),m_pin26,plot,b8,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(27),m_pin27,plot,c8,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(28),m_pin28,plot,a9,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(29),m_pin29,plot,b9,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+M_PIN(30),m_pin30,plot,c9,y,m_pin,genx,number,degrees Celsius,IDK,genx_control
+Proj_AMB30,proj_amb30,site,logger,n,proj_amb30,genx,number,degrees Celsius,3 minute projection of temperature in ambient plots,genx_control
+Proj_PIN30(7),proj_pin307,plot,a2,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(8),proj_pin308,plot,b2,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(9),proj_pin309,plot,c2,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(10),proj_pin3010,plot,a3,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(11),proj_pin3011,plot,b3,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(12),proj_pin3012,plot,c3,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(13),proj_pin3013,plot,a4,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(14),proj_pin3014,plot,b4,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(15),proj_pin3015,plot,c4,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(16),proj_pin3016,plot,a5,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(17),proj_pin3017,plot,b5,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(18),proj_pin3018,plot,c5,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(19),proj_pin3019,plot,a6,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(20),proj_pin3020,plot,b6,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(21),proj_pin3021,plot,c6,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(22),proj_pin3022,plot,a7,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(23),proj_pin3023,plot,b7,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(24),proj_pin3024,plot,c7,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(25),proj_pin3025,plot,a8,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(26),proj_pin3026,plot,b8,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(27),proj_pin3027,plot,c8,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(28),proj_pin3028,plot,a9,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(29),proj_pin3029,plot,b9,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_PIN30(30),proj_pin3030,plot,c9,y,proj_pin30,genx,number,degrees Celsius,3 minute projection of temperature at warming pin,genx_control
+Proj_DifB(7),proj_difb7,plot,a2,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(8),proj_difb8,plot,b2,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(9),proj_difb9,plot,c2,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(10),proj_difb10,plot,a3,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(11),proj_difb11,plot,b3,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(12),proj_difb12,plot,c3,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(13),proj_difb13,plot,a4,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(14),proj_difb14,plot,b4,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(15),proj_difb15,plot,c4,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(16),proj_difb16,plot,a5,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(17),proj_difb17,plot,b5,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(18),proj_difb18,plot,c5,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(19),proj_difb19,plot,a6,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(20),proj_difb20,plot,b6,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(21),proj_difb21,plot,c6,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(22),proj_difb22,plot,a7,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(23),proj_difb23,plot,b7,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(24),proj_difb24,plot,c7,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(25),proj_difb25,plot,a8,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(26),proj_difb26,plot,b8,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(27),proj_difb27,plot,c8,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(28),proj_difb28,plot,a9,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(29),proj_difb29,plot,b9,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+Proj_DifB(30),proj_difb30,plot,c9,y,proj_difb,genx,number,degrees Celsius,3 minute projected difference between heated and ambient,genx_control
+B_TargetDIF(7),b_targetdif7,plot,a2,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(8),b_targetdif8,plot,b2,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(9),b_targetdif9,plot,c2,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(10),b_targetdif10,plot,a3,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(11),b_targetdif11,plot,b3,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(12),b_targetdif12,plot,c3,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(13),b_targetdif13,plot,a4,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(14),b_targetdif14,plot,b4,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(15),b_targetdif15,plot,c4,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(16),b_targetdif16,plot,a5,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(17),b_targetdif17,plot,b5,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(18),b_targetdif18,plot,c5,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(19),b_targetdif19,plot,a6,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(20),b_targetdif20,plot,b6,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(21),b_targetdif21,plot,c6,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(22),b_targetdif22,plot,a7,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(23),b_targetdif23,plot,b7,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(24),b_targetdif24,plot,c7,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(25),b_targetdif25,plot,a8,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(26),b_targetdif26,plot,b8,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(27),b_targetdif27,plot,c8,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(28),b_targetdif28,plot,a9,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(29),b_targetdif29,plot,b9,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDIF(30),b_targetdif30,plot,c9,y,b_targetdif,genx,number,degrees Celsius,delta from b_target,genx_control
+B_TargetDEV(7),b_targetdev7,plot,a2,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(8),b_targetdev8,plot,b2,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(9),b_targetdev9,plot,c2,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(10),b_targetdev10,plot,a3,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(11),b_targetdev11,plot,b3,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(12),b_targetdev12,plot,c3,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(13),b_targetdev13,plot,a4,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(14),b_targetdev14,plot,b4,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(15),b_targetdev15,plot,c4,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(16),b_targetdev16,plot,a5,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(17),b_targetdev17,plot,b5,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(18),b_targetdev18,plot,c5,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(19),b_targetdev19,plot,a6,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(20),b_targetdev20,plot,b6,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(21),b_targetdev21,plot,c6,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(22),b_targetdev22,plot,a7,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(23),b_targetdev23,plot,b7,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(24),b_targetdev24,plot,c7,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(25),b_targetdev25,plot,a8,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(26),b_targetdev26,plot,b8,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(27),b_targetdev27,plot,c8,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(28),b_targetdev28,plot,a9,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(29),b_targetdev29,plot,b9,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+B_TargetDEV(30),b_targetdev30,plot,c9,y,b_targetdev,genx,number,degrees Celsius,proportional deviation from b_target (b_target-delta/ b_target),genx_control
+Logger,logger,site,logger,n,logger,genx,character,NA,logger name,genx_control
+Program,program,site,logger,n,program,genx,character,NA,program version,genx_control
+Table,table,site,logger,n,table,genx,character,NA,loggernet table name,genx_control
+rowid,rowid,key,logger,key,rowid,genx,character,NA,"unique id  for each orginal data row contatenate (timestamp, block, tabletype)",genx_control
+time2,time2,key,logger,key,time2,genx,number,YYYY-MM-DD HH:MM:SS,posix time stamp (EST standard),genx_control
+TIMESTAMP,timestamp,site,logger,n,timestamp,genx,number,YYYY-MM-DD HH:MM:SS,loggernet timestamp,genx_export
+RECORD,record,site,logger,n,record,genx,number,NA,loggernet record number,genx_export
+Statname,logger,key,logger,key,logger,genx,character,NA,logger name,genx_export
+DIF_B_Avg(1),dif_b_avg1,plot,a0,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(2),dif_b_avg2,plot,b0,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(3),dif_b_avg3,plot,c0,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(4),dif_b_avg4,plot,a1,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(5),dif_b_avg5,plot,b1,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(6),dif_b_avg6,plot,c1,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(7),dif_b_avg7,plot,a2,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(8),dif_b_avg8,plot,b2,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(9),dif_b_avg9,plot,c2,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(10),dif_b_avg10,plot,a3,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(11),dif_b_avg11,plot,b3,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(12),dif_b_avg12,plot,c3,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(13),dif_b_avg13,plot,a4,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(14),dif_b_avg14,plot,b4,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(15),dif_b_avg15,plot,c4,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(16),dif_b_avg16,plot,a5,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(17),dif_b_avg17,plot,b5,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(18),dif_b_avg18,plot,c5,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(19),dif_b_avg19,plot,a6,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(20),dif_b_avg20,plot,b6,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(21),dif_b_avg21,plot,c6,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(22),dif_b_avg22,plot,a7,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(23),dif_b_avg23,plot,b7,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(24),dif_b_avg24,plot,c7,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(25),dif_b_avg25,plot,a8,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(26),dif_b_avg26,plot,b8,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(27),dif_b_avg27,plot,c8,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(28),dif_b_avg28,plot,a9,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(29),dif_b_avg29,plot,b9,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_Avg(30),dif_b_avg30,plot,c9,y,dif_b_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature,genx_export
+DIF_B_trt_Avg(1),dif_b_trt_avg1,treatment,zone_0,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(2),dif_b_trt_avg2,treatment,zone_1,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(3),dif_b_trt_avg3,treatment,zone_2,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(4),dif_b_trt_avg4,treatment,zone_3,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(5),dif_b_trt_avg5,treatment,zone_4,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(6),dif_b_trt_avg6,treatment,zone_5,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(7),dif_b_trt_avg7,treatment,zone_6,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(8),dif_b_trt_avg8,treatment,zone_7,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(9),dif_b_trt_avg9,treatment,zone_8,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+DIF_B_trt_Avg(10),dif_b_trt_avg10,treatment,zone_9,y,dif_b_trt_avg,genx,number,degrees Celsius,heated soil treatment minus ambient temperature averaged across treatments,genx_export
+BTemp_Avg(1),btemp_avg1,plot,a0,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(2),btemp_avg2,plot,b0,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(3),btemp_avg3,plot,c0,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(4),btemp_avg4,plot,a1,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(5),btemp_avg5,plot,b1,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(6),btemp_avg6,plot,c1,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(7),btemp_avg7,plot,a2,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(8),btemp_avg8,plot,b2,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(9),btemp_avg9,plot,c2,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(10),btemp_avg10,plot,a3,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(11),btemp_avg11,plot,b3,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(12),btemp_avg12,plot,c3,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(13),btemp_avg13,plot,a4,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(14),btemp_avg14,plot,b4,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(15),btemp_avg15,plot,c4,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(16),btemp_avg16,plot,a5,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(17),btemp_avg17,plot,b5,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(18),btemp_avg18,plot,c5,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(19),btemp_avg19,plot,a6,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(20),btemp_avg20,plot,b6,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(21),btemp_avg21,plot,c6,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(22),btemp_avg22,plot,a7,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(23),btemp_avg23,plot,b7,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(24),btemp_avg24,plot,c7,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(25),btemp_avg25,plot,a8,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(26),btemp_avg26,plot,b8,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(27),btemp_avg27,plot,c8,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(28),btemp_avg28,plot,a9,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(29),btemp_avg29,plot,b9,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+BTemp_Avg(30),btemp_avg30,plot,c9,y,btemp_avg,genx,number,degrees Celsius,belowground pin and lag temperature,genx_export
+Soil_Check_Avg(3),soil_check_avg3,treatment,zone_2,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(4),soil_check_avg4,treatment,zone_3,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(5),soil_check_avg5,treatment,zone_4,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(6),soil_check_avg6,treatment,zone_5,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(7),soil_check_avg7,treatment,zone_6,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(8),soil_check_avg8,treatment,zone_7,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(9),soil_check_avg9,treatment,zone_8,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Check_Avg(10),soil_check_avg10,treatment,zone_9,y,soil_check_avg,genx,number,degrees Celsius,DIF_B minus treatment target,genx_export
+Soil_Eveness(3),soil_eveness3,treatment,zone_2,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(4),soil_eveness4,treatment,zone_3,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(5),soil_eveness5,treatment,zone_4,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(6),soil_eveness6,treatment,zone_5,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(7),soil_eveness7,treatment,zone_6,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(8),soil_eveness8,treatment,zone_7,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(9),soil_eveness9,treatment,zone_8,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Eveness(10),soil_eveness10,treatment,zone_9,y,soil_eveness,genx,character,NA,message regarding whether treatments are differentiating based on standard deviation of pin sensors,genx_export
+Soil_Message(3),soil_message3,treatment,zone_2,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(4),soil_message4,treatment,zone_3,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(5),soil_message5,treatment,zone_4,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(6),soil_message6,treatment,zone_5,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(7),soil_message7,treatment,zone_6,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(8),soil_message8,treatment,zone_7,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(9),soil_message9,treatment,zone_8,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+Soil_Message(10),soil_message10,treatment,zone_9,y,soil_message,genx,character,NA,message about whether treatments are too high,genx_export
+STemp_Avg(1),stemp_avg1,plot,a0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(2),stemp_avg2,plot,a1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(3),stemp_avg3,plot,a2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(4),stemp_avg4,plot,a3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(5),stemp_avg5,plot,a4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(6),stemp_avg6,plot,a5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(7),stemp_avg7,plot,a6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(8),stemp_avg8,plot,a7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(9),stemp_avg9,plot,a8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(10),stemp_avg10,plot,a9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(11),stemp_avg11,plot,b0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(12),stemp_avg12,plot,b1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(13),stemp_avg13,plot,b2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(14),stemp_avg14,plot,b3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(15),stemp_avg15,plot,b4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(16),stemp_avg16,plot,b5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(17),stemp_avg17,plot,b6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(18),stemp_avg18,plot,b7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(19),stemp_avg19,plot,b8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(20),stemp_avg20,plot,b9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(21),stemp_avg21,plot,c0,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(22),stemp_avg22,plot,c1,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(23),stemp_avg23,plot,c2,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(24),stemp_avg24,plot,c3,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(25),stemp_avg25,plot,c4,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(26),stemp_avg26,plot,c5,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(27),stemp_avg27,plot,c6,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(28),stemp_avg28,plot,c7,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(29),stemp_avg29,plot,c8,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Avg(30),stemp_avg30,plot,c9,y,stemp_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer screened for feedback loop temperature,genx_export
+STemp_Raw_Std(1),stemp_raw_std1,plot,a0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(2),stemp_raw_std2,plot,a1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(3),stemp_raw_std3,plot,a2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(4),stemp_raw_std4,plot,a3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(5),stemp_raw_std5,plot,a4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(6),stemp_raw_std6,plot,a5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(7),stemp_raw_std7,plot,a6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(8),stemp_raw_std8,plot,a7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(9),stemp_raw_std9,plot,a8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(10),stemp_raw_std10,plot,a9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(11),stemp_raw_std11,plot,b0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(12),stemp_raw_std12,plot,b1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(13),stemp_raw_std13,plot,b2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(14),stemp_raw_std14,plot,b3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(15),stemp_raw_std15,plot,b4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(16),stemp_raw_std16,plot,b5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(17),stemp_raw_std17,plot,b6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(18),stemp_raw_std18,plot,b7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(19),stemp_raw_std19,plot,b8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(20),stemp_raw_std20,plot,b9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(21),stemp_raw_std21,plot,c0,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(22),stemp_raw_std22,plot,c1,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(23),stemp_raw_std23,plot,c2,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(24),stemp_raw_std24,plot,c3,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(25),stemp_raw_std25,plot,c4,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(26),stemp_raw_std26,plot,c5,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(27),stemp_raw_std27,plot,c6,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(28),stemp_raw_std28,plot,c7,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(29),stemp_raw_std29,plot,c8,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Std(30),stemp_raw_std30,plot,c9,y,stemp_raw_std,genx,number,degrees Celsius,standard deviation (OVER WHAT?) of incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(1),stemp_raw_avg1,plot,a0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(2),stemp_raw_avg2,plot,a1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(3),stemp_raw_avg3,plot,a2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(4),stemp_raw_avg4,plot,a3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(5),stemp_raw_avg5,plot,a4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(6),stemp_raw_avg6,plot,a5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(7),stemp_raw_avg7,plot,a6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(8),stemp_raw_avg8,plot,a7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(9),stemp_raw_avg9,plot,a8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(10),stemp_raw_avg10,plot,a9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(11),stemp_raw_avg11,plot,b0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(12),stemp_raw_avg12,plot,b1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(13),stemp_raw_avg13,plot,b2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(14),stemp_raw_avg14,plot,b3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(15),stemp_raw_avg15,plot,b4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(16),stemp_raw_avg16,plot,b5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(17),stemp_raw_avg17,plot,b6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(18),stemp_raw_avg18,plot,b7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(19),stemp_raw_avg19,plot,b8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(20),stemp_raw_avg20,plot,b9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(21),stemp_raw_avg21,plot,c0,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(22),stemp_raw_avg22,plot,c1,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(23),stemp_raw_avg23,plot,c2,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(24),stemp_raw_avg24,plot,c3,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(25),stemp_raw_avg25,plot,c4,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(26),stemp_raw_avg26,plot,c5,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(27),stemp_raw_avg27,plot,c6,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(28),stemp_raw_avg28,plot,c7,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(29),stemp_raw_avg29,plot,c8,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+STemp_Raw_Avg(30),stemp_raw_avg30,plot,c9,y,stemp_raw_avg,genx,number,degrees Celsius,average (AVERAGED OVER WHAT?) incoming temperature from multiplexer,genx_export
+Powerpro_Avg(7),powerpro_avg7,plot,a2,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(8),powerpro_avg8,plot,b2,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(9),powerpro_avg9,plot,c2,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(10),powerpro_avg10,plot,a3,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(11),powerpro_avg11,plot,b3,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(12),powerpro_avg12,plot,c3,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(13),powerpro_avg13,plot,a4,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(14),powerpro_avg14,plot,b4,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(15),powerpro_avg15,plot,c4,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(16),powerpro_avg16,plot,a5,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(17),powerpro_avg17,plot,b5,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(18),powerpro_avg18,plot,c5,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(19),powerpro_avg19,plot,a6,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(20),powerpro_avg20,plot,b6,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(21),powerpro_avg21,plot,c6,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(22),powerpro_avg22,plot,a7,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(23),powerpro_avg23,plot,b7,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(24),powerpro_avg24,plot,c7,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(25),powerpro_avg25,plot,a8,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(26),powerpro_avg26,plot,b8,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(27),powerpro_avg27,plot,c8,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(28),powerpro_avg28,plot,a9,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(29),powerpro_avg29,plot,b9,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+Powerpro_Avg(30),powerpro_avg30,plot,c9,y,powerpro_avg,genx,number,NA,proportion of power used,genx_export
+B_Duty_Avg(7),b_duty_avg7,plot,a2,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(8),b_duty_avg8,plot,b2,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(9),b_duty_avg9,plot,c2,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(10),b_duty_avg10,plot,a3,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(11),b_duty_avg11,plot,b3,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(12),b_duty_avg12,plot,c3,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(13),b_duty_avg13,plot,a4,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(14),b_duty_avg14,plot,b4,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(15),b_duty_avg15,plot,c4,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(16),b_duty_avg16,plot,a5,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(17),b_duty_avg17,plot,b5,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(18),b_duty_avg18,plot,c5,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(19),b_duty_avg19,plot,a6,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(20),b_duty_avg20,plot,b6,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(21),b_duty_avg21,plot,c6,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(22),b_duty_avg22,plot,a7,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(23),b_duty_avg23,plot,b7,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(24),b_duty_avg24,plot,c7,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(25),b_duty_avg25,plot,a8,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(26),b_duty_avg26,plot,b8,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(27),b_duty_avg27,plot,c8,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(28),b_duty_avg28,plot,a9,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(29),b_duty_avg29,plot,b9,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+B_Duty_Avg(30),b_duty_avg30,plot,c9,y,b_duty_avg,genx,number,NA,belowground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(7),ard_duty_avg7,plot,a2,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(8),ard_duty_avg8,plot,b2,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(9),ard_duty_avg9,plot,c2,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(10),ard_duty_avg10,plot,a3,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(11),ard_duty_avg11,plot,b3,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(12),ard_duty_avg12,plot,c3,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(13),ard_duty_avg13,plot,a4,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(14),ard_duty_avg14,plot,b4,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(15),ard_duty_avg15,plot,c4,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(16),ard_duty_avg16,plot,a5,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(17),ard_duty_avg17,plot,b5,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(18),ard_duty_avg18,plot,c5,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(19),ard_duty_avg19,plot,a6,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(20),ard_duty_avg20,plot,b6,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(21),ard_duty_avg21,plot,c6,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(22),ard_duty_avg22,plot,a7,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(23),ard_duty_avg23,plot,b7,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(24),ard_duty_avg24,plot,c7,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(25),ard_duty_avg25,plot,a8,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(26),ard_duty_avg26,plot,b8,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(27),ard_duty_avg27,plot,c8,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(28),ard_duty_avg28,plot,a9,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(29),ard_duty_avg29,plot,b9,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+Ard_Duty_Avg(30),ard_duty_avg30,plot,c9,y,ard_duty_avg,genx,number,NA,aboveground arduino duty cycle proportion (0-1000 milliseconds),genx_export
+PIN_B_Avg(1),pin_b_avg1,treatment,zone_0,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(2),pin_b_avg2,treatment,zone_1,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(3),pin_b_avg3,treatment,zone_2,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(4),pin_b_avg4,treatment,zone_3,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(5),pin_b_avg5,treatment,zone_4,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(6),pin_b_avg6,treatment,zone_5,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(7),pin_b_avg7,treatment,zone_6,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(8),pin_b_avg8,treatment,zone_7,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(9),pin_b_avg9,treatment,zone_8,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_B_Avg(10),pin_b_avg10,treatment,zone_9,y,pin_b_avg,genx,number,degrees Celsius,spatial average temperature at warming pins,genx_export
+PIN_Bdev_Avg(1),pin_bdev_avg1,treatment,zone_0,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(2),pin_bdev_avg2,treatment,zone_1,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(3),pin_bdev_avg3,treatment,zone_2,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(4),pin_bdev_avg4,treatment,zone_3,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(5),pin_bdev_avg5,treatment,zone_4,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(6),pin_bdev_avg6,treatment,zone_5,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(7),pin_bdev_avg7,treatment,zone_6,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(8),pin_bdev_avg8,treatment,zone_7,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(9),pin_bdev_avg9,treatment,zone_8,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+PIN_Bdev_Avg(10),pin_bdev_avg10,treatment,zone_9,y,pin_bdev_avg,genx,number,degrees Celsius,spatial standard deviation of temperature at warming pins,genx_export
+AMB_B_Avg,amb_b_avg,site,logger,n,amb_b_avg,genx,number,degrees Celsius,spatial average temperature in ambient plots,genx_export
+PIN_R(1),pin_r1,treatment,zone_0,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(2),pin_r2,treatment,zone_1,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(3),pin_r3,treatment,zone_2,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(4),pin_r4,treatment,zone_3,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(5),pin_r5,treatment,zone_4,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(6),pin_r6,treatment,zone_5,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(7),pin_r7,treatment,zone_6,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(8),pin_r8,treatment,zone_7,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(9),pin_r9,treatment,zone_8,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+PIN_R(10),pin_r10,treatment,zone_9,y,pin_r,genx,number,degrees Celsius,running average temperature over 5 minutes at warming pin,genx_export
+AMB_R,amb_r,site,logger,n,amb_r,genx,number,degrees Celsius,running average temperature over 5 minutes in ambient plots,genx_export
+Batt_CHECK,batt_check,site,logger,n,batt_check,genx,character,volts,default CR1000 battery voltage measurement,genx_export
+BMETemp_Avg(1),bmetemp_avg1,plot,a0,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(2),bmetemp_avg2,plot,c1,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(3),bmetemp_avg3,plot,b2,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(4),bmetemp_avg4,plot,a3,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(5),bmetemp_avg5,plot,c4,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(6),bmetemp_avg6,plot,b4,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(7),bmetemp_avg7,plot,a5,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(8),bmetemp_avg8,plot,c6,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(9),bmetemp_avg9,plot,b6,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(10),bmetemp_avg10,plot,a7,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(11),bmetemp_avg11,plot,c8,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(12),bmetemp_avg12,plot,b9,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(13),bmetemp_avg13,plot,13_amb,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMETemp_Avg(14),bmetemp_avg14,plot,14_amb,y,bmetemp_avg,genx,number,degrees Celsius,air temperature,genx_export
+BMERH_Avg(1),bmerh_avg1,plot,a0,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(2),bmerh_avg2,plot,c1,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(3),bmerh_avg3,plot,b2,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(4),bmerh_avg4,plot,a3,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(5),bmerh_avg5,plot,c4,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(6),bmerh_avg6,plot,b4,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(7),bmerh_avg7,plot,a5,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(8),bmerh_avg8,plot,c6,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(9),bmerh_avg9,plot,b6,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(10),bmerh_avg10,plot,a7,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(11),bmerh_avg11,plot,c8,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(12),bmerh_avg12,plot,b9,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(13),bmerh_avg13,plot,13_amb,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMERH_Avg(14),bmerh_avg14,plot,14_amb,y,bmerh_avg,genx,number,%,relative humidity,genx_export
+BMEpressure_Avg(1),bmepressure_avg1,plot,a0,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(2),bmepressure_avg2,plot,c1,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(3),bmepressure_avg3,plot,b2,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(4),bmepressure_avg4,plot,a3,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(5),bmepressure_avg5,plot,c4,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(6),bmepressure_avg6,plot,b4,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(7),bmepressure_avg7,plot,a5,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(8),bmepressure_avg8,plot,c6,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(9),bmepressure_avg9,plot,b6,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(10),bmepressure_avg10,plot,a7,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(11),bmepressure_avg11,plot,c8,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(12),bmepressure_avg12,plot,b9,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(13),bmepressure_avg13,plot,13_amb,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEpressure_Avg(14),bmepressure_avg14,plot,14_amb,y,bmepressure_avg,genx,number,millibars,atmospheric pressure,genx_export
+BMEVOC_Avg(1),bmevoc_avg1,plot,a0,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(2),bmevoc_avg2,plot,c1,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(3),bmevoc_avg3,plot,b2,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(4),bmevoc_avg4,plot,a3,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(5),bmevoc_avg5,plot,c4,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(6),bmevoc_avg6,plot,b4,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(7),bmevoc_avg7,plot,a5,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(8),bmevoc_avg8,plot,c6,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(9),bmevoc_avg9,plot,b6,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(10),bmevoc_avg10,plot,a7,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(11),bmevoc_avg11,plot,c8,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(12),bmevoc_avg12,plot,b9,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(13),bmevoc_avg13,plot,13_amb,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+BMEVOC_Avg(14),bmevoc_avg14,plot,14_amb,y,bmevoc_avg,genx,number,kiloohms,concentration of volatile organic compounds measured as resistance,genx_export
+Therm10C_Avg(1),therm10c_avg1,plot,a0,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(2),therm10c_avg2,plot,c1,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(3),therm10c_avg3,plot,b2,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(4),therm10c_avg4,plot,a3,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(5),therm10c_avg5,plot,c4,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(6),therm10c_avg6,plot,b4,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(7),therm10c_avg7,plot,a5,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(8),therm10c_avg8,plot,c6,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(9),therm10c_avg9,plot,b6,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(10),therm10c_avg10,plot,a7,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(11),therm10c_avg11,plot,c8,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(12),therm10c_avg12,plot,b9,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(13),therm10c_avg13,plot,13_amb,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm10C_Avg(14),therm10c_avg14,plot,14_amb,y,therm10c_avg,genx,number,degrees Celsius,soil temperature at 10 centimeter depth,genx_export
+Therm25C_Avg(1),therm25c_avg1,plot,a0,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(2),therm25c_avg2,plot,c1,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(3),therm25c_avg3,plot,b2,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(4),therm25c_avg4,plot,a3,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(5),therm25c_avg5,plot,c4,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(6),therm25c_avg6,plot,b4,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(7),therm25c_avg7,plot,a5,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(8),therm25c_avg8,plot,c6,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(9),therm25c_avg9,plot,b6,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(10),therm25c_avg10,plot,a7,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(11),therm25c_avg11,plot,c8,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(12),therm25c_avg12,plot,b9,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(13),therm25c_avg13,plot,13_amb,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm25C_Avg(14),therm25c_avg14,plot,14_amb,y,therm25c_avg,genx,number,degrees Celsius,soil temperature at 25 centimeter depth,genx_export
+Therm10pin_Avg(1),therm10pin_avg1,plot,a0,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(2),therm10pin_avg2,plot,c1,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(3),therm10pin_avg3,plot,b2,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(4),therm10pin_avg4,plot,a3,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(5),therm10pin_avg5,plot,c4,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(6),therm10pin_avg6,plot,b4,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(7),therm10pin_avg7,plot,a5,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(8),therm10pin_avg8,plot,c6,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(9),therm10pin_avg9,plot,b6,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(10),therm10pin_avg10,plot,a7,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(11),therm10pin_avg11,plot,c8,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(12),therm10pin_avg12,plot,b9,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(13),therm10pin_avg13,plot,13_amb,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10pin_Avg(14),therm10pin_avg14,plot,14_amb,y,therm10pin_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(1),therm90ext_avg1,plot,a0,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(2),therm90ext_avg2,plot,c1,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(3),therm90ext_avg3,plot,b2,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(4),therm90ext_avg4,plot,a3,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(5),therm90ext_avg5,plot,c4,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(6),therm90ext_avg6,plot,b4,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(7),therm90ext_avg7,plot,a5,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(8),therm90ext_avg8,plot,c6,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(9),therm90ext_avg9,plot,b6,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(10),therm90ext_avg10,plot,a7,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(11),therm90ext_avg11,plot,c8,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(12),therm90ext_avg12,plot,b9,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(13),therm90ext_avg13,plot,13_amb,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm90ext_Avg(14),therm90ext_avg14,plot,14_amb,y,therm90ext_avg,genx,number,degrees Celsius,NA,genx_export
+Therm10amb_Avg,therm10amb_avg,site,logger,n,therm10amb_avg,genx,number,degrees Celsius,ambient average from Campbell,genx_export
+Dif_10C_Avg(1),dif_10c_avg1,plot,a0,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(2),dif_10c_avg2,plot,c1,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(3),dif_10c_avg3,plot,b2,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(4),dif_10c_avg4,plot,a3,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(5),dif_10c_avg5,plot,c4,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(6),dif_10c_avg6,plot,b4,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(7),dif_10c_avg7,plot,a5,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(8),dif_10c_avg8,plot,c6,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(9),dif_10c_avg9,plot,b6,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(10),dif_10c_avg10,plot,a7,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(11),dif_10c_avg11,plot,c8,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(12),dif_10c_avg12,plot,b9,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(13),dif_10c_avg13,plot,13_amb,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10C_Avg(14),dif_10c_avg14,plot,14_amb,y,dif_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and amb_b,genx_export
+Dif_10pin_Avg(1),dif_10pin_avg1,plot,a0,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(2),dif_10pin_avg2,plot,c1,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(3),dif_10pin_avg3,plot,b2,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(4),dif_10pin_avg4,plot,a3,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(5),dif_10pin_avg5,plot,c4,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(6),dif_10pin_avg6,plot,b4,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(7),dif_10pin_avg7,plot,a5,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(8),dif_10pin_avg8,plot,c6,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(9),dif_10pin_avg9,plot,b6,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(10),dif_10pin_avg10,plot,a7,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(11),dif_10pin_avg11,plot,c8,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(12),dif_10pin_avg12,plot,b9,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(13),dif_10pin_avg13,plot,13_amb,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_10pin_Avg(14),dif_10pin_avg14,plot,14_amb,y,dif_10pin_avg,genx,number,degrees Celsius,difference between 10pin and amb_b,genx_export
+Dif_C2C_10C_Avg(1),dif_c2c_10c_avg1,plot,a0,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(2),dif_c2c_10c_avg2,plot,c1,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(3),dif_c2c_10c_avg3,plot,b2,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(4),dif_c2c_10c_avg4,plot,a3,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(5),dif_c2c_10c_avg5,plot,c4,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(6),dif_c2c_10c_avg6,plot,b4,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(7),dif_c2c_10c_avg7,plot,a5,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(8),dif_c2c_10c_avg8,plot,c6,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(9),dif_c2c_10c_avg9,plot,b6,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(10),dif_c2c_10c_avg10,plot,a7,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(11),dif_c2c_10c_avg11,plot,c8,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(12),dif_c2c_10c_avg12,plot,b9,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(13),dif_c2c_10c_avg13,plot,13_amb,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_10C_Avg(14),dif_c2c_10c_avg14,plot,14_amb,y,dif_c2c_10c_avg,genx,number,degrees Celsius,difference between chamber temperature at 10 centimeter depth and spatial average of ambients,genx_export
+Dif_C2C_25C_Avg(1),dif_c2c_25c_avg1,plot,a0,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(2),dif_c2c_25c_avg2,plot,c1,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(3),dif_c2c_25c_avg3,plot,b2,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(4),dif_c2c_25c_avg4,plot,a3,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(5),dif_c2c_25c_avg5,plot,c4,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(6),dif_c2c_25c_avg6,plot,b4,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(7),dif_c2c_25c_avg7,plot,a5,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(8),dif_c2c_25c_avg8,plot,c6,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(9),dif_c2c_25c_avg9,plot,b6,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(10),dif_c2c_25c_avg10,plot,a7,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(11),dif_c2c_25c_avg11,plot,c8,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(12),dif_c2c_25c_avg12,plot,b9,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(13),dif_c2c_25c_avg13,plot,13_amb,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+Dif_C2C_25C_Avg(14),dif_c2c_25c_avg14,plot,14_amb,y,dif_c2c_25c_avg,genx,number,degrees Celsius,difference between chamber temperature at 25 centimeter depth and spatial average of ambient plots,genx_export
+CS_Code,cs_code,site,logger,n,cs_code,genx,number,NA,code for Campbell Scientific control of system,genx_export
+BoxTemp(1),boxtemp1,site,logger,n,boxtemp1,genx,number,degrees Celsius,temperature in LGR box,genx_export
+BoxTemp(2),boxtemp2,site,logger,n,boxtemp2,genx,number,degrees Celsius,temperature in LGR box,genx_export
+Logger,logger,site,logger,n,logger,genx,character,NA,logger name,genx_export
+Program,program,site,logger,n,program,genx,character,NA,program version,genx_export
+Table,table,site,logger,n,table,genx,character,NA,loggernet table name,genx_export
+rowid,rowid,key,logger,key,rowid,genx,character,NA,"unique id  for each orginal data row contatenate (timestamp, block, tabletype)",genx_export
+time2,time2,key,logger,key,time2,genx,number,YYYY-MM-DD HH:MM:SS,posix time stamp (EST standard),genx_export
+TIMESTAMP,timestamp,site,logger,n,timestamp,genx,number,YYYY-MM-DD HH:MM:SS,loggernet timestamp,genx_redoxswap
+RECORD,record,site,logger,n,record,genx,number,NA,loggernet record number,genx_redoxswap
+Redox5cm,redox5cm,site,logger,n,redox5cm,genx,number,millivolts,redox at 5 centimeter depth,genx_redoxswap
+Redox25cm,redox25cm,site,logger,n,redox25cm,genx,number,millivolts,redox at 25 centimeter depth,genx_redoxswap
+Redox45cm,redox45cm,site,logger,n,redox45cm,genx,number,millivolts,redox at 45 centimeter depth,genx_redoxswap
+Redox65cm,redox65cm,site,logger,n,redox65cm,genx,number,millivolts,redox at 65 centimeter depth,genx_redoxswap
+Temp50cm,temp50cm,site,logger,n,temp50cm,genx,number,degrees Celsius,temperature at 50 centimeter depth,genx_redoxswap
+Logger,logger,key,logger,key,logger,genx,character,NA,logger name,genx_redoxswap
+Program,program,site,logger,n,program,genx,character,NA,program version,genx_redoxswap
+Table,table,site,logger,n,table,genx,character,NA,loggernet table name,genx_redoxswap
+rowid,rowid,key,logger,key,rowid,genx,character,NA,"unique id  for each orginal data row contatenate (timestamp, block, tabletype)",genx_redoxswap
+time2,time2,key,logger,key,time2,genx,number,YYYY-MM-DD HH:MM:SS,posix time stamp (EST standard),genx_redoxswap
