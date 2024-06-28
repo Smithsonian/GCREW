@@ -1,0 +1,602 @@
+---
+title: "Example GCREW Pipeline"
+author: "Selina Cheng"
+date: "2022-10-12"
+output: 
+  html_document:
+      df_print: paged
+      toc: true
+      toc_float: true
+theme: lumen
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(knitr)
+library(tidyverse)
+library(kableExtra)
+source("origami scripts/0-SMARTX-origami-functions.R")
+```
+
+# Getting set up
+
+To start out, the user needs to define all of the directories. 
+
+1. The source directory, GCREW_LOGGERNET_DATA in Dropbox
+
+2. The intermediary directory, where all intermediate files are stored
+
+3. The output directory, where usable data is made available for researchers as monthly and yearly bundles
+
+```{r}
+source_dir <- paste0("C:/Users/", Sys.getenv("USERNAME"),"/OneDrive - Smithsonian Institution/Documents/GCREW_LOGGERNET_DATA-test")
+
+mid_path <- paste0("C:/Users/", Sys.getenv("USERNAME"),"/OneDrive - Smithsonian Institution/Documents/SMARTX_processing_test")
+
+out_path <- paste0("C:/Users/", Sys.getenv("USERNAME"),"/OneDrive - Smithsonian Institution/Documents/GCREW_RESEARCHER_DATA-test")
+```
+
+```{r, echo = F}
+# "Logger_role" matches every LoggerNet table with the appropriate project (e.g., GENX, SMARTX, GCREW Marsh Outlet, etc.)
+
+# logger_role <- "design documents/logger_x_project.csv"
+# logger_project <- fread(logger_role)
+# kable(logger_project) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+
+# Importing files {.tabset}
+
+`dir_names()` creates a list of directories to create, while `create_dirs()` creates the directories if they don't exist yet.
+
+`file_import()` imports raw files from GCREW_LOGGERNET_DATA that haven't been processed yet.
+
+## Function execution
+
+```{r}
+my_dirs <- dir_names(mid_path)
+
+create_dirs(my_dirs)
+
+file_import(source_dir, my_dirs$raw)
+```
+
+## Function code
+
+```{r}
+# Create directories
+create_dirs <- function(my_dirs){
+  out <- 0
+  for(n in 1:length(my_dirs)){
+    if(!dir.exists(file.path(my_dirs[n]))){
+      dir.create(file.path(my_dirs[n]))
+      out <- out + 1
+    }
+  }
+  print(paste(out, "directories have been created."))
+}
+
+# Import files
+file_import <- function (source_dir, raw_dir){
+  raw_working <- paste0(raw_dir, "/raw_working")
+  raw_archive <- paste0(raw_dir, "/raw_archive")
+  # List all files from the source directory folder, does NOT recurse into other folders in directory
+  files <- list.files(source_dir, pattern = NULL, all.files = FALSE,
+                  full.names = TRUE, recursive = FALSE,
+                  ignore.case = FALSE)
+  
+  # Remove any file paths that are just folders in the directory
+  files <- files[!file.info(files)$isdir]
+
+  # Remove files that are not .dat or .backup extensions
+  files <- files[file_ext(files) == "dat" | file_ext(files) == "backup"]
+  
+  # Create empty vector for the for loop
+  keep_files <- vector(mode = "character", length = length(files))
+  
+  # Read in data tables so that we can remove any empty data tables
+  for (n in 1:length(files)) {
+    dat <- read.table(files[n], sep = ",", quote = "\"'", dec = ".", na.strings = "NA", 
+                      colClasses = "character", nrows = 6, skip = 0, check.names = FALSE, fill=TRUE, 
+                      strip.white = FALSE, blank.lines.skip = TRUE) 
+    
+    # Extract table type from data
+    type <- dat[1,1]
+    
+    # Depending on type of table, remove tables less than a given length
+    if(nrow(dat) > 2 & type == "TOACI1"){
+      keep_files[n] <- files[n]
+    }
+    if(nrow(dat) > 4 & type == "TOA5"){
+      keep_files[n] <- files[n]
+    }
+  }
+  
+  keep_files <- keep_files[keep_files != ""]
+  
+  # Compare list of incoming files with files from raw_archive
+  keep_files_short <- strsplit(keep_files, "/")
+  keep_files_short <- sapply(keep_files_short, "[[", length(keep_files_short[[1]]))
+  
+  # Read in data from raw_archive
+  done_files <- list.files(raw_archive, pattern = NULL, all.files = FALSE,
+                           full.names = FALSE, recursive = FALSE,
+                           ignore.case = FALSE)
+  
+  keep_files <- keep_files[keep_files_short %in% done_files == F]
+  
+  # Copy all files to raw_working
+  file.copy(keep_files, raw_working)
+  print(paste0(length(keep_files), " files have been imported."))
+}
+
+```
+
+## Raw file
+
+```{r}
+  # Create list of file names in the raw directory
+  files <- list.files(paste0(my_dirs$raw, "/raw_working"), pattern = NULL, all.files = FALSE, 
+                full.names = TRUE, recursive = TRUE, 
+                ignore.case = FALSE) 
+
+  dat <- readLines(files[1])
+  
+  kable(head(dat)) %>% scroll_box(width = "100%")
+
+```
+
+# Process raw files {.tabset}
+
+`process()` reads a list of raw .dat files and saves them to .csv format.
+
+## Function execution
+```{r}
+process(my_dirs$raw, my_dirs$processed)
+```
+
+```{r, echo = F}
+processed_dat <- read.csv("C:/Users/chengs1/OneDrive - Smithsonian Institution/Documents/SMARTX_processing_test/1_processed/processed_archive/export_2021-04-07_01-45-00_c3log_1344_TOA5_.csv")
+
+kable(head(processed_dat)) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+## Function code
+```{r}
+process <- function(raw_dir, proc_dir) { 
+  raw_working <- paste0(raw_dir, "/raw_working")
+  raw_archive <- paste0(raw_dir, "/raw_archive")
+  proc_working <- paste0(proc_dir, "/processed_working")
+  
+  # Create list of file names in the raw directory
+  files <- list.files(raw_working, pattern = NULL, all.files = FALSE, 
+                full.names = TRUE, recursive = TRUE, 
+                ignore.case = FALSE) 
+  
+  if(length(files) == 0){
+    stop("No files to process")
+  }
+  
+  for (n in 1:length(files)) {
+    # Read in start of data to determine header and type
+    dat_header <- read.table(files[n], sep = ",", quote = "\"", 
+                             dec = ".", header = FALSE,
+                             na.strings = "NA", colClasses = "character", nrows = 6, 
+                             skip = 0, check.names = FALSE,fill=TRUE, 
+                             strip.white = FALSE, blank.lines.skip = TRUE) 
+    
+    # Read in data differently depending on table type
+    type <- dat_header[1,1]           
+    
+    if(type == "TOACI1") dat <- read.table(files[n], sep = ",", quote = "\"'",
+                                           dec = ".", na.strings = "NA", colClasses = "character", nrows = -1,
+                                           skip = 2, fill=TRUE, strip.white = FALSE, blank.lines.skip = TRUE)
+    
+    if(type == "TOA5" ) dat <- read.table(files[n], sep = ",", quote = "\"'",
+                                          dec = ".", na.strings = "NA", colClasses = "character", nrows = -1,
+                                          skip = 4, fill=TRUE, strip.white = FALSE, blank.lines.skip = TRUE)
+    
+    # Get logger info and column names from header
+    loggerinfo <- dat_header[1, ]
+    datnames <- dat_header[2, 1:ncol(dat)] 
+    datnames <- c(datnames, "Logger", "Program", "Table") 
+    
+    # Format data tables depending on type
+    if(type == "TOA5") dat <- cbind(dat, loggerinfo[2], loggerinfo[6], loggerinfo[8], row.names = NULL) 
+    if(type == "TOACI1") dat <- cbind(dat, loggerinfo[2], type, loggerinfo[3], row.names = NULL)
+    
+    # Set new column names
+    colnames(dat) <- datnames 
+    
+    # Get date and time for file naming purposes
+    date <- substr(dat[nrow(dat), 1], 1, 10) 
+    time <- substr(dat[nrow(dat), 1], 12, 20) 
+    time <- chartr(":", "-", time)
+    
+    # Create unique file name by pulling data from process file in this order:
+    # Table type, date, time, block, number of rows in data frame, type of original file 
+    # Any file name that could be overwritten would be a duplicate file
+    if(type == "TOA5"){
+      loggerinfo[1, 8] <- gsub("_", "", loggerinfo[1, 8])
+      loggerinfo[1, 2] <- gsub("_", "", loggerinfo[1, 2])
+      filename <- paste(tolower(loggerinfo[1,8]), date, time, tolower(loggerinfo[1,2]), nrow(dat), type, ".csv", sep="_")
+    }
+    if(type =="TOACI1"){
+      loggerinfo[1, 3] <- gsub("_", "", loggerinfo[1, 3])
+      loggerinfo[1, 2] <- gsub("_", "", loggerinfo[1, 2])
+      filename <- paste(tolower(loggerinfo[1,3]), date, time, tolower(loggerinfo[1,2]), nrow(dat), type, ".csv", sep="_")
+    }
+    
+    # Add the rest of the file path to file name
+    filename <- paste(proc_working, "/", filename, sep = "")
+    
+    # Create metadata and file path for metadata
+    meta_dat <- c(filename, datnames, files[n]) 
+    meta_file <- paste(proc_working, "/", format(Sys.time(), "%Y-%m-%d"), "_meta.txt", sep = "")
+    
+    # Save tables including metadata
+    write.table(meta_dat, meta_file, append = TRUE, quote = FALSE, sep = ",", 
+                na = "NA", dec = ".", row.names = FALSE, 
+                col.names = FALSE, qmethod = c("escape", "double")) 
+    
+    write.table(dat, filename, append = FALSE, quote = FALSE, sep = ",", 
+                na = "NA", dec = ".", row.names = FALSE,
+                col.names = TRUE, qmethod = c("escape", "double"))
+    
+    # Copy files to raw_archive folder
+    file.copy(files[n], raw_archive)
+    
+    # Remove files from raw_dir
+    file.remove(files[n])
+  }
+  print("Files have been processed.")
+}
+```
+
+# Sort processed files
+
+The `sorter()` function sorts each file into individual folders that correspond to logger and table type.
+
+```{r}
+sorter(my_dirs$processed, my_dirs$sorted)
+```
+
+![](sorter_files.png)
+
+# Join file with metadata {.tabset}
+
+We have two primary metadata documents:
+
+1. "Plot_names" contains the plots, treatments, and overarching experimental design information for the project.
+
+```{r}
+plot_names <- "design documents/gcrew schema drafts/functional/plot_names_SMARTX.csv"
+plots <- fread(plot_names)
+kable(head(plots)) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+
+
+2. "Design_role" contains every single variable from LoggerNet and the scale that it is relevant to (e.g., plot, treatment, or experiment-scale).
+
+```{r}
+design_table <- "design documents/gcrew schema drafts/functional/design_role_SMARTX.csv"
+design <- fread(design_table)
+kable(head(design)) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+
+The code is currently run manually - the user needs to specify the logger and table that they want to process.
+
+The function `new_norm_smartx()` unfolds the LoggerNet columns according to the experimental design and assigns them to the correct plots. 
+
+## Function execution
+
+```{r}
+# User defines variables for manual processing
+logger <- c("c3log")
+table <- c("export")
+increment <- 15
+
+# Check that these are the correct files that you want to process
+dirs_for_norm <- norm_files(my_dirs$sorted, logger, table)
+
+# Process files
+new_norm_smartx(dirs_for_norm, my_dirs$normal, design_table, plot_names, increment)
+```
+
+```{r, echo = F}
+norm_dat <- read.csv("C:/Users/chengs1/OneDrive - Smithsonian Institution/Documents/SMARTX_processing_test/3_normal/normal_archive/norm_export_2021-04-07_01-45-00_c3log_1344_TOA5_.csv")
+
+kable(head(norm_dat, 10)) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+
+## Function code
+```{r}
+new_norm_smartx <- function(source_dir, norm_dir, design_table, plot_names, increment){
+  norm_working <- paste0(norm_dir, "/normal_working")
+  
+  # Read in experimental design tables
+  design <- fread(design_table)
+  plotname <- fread(plot_names)
+  
+  # Set key for plotname and design tables to speed joining
+  merge_key = c("logger","design_link")
+  setkeyv(plotname, merge_key)
+  setkeyv(design, merge_key)
+  
+  # Prepare plotname and design tables for merging (set everything to lowercase and class data.table)
+  plotname <- lapply(plotname, tolower)
+  plotname <- as.data.table(plotname)
+  
+  design <- lapply(design, tolower)
+  design <- as.data.table(design)
+  
+  # Merge plotname and design to create big table that includes all of the measurements / parameters that apply to each plot
+  design <- merge(plotname, design, allow.cartesian = TRUE, by = merge_key)
+  
+  # Identify variable types "key", "site", and "plot" level from "var_norm_split" variable in design document
+  temp <- design[var_norm_split == "key",]
+  key <- unique(as.vector(temp$cr1000_name))
+  
+  temp <- design[var_norm_split == "n",]
+  site <- unique(as.vector(temp$cr1000_name))
+  
+  temp <- design[var_norm_split == "y",]
+  plot <- unique(as.vector(temp$cr1000_name))
+  
+  # List file paths from source directory. i includes full file path
+  i <- list.files(source_dir, pattern = NULL, all.files = FALSE,
+                  full.names = TRUE, recursive = TRUE,
+                  ignore.case = FALSE)
+  
+  # If there are no files to read in the specified directory,
+  # tell the user and stop the function from running so it doesn't break down the line.
+  if(length(i) == 0){
+    stop("No files to normalize in the specified directories.")
+  }
+  
+  for(n in 1:length(i)){
+    # This will go within a for loop in the function
+    dt <- fread(i[n])
+    
+    # Edit column names for ease of use
+    setnames(dt, tolower(names(dt)))
+    newnames <- names(dt)
+    newnames <- gsub("[(]", "", newnames)
+    newnames <- gsub("[)]", "", newnames)
+    setnames(dt, newnames)
+    
+    # Make all data lowercase
+    # dt <- lapply(dt, function(x) {gsub("NaN", NA, x)})
+    dt <- lapply(dt, tolower)
+    dt <- as.data.table(dt)
+    
+    # Deal with cases where logger might be NA -- set to statname1. Old code
+    # dt[, logger := ifelse(is.na(dt$logger) == TRUE, statname1, logger)]
+    
+    ## Format time so that minute is rounded to the nearest X-minute increment
+    Sys.setenv(TZ = "America/Cancun") ### set for EST all year long
+    dt <- subset(dt, grepl("20..-..-.. ..:..:..", dt$timestamp))
+    dt$timestamp <- as.POSIXct(dt$timestamp)
+    
+    # Create new time variable
+    minute_time <- round(minute(dt$timestamp)/increment)*increment
+    dt$time2 <- update(dt$timestamp, min = minute_time)
+    
+    # Create row id
+    dt$rowid <- paste("gcrew", dt$timestamp, dt$logger, sep="_")
+    
+    # Separate data into plot level and site level by selecting relevant variables
+    plot_name <- c(key, plot)
+    site_name <- c(key, site)
+    
+    dt_site <- subset(dt, select = names(dt) %in% site_name) # site data for merge
+    dt_plot <- subset(dt, select = names(dt) %in% plot_name) # plot level to denormalize
+    
+    ### Normalize data 
+    # Stack block/site data (long form data)
+    site_key <- c("logger", "rowid", "time2", "timestamp")
+    dt_site2 <- melt(dt_site, id.vars = site_key, measure.vars = , variable.name = "cr1000_name", na.rm = FALSE)
+    dt_site2 <- unique(dt_site2)
+    
+    # Stack plot data
+    plot_key <- c("logger", "rowid", "time2")
+    dt_plot2 <- melt(dt_plot, id.vars = plot_key, measure.vars = , variable.name = "cr1000_name", na.rm = FALSE)
+    
+    # If there are no plot variables, join just the site data to the design data
+    if(("cr1000_name" %in% colnames(dt_plot2)) == F){
+      # Merge site level data and design attributes (really just the site name and the type of data)
+      merge_key = c("logger", "cr1000_name")
+      setkeyv(dt_site2, merge_key)
+      setkeyv(design, merge_key)
+      dt_site_merged <- merge(dt_site2, design, allow.cartesian = TRUE, by = merge_key)
+      # Select only the relevant columns
+      dt_site_merged <- subset(dt_site_merged, select = c("site", "logger", "rowid", "time2", "timestamp",
+                                                          "value", "research_name", "cr1000_name", "type"))
+      
+      ## Collect only numeric data, remove duplicate rows, and set to numeric class
+      dt_site_merged_num <- dt_site_merged[type == "number", ]
+      setkey(dt_site_merged_num, NULL)
+      dt_site_merged_num <- unique(dt_site_merged_num)
+      dt_site_merged_num$value <- as.double(dt_site_merged_num$value)
+      
+      # Recast site level data to wide format with each variable as its own column (wide)
+      dt_site_wide <- dcast(dt_site_merged_num, site+logger+rowid+time2+timestamp ~ cr1000_name,
+                            subset = NULL, drop = TRUE, value.var = "value") # note that fill should be allowed to default
+      
+      # Normalized dt for output
+      dt_normalized <- dt_site_wide
+    } else{ # Otherwise, merge plot and site level data
+      # Merge plot level values and timestamps with design table
+      merge_key = c("logger", "cr1000_name")
+      setkeyv(dt_plot2, merge_key)
+      setkeyv(design, merge_key)
+      dt_plot3 <- merge(dt_plot2, design, allow.cartesian = TRUE, by = merge_key)
+      
+      # Select only the variables we want.
+      dt_plot4 <- subset(dt_plot3, select = c("rowid", "time2", "logger", "plot_id", "value", "research_name", "cr1000_name", "type"))
+      
+      ## Collect only numeric data, remove duplicate rows, and set to numeric class
+      dt_plot4_num <- dt_plot4[type == "number", ]
+      
+      setkey(dt_plot4_num, NULL)
+      dt_plot4_num <- unique(dt_plot4_num)
+      dt_plot4_num$value <- as.double(dt_plot4_num$value)
+      
+      # Recast data to wide format with each variable as its own column
+      dt_plot_wide <- dcast(dt_plot4_num, plot_id+rowid+logger+time2 ~ research_name, fun.aggregate = mean_rm,
+                            subset = NULL, drop = TRUE, value.var = "value") # note that fill should be allowed to default
+      
+      # Recast site level data to wide format with each variable as its own column
+      dt_site_wide <- dcast(dt_site2, rowid+logger+time2+timestamp ~ cr1000_name,
+                            subset = NULL, drop = TRUE, value.var = "value") # note that fill should be allowed to default
+      
+      # Merge non normalized variables with data
+      key2 <-c("rowid","logger","time2")
+      setkeyv(dt_plot_wide, key2)
+      setkeyv(dt_site_wide, key2)
+      
+      dt_merged <- merge(dt_site_wide, dt_plot_wide, allow.cartesian = TRUE, by = key2)
+      
+      # Get plotnames again and merge plot attributes with dt_merged
+      # plotname2 <- as.data.table(unique(subset(plotname, select= c("site", "plot_id","logger", "plot_name",
+      #                                                              "treatment_name", "transect","warming_level","co2_level","treatment"))))
+      plotname2 <- as.data.table(unique(subset(plotname, select = -design_link)))
+      
+      key2 <- c("plot_id", "logger")
+      setkeyv(dt_merged, key2)
+      setkeyv(plotname2, key2)
+      dt_merged <- plotname2[dt_merged]
+      
+      # Set final data for output
+      dt_normalized <- dt_merged
+    }
+    
+    # Get table name from i
+    table_name <- unlist(strsplit(i[n], "/"))
+    table_name <- table_name[length(table_name)]
+    
+    ### Save table to directory
+    path <- paste("norm_", table_name, sep = "")
+    out_path <- paste(norm_working, path, sep = "/")
+    
+    # Save table to norm_working
+    write.table(dt_normalized, out_path, append = FALSE, quote = FALSE, sep = ",",
+                na = "NA", dec = ".", row.names = FALSE,
+                col.names = TRUE, qmethod = c("escape", "double"))
+    
+    # Copy original file to sorted_archive
+    sort_dir <- unlist(strsplit(i[n], "/sorted_working/"))
+    folder <- unlist(strsplit(sort_dir[2], "/"))[1]
+    copy_dir <- paste0(sort_dir[1], "/sorted_archive/", folder)
+
+    file.copy(i[n], copy_dir)
+    # Remove original file from sorted_working
+    file.remove(i[n])
+  }
+  print("Files have been normalized.")
+}
+```
+
+# Monthly (and yearly) aggregation {.tabset}
+
+The last step for packaging the data is to aggregate it by month and year. The data will then be made available to researchers by project, month, and year. 
+
+We sort the final data using the "logger_role" document, which matches every LoggerNet table with the appropriate project (e.g., GENX, SMARTX, GCREW Marsh Outlet, etc.)
+
+```{r}
+logger_role <- "design documents/logger_x_project.csv"
+logger_project <- fread(logger_role)
+kable(logger_project) %>% kable_styling("striped") %>% scroll_box(width = "100%")
+```
+
+The `monthlymanage()` function aggregates data for a certain logger and table by month. If the data has already been aggregated by month but you need to tack more days on, the function will also do so.
+
+## Function execution
+
+```{r}
+# Define the table you want to aggregate and get the corresponding filepaths
+table <- c("export")
+dirs_for_month <- monthly_files(my_dirs$normal, table)
+
+# Aggregate by month
+monthlymanage(dirs_for_month, my_dirs$monthly, out_path, logger_role)
+```
+
+## Function code
+```{r}
+monthlymanage <- function(source_files, monthly_dir, out_path, logger_role){
+  norm_working <- paste0(unlist(strsplit(source_files[1], "/normal_working/"))[1], "/normal_working")
+  norm_archive <- paste0(unlist(strsplit(source_files[1], "/normal_working/"))[1], "/normal_archive")
+  logger_role <- read.csv(logger_role)
+  
+  if(length(source_files) == 0){
+    stop("There are no files to aggregate that match your specified table and year")
+  }
+  
+  for (n in 1:length(source_files)){
+    # Read in data table 
+    dt <- fread(source_files[n])
+    
+    # Format time
+    dt$time2 <- as.POSIXct(dt$time2)
+    
+    # Create year, month, and logger variables to create a key data frame
+    # Create a different table for every combination of month, year, and logger
+    dates <- unique(format(dt$time2, "%Y-%m"))
+    dates <- strsplit(dates, "-")
+    logger <- unique(tolower(dt$logger))
+    y2 <- data.frame(yr = as.integer(sapply(dates, "[[", 1)),
+                     mo = as.integer(sapply(dates, "[[", 2)), 
+                     logger = logger, row.names = NULL)
+    
+    # Find output directory
+    table <- gsub("_", "", unique(tolower(dt$table)))
+    logger <- gsub("_", "", unique(tolower(dt$logger)))
+    if(grepl("waterlevel", table, ignore.case = TRUE) == TRUE){
+      folder <- "gcrew_waterlevel"
+    } else{
+      folder <- logger_role$project[which(logger_role$pattern == logger)]
+    }
+  
+    output_dir <- paste0(out_path, "/", folder, "/monthly")
+    if(!dir.exists(output_dir)) dir.create(output_dir)
+
+    for (m in 1:nrow(y2)) {
+      # Subset data by month and save each one as a different file
+      dtplot <- subset(dt, month(dt$time2) == y2$mo[m] & dt$logger == y2$logger[m] & year(dt$time2) == y2$yr[m])
+      path <- paste(gsub("_", "", y2$logger[m]), table, y2$mo[m], y2$yr[m], sep = "_")
+      path <- paste(path, "csv", sep = ".")
+      path_out <- paste(output_dir, path, sep = "/")
+      path_monthly <- paste(monthly_dir, path, sep = "/")
+
+      # If there's already a data table with the same name, bind rows together and overwrite
+      if (file.exists(path_out) == TRUE) {
+        dt2 <- fread(path_out)
+        dt2 <- rbind.fill(dtplot, dt2)
+        dt2 <- unique(dt2)
+        dt2 <- as.data.table(dt2)
+        
+        write.table(dt2, path_out, append = FALSE, quote = FALSE, sep = ",",
+                    na = "NA", dec = ".", row.names = FALSE,
+                    col.names = TRUE, qmethod = c("escape", "double"))
+        write.table(dt2, path_monthly, append = FALSE, quote = FALSE, sep = ",",
+                    na = "NA", dec = ".", row.names = FALSE,
+                    col.names = TRUE, qmethod = c("escape", "double"))
+        
+        # Otherwise, if the data table doesn't exist yet, just save it to the output dir
+      } else if (file.exists(path_out) == FALSE) {
+        write.table(dtplot, path_out, append = FALSE, quote = FALSE, sep = ",",
+                    na = "NA", dec = ".", row.names = FALSE,
+                    col.names = TRUE, qmethod = c("escape", "double"))
+        write.table(dtplot, path_monthly, append = FALSE, quote = FALSE, sep = ",",
+                    na = "NA", dec = ".", row.names = FALSE,
+                    col.names = TRUE, qmethod = c("escape", "double"))
+      }
+    }
+
+    # Copy file to norm_archive
+    file.copy(source_files[n], norm_archive)
+    # Remove file from norm_working
+    file.remove(source_files[n])
+  }
+}
+```
