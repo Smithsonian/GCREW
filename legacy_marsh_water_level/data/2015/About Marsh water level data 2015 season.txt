@@ -1,0 +1,2 @@
+Data for the marsh water level in 2015 had several issues, so we have decided not to edit or publish what we have. Instrument/logger was not operational until July; logger and communications issues continued. 
+There is an excel worksheet with the data; a glance at the graphed data suggests there are some data from jday 192-264 (July 11 to Sept 21), then a noisy patch, then possibly some more usable data from Oct 7-28 (jday 280-302). Note: the 'depth' is relative - should be referenced to the creek data at a high tide to estimate actual water table.

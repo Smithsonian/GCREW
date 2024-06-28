@@ -1,0 +1,18 @@
+2022 c3 and met have huge spike in December. Did aquatroll offsets change? Need to create new offset relationship as well....
+
+For all sites:
+Created linear regressions to predict one site's waterlevel based on another's, using 2021 data (fullest data for C3, C4, GCREW MET, GENX, and C3 float gauge).
+Using the file called "waterlevel_combined_filled_2021.csv", converted to wide form, using the "corrected_depth" variable.
+The intercept of the linear model was used as the offset.
+Order of fill for sites determined by distance to the next site and the R^2 for the linear regression
+i.e., the order of fill for C3 is GCREW MET, GENX, C4, and then float gauge (which is next to C3).
+This is because GCREW MET is closest to C3 spatially, then GENX, then G4. The float gauge is always last because it is less precise than the other data.
+
+Order of fill:
+C3: Fill with GCREW MET, GENX, C4, float gauge
+GCREW_MET: Fill with C3, C4, GENX, float gauge
+GENX: Fill with C4, GCREW MET, C3, float gauge
+C4: Fill with GENX, GCREW MET, C3, float gauge
+
+
+
