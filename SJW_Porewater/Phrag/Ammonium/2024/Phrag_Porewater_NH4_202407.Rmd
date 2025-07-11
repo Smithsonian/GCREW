@@ -1,6 +1,6 @@
 ---
-title: "SMARTX: Porewater Ammonium"
-author: "September 2024 Samples"
+title: "Phrag: Porewater Ammonium"
+author: "July 2024 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -15,25 +15,21 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Stephanie J. Wilson ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- "05/08/2025"
+  run_date <- "03/17/2025"
   sample_year <- "2024"
-  sample_month <- "September"
+  sample_month <- "July"
   user <- "Max Wegner"
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  NH3_files <- c("Raw Data/Sept_2024_SMARTX_NH4_Run1.csv",
-                 "Raw Data/Sept_2024_SMARTX_NH4_Run2.csv", 
-                 "Raw Data/Sept_2024_SMARTX_NH4_Run3_rerun (with dilution).csv",
-                 "Raw Data/Sept_2024_SMARTX_NH4_Run4.csv")
+  NH3_files <- c("Raw Data/July_2024_Phrag_NH4_Run1.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
-  file_path <- "Raw Data/SEAL_SMARTX_QAQC_Log_2024.csv"
-  final_path <- "Processed Data/SMARTX_Porewater_NH4_202409.csv"
+  file_path <- "Raw Data/SEAL_Phrag_QAQC_Log_2024.csv"
+  final_path <- "Processed Data/Phrag_Porewater_NH4_202407.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- "I think SMARTX_610-20 was input twice on the instrument and one is supposed to be4
-      SMARTX_610-40 "
+  run_notes <- "NA "
   
 #Set up file path for metadata 
   #downloaded metadata csv - downloaded from Google drive as csv for this year
@@ -118,8 +114,8 @@ raw_metadata <- read.csv(Raw_Metadata)
   #Pull out only SMARTX Rows 
   #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("SMARTX", Experiment, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = paste0(Experiment, "_", Sample.ID)) %>%
+  filter(grepl("Phragmites", Experiment, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
     rename(
@@ -129,18 +125,7 @@ metadata <- raw_metadata %>%
     N_Treatment = N.Treatment,
     Temp_Treatment = Temp.Treatment
   ) %>%
-  select(-N_Treatment)
-
-#create a column for C3 or C4 plants 
-metadata <- metadata %>%
-  mutate(
-    Community = case_when(
-      startsWith(as.character(Plot_Name), "3") ~ "C3",
-      startsWith(as.character(Plot_Name), "6") ~ "C3",
-      startsWith(as.character(Plot_Name), "4") ~ "C4",
-      TRUE ~ NA_character_  # if other values exist
-    )
-  )
+  select(-Temp_Treatment)
 
 #Bring in the collection date and any field notes if relevant 
 #collection_metadata <- read.csv(Collection_Dates)
@@ -180,16 +165,6 @@ head(df)
 df_all <- df %>%
   mutate(Run_Number = as.numeric(Run_Number))
 
-## Extra code to put SMARTX at the beginning of samples that don't have it 
-df_all <- df_all %>%
-  mutate(
-    Sample_Name = case_when(
-      str_detect(Sample_Name, "^\\d{3}-\\d{2,3}$") &  # matches 123-45, 456-120, etc.
-      !str_starts(Sample_Name, "SMARTX_") ~ paste0("SMARTX_", Sample_Name),
-      
-      TRUE ~ Sample_Name  # leave all others unchanged
-    )
-  )
 
 ```
 
@@ -321,7 +296,7 @@ Slopes_chk <- ggplot(log, aes(run_date, Slope, col=Test)) +
   geom_line(aes(group = Test)) + 
   theme_bw() + 
   labs(title="Slope Drift Assessment", x="Run Date", y="Slope") +
-  scale_color_manual(values=c( "darkgoldenrod")) + 
+  scale_color_manual(values=c( "darkgoldenrod"))+
   ylim(1.5,2)
 Slopes_chk
 
@@ -407,6 +382,7 @@ if (dil_dups_string != "") {
   message("No duplicated samples.")
 }
 
+#This is to pick out the dilutions and keep the last run
 df_all_cor <- df_all %>%
   arrange(row_number()) %>%
   mutate(
@@ -438,7 +414,7 @@ df_all_cor <- df_all %>%
 
 NH3_peChk <- df_all_cor %>%
   filter(Test == "Ammonia 2", 
-         str_detect(Sample_Name, "pe_chk")) %>%
+         str_detect(Sample_Name, "PEchk")) %>%
   summarise(
     Mean_Chk_Conc = mean(Conc, na.rm = TRUE),
     SD_Chk_Conc = sd(Conc, na.rm = TRUE),
@@ -468,7 +444,6 @@ cat("Analyze Check Standards")
 NH3_chks <- df_all %>%
   filter(str_detect(Sample_Name, "1mg/L ammonia"))%>% 
   mutate(rep = row_number())
-
 
 #RSV of standards 
 chks_NH3_rsv <- ((sd(NH3_chks$Conc))/mean(NH3_chks$Conc))
@@ -534,7 +509,8 @@ NH3_blks <- df_all %>%
 
 #Pull out samples from df_all to calc quantile
 samples <- df_all %>%  
-  filter(str_detect(Sample_Name, c("SMARTX"))) 
+  filter(str_detect(Sample_Name, c("P"))) %>%  
+  filter(!str_detect(Sample_Name, c("PEchk"))) #have to do this because Phrag ids start with P 
 
 #Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
 
@@ -602,7 +578,7 @@ cat("Analyze Duplicates")
 df_NH3_dup <- df_all_cor %>%
   filter(Test == "Ammonia 2") %>%
   filter(
-     !grepl("CCV|CCB|Blank|1mg/L ammonia|10ppt|Standard|Auto Spike|pe_chk", Sample_Name, ignore.case = TRUE), 
+     !grepl("CCV|CCB|Blank|1mg/L ammonia|10ppt|Standard|Auto Spike", Sample_Name, ignore.case = TRUE), 
      #^removes autospice, ccv, ccb, standards
      !is.na(Sample_Name),                                         # Remove NA
      !grepl("^\\d+$", Sample_Name),                               # removes all numbers
@@ -796,7 +772,8 @@ if (any(df_matrix$Spike_diff_flag[df_matrix$Test == "Ammonia 2"] != "YES")) {
 
 #Pull out samples 
 samples <- df_all_cor %>%  
-  filter(str_detect(Sample_Name, c("SMARTX")))     
+  filter(str_detect(Sample_Name, c("P")))   %>%  
+  filter(!str_detect(Sample_Name, c("PEchk"))) #have to do this because Phrag ids start with P    
 
 #Convert values based on the Test ID 
 samples <- samples %>%
@@ -854,7 +831,7 @@ cat("Merge Samples with Metadata")
 all_present <- all(metadata$Sample_Name %in% samples_flagged$Sample_Name)
 
 if (all_present) {
-  message("All sample IDs are present in data.")
+  message("All sample IDs are present in data")
 } else {
   message("Some sample IDs are missing from data.")
   
@@ -884,57 +861,22 @@ cat("Visualize Data")
 NH3_forplot <- df_all_clean %>%
   filter(Test == "Ammonia 2")
 
-#C3 plots
-NH3_forplot_C3 <- NH3_forplot %>%
-  filter(Community == "C3")
+#need to work out how best to plot these data 
 
-#group the data for plotting
-NH3_forplot_C3 <- NH3_forplot_C3 %>%
-  group_by(Depth) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
-
-viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(x = as.factor(Temp_Treatment), y = Conc, fill=as.factor(Temp_Treatment))) +
+viz_NH3_plot <- ggplot(data = NH3_forplot, aes(x = as.factor(CO2_Treatment), y = Conc, fill=as.factor(CO2_Treatment))) +
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
-       facet_grid(~ Depth, scales="free_x") +
-        scale_fill_manual(values = c("0" = "blue", 
-                                     "1.7" = "yellow", 
-                                     "3.4" = "orange",
-                                     "5.1" = "red")) +
+       facet_grid(N_Treatment~Depth, scales="free_x") +
+        scale_fill_manual(values = c("Amb" = "deeppink2", 
+                                     "Elev" = "darkorchid4")) +
         theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="C3: Porewater NH3", fill="+Temp. (C)") + 
+        labs(x= " ", y="NH3 (mg/L)", title="Phrag: Porewater NH3", fill="CO2 Trtmt:") + 
           theme(legend.position = "right") +
           scale_x_discrete(drop = TRUE)+
         theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
               panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
-print(viz_NH3_plot_C3) 
+print(viz_NH3_plot) 
 
-#C4 plots
-NH3_forplot_C4 <- NH3_forplot %>%
-  filter(Community == "C4")
-
-#group the data for plotting
-NH3_forplot_C4 <- NH3_forplot_C4 %>%
-  group_by(Depth) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
-
-viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(x = as.factor(Temp_Treatment), y = Conc, fill=as.factor(Temp_Treatment))) +
-       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
-                 color="black") + 
-       facet_grid(~ Depth, scales="free_x") +
-        scale_fill_manual(values = c("0" = "blue", 
-                                     "1.7" = "yellow", 
-                                     "3.4" = "orange",
-                                     "5.1" = "red")) +
-        theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="C4: Porewater NH3", fill="+Temp. (C)") + 
-          theme(legend.position = "right") +
-          scale_x_discrete(drop = TRUE)+
-        theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
-              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
-print(viz_NH3_plot_C4) 
 
 ```
 
@@ -970,7 +912,8 @@ final_data3 <- df_all_clean %>%
 
 #take out only the columns we want to merge 
 df_all_clean_cols <- df_all_clean %>%
-  select(Sample_Name, Sample_ID, Experiment, Plot_Name, Depth, CO2_Treatment, Temp_Treatment, Community,
+  select(Sample_Name, Sample_ID, Experiment, Plot_Name, Depth, CO2_Treatment, N_Treatment, 
+         #Community,
          Year, Month,
          #Day, Time..24hr., Time.Zone_EDT.EST,
         NH3_flag)
@@ -1012,7 +955,8 @@ final_data <- final_data_labeled %>%
     # add more rename pairs as needed
   ) %>%
   select(Site, Experiment, Month, Year, Sample_Name, Sample_ID,  
-         Plot_Name, Depth, CO2_Treatment, Temp_Treatment, Community,
+         Plot_Name, Depth, CO2_Treatment, N_Treatment,
+         #Community, 
          #Sample_ID, Day, Time, Time_Zone,
          NH3_Conc_mgL, NH3_Conc_uM, NH3_Conc_Flag, NH3_QAQC_Flag,
          Analysis_rundate,  Run_notes)
