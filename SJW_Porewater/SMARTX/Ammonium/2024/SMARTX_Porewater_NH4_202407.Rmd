@@ -162,25 +162,16 @@ data_NH3 <- map(NH3_files, read.csv)
 # Combining Files
 df_combo <- bind_rows(data_NH3)
 
-# Rename columns
-df_combo_rename <- df_combo %>%
-  rename('Conc' = Concentration,
-         'Absorbance' = Absorbance,
-         'Dilution' = Dilution,
-         'Sample_Name' = X,
-         'Test' = X.6,
-         'Run_Time' = X.8,
-         'Unit' = X.5, 
-         'Run_Number' = X.1)
-
-#making list to remove columns
-cols_to_remove <- c("RUNSTARTED", "X.2", "X.3", "X.4", "X.7")
-
-#Removing columns
-df <- df_combo_rename %>%
-  select(-all_of(cols_to_remove)) %>%
-  select(!c(1,2))%>%
-  select(Sample_Name, Run_Number, Conc, Absorbance, Dilution, Unit, Test, Run_Time)
+# Select needed columns & rename 
+df <- df_combo %>%
+  select(Sample_Name = 4, 
+         Run_Number = 5,
+         Conc = 6, 
+         Absorbance = 7, 
+         Dilution = 9, 
+         Unit = 12,
+         Test = 13, 
+         Run_Time = 15)
 
 #Checking column headers
 head(df)
@@ -415,6 +406,7 @@ if (dil_dups_string != "") {
   message("No duplicated samples.")
 }
 
+#This is to pick out the dilutions and keep the last run
 df_all_cor <- df_all %>%
   arrange(row_number()) %>%
   mutate(
@@ -476,7 +468,6 @@ cat("Analyze Check Standards")
 NH3_chks <- df_all %>%
   filter(str_detect(Sample_Name, "1mg/L ammonia"))%>% 
   mutate(rep = row_number())
-
 
 #RSV of standards 
 chks_NH3_rsv <- ((sd(NH3_chks$Conc))/mean(NH3_chks$Conc))
@@ -862,9 +853,9 @@ cat("Merge Samples with Metadata")
 all_present <- all(metadata$Sample_Name %in% samples_flagged$Sample_Name)
 
 if (all_present) {
-  message("All sample IDs are present in metadata.")
+  message("All sample IDs are present in data")
 } else {
-  message("Some sample IDs are missing from metadata.")
+  message("Some sample IDs are missing from data.")
   
   # Optional: Which ones are missing?
   missing_ids <- setdiff(metadata$Sample_Name, samples_flagged$Sample_Name)
@@ -943,6 +934,8 @@ viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(x = as.factor(Temp_Treatmen
         theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
               panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
 print(viz_NH3_plot_C4) 
+
+#would be good to come up with a way to parse out and show the elevated CO2 as well
 
 ```
 
