@@ -1,0 +1,51 @@
+---
+title: "GC_Collate_Data"
+author: "Brenden Blakley"
+date: "2025-08-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(stringr)
+
+```
+
+```{r , echo=FALSE}
+
+CH4_processed_files <- c("Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_2.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_3.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv")
+data_CH4 <- map(CH4_processed_files, read.csv)
+
+# Combining Files
+df_combo <- bind_rows(data_CH4)
+```
+
+## Visualize Data
+```{r Visualize Data, echo=FALSE}
+cat("Visualize Data")
+
+### Ammonia 
+CH4_forplot <- df_combo
+
+#need to work out how best to plot these data 
+
+viz_CH4_plot <- ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4_Conc_umol, fill = as.factor(Treatment))) +
+       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
+                 color="black") + 
+       facet_grid(~ Depth, scales="free_x") +
+  scale_fill_manual(values = c("Control" = "blue", 
+                                     "eCO2" = "red", 
+                                     "N" = "yellow",
+                                     "eCO2_N" = "orange")) +
+        theme_classic() + 
+        labs(x= " ", y="CH4 (umol)", title="2M: Porewater CH4", fill = "Treatment") + 
+          theme(legend.position = "right") +
+          scale_x_discrete(drop = TRUE)+
+        theme(axis.text.x = element_text(angle = 90, vjust = 0.3), 
+              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
+print(viz_CH4_plot) 
+
+
+```
