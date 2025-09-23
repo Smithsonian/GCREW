@@ -74,6 +74,10 @@ bdl_cutoff <- 50
 ##Check Standard Concentration
 level_ch4 <- 1000      #ppm
 chks_flag = 60
+blks_flag = 60
+
+#initialize flags
+flags <- ""
 
 
 
@@ -132,7 +136,6 @@ colnames(raw)[1] <- "Sample_ID"
 
 ```
 
-\newpage
 # Assess standard curves
 ```{r , echo=FALSE}
 
@@ -161,7 +164,6 @@ CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size=4)
 CH4_Curve
 
 high_CH4_lm <- lm(high_stds_ch4$CH4_Area ~ high_stds_ch4$Conc_CH4)
-summary(high_CH4_lm)
 high_cf <- coef(high_CH4_lm)
 
 #create data frame with 1 rows and 0 columns
@@ -177,7 +179,6 @@ CH4_Curve <- ggplot(low_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size=4) 
 CH4_Curve
 
 low_CH4_lm <- lm(low_stds_ch4$CH4_Area ~ low_stds_ch4$Conc_CH4)
-summary(low_CH4_lm)
 low_cf <- coef(low_CH4_lm)
 
 #create data frame with 1 rows and 0 columns
@@ -199,6 +200,19 @@ Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col=Curve)) + geom_point(size=4) 
 Slopes_chk
 
 write.csv(log, log_path)
+
+
+#check r2
+
+if(summary(high_CH4_lm)$adj.r.squared < r2_cutoff) {message("High_R2 is Bad")} else {message("High R2 Good") }
+
+if(summary(low_CH4_lm)$adj.r.squared < r2_cutoff) {message("Low_R2 is Bad")} else {message("Low R2 Good")}
+
+#create R2 flags
+
+flags <- ifelse(summary(high_CH4_lm)$adj.r.squared < r2_cutoff, paste0(flags, "High_R2 is Bad"), flags)
+
+flags <- ifelse(summary(low_CH4_lm)$adj.r.squared < r2_cutoff, paste0(flags, "; Low_R2 is Bad"), flags)
 ```
 
 ## Now calculate the CH4 & CO2 concentrations in ppm  
@@ -253,6 +267,14 @@ chks$CH4_Conc_ppm <-
 chks$Ch4_diff <- ((chks$CH4_Conc_ppm - level_ch4)/((chks$CH4_Conc_ppm + level_ch4)/2)) * 100
 chks$CH4_diff_flag <-  ifelse(chks$Ch4_diff <10, 'YES', 'NO, rerun')
 
+#calculate the percent of check standards that are within the range based on the flag 
+CH4_chks_percent <- (sum(chks$CH4_diff_flag == "YES")/nrow(chks))*100
+
+#report out if flags indicate need for rerun
+
+if(CH4_chks_percent >= chks_flag) {message(">60% of CH4 Check Standards are within range of expected concentration - PROCEED")} else {message("<60% of CH$ Check Standards are within range of expected concentration - REASSESS")}
+
+
 #now plot the Ch4 concentrations and the CO2 concentrations vs. the expected concentration 
 #then also make the color the percent difference between the expected and observed concentration 
 
@@ -267,6 +289,9 @@ ch4_chk <-  ggplot(data = chks, aes(x = Sample_ID, y = CH4_Conc_ppm, fill=CH4_di
 
 ch4_chk
 
+#Add Check Standard Flags
+
+flags <- ifelse(CH4_chks_percent >= chks_flag, flags, paste0(flags, "; Check Standards out Of Range"))
 
 ```
 
@@ -297,9 +322,7 @@ CH4_blks$CH4_diff_flag <-  ifelse(CH4_blks$CH4_Area <= blk_flag_CH4, 'YES', 'NO,
 CH4_blks_percent <- (sum(CH4_blks$CH4_diff_flag == "YES")/nrow(CH4_blks))*100
 
 #report out if flags indicate need for rerun
-ifelse(CH4_blks_percent >= 60,
-       ">60% of CH4 Blanks are below the lower 25% quartile of samples - PROCEED",
-       "<60% of CH4 blaks are lower 25% quartile of samples - REASSESS")
+if(CH4_blks_percent >= blks_flag) {message(">60% of CH4 Blanks are below the lower 25% quartile of samples - PROCEED")} else {message("<60% of CH4 blaks are lower 25% quartile of samples - REASSESS")}
 
 #plotting the blanks compared to the lower 25% of conc (what the flag is)
 CH4_blks_plot <-  ggplot(data = CH4_blks, aes(x = Sample_ID, y = CH4_Area, fill=CH4_diff_flag)) +
@@ -326,22 +349,18 @@ blank_avgs <- data.frame(
 )
 
 # Pretty print
-knitr::kable(blank_avgs, caption = "Mean Concentration of Blanks", digits = 4)
+knitr::kable(blank_avgs, caption = "Mean Area of Blanks", digits = 4)
 
 
-#write out a flag to the sample dataframe if more than 60% of the blanks are above the lower 25% quantile of samples
-if (CH4_blks_percent <= chks_flag) {  # assuming you have tn_chks_percent similarly
-    df_all_cor$CH4_flag <- ifelse(
-    df_all_cor$CH4_flag != "",
-    paste0(df_all_cor$CH4_flag, "; CH4 blanks out of range"),
-    "CH4 blanks out of range"
-  )
-}
+#write out a flag if more than 60% of the blanks are above the lower 25% quantile of samples
+flags <-  ifelse(CH4_blks_percent >= blks_flag, flags, paste0(flags, '; Blanks out of Range'))
+
+
 
 
 ```
 
-# Dilution correct samples 
+# Dilution correct samples and Check Range
 ```{r, echo=FALSE}
 
 #multiply the concentration by the dilution factor
@@ -381,7 +400,7 @@ Samples$CH4_Conc_umol <- (Samples$CH4_Conc_ppm_dilcorr*((1*volume/1000)/(0.08206
 
 #quick first look at the samples 
 ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_umol)) +
-  geom_bar(stat = 'identity') +
+  geom_bar(stat = 'identity', fill = "darkblue") +
   theme_classic() +
   labs(x = " ", y = "CH4 (umol)", title = "CH4 Gas in Water") +
   theme(axis.text.x = element_text(
@@ -422,6 +441,10 @@ merged_data <- metadata %>%
 
 #might want to include a flag or something to see that all the samples are included? 
 
+#add flags
+
+merged_data$CH4_Flags <- flags
+
 df_all_clean <- merged_data 
 
 ```
@@ -435,7 +458,7 @@ CH4_forplot <- df_all_clean
 
 #need to work out how best to plot these data 
 
-viz_CH4_plot <- ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4_Conc_umol, fill = as.factor(Treatment))) +
+viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4_Conc_umol, fill = as.factor(Treatment))) +
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
        facet_grid(~ Depth, scales="free_x") +
@@ -474,12 +497,12 @@ print(viz_CH4_plot2)
 
 
 ## Export Processed Data  
-```{r}
+```{r, echo=FALSE}
 #check results
 #head(Samples)
 
 #pull out what we need 
-Samples1 <- df_all_clean[ ,c(7, 9:14, 16:23 )]
+Samples1 <- df_all_clean[ ,c(7, 9:14, 16:23, 25 )]
 #head(Samples1)
 
 #write.csv(Samples1, final_path)
