@@ -2,20 +2,17 @@
 title: "LTREB_SHIMADZUGC_CH4_TEMPLATE"
 author: "Brenden Blakley"
 date: "2025-08-22"
-output: pdf_document
+output:  
+  pdf_document:
+    toc: true
+    toc_depth: 1
+    number_sections: true
+output_dir: "To Be Reviewed/PDF"
 ---
 
-##Set Up
+\newpage
 
-```{r setup, include=FALSE}
-library(dplyr)
-library(ggplot2)
-library(ggpubr)
-library(stringr)
-library(fuzzyjoin)
-
-```
-
+##Run Information
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in 
 #set the run date & user name 
@@ -51,8 +48,15 @@ volume = 0.012
   cat(run_notes)
 ```
 
-##Set Up Constants
-```{r}
+
+##Set Up
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(stringr)
+library(fuzzyjoin)
 
 ##Low & High Standard Curve Cutoffs
 low_std_crv_cutoff <- 1000
@@ -115,7 +119,7 @@ metadata <- raw_metadata %>%
 
 ```
 
-## Read in data files
+# Read in data files
 ```{r , echo=FALSE}
 
 #Read in Nov Data 
@@ -128,7 +132,8 @@ colnames(raw)[1] <- "Sample_ID"
 
 ```
 
-## Assess standard curves
+\newpage
+# Assess standard curves
 ```{r , echo=FALSE}
 
 stds_ch4 <-  raw %>%  
@@ -142,7 +147,7 @@ stds_ch4[,"Conc_CH4"] <- as.numeric(stds_ch4[,"Conc_CH4"])
 low_stds_ch4 <- stds_ch4  %>%  
   filter(!Conc_CH4 > low_std_crv_cutoff)
 
-low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_CH4$Conc_CH4)
+low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_ch4$Conc_CH4)
 
 
 high_stds_ch4 <- stds_ch4  %>%  
@@ -228,7 +233,7 @@ Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > adl_cutoff, "Needs Dilution", 
 
 ```
 
-## Check the Check Standards 
+# Aanlayze the Check Standards 
 ```{r Asses Check Standards, echo=FALSE}
 
 chks <-  raw %>%  
@@ -264,7 +269,8 @@ ch4_chk
 
 
 ```
-## Analyze Blanks 
+
+# Analyze the Blanks 
 ```{r Analyze Blanks, echo=FALSE}
 cat("Assess Blanks")
 
@@ -310,13 +316,13 @@ print(CH4_blks_plot)
 
 #find average of run blanks for flagging samples later 
 # Compute averages
-blk_avg_CH4 <- mean(CH4_blks$Conc, na.rm = TRUE)
+blk_avg_CH4 <- mean(CH4_blks$CH4_Area, na.rm = TRUE)
 
 
 # Create a data frame
 blank_avgs <- data.frame(
   Test = c("CH4"),
-  Blank_Mean_Conc = c(blk_avg_CH4)
+  Blank_Mean_Area = c(blk_avg_CH4)
 )
 
 # Pretty print
@@ -335,8 +341,8 @@ if (CH4_blks_percent <= chks_flag) {  # assuming you have tn_chks_percent simila
 
 ```
 
-## Dilution correct samples 
-```{r}
+# Dilution correct samples 
+```{r, echo=FALSE}
 
 #multiply the concentration by the dilution factor
 Samples$CH4_Conc_ppm_dilcorr <- (Samples$CH4_Conc_ppm * 12 + Samples$Sample_Volume )/(Samples$Sample_Volume)
@@ -358,7 +364,7 @@ ch4_samples
 ```
 
 
-## If samples are water calculate gas in water  
+# Calculate gas in water  
 ```{r, echo=FALSE}
 
 # Convert ppm CH4 to total umol CH4 in the sample headspace
@@ -377,7 +383,7 @@ Samples$CH4_Conc_umol <- (Samples$CH4_Conc_ppm_dilcorr*((1*volume/1000)/(0.08206
 ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_umol)) +
   geom_bar(stat = 'identity') +
   theme_classic() +
-  labs(x = " ", y = "CH4 (uM)", title = "CH4 Gas in Water") +
+  labs(x = " ", y = "CH4 (umol)", title = "CH4 Gas in Water") +
   theme(axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -390,7 +396,7 @@ ch4_samples1
 
 ```
 
-## Merge samples with Metadata & check all samples are present 
+# Merge samples with Metadata & check all samples are present 
 ```{r check sample ids with metadata, echo=FALSE}
 
 cat("Merge Samples with Metadata")
@@ -420,7 +426,7 @@ df_all_clean <- merged_data
 
 ```
 
-## Visualize Data
+# Visualize Data
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
@@ -466,9 +472,8 @@ print(viz_CH4_plot2)
 
 ```
 
-```
 
-## Write out processed data & slopes  
+## Export Processed Data  
 ```{r}
 #check results
 #head(Samples)
@@ -477,7 +482,7 @@ print(viz_CH4_plot2)
 Samples1 <- df_all_clean[ ,c(7, 9:14, 16:23 )]
 #head(Samples1)
 
-write.csv(Samples1, final_path)
+#write.csv(Samples1, final_path)
 
 ```
 

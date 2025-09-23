@@ -10,6 +10,7 @@ library(dplyr)
 library(ggplot2)
 library(ggpubr)
 library(stringr)
+library(purrr)
 
 ```
 
@@ -35,10 +36,10 @@ viz_CH4_plot <- ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
        facet_grid(~ Depth, scales="free_x") +
-  scale_fill_manual(values = c("Control" = "blue", 
-                                     "eCO2" = "red", 
-                                     "N" = "yellow",
-                                     "eCO2_N" = "orange")) +
+  scale_fill_manual(values = c("Ambient" = "#007C77", 
+                                     "eCO2" = "#F46036", 
+                                     "N" = "#85CB33",
+                                     "eCO2_N" = "#EF27A6")) +
         theme_classic() + 
         labs(x= " ", y="CH4 (umol)", title="2M: Porewater CH4", fill = "Treatment") + 
           theme(legend.position = "right") +
