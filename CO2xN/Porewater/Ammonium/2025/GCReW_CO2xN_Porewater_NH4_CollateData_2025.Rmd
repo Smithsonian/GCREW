@@ -1,0 +1,85 @@
+---
+title: "Phrag_Porewater_Ammonium_2024"
+author: "Stephanie J. Wilson"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Set up 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(readr)
+library(lubridate)
+```
+
+## Pull In Data
+
+```{r}
+
+#read in all data from processed data folder 
+files <- list.files(path = "Processed Data", pattern = "\\.csv$", full.names = TRUE)
+list_of_dfs <- lapply(files, read_csv)
+
+#combine those files together into one dataframe 
+combined_df <- bind_rows(list_of_dfs)
+
+combined_df <- combined_df %>%
+  select(-1)
+
+head(combined_df)
+```
+
+## Clean up Data frame for ESS DIVE / Use 
+  #need to work with Steph P to determine set up here 
+
+```{r, echo=FALSE}
+
+#not sure what this will look like just yet 
+
+#create a date column from year, month, date columns
+#combined_df <- combined_df %>% 
+  #mutate(Date = make_date(year = Year, month = Month, day = Day))
+
+final_df <- combined_df
+
+```
+
+
+## Might be worth calculating some averages and plotting through time as a quick viz?
+
+```{r, echo=FALSE}
+
+final_df <- final_df %>%
+  mutate(CO2_Treatment = factor(CO2_Treatment, levels = c("Amb","Elev")))
+
+levels(final_df$CO2_Treatment) 
+
+#boxplots of all 2023 data 
+NH3_plot <- ggplot(data = final_df, aes(x = CO2_Treatment, y = NH3_Conc_uM, color=CO2_Treatment)) +
+       geom_boxplot() + 
+       facet_grid(N_Treatment~Depth, scales="free_x") +
+        scale_color_manual(values = c("Amb" = "midnightblue", 
+                                     "Elev" = "mediumvioletred")) +
+        theme_classic() + 
+        labs(x= " ", y="Ammonium (uM)", title="Phrag: Porewater Ammonium 2024", color="CO2 Trtmt:") + 
+          theme(legend.position = "bottom") +
+          scale_x_discrete(drop = TRUE)+
+        theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
+              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
+print(NH3_plot) 
+
+
+```
+
+
+## Write out the final file with all of the data 
+
+```{r, echo=FALSE}
+
+#write out the csv to the main folder 
+
+write.csv(final_df, "CO2xN_Porewater_NH3_2024.csv")
+
+```
