@@ -64,6 +64,8 @@ low_std_crv_area_cutoff <- 600000
 r2_cutoff <- 0.990
 
 ##Gas In Water Calculation
+R <- 0.08206
+CTK <- 273.15
 
 
 
@@ -192,16 +194,22 @@ Slope_CH4$Intercept[2] <- low_cf[1]
 #add in run date
 Slope_CH4$Run_Date <- run_date
 
+
+#add new standard curve data to log
 log <- read.csv(log_path)
 head(log)
 log <- log[, -c(1)]
 log <- rbind(log, Slope_CH4)
 
+#remove possible duplicates from multiple QAQC attempts 
+
+unique_log <- log %>% distinct(.keep_all = TRUE)
+
 Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
                                                                             4) + geom_line() + theme_bw()
 Slopes_chk
 
-write.csv(log, log_path)
+write.csv(unique_log, log_path)
 
 
 #check r2
@@ -209,13 +217,13 @@ write.csv(log, log_path)
 if (summary(high_CH4_lm)$adj.r.squared < r2_cutoff) {
   message("High_R2 is Bad")
 } else {
-  message("High R2 Good")
+  message("High_R2 Good")
 }
 
 if (summary(low_CH4_lm)$adj.r.squared < r2_cutoff) {
   message("Low_R2 is Bad")
 } else {
-  message("Low R2 Good")
+  message("Low_R2 Good")
 }
 
 #create R2 flags
@@ -443,7 +451,7 @@ ch4_samples
 
 #Calculate CH4 concentrations in ppm
 Samples$CH4_Conc_umol <- (Samples$CH4_Conc_ppm_dilcorr * ((1 * volume /
-                                                             1000) / (0.08206 * (TempC + 273.15)))) / (volume / 1000)
+                                                             1000) / (R * (TempC + CTK)))) / (volume / 1000)
 
 
 #quick first look at the samples
