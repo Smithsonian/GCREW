@@ -1,6 +1,6 @@
 ---
 title: "LTREB_SHIMADZUGC_CH4_TEMPLATE"
-author: "Brenden Blakley"
+author: "Month Year Samples"
 date: "2025-08-22"
 output:  
   pdf_document:
@@ -20,6 +20,7 @@ run_date <- "06/12/2025"
 sample_year <- "2025"
 sample_month <- "May"
 user <- "Brenden Blakley"
+project <- "CO2xN"
 
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
@@ -33,9 +34,9 @@ log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
 # Define final path for data be sure to change year and month and run number
 final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
 #Gas in Water Calculations
-# "TempC" column value in Kelvin (equilibration temperature) and volume of gas (in liters) in syringe
-TempC = 22.7
-volume = 0.012
+# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
+TempC = 22.7 #Equilibration Temperature (Celsius)
+volume = 0.012 #volume of gas (in liters) in syringe
 
 #record any notes about the run or anything other info here:
 run_notes <- ""
@@ -155,7 +156,7 @@ low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_ch4$Conc_CH4)
 
 
 high_stds_ch4 <- stds_ch4  %>%
-  filter(Conc_CH4 > low_std_crv_cutoff)
+  filter(!Conc_CH4 < low_std_crv_cutoff)
 
 high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
 
@@ -412,8 +413,8 @@ flags <-  ifelse(CH4_blks_percent >= blks_flag,
 # Dilution correct samples and Check Range
 ```{r, echo=FALSE}
 
-#multiply the concentration by the dilution factor
-Samples$CH4_Conc_ppm_dilcorr <- (Samples$CH4_Conc_ppm * 12 + Samples$Sample_Volume) /
+#Correct if volume other than 12mL of Sample was added
+Samples$CH4_Conc_ppm_dilcorr <- ((0.5 * Samples$CH4_Conc_ppm) * (12 + Samples$Sample_Volume)) /
   (Samples$Sample_Volume)
 
 #check results
@@ -432,7 +433,21 @@ ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill
   )) +
   theme(legend.position = "none")
 
+ch4_samples_cor <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
+                                             CH4_Flag)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_manual(values = c("green4", "darkred")) +
+  theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range") +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) +
+  theme(legend.position = "none")
+
 ch4_samples
+
+ch4_samples_cor
 
 
 ```
@@ -595,9 +610,48 @@ print(viz_CH4_plot2)
 
 #pull out what we need
 Samples1 <- df_all_clean[, c(7, 9:14, 16:23, 25)]
+
+df_all_clean_cols <- df_all_clean %>%
+  select(
+    CH4_Area,
+    Sample_Volume,
+    Notes,
+    CH4_Conc_ppm_dilcorr,
+    CH4_Conc_umol,
+    CH4_Flag,
+    Experiment,
+    Plot_Name,
+    Depth,
+    CO2_Treatment,
+    N_Treatment,
+    Month,
+    Year,
+    CH4_Flags
+  )
+
+final_data_labeled <- df_all_clean_cols %>%
+  mutate(
+    Site = "GCReW",
+    # new column with same value on every row
+    Run_notes = run_notes,
+    Analysis_rundate = print(run_date)# new column with notes about the run
+  )
+
+#order columns
+org_fin_data <- final_data_labeled[, c(15, 7, 13, 12, 8, 9, 10, 11, 4, 5, 1, 2, 3, 6, 14, 17, 16)]
+
+#rename columns
+org_labeled_fin_data <- org_fin_data %>%
+  rename(
+    Project = Experiment,
+    Plot = Plot_Name,
+    CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
+    CH4_Conc_Flag = CH4_Flag,
+    Depth_cm = Depth
+  )
 #head(Samples1)
 
-#write.csv(Samples1, final_path)
+#write.csv(org_labeled_fin_data, final_path)
 
 ```
 
