@@ -1,0 +1,107 @@
+---
+title: "SMARTX_Porewater_Ammonium_2024"
+author: "Stephanie J. Wilson"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+## Set up 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(readr)
+library(lubridate)
+```
+
+## Pull In Data
+
+```{r}
+
+#read in all data from processed data folder 
+files <- list.files(path = "Processed Data", pattern = "\\.csv$", full.names = TRUE)
+list_of_dfs <- lapply(files, read_csv)
+
+#combine those files together into one dataframe 
+combined_df <- bind_rows(list_of_dfs)
+
+combined_df <- combined_df %>%
+  select(-1)
+
+head(combined_df)
+```
+
+## Clean up Data frame for ESS DIVE / Use 
+  #need to work with Steph P to determine set up here 
+
+```{r, echo=FALSE}
+
+#not sure what this will look like just yet 
+
+#create a date column from year, month, date columns
+#combined_df <- combined_df %>% 
+  #mutate(Date = make_date(year = Year, month = Month, day = Day))
+
+final_df <- combined_df
+
+```
+
+
+## Might be worth calculating some averages and plotting through time as a quick viz?
+
+```{r, echo=FALSE}
+
+final_df <- final_df %>%
+  mutate(Temp_Treatment = factor(Temp_Treatment, levels = c("0","1.7","3.4","5.1")))
+
+levels(final_df$Temp_Treatment) 
+
+#boxplots of all 2023 data 
+
+#C3
+NH3_forplot_C3 <- final_df %>%
+  filter(Community == "C3")
+
+NH4_C3 <- ggplot(data = NH3_forplot_C3, aes(Temp_Treatment, NH3_Conc_uM, color = Temp_Treatment)) + 
+  geom_boxplot() + 
+  facet_grid(~ Depth, scales="free_x") +
+        scale_color_manual(values = c("0" = "blue", 
+                                     "1.7" = "goldenrod1", 
+                                     "3.4" = "darkorange1",
+                                     "5.1" = "red")) +
+        theme_classic() + 
+        labs(x= " ", y="Ammonium (uM)", title="SMARTX: C3 Porewater Ammonium 2024") + 
+          theme(legend.position = "none") +
+          scale_x_discrete(drop = TRUE)
+NH4_C3
+
+#C4
+NH3_forplot_C4 <- final_df %>%
+  filter(Community == "C4")
+
+NH4_C4 <- ggplot(data = final_df, aes(Temp_Treatment, NH3_Conc_uM, color = Temp_Treatment)) + 
+  geom_boxplot() + 
+  facet_grid(~ Depth, scales="free_x") +
+        scale_color_manual(values = c("0" = "blue", 
+                                     "1.7" = "goldenrod1", 
+                                     "3.4" = "darkorange1",
+                                     "5.1" = "red")) +
+        theme_classic() + 
+        labs(x= " ", y="Ammonium (uM)", title="SMARTX: C4 Porewater Ammonium 2024") + 
+          theme(legend.position = "none") +
+          scale_x_discrete(drop = TRUE)
+NH4_C4
+
+
+```
+
+
+## Write out the final file with all of the data 
+
+```{r, echo=FALSE}
+
+#write out the csv to the main folder 
+
+write.csv(final_df, "GCReW_SMARTX_Porewater_NH4_2024.csv")
+
+```
