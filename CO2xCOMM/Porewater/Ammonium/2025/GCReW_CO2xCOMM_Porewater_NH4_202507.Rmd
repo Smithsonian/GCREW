@@ -13,7 +13,7 @@ output_dir: "To Be Reviewed/PDF"
 
 ##Run Information 
 ```{r run information, include=TRUE}
-cat("Run Information: Stephanie J. Wilson ") #lets you know what section you're in 
+cat("Run Information: ") #lets you know what section you're in 
 #set the run date & user name 
   run_date <- "08/18/2025"
   sample_year <- "2025"

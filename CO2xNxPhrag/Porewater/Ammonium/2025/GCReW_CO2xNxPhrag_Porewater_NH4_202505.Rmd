@@ -1,5 +1,5 @@
 ---
-title: "CO2xN: Porewater Ammonium"
+title: "Phrag: Porewater Ammonium"
 author: "May 2025 Samples"
 date: "`r Sys.Date()`"
 output: 
@@ -17,20 +17,19 @@ cat("Run Information: ") #lets you know what section you're in
 #set the run date & user name 
   run_date <- "09/23/2025"
   sample_year <- "2025"
-  sample_month <- "May"
+  sample_month <- "July"
   user <- "Victoria Ellis"
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  NH3_files <- c("Raw Data/LTREB_May_2M_2025_Run1.csv",
-                 "Raw Data/LTREB_May_2M_2025_Run2.csv")
+  NH3_files <- c("Raw Data/LTREB_Phrag_May_2025.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
-  file_path <- "Raw Data/SEAL_CO2xN_QAQC_Log_2025.csv"
-  final_path <- "Processed Data/CO2xN_Porewater_NH4_202505.csv"
+  file_path <- "Raw Data/SEAL_Phrag_QAQC_Log_2025.csv"
+  final_path <- "Processed Data/Phrag_Porewater_NH4_202505.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- "L9-20 DUP out of range"
+  run_notes <- "pe_chk VERY high compared to expected NH3"
   
 #Set up file path for metadata 
   #downloaded metadata csv - downloaded from Google drive as csv for this year
@@ -115,7 +114,7 @@ raw_metadata <- read.csv(Raw_Metadata)
   #Pull out only SMARTX Rows 
   #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("CO2xN", Experiment, ignore.case = TRUE)) %>%
+  filter(grepl("Phragmites", Experiment, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
@@ -165,8 +164,6 @@ head(df)
 
 df_all <- df %>%
   mutate(Run_Number = as.numeric(Run_Number))
-
-#Need to add some extra code to deal with July and Sept being run in the same file 
 
 
 ```
@@ -300,7 +297,7 @@ Slopes_chk <- ggplot(log, aes(run_date, Slope, col=Test)) +
   theme_bw() + 
   labs(title="Slope Drift Assessment", x="Run Date", y="Slope") +
   scale_color_manual(values=c( "darkgoldenrod"))+
-  ylim(1.5,2.3)
+  ylim(1.5,2.5)
 Slopes_chk
 
 #averaging the slopes from the log and printing
@@ -512,8 +509,8 @@ NH3_blks <- df_all %>%
 
 #Pull out samples from df_all to calc quantile
 samples <- df_all %>%  
-  filter(str_detect(Sample_Name, c("L"))) %>%  
-  filter(!str_detect(Sample_Name, c("1mg/L ammonia"))) #have to do this because Phrag ids start with L 
+  filter(str_detect(Sample_Name, c("P"))) %>%  
+  filter(!str_detect(Sample_Name, c("PEchk"))) #have to do this because Phrag ids start with P 
 
 #Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
 
@@ -775,8 +772,8 @@ if (any(df_matrix$Spike_diff_flag[df_matrix$Test == "Ammonia 2"] != "YES")) {
 
 #Pull out samples 
 samples <- df_all_cor %>%  
-   filter(str_detect(Sample_Name, c("L"))) %>%  
-  filter(!str_detect(Sample_Name, c("1mg/L ammonia"))) #have to do this because Phrag ids start with L   
+  filter(str_detect(Sample_Name, c("P")))   %>%  
+  filter(!str_detect(Sample_Name, c("PEchk"))) #have to do this because Phrag ids start with P    
 
 #Convert values based on the Test ID 
 samples <- samples %>%
@@ -870,10 +867,10 @@ viz_NH3_plot <- ggplot(data = NH3_forplot, aes(x = as.factor(CO2_Treatment), y =
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
        facet_grid(N_Treatment~Depth, scales="free_x") +
-        scale_fill_manual(values = c("Amb" = "midnightblue", 
-                                     "Elev" = "mediumvioletred")) +
+        scale_fill_manual(values = c("Amb" = "deeppink2", 
+                                     "Elev" = "darkorchid4")) +
         theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="CO2xN: Porewater NH3", fill="CO2 Trtmt:") + 
+        labs(x= " ", y="NH3 (mg/L)", title="Phrag: Porewater NH3", fill="CO2 Trtmt:") + 
           theme(legend.position = "right") +
           scale_x_discrete(drop = TRUE)+
         theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
