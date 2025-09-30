@@ -31,14 +31,8 @@ cat("Run Information:  ") #lets you know what section you're in
   final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202505.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- ""
-  
-#Set up file path for metadata 
-  #downloaded metadata csv - downloaded from Google drive as csv for this year
-  #Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
-  #Raw_Metadata = "..GCReW/GCReW_Project_Treatment_Metadata.csv"
-
-  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+  run_notes <- "PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -68,8 +62,16 @@ pacman::p_load(
   readxl,
   purrr,
   tinytex,
-  broom)
+  broom,
+  here)
 
+#Set up file path for metadata 
+  #downloaded metadata csv - downloaded from Google drive as csv for this year
+  #Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
+  #Raw_Metadata = "..GCReW/GCReW_Project_Treatment_Metadata.csv"
+
+  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+  
 #Coefficients / constants that are needed for calculations 
 N_mw <- 14.0067    # molecular weight of N 
 P_mw <- 30.973762  # molecular weight of P 
@@ -87,7 +89,7 @@ PO4_top <- 0.3 #mgL
 
 #Check Standard concnetrations 
 NOx_CCV <- 0.5 
-NH3_CCV <- 2.0 
+NH3_CCV <- 1.0 
 PO4_CCV <- 0.15 
 
 #Spike Concentrations 
@@ -449,7 +451,7 @@ df_all_cor <- df_all %>%
 
 NH3_peChk <- df_all_cor %>%
   filter(Test == "Ammonia 2", 
-         str_detect(Sample_Name, "PE CHECK")) %>%
+         str_detect(Sample_Name, "pe_chk")) %>%
   summarise(
     Mean_Chk_Conc = mean(Conc, na.rm = TRUE),
     SD_Chk_Conc = sd(Conc, na.rm = TRUE),
@@ -899,8 +901,8 @@ NH3_forplot <- df_all_clean %>%
 NH3_forplot_C3 <- NH3_forplot %>%
   filter(Nickname == "C3")
 
-NH3_forplot_C3$Depth_cm <- NH3_forplot %>%
-  as.numeric(Depth_cm)
+NH3_forplot_C3$Depth_cm <- 
+  as.numeric(NH3_forplot_C3$Depth_cm)
 
 #group the data for plotting
 NH3_forplot_C3 <- NH3_forplot_C3 %>%
@@ -930,8 +932,8 @@ print(viz_NH3_plot_C3)
 NH3_forplot_C4 <- NH3_forplot %>%
   filter(Nickname == "C4")
 
-NH3_forplot_C4$Depth_cm <- NH3_forplot %>%
-  as.numeric(Depth_cm)
+NH3_forplot_C4$Depth_cm <- 
+  as.numeric(NH3_forplot_C4$Depth_cm)
 
 #group the data for plotting
 NH3_forplot_C4 <- NH3_forplot_C4 %>%
