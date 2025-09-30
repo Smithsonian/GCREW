@@ -1,6 +1,6 @@
 ---
 title: "SMARTX: Porewater Ammonium"
-author: "May 2024 Samples"
+author: "May 2025 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -13,32 +13,31 @@ output_dir: "To Be Reviewed/PDF"
 
 ##Run Information 
 ```{r run information, include=TRUE}
-cat("Run Information: Stephanie J. Wilson ") #lets you know what section you're in 
+cat("Run Information:  ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- "09/19/2024"
-  sample_year <- "2024"
+  run_date <- "08/12/2025"
+  sample_year <- "2025"
   sample_month <- "May"
-  user <- "Max Wegner"
+  user <- "Victoria Ellis"
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  NH3_files <- c("Raw Data/May_2024_SMARTX_NH4_Run1.csv",
-                 "Raw Data/May_2024_SMARTX_NH4_Run2.csv",
-                 "Raw Data/May_2024_SMARTX_NH4_Run3.csv",
-                 "Raw Data/May_2024_SMARTX_NH4_Run4.csv")
+  NH3_files <- c("Raw Data/SMARTX_May_2025_Run1.csv",
+                 "Raw Data/SMARTX_May_2025_Run2.csv",
+                 "Raw Data/SMARTX_May_2025_Run3.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
-  file_path <- "Raw Data/SEAL_SMARTX_QAQC_Log_2024.csv"
-  final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202405.csv"
+  file_path <- "Raw Data/SEAL_SMARTX_QAQC_Log_2025.csv"
+  final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202505.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- "Check standards were double the expected concentration for these runs. "
+  run_notes <- ""
   
 #Set up file path for metadata 
   #downloaded metadata csv - downloaded from Google drive as csv for this year
   #Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
   #Raw_Metadata = "..GCReW/GCReW_Project_Treatment_Metadata.csv"
-  library(here)
+
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
@@ -320,6 +319,8 @@ if (nrow(stds_log) == 0) {
   new_rows <- anti_join(add_log, stds_log, by = c("run_date", "Test"))
 }
 
+desired_cols <- c("Test", "Intercept", "Slope", "R_squared", "run_date", "user")
+stds_log <- stds_log[, desired_cols]
 
 # Append the new, non-duplicate rows to log
 log <- bind_rows(stds_log, new_rows)
@@ -332,7 +333,7 @@ Slopes_chk <- ggplot(log, aes(run_date, Slope, col=Test)) +
   theme_bw() + 
   labs(title="Slope Drift Assessment", x="Run Date", y="Slope") +
   scale_color_manual(values=c( "darkgoldenrod"))+
-  ylim(1.5,2)
+  ylim(1.5,2.4)
 Slopes_chk
 
 #averaging the slopes from the log and printing
@@ -448,7 +449,7 @@ df_all_cor <- df_all %>%
 
 NH3_peChk <- df_all_cor %>%
   filter(Test == "Ammonia 2", 
-         str_detect(Sample_Name, "pechk")) %>%
+         str_detect(Sample_Name, "PE CHECK")) %>%
   summarise(
     Mean_Chk_Conc = mean(Conc, na.rm = TRUE),
     SD_Chk_Conc = sd(Conc, na.rm = TRUE),
@@ -898,6 +899,9 @@ NH3_forplot <- df_all_clean %>%
 NH3_forplot_C3 <- NH3_forplot %>%
   filter(Nickname == "C3")
 
+NH3_forplot_C3$Depth_cm <- NH3_forplot %>%
+  as.numeric(Depth_cm)
+
 #group the data for plotting
 NH3_forplot_C3 <- NH3_forplot_C3 %>%
   group_by(Depth_cm) %>%
@@ -908,7 +912,7 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(x = as.factor(Temp_Treatmen
                                                      fill=as.factor(Temp_Treatment))) +
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
-       facet_grid(~ Depth_cm, scales="free_x") +
+       facet_grid(~ as.numeric(Depth_cm), scales="free_x") +
         #facet_grid(Depth_cm ~ ., scales = "free_x") + 
         scale_fill_manual(values = c("0" = "blue", 
                                      "1.7" = "yellow", 
@@ -926,6 +930,9 @@ print(viz_NH3_plot_C3)
 NH3_forplot_C4 <- NH3_forplot %>%
   filter(Nickname == "C4")
 
+NH3_forplot_C4$Depth_cm <- NH3_forplot %>%
+  as.numeric(Depth_cm)
+
 #group the data for plotting
 NH3_forplot_C4 <- NH3_forplot_C4 %>%
   group_by(Depth_cm) %>%
@@ -936,7 +943,7 @@ viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(x = as.factor(Temp_Treatmen
        geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
                  color="black") + 
         #facet_grid(~ Depth_cm, scales="free_x") +
-        facet_grid(Depth_cm ~ ., scales = "free_x") + 
+        facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") + 
         scale_fill_manual(values = c("0" = "blue", 
                                      "1.7" = "yellow", 
                                      "3.4" = "orange",
