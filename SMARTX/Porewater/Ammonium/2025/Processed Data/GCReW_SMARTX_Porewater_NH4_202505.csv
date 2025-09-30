@@ -1,0 +1,301 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","NH3_Conc_mgL","NH3_Conc_uM","NH3_Conc_Flag","NH3_QAQC_Flag","Analysis_rundate","Run_notes"
+"1","GCReW","SMARTX","2025","May","SCAM","C3","310","10","Ambient","0",0.932318,66.5622880478628,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"2","GCReW","SMARTX","2025","May","SCAM","C3","310","120","Ambient","0",2.367778,169.046099366732,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"3","GCReW","SMARTX","2025","May","SCAM","C3","310","20","Ambient","0",1.654718,118.137605574475,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"4","GCReW","SMARTX","2025","May","SCAM","C3","310","40","Ambient","0",2.043936,145.92559275204,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"5","GCReW","SMARTX","2025","May","SCAM","C3","310","80","Ambient","0",2.180881,155.702699422419,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"6","GCReW","SMARTX","2025","May","SCAM","C3","311","10","Ambient","1.7",0.297376,21.2309823156061,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"7","GCReW","SMARTX","2025","May","SCAM","C3","311","120","Ambient","1.7",2.402793,171.545974426524,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"8","GCReW","SMARTX","2025","May","SCAM","C3","311","20","Ambient","1.7",1.681926,120.080104521408,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"9","GCReW","SMARTX","2025","May","SCAM","C3","311","40","Ambient","1.7",1.990404,142.103707511405,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"10","GCReW","SMARTX","2025","May","SCAM","C3","311","80","Ambient","1.7",2.819143,201.27103457631,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"11","GCReW","SMARTX","2025","May","SCAM","C3","312","10","Ambient","3.4",0.948453,67.7142367581229,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"12","GCReW","SMARTX","2025","May","SCAM","C3","312","120","Ambient","3.4",2.794161,199.487459572919,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"13","GCReW","SMARTX","2025","May","SCAM","C3","312","20","Ambient","3.4",2.443131,174.425881899377,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"14","GCReW","SMARTX","2025","May","SCAM","C3","312","40","Ambient","3.4",3.940602,281.3369316113,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"15","GCReW","SMARTX","2025","May","SCAM","C3","312","80","Ambient","3.4",4.494594,320.888860331127,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"16","GCReW","SMARTX","2025","May","SCAM","C3","313","10","Ambient","5.1",0.418062,29.847287369616,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"17","GCReW","SMARTX","2025","May","SCAM","C3","313","120","Ambient","5.1",7.846072,560.165635017527,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"18","GCReW","SMARTX","2025","May","SCAM","C3","313","20","Ambient","5.1",2.924169,208.76930326201,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"19","GCReW","SMARTX","2025","May","SCAM","C3","313","40","Ambient","5.1",0.96523,68.9120206758194,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"20","GCReW","SMARTX","2025","May","SCAM","C3","313","80","Ambient","5.1",8.071135,576.233873788972,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"21","GCReW","SMARTX","2025","May","SCAM","C3","320","10","Ambient","0",1.139218,81.3337902575196,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"22","GCReW","SMARTX","2025","May","SCAM","C3","320","120","Ambient","0",1.737274,124.0316419999,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"23","GCReW","SMARTX","2025","May","SCAM","C3","320","20","Ambient","0",1.747435,124.757080540027,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"24","GCReW","SMARTX","2025","May","SCAM","C3","320","40","Ambient","0",2.177625,155.470239242648,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"25","GCReW","SMARTX","2025","May","SCAM","C3","320","80","Ambient","0",2.291361,163.590353188117,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"26","GCReW","SMARTX","2025","May","SCAM","C3","321","10","Ambient","1.7",0.688017,49.1205637302148,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"27","GCReW","SMARTX","2025","May","SCAM","C3","321","120","Ambient","1.7",2.518774,179.826368809213,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"28","GCReW","SMARTX","2025","May","SCAM","C3","321","20","Ambient","1.7",1.887441,134.752725481377,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"29","GCReW","SMARTX","2025","May","SCAM","C3","321","40","Ambient","1.7",2.373589,169.460972248995,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"30","GCReW","SMARTX","2025","May","SCAM","C3","321","80","Ambient","1.7",4.934336,352.283978381774,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"31","GCReW","SMARTX","2025","May","SCAM","C3","322","10","Ambient","3.4",0.423375,30.2266058386344,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"32","GCReW","SMARTX","2025","May","SCAM","C3","322","120","Ambient","3.4",2.922059,208.618661069345,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"33","GCReW","SMARTX","2025","May","SCAM","C3","322","20","Ambient","3.4",2.308631,164.823334547038,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"34","GCReW","SMARTX","2025","May","SCAM","C3","322","40","Ambient","3.4",2.889422,206.288561902518,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"35","GCReW","SMARTX","2025","May","SCAM","C3","322","80","Ambient","3.4",4.169796,297.70010066611,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"36","GCReW","SMARTX","2025","May","SCAM","C3","323","10","Ambient","5.1",0.356126,25.4254035568692,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"37","GCReW","SMARTX","2025","May","SCAM","C3","323","120","Ambient","5.1",4.370399,312.022032313107,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"38","GCReW","SMARTX","2025","May","SCAM","C3","323","20","Ambient","5.1",2.717235,193.995373642614,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"39","GCReW","SMARTX","2025","May","SCAM","C3","323","40","Ambient","5.1",3.953397,282.250423011844,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"40","GCReW","SMARTX","2025","May","SCAM","C3","323","80","Ambient","5.1",4.680665,334.173288497648,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"41","GCReW","SMARTX","2025","May","SCAM","C3","330","10","Ambient","0",0.186136,13.2890688027872,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"42","GCReW","SMARTX","2025","May","SCAM","C3","330","120","Ambient","0",2.905736,207.453290211113,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"43","GCReW","SMARTX","2025","May","SCAM","C3","330","20","Ambient","0",0.768477,54.8649574846323,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"44","GCReW","SMARTX","2025","May","SCAM","C3","330","40","Ambient","0",0.984292,70.2729408068995,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"45","GCReW","SMARTX","2025","May","SCAM","C3","330","80","Ambient","0",1.394393,99.5518573254228,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"46","GCReW","SMARTX","2025","May","SCAM","C3","331","10","Ambient","1.7",0.112327,8.01951923008275,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"47","GCReW","SMARTX","2025","May","SCAM","C3","331","120","Ambient","1.7",2.83043,202.076863215461,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"48","GCReW","SMARTX","2025","May","SCAM","C3","331","20","Ambient","1.7",0.798201,56.9870847522971,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"49","GCReW","SMARTX","2025","May","SCAM","C3","331","40","Ambient","1.7",1.537833,109.792670650474,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"50","GCReW","SMARTX","2025","May","SCAM","C3","331","80","Ambient","1.7",2.620658,187.10031627721,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"51","GCReW","SMARTX","2025","May","SCAM","C3","332","10","Ambient","3.4",0.376414,26.873853227384,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"52","GCReW","SMARTX","2025","May","SCAM","C3","332","120","Ambient","3.4",2.890864,206.39151263324,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"53","GCReW","SMARTX","2025","May","SCAM","C3","332","20","Ambient","3.4",1.59575,113.927620353117,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"54","GCReW","SMARTX","2025","May","SCAM","C3","332","40","Ambient","3.4",2.254287,160.943477050269,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"55","GCReW","SMARTX","2025","May","SCAM","C3","332","80","Ambient","3.4",3.133826,223.737639843789,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"56","GCReW","SMARTX","2025","May","SCAM","C3","333","10","Ambient","5.1",0.974286,69.5585683994089,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"57","GCReW","SMARTX","2025","May","SCAM","C3","333","120","Ambient","5.1",5.444939,388.73817530182,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"58","GCReW","SMARTX","2025","May","SCAM","C3","333","20","Ambient","5.1",3.409522,243.420791478364,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"59","GCReW","SMARTX","2025","May","SCAM","C3","333","40","Ambient","5.1",5.735538,409.485317740795,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"60","GCReW","SMARTX","2025","May","SCAM","C3","333","80","Ambient","5.1",6.816103,486.63161201425,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"61","GCReW","SMARTX","2025","May","SPPA, DISP","C4","440","10","Ambient","0",0.226559,16.1750447999886,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"62","GCReW","SMARTX","2025","May","SPPA, DISP","C4","440","120","Ambient","0",2.071196,147.871804207986,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"63","GCReW","SMARTX","2025","May","SPPA, DISP","C4","440","20","Ambient","0",0.588979,42.0498047363048,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"64","GCReW","SMARTX","2025","May","SPPA, DISP","C4","440","40","Ambient","0",2.052773,146.55650510113,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"65","GCReW","SMARTX","2025","May","SPPA, DISP","C4","440","80","Ambient","0",2.703559,193.018983772052,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"66","GCReW","SMARTX","2025","May","SPPA, DISP","C4","441","10","Ambient","1.7",0.52935,37.7926278138319,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"67","GCReW","SMARTX","2025","May","SPPA, DISP","C4","441","120","Ambient","1.7",3.127091,223.256798532131,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"68","GCReW","SMARTX","2025","May","SPPA, DISP","C4","441","20","Ambient","1.7",0.875527,62.5077284442445,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"69","GCReW","SMARTX","2025","May","SPPA, DISP","C4","441","40","Ambient","1.7",1.983801,141.632290261089,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"70","GCReW","SMARTX","2025","May","SPPA, DISP","C4","441","80","Ambient","1.7",3.13645,223.924978760165,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"71","GCReW","SMARTX","2025","May","SPPA, DISP","C4","442","10","Ambient","3.4",0.398828,28.4740874010295,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"72","GCReW","SMARTX","2025","May","SPPA, DISP","C4","442","120","Ambient","3.4",3.92361,280.123797896721,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"73","GCReW","SMARTX","2025","May","SPPA, DISP","C4","442","20","Ambient","3.4",0.932007,66.5400843881857,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"74","GCReW","SMARTX","2025","May","SPPA, DISP","C4","442","40","Ambient","3.4",3.444581,245.923807891937,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"75","GCReW","SMARTX","2025","May","SPPA, DISP","C4","442","80","Ambient","3.4",3.847667,274.701892665653,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"76","GCReW","SMARTX","2025","May","SPPA, DISP","C4","443","10","Ambient","5.1",0.329367,23.5149606973805,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"77","GCReW","SMARTX","2025","May","SPPA, DISP","C4","443","120","Ambient","5.1",3.09973,221.30337624137,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"78","GCReW","SMARTX","2025","May","SPPA, DISP","C4","443","20","Ambient","5.1",1.293853,92.3738639365447,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"79","GCReW","SMARTX","2025","May","SPPA, DISP","C4","443","40","Ambient","5.1",2.279743,162.760893001207,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"80","GCReW","SMARTX","2025","May","SPPA, DISP","C4","443","80","Ambient","5.1",3.116759,222.519151548902,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"81","GCReW","SMARTX","2025","May","SPPA, DISP","C4","450","10","Ambient","0",0.393481,28.0923415222715,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"82","GCReW","SMARTX","2025","May","SPPA, DISP","C4","450","120","Ambient","0",5.392736,385.011173224243,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"83","GCReW","SMARTX","2025","May","SPPA, DISP","C4","450","20","Ambient","0",0.347493,24.8090556662169,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"84","GCReW","SMARTX","2025","May","SPPA, DISP","C4","450","40","Ambient","0",2.364739,168.829131772652,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"85","GCReW","SMARTX","2025","May","SPPA, DISP","C4","450","80","Ambient","0",3.131178,223.548587461715,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"86","GCReW","SMARTX","2025","May","SPPA, DISP","C4","451","10","Ambient","1.7",0.184094,13.1432814296015,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"87","GCReW","SMARTX","2025","May","SPPA, DISP","C4","451","120","Ambient","1.7",5.782453,412.834786209457,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"88","GCReW","SMARTX","2025","May","SPPA, DISP","C4","451","20","Ambient","1.7",1.012262,72.2698422897613,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"89","GCReW","SMARTX","2025","May","SPPA, DISP","C4","451","40","Ambient","1.7",2.978106,212.620103236308,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"90","GCReW","SMARTX","2025","May","SPPA, DISP","C4","451","80","Ambient","1.7",3.184139,227.329706497605,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"91","GCReW","SMARTX","2025","May","SPPA, DISP","C4","452","10","Ambient","3.4",0.208768,14.9048669565279,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"92","GCReW","SMARTX","2025","May","SPPA, DISP","C4","452","120","Ambient","3.4",5.225339,373.059964160009,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"93","GCReW","SMARTX","2025","May","SPPA, DISP","C4","452","20","Ambient","3.4",0.436134,31.1375270406306,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"94","GCReW","SMARTX","2025","May","SPPA, DISP","C4","452","40","Ambient","3.4",2.229143,159.148336153412,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"95","GCReW","SMARTX","2025","May","SPPA, DISP","C4","452","80","Ambient","3.4",3.68176,262.857061263538,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"96","GCReW","SMARTX","2025","May","SPPA, DISP","C4","453","10","Ambient","5.1",0.184386,13.1641285956007,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"97","GCReW","SMARTX","2025","May","SPPA, DISP","C4","453","120","Ambient","5.1",3.634345,259.471895592823,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"98","GCReW","SMARTX","2025","May","SPPA, DISP","C4","453","20","Ambient","5.1",0.908364,64.8521064918932,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"99","GCReW","SMARTX","2025","May","SPPA, DISP","C4","453","40","Ambient","5.1",2.747442,196.151984407462,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"100","GCReW","SMARTX","2025","May","SPPA, DISP","C4","453","80","Ambient","5.1",4.717268,336.786537871162,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"101","GCReW","SMARTX","2025","May","SPPA, DISP","C4","460","10","Ambient","0",0.306229,21.8630369751619,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"102","GCReW","SMARTX","2025","May","SPPA, DISP","C4","460","120","Ambient","0",3.868031,276.15576831088,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"103","GCReW","SMARTX","2025","May","SPPA, DISP","C4","460","20","Ambient","0",0.792569,56.5849914683687,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"104","GCReW","SMARTX","2025","May","SPPA, DISP","C4","460","40","Ambient","0",2.554978,182.411131815488,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"105","GCReW","SMARTX","2025","May","SPPA, DISP","C4","460","80","Ambient","0",3.80352,271.550043907559,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"106","GCReW","SMARTX","2025","May","SPPA, DISP","C4","461","10","Ambient","1.7",0.224224,16.0083388663997,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"107","GCReW","SMARTX","2025","May","SPPA, DISP","C4","461","120","Ambient","1.7",3.099312,221.273533380454,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"108","GCReW","SMARTX","2025","May","SPPA, DISP","C4","461","20","Ambient","1.7",0.381387,27.2288975990062,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"109","GCReW","SMARTX","2025","May","SPPA, DISP","C4","461","40","Ambient","1.7",1.271356,90.7677040273583,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"110","GCReW","SMARTX","2025","May","SPPA, DISP","C4","461","80","Ambient","1.7",2.585896,184.618504001656,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"111","GCReW","SMARTX","2025","May","SPPA, DISP","C4","462","10","Ambient","3.4",0.702203,50.1333647468711,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"112","GCReW","SMARTX","2025","May","SPPA, DISP","C4","462","120","Ambient","3.4",3.740511,267.051553899205,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"113","GCReW","SMARTX","2025","May","SPPA, DISP","C4","462","20","Ambient","3.4",1.562087,111.524270527676,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"114","GCReW","SMARTX","2025","May","SPPA, DISP","C4","462","40","Ambient","3.4",2.044519,145.967215689634,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"115","GCReW","SMARTX","2025","May","SPPA, DISP","C4","462","80","Ambient","3.4",2.84517,203.129216731993,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"116","GCReW","SMARTX","2025","May","SPPA, DISP","C4","463","10","Ambient","5.1",0.620224,44.2805228926157,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"117","GCReW","SMARTX","2025","May","SPPA, DISP","C4","463","120","Ambient","5.1",0.11966,8.54305439539649,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"118","GCReW","SMARTX","2025","May","SPPA, DISP","C4","463","20","Ambient","5.1",1.981185,141.445522499946,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"119","GCReW","SMARTX","2025","May","SPPA, DISP","C4","463","40","Ambient","5.1",3.12561,223.151063419649,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"120","GCReW","SMARTX","2025","May","SPPA, DISP","C4","463","80","Ambient","5.1",4.286596,306.038967065761,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"121","GCReW","SMARTX","2025","May","SCAM","C3","610","10","Elevated","0",0.105252,7.51440382102851,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"122","GCReW","SMARTX","2025","May","SCAM","C3","610","120","Elevated","0",0.726016,51.8334796918617,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"123","GCReW","SMARTX","2025","May","SCAM","C3","610","20","Elevated","0",0.235949,16.8454382545496,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"124","GCReW","SMARTX","2025","May","SCAM","C3","610","40","Elevated","0",0.30698,21.9166541726459,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"125","GCReW","SMARTX","2025","May","SCAM","C3","610","80","Elevated","0",0.329035,23.4912577552171,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"126","GCReW","SMARTX","2025","May","SCAM","C3","613","10","Elevated","5.1",0.252406,18.020375962932,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"127","GCReW","SMARTX","2025","May","SCAM","C3","613","120","Elevated","5.1",6.362422,454.241327364761,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"128","GCReW","SMARTX","2025","May","SCAM","C3","613","20","Elevated","5.1",1.506453,107.552314249609,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"129","GCReW","SMARTX","2025","May","SCAM","C3","613","40","Elevated","5.1",3.5142,250.894214911435,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"130","GCReW","SMARTX","2025","May","SCAM","C3","613","80","Elevated","5.1",5.451845,389.23122505658,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"131","GCReW","SMARTX","2025","May","SCAM","C3","620","10","Elevated","0",0.418444,29.8745600319847,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"132","GCReW","SMARTX","2025","May","SCAM","C3","620","120","Elevated","0",1.275642,91.0737004433593,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"133","GCReW","SMARTX","2025","May","SCAM","C3","620","20","Elevated","0",0.439959,31.4106106363383,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"134","GCReW","SMARTX","2025","May","SCAM","C3","620","40","Elevated","0",0.66097,47.1895592823434,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"135","GCReW","SMARTX","2025","May","SCAM","C3","620","80","Elevated","0",1.048512,74.8578894386258,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"136","GCReW","SMARTX","2025","May","SCAM","C3","623","10","Elevated","5.1",0.175434,12.5250058900383,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"137","GCReW","SMARTX","2025","May","SCAM","C3","623","120","Elevated","5.1",3.931203,280.665895607102,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"138","GCReW","SMARTX","2025","May","SCAM","C3","623","20","Elevated","5.1",0.438042,31.273747563666,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"139","GCReW","SMARTX","2025","May","SCAM","C3","623","40","Elevated","5.1",1.390146,99.2486452911821,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"140","GCReW","SMARTX","2025","May","SCAM","C3","623","80","Elevated","5.1",2.704723,193.102086858432,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"141","GCReW","SMARTX","2025","May","SCAM","C3","630","10","Elevated","0",0.202051,14.4253107441439,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"142","GCReW","SMARTX","2025","May","SCAM","C3","630","120","Elevated","0",0.773998,55.2591259897049,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"143","GCReW","SMARTX","2025","May","SCAM","C3","630","20","Elevated","0",0.281692,20.1112324815981,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"144","GCReW","SMARTX","2025","May","SCAM","C3","630","40","Elevated","0",0.23659,16.8912020675819,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"145","GCReW","SMARTX","2025","May","SCAM","C3","630","80","Elevated","0",0.25549,18.2405563051968,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"146","GCReW","SMARTX","2025","May","SCAM","C3","633","10","Elevated","5.1",0.319252,22.7928062998422,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"147","GCReW","SMARTX","2025","May","SCAM","C3","633","120","Elevated","5.1",2.750741,196.38751454661,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"148","GCReW","SMARTX","2025","May","SCAM","C3","633","20","Elevated","5.1",1.70642,121.828839055595,"Within_Range","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"149","GCReW","SMARTX","2025","May","SCAM","C3","633","40","Elevated","5.1",3.593198,256.534230047049,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"150","GCReW","SMARTX","2025","May","SCAM","C3","633","80","Elevated","5.1",6.448018,460.35240277867,"Within_Range_Diluted","","08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
