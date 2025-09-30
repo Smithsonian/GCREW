@@ -35,14 +35,16 @@ final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
 TempC = 22.7 #Equilibration Temperature (Celsius)
-volume = 0.012 #volume of gas (in liters) in syringe
+
+volume_g = 0.015 #volume of gas (in liters) in syringe when equilibrized
+volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (should be equal to volume_g)
 
 #record any notes about the run or anything other info here:
 run_notes <- ""
 
-#Set up file path for metadata
-#downloaded metadata csv - downloaded from Google drive as csv for this year
-Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
+#Metadata file path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
 #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
 cat(run_notes)
@@ -52,11 +54,15 @@ cat(run_notes)
 ##Set Up
 
 ```{r setup, include=FALSE}
-library(dplyr)
-library(ggplot2)
-library(ggpubr)
-library(stringr)
-library(fuzzyjoin)
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+  dplyr,
+  fuzzyjoin,
+  ggplot2,
+  ggpubr,
+  stringr,
+  here)
 
 ##Low & High Standard Curve Cutoffs
 low_std_crv_cutoff <- 1000
@@ -88,33 +94,32 @@ flags <- ""
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
+#read in metadata
+
 raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
 #Pull out only SMARTX Rows
 #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("CO2xN", Experiment, ignore.case = TRUE)) %>%
+  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
   rename(
     Sample_ID = Sample.ID,
-    Plot_Name = Chamber.Plot.Name,
-    CO2_Treatment = CO2.Treatment,
-    N_Treatment = N.Treatment,
-    Temp_Treatment = Temp.Treatment
+    Plot_Name = Plot,
   ) %>%
   select(-Temp_Treatment) %>%
   mutate(Treatment = ifelse(
-    CO2_Treatment == "Elev" &
-      N_Treatment == "N",
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
     "eCO2_N",
     ifelse(
-      CO2_Treatment == "Elev" &
-        N_Treatment == "Amb",
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
       "eCO2",
-      ifelse(CO2_Treatment == "Amb" &
-               N_Treatment == "N"  , "N" , "Ambient")
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
     )
   ))
 
@@ -424,7 +429,7 @@ ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill
                                              CH4_Flag)) +
   geom_bar(stat = 'identity') +
   scale_fill_manual(values = c("darkgreen", "red")) +
-  theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range") +
+  theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range (Not Dil Cor)") +
   theme(axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -432,6 +437,7 @@ ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill
   )) +
   theme(legend.position = "none")
 
+#corrected for different dilutions
 ch4_samples_cor <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
                                              CH4_Flag)) +
   geom_bar(stat = 'identity') +
@@ -455,24 +461,27 @@ ch4_samples_cor
 # Calculate gas in water  
 ```{r, echo=FALSE}
 
-# Convert ppm CH4 to total umol CH4 in the sample headspace
+# Convert ppm CH4 to total uM CH4 in the sample headspace
 # use Ideal Gas Law:
 #   hdsp umol CH4 = ppm CH4*(PV/RT)
 #      P = 1 (pressure in atm)
 #      R = 0.082 (gas constant)
-#      V = 0.012 (gas syringe volume in L)
+#      V = 0.015 (gas syringe volume in L)
 #      T = "TempC" column value in Kelvin (equilibration temperature)
 
-#Calculate CH4 concentrations in ppm
-Samples$CH4_Conc_umol <- (Samples$CH4_Conc_ppm_dilcorr * ((1 * volume /
-                                                             1000) / (R * (TempC + CTK)))) / (volume / 1000)
+#Calculate CH4 uM from ppm
+
+Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (TempC + CTK) )))/ volume_w
+
+#old equation
+#Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * ((1 * volume / 1000) / (R * (TempC + CTK)))) / (volume / 1000)
 
 
 #quick first look at the samples
-ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_umol)) +
+ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_uM)) +
   geom_bar(stat = 'identity', fill = "darkblue") +
   theme_classic() +
-  labs(x = " ", y = "CH4 (umol)", title = "CH4 Gas in Water") +
+  labs(x = " ", y = "CH4 (uM)", title = "CH4 Gas in Water") +
   theme(axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -530,7 +539,7 @@ CH4_forplot <- df_all_clean
 
 viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
   x = as.factor(Treatment),
-  y = CH4_Conc_umol,
+  y = CH4_Conc_uM,
   fill = as.factor(Treatment)
 )) +
   geom_bar(
@@ -538,7 +547,7 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
     position = position_dodge2(preserve = "single"),
     color = "black"
   ) +
-  facet_grid( ~ Depth, scales = "free_x") +
+  facet_grid( ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
     "Ambient" = "#007C77",
     "eCO2" = "#F46036",
@@ -547,7 +556,7 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (umol)",
+       y = "CH4 (uM)",
        title = "CO2xN: Porewater Methane",
        fill = "Treatment") +
   theme(legend.position = "right") +
@@ -568,7 +577,7 @@ print(viz_CH4_plot)
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = as.factor(CO2_Treatment),
-  y = CH4_Conc_umol,
+  y = CH4_Conc_uM,
   fill = as.factor(CO2_Treatment)
 )) +
   geom_bar(
@@ -576,14 +585,14 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     position = position_dodge2(preserve = "single"),
     color = "black"
   ) +
-  facet_grid(N_Treatment ~ Depth, scales = "free_x") +
+  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
     "Amb" = "midnightblue",
     "Elev" = "mediumvioletred"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (umol)",
+       y = "CH4 (uM)",
        title = "CO2xN: Porewater Methane",
        fill = "Treatment:") +
   theme(legend.position = "right") +
@@ -608,44 +617,59 @@ print(viz_CH4_plot2)
 #head(Samples)
 
 #pull out what we need
-Samples1 <- df_all_clean[, c(7, 9:14, 16:23, 25)]
 
 df_all_clean_cols <- df_all_clean %>%
   select(
-    CH4_Area,
-    Sample_Volume,
-    Notes,
-    CH4_Conc_ppm_dilcorr,
-    CH4_Conc_umol,
-    CH4_Flag,
-    Experiment,
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
     Plot_Name,
-    Depth,
+    Depth_cm,
     CO2_Treatment,
     N_Treatment,
-    Month,
-    Year,
+    CH4_Conc_ppm_dilcorr,
+    CH4_Conc_uM,
+    CH4_Flag,
     CH4_Flags
   )
 
 final_data_labeled <- df_all_clean_cols %>%
   mutate(
-    Site = "GCReW", # new column with same value on every row
-    Run_notes = run_notes,
-    Analysis_rundate = print(run_date)# new column with notes about the run
+    Run_notes = run_notes,# new column with notes about the run
+    Analysis_rundate = print(run_date) 
   )
 
-#order columns
-org_fin_data <- final_data_labeled[, c(15, 7, 13, 12, 8, 9, 10, 11, 4, 5, 1, 2, 3, 6, 14, 17, 16)]
-
 #rename columns
-org_labeled_fin_data <- org_fin_data %>%
+org_labeled_fin_data <- final_data_labeled %>%
   rename(
-    Project = Experiment,
-    Plot = Plot_Name,
     CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
     CH4_Conc_Flag = CH4_Flag,
-    Depth_cm = Depth
+    CH4_QAQC_Flags = CH4_Flags,
+    Plot = Plot_Name
+  )
+
+#Order Columns for Final Data Frame
+All_Clean_Data <- org_labeled_fin_data %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    CH4_Conc_ppm,
+    CH4_Conc_uM,
+    CH4_Conc_Flag,
+    CH4_QAQC_Flags,
+    Analysis_rundate,
+    Run_notes
   )
 #head(Samples1)
 
