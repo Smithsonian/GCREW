@@ -1,6 +1,6 @@
 ---
 title: "SMARTX: Porewater SO4/Cl"
-author: "May 2024 Samples"
+author: "May 2024 Samples 610-332"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -30,9 +30,12 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "YYYY-MM-DD"  #Date that instrument was run
+  Date_Run = "2024-08-19"  #Date that instrument was run
   Run_by = "Zoe Read"  #Instrument user 
   Script_run_by = "Zoe Read" #Code user 
+  sample_year <- "2024"
+  sample_month <- "May"
+  Site = "GCREW"
   run_notes = " " #any notes from the run
   samples <- c("GCW", "GWI", "MSM", "SWH") #whatever identifies your samples within the same names 
   samples_pattern <- paste(samples, collapse = "|") 
@@ -40,17 +43,17 @@ lapply(c(
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/COMPASS_Synoptic_CB_MonMon_202410_Cl.txt"
-  raw_file_name_so4 = "Raw Data/COMPASS_Synoptic_CB_MonMon_202410_SO4.txt"
+  raw_file_name_cl = "Raw Data/SMARTX_202405_610-332_Cl.txt"
+  raw_file_name_so4 = "Raw Data/SMARTX_202405_610-332_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/COMPASS_SynopticCB_PW_Processed_Cl_SO4_202410.csv" 
+  processed_file_name = "Processed Data/GCReW_SMARTX_PW_Processed_Cl_SO4_202405_610-332.csv" 
 
 ###### Log Files - PLEASE CHECK 
 #downloaded metadata csv - downloaded from Google drive as csv for this year
-  Raw_Metadata = "Raw Data/COMPASS_SynopticCB_PW_SampleLog_2024.csv"
+  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
-#qaqc log file path for this year 
+  #qaqc log file path for this year 
   Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2024.csv"
 
 ```
@@ -61,6 +64,9 @@ lapply(c(
 
 #Link to the protocol used for analysis 
   #steph will add this soon 
+
+#Dilution
+Dilution = 100
 
 #Coefficients / constants that are needed for calculations 
   cl_mw <- 35.45     #molecular weight of Chloride, g/mol
@@ -104,76 +110,18 @@ lapply(c(
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-# #read in the raw metadata file 
-# raw_metadata <- read.csv(Raw_Metadata)
-# 
-# #make a new columns in the metadata with important info:
-# metadata <- raw_metadata %>%
-#   mutate(Depth = paste0(Depth_cm, "cm")) %>%
-#   mutate(LysID = paste0("Lys", Lysimeter)) %>%
-#   mutate(YearMonth = sprintf("%d%02d", Year, Month))  %>%
-#   mutate(Zone = case_when(
-#     `Transect.Location` == "Transition" ~ "TR",
-#     `Transect.Location` == "Wetland"    ~ "WC",
-#     `Transect.Location` == "Upland"     ~ "UP",   
-#     `Transect.Location` == "Surface Water" ~ "SW",
-#     TRUE                 ~ `Transect.Location`    # keep original value if no match
-#   ))
-# 
-# #Create IDs from what was collected for comparison later
-# metadata <- metadata %>%
-#   mutate(Cl_SO4_ID = ifelse(SO4 == "x",
-#                                      paste(Site,
-#                                            YearMonth,
-#                                            Zone,
-#                                            LysID,
-#                                            Depth,
-#                                            sep = "_"),
-#                                      NA),  )
-# 
-# #Change the SW lines because they don't have lysimeters or a depth  
-# metadata <- metadata %>%
-#   mutate(
-#     Cl_SO4_ID = if_else(
-#       Zone == "SW",
-#       # Modify the string:
-#       Cl_SO4_ID %>%
-#         str_replace("_LysA", "_A") %>%                    # Replace "_LysA" with "_A"
-#         str_replace("_LysB", "_B") %>%                    # Replace "_LysB" with "_B"
-#         str_replace("_LysC", "_C") %>%                    # Replace "_LysC" with "_C"
-#         str_replace("_0cm$", ""),                          # Remove trailing "_0cm"
-#       Cl_SO4_ID  # else keep original
-#     )
-#   )
-# 
-# #Take out the columns and rows that are not relevant
-# dionex_metadata <- metadata %>%
-#   select(Cl_SO4_ID, Year, Month, Day, YearMonth, Site, Zone, Lysimeter, LysID, Depth_cm, 
-#          Depth, Time..24hr., Time.Zone_EDT.EST, Field.Notes, ) %>%        
-#   # only keep specific columns
-#   filter(!is.na(Cl_SO4_ID) & Cl_SO4_ID != "")  # remove missing/blank Cl_SO4_ID rows
-# 
-# head(dionex_metadata)
-
-```
-
-##Read in metadata and create similar sample IDs for matching to samples 
-```{r pull in metadata for later, include=FALSE}
-
 #read in the raw metadata file 
 raw_metadata <- read.csv(Raw_Metadata)
 
 #clean up columns in metadata file:
   #Pull out only SMARTX Rows 
   #Create a Sample_Name column to match the SEAL
-metadata <- raw_metadata %>%
+dionex_metadata <- raw_metadata %>%
   filter(grepl("SMARTX", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = paste0(Project, "_", Sample.ID)) %>%
+  mutate(Sample.ID = gsub("-", "_", Sample.ID)) %>% 
+  mutate(Cl_SO4_ID = paste0(Sample.ID, "_", sample_month, "_", sample_year)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-    rename(
-    Sample_ID = Sample.ID,
-  ) %>%
   select(-N_Treatment)
 
 #create a column for C3 or C4 plants 
@@ -673,16 +621,16 @@ if (so4_blks_percent <= chks_flag) {
 #pull out any rows that have "dup" in the sample_name column
 dups <- all_dat %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag)) %>%
-  filter(str_detect(sample_ID, "dup"))      #have to change this to match data
+  filter(str_detect(sample_ID, "DUP"))      #have to change this to match data
 
 #create a new dataframe and remove dups from sample dataframe 
 dat_raw2 <- all_dat %>%  
-  filter(!str_detect(sample_ID, "dup")) %>%  
+  filter(!str_detect(sample_ID, "DUP")) %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag))
 
 #remove the dup from these IDs so we will have duplicate sample names
 dups <- dups %>%
-  mutate(sample_ID = gsub("_dup", "", as.character(sample_ID))) %>%
+  mutate(sample_ID = gsub("_DUP", "", as.character(sample_ID))) %>%
   rename(
     sample_ID = sample_ID,
     SO4_ppm_dup = SO4_ppm, 
@@ -851,24 +799,7 @@ all_dat$salinity <- ((1.8070 * all_dat$Cl_ppm) + 0.026) / 1000
 
 #Need to determine dilution factors for your samples
 #for Steph / COMPASS this depends on the site so... 
-all_dat$Dilution <- 1
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "MSM") & str_detect(all_dat$sample_ID, "UP"), 50, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "MSM") & str_detect(all_dat$sample_ID, "TR"), 50, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "MSM") & str_detect(all_dat$sample_ID, "WC"), 100, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "MSM") & str_detect(all_dat$sample_ID, "SW"), 100, all_dat$Dilution)
-
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GCW") & str_detect(all_dat$sample_ID, "UP"), 50, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GCW") & str_detect(all_dat$sample_ID, "TR"), 50, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GCW") & str_detect(all_dat$sample_ID, "WC"), 100, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GCW") & str_detect(all_dat$sample_ID, "SW"), 100, all_dat$Dilution)
-
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GWI") & str_detect(all_dat$sample_ID, "UP"), 100, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GWI") & str_detect(all_dat$sample_ID, "TR"), 100, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GWI") & str_detect(all_dat$sample_ID, "WC"), 200, all_dat$Dilution)
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "GWI") & str_detect(all_dat$sample_ID, "SW"), 200, all_dat$Dilution)
-
-all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "SWH"), 50, all_dat$Dilution)
-
+all_dat$Dilution <- Dilution
 # head(all_dat)
 ```
 
@@ -880,17 +811,17 @@ all_dat$Dilution <-  ifelse(str_detect(all_dat$sample_ID, "SWH"), 50, all_dat$Di
 #pull out any rows that have "spk" in the Sample ID column
 spks <- all_dat %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_ppm, Cl_Conc_mM, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag, salinity, Dilution)) %>%
-  filter(str_detect(sample_ID, "spk"))      #have to change this to match data
+  filter(str_detect(sample_ID, "SPK"))      #have to change this to match data
 # head(spks)
 
 #create a new dataframe and remove dups from sample dataframe 
 dat_spks <- all_dat %>%  
-  filter(!str_detect(sample_ID, "spk")) %>%  
+  filter(!str_detect(sample_ID, "SPK")) %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_ppm,  Cl_Conc_mM, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag, salinity))
 
 #remove the dup from these IDs so we will have duplicate sample names
 spks <- spks %>%
-  mutate(sample_ID = gsub("_spk", "", as.character(sample_ID))) %>%
+  mutate(sample_ID = gsub("_SPK", "", as.character(sample_ID))) %>%
   rename(
     sample_ID = sample_ID,
     SO4_Conc_mM_spk = SO4_Conc_mM, 
@@ -1046,16 +977,16 @@ knitr::kable(Perc_Cl_flagged, caption = "Cl samples")
 
 #remove duplicates from the sample dataframe bc we are just taking the first dup run
 all_data_flagged <- dat_flagged %>%
-  filter(!str_detect(sample_ID, "dup")) %>%
+  filter(!str_detect(sample_ID, "DUP")) %>%
   filter(!str_detect(sample_ID, "Lab Blank")) %>%
-  filter(!str_detect(sample_ID, "spk")) %>%
-  mutate(sample_ID = sub("^[^_]+_", "", sample_ID))
+  filter(!str_detect(sample_ID, "SPK"))
   #select(!Excess_Info)
 
-#check to see if all samples are present in the metadata 
-all_data_flagged$sample_ID <- toupper(all_data_flagged$sample_ID)
-dionex_metadata$Cl_SO4_ID <- toupper(dionex_metadata$Cl_SO4_ID)
+#change sample IDs to match metdata
+all_data_flagged <- all_data_flagged %>%
+  mutate(sample_ID = paste0(sample_ID, "_", sample_year))
 
+#check to see if all samples are present in the metadata 
 all_present <- all(all_data_flagged$sample_ID %in% dionex_metadata$Cl_SO4_ID)
 
 if (all_present) {
@@ -1068,31 +999,9 @@ if (all_present) {
   print(missing_ids)
 }
 
-dionex_metadata_selected <- dionex_metadata %>%
-  select(Cl_SO4_ID, Year, Month, Day, Depth_cm, Lysimeter, Time..24hr., Time.Zone_EDT.EST,  Field.Notes) 
-
 #merge metadata with sample run data 
-merged_data <- all_data_flagged %>%
-  left_join(dionex_metadata_selected, by = c("sample_ID" = "Cl_SO4_ID"))
-
-df_all_clean <- merged_data %>%
-  #filter(str_detect(Sample_Name, "GCW|GWI|MSM|SWH")) %>%
-  #mutate(Run_Time = lubridate::mdy_hm(Run_Time)) %>%
-  separate(
-    col = sample_name,
-    sep = "_",
-    into = c("Sample_Number", "Site_Code", "Date" ,"Zone", "LysID", "Depth"),
-    remove = FALSE)
-
-############### THIS IS ONLY FOR 2023 when SWAMP was called UP and UPLAND was called UPCON ##############
-df_all_clean <- df_all_clean %>%
-  mutate(
-    Zone = case_when(
-      Site_Code == "SWH" & Zone == "UP" ~ "SWAMP",
-      Site_Code == "SWH" & Zone == "UPCON" ~ "UP",
-      TRUE ~ `Zone`
-    ))
-
+df_all_clean <- all_data_flagged %>%
+  left_join(dionex_metadata, by = c("sample_ID" = "Cl_SO4_ID"))
 
 ```
 
@@ -1103,46 +1012,57 @@ df_all_clean <- df_all_clean %>%
 data_plotting <- df_all_clean
 
 #Order by Zone from Upland to Surface Water
-data_plotting$Zone = factor(data_plotting$Zone, levels = c("UP",  "SWAMP", "TR", "WC", "SW"))
-data_plotting <- data_plotting[order(data_plotting$Zone), ]
+data_plotting$Temp_Treatment = factor(data_plotting$Temp_Treatment, levels = c("0",  "1.7", "3.4", "5.1"))
+data_plotting <- data_plotting[order(data_plotting$Temp_Treatment), ]
+
+#Add cm units for depths
+depth_labels <- c(
+  "10" = "10 cm",
+  "20" = "20 cm",
+  "40" = "40 cm", 
+  "80" = "80 cm",
+  "120" = "120 cm"
+)
 
 #group the data for plotting
 data_plotting <- data_plotting %>%
-  group_by(Site_Code) %>%
+  group_by(Depth_cm) %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup()
 
 #Plot data and change colors based on Zone:
-viz_cl_plot <- ggplot(data_plotting, aes(x = row_num, y = Cl_ppm, fill = Zone)) +
-  geom_bar(stat = "identity", position = position_dodge2(preserve = "single")) +
-  facet_grid(~ Site_Code, scales="free_x") +
+viz_cl_plot <- ggplot(data_plotting, aes(x = as.factor(Temp_Treatment), y = Cl_ppm, fill = as.factor(Temp_Treatment))) +
+  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), color="black") +   
+  facet_grid(~ Depth_cm, labeller = labeller(Depth_cm = depth_labels), scales="free_x") +
   scale_fill_manual(values = c(
-    "UP" = "#20063B",
-    "SWAMP" = "darkgrey",
-    "TR" = "#FFBC42",
-    "WC" = "#419973",
-    "SW" = "#25ABE6"
+    "0" = "blue", 
+    "1.7" = "yellow", 
+    "3.4" = "orange",
+    "5.1" = "red"
   )) +
   theme_classic() +
-  theme(axis.text.x = element_blank()) +
-  labs(x = " ", y = "Cl (mg/L)", title = "Samples: Chloride") +
-  scale_x_discrete(drop = TRUE)
+  labs(x = " ", y = "Cl (mg/L)", title = "Samples: Chloride", fill="+Temp. (C)") +
+  scale_x_discrete(drop = TRUE) + 
+  theme(legend.position = "right") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
+  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
 
 
-viz_so4_plot <-  ggplot(data_plotting, aes(x = row_num, y = SO4_ppm, fill = Zone)) +
-  geom_bar(stat = "identity", position = position_dodge2(preserve = "single")) +
-  facet_grid(~ Site_Code, scales="free_x") +
+viz_so4_plot <-  ggplot(data_plotting, aes(x = as.factor(Temp_Treatment), y = SO4_ppm, fill = as.factor(Temp_Treatment))) +
+  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), color="black") +   
+  facet_grid(~ Depth_cm, labeller = labeller(Depth_cm = depth_labels), scales="free_x") +
   scale_fill_manual(values = c(
-    "UP" = "#20063B",
-    "SWAMP" = "darkgrey",
-    "TR" = "#FFBC42",
-    "WC" = "#419973",
-    "SW" = "#25ABE6"
+    "0" = "blue", 
+    "1.7" = "yellow", 
+    "3.4" = "orange",
+    "5.1" = "red"
   )) +
   theme_classic() +
-  theme(axis.text.x = element_blank()) +
-  labs(x = " ", y = "SO4 (mg/L)", title = "Samples: SO4") +
-  scale_x_discrete(drop = TRUE)
+  labs(x = " ", y = "SO4 (mg/L)", title = "Samples: SO4", fill="+Temp. (C)") +
+  scale_x_discrete(drop = TRUE) + 
+  theme(legend.position = "right") +
+  theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
+  panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
 
 ggarrange(viz_cl_plot, viz_so4_plot, nrow=2, ncol=1)
 
@@ -1158,8 +1078,7 @@ ggarrange(viz_cl_plot, viz_so4_plot, nrow=2, ncol=1)
   #create required ID columns in R, etc. 
 final_data <- df_all_clean %>% 
   mutate(
-    Project = "COMPASS: Synoptic",   # new column with same value on every row
-    Region = "CB",
+    Site = Site, 
     Run_notes = run_notes,     # new column with notes about the run
     Analysis_rundate = print(Date_Run)
   ) 
@@ -1167,20 +1086,11 @@ final_data <- df_all_clean %>%
 colnames(final_data)
 
 final_data <- final_data %>%
-  rename(
-    Time = Time..24hr.,
-    Time_Zone = Time.Zone_EDT.EST,
-    Replicate = Lysimeter,
-    Sample_ID = sample_ID,
-    Field_notes = Field.Notes,
-    Site = Site_Code
-    # add more rename pairs as needed
-  ) %>%
   select(
-    Project, Region, Site, Zone, Replicate, Depth_cm, 
-         Sample_ID, Year, Month, Day, Time, Time_Zone,
+         Site, Project, Year, Month, 
+         Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, 
          SO4_Conc_mM, SO4_Conc_flag, SO4_QAQC_flag, Cl_Conc_mM, Cl_Conc_flag, Cl_QAQC_flag, salinity,
-         Analysis_rundate,  Run_notes, Field_notes
+         Analysis_rundate,  Run_notes
         # list columns in the order you want them
   )
 
