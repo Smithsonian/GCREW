@@ -1,0 +1,141 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","SMARTX","2024","July","SCAM","C3","333","10","Ambient","5.1",11.0567373674361,"Within_Range","",184.942022566996,"Within_Range","",11.8470698229,"2025-05-27","The first dup has a high CV for SO4
+  "
+"2","GCReW","SMARTX","2024","July","SCAM","C3","333","20","Ambient","5.1",2.44644416718653,"Within_Range","",175.188228490832,"Within_Range","",11.2222598189,"2025-05-27","The first dup has a high CV for SO4
+  "
+"3","GCReW","SMARTX","2024","July","SCAM","C3","333","40","Ambient","5.1",0.283406113537118,"Within_Range","",181.580614950635,"Within_Range","",11.6317442696,"2025-05-27","The first dup has a high CV for SO4
+  "
+"4","GCReW","SMARTX","2024","July","SCAM","C3","333","80","Ambient","5.1",0.062882096069869,"Within_Range","",164.925221438646,"Within_Range","",10.5648305737,"2025-05-27","The first dup has a high CV for SO4
+  "
+"5","GCReW","SMARTX","2024","July","SCAM","C3","333","120","Ambient","5.1",0.0410012476606363,"Within_Range","",154.713404795487,"Within_Range","",9.9106804914,"2025-05-27","The first dup has a high CV for SO4
+  "
+"6","GCReW","SMARTX","2024","July","SCAM","C3","633","10","Elevated","5.1",24.6374111041797,"Within_Range","",205.262115655853,"Within_Range","",13.148737394,"2025-05-27","The first dup has a high CV for SO4
+  "
+"7","GCReW","SMARTX","2024","July","SCAM","C3","633","20","Elevated","5.1",5.97507174048659,"Within_Range","",184.270084626234,"Within_Range","",11.8040267215,"2025-05-27","The first dup has a high CV for SO4
+  "
+"8","GCReW","SMARTX","2024","July","SCAM","C3","633","40","Elevated","5.1",0.30300998128509,"Within_Range","",190.900352609309,"Within_Range","",12.2287494225,"2025-05-27","The first dup has a high CV for SO4
+  "
+"9","GCReW","SMARTX","2024","July","SCAM","C3","633","80","Elevated","5.1",0.336247660636307,"Within_Range","",168.308566995769,"Within_Range","",10.7815614309,"2025-05-27","The first dup has a high CV for SO4
+  "
+"10","GCReW","SMARTX","2024","July","SCAM","C3","633","120","Elevated","5.1",0.192292576419214,"Within_Range","",147.429080394922,"Within_Range","",9.4440601463,"2025-05-27","The first dup has a high CV for SO4
+  "
+"11","GCReW","SMARTX","2024","July","SPPA, DISP","C4","440","10","Ambient","0",20.6146069868996,"Within_Range","",144.300076163611,"Within_Range","",9.2436219239,"2025-05-27","The first dup has a high CV for SO4
+  "
+"12","GCReW","SMARTX","2024","July","SPPA, DISP","C4","440","20","Ambient","0",14.2960792264504,"Within_Range","",127.575071932299,"Within_Range","",8.1722490941,"2025-05-27","The first dup has a high CV for SO4
+  "
+"13","GCReW","SMARTX","2024","July","SPPA, DISP","C4","440","40","Ambient","0",7.62955084217093,"Within_Range","",156.866045133992,"Within_Range","",10.0485746491,"2025-05-27","The first dup has a high CV for SO4
+  "
+"14","GCReW","SMARTX","2024","July","SPPA, DISP","C4","440","80","Ambient","0",0.49597629444791,"Within_Range","",144.008747531735,"Within_Range","",9.2249599507,"2025-05-27","The first dup has a high CV for SO4
+  "
+"15","GCReW","SMARTX","2024","July","SPPA, DISP","C4","440","120","Ambient","0",0.164376169681847,"Within_Range","",147.28941325811,"Within_Range","",9.4351133279,"2025-05-27","The first dup has a high CV for SO4
+  "
+"16","GCReW","SMARTX","2024","July","SPPA, DISP","C4","441","10","Ambient","1.7",13.7853181534623,"Within_Range","",129.748330042313,"Within_Range","",8.3114639881,"2025-05-27","The first dup has a high CV for SO4
+  "
+"17","GCReW","SMARTX","2024","July","SPPA, DISP","C4","441","20","Ambient","1.7",8.25764815970056,"Within_Range","",127.401156558533,"Within_Range","",8.161108397,"2025-05-27","The first dup has a high CV for SO4
+  "
+"18","GCReW","SMARTX","2024","July","SPPA, DISP","C4","441","40","Ambient","1.7",12.8100935745477,"Within_Range","",140.206070521862,"Within_Range","",8.9813674964,"2025-05-27","The first dup has a high CV for SO4
+  "
+"19","GCReW","SMARTX","2024","July","SPPA, DISP","C4","441","80","Ambient","1.7",0.0339800374298191,"Within_Range","",133.542885754584,"Within_Range","",8.5545362071,"2025-05-27","The first dup has a high CV for SO4
+  "
+"20","GCReW","SMARTX","2024","July","SPPA, DISP","C4","441","120","Ambient","1.7",0.441378665003119,"Within_Range","",130.418947813822,"Within_Range","",8.3544225219,"2025-05-27","The first dup has a high CV for SO4
+  "
+"21","GCReW","SMARTX","2024","July","SPPA, DISP","C4","442","10","Ambient","3.4",20.5602526512789,"Within_Range","",156.526620592384,"Within_Range","",10.0268317409,"2025-05-27","The first dup has a high CV for SO4
+  "
+"22","GCReW","SMARTX","2024","July","SPPA, DISP","C4","442","20","Ambient","3.4",11.6039114160948,"Within_Range","",138.819511988716,"Within_Range","",8.8925471219,"2025-05-27","The first dup has a high CV for SO4
+  "
+"23","GCReW","SMARTX","2024","July","SPPA, DISP","C4","442","40","Ambient","3.4",0.848693075483468,"Within_Range","",143.157475317348,"Within_Range","",9.1704290275,"2025-05-27","The first dup has a high CV for SO4
+  "
+"24","GCReW","SMARTX","2024","July","SPPA, DISP","C4","442","80","Ambient","3.4",0.182916406737367,"Within_Range","",136.161777150917,"Within_Range","",8.722297545,"2025-05-27","The first dup has a high CV for SO4
+  "
+"25","GCReW","SMARTX","2024","July","SPPA, DISP","C4","442","120","Ambient","3.4",8.54670929507174,"Within_Range","",132.058251057828,"Within_Range","",8.459433255,"2025-05-27","The first dup has a high CV for SO4
+  "
+"26","GCReW","SMARTX","2024","July","SPPA, DISP","C4","443","10","Ambient","5.1",12.6770368059888,"Within_Range","",140.139667136812,"Within_Range","",8.9771138184,"2025-05-27","The first dup has a high CV for SO4
+  "
+"27","GCReW","SMARTX","2024","July","SPPA, DISP","C4","443","20","Ambient","5.1",5.56912975670618,"Within_Range","",137.802513399154,"Within_Range","",8.8274000737,"2025-05-27","The first dup has a high CV for SO4
+  "
+"28","GCReW","SMARTX","2024","July","SPPA, DISP","C4","443","40","Ambient","5.1",5.99114472863381,"Within_Range","",157.551382228491,"Within_Range","",10.0924760755,"2025-05-27","The first dup has a high CV for SO4
+  "
+"29","GCReW","SMARTX","2024","July","SPPA, DISP","C4","443","80","Ambient","5.1",3.97431690580162,"Within_Range","",143.415873060649,"Within_Range","",9.1869815089,"2025-05-27","The first dup has a high CV for SO4
+  "
+"30","GCReW","SMARTX","2024","July","SPPA, DISP","C4","443","120","Ambient","5.1",3.86125701809108,"Within_Range","",140.832981664316,"Within_Range","",9.0215262644,"2025-05-27","The first dup has a high CV for SO4
+  "
+"31","GCReW","SMARTX","2024","July","SPPA, DISP","C4","450","10","Ambient","0",14.9681409856519,"Within_Range","",136.089847672779,"Within_Range","",8.7176898757,"2025-05-27","The first dup has a high CV for SO4
+  "
+"32","GCReW","SMARTX","2024","July","SPPA, DISP","C4","450","20","Ambient","0",17.6423268870867,"Within_Range","",143.282815232722,"Within_Range","",9.1784580706,"2025-05-27","The first dup has a high CV for SO4
+  "
+"33","GCReW","SMARTX","2024","July","SPPA, DISP","C4","450","40","Ambient","0",7.27397067997505,"Within_Range","",131.269543018336,"Within_Range","",8.4089100771,"2025-05-27","The first dup has a high CV for SO4
+  "
+"34","GCReW","SMARTX","2024","July","SPPA, DISP","C4","450","80","Ambient","0",0.317170929507174,"Within_Range","",135.021407616361,"Within_Range","",8.6492475823,"2025-05-27","The first dup has a high CV for SO4
+  "
+"35","GCReW","SMARTX","2024","July","SPPA, DISP","C4","450","120","Ambient","0",0.681846537741734,"Within_Range","",124.517334273625,"Within_Range","",7.9763760765,"2025-05-27","The first dup has a high CV for SO4
+  "
+"36","GCReW","SMARTX","2024","July","SPPA, DISP","C4","451","10","Ambient","1.7",22.193041172801,"Within_Range","",152.063026798307,"Within_Range","",9.7409021801,"2025-05-27","The first dup has a high CV for SO4
+  "
+"37","GCReW","SMARTX","2024","July","SPPA, DISP","C4","451","20","Ambient","1.7",13.6991671865253,"Within_Range","",133.437393511989,"Within_Range","",8.5477785692,"2025-05-27","The first dup has a high CV for SO4
+  "
+"38","GCReW","SMARTX","2024","July","SPPA, DISP","C4","451","40","Ambient","1.7",3.25223955084217,"Within_Range","",145.841588152327,"Within_Range","",9.3423683301,"2025-05-27","The first dup has a high CV for SO4
+  "
+"39","GCReW","SMARTX","2024","July","SPPA, DISP","C4","451","80","Ambient","1.7",3.27189644416719,"Within_Range","",134.414513399154,"Within_Range","",8.6103710615,"2025-05-27","The first dup has a high CV for SO4
+  "
+"40","GCReW","SMARTX","2024","July","SPPA, DISP","C4","451","120","Ambient","1.7",1.21466625077979,"Within_Range","",126.413043723554,"Within_Range","",8.0978117168,"2025-05-27","The first dup has a high CV for SO4
+  "
+"41","GCReW","SMARTX","2024","July","SPPA, DISP","C4","452","10","Ambient","3.4",19.7986182158453,"Within_Range","",155.193263751763,"Within_Range","",9.9414193684,"2025-05-27","The first dup has a high CV for SO4
+  "
+"42","GCReW","SMARTX","2024","July","SPPA, DISP","C4","452","20","Ambient","3.4",7.39783530879601,"Within_Range","",148.171060648801,"Within_Range","",9.4915900287,"2025-05-27","The first dup has a high CV for SO4
+  "
+"43","GCReW","SMARTX","2024","July","SPPA, DISP","C4","452","40","Ambient","3.4",6.81032751091703,"Within_Range","",155.168248236953,"Within_Range","",9.9398169208,"2025-05-27","The first dup has a high CV for SO4
+  "
+"44","GCReW","SMARTX","2024","July","SPPA, DISP","C4","452","80","Ambient","3.4",3.34239550842171,"Within_Range","",141.395641748942,"Within_Range","",9.0575692285,"2025-05-27","The first dup has a high CV for SO4
+  "
+"45","GCReW","SMARTX","2024","July","SPPA, DISP","C4","452","120","Ambient","3.4",2.371958827199,"Within_Range","",138.828425952045,"Within_Range","",8.8931181339,"2025-05-27","The first dup has a high CV for SO4
+  "
+"46","GCReW","SMARTX","2024","July","SPPA, DISP","C4","453","10","Ambient","5.1",21.9690205864005,"Within_Range","",160.816490832158,"Within_Range","",10.3016328922,"2025-05-27","The first dup has a high CV for SO4
+  "
+"47","GCReW","SMARTX","2024","July","SPPA, DISP","C4","453","20","Ambient","5.1",5.56379600748596,"Within_Range","",145.655706629055,"Within_Range","",9.3304611036,"2025-05-27","The first dup has a high CV for SO4
+  "
+"48","GCReW","SMARTX","2024","July","SPPA, DISP","C4","453","40","Ambient","5.1",3.60728945726762,"Within_Range","",155.691994358251,"Within_Range","",9.9733671284,"2025-05-27","The first dup has a high CV for SO4
+  "
+"49","GCReW","SMARTX","2024","July","SPPA, DISP","C4","453","80","Ambient","5.1",0.272688708671241,"Within_Range","",135.072894217207,"Within_Range","",8.6525457187,"2025-05-27","The first dup has a high CV for SO4
+  "
+"50","GCReW","SMARTX","2024","July","SPPA, DISP","C4","453","120","Ambient","5.1",2.74715845290081,"Within_Range","",145.85504090268,"Within_Range","",9.3432300884,"2025-05-27","The first dup has a high CV for SO4
+  "
+"51","GCReW","SMARTX","2024","July","SPPA, DISP","C4","460","10","Ambient","0",14.7539800374298,"Within_Range","",124.813196050776,"Within_Range","",7.9953284346,"2025-05-27","The first dup has a high CV for SO4
+  "
+"52","GCReW","SMARTX","2024","July","SPPA, DISP","C4","460","20","Ambient","0",8.85788833437305,"Within_Range","",104.065184767278,"Within_Range","",6.6662492156,"2025-05-27","The first dup has a high CV for SO4
+  "
+"53","GCReW","SMARTX","2024","July","SPPA, DISP","C4","460","40","Ambient","0",9.45514348097317,"Within_Range","",133.956056417489,"Within_Range","",8.5810031554,"2025-05-27","The first dup has a high CV for SO4
+  "
+"54","GCReW","SMARTX","2024","July","SPPA, DISP","C4","460","80","Ambient","0",5.14248596381784,"Within_Range","",126.504270803949,"Within_Range","",8.1036555548,"2025-05-27","The first dup has a high CV for SO4
+  "
+"55","GCReW","SMARTX","2024","July","SPPA, DISP","C4","460","120","Ambient","0",4.84681222707424,"Within_Range","",118.790186177715,"Within_Range","",7.6095055647,"2025-05-27","The first dup has a high CV for SO4
+  "
+"56","GCReW","SMARTX","2024","July","SPPA, DISP","C4","461","10","Ambient","1.7",5.23246412975671,"Within_Range","",110.775712270804,"Within_Range","",7.096113193,"2025-05-27","The first dup has a high CV for SO4
+  "
+"57","GCReW","SMARTX","2024","July","SPPA, DISP","C4","461","20","Ambient","1.7",5.65093574547723,"Within_Range","",113.972380818054,"Within_Range","",7.3008858663,"2025-05-27","The first dup has a high CV for SO4
+  "
+"58","GCReW","SMARTX","2024","July","SPPA, DISP","C4","461","40","Ambient","1.7",10.2520243293824,"Within_Range","",141.233359661495,"Within_Range","",9.0471737382,"2025-05-27","The first dup has a high CV for SO4
+  "
+"59","GCReW","SMARTX","2024","July","SPPA, DISP","C4","461","80","Ambient","1.7",6.88966936993138,"Within_Range","",135.031588152327,"Within_Range","",8.6498997286,"2025-05-27","The first dup has a high CV for SO4
+  "
+"60","GCReW","SMARTX","2024","July","SPPA, DISP","C4","461","120","Ambient","1.7",5.5919245165315,"Within_Range","",125.535390691114,"Within_Range","",8.0415908872,"2025-05-27","The first dup has a high CV for SO4
+  "
+"61","GCReW","SMARTX","2024","July","SPPA, DISP","C4","462","10","Ambient","3.4",18.7005520898316,"Within_Range","",156.895952045134,"Within_Range","",10.0504904305,"2025-05-27","The first dup has a high CV for SO4
+  "
+"62","GCReW","SMARTX","2024","July","SPPA, DISP","C4","462","20","Ambient","3.4",8.56648471615721,"Within_Range","",121.710118476728,"Within_Range","",7.7965510259,"2025-05-27","The first dup has a high CV for SO4
+  "
+"63","GCReW","SMARTX","2024","July","SPPA, DISP","C4","462","40","Ambient","3.4",4.47225514660012,"Within_Range","",147.027275035261,"Within_Range","",9.4183212383,"2025-05-27","The first dup has a high CV for SO4
+  "
+"64","GCReW","SMARTX","2024","July","SPPA, DISP","C4","462","80","Ambient","3.4",2.52048034934498,"Within_Range","",134.720527503526,"Within_Range","",8.6299737589,"2025-05-27","The first dup has a high CV for SO4
+  "
+"65","GCReW","SMARTX","2024","July","SPPA, DISP","C4","462","120","Ambient","3.4",2.19174048658765,"Within_Range","",116.830174894217,"Within_Range","",7.4839508679,"2025-05-27","The first dup has a high CV for SO4
+  "
+"66","GCReW","SMARTX","2024","July","SPPA, DISP","C4","463","10","Ambient","5.1",27.0850904553961,"Within_Range","",174.236490832158,"Within_Range","",11.1612932652,"2025-05-27","The first dup has a high CV for SO4
+  "
+"67","GCReW","SMARTX","2024","July","SPPA, DISP","C4","463","20","Ambient","5.1",3.89867747972551,"Within_Range","",138.842166431594,"Within_Range","",8.8939983236,"2025-05-27","The first dup has a high CV for SO4
+  "
+"68","GCReW","SMARTX","2024","July","SPPA, DISP","C4","463","40","Ambient","5.1",1.15824079850281,"Within_Range","",146.131768688293,"Within_Range","",9.3609567584,"2025-05-27","The first dup has a high CV for SO4
+  "
+"69","GCReW","SMARTX","2024","July","SPPA, DISP","C4","463","80","Ambient","5.1",1.08778852152215,"Within_Range","",135.617351198872,"Within_Range","",8.6874226257,"2025-05-27","The first dup has a high CV for SO4
+  "
+"70","GCReW","SMARTX","2024","July","SPPA, DISP","C4","463","120","Ambient","5.1",4.20663443543356,"Within_Range","",130.655743300423,"Within_Range","",8.3695912027,"2025-05-27","The first dup has a high CV for SO4
+  "
