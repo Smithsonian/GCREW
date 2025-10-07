@@ -1,0 +1,681 @@
+---
+title: "CO2xN: Porewater Methane"
+author: "Month Year Samples"
+date: "2025-08-22"
+output:  
+  pdf_document:
+    toc: true
+    toc_depth: 1
+    number_sections: true
+output_dir: "To Be Reviewed/PDF"
+---
+
+\newpage
+
+##Run Information
+```{r run information, include=TRUE}
+cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
+#set the run date & user name
+run_date <- "06/12/2025"
+sample_year <- "2025"
+sample_month <- "May"
+user <- "Brenden Blakley"
+#identify the files you want to read in
+#read in as a list to accommodate multiple runs in a month
+
+GHG_file <- "Raw Data/20250612_2M_MAY_GHG.csv"
+
+
+# Define the file path for QAQC log file - NO Need to change just check year
+log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
+
+# Define final path for data be sure to change year and month and run number
+final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
+
+#Gas in Water Calculations
+# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
+TempC = 22.7 #Equilibration Temperature (Celsius)
+
+volume_g = 0.015 #volume of gas (in liters) in syringe when equilibrized
+volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (should be equal to volume_g)
+
+#record any notes about the run or anything other info here:
+run_notes <- ""
+
+#Metadata file path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
+#Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
+
+cat(run_notes)
+```
+
+
+##Set Up
+
+```{r setup, include=FALSE}
+
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+  dplyr,
+  fuzzyjoin,
+  ggplot2,
+  ggpubr,
+  stringr,
+  here)
+
+##Low & High Standard Curve Cutoffs
+low_std_crv_cutoff <- 1000
+low_std_crv_area_cutoff <- 600000
+r2_cutoff <- 0.990
+
+##Gas In Water Calculation
+R <- 0.08206
+CTK <- 273.15
+
+
+
+##Detection Limits
+adl_cutoff <- 20000
+bdl_cutoff <- 50
+
+##Check Standard Concentration
+level_ch4 <- 1000      #ppm
+chks_flag = 60
+blks_flag = 60
+
+#initialize flags
+flags <- ""
+
+
+```
+
+
+##Read in metadata and create similar sample IDs for matching to samples 
+```{r pull in metadata for later, include=FALSE}
+
+#read in metadata
+
+raw_metadata <- read.csv(Raw_Metadata)
+#clean up columns in metadata file:
+#Pull out only SMARTX Rows
+#Create a Sample_Name column to match the SEAL
+metadata <- raw_metadata %>%
+  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
+  mutate(Month = sample_month) %>%
+  mutate(Year = sample_year) %>%
+  rename(
+    Sample_ID = Sample.ID,
+    Plot_Name = Plot,
+  ) %>%
+  select(-Temp_Treatment) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_N",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2",
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
+    )
+  ))
+
+#Bring in the collection date and any field notes if relevant
+#collection_metadata <- read.csv(Collection_Dates)
+#then we will merge the collection date for SMARTX based on the project and the chambers
+
+```
+
+# Read in data files
+```{r , echo=FALSE}
+
+#Read in Nov Data
+raw <- read.csv(GHG_file)
+
+#rename column
+colnames(raw)[1] <- "Sample_ID"
+
+#head(stds_ch4) 
+
+```
+
+# Assess standard curves
+```{r , echo=FALSE}
+
+stds_ch4 <-  raw %>%
+  filter(str_detect(Type, "Standard"))
+
+#Correct data class
+stds_ch4[, "Conc_CH4"] <- as.numeric(stds_ch4[, "Conc_CH4"])
+
+#Separate Into Low and High
+
+low_stds_ch4 <- stds_ch4  %>%
+  filter(!Conc_CH4 > low_std_crv_cutoff)
+
+low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_ch4$Conc_CH4)
+
+
+high_stds_ch4 <- stds_ch4  %>%
+  filter(!Conc_CH4 < low_std_crv_cutoff)
+
+high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
+
+#High Curve for CH4
+CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size =
+                                                                           4) +
+  geom_smooth(method = "lm", se = FALSE) + labs(title = "CH4 Std Curve")
+CH4_Curve
+
+high_CH4_lm <- lm(high_stds_ch4$CH4_Area ~ high_stds_ch4$Conc_CH4)
+high_cf <- coef(high_CH4_lm)
+
+#create data frame with 1 rows and 0 columns
+Slope_CH4 <- data.frame(matrix(ncol = 0, nrow = 2))
+Slope_CH4$Curve <- "High"
+Slope_CH4$R2 <- summary(high_CH4_lm)$adj.r.squared
+Slope_CH4$Slope <- high_cf[2]
+Slope_CH4$Intercept <- high_cf[1]
+
+#low Curve for CH4
+CH4_Curve <- ggplot(low_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size =
+                                                                          4) +
+  geom_smooth(method = "lm", se = FALSE) + labs(title = "CH4 Std Curve")
+CH4_Curve
+
+low_CH4_lm <- lm(low_stds_ch4$CH4_Area ~ low_stds_ch4$Conc_CH4)
+low_cf <- coef(low_CH4_lm)
+
+#create data frame with 1 rows and 0 columns
+Slope_CH4$Curve[2] <- "Low"
+Slope_CH4$R2[2] <- summary(low_CH4_lm)$adj.r.squared
+Slope_CH4$Slope[2] <- low_cf[2]
+Slope_CH4$Intercept[2] <- low_cf[1]
+#head(Slope_CH4_low)
+
+#add in run date
+Slope_CH4$Run_Date <- run_date
+
+
+#add new standard curve data to log
+log <- read.csv(log_path)
+head(log)
+log <- log[, -c(1)]
+log <- rbind(log, Slope_CH4)
+
+#remove possible duplicates from multiple QAQC attempts 
+
+unique_log <- log %>% distinct(.keep_all = TRUE)
+
+Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
+                                                                            4) + geom_line() + theme_bw()
+Slopes_chk
+
+write.csv(unique_log, log_path)
+
+
+#check r2
+
+if (summary(high_CH4_lm)$adj.r.squared < r2_cutoff) {
+  message("High_R2 is Bad")
+} else {
+  message("High_R2 Good")
+}
+
+if (summary(low_CH4_lm)$adj.r.squared < r2_cutoff) {
+  message("Low_R2 is Bad")
+} else {
+  message("Low_R2 Good")
+}
+
+#create R2 flags
+
+flags <- ifelse(
+  summary(high_CH4_lm)$adj.r.squared < r2_cutoff,
+  paste0(flags, "High_R2 is Bad"),
+  flags
+)
+
+flags <- ifelse(summary(low_CH4_lm)$adj.r.squared < r2_cutoff,
+                paste0(flags, "; Low_R2 is Bad"),
+                flags)
+```
+
+## Now calculate the CH4 & CO2 concentrations in ppm  
+```{r Calculate Concetration, echo=FALSE}
+#head(raw)
+
+#pull out CO2xN Samples
+Samples <-  raw %>%  
+  filter(!str_detect(Type, "Lab air")) %>%  
+  filter(!str_detect(Type, "Standard")) %>%  
+  filter(!str_detect(Type, "Blank")) %>%  
+  filter(!str_detect(Type, "Chk_STD")) %>%  
+   filter(!str_detect(Type, "ChkStd")) %>%
+  filter(!str_detect(Type, "NA")) %>%
+    filter(str_detect(Sample_ID, c("L")))
+#head(Samples)
+
+#Calculate CH4 concentrations in ppm
+Samples$CH4_Conc_ppm <- ifelse(
+  Samples$CH4_Area >= low_std_crv_area_cutoff,
+  (Samples$CH4_Area - Slope_CH4$Intercept[1]) / Slope_CH4$Slope[1],
+  (Samples$CH4_Area - Slope_CH4$Intercept[2]) / Slope_CH4$Slope[2]
+)
+
+#head(Samples)
+
+##########make flags for any dilutions needed 
+
+Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > adl_cutoff, "Needs Dilution", "Within Range")
+
+#head(Samples)
+
+```
+
+# Aanlayze the Check Standards 
+```{r Asses Check Standards, echo=FALSE}
+
+chks <-  raw %>%
+  filter(!str_detect(Type, "Lab air")) %>%
+  filter(!str_detect(Type, "Standard")) %>%
+  filter(!str_detect(Type, "Blank")) %>%
+  filter(!str_detect(Type, "Sample")) %>%
+  filter(!str_detect(Type, "NA"))
+#head(chks)
+
+#Calculate CH4 concentrations in ppm
+chks$CH4_Conc_ppm <-
+  (chks$CH4_Area - Slope_CH4$Intercept[2]) / Slope_CH4$Slope[2]
+
+
+#calculate percent difference of check standards
+chks$Ch4_diff <- ((chks$CH4_Conc_ppm - level_ch4) / ((chks$CH4_Conc_ppm + level_ch4) /
+                                                       2)) * 100
+chks$CH4_diff_flag <-  ifelse(chks$Ch4_diff < 10, 'YES', 'NO, rerun')
+
+#calculate the percent of check standards that are within the range based on the flag
+CH4_chks_percent <- (sum(chks$CH4_diff_flag == "YES") / nrow(chks)) * 100
+
+#report out if flags indicate need for rerun
+
+if (CH4_chks_percent >= chks_flag) {
+  message(">60% of CH4 Check Standards are within range of expected concentration - PROCEED")
+} else {
+  message("<60% of CH$ Check Standards are within range of expected concentration - REASSESS")
+}
+
+
+#now plot the Ch4 concentrations and the CO2 concentrations vs. the expected concentration
+#then also make the color the percent difference between the expected and observed concentration
+
+ch4_chk <-  ggplot(data = chks, aes(x = Sample_ID, y = CH4_Conc_ppm, fill =
+                                      CH4_diff_flag)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_manual(values = c("NO, rerun" = "darkgrey", "YES" = "darkgreen")) +
+  theme_classic() + labs(x = " ", y = "Concentration (ppm)", title =
+                           "Check Stds: CH4") +
+  theme(legend.position = "bottom") +  geom_hline(
+    yintercept = level_ch4,
+    linetype = "dashed",
+    color = "black",
+    size = 1
+  ) +
+  guides(fill = guide_legend(title = "% Difference <10%"))
+
+
+ch4_chk
+
+#Add Check Standard Flags
+
+flags <- ifelse(CH4_chks_percent >= chks_flag,
+                flags,
+                paste0(flags, "; Check Standards out Of Range"))
+
+```
+
+# Analyze the Blanks 
+```{r Analyze Blanks, echo=FALSE}
+cat("Assess Blanks")
+
+CH4_blks <-  raw %>%
+  filter(!str_detect(Type, "Lab air")) %>%
+  filter(!str_detect(Type, "Standard")) %>%
+  filter(!str_detect(Type, "Sample")) %>%
+  filter(!str_detect(Type, "Chk_STD")) %>%
+  filter(!str_detect(Type, "ChkStd")) %>%
+  filter(!str_detect(Type, "NA"))
+
+
+#Pull out samples from df_all to calc quantile
+samples_blanks <- raw %>%
+  filter(str_detect(Type, c("Sample"))) %>%
+  filter(str_detect(Sample_ID, c("L")))#have to do this because CO2xN ids start with L
+
+#Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
+
+blk_flag_CH4 <- quantile(samples_blanks$CH4_Area, prob = c(.25))   #this gives you the lower 25% quartile of the data
+CH4_blks$CH4_diff_flag <-  ifelse(CH4_blks$CH4_Area <= blk_flag_CH4, 'YES', 'NO, rerun')
+
+#calculate the percent of check standards that are within the range based on the flag
+CH4_blks_percent <- (sum(CH4_blks$CH4_diff_flag == "YES") / nrow(CH4_blks)) *
+  100
+
+#report out if flags indicate need for rerun
+if (CH4_blks_percent >= blks_flag) {
+  message(">60% of CH4 Blanks are below the lower 25% quartile of samples - PROCEED")
+} else {
+  message("<60% of CH4 blaks are lower 25% quartile of samples - REASSESS")
+}
+
+#plotting the blanks compared to the lower 25% of conc (what the flag is)
+CH4_blks_plot <-  ggplot(data = CH4_blks, aes(x = Sample_ID, y = CH4_Area, fill =
+                                                CH4_diff_flag)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_manual(values = c(
+    "YES" = "deepskyblue3",
+    "NO, rerun" = "darkred"
+  )) +
+  theme_classic() + labs(x = " ", y = "CH4 Area", title = "CH4 Blanks") +
+  theme(legend.position = "bottom") +
+  geom_hline(
+    yintercept = as.numeric(blk_flag_CH4),
+    linetype = "dashed",
+    color = "black",
+    linewidth = 1
+  )  +
+  guides(fill = guide_legend(title = "Blank Conc <25% Quartile Samples"))
+
+print(CH4_blks_plot)
+
+
+#find average of run blanks for flagging samples later
+# Compute averages
+blk_avg_CH4 <- mean(CH4_blks$CH4_Area, na.rm = TRUE)
+
+
+# Create a data frame
+blank_avgs <- data.frame(Test = c("CH4"),
+                         Blank_Mean_Area = c(blk_avg_CH4))
+
+# Pretty print
+knitr::kable(blank_avgs, caption = "Mean Area of Blanks", digits = 4)
+
+
+#write out a flag if more than 60% of the blanks are above the lower 25% quantile of samples
+flags <-  ifelse(CH4_blks_percent >= blks_flag,
+                 flags,
+                 paste0(flags, '; Blanks out of Range'))
+
+
+
+```
+
+# Dilution correct samples and Check Range
+```{r, echo=FALSE}
+
+#Correct if volume other than 12mL of Sample was added
+Samples$CH4_Conc_ppm_dilcorr <- ((0.5 * Samples$CH4_Conc_ppm) * (12 + Samples$Sample_Volume)) /
+  (Samples$Sample_Volume)
+
+#check results
+#head(Samples)
+
+#quick first look at the samples
+ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill =
+                                             CH4_Flag)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_manual(values = c("darkgreen", "red")) +
+  theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range (Not Dil Cor)") +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) +
+  theme(legend.position = "none")
+
+#corrected for different dilutions
+ch4_samples_cor <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
+                                             CH4_Flag)) +
+  geom_bar(stat = 'identity') +
+  scale_fill_manual(values = c("green4", "darkred")) +
+  theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range") +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) +
+  theme(legend.position = "none")
+
+ch4_samples
+
+ch4_samples_cor
+
+
+```
+
+
+# Calculate gas in water  
+```{r, echo=FALSE}
+
+# Convert ppm CH4 to total uM CH4 in the sample headspace
+# use Ideal Gas Law:
+#   hdsp umol CH4 = ppm CH4*(PV/RT)
+#      P = 1 (pressure in atm)
+#      R = 0.082 (gas constant)
+#      V = 0.015 (gas syringe volume in L)
+#      T = "TempC" column value in Kelvin (equilibration temperature)
+
+#Calculate CH4 uM from ppm
+
+Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (TempC + CTK) )))/ volume_w
+
+#old equation
+#Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * ((1 * volume / 1000) / (R * (TempC + CTK)))) / (volume / 1000)
+
+
+#quick first look at the samples
+ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_uM)) +
+  geom_bar(stat = 'identity', fill = "darkblue") +
+  theme_classic() +
+  labs(x = " ", y = "CH4 (uM)", title = "CH4 Gas in Water") +
+  theme(axis.text.x = element_text(
+    angle = 90,
+    vjust = 0.5,
+    hjust = 1
+  )) +
+  theme(legend.position = "none")
+
+
+ch4_samples1
+
+```
+
+# Merge samples with Metadata & check all samples are present 
+```{r check sample ids with metadata, echo=FALSE}
+
+cat("Merge Samples with Metadata")
+
+#check to see if all samples are present in the metadata
+all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
+
+if (all_present) {
+  message("All sample IDs are present in data")
+} else {
+  message("Some sample IDs are missing from data.")
+  
+  # Optional: Which ones are missing?
+  missing_ids <- setdiff(metadata$Sample_Name, Samples$Sample_ID)
+  print(missing_ids)
+}
+
+
+#merge metadata with sample run data
+merged_data <- metadata %>%
+  mutate(Sample_ID = paste0("\\b", Sample_ID, "\\b")) %>%
+  fuzzyjoin::regex_left_join(Samples, ., by = c(Sample_ID = "Sample_Name"))
+
+#might want to include a flag or something to see that all the samples are included?
+
+#add flags
+
+merged_data$CH4_Flags <- flags
+
+df_all_clean <- merged_data
+
+```
+
+# Visualize Data
+```{r Visualize Data, echo=FALSE}
+cat("Visualize Data")
+
+### Plot Style 1
+CH4_forplot <- df_all_clean
+
+#need to work out how best to plot these data
+
+viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
+  x = as.factor(Treatment),
+  y = CH4_Conc_uM,
+  fill = as.factor(Treatment)
+)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(preserve = "single"),
+    color = "black"
+  ) +
+  facet_grid( ~ Depth_cm, scales = "free_x") +
+  scale_fill_manual(values = c(
+    "Ambient" = "#007C77",
+    "eCO2" = "#F46036",
+    "N" = "#85CB33",
+    "eCO2_N" = "#EF27A6"
+  )) +
+  theme_classic() +
+  labs(x = " ",
+       y = "CH4 (uM)",
+       title = "CO2xN: Porewater Methane",
+       fill = "Treatment") +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.3),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+print(viz_CH4_plot)
+
+### Plot Style 2
+
+#need to work out how best to plot these data
+
+viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
+  x = as.factor(CO2_Treatment),
+  y = CH4_Conc_uM,
+  fill = as.factor(CO2_Treatment)
+)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(preserve = "single"),
+    color = "black"
+  ) +
+  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
+  scale_fill_manual(values = c(
+    "Amb" = "midnightblue",
+    "Elev" = "mediumvioletred"
+  )) +
+  theme_classic() +
+  labs(x = " ",
+       y = "CH4 (uM)",
+       title = "CO2xN: Porewater Methane",
+       fill = "Treatment:") +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+print(viz_CH4_plot2)
+
+
+```
+
+
+## Export Processed Data  
+```{r, echo=FALSE}
+#check results
+#head(Samples)
+
+#pull out what we need
+
+df_all_clean_cols <- df_all_clean %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot_Name,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    CH4_Conc_ppm_dilcorr,
+    CH4_Conc_uM,
+    CH4_Flag,
+    CH4_Flags
+  )
+
+final_data_labeled <- df_all_clean_cols %>%
+  mutate(
+    Run_notes = run_notes,# new column with notes about the run
+    Analysis_rundate = print(run_date) 
+  )
+
+#rename columns
+org_labeled_fin_data <- final_data_labeled %>%
+  rename(
+    CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
+    CH4_Conc_Flag = CH4_Flag,
+    CH4_QAQC_Flags = CH4_Flags,
+    Plot = Plot_Name
+  )
+
+#Order Columns for Final Data Frame
+All_Clean_Data <- org_labeled_fin_data %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    CH4_Conc_ppm,
+    CH4_Conc_uM,
+    CH4_Conc_Flag,
+    CH4_QAQC_Flags,
+    Analysis_rundate,
+    Run_notes
+  )
+#head(Samples1)
+
+#write.csv(org_labeled_fin_data, final_path)
+
+```
+
+
+#end
