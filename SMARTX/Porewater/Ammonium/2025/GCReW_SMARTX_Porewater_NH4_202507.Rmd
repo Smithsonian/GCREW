@@ -31,7 +31,7 @@ cat("Run Information:  ") #lets you know what section you're in
   final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202507.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- ""
+  run_notes <- "updated chunk 368-448 to calculate average PE_chk values for all runs"
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -382,7 +382,7 @@ df_duplicates <- df_all %>%
   !startsWith(Sample_Name, "Nitrite ") &                #removing standards
   !startsWith(Sample_Name, "Nitrate ") &                #removing standards
   !startsWith(Sample_Name, "Abs_Chk_") &                #removing abs_chks
-  !startsWith(Sample_Name, "peChk_") &                 #removing peChks
+  !startsWith(Sample_Name, "pe_chk") &                 #removing peChks
   !grepl("^\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}$", Sample_Name) & #removing naything that is a date
   !grepl("^\\d+$", Sample_Name)) %>%                    #removing any rows with just numbers in the sample name column
   group_by(Test, Sample_Name)%>%                              #grouping by test & sample name to avoid fake dups
@@ -419,7 +419,8 @@ if (dil_dups_string != "") {
   message("No duplicated samples.")
 }
 
-df_all_cor <- df_all %>%
+df_all_cor_1 <- df_all %>% 
+  filter(Sample_Name != "pe_chk") %>%
   arrange(row_number()) %>%
   mutate(
     Dilution = case_when(
@@ -438,6 +439,11 @@ df_all_cor <- df_all %>%
     Dilution == ifelse(any(Dilution > 1, na.rm = TRUE), max(Dilution, na.rm = TRUE), 1)
   ) %>%
   ungroup()
+
+
+pe_chk_df <- df_all %>% filter(Sample_Name == "pe_chk")
+
+df_all_cor <- bind_rows(df_all_cor_1, pe_chk_df)
 
 
 
