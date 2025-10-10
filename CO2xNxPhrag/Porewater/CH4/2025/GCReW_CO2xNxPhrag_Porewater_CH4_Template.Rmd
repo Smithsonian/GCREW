@@ -1,5 +1,5 @@
 ---
-title: "CO2xN: Porewater Methane"
+title: "CO2xNxPhrag: Porewater Methane"
 author: "Month Year Samples"
 date: "2025-08-22"
 output:  
@@ -16,21 +16,21 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
-run_date <- "06/12/2025"
+run_date <- "09/02/2025"
 sample_year <- "2025"
-sample_month <- "May"
+sample_month <- "July"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_file <- "Raw Data/20250612_2M_MAY_GHG.csv"
+GHG_file <- "Raw Data/20250905_GHGdata_LTREB_PHRAG.csv"
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
+log_path <- "Processed Data/LTREB_Phrag_ShimadzuGC_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
+final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202507_2.csv"
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
@@ -75,11 +75,11 @@ CTK <- 273.15
 
 
 
-##Detection Limits
+##Detection Limits (Typically 50-20000)
 adl_cutoff <- 20000
 bdl_cutoff <- 50
 
-##Check Standard Concentration
+##Blank & Check Standard QAQC values
 level_ch4 <- 1000      #ppm
 chks_flag = 60
 blks_flag = 60
@@ -101,7 +101,7 @@ raw_metadata <- read.csv(Raw_Metadata)
 #Pull out only SMARTX Rows
 #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("Phrag", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
@@ -210,8 +210,11 @@ log <- rbind(log, Slope_CH4)
 
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
-                                                                            4) + geom_line() + theme_bw()
+Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) +
+  geom_point(size = 4) +
+  geom_line() +
+  ylim(400, 800) +
+  theme_bw()
 Slopes_chk
 
 write.csv(unique_log, log_path)
@@ -249,14 +252,15 @@ flags <- ifelse(summary(low_CH4_lm)$adj.r.squared < r2_cutoff,
 #head(raw)
 
 #pull out CO2xN Samples
-Samples <-  raw %>%  
-  filter(!str_detect(Type, "Lab air")) %>%  
-  filter(!str_detect(Type, "Standard")) %>%  
-  filter(!str_detect(Type, "Blank")) %>%  
-  filter(!str_detect(Type, "Chk_STD")) %>%  
-   filter(!str_detect(Type, "ChkStd")) %>%
+Samples <-  raw %>%
+  filter(!str_detect(Type, "Lab air")) %>%
+  filter(!str_detect(Type, "Standard")) %>%
+  filter(!str_detect(Type, "Blank")) %>%
+  filter(!str_detect(Type, "Chk_STD")) %>%
+  filter(!str_detect(Type, "ChkStd")) %>%
   filter(!str_detect(Type, "NA")) %>%
-    filter(str_detect(Sample_ID, c("L")))
+  filter(str_detect(Sample_ID, c("P"))) %>%
+  mutate(Sample_ID = str_replace_all(Sample_ID, "_", "-"))
 #head(Samples)
 
 #Calculate CH4 concentrations in ppm
@@ -276,7 +280,7 @@ Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > adl_cutoff, "Needs Dilution", 
 
 ```
 
-# Aanlayze the Check Standards 
+# Anlayze the Check Standards 
 ```{r Asses Check Standards, echo=FALSE}
 
 chks <-  raw %>%
@@ -353,7 +357,7 @@ CH4_blks <-  raw %>%
 #Pull out samples from df_all to calc quantile
 samples_blanks <- raw %>%
   filter(str_detect(Type, c("Sample"))) %>%
-  filter(str_detect(Sample_ID, c("L")))#have to do this because CO2xN ids start with L
+  filter(str_detect(Sample_ID, c("P")))#have to do this because CO2xN ids start with L
 
 #Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
 
@@ -556,8 +560,8 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
+       y = "CH4 (umol/L)",
+       title = "CO2xNxPhrag: Porewater Methane",
        fill = "Treatment") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -587,13 +591,13 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   ) +
   facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
-    "Amb" = "midnightblue",
-    "Elev" = "mediumvioletred"
+    "Ambient" = "midnightblue",
+    "Elevated" = "mediumvioletred"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
+       y = "CH4 (umol/L)",
+       title = "CO2xNxPhrag: Porewater Methane (Alt View)",
        fill = "Treatment:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -627,6 +631,7 @@ df_all_clean_cols <- df_all_clean %>%
     Community,
     Nickname,
     Plot_Name,
+    SubPlot,
     Depth_cm,
     CO2_Treatment,
     N_Treatment,
@@ -661,6 +666,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Community,
     Nickname,
     Plot,
+    SubPlot,
     Depth_cm,
     CO2_Treatment,
     N_Treatment,

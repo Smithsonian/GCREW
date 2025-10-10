@@ -210,8 +210,12 @@ log <- rbind(log, Slope_CH4)
 
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
-                                                                            4) + geom_line() + theme_bw()
+Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) +
+  geom_point(size = 4) +
+  geom_line() +
+  ylim(400, 800) +
+  theme_bw()
+
 Slopes_chk
 
 write.csv(unique_log, log_path)
@@ -556,7 +560,7 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
+       y = "CH4 (umol/L)",
        title = "CO2xN: Porewater Methane",
        fill = "Treatment") +
   theme(legend.position = "right") +
@@ -587,14 +591,14 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   ) +
   facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
-    "Amb" = "midnightblue",
-    "Elev" = "mediumvioletred"
+    "Ambient" = "midnightblue",
+    "Elevated" = "mediumvioletred"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
-       fill = "Treatment:") +
+       y = "CH4 (umol/L)",
+       title = "CO2xN: Porewater Methane (Alternate View)",
+       fill = "N Treatment:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(

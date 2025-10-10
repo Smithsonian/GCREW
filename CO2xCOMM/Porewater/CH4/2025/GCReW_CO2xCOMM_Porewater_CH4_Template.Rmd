@@ -1,7 +1,7 @@
 ---
-title: "CO2xN: Porewater Methane"
+title: "CO2xCOMM: Porewater Methane"
 author: "Month Year Samples"
-date: "2025-08-22"
+date: "2025-10-07"
 output:  
   pdf_document:
     toc: true
@@ -16,21 +16,21 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
-run_date <- "06/12/2025"
+run_date <- "08/21/2025"
 sample_year <- "2025"
-sample_month <- "May"
+sample_month <- "July"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_file <- "Raw Data/20250612_2M_MAY_GHG.csv"
+GHG_file <- "Raw Data/20250821_GHGdata_LTREB_2M_1M.csv"
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
+log_path <- "Processed Data/LTREB_1M_ShimadzuGC_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
+final_path <- "Processed Data/GCReW_CO2xCOMM_Porewater_CH4_202507_2.csv"
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
@@ -75,7 +75,7 @@ CTK <- 273.15
 
 
 
-##Detection Limits
+##Detection Limits (ppm)
 adl_cutoff <- 20000
 bdl_cutoff <- 50
 
@@ -98,34 +98,21 @@ flags <- ""
 
 raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-#Pull out only SMARTX Rows
+#Pull out only 1 Meter Rows
 #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("1-Meter", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
   rename(
     Sample_ID = Sample.ID,
     Plot_Name = Plot,
-  ) %>%
-  select(-Temp_Treatment) %>%
-  mutate(Treatment = ifelse(
-    CO2_Treatment == "Elevated" &
-      N_Treatment == "Amended",
-    "eCO2_N",
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Ambient",
-      "eCO2",
-      ifelse(CO2_Treatment == "Ambient" &
-               N_Treatment == "Amended"  , "N" , "Ambient")
-    )
-  ))
+  )
 
 #Bring in the collection date and any field notes if relevant
 #collection_metadata <- read.csv(Collection_Dates)
-#then we will merge the collection date for SMARTX based on the project and the chambers
+#then we will merge the collection date for project based on the project and the chambers
 
 ```
 
@@ -210,8 +197,11 @@ log <- rbind(log, Slope_CH4)
 
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
-                                                                            4) + geom_line() + theme_bw()
+Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + 
+  geom_point(size = 4) + 
+  geom_line() + 
+  ylim(400, 800) +
+  theme_bw()
 Slopes_chk
 
 write.csv(unique_log, log_path)
@@ -248,15 +238,17 @@ flags <- ifelse(summary(low_CH4_lm)$adj.r.squared < r2_cutoff,
 ```{r Calculate Concetration, echo=FALSE}
 #head(raw)
 
-#pull out CO2xN Samples
-Samples <-  raw %>%  
-  filter(!str_detect(Type, "Lab air")) %>%  
-  filter(!str_detect(Type, "Standard")) %>%  
-  filter(!str_detect(Type, "Blank")) %>%  
-  filter(!str_detect(Type, "Chk_STD")) %>%  
-   filter(!str_detect(Type, "ChkStd")) %>%
+#pull out CO2xCOMM Samples
+Samples <-  raw %>%
+  filter(!str_detect(Type, "Lab air")) %>%
+  filter(!str_detect(Type, "Standard")) %>%
+  filter(!str_detect(Type, "Blank")) %>%
+  filter(!str_detect(Type, "Chk_STD")) %>%
+  filter(!str_detect(Type, "ChkStd")) %>%
   filter(!str_detect(Type, "NA")) %>%
-    filter(str_detect(Sample_ID, c("L")))
+  filter(str_detect(Sample_ID, c("SP|SC")))   %>%
+  mutate(Sample_ID = str_replace_all(Sample_ID, "_", "-")) #Change _ to - for matching purposes
+ # %>% mutate(Sample_ID = substr(Sample_ID, 9, nchar(Sample_ID))) #for removing extra characters (month etc)
 #head(Samples)
 
 #Calculate CH4 concentrations in ppm
@@ -353,7 +345,7 @@ CH4_blks <-  raw %>%
 #Pull out samples from df_all to calc quantile
 samples_blanks <- raw %>%
   filter(str_detect(Type, c("Sample"))) %>%
-  filter(str_detect(Sample_ID, c("L")))#have to do this because CO2xN ids start with L
+  filter(str_detect(Sample_ID, c("SP|SC")))#have to do this because CO2xCOMM ids start with SP or SC
 
 #Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
 
@@ -481,7 +473,7 @@ Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (T
 ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_uM)) +
   geom_bar(stat = 'identity', fill = "darkblue") +
   theme_classic() +
-  labs(x = " ", y = "CH4 (uM)", title = "CH4 Gas in Water") +
+  labs(x = " ", y = "CH4 (umol/L)", title = "CH4 Gas in Water") +
   theme(axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -537,32 +529,30 @@ CH4_forplot <- df_all_clean
 
 #need to work out how best to plot these data
 
-viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
-  x = as.factor(Treatment),
+viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
+  x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(Treatment)
+  fill = as.factor(CO2_Treatment)
 )) +
   geom_bar(
     stat = "identity",
     position = position_dodge2(preserve = "single"),
     color = "black"
   ) +
-  facet_grid( ~ Depth_cm, scales = "free_x") +
+  facet_grid(Community ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
-    "Ambient" = "#007C77",
-    "eCO2" = "#F46036",
-    "N" = "#85CB33",
-    "eCO2_N" = "#EF27A6"
+    "Ambient" = "#7AFFF8",
+    "Elevated" = "#149911"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
-       fill = "Treatment") +
+       y = "CH4 (umol/L)",
+       title = "CO2xCOMM: Porewater Methane",
+       fill = "CO2 Treatment:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
-    axis.text.x = element_text(angle = 90, vjust = 0.3),
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
     panel.border = element_rect(
       color = "black",
       fill = NA,
@@ -576,25 +566,25 @@ print(viz_CH4_plot)
 #need to work out how best to plot these data
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-  x = as.factor(CO2_Treatment),
+  x = as.factor(Community),
   y = CH4_Conc_uM,
-  fill = as.factor(CO2_Treatment)
+  fill = as.factor(Community)
 )) +
   geom_bar(
     stat = "identity",
     position = position_dodge2(preserve = "single"),
     color = "black"
   ) +
-  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
+  facet_grid(CO2_Treatment ~ Depth_cm, scales = "free_x") +
   scale_fill_manual(values = c(
-    "Amb" = "midnightblue",
-    "Elev" = "mediumvioletred"
+    "SPPA" = "#CFFBCF",
+    "SCAM" = "#149911"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
-       fill = "Treatment:") +
+       y = "CH4 (umol/L)",
+       title = "CO2xCOMM: Porewater Methane (Alt View)",
+       fill = "Community:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -673,7 +663,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
   )
 #head(Samples1)
 
-#write.csv(org_labeled_fin_data, final_path)
+write.csv(org_labeled_fin_data, final_path)
 
 ```
 

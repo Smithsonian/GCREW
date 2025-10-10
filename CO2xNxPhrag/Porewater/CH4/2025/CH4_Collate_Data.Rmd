@@ -16,7 +16,7 @@ library(purrr)
 
 ```{r , echo=FALSE}
 
-CH4_processed_files <- c("Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_2.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_3.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv")
+CH4_processed_files <- c("Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202507_1.csv", "Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202507_2.csv")
 data_CH4 <- map(CH4_processed_files, read.csv)
 
 # Combining Files
@@ -32,20 +32,36 @@ CH4_forplot <- df_combo
 
 #need to work out how best to plot these data 
 
-viz_CH4_plot <- ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4_Conc_umol, fill = as.factor(Treatment))) +
-       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
-                 color="black") + 
-       facet_grid(~ Depth, scales="free_x") +
-  scale_fill_manual(values = c("Ambient" = "#007C77", 
-                                     "eCO2" = "#F46036", 
-                                     "N" = "#85CB33",
-                                     "eCO2_N" = "#EF27A6")) +
-        theme_classic() + 
-        labs(x= " ", y="CH4 (umol)", title="2M: Porewater CH4", fill = "Treatment") + 
-          theme(legend.position = "right") +
-          scale_x_discrete(drop = TRUE)+
-        theme(axis.text.x = element_text(angle = 90, vjust = 0.3), 
-              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
+viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
+  x = as.factor(CO2_Treatment),
+  y = CH4_Conc_uM,
+  fill = as.factor(CO2_Treatment)
+)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(preserve = "single"),
+    color = "black"
+  ) +
+  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
+  scale_fill_manual(values = c(
+    "Ambient" = "midnightblue",
+    "Elevated" = "mediumvioletred"
+  )) +
+  theme_classic() +
+  labs(x = " ",
+       y = "CH4 (umol/L)",
+       title = "CO2xN: Porewater Methane",
+       fill = "Treatment:") +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
 print(viz_CH4_plot) 
 
 
