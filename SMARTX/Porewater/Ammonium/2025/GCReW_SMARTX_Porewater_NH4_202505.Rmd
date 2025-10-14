@@ -924,7 +924,7 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
   scale_fill_manual(
     values = c(
       "T0" = "blue",
-      "T1" = "yellow",
+      "T1" = "green",
       "T2" = "orange",
       "T3" = "red",
       "eCT0" = "white",
@@ -936,7 +936,7 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
   scale_color_manual(
     values = c(
       "T0" = "blue",
-      "T1" = "yellow",
+      "T1" = "green",
       "T2" = "orange",
       "T3" = "red",
       "eCT0" = "blue",
@@ -992,7 +992,7 @@ viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(
   facet_grid(Depth_cm ~ ., scales = "free_x") +
   scale_fill_manual(values = c(
     "0" = "blue",
-    "1.7" = "yellow",
+    "1.7" = "green",
     "3.4" = "orange",
     "5.1" = "red"
   )) +
@@ -1051,9 +1051,9 @@ viz_NH3_plot_C3_2 <- ggplot(data = NH3_forplot_C3,
   geom_point(size = 3) +
   geom_path(size = 1) +
   scale_color_manual(values = c(
-    "1" = "blue",
-    "2" = "orange",
-    "3" = "red"
+    "1" = "#FFD500",
+    "2" = "#00D0FF",
+    "3" = "#FF0075"
   )) +
   facet_grid(factor(
     Treatment1,
@@ -1112,9 +1112,9 @@ viz_NH3_plot_C4_2 <- ggplot(data = NH3_forplot_C4,
   geom_point(size = 3) +
   geom_path(size = 1) +
   scale_color_manual(values = c(
-    "4" = "blue",
-    "5" = "orange",
-    "6" = "red"
+    "4" = "#FFD500",
+    "5" = "#00D0FF",
+    "6" = "#FF0075"
   )) +
   facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
                ., scales = "free_x") +
