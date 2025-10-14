@@ -42,9 +42,6 @@ volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (shou
 #record any notes about the run or anything other info here:
 run_notes <- ""
 
-#Metadata file path
-Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
-
 #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
 cat(run_notes)
@@ -73,7 +70,8 @@ r2_cutoff <- 0.990
 R <- 0.08206
 CTK <- 273.15
 
-
+#Metadata file path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
 ##Detection Limits
 adl_cutoff <- 20000
@@ -210,8 +208,12 @@ log <- rbind(log, Slope_CH4)
 
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) + geom_point(size =
-                                                                            4) + geom_line() + theme_bw()
+Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) +
+  geom_point(size = 4) +
+  geom_line() +
+  ylim(400, 800) +
+  theme_bw()
+
 Slopes_chk
 
 write.csv(unique_log, log_path)
@@ -556,7 +558,7 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
+       y = "CH4 (umol/L)",
        title = "CO2xN: Porewater Methane",
        fill = "Treatment") +
   theme(legend.position = "right") +
@@ -570,31 +572,56 @@ viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
     )
   )
 print(viz_CH4_plot)
+```
 
+```{r, echo=FALSE}
 ### Plot Style 2
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
+
+CH4_forplot <- CH4_forplot %>%
+  mutate(Plot_Color = case_when(Plot_Name %in% color1 ~ "Color1",
+                                Plot_Name %in% color2 ~ "Color2",
+                                Plot_Name %in% color3 ~ "Color3",
+                                Plot_Name %in% color4 ~ "Color4",
+                                Plot_Name %in% color5 ~ "Color5"))
 
 #need to work out how best to plot these data
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(CO2_Treatment)
+  fill = as.factor(Treatment),
+  color = as.factor(N_Treatment)
 )) +
   geom_bar(
     stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
+    position = position_dodge2(preserve = "single")
   ) +
-  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
   scale_fill_manual(values = c(
-    "Amb" = "midnightblue",
-    "Elev" = "mediumvioletred"
+    "eCO2_N" = "#DB5461",
+    "eCO2" = "#454ADE", 
+    "N" = "white",
+    "Ambient" = "white"
+  ),
+    breaks = c("eCO2", "eCO2_N", "N", "Ambient"),
+    labels = c("eCO2","eCO2","aCO2","aCO2")
+  ) +
+  scale_color_manual(values = c(
+    "Ambient" = "#454ADE",
+    "Amended" = "#DB5461"
   )) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane",
-       fill = "Treatment:") +
+       y = "CH4 (umol/L)",
+       title = "CO2xN: Porewater Methane (Alternate View)",
+       fill = "CO2 Treatment:",
+       color = "N Treatment") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -604,7 +631,8 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       fill = NA,
       linewidth = 0.8
     )
-  )
+  ) +
+coord_flip()
 print(viz_CH4_plot2)
 
 
