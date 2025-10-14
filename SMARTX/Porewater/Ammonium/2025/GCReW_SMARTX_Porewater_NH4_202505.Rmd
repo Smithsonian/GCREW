@@ -890,7 +890,7 @@ df_all_clean <- merged_data
 \newpage
 
 ## Visualize Data
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data C3, fig.height=10, echo=FALSE}
 cat("Visualize Data")
 
 ### Ammonia 
@@ -908,31 +908,72 @@ NH3_forplot_C3$Depth_cm <-
 NH3_forplot_C3 <- NH3_forplot_C3 %>%
   group_by(Depth_cm) %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
+  ungroup() %>%
+  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "T0", "eCT0"), ifelse(Temp_Treatment == 1.7, "T1", ifelse(Temp_Treatment == 3.4, "T2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "T3", "eCT3"), NA)))))
 
-viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(x = as.factor(Temp_Treatment), y = Conc, 
-                                                     fill=as.factor(Temp_Treatment))) +
-       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
-                 color="black") + 
-       facet_grid(~ as.numeric(Depth_cm), scales="free_x") +
-        #facet_grid(Depth_cm ~ ., scales = "free_x") + 
-        scale_fill_manual(values = c("0" = "blue", 
-                                     "1.7" = "yellow", 
-                                     "3.4" = "orange",
-                                     "5.1" = "red")) +
-        theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="C3: Porewater NH3", fill="+Temp. (C)") + 
-          theme(legend.position = "right") +
-          scale_x_discrete(drop = TRUE)+
-        theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
-              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
-print(viz_NH3_plot_C3) 
+#create plot
+viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
+  x = as.factor(Temp_Treatment),
+  y = Conc,
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
+)) +
+  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), ) +
+  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+  facet_grid(Depth_cm ~ ., scales = "free_x") +
+  scale_fill_manual(
+    values = c(
+      "T0" = "blue",
+      "T1" = "yellow",
+      "T2" = "orange",
+      "T3" = "red",
+      "eCT0" = "white",
+      "eCT3" = "white"
+    ),
+    breaks = c("T0", "T1", "T2", "T3", "eCT0"),
+    labels = c("aCO2","aCO2","aCO2","aCO2", "eCO2")
+  ) +
+  scale_color_manual(
+    values = c(
+      "T0" = "blue",
+      "T1" = "yellow",
+      "T2" = "orange",
+      "T3" = "red",
+      "eCT0" = "blue",
+      "eCT3" = "red"
+    ),
+    breaks = c("T0", "T1", "T2", "T3"),
+    labels = c("0", "1.7", "3.4", "5.1")
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "NH3 (mg/L)",
+    title = "C3: Porewater NH3",
+    fill = "CO2 Treatment",
+    color = "+Temp. (C)"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black")
+    ) + 
+  coord_flip()
+print(viz_NH3_plot_C3)
 
+```
+\newpage
+```{r Visualize Data C4, fig.height=10, echo=FALSE}
 #C4 plots
 NH3_forplot_C4 <- NH3_forplot %>%
   filter(Nickname == "C4")
 
-NH3_forplot_C4$Depth_cm <- 
+NH3_forplot_C4$Depth_cm <-
   as.numeric(NH3_forplot_C4$Depth_cm)
 
 #group the data for plotting
@@ -941,24 +982,164 @@ NH3_forplot_C4 <- NH3_forplot_C4 %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup()
 
-viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(x = as.factor(Temp_Treatment), y = Conc, fill=as.factor(Temp_Treatment))) +
-       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
-                 color="black") + 
-        #facet_grid(~ Depth_cm, scales="free_x") +
-        facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") + 
-        scale_fill_manual(values = c("0" = "blue", 
-                                     "1.7" = "yellow", 
-                                     "3.4" = "orange",
-                                     "5.1" = "red")) +
-        theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="C4: Porewater NH3", fill="+Temp. (C)") + 
-          theme(legend.position = "right") +
-          scale_x_discrete(drop = TRUE)+
-        theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
-              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
+viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(
+  x = as.factor(Temp_Treatment),
+  y = Conc,
+  fill = as.factor(Temp_Treatment)
+)) +
+  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), ) +
+  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+  facet_grid(Depth_cm ~ ., scales = "free_x") +
+  scale_fill_manual(values = c(
+    "0" = "blue",
+    "1.7" = "yellow",
+    "3.4" = "orange",
+    "5.1" = "red"
+  )) +
+  
+  theme_classic() +
+  labs(x = " ",
+       y = "NH3 (mg/L)",
+       title = "C4: Porewater NH3",
+       fill = "+Temp. (C)") +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    ),
+    legend.key = element_rect("black")
+    
+  ) +
+  coord_flip()
 print(viz_NH3_plot_C4) 
 
 ```
+\newpage
+```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+NH3_forplot_C3 <- NH3_forplot_C3 %>%
+  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
+  mutate(Treatment1 = ifelse(
+    Temp_Treatment == 0,
+    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
+    ifelse(
+      Temp_Treatment == 1.7,
+      "+ 1.7 C",
+      ifelse(
+        Temp_Treatment == 3.4,
+        "+ 3.4 C",
+        ifelse(
+          Temp_Treatment == 5.1,
+          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
+          NA
+        )
+      )
+    )
+  ))
+
+#ensure points are in correct order
+NH3_forplot_C3 <- NH3_forplot_C3[order(NH3_forplot_C3$Depth_cm), ]
+
+#make plot
+viz_NH3_plot_C3_2 <- ggplot(data = NH3_forplot_C3, 
+                            aes(x = Conc, y = Depth_cm, color = Replicate)) +
+  geom_point(size = 3) +
+  geom_path(size = 1) +
+  scale_color_manual(values = c(
+    "1" = "blue",
+    "2" = "orange",
+    "3" = "red"
+  )) +
+  facet_grid(factor(
+    Treatment1,
+    levels = c("eCO2 + 0 C", "+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C", "eCO2 + 5.1 C")
+  ) ~ ., scales = "free_x") +
+  labs(x = "NH3 (mg/L)", 
+       y = "Depth (cm)", 
+       title = "C3: Porewater NH3 by Replicate") +
+  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
+                  limits = c(125, 5)) +
+  xlim(0, 10) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_NH3_plot_C3_2
+
+```
+\newpage
+
+```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
+
+#get replicate value and treatment info
+NH3_forplot_C4 <- NH3_forplot_C4 %>%
+  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
+  mutate(Treatment1 = ifelse(
+    Temp_Treatment == 0,
+    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
+    ifelse(
+      Temp_Treatment == 1.7,
+      "+ 1.7 C",
+      ifelse(
+        Temp_Treatment == 3.4,
+        "+ 3.4 C",
+        ifelse(
+          Temp_Treatment == 5.1,
+          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
+          NA
+        )
+      )
+    )
+  ))
+
+#make sure point are in correct order
+NH3_forplot_C4 <- NH3_forplot_C4[order(NH3_forplot_C4$Depth_cm), ]
+
+#make plot
+viz_NH3_plot_C4_2 <- ggplot(data = NH3_forplot_C4, 
+                            aes(x = Conc, y = Depth_cm, color = Replicate)) +
+  geom_point(size = 3) +
+  geom_path(size = 1) +
+  scale_color_manual(values = c(
+    "4" = "blue",
+    "5" = "orange",
+    "6" = "red"
+  )) +
+  facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
+               ., scales = "free_x") +
+  labs(x = "NH3 (mg/L)", 
+       y = "Depth (cm)", 
+       title = "C4: Porewater NH3 by Replicate") +
+  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
+                  limits = c(125, 5)) +
+  xlim(0, 10) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_NH3_plot_C4_2
+
+```
+
+
+
 
 ## Export Processed Data
 ```{r Export Processed Data, include=FALSE}
@@ -1041,7 +1222,7 @@ final_data <- final_data_labeled %>%
 
 
 #Write out data frame 
-  write.csv(final_data, final_path)
+ write.csv(final_data, final_path)
   
 
 ```
