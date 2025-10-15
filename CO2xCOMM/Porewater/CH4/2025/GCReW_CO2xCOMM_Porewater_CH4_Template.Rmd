@@ -521,70 +521,52 @@ df_all_clean <- merged_data
 ```
 
 # Visualize Data
-```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
 
-### Plot Style 1
-CH4_forplot <- df_all_clean
-
-#need to work out how best to plot these data
-
-viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
+```{r Visualize Data, echo = FALSE}
+  CH4_forplot <- CH4_forplot %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      Community == "SPPA",
+    "eCO2_SPPA",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        Community == "SCAM",
+      "eCO2_SCAM",
+      ifelse(CO2_Treatment == "Ambient" &
+               Community == "SPPA"  , "aCO2_SPPA" , "aCO2_SCAM")
+    )
+  ))
+viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(CO2_Treatment)
+  color = as.factor(Community),
+  fill = as.factor(Treatment)
 )) +
   geom_bar(
     stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
+    position = position_dodge2(preserve = "single")
   ) +
-  facet_grid(Community ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Ambient" = "#7AFFF8",
-    "Elevated" = "#149911"
-  )) +
-  theme_classic() +
-  labs(x = " ",
-       y = "CH4 (umol/L)",
-       title = "CO2xCOMM: Porewater Methane",
-       fill = "CO2 Treatment:") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-print(viz_CH4_plot)
-
-### Plot Style 2
-
-#need to work out how best to plot these data
-
-viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-  x = as.factor(Community),
-  y = CH4_Conc_uM,
-  fill = as.factor(Community)
-)) +
-  geom_bar(
-    stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
+  facet_grid(Depth_cm ~ ., scales = "fixed") +
+  scale_fill_manual(
+    values = c(
+    "eCO2_SPPA" = "#CFFBCF",
+    "eCO2_SCAM" = "#149911", 
+    "aCO2_SPPA" = "white",
+    "aCO2_SCAM" = "white"
+  ),
+    breaks = c("eCO2_SPPA", "eCO2_sCAM", "aCO2_SPPA"),
+    labels = c("eCO2","eCO2","aCO2") 
   ) +
-  facet_grid(CO2_Treatment ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
+  scale_color_manual(values = c(
     "SPPA" = "#CFFBCF",
     "SCAM" = "#149911"
   )) +
   theme_classic() +
   labs(x = " ",
        y = "CH4 (umol/L)",
-       title = "CO2xCOMM: Porewater Methane (Alt View)",
-       fill = "Community:") +
+       title = "CO2xCOMM: Porewater Methane",
+       fill = "CO2 Treatment:",
+       color = "Community:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -594,10 +576,9 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       fill = NA,
       linewidth = 0.8
     )
-  )
+  ) +
+coord_flip()
 print(viz_CH4_plot2)
-
-
 ```
 
 
