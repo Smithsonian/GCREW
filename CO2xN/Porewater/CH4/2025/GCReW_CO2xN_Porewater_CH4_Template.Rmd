@@ -16,25 +16,25 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
-run_date <- "06/12/2025"
+run_date <- "06/23/2025"
 sample_year <- "2025"
 sample_month <- "May"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_file <- "Raw Data/20250612_2M_MAY_GHG.csv"
+GHG_file <- "Raw Data/20250623_2M_MAY_GHG.csv"
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
 log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv"
+final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv"
 
 #Gas in Water Calculations
-# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
-TempC = 22.7 #Equilibration Temperature (Celsius)
+# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
+TempC = 22.5 #Equilibration Temperature (Celsius)
 
 volume_g = 0.015 #volume of gas (in liters) in syringe when equilibrized
 volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (should be equal to volume_g)
@@ -578,7 +578,7 @@ print(viz_CH4_plot)
 ### Plot Style 2
 
 color1 <- c("L1", "L2", "L3", "L4")
-color2 <- c("L5", "L6", "L8", "10")
+color2 <- c("L5", "L6", "L8", "L10")
 color3 <- c("L7", "L9", "L11", "L12")
 color4 <- c("L13", "L14", "L16", "L15")
 color5 <- c("L17", "L18", "L19", "L20")
@@ -609,8 +609,8 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     "N" = "white",
     "Ambient" = "white"
   ),
-    breaks = c("eCO2", "eCO2_N", "N", "Ambient"),
-    labels = c("eCO2","eCO2","aCO2","aCO2")
+    breaks = c("eCO2", "eCO2_N", "Ambient"),
+    labels = c("eCO2","eCO2","aCO2")
   ) +
   scale_color_manual(values = c(
     "Ambient" = "#454ADE",
@@ -621,7 +621,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
        y = "CH4 (umol/L)",
        title = "CO2xN: Porewater Methane (Alternate View)",
        fill = "CO2 Treatment:",
-       color = "N Treatment") +
+       color = "N Treatment:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -630,7 +630,8 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       color = "black",
       fill = NA,
       linewidth = 0.8
-    )
+    ),
+      legend.key = element_rect("black")
   ) +
 coord_flip()
 print(viz_CH4_plot2)
@@ -701,7 +702,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
   )
 #head(Samples1)
 
-#write.csv(org_labeled_fin_data, final_path)
+write.csv(org_labeled_fin_data, final_path)
 
 ```
 

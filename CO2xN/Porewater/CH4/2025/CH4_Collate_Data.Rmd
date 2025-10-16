@@ -21,14 +21,14 @@ data_CH4 <- map(CH4_processed_files, read.csv)
 
 # Combining Files
 df_combo <- bind_rows(data_CH4)
+
+### Methane 
+CH4_forplot <- df_combo
 ```
 
 ## Visualize Data
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
-
-### Ammonia 
-CH4_forplot <- df_combo
 
 #need to work out how best to plot these data 
 
@@ -49,4 +49,75 @@ viz_CH4_plot <- ggplot(data = CH4_forplot, aes(x = as.factor(Treatment), y = CH4
 print(viz_CH4_plot) 
 
 
+```
+```{r}
+#ensure points are in correct order
+CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "L10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
+
+CH4_forplot <- CH4_forplot %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
+    )
+  ) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2 & eN",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2 & aN",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2 & eN" ,
+        "aCO2 & aN"
+      )
+    )
+  ))
+
+#make plot
+viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
+  geom_point(size = 3) +
+  geom_path(size = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
+    ),
+    labels = c("1", "2", "3", "4", "5")
+  ) +
+  facet_grid(Treatment ~ ., scales = "fixed") +
+  labs(
+    x = "CH4 (uM)",
+    y = "Depth (cm)",
+    title = "CO2xN: Porewater CH4 by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_CH4_plot_2
 ```

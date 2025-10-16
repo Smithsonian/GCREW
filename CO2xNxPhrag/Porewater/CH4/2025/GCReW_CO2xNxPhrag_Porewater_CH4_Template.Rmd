@@ -42,8 +42,7 @@ volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (shou
 #record any notes about the run or anything other info here:
 run_notes <- ""
 
-#Metadata file path
-Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
 
 #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -62,7 +61,11 @@ pacman::p_load(
   ggplot2,
   ggpubr,
   stringr,
-  here)
+  here, 
+  ggpattern)
+
+#Metadata file path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
 ##Low & High Standard Curve Cutoffs
 low_std_crv_cutoff <- 1000
@@ -533,72 +536,63 @@ df_all_clean <- merged_data
 ```
 
 # Visualize Data
-```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
+```{r, echo = FALSE}
 
-### Plot Style 1
-CH4_forplot <- df_all_clean
 
-#need to work out how best to plot these data
-
-viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
-  x = as.factor(Treatment),
+CH4_forplot <- CH4_forplot %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_N",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2",
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
+    )
+  ))
+    
+   
+  
+viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
+  x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(Treatment)
+  fill = as.factor(Treatment),
+  color = as.factor(N_Treatment),
+  pattern = as.factor(SubPlot)
 )) +
-  geom_bar(
+  geom_bar_pattern(
     stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
+    position = position_dodge(preserve = "single"),
+                   pattern_angle = 45,
+                   pattern_density = 0.1,
+                   pattern_spacing = 0.025,
+                   pattern_key_scale_factor = 0.6
   ) +
-  facet_grid( ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Ambient" = "#007C77",
-    "eCO2" = "#F46036",
-    "N" = "#85CB33",
-    "eCO2_N" = "#EF27A6"
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_fill_manual(
+    values = c(
+    "eCO2_N" = "#DB5461",
+    "eCO2" = "#454ADE", 
+    "N" = "white",
+    "Ambient" = "white"
+  ),
+    breaks = c("eCO2", "eCO2_N", "Ambient"),
+    labels = c("eCO2","eCO2","aCO2")
+  ) +
+  scale_color_manual(values = c(
+    "Ambient" = "#454ADE",
+    "Amended" = "#DB5461"
   )) +
+  scale_pattern_manual(values = c(A = "stripe", B = "none")) +
   theme_classic() +
   labs(x = " ",
        y = "CH4 (umol/L)",
        title = "CO2xNxPhrag: Porewater Methane",
-       fill = "Treatment") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 90, vjust = 0.3),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-print(viz_CH4_plot)
-
-### Plot Style 2
-
-#need to work out how best to plot these data
-
-viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-  x = as.factor(CO2_Treatment),
-  y = CH4_Conc_uM,
-  fill = as.factor(CO2_Treatment)
-)) +
-  geom_bar(
-    stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
-  ) +
-  facet_grid(N_Treatment ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Ambient" = "midnightblue",
-    "Elevated" = "mediumvioletred"
-  )) +
-  theme_classic() +
-  labs(x = " ",
-       y = "CH4 (umol/L)",
-       title = "CO2xNxPhrag: Porewater Methane (Alt View)",
-       fill = "Treatment:") +
+       fill = "CO2 Treatment:",
+       color = "N Treatment:",
+       pattern = "Subplot:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -608,11 +602,11 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       fill = NA,
       linewidth = 0.8
     )
-  )
+  ) +
+coord_flip()
 print(viz_CH4_plot2)
-
-
 ```
+
 
 
 ## Export Processed Data  

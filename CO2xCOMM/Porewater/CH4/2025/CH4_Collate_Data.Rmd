@@ -32,26 +32,50 @@ CH4_forplot <- df_combo
 
 #need to work out how best to plot these data 
 
-viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
+ CH4_forplot <- CH4_forplot %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      Community == "SPPA",
+    "eCO2_SPPA",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        Community == "SCAM",
+      "eCO2_SCAM",
+      ifelse(CO2_Treatment == "Ambient" &
+               Community == "SPPA"  , "aCO2_SPPA" , "aCO2_SCAM")
+    )
+  ))
+viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(CO2_Treatment)
+  color = as.factor(Community),
+  fill = as.factor(Treatment)
 )) +
   geom_bar(
     stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
+    position = position_dodge2(preserve = "single")
   ) +
-  facet_grid(Community ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Ambient" = "#7AFFF8",
-    "Elevated" = "#149911"
+  facet_grid(Depth_cm ~ ., scales = "fixed") +
+  scale_fill_manual(
+    values = c(
+    "eCO2_SPPA" = "#EAC435",
+    "eCO2_SCAM" = "#149911", 
+    "aCO2_SPPA" = "white",
+    "aCO2_SCAM" = "white"
+  ),
+    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA"),
+    labels = c("eCO2","eCO2","aCO2") 
+  ) +
+  scale_color_manual(values = c(
+    "SPPA" = "#EAC435",
+    "SCAM" = "#149911"
   )) +
   theme_classic() +
   labs(x = " ",
        y = "CH4 (umol/L)",
        title = "CO2xCOMM: Porewater Methane",
-       fill = "CO2 Treatment:") +
+       fill = "CO2 Treatment:",
+       color = "Community:") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -60,9 +84,66 @@ viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
       color = "black",
       fill = NA,
       linewidth = 0.8
+    ),
+      legend.key = element_rect("black")
+  ) +
+coord_flip()
+print(viz_CH4_plot2)
+
+
+```
+```{r}
+#ensure points are in correct order
+CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
+
+color1 <- c("SC1", "SC2", "SP1", "SP2")
+color2 <- c("SC6", "SC4", "SP4", "SP5")
+color3 <- c("SC9", "SC8", "SP8", "SP9")
+color4 <- c("SC10", "SC12", "SP10", "SP11")
+color5 <- c("SC14", "SC15", "SP14", "SP13")
+
+CH4_forplot <- CH4_forplot %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
     )
   )
-print(viz_CH4_plot) 
 
+#make plot
+viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
+  geom_point(size = 3) +
+  geom_path(size = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
+    ),
+    labels = c("1", "2", "3", "4", "5")
+  ) +
+  facet_grid(Treatment ~ ., scales = "fixed") +
+  labs(
+    x = "CH4 (uM)",
+    y = "Depth (cm)",
+    title = "CO2xCOMM: Porewater CH4 by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
 
+viz_CH4_plot_2
 ```
