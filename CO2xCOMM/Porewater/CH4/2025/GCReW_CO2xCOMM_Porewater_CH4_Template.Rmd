@@ -549,7 +549,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   facet_grid(Depth_cm ~ ., scales = "fixed") +
   scale_fill_manual(
     values = c(
-    "eCO2_SPPA" = "#CFFBCF",
+    "eCO2_SPPA" = "#EAC435",
     "eCO2_SCAM" = "#149911", 
     "aCO2_SPPA" = "white",
     "aCO2_SCAM" = "white"
@@ -558,7 +558,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     labels = c("eCO2","eCO2","aCO2") 
   ) +
   scale_color_manual(values = c(
-    "SPPA" = "#CFFBCF",
+    "SPPA" = "#EAC435",
     "SCAM" = "#149911"
   )) +
   theme_classic() +
@@ -575,7 +575,8 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       color = "black",
       fill = NA,
       linewidth = 0.8
-    )
+    ),
+      legend.key = element_rect("black")
   ) +
 coord_flip()
 print(viz_CH4_plot2)
