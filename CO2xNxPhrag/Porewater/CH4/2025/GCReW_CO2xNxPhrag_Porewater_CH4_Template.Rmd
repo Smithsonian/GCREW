@@ -537,7 +537,7 @@ df_all_clean <- merged_data
 
 # Visualize Data
 ```{r, echo = FALSE}
-
+CH4_forplot <- df_all_clean
 
 CH4_forplot <- CH4_forplot %>%
   mutate(Treatment = ifelse(
@@ -564,7 +564,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
 )) +
   geom_bar_pattern(
     stat = "identity",
-    position = position_dodge(preserve = "single"),
+    position = position_dodge2(preserve = "single"),
                    pattern_angle = 45,
                    pattern_density = 0.1,
                    pattern_spacing = 0.025,

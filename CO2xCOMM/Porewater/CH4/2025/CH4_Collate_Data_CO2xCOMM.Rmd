@@ -1,5 +1,5 @@
 ---
-title: "GC_Collate_Data"
+title: "GC_Collate_Data_CO2xCOMM"
 author: "Brenden Blakley"
 date: "2025-08-25"
 output: pdf_document
@@ -92,7 +92,7 @@ print(viz_CH4_plot2)
 
 
 ```
-```{r}
+```{r, echo = FALSE}
 #ensure points are in correct order
 CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
 
@@ -116,7 +116,7 @@ CH4_forplot <- CH4_forplot %>%
 #make plot
 viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
   geom_point(size = 3) +
-  geom_path(size = 1) +
+  geom_path(linewidth = 1) +
   scale_color_manual(
     values = c(
       "Color1" = "#FFD500",
