@@ -537,55 +537,104 @@ df_all_clean <- merged_data
 
 # Visualize Data
 ```{r, echo = FALSE}
-
+CH4_forplot <- df_all_clean
 
 CH4_forplot <- CH4_forplot %>%
-  mutate(Treatment = ifelse(
+  mutate(Treatment = ifelse(SubPlot == "A", ifelse(
     CO2_Treatment == "Elevated" &
       N_Treatment == "Amended",
-    "eCO2_N",
+    "eCO2_eN_A",
     ifelse(
       CO2_Treatment == "Elevated" &
         N_Treatment == "Ambient",
-      "eCO2",
-      ifelse(CO2_Treatment == "Ambient" &
-               N_Treatment == "Amended"  , "N" , "Ambient")
+      "eCO2_aN_A",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2_eN_A" ,
+        "aCO2_aN_A"
+      )
     )
-  ))
-    
+  ), ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_eN_B",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2_aN_B",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2_eN_B" ,
+        "aCO2_aN_B"
+      )
+    )
+  )))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
    
   
-viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
+viz_CH4_plot_v2 <- ggplot(data = CH4_forplot, aes(
   x = as.factor(CO2_Treatment),
   y = CH4_Conc_uM,
   fill = as.factor(Treatment),
-  color = as.factor(N_Treatment),
-  pattern = as.factor(SubPlot)
+  color = as.factor(Treatment),
+  pattern = as.factor(Treatment)
 )) +
   geom_bar_pattern(
     stat = "identity",
-    position = position_dodge(preserve = "single"),
+    position = position_dodge2(padding = 0.25, preserve = "single"),
                    pattern_angle = 45,
                    pattern_density = 0.1,
                    pattern_spacing = 0.025,
                    pattern_key_scale_factor = 0.6
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(
-    values = c(
-    "eCO2_N" = "#DB5461",
-    "eCO2" = "#454ADE", 
-    "N" = "white",
-    "Ambient" = "white"
+   scale_fill_manual(values = c(
+    "eCO2_eN_A" = "#DB5461",
+    "eCO2_aN_A" = "#454ADE", 
+    "aCO2_eN_A" = "white",
+    "aCO2_aN_A" = "white",
+    "eCO2_eN_B" = "#DB5461",
+    "eCO2_aN_B" = "#454ADE", 
+    "aCO2_eN_B" = "white",
+    "aCO2_aN_B" = "white"
   ),
-    breaks = c("eCO2", "eCO2_N", "Ambient"),
-    labels = c("eCO2","eCO2","aCO2")
+    name = "Treatment:",
+    breaks = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B"),
+    labels = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B")
+    
   ) +
   scale_color_manual(values = c(
-    "Ambient" = "#454ADE",
-    "Amended" = "#DB5461"
-  )) +
-  scale_pattern_manual(values = c(A = "stripe", B = "none")) +
+     "eCO2_eN_A" = "#DB5461",
+    "eCO2_aN_A" = "#454ADE", 
+    "aCO2_eN_A" = "#DB5461",
+    "aCO2_aN_A" = "#454ADE",
+    "eCO2_eN_B" = "#DB5461",
+    "eCO2_aN_B" = "#454ADE", 
+    "aCO2_eN_B" = "#DB5461",
+    "aCO2_aN_B" = "#454ADE"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B"),
+    labels = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B")
+    
+  ) +
+  scale_pattern_manual(values = c(
+     "eCO2_eN_A" = "stripe",
+    "eCO2_aN_A" = "stripe", 
+    "aCO2_eN_A" = "stripe",
+    "aCO2_aN_A" = "stripe",
+    "eCO2_eN_B" = "none",
+    "eCO2_aN_B" = "none", 
+    "aCO2_eN_B" = "none",
+    "aCO2_aN_B" = "none"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B"),
+    labels = c("eCO2_eN_A", "eCO2_aN_A", "aCO2_aN_A", "aCO2_eN_A", "eCO2_eN_B", "eCO2_aN_B", "aCO2_aN_B", "aCO2_eN_B")
+    ) +
   theme_classic() +
   labs(x = " ",
        y = "CH4 (umol/L)",
@@ -604,7 +653,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     )
   ) +
 coord_flip()
-print(viz_CH4_plot2)
+print(viz_CH4_plot_v2)
 ```
 
 

@@ -1,5 +1,5 @@
 ---
-title: "GC_Collate_Data"
+title: "GC_Collate_Data_CO2xCOMM"
 author: "Brenden Blakley"
 date: "2025-08-25"
 output: pdf_document
@@ -44,18 +44,23 @@ CH4_forplot <- df_combo
       ifelse(CO2_Treatment == "Ambient" &
                Community == "SPPA"  , "aCO2_SPPA" , "aCO2_SCAM")
     )
-  ))
+  )) %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2")) %>%
+  mutate(Order = ifelse(CO2_Treatment == "Ambient", "1", "2"))
+ 
+ CH4_forplot <- CH4_forplot[order(CH4_forplot$CO2_Treatment), ]
+ 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-  x = as.factor(CO2_Treatment),
+  x =  factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")), 
   y = CH4_Conc_uM,
-  color = as.factor(Community),
+  color = as.factor(Treatment),
   fill = as.factor(Treatment)
 )) +
   geom_bar(
     stat = "identity",
-    position = position_dodge2(preserve = "single")
+    position = position_dodge2(padding = 0.5, preserve = "single")
   ) +
-  facet_grid(Depth_cm ~ ., scales = "fixed") +
+  facet_grid(Depth_cm ~ ., scales = "fixed", space = "free_x") +
   scale_fill_manual(
     values = c(
     "eCO2_SPPA" = "#EAC435",
@@ -63,16 +68,23 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     "aCO2_SPPA" = "white",
     "aCO2_SCAM" = "white"
   ),
-    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA"),
-    labels = c("eCO2","eCO2","aCO2") 
+    name = "Treatment:",
+    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
+    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
   ) +
   scale_color_manual(values = c(
-    "SPPA" = "#EAC435",
-    "SCAM" = "#149911"
-  )) +
+    "eCO2_SPPA" = "#EAC435",
+    "eCO2_SCAM" = "#149911", 
+    "aCO2_SPPA" = "#EAC435",
+    "aCO2_SCAM" = "#149911"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
+    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
+  ) +
   theme_classic() +
   labs(x = " ",
-       y = "CH4 (umol/L)",
+       y = "CH4 (uM)",
        title = "CO2xCOMM: Porewater Methane",
        fill = "CO2 Treatment:",
        color = "Community:") +
@@ -84,15 +96,14 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
       color = "black",
       fill = NA,
       linewidth = 0.8
-    ),
-      legend.key = element_rect("black")
+    )
   ) +
 coord_flip()
 print(viz_CH4_plot2)
 
 
 ```
-```{r}
+```{r, echo = FALSE}
 #ensure points are in correct order
 CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
 
@@ -116,7 +127,7 @@ CH4_forplot <- CH4_forplot %>%
 #make plot
 viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
   geom_point(size = 3) +
-  geom_path(size = 1) +
+  geom_path(linewidth = 1) +
   scale_color_manual(
     values = c(
       "Color1" = "#FFD500",

@@ -531,51 +531,11 @@ df_all_clean <- merged_data
 ```
 
 # Visualize Data
+
+
 ```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
-
-### Plot Style 1
-CH4_forplot <- df_all_clean
-
-#need to work out how best to plot these data
-
-viz_CH4_plot <-  ggplot(data = CH4_forplot, aes(
-  x = as.factor(Treatment),
-  y = CH4_Conc_uM,
-  fill = as.factor(Treatment)
-)) +
-  geom_bar(
-    stat = "identity",
-    position = position_dodge2(preserve = "single"),
-    color = "black"
-  ) +
-  facet_grid( ~ Depth_cm, scales = "free_x") +
-  scale_fill_manual(values = c(
-    "Ambient" = "#007C77",
-    "eCO2" = "#F46036",
-    "N" = "#85CB33",
-    "eCO2_N" = "#EF27A6"
-  )) +
-  theme_classic() +
-  labs(x = " ",
-       y = "CH4 (umol/L)",
-       title = "CO2xN: Porewater Methane",
-       fill = "Treatment") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 90, vjust = 0.3),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-print(viz_CH4_plot)
-```
-
-```{r, echo=FALSE}
 ### Plot Style 2
+CH4_forplot <- df_all_clean
 
 color1 <- c("L1", "L2", "L3", "L4")
 color2 <- c("L5", "L6", "L8", "L10")

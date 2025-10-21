@@ -1,0 +1,162 @@
+---
+title: "GC_Collate_Data_CO2xN"
+author: "Brenden Blakley"
+date: "2025-08-25"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(stringr)
+library(purrr)
+
+```
+
+```{r , echo=FALSE}
+
+CH4_processed_files <- c("Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_2.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_3.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv")
+data_CH4 <- map(CH4_processed_files, read.csv)
+
+# Combining Files
+df_combo <- bind_rows(data_CH4)
+
+### Methane 
+CH4_forplot <- df_combo
+```
+
+## Visualize Data
+```{r Visualize Data, echo=FALSE}
+
+#ensure points are in correct order
+
+CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "L10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
+
+CH4_forplot <- CH4_forplot %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
+    )
+  ) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2 & eN",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2 & aN",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2 & eN" ,
+        "aCO2 & aN"
+      )
+    )
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
+#need to work out how best to plot these data
+
+viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+  y = CH4_Conc_uM,
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
+)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(padding = 0.25,preserve = "single")
+  ) +
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    
+  ) +
+  scale_color_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+  ) +
+  theme_classic() +
+  labs(x = " ",
+       y = "CH4 (uM)",
+       title = "CO2xN: Porewater Methane (Alternate View)"
+       ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  ) +
+coord_flip()
+print(viz_CH4_plot2)
+
+```
+
+
+
+```{r, echo=FALSE}
+#ensure points are in correct order
+
+#make plot
+viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
+    ),
+    labels = c("1", "2", "3", "4", "5")
+  ) +
+  facet_grid(Treatment ~ ., scales = "fixed") +
+  labs(
+    x = "CH4 (uM)",
+    y = "Depth (cm)",
+    title = "CO2xN: Porewater CH4 by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_CH4_plot_2
+```
