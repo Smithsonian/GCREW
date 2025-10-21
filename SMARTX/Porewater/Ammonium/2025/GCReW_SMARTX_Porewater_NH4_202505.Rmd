@@ -909,7 +909,7 @@ NH3_forplot_C3 <- NH3_forplot_C3 %>%
   group_by(Depth_cm) %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup() %>%
-  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "T0", "eCT0"), ifelse(Temp_Treatment == 1.7, "T1", ifelse(Temp_Treatment == 3.4, "T2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "T3", "eCT3"), NA)))))
+  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "0 C + aCO2", "0 C + eCO2"), ifelse(Temp_Treatment == 1.7, "1.7 C + aCO2", ifelse(Temp_Treatment == 3.4, "3.4 C + aCO2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "5.1 C + aCO2", "5.1 C + eCO2"), NA)))))
 
 #create plot
 viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
@@ -918,32 +918,34 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
   fill = as.factor(Treatment),
   color = as.factor(Treatment)
 )) +
-  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), ) +
+  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = "single"), ) +
   facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
   facet_grid(Depth_cm ~ ., scales = "free_x") +
   scale_fill_manual(
     values = c(
-      "T0" = "blue",
-      "T1" = "green",
-      "T2" = "orange",
-      "T3" = "red",
-      "eCT0" = "white",
-      "eCT3" = "white"
+      "0 C + aCO2" = "blue",
+      "1.7 C + aCO2" = "green",
+      "3.4 C + aCO2" = "orange",
+      "5.1 C + aCO2" = "red",
+      "0 C + eCO2" = "white",
+      "5.1 C + eCO2" = "white"
     ),
-    breaks = c("T0", "T1", "T2", "T3", "eCT0"),
-    labels = c("aCO2","aCO2","aCO2","aCO2", "eCO2")
+    name = "Treatment:",
+    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
+    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
   ) +
   scale_color_manual(
     values = c(
-      "T0" = "blue",
-      "T1" = "green",
-      "T2" = "orange",
-      "T3" = "red",
-      "eCT0" = "blue",
-      "eCT3" = "red"
+      "0 C + aCO2" = "blue",
+      "1.7 C + aCO2" = "green",
+      "3.4 C + aCO2" = "orange",
+      "5.1 C + aCO2" = "red",
+      "0 C + eCO2" = "blue",
+      "5.1 C + eCO2" = "red"
     ),
-    breaks = c("T0", "T1", "T2", "T3"),
-    labels = c("0", "1.7", "3.4", "5.1")
+    name = "Treatment:",
+    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
+    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
   ) +
   theme_classic() +
   labs(
@@ -987,7 +989,7 @@ viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(
   y = Conc,
   fill = as.factor(Temp_Treatment)
 )) +
-  geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), ) +
+  geom_bar(stat = "identity", position = position_dodge2(padding = 0.25, preserve = "single"), ) +
   facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
   facet_grid(Depth_cm ~ ., scales = "free_x") +
   scale_fill_manual(values = c(

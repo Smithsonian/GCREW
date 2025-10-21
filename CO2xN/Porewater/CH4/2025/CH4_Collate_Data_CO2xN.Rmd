@@ -70,7 +70,7 @@ CH4_forplot <- CH4_forplot %>%
 #need to work out how best to plot these data
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-  x = as.factor(CO2_Treatment),
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = CH4_Conc_uM,
   fill = as.factor(Treatment),
   color = as.factor(Treatment)
