@@ -918,9 +918,8 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
   fill = as.factor(Treatment),
   color = as.factor(Treatment)
 )) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = "single"), ) +
+  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = c("total", "single"), )) +
   facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
-  facet_grid(Depth_cm ~ ., scales = "free_x") +
   scale_fill_manual(
     values = c(
       "0 C + aCO2" = "blue",
