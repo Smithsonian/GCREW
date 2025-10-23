@@ -662,7 +662,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
   )
 #head(Samples1)
 
-write.csv(org_labeled_fin_data, final_path)
+write.csv(All_Clean_Data, final_path)
 
 ```
 
