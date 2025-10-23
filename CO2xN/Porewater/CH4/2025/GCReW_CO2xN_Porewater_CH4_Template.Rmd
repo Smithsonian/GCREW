@@ -16,25 +16,26 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
-run_date <- "06/23/2025"
+run_dates <- c("06/12/2025","06/216/2025","06/18/2025","06/23/2025") #enter in same order as GHG files
 sample_year <- "2025"
 sample_month <- "May"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_file <- "Raw Data/20250623_2M_MAY_GHG.csv"
+GHG_files <- c("Raw Data/20250612_2M_MAY_GHG.csv","Raw Data/20250616_2M_MAY_GHG.csv","Raw Data/20250618_2M_MAY_GHG.csv","Raw Data/20250623_2M_MAY_GHG.csv" )
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
 log_path <- "Processed Data/LTREB_2M_ShimadzuGC_QAQC_2025.csv"
+
 
 # Define final path for data be sure to change year and month and run number
 final_path <- "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv"
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
-TempC = 22.5 #Equilibration Temperature (Celsius)
+TempC = 25 #Equilibration Temperature (Celsius)
 
 volume_g = 0.015 #volume of gas (in liters) in syringe when equilibrized
 volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (should be equal to volume_g)
@@ -55,6 +56,7 @@ cat(run_notes)
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(
   dplyr,
+  purrr,
   fuzzyjoin,
   ggplot2,
   ggpubr,
@@ -81,6 +83,8 @@ bdl_cutoff <- 50
 level_ch4 <- 1000      #ppm
 chks_flag = 60
 blks_flag = 60
+
+
 
 #initialize flags
 flags <- ""
@@ -128,10 +132,16 @@ metadata <- raw_metadata %>%
 ```
 
 # Read in data files
-```{r , echo=FALSE}
+```{r , include=FALSE}
 
 #Read in Nov Data
-raw <- read.csv(GHG_file)
+raw_list <- map(GHG_files, read.csv)
+
+
+# Combining Files
+raw <- bind_rows(raw_list)
+
+
 
 #rename column
 colnames(raw)[1] <- "Sample_ID"
@@ -163,40 +173,59 @@ high_stds_ch4 <- stds_ch4  %>%
 high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
 
 #High Curve for CH4
-CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size =
+CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size =
                                                                            4) +
-  geom_smooth(method = "lm", se = FALSE) + labs(title = "CH4 Std Curve")
+  geom_smooth(method = "lm", se = FALSE) + labs(title = "High CH4 Std Curve")
 CH4_Curve
 
-high_CH4_lm <- lm(high_stds_ch4$CH4_Area ~ high_stds_ch4$Conc_CH4)
-high_cf <- coef(high_CH4_lm)
+ # Convert 'run date' to a factor for grouping
+    high_stds_ch4_grouped <- high_stds_ch4 %>%
+      mutate(Run_Date = as.factor(Run_Date))
 
-#create data frame with 1 rows and 0 columns
-Slope_CH4 <- data.frame(matrix(ncol = 0, nrow = 2))
-Slope_CH4$Curve <- "High"
-Slope_CH4$R2 <- summary(high_CH4_lm)$adj.r.squared
-Slope_CH4$Slope <- high_cf[2]
-Slope_CH4$Intercept <- high_cf[1]
+    
+  split_data <- high_stds_ch4_grouped %>%
+      group_by(Run_Date) %>%
+      group_split()
+ 
+Slope_CH4_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "High",
+                                        R2 = summary(lm(CH4_Area ~ Conc_CH4, data = .))$adj.r.squared , 
+                                        Slope = coef(lm(CH4_Area ~ Conc_CH4, data = .))[2],
+                                        Intercept = coef(lm(CH4_Area ~ Conc_CH4, data = .))[1]))
 
+ Slope_CH4_raw <- bind_rows(Slope_CH4_raw_list)
+  
+ Slope_CH4_High <- Slope_CH4_raw %>% select(Run_Date, Curve, R2, Slope, Intercept) %>% distinct()
+
+
+                              
 #low Curve for CH4
-CH4_Curve <- ggplot(low_stds_ch4, aes(Conc_CH4, CH4_Area)) + geom_point(size =
+CH4_Curve <- ggplot(low_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size =
                                                                           4) +
-  geom_smooth(method = "lm", se = FALSE) + labs(title = "CH4 Std Curve")
+  geom_smooth(method = "lm", se = FALSE) + labs(title = "Low CH4 Std Curve")
 CH4_Curve
 
 low_CH4_lm <- lm(low_stds_ch4$CH4_Area ~ low_stds_ch4$Conc_CH4)
 low_cf <- coef(low_CH4_lm)
 
-#create data frame with 1 rows and 0 columns
-Slope_CH4$Curve[2] <- "Low"
-Slope_CH4$R2[2] <- summary(low_CH4_lm)$adj.r.squared
-Slope_CH4$Slope[2] <- low_cf[2]
-Slope_CH4$Intercept[2] <- low_cf[1]
-#head(Slope_CH4_low)
+ # Convert 'run date' to a factor for grouping
+    low_stds_ch4_grouped <- low_stds_ch4 %>%
+      mutate(Run_Date = as.factor(Run_Date))
 
-#add in run date
-Slope_CH4$Run_Date <- run_date
+    
+  split_data_l <- low_stds_ch4_grouped %>%
+      group_by(Run_Date) %>%
+      group_split()
+ 
+Slope_CH4_raw_list_l <- map(split_data_l, ~ .x %>% mutate(Curve = "Low",
+                                        R2 = summary(lm(CH4_Area ~ Conc_CH4, data = .))$adj.r.squared , 
+                                        Slope = coef(lm(CH4_Area ~ Conc_CH4, data = .))[2],
+                                        Intercept = coef(lm(CH4_Area ~ Conc_CH4, data = .))[1]))
 
+ Slope_CH4_raw_l <- bind_rows(Slope_CH4_raw_list_l)
+  
+ Slope_CH4_Low <- Slope_CH4_raw_l %>% select(Run_Date, Curve, R2, Slope, Intercept) %>% distinct()
+ 
+ Slope_CH4 <- rbind(Slope_CH4_High, Slope_CH4_Low)
 
 #add new standard curve data to log
 log <- read.csv(log_path)
@@ -208,9 +237,8 @@ log <- rbind(log, Slope_CH4)
 
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(Run_Date, Slope, col = Curve)) +
+Slopes_chk <- ggplot(log, aes(x = Run_Date, y = Slope, col = Curve)) +
   geom_point(size = 4) +
-  geom_line() +
   ylim(400, 800) +
   theme_bw()
 
@@ -221,11 +249,10 @@ write.csv(unique_log, log_path)
 
 #check r2
 
-if (summary(high_CH4_lm)$adj.r.squared < r2_cutoff) {
-  message("High_R2 is Bad")
-} else {
-  message("High_R2 Good")
-}
+
+ifelse(Slope_CH4_High$R2 < r2_cutoff, message(paste0("High_R2 is Bad","-", Slope_CH4$Run_Date) ), message(paste0("High_R2 is Good","-", Slope_CH4$Run_Date)))
+
+ifelse(Slope_CH4_Low$R2 < r2_cutoff, message(paste0("Low_R2 is Bad","-", Run_Date) ), message(paste0("low_R2 is Good","-", Run_Date)))
 
 if (summary(low_CH4_lm)$adj.r.squared < r2_cutoff) {
   message("Low_R2 is Bad")
