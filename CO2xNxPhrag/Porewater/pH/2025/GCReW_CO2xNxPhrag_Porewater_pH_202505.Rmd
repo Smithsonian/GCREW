@@ -21,10 +21,10 @@ cat("Run Information:  ") #lets you know what section you're in
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  pH_file <- "Raw Data/SMARTX_pH_(May 610).csv"
+  pH_file <- "Raw Data/1_Phrag_pH_(May).csv"
 
 # Define the file path for  file - check year and month 
-  final_path <- "Processed Data/GCReW_SMARTX_Porewater_pH_202505.csv"
+  final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_pH_202505.csv"
 
 #record any notes about the run or anything other info here: 
   run_notes <- ""
@@ -58,7 +58,8 @@ pacman::p_load(
   purrr,
   tinytex,
   broom,
-  here)
+  here,
+  ggpattern)
 
 #Set up file path for metadata 
   #downloaded metadata csv - downloaded from Google drive as csv for this year
@@ -73,49 +74,39 @@ pacman::p_load(
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in the raw metadata file 
-raw_metadata <- read.csv(Raw_Metadata)
+#read in metadata
 
+raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
+#Pull out only SMARTX Rows
+#Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("SMARTX", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = Sample.ID) %>%
+  filter(grepl("Phrag", Nickname, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-    rename(
+  rename(
     Sample_ID = Sample.ID,
+    Plot_Name = Plot,
   ) %>%
-  select(-N_Treatment)
+  select(-Temp_Treatment) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_N",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2",
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
+    )
+  ))
 
-#create a column for C3 or C4 plants 
-#metadata <- metadata %>%
-#  mutate(
-#    Nickname = case_when(
-#      startsWith(as.character(Plot), "3") ~ "C3",
-#      startsWith(as.character(Plot), "6") ~ "C3",
-#      startsWith(as.character(Plot), "4") ~ "C4",
-#      TRUE ~ NA_character_  # if other values exist
- #   )
-#  )
-
-#create a column for dominant plant communities  
-#metadata <- metadata %>%
-#  mutate(
- #   Community = case_when(
- #     startsWith(as.character(Plot), "3") ~ "SCAM",
-  #    startsWith(as.character(Plot), "6") ~ "SCAM",
-#      startsWith(as.character(Plot), "4") ~ "SPPA, DISP",
-  #    TRUE ~ NA_character_  # if other values exist
- #   )
- # )
-
-#Bring in the collection date and any field notes if relevant 
+#Bring in the collection date and any field notes if relevant
 #collection_metadata <- read.csv(Collection_Dates)
-  #then we will merge the collection date for SMARTX based on the project and the chambers 
+#then we will merge the collection date for SMARTX based on the project and the chambers
 
-## Import Data & Clean
 ```
 
 ```{r Import Data, include=FALSE}
@@ -181,68 +172,213 @@ df_all_clean <- merged_data
 \newpage
 
 ## Visualize Data
-```{r Visualize Data C3, fig.height=10, echo=FALSE}
+```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia 
+### Ammonia
 pH_forplot <- df_all_clean
 
-#C3 plots
-pH_forplot_C3 <- pH_forplot %>%
-  filter(Nickname == "C3")
+color1 <- c("P1", "P2", "P3", "P4")
+color2 <- c("P5", "P6", "P7", "P8")
+color3 <- c("P10", "P9", "P11", "P12")
 
-pH_forplot_C3$Depth_cm <- 
-  as.numeric(pH_forplot_C3$Depth_cm)
 
-#group the data for plotting
-pH_forplot_C3 <- pH_forplot_C3 %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup() %>%
-  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "0 C + aCO2", "0 C + eCO2"), ifelse(Temp_Treatment == 1.7, "1.7 C + aCO2", ifelse(Temp_Treatment == 3.4, "3.4 C + aCO2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "5.1 C + aCO2", "5.1 C + eCO2"), NA)))))
+pH_forplot <- pH_forplot %>%
+  mutate(
+    Treatment1 = ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2 & eN",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2 & aN",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2 & eN" ,
+          "aCO2 & aN"
+        )
+      )
+    )
+  ) %>%
+  mutate(Treatment = ifelse(
+    SubPlot == "A",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2_eN_Phrag",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2_aN_Phrag",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2_eN_Phrag" ,
+          "aCO2_aN_Phrag"
+        )
+      )
+    ),
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2_eN_Native",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2_aN_Native",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2_eN_Native" ,
+          "aCO2_aN_Native"
+        )
+      )
+    )
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
+  mutate(Plot = Plot_Name) %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3"
+    )
+  )
 
-#create plot
-viz_pH_plot_C3 <- ggplot(data = pH_forplot_C3, aes(
-  x = as.factor(Temp_Treatment),
-  y = pH,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
-)) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = c("total", "single"), )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+
+pH_forplot <- pH_forplot[order(pH_forplot$Depth_cm), ]
+
+viz_pH_plot_v2 <- ggplot(
+  data = pH_forplot,
+  aes(
+    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+    y = pH,
+    fill = as.factor(Treatment),
+    color = as.factor(Treatment),
+    pattern = as.factor(Treatment)
+  )
+) +
+  geom_bar_pattern(
+    stat = "identity",
+    position = position_dodge2(padding = 0.25, preserve = "single"),
+    pattern_angle = 45,
+    pattern_density = 0.1,
+    pattern_spacing = 0.025,
+    pattern_key_scale_factor = 0.6
+  ) +
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
   scale_fill_manual(
     values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "white",
-      "5.1 C + eCO2" = "white"
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "white",
+      "aCO2_aN_Phrag" = "white",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "white",
+      "aCO2_aN_Native" = "white"
     ),
     name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
   ) +
   scale_color_manual(
     values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "blue",
-      "5.1 C + eCO2" = "red"
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "#DB5461",
+      "aCO2_aN_Phrag" = "#454ADE",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "#DB5461",
+      "aCO2_aN_Native" = "#454ADE"
     ),
     name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
+  ) +
+  scale_pattern_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "stripe",
+      "eCO2_aN_Phrag" = "stripe",
+      "aCO2_eN_Phrag" = "stripe",
+      "aCO2_aN_Phrag" = "stripe",
+      "eCO2_eN_Native" = "none",
+      "eCO2_aN_Native" = "none",
+      "aCO2_eN_Native" = "none",
+      "aCO2_aN_Native" = "none"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
   ) +
   theme_classic() +
   labs(
     x = " ",
     y = "pH",
-    title = "C3: Porewater pH",
-    fill = "CO2 Treatment",
-    color = "+Temp. (C)"
+    title = "CO2xNxPhrag: Porewater Methane",
+    fill = "CO2 Treatment:",
+    color = "N Treatment:",
+    pattern = "Subplot:"
   ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -251,111 +387,41 @@ viz_pH_plot_C3 <- ggplot(data = pH_forplot_C3, aes(
     panel.border = element_rect(
       color = "black",
       fill = NA,
-      linewidth = 0.8),
-      legend.key = element_rect("black")
-    ) + 
-  coord_flip(ylim = c(5.5,7.1))
-print(viz_pH_plot_C3)
+      linewidth = 0.8
+    )
+  ) +
+  coord_flip()
+print(viz_pH_plot_v2)
+
 
 ```
-\newpage
-```{r Visualize Data C4, fig.height=10, echo=FALSE}
-#C4 plots
-pH_forplot_C4 <- pH_forplot %>%
-  filter(Nickname == "C4")
 
-pH_forplot_C4$Depth_cm <-
-  as.numeric(pH_forplot_C4$Depth_cm)
+```{r, echo = FALSE}
+#make plot
 
-#group the data for plotting
-pH_forplot_C4 <- pH_forplot_C4 %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
+pH_forplot <- pH_forplot %>% 
+  mutate(SubPlot = ifelse(SubPlot == "A", "Phrag", "Native"))
 
-viz_pH_plot_C4 <- ggplot(data = pH_forplot_C4, aes(
-  x = as.factor(Temp_Treatment),
-  y = pH,
-  fill = as.factor(Temp_Treatment)
-)) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.25, preserve = "single"), ) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
-  facet_grid(Depth_cm ~ ., scales = "free_x") +
-  scale_fill_manual(values = c(
-    "0" = "blue",
-    "1.7" = "green",
-    "3.4" = "orange",
-    "5.1" = "red"
-  )) +
-  
-  theme_classic() +
-  labs(x = " ",
-       y = "pH",
-       title = "C4: Porewater pH",
-       fill = "+Temp. (C)") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
+viz_pH_plot_2 <- ggplot(data = pH_forplot, aes(x = pH, y = as.numeric(Depth_cm), color = Plot_Color, shape = SubPlot)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075"
+   
     ),
-    legend.key = element_rect("black")
-    
+    labels = c("1", "2", "3")
   ) +
-  coord_flip(ylim = c(5.5,7.1))
-print(viz_pH_plot_C4) 
-
-```
-\newpage
-```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
-
-#get replicate value and treatment info
-pH_forplot_C3 <- pH_forplot_C3 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#ensure points are in correct order
-pH_forplot_C3 <- pH_forplot_C3[order(pH_forplot_C3$Depth_cm), ]
-
-#make plot
-viz_pH_plot_C3_2 <- ggplot(data = pH_forplot_C3, 
-                            aes(x = pH, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "1" = "#FFD500",
-    "2" = "#00D0FF",
-    "3" = "#FF0075"
-  )) +
-  facet_grid(factor(
-    Treatment1,
-    levels = c("eCO2 + 0 C", "+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C", "eCO2 + 5.1 C")
-  ) ~ ., scales = "free_x") +
-  labs(x = "pH", 
-       y = "Depth (cm)", 
-       title = "C3: Porewater pH by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  xlim(5.7, 7.1) +
+  facet_grid(Treatment1 ~ ., scales = "fixed") +
+  labs(
+    x = "pH",
+    y = "Depth (cm)",
+    title = "CO2xNxPhrag: Porewater pH by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40), limits = c(45, 15)) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -366,66 +432,7 @@ viz_pH_plot_C3_2 <- ggplot(data = pH_forplot_C3,
     )
   )
 
-viz_pH_plot_C3_2
-
-```
-\newpage
-
-```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
-
-#get replicate value and treatment info
-pH_forplot_C4 <- pH_forplot_C4 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#make sure point are in correct order
-pH_forplot_C4 <- pH_forplot_C4[order(pH_forplot_C4$Depth_cm), ]
-
-#make plot
-viz_pH_plot_C4_2 <- ggplot(data = pH_forplot_C4, 
-                            aes(x = pH, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "4" = "#FFD500",
-    "5" = "#00D0FF",
-    "6" = "#FF0075"
-  )) +
-  facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
-               ., scales = "free_x") +
-  labs(x = "pH", 
-       y = "Depth (cm)", 
-       title = "C4: Porewater pH by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  xlim(5.7, 7.11) +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-
-viz_pH_plot_C4_2
+viz_pH_plot_2
 
 ```
 
@@ -441,10 +448,11 @@ df_all_clean_cols <- df_all_clean %>%
     Month,
     Community,
     Nickname,
-    Plot,
+    Plot_Name,
+    SubPlot,
     Depth_cm,
     CO2_Treatment,
-    Temp_Treatment,
+    N_Treatment,
     pH,
     Analysis_rundate
   )
@@ -452,6 +460,7 @@ df_all_clean_cols <- df_all_clean %>%
 final_data_labeled <- df_all_clean_cols %>%
   mutate(
     Run_notes = run_notes,# new column with notes about the run 
+    Plot = Plot_Name
     )
 
 #Order Columns for Final Data Frame
@@ -464,9 +473,10 @@ All_Clean_Data <- final_data_labeled %>%
     Community,
     Nickname,
     Plot,
+    SubPlot,
     Depth_cm,
     CO2_Treatment,
-    Temp_Treatment,
+    N_Treatment,
     pH,
     Analysis_rundate,
     Run_notes
