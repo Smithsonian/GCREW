@@ -1,0 +1,121 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xN","2024","July","SCAM","2-Meter","L1","20","Elevated",NA,14.1637741734248,"Within_Range","SO4 checks perc diff out of range",162.304603667137,"Within_Range","",10.3969586474,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"2","GCReW","CO2xN","2024","July","SCAM","2-Meter","L1","40","Elevated",NA,18.367011852776,"Within_Range","SO4 checks perc diff out of range",188.846022566996,"Within_Range","",12.0971528405,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"3","GCReW","CO2xN","2024","July","SCAM","2-Meter","L1","80","Elevated",NA,8.52932626325639,"Within_Range","SO4 checks perc diff out of range",168.465985895628,"Within_Range","",10.7916453944,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"4","GCReW","CO2xN","2024","July","SCAM","2-Meter","L2","20","Ambient",NA,17.9883031815346,"Within_Range","SO4 checks perc diff out of range",170.844414668547,"Within_Range","",10.9440031415,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"5","GCReW","CO2xN","2024","July","SCAM","2-Meter","L2","40","Ambient",NA,21.7492701185278,"Within_Range","SO4 checks perc diff out of range",199.699695345557,"Within_Range","",12.7924190394,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"6","GCReW","CO2xN","2024","July","SCAM","2-Meter","L2","80","Ambient",NA,11.9805552089832,"Within_Range","SO4 checks perc diff out of range",171.539613540197,"Within_Range","",10.9885362951,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"7","GCReW","CO2xN","2024","July","SCAM","2-Meter","L3","20","Elevated",NA,6.83384279475982,"Within_Range","SO4 checks perc diff out of range",168.47181100141,"Within_Range","",10.7920185399,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"8","GCReW","CO2xN","2024","July","SCAM","2-Meter","L3","40","Elevated",NA,13.3500311915159,"Within_Range","SO4 checks perc diff out of range",177.045782792666,"Within_Range","",11.341251311,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"9","GCReW","CO2xN","2024","July","SCAM","2-Meter","L3","80","Elevated",NA,9.88818153462258,"Within_Range","SO4 checks perc diff out of range",165.836617771509,"Within_Range","",10.6232129367,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"10","GCReW","CO2xN","2024","July","SCAM","2-Meter","L4","20","Ambient",NA,15.7367373674361,"Within_Range","SO4 checks perc diff out of range",154.754456981664,"Within_Range","",9.9133102185,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"11","GCReW","CO2xN","2024","July","SCAM","2-Meter","L4","40","Ambient",NA,21.558384279476,"Within_Range","SO4 checks perc diff out of range",192.41082651622,"Within_Range","",12.3255075866,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"12","GCReW","CO2xN","2024","July","SCAM","2-Meter","L4","80","Ambient",NA,13.0393917654398,"Within_Range","SO4 checks perc diff out of range",169.767884344147,"Within_Range","",10.8750426005,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"13","GCReW","CO2xN","2024","July","SCAM","2-Meter","L5","20","Elevated",NA,12.3954304429195,"Within_Range","SO4 checks perc diff out of range",137.539870239774,"Within_Range","",8.8105756388,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"14","GCReW","CO2xN","2024","July","SCAM","2-Meter","L5","40","Elevated",NA,16.9050810979414,"Within_Range","SO4 checks perc diff out of range",181.480866008463,"Within_Range","",11.6253545369,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"15","GCReW","CO2xN","2024","July","SCAM","2-Meter","L5","80","Elevated",NA,11.1409388646288,"Within_Range","SO4 checks perc diff out of range",156.037537376587,"Within_Range","",9.9955019749,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"16","GCReW","CO2xN","2024","July","SCAM","2-Meter","L6","20","Ambient",NA,13.2755926388022,"Within_Range","SO4 checks perc diff out of range",147.36823977433,"Within_Range","",9.4401628087,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"17","GCReW","CO2xN","2024","July","SCAM","2-Meter","L6","40","Ambient",NA,20.8270648783531,"Within_Range","SO4 checks perc diff out of range",190.346112834979,"Within_Range","",12.1932458479,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"18","GCReW","CO2xN","2024","July","SCAM","2-Meter","L6","80","Ambient",NA,15.4201933873986,"Within_Range","SO4 checks perc diff out of range",172.020228490832,"Within_Range","",11.0193235997,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"19","GCReW","CO2xN","2024","July","SCAM","2-Meter","L7","20","Ambient",NA,17.0068247036806,"Within_Range","SO4 checks perc diff out of range",143.374688293371,"Within_Range","",9.1843432889,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"20","GCReW","CO2xN","2024","July","SCAM","2-Meter","L7","40","Ambient",NA,25.6934154709919,"Within_Range","SO4 checks perc diff out of range",193.492028208745,"Within_Range","",12.3947673668,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"21","GCReW","CO2xN","2024","July","SCAM","2-Meter","L7","80","Ambient",NA,14.1715751715533,"Within_Range","SO4 checks perc diff out of range",165.293181946403,"Within_Range","",10.5884014431,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"22","GCReW","CO2xN","2024","July","SCAM","2-Meter","L8","20","Elevated",NA,13.398437305053,"Within_Range","SO4 checks perc diff out of range",135.725661495063,"Within_Range","",8.6943607829,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"23","GCReW","CO2xN","2024","July","SCAM","2-Meter","L8","40","Elevated",NA,21.8660168434186,"Within_Range","SO4 checks perc diff out of range",188.001492242595,"Within_Range","",12.0430537903,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"24","GCReW","CO2xN","2024","July","SCAM","2-Meter","L8","80","Elevated",NA,0,"bdl","SO4 checks perc diff out of range",0,"bdl","",2.6e-05,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"25","GCReW","CO2xN","2024","July","SCAM","2-Meter","L9","20","Elevated",NA,14.2418527760449,"Within_Range","SO4 checks perc diff out of range",159.571985895628,"Within_Range","",10.2219122083,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"26","GCReW","CO2xN","2024","July","SCAM","2-Meter","L9","40","Elevated",NA,22.0553836556457,"Within_Range","SO4 checks perc diff out of range",195.724961918195,"Within_Range","",12.5378049693,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"27","GCReW","CO2xN","2024","July","SCAM","2-Meter","L9","80","Elevated",NA,13.6219213973799,"Within_Range","SO4 checks perc diff out of range",172.921605077574,"Within_Range","",11.0770641163,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"28","GCReW","CO2xN","2024","July","SCAM","2-Meter","L10","20","Ambient",NA,16.5908733624454,"Within_Range","SO4 checks perc diff out of range",160.647737658674,"Within_Range","",10.2908228761,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"29","GCReW","CO2xN","2024","July","SCAM","2-Meter","L10","40","Ambient",NA,18.9876263256394,"Within_Range","SO4 checks perc diff out of range",184.01090832158,"Within_Range","",11.7874243669,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"30","GCReW","CO2xN","2024","July","SCAM","2-Meter","L10","80","Ambient",NA,12.4695165315034,"Within_Range","SO4 checks perc diff out of range",172.389052186178,"Within_Range","",11.0429497633,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"31","GCReW","CO2xN","2024","July","SCAM","2-Meter","L11","20","Ambient",NA,17.6650124766064,"Within_Range","SO4 checks perc diff out of range",145.576626234133,"Within_Range","",9.3253953598,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"32","GCReW","CO2xN","2024","July","SCAM","2-Meter","L11","40","Ambient",NA,14.5353025577043,"Within_Range","SO4 checks perc diff out of range",105.658361071932,"Within_Range","",6.7683051423,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"33","GCReW","CO2xN","2024","July","SCAM","2-Meter","L11","80","Ambient",NA,14.8189519650655,"Within_Range","SO4 checks perc diff out of range",170.031791255289,"Within_Range","",10.891947989,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"34","GCReW","CO2xN","2024","July","SCAM","2-Meter","L12","20","Elevated",NA,13.6205520898316,"Within_Range","SO4 checks perc diff out of range",153.378772919605,"Within_Range","",9.8251864425,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"35","GCReW","CO2xN","2024","July","SCAM","2-Meter","L12","40","Elevated",NA,22.9945446038677,"Within_Range","SO4 checks perc diff out of range",194.076894217207,"Within_Range","",12.4322328013,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"36","GCReW","CO2xN","2024","July","SCAM","2-Meter","L12","80","Elevated",NA,19.1708296943231,"Within_Range","SO4 checks perc diff out of range",182.43191819464,"Within_Range","",11.6862771805,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"37","GCReW","CO2xN","2024","July","SCAM","2-Meter","L13","20","Elevated",NA,14.8685651902682,"Within_Range","SO4 checks perc diff out of range",155.256352609309,"Within_Range","",9.9454607239,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"38","GCReW","CO2xN","2024","July","SCAM","2-Meter","L13","40","Elevated",NA,20.6085464753587,"Within_Range","SO4 checks perc diff out of range",191.803083215797,"Within_Range","",12.2865766751,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"39","GCReW","CO2xN","2024","July","SCAM","2-Meter","L13","80","Elevated",NA,12.5374890829694,"Within_Range","SO4 checks perc diff out of range",159.474053596615,"Within_Range","",10.2156388464,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"40","GCReW","CO2xN","2024","July","SCAM","2-Meter","L14","20","Ambient",NA,17.8969837804117,"Within_Range","SO4 checks perc diff out of range",142.810857545839,"Within_Range","",9.1482253343,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"41","GCReW","CO2xN","2024","July","SCAM","2-Meter","L14","40","Ambient",NA,23.5809014348097,"Within_Range","SO4 checks perc diff out of range",192.177193229901,"Within_Range","",12.3105414705,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"42","GCReW","CO2xN","2024","July","SCAM","2-Meter","L14","80","Ambient",NA,13.8713817841547,"Within_Range","SO4 checks perc diff out of range",166.067291960508,"Within_Range","",10.6379894985,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"43","GCReW","CO2xN","2024","July","SCAM","2-Meter","L15","20","Elevated",NA,16.0286993137866,"Within_Range","SO4 checks perc diff out of range",148.007190409027,"Within_Range","",9.4810928043,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"44","GCReW","CO2xN","2024","July","SCAM","2-Meter","L15","40","Elevated",NA,22.9020087336245,"Within_Range","SO4 checks perc diff out of range",196.25346403385,"Within_Range","",12.5716598371,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"45","GCReW","CO2xN","2024","July","SCAM","2-Meter","L15","80","Elevated",NA,19.9237336244541,"Within_Range","SO4 checks perc diff out of range",187.973878702398,"Within_Range","",12.041284918,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"46","GCReW","CO2xN","2024","July","SCAM","2-Meter","L16","20","Ambient",NA,15.5236993137866,"Within_Range","SO4 checks perc diff out of range",153.065599435825,"Within_Range","",9.8051251285,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"47","GCReW","CO2xN","2024","July","SCAM","2-Meter","L16","40","Ambient",NA,23.8781409856519,"Within_Range","SO4 checks perc diff out of range",196.243692524683,"Within_Range","",12.5710338923,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"48","GCReW","CO2xN","2024","July","SCAM","2-Meter","L16","80","Ambient",NA,19.800929507174,"Within_Range","SO4 checks perc diff out of range",186.867774330042,"Within_Range","",11.9704299182,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"49","GCReW","CO2xN","2024","July","SCAM","2-Meter","L17","20","Ambient",NA,13.1593636930755,"Within_Range","SO4 checks perc diff out of range",142.561695345557,"Within_Range","",9.1322644647,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"50","GCReW","CO2xN","2024","July","SCAM","2-Meter","L17","40","Ambient",NA,15.4225296319401,"Within_Range","SO4 checks perc diff out of range",156.706832157969,"Within_Range","",10.0383757604,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"51","GCReW","CO2xN","2024","July","SCAM","2-Meter","L17","80","Ambient",NA,9.82372426699938,"Within_Range","SO4 checks perc diff out of range",130.964880112835,"Within_Range","",8.389393935,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"52","GCReW","CO2xN","2024","July","SCAM","2-Meter","L18","20","Elevated",NA,10.2779320024953,"Within_Range","SO4 checks perc diff out of range",126.656152327221,"Within_Range","",8.1133848042,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"53","GCReW","CO2xN","2024","July","SCAM","2-Meter","L18","40","Elevated",NA,15.4560449157829,"Within_Range","SO4 checks perc diff out of range",164.663337094499,"Within_Range","",10.5480547471,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"54","GCReW","CO2xN","2024","July","SCAM","2-Meter","L18","80","Elevated",NA,10.3977885215221,"Within_Range","SO4 checks perc diff out of range",144.591853314527,"Within_Range","",9.2623126284,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"55","GCReW","CO2xN","2024","July","SCAM","2-Meter","L19","20","Elevated",NA,6.39536494073612,"Within_Range","SO4 checks perc diff out of range",145.986888575458,"Within_Range","",9.3516760064,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"56","GCReW","CO2xN","2024","July","SCAM","2-Meter","L19","40","Elevated",NA,13.3154023705552,"Within_Range","SO4 checks perc diff out of range",171.159726375176,"Within_Range","",10.9642014261,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"57","GCReW","CO2xN","2024","July","SCAM","2-Meter","L19","80","Elevated",NA,8.97831877729257,"Within_Range","SO4 checks perc diff out of range",147.670124118477,"Within_Range","",9.4595009613,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"58","GCReW","CO2xN","2024","July","SCAM","2-Meter","L20","20","Ambient",NA,14.4453836556457,"Within_Range","SO4 checks perc diff out of range",155.023275035261,"Within_Range","",9.9305302057,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"59","GCReW","CO2xN","2024","July","SCAM","2-Meter","L20","40","Ambient",NA,25.9662445414847,"Within_Range","SO4 checks perc diff out of range",199.450146685472,"Within_Range","",12.7764334139,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
+"60","GCReW","CO2xN","2024","July","SCAM","2-Meter","L20","80","Ambient",NA,19.5160636306925,"Within_Range","SO4 checks perc diff out of range",181.418172073343,"Within_Range","",11.6213384794,"2025-08-19","Std 1 chk stds lower than expected value. 
+  "
