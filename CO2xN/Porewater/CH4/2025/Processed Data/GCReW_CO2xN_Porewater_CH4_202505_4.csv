@@ -1,5 +1,0 @@
-"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","N_Treatment","CH4_Conc_ppm","CH4_Conc_uM","CH4_Conc_Flag","CH4_QAQC_Flags","Run_notes","Analysis_rundate"
-"1","GCReW","CO2xN","2025","May","SCAM","2-Meter","L19","80","Elevated","Ambient",1510.93900978785,62.2784131292912,"Within Range","","","06/23/2025"
-"2","GCReW","CO2xN","2025","May","SCAM","2-Meter","L20","20","Ambient","Amended",895.506093092686,36.9112836879198,"Within Range","","","06/23/2025"
-"3","GCReW","CO2xN","2025","May","SCAM","2-Meter","L20","40","Ambient","Amended",696.58920641457,28.7122578062123,"Within Range","","","06/23/2025"
-"4","GCReW","CO2xN","2025","May","SCAM","2-Meter","L20","80","Ambient","Amended",906.406204931189,37.3605683141266,"Within Range","","","06/23/2025"
