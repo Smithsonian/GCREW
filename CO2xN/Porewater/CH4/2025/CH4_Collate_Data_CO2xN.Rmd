@@ -104,7 +104,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "CH4 (uM)",
-       title = "CO2xN: Porewater Methane (Alternate View)"
+       title = "CO2xN: Porewater Methane"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
