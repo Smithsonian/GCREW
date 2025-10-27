@@ -155,6 +155,8 @@ stds_ch4[, "Conc_CH4"] <- as.numeric(stds_ch4[, "Conc_CH4"])
 
 #Separate Into Low and High
 
+mnmx_stds <- stds_ch4 %>% filter(Conc_CH4 > 0) %>% group_by(Run_Date) %>% mutate(Min = min(Conc_CH4), Max = max(Conc_CH4)) %>% select(Run_Date, Min, Max) %>% unique()
+
 low_stds_ch4 <- stds_ch4  %>%
   filter(!Conc_CH4 > low_std_crv_cutoff)
 
@@ -167,8 +169,7 @@ high_stds_ch4 <- stds_ch4  %>%
 high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
 
 #High Curve for CH4
-CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size =
-                                                                           4) +
+CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size = 4) +
   geom_smooth(method = "lm", se = FALSE) + labs(title = "High CH4 Std Curve")
 CH4_Curve
 
@@ -225,6 +226,8 @@ Slope_CH4_raw_list_l <- map(split_data_l, ~ .x %>% mutate(Curve = "Low",
  Slope_CH4_Low <- Slope_CH4_raw_l %>% select(Run_Date, Curve, R2, Slope, Intercept) %>% distinct()
  
  Slope_CH4 <- rbind(Slope_CH4_High, Slope_CH4_Low)
+ 
+ Slope_CH4_m <- left_join(Slope_CH4, mnmx_stds)
 
 #add new standard curve data to log
 log <- read.csv(log_path)
@@ -284,7 +287,7 @@ Samples_1 <-  raw %>%
   mutate(Curve = ifelse(CH4_Area >= low_std_crv_area_cutoff, "High", "Low"))
 #head(Samples)
 
-Samples_2 <- merge(Samples_1, Slope_CH4)
+Samples_2 <- merge(Samples_1, Slope_CH4_m)
 
 #Calculate CH4 concentrations in ppm
 Samples <- Samples_2 %>% 
@@ -292,7 +295,8 @@ Samples <- Samples_2 %>%
 
 ##########make flags for any dilutions needed 
 
-Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > adl_cutoff, "Needs Dilution", "Within Range")
+
+Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > Samples$Max, "ADL", ifelse(Samples$CH4_Conc_ppm < Samples$Min, "BDL", "Within Range"))
 
 #head(Samples)
 
@@ -459,7 +463,9 @@ Samples$CH4_Conc_ppm_dilcorr <- ((0.5 * Samples$CH4_Conc_ppm) * (12 + Samples$Sa
 ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill =
                                              CH4_Flag)) +
   geom_bar(stat = 'identity') +
-  scale_fill_manual(values = c("darkgreen", "red")) +
+  scale_fill_manual(values = c("Within Range" = "darkgreen",
+                    "ADL" = "darkred",
+                    "BDL" = "darkblue")) +
   theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range (Not Dil Cor)") +
   theme(axis.text.x = element_text(
     angle = 90,
@@ -472,7 +478,9 @@ ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill
 ch4_samples_cor <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
                                              CH4_Flag)) +
   geom_bar(stat = 'identity') +
-  scale_fill_manual(values = c("green4", "darkred")) +
+  scale_fill_manual(values = c("Within Range" = "green4",
+                    "ADL" = "red3",
+                    "BDL" = "blue3")) +
   theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range") +
   theme(axis.text.x = element_text(
     angle = 90,
