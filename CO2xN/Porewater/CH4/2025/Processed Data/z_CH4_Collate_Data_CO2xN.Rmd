@@ -11,16 +11,20 @@ library(ggplot2)
 library(ggpubr)
 library(stringr)
 library(purrr)
+library(gganimate)
+library(gifski)
 
 ```
 
 ```{r , echo=FALSE}
 
-CH4_processed_files <- c("Processed Data/GCReW_CO2xN_Porewater_CH4_202505_1.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_2.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_3.csv", "Processed Data/GCReW_CO2xN_Porewater_CH4_202505_4.csv")
+CH4_processed_files <- c("GCReW_CO2xN_Porewater_CH4_202505.csv","GCReW_CO2xN_Porewater_CH4_202507.csv","GCReW_CO2xN_Porewater_CH4_202509.csv" )
 data_CH4 <- map(CH4_processed_files, read.csv)
 
 # Combining Files
 df_combo <- bind_rows(data_CH4)
+
+df_combo <- df_combo[,-1]
 
 ### Methane 
 CH4_forplot <- df_combo
@@ -66,8 +70,14 @@ CH4_forplot <- CH4_forplot %>%
     )
   ))  %>%
   mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
-  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
+  mutate(Time_ch = paste0(Month, "01", Year)) %>%
+  mutate(Time = as.Date(Time_ch, format = "%B%d%Y")) %>%
+  arrange(Time, Depth_cm)
 #need to work out how best to plot these data
+```
+
+```{r Visualize Data, echo=FALSE}
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
@@ -79,7 +89,7 @@ viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
     stat = "identity",
     position = position_dodge2(padding = 0.25,preserve = "single")
   ) +
-  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  facet_grid(Depth_cm ~ Month, scales = "fixed") +
   scale_fill_manual(values = c(
     "eCO2 & eN" = "#DB5461",
     "eCO2 & aN" = "#454ADE", 
@@ -144,7 +154,7 @@ viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, 
   labs(
     x = "CH4 (uM)",
     y = "Depth (cm)",
-    title = "CO2xN: Porewater CH4 by Replicate",
+    title = "CO2xN: Porewater CH4 by Replicate {format.Date(closest_state, '%B - %Y')}",
     color = "Replicate"
   ) +
   scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
@@ -156,7 +166,15 @@ viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, 
       fill = NA,
       linewidth = 0.8
     )
-  )
+  ) + transition_states(Time, transition_length = 4, state_length = 8)+
+  ease_aes('linear')
 
-viz_CH4_plot_2
+animate(viz_CH4_plot_2, start_pause = 10, renderer = gifski_renderer())
 ```
+# Data Export
+```{r}
+
+write.csv(df_combo, "GCReW_CO2xN_Porewater_CH4_2025_ALL.csv")
+
+```
+
