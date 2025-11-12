@@ -155,7 +155,7 @@ viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_mean, y = Depth_cm)) +
   labs(
     x = "CH4 (uM)",
     y = "Depth (cm)",
-    title = "CO2xN: Porewater CH4 by Replicate {format.Date(closest_state, '%B - %Y')}"
+    title = "CO2xN: Porewater CH4 by Treatment {format.Date(closest_state, '%B - %Y')}"
   ) +
   scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
   theme_classic() +
