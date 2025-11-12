@@ -28,6 +28,10 @@ df_combo <- df_combo[,-1]
 
 ### Methane 
 CH4_forplot <- df_combo
+
+# Mean & SD
+
+CH4_forplot %>% group_by()
 ```
 
 ## Visualize Data
@@ -73,7 +77,13 @@ CH4_forplot <- CH4_forplot %>%
   mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
   mutate(Time_ch = paste0(Month, "01", Year)) %>%
   mutate(Time = as.Date(Time_ch, format = "%B%d%Y")) %>%
-  arrange(Time, Depth_cm)
+  arrange(Time, Depth_cm) %>% 
+  mutate(Treatment_D = paste0(Treatment, "_", Depth_cm, "_", Month)) %>%
+  group_by(Treatment_D) %>% 
+  mutate(CH4_mean = mean(CH4_Conc_uM)) %>%
+  mutate(CH4_SD = sd(CH4_Conc_uM)) %>%
+  ungroup() %>%
+  distinct(Treatment_D, .keep_all = TRUE)
 #need to work out how best to plot these data
 ```
 
@@ -81,7 +91,7 @@ CH4_forplot <- CH4_forplot %>%
 
 viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-  y = CH4_Conc_uM,
+  y = CH4_mean,
   fill = as.factor(Treatment),
   color = as.factor(Treatment)
 )) +
@@ -137,25 +147,15 @@ print(viz_CH4_plot2)
 #ensure points are in correct order
 
 #make plot
-viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = Depth_cm, color = Plot_Color)) +
+viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_mean, y = Depth_cm)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
-  scale_color_manual(
-    values = c(
-      "Color1" = "#FFD500",
-      "Color2" = "#00D0FF",
-      "Color3" = "#FF0075",
-      "Color4" = "#80d280",
-      "Color5" = "#ff6040"
-    ),
-    labels = c("1", "2", "3", "4", "5")
-  ) +
+  geom_errorbar(aes(xmin = CH4_mean - CH4_SD, xmax = CH4_mean + CH4_SD)) +
   facet_grid(Treatment ~ ., scales = "fixed") +
   labs(
     x = "CH4 (uM)",
     y = "Depth (cm)",
-    title = "CO2xN: Porewater CH4 by Replicate {format.Date(closest_state, '%B - %Y')}",
-    color = "Replicate"
+    title = "CO2xN: Porewater CH4 by Replicate {format.Date(closest_state, '%B - %Y')}"
   ) +
   scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
   theme_classic() +
