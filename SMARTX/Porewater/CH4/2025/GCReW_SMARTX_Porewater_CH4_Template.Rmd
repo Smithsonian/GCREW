@@ -248,7 +248,25 @@ High_R2_Flags <- High_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date 
 
 Low_R2_Flags <- data.frame()
 
-Low_R2_Flags <- data.frame(ifelse(Slope_CH4_Low$R2 < r2_cutoff, rbind(Low_R2_Flags, data.frame(Flag = "R2 is Bad", Run_Date = Slope_CH4_Low$Run_Date, Curve = "Low")),rbind(Low_R2_Flags,  data.frame(Flag = "", Run_Date = Slope_CH4_Low$Run_Date, Curve = "Low"))))
+Low_R2_Flags <- data.frame(ifelse(
+  Slope_CH4_Low$R2 < r2_cutoff,
+  rbind(
+    Low_R2_Flags,
+    data.frame(
+      Flag = "R2 is Bad",
+      Run_Date = Slope_CH4_Low$Run_Date,
+      Curve = "Low"
+    )
+  ),
+  rbind(
+    Low_R2_Flags,
+    data.frame(
+      Flag = "",
+      Run_Date = Slope_CH4_Low$Run_Date,
+      Curve = "Low"
+    )
+  )
+))
 
 Low_R2_Flags <- Low_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date = 2, Curve = 3)
 
