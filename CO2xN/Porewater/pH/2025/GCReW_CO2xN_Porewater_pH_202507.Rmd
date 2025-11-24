@@ -1,0 +1,350 @@
+---
+title: "CO2xN: Porewater pH"
+author: "July 2025 Samples"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+output_dir: "To Be Reviewed/PDF"
+---
+
+\newpage
+
+##Run Information 
+```{r run information, include=TRUE}
+cat("Run Information:  ") #lets you know what section you're in 
+#set the run date & user name 
+  sample_year <- "2025"
+  sample_month <- "July"
+  user <- "Victoria Ellis"
+
+#identify the files you want to read in 
+  #read in as a list to accommodate multiple runs in a month
+  pH_file <- "Raw Data/1_CO2xN_pH_(July).csv"
+
+# Define the file path for  file - check year and month 
+  final_path <- "Processed Data/GCReW_CO2xN_Porewater_pH_202507.csv"
+
+#record any notes about the run or anything other info here: 
+  run_notes <- ""
+  
+  #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
+
+  cat(run_notes)
+```
+
+##Setup
+```{r setup, include=FALSE}
+
+#let you know which section you are in 
+cat("Setup")
+
+#load/install packages
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+  dplyr,
+  purrr,
+  ggplot2,
+  ggpubr,
+  tidyr,
+  tidyverse,
+  lubridate,
+  tinytex,
+  stringr,
+  writexl,
+  readr,
+  readxl,
+  purrr,
+  tinytex,
+  broom,
+  here)
+
+#Set up file path for metadata 
+  #downloaded metadata csv - downloaded from Google drive as csv for this year
+  #Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
+  #Raw_Metadata = "..GCReW/GCReW_Project_Treatment_Metadata.csv"
+
+  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+  
+
+```
+
+##Read in metadata and create similar sample IDs for matching to samples 
+```{r pull in metadata for later, include=FALSE}
+
+#read in metadata
+
+raw_metadata <- read.csv(Raw_Metadata)
+#clean up columns in metadata file:
+#Pull out only SMARTX Rows
+#Create a Sample_Name column to match the SEAL
+metadata <- raw_metadata %>%
+  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
+  mutate(Month = sample_month) %>%
+  mutate(Year = sample_year) %>%
+  rename(
+    Sample_ID = Sample.ID,
+    Plot_Name = Plot,
+  ) %>%
+  select(-Temp_Treatment)  %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2 & eN",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2 & aN",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2 & eN" ,
+        "aCO2 & aN"
+      )
+    )
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
+
+#Bring in the collection date and any field notes if relevant
+#collection_metadata <- read.csv(Collection_Dates)
+#then we will merge the collection date for SMARTX based on the project and the chambers
+
+```
+
+```{r Import Data, include=FALSE}
+cat("Import Data")
+
+#set file path for data - in run info chunk 
+path <- ("file path")
+
+#Read in Raw Data 
+data_pH <- map(pH_file, read.csv)
+
+# Combining Files
+df_combo <- bind_rows(data_pH)
+
+# Select needed columns & rename 
+df_all <- df_combo %>%
+  mutate(Sample_Name = paste0(Plot, "-",Depth)) %>%
+  mutate(Analysis_rundate = paste0(match(Month, month.name), "/", Day, "/", Year)) %>%
+select(
+         Sample_Name = Sample_Name,
+         pH = pH, 
+         Analysis_rundate = Analysis_rundate,
+       )
+
+#Checking column headers
+head(df)
+
+
+
+
+```
+
+
+## Merge samples with Metadata & check all samples are present 
+```{r check sample ids with metadata, echo=FALSE}
+
+cat("Merge Samples with Metadata")
+
+#check to see if all samples are present in the metadata 
+all_present <- all(metadata$Sample_Name %in% df_all$Sample_Name)
+
+if (all_present) {
+  message("All sample IDs are present in data.")
+} else {
+  message("Some sample IDs are missing from data.")
+  
+  # Optional: Which ones are missing?
+  missing_ids <- setdiff(metadata$Sample_Name, df_all$Sample_Name)
+  print(missing_ids)
+}
+
+
+#merge metadata with sample run data 
+merged_data <- df_all %>%
+  left_join(metadata, by = c("Sample_Name" = "Sample_Name"))
+
+#might want to include a flag or something to see that all the samples are included? 
+
+df_all_clean <- merged_data 
+
+```
+
+\newpage
+
+# Visualize Data
+
+
+```{r Visualize Data, echo=FALSE}
+### Plot Style 2
+pH_forplot <- df_all_clean
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "L10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
+
+pH_forplot <- pH_forplot %>%
+  mutate(Plot_Color = case_when(Plot_Name %in% color1 ~ "Color1",
+                                Plot_Name %in% color2 ~ "Color2",
+                                Plot_Name %in% color3 ~ "Color3",
+                                Plot_Name %in% color4 ~ "Color4",
+                                Plot_Name %in% color5 ~ "Color5"))
+
+#need to work out how best to plot these data
+
+viz_pH_plot2 <- ggplot(data = pH_forplot, aes(
+  x = as.factor(CO2_Treatment),
+  y = pH,
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
+)) +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(padding = 0.25,preserve = "single")
+  ) +
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    
+  ) +
+  scale_color_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+  ) +
+  theme_classic() +
+  labs(x = " ",
+       y = "pH",
+       title = "CO2xN: Porewater Methane (Alternate View)"
+       ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  ) +
+coord_flip(ylim = c(5.8,6.8))
+print(viz_pH_plot2)
+
+
+```
+
+```{r, echo=FALSE}
+#ensure points are in correct order
+
+pH_forplot <- pH_forplot[order(pH_forplot$Depth_cm), ]
+
+#make plot
+viz_pH_plot_2 <- ggplot(data = pH_forplot, aes(x = pH, y = as.numeric(Depth_cm), color = Plot_Color)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
+    ),
+    labels = c("1", "2", "3", "4", "5")
+  ) +
+  facet_grid(Treatment ~ ., scales = "fixed") +
+  labs(
+    x = "pH",
+    y = "Depth (cm)",
+    title = "CO2xN: Porewater pH by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_pH_plot_2
+```
+
+
+## Export Processed Data  
+```{r, echo=FALSE}
+#check results
+#head(Samples)
+
+#pull out what we need
+
+df_all_clean_cols <- df_all_clean %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot_Name,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    pH,
+    Analysis_rundate
+  )
+
+final_data_labeled <- df_all_clean_cols %>%
+  mutate(
+    Run_notes = run_notes,# new column with notes about the run
+  )
+
+#rename columns
+org_labeled_fin_data <- final_data_labeled %>%
+  rename(
+    Plot = Plot_Name
+  )
+
+#Order Columns for Final Data Frame
+All_Clean_Data <- org_labeled_fin_data %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    pH,
+    Analysis_rundate,
+    Run_notes
+  )
+#head(Samples1)
+
+write.csv(All_Clean_Data, final_path)
+
+```

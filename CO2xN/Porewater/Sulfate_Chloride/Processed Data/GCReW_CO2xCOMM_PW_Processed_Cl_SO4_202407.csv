@@ -1,0 +1,101 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC1","20","Elevated",NA,10.8752464129757,"Within_Range","",132.885616361072,"Within_Range","",8.5124327457,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"2","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC1","40","Elevated",NA,8.28987211478478,"Within_Range","",156.89565303244,"Within_Range","",10.0504712763,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"3","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC1","80","Elevated",NA,1.28352464129757,"Within_Range","",128.353523272214,"Within_Range","",8.2221152468,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"4","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC2","20","Ambient",NA,14.4298253275109,"Within_Range","",150.103069111425,"Within_Range","",9.6153509166,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"5","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC2","40","Ambient",NA,13.0466219588272,"Within_Range","",164.505923836389,"Within_Range","",10.537971145,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"6","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC2","80","Ambient",NA,6.53052713661884,"Within_Range","",143.816753173484,"Within_Range","",9.2126611473,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"7","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC4","20","Ambient",NA,11.5475265127885,"Within_Range","",105.871193229901,"Within_Range","",6.7819387766,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"8","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC4","40","Ambient",NA,15.2207018091079,"Within_Range","",125.921822284908,"Within_Range","",8.0663449802,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"9","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC4","80","Ambient",NA,8.16441359950094,"Within_Range","",139.465503526093,"Within_Range","",8.9339281447,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"10","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC6","20","Elevated",NA,4.07491578290705,"Within_Range","",150.572834978843,"Within_Range","",9.645443249,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"11","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC6","40","Elevated",NA,10.2763849033063,"Within_Range","",174.162555712271,"Within_Range","",11.1565571182,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"12","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC6","80","Elevated",NA,0.714132875857767,"Within_Range","",146.78189280677,"Within_Range","",9.4026025067,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"13","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC8","20","Ambient",NA,16.0538459139114,"Within_Range","",148.265424541608,"Within_Range","",9.4976348051,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"14","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC8","40","Ambient",NA,13.5501871490954,"Within_Range","",184.215382228491,"Within_Range","",11.8005225871,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"15","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC8","80","Ambient",NA,5.45558328134747,"Within_Range","",150.686400564175,"Within_Range","",9.6527180503,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"16","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC9","20","Elevated",NA,1.57321584529008,"Within_Range","",138.487641748942,"Within_Range","",8.8712881283,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"17","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC9","40","Elevated",NA,2.54441048034934,"Within_Range","",135.418516220028,"Within_Range","",8.6746856248,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"18","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC9","80","Elevated",NA,0.705583281347473,"Within_Range","",123.201830747532,"Within_Range","",7.8921073543,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"19","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC10","20","Elevated",NA,13.1799656893325,"Within_Range","",128.638084626234,"Within_Range","",8.2403437207,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"20","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC10","40","Elevated",NA,15.363933250156,"Within_Range","",150.509102961918,"Within_Range","",9.6413606939,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"21","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC10","80","Elevated",NA,14.3196475358702,"Within_Range","",158.925954866008,"Within_Range","",10.1805286557,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"22","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC12","20","Ambient",NA,17.7211260137243,"Within_Range","",140.384722143865,"Within_Range","",8.9928115888,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"23","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC12","40","Ambient",NA,22.7169151590767,"Within_Range","",157.675830747532,"Within_Range","",10.1004480174,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"24","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC12","80","Ambient",NA,14.6075920149719,"Within_Range","",145.469108603667,"Within_Range","",9.3185079793,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"25","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC14","20","Elevated",NA,12.4079164067374,"Within_Range","",156.386363892807,"Within_Range","",10.0178471562,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"26","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC14","40","Elevated",NA,18.9434684965689,"Within_Range","",177.229289139633,"Within_Range","",11.3530063881,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"27","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC14","80","Elevated",NA,13.240015595758,"Within_Range","",152.167334273625,"Within_Range","",9.747583924,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"28","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC15","20","Ambient",NA,14.2147535870243,"Within_Range","",144.863486600846,"Within_Range","",9.2797129542,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"29","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC15","40","Ambient",NA,22.929398003743,"Within_Range","",178.839303244006,"Within_Range","",11.4561409131,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"30","GCReW","CO2xCOMM","2024","July","SCAM","1-Meter","SC15","80","Ambient",NA,15.01890205864,"Within_Range","",148.781746121298,"Within_Range","",9.5307094103,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"31","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP1","20","Elevated",NA,14.0750187149095,"Within_Range","",124.33010719323,"Within_Range","",7.9643826561,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"32","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP1","40","Elevated",NA,14.3894603867748,"Within_Range","",151.054820874471,"Within_Range","",9.6763183738,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"33","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP2","20","Ambient",NA,13.0445945102932,"Within_Range","",126.940124118477,"Within_Range","",8.1315755118,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"34","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP2","40","Ambient",NA,6.8712507797879,"Within_Range","",144.184090267983,"Within_Range","",9.236192082,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"35","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP4","20","Elevated",NA,14.9919245165315,"Within_Range","",127.489712270804,"Within_Range","",8.1667811121,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"36","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP4","40","Elevated",NA,15.2305895196507,"Within_Range","",148.01458674189,"Within_Range","",9.4815665997,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"37","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP5","20","Ambient",NA,5.51326263256394,"Within_Range","",133.540866008463,"Within_Range","",8.5544068259,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"38","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP5","40","Ambient",NA,9.06884279475982,"Within_Range","",151.640552891396,"Within_Range","",9.7138392832,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"39","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP8","20","Elevated",NA,9.82990954460387,"Within_Range","",124.850375176305,"Within_Range","",7.9977100606,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"40","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP8","40","Elevated",NA,5.48538053649407,"Within_Range","",143.419672778561,"Within_Range","",9.1872249118,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"41","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP9","20","Ambient",NA,20.537919525889,"Within_Range","",145.544713681241,"Within_Range","",9.3233511007,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"42","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP9","40","Ambient",NA,15.0714691203993,"Within_Range","",133.227870239774,"Within_Range","",8.534356896,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"43","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP10","20","Elevated",NA,7.25993761696818,"Within_Range","",128.432823695346,"Within_Range","",8.2271950852,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"44","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP10","40","Elevated",NA,3.78624142233312,"Within_Range","",147.265850493653,"Within_Range","",9.4336039408,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"45","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP11","20","Ambient",NA,11.5578665003119,"Within_Range","",124.765433004231,"Within_Range","",7.9922688222,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"46","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP11","40","Ambient",NA,13.0491952588896,"Within_Range","",151.646143864598,"Within_Range","",9.7141974306,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"47","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP13","20","Ambient",NA,17.4417061759201,"Within_Range","",147.711444287729,"Within_Range","",9.4621478549,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"48","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP13","40","Ambient",NA,21.4334185901435,"Within_Range","",167.699503526093,"Within_Range","",10.7425459518,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"49","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP14","20","Elevated",NA,5.90878976918278,"Within_Range","",143.824262341326,"Within_Range","",9.2131421707,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
+"50","GCReW","CO2xCOMM","2024","July","SPPA","1-Meter","SP14","40","Elevated",NA,7.20079850280724,"Within_Range","",164.771125528914,"Within_Range","",10.5549594748,"2025-08-28","One spk had slightly high (124%) recovery.  
+  "
