@@ -144,7 +144,7 @@ temp_data <- bind_rows(lapply(temp_tables, function(table) {
 ggplot(temp_data, aes(x = TIMESTAMP, y = as.numeric(Temp), color = Sensor)) +
   geom_line(na.rm = TRUE) +
   facet_wrap(~origin) +
-  labs(title = "BME Temperature Trends", y = "Temperature (°C)", x = "Time") +
+  labs(title = "BME Temperature Trends", y = "Temperature (Â°C)", x = "Time") +
   theme_minimal()
 
 rh_tables <- grep("ChamberBME280", names(chapada_data), value = TRUE)
