@@ -27,7 +27,7 @@ for (file in files){
   
   #filter out any weird time stamps that are marked before 2025 -- note that we want to put it int he proper timezone here as well
   dt <- dt %>%
-    filter(year(TIMESTAMP) > 2024)
+    filter(year(TIMESTAMP) > 2018)
   
   #write it out as a csv file. break into monthly files and handle duplicate timestamps. 
   filename <- substr(basename(file),1,(nchar(basename(file))-4)) #will need to change the number once the renaming functions kick in. 
@@ -37,6 +37,7 @@ for (file in files){
   file.rename(file, paste0(rawDataArchive_dir, basename(file)))
   
 }
+
 
 
 
