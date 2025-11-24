@@ -1,0 +1,165 @@
+---
+title: "Chapada Checks"
+author: "TE Technicians"
+date: "`r Sys.Date()`"
+output: html_document
+---
+<style>
+.vscroll-plot {
+    width: 1000px;
+    height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+</style>
+```{r setup, include=FALSE}
+library(tidyverse)
+library(data.table)
+library(lubridate)
+library(ggpubr)
+library(gghighlight)
+library(kableExtra)
+library(ggrepel)
+
+library(knitr)
+library(utils)
+library(pacman)
+
+```
+
+``` {r set knitr options,include = F}
+options(width = 150)
+local({
+  hook_output <- knitr::knit_hooks$get('output')
+  knitr::knit_hooks$set(output = function(x, options) {
+    if (!is.null(options$max.height)) options$attr.output <- c(
+      options$attr.output,
+      sprintf('style="max-height: %s;"', options$max.height, options$max.width)
+    )
+    hook_output(x, options)
+  })
+})
+```
+
+``` {r load data, echo = F}
+#set wd
+wd =  "C:/Users/LaGorgaL.S/Documents/Chapata_Stem/daily_checks/"
+#read in files from dropbox
+dbfold <- "C:/Campbellsci/LoggerNet/CHAPADA_Loggerfiles/"
+files <- list.files(dbfold, pattern = "*.dat", full.names = TRUE)
+names(files) <- gsub(".dat", "", basename(files))
+
+#read into list to stay organized, format head function
+chapada_data <- lapply(files, function(file) {
+ data <- fread(file,skip=1, header = TRUE)[-c(1,2)]
+  return(data)
+})
+names(chapada_data) <- names(files)
+
+#convert timestamps
+chapada_data <- lapply(chapada_data, function(df) {
+  df$TIMESTAMP <- as.POSIXct(df$TIMESTAMP, format = "%Y-%m-%d %H:%M:%S")
+  df<- df %>% filter(TIMESTAMP>=format(Sys.time()-2419200,"%Y-%m-%d %H:%M:%S"))
+  return(df)
+})
+```
+Check the Battery Voltage! 
+12-14V is ideal. If you notice that the battery voltage is drifting, it may be time to change the battery. 
+
+```{r batteries babyyyy, echo=F}
+#aggregate and make long battery table for plotting
+battery_tables <- grep("CheckTable|ChamberBME280|Redox15|Teros12Table", names(chapada_data), value = TRUE)
+batt_plot_data <- bind_rows(lapply(battery_tables, function(table) {
+  df <- chapada_data[[table]]
+  df %>% select(TIMESTAMP, BattV = matches("BattV|BattV_Min|BattV_Avg")) %>%
+    mutate(origin = table)
+}))
+
+ggplot(batt_plot_data, aes(x = TIMESTAMP, y = as.numeric(BattV), color = origin))+
+  geom_line(na.rm = TRUE) +
+  labs(title = "Battery Voltage Across Tables", y = "Voltage (V)", x = "Time") +
+  theme_minimal()
+```
+Check that the Ringdown Times on Both Licor Are Not Changing!
+The plot below shows this months's record of the ringdown times for both licor. Make sure that you are not seeing any long-term drift of the ringdown times.
+
+```{r flux deluxe!, echo=F}
+flux_tables <- grep("FLUX_7810", names(chapada_data), value = TRUE)
+
+ringdown_data <- bind_rows(lapply(flux_tables, function(table){
+  df <- chapada_data[[table]]
+  df %>% select(TIMESTAMP, ringdown = matches("ringdown")) %>%
+    mutate(origin = table)
+  }))
+
+ggplot(ringdown_data, aes(x = TIMESTAMP, y = as.numeric(ringdown), color = origin)) +
+  geom_line(na.rm = TRUE) +
+  labs(title = "Ringdown Time by Instrument", y = "Ringdown", x = "Time") +
+  theme_minimal()
+
+flux_comb_tables <- grep("FLUX_COMB", names(chapada_data), value = TRUE)
+
+flux_data <- bind_rows(lapply(flux_comb_tables, function(table) {
+  df <- chapada_data[[table]]
+  df %>% select(TIMESTAMP, Fluxing_Chamber, Flux_Status, Manifold_Timer, H2O, CO2, CH4) %>%
+    mutate(origin = table)
+}))
+
+ggplot(flux_data, aes(x = TIMESTAMP, y = as.numeric(CO2), color = as.factor(Fluxing_Chamber))) +
+  geom_line(na.rm = TRUE) +
+  facet_wrap(~origin) +
+  labs(title = "CO2 Concentration by Chamber", y = "CO2 ppm", x = "Time") +
+  theme_minimal()
+```
+Record of Flux Slopes and R2 Values During Flux Flag 2
+```{r flux flag 2, echo=F}
+#flux slopes in table form
+df <- chapada_data[["Chapada_High_FLUX_COMB"]]
+df <- df %>% filter(Flux_Status == 2, Manifold_Timer >= 180 & Manifold_Timer <= 540)
+
+lm_results <- df %>%
+  group_by(Fluxing_Chamber) %>%
+  summarise(
+    CO2_slope = coef(lm(as.numeric(CO2) ~ as.numeric(TIMESTAMP)))[2],
+    CO2_r2 = summary(lm(as.numeric(CO2) ~ as.numeric(TIMESTAMP)))$r.squared,
+    CH4_slope = coef(lm(as.numeric(CH4) ~ as.numeric(TIMESTAMP)))[2],
+    CH4_r2 = summary(lm(as.numeric(CH4) ~ as.numeric(TIMESTAMP)))$r.squared
+  )
+
+kable(lm_results, caption = "Flux Slopes and R^2 by Chamber") %>%
+  kable_styling()
+```
+Check out BME performance in each chamber:
+```{r high fives for hives!, echo=F}
+temp_tables <- grep("ChamberBME280", names(chapada_data), value = TRUE)
+
+temp_data <- bind_rows(lapply(temp_tables, function(table) {
+  df <- chapada_data[[table]]
+  df %>% select(TIMESTAMP, matches("Temp")) %>%
+    pivot_longer(cols = -TIMESTAMP, names_to = "Sensor", values_to = "Temp") %>%
+     filter(TIMESTAMP>as.POSIXct("2025-09-22 23:00:00"))%>%
+    mutate(origin = table)
+}))
+
+ggplot(temp_data, aes(x = TIMESTAMP, y = as.numeric(Temp), color = Sensor)) +
+  geom_line(na.rm = TRUE) +
+  facet_wrap(~origin) +
+  labs(title = "BME Temperature Trends", y = "Temperature (°C)", x = "Time") +
+  theme_minimal()
+
+rh_tables <- grep("ChamberBME280", names(chapada_data), value = TRUE)
+
+rh_data <- bind_rows(lapply(rh_tables, function(table) {
+  df <- chapada_data[[table]]
+  df %>% select(TIMESTAMP, matches("RH")) %>%
+    pivot_longer(cols = -TIMESTAMP, names_to = "Sensor", values_to = "RH") %>%
+    mutate(origin = table)
+}))
+
+ggplot(rh_data, aes(x = TIMESTAMP, y = as.numeric(RH), color = Sensor)) +
+  geom_line(na.rm = TRUE) +
+  facet_wrap(~origin) +
+  labs(title = "BME Relative Humidity Trends", y = "RH (%)", x = "Time") +
+  ylim(y=0, 100)+
+  theme_minimal()
+```
