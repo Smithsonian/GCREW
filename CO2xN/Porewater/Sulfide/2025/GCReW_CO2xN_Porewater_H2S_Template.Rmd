@@ -1,5 +1,6 @@
 ---
-title: "Microplate_Sulfide_Code"
+title: "CO2xN: Porewater Sulfide"
+author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -34,37 +35,44 @@ library(readxl)
 ```{r Information to be changed}
 
 ###things that need to be changed
-Date_Run = "20250808"
-plates<- c("Plate1","Plate2","Plate3","Plate4","STD2")
-file_name<-"Experiment4_allplates"
+Date_Run = "20250527"
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate_rr")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Melanie Giessner"#Code user
-Project = "GENX2"
-Experiment="Experiment 3"
 
-Run_notes="Plate 3 had high R2; majority of spikes were too low;Plate 1 Std curve used for all plates"#any notes from run
+Run_notes=""#any notes from run
+
+#Import Plate Data
+Raw_plates <- c("Raw Data/20250527_LTREB_H2S_Plate1.csv","Raw Data/20250527_LTREB_H2S_Plate2.csv","Raw Data/20250527_LTREB_H2S_Plate3.csv","Raw Data/20250527_LTREB_H2S_Plate4.csv","Raw Data/20250527_LTREB_H2S_Plate5.csv","Raw Data/20250527_LTREB_H2S_Plate6.csv","Raw Data/20250527_LTREB_H2S_Plate7.csv","Raw Data/20250602_H2S_LTREBrr.csv")
+
+
+# Define the file path for QAQC log file - NO Need to change just check year
+log_path <- "Processed Data/LTREB_2M_H2S_QAQC_2025.csv"
+
+# Define final path for data be sure to change year and month and run number
+final_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202505.csv"
 
 #Stds that should be excluded
-stds_to_remove<-data.frame(Plate=c("Plate4","STD2"),IDs=c("Std 4","Std 3"))
+#stds_to_remove<-data.frame(Plate=c("Plate4","STD2"),IDs=c("Std 4","Std 3"))
 
 
 ```
 
 
 ```{r, echo=FALSE}
-#read in all the Tidy data files
-folder_path_tidydata <- paste0("2025/",Experiment,"/Tidy Data")
-file_paths_tidydata <- list.files(path = folder_path_tidydata, full.names = TRUE)
-head(file_paths_tidydata)
+
 
 #file path name for processed data
 summarizeddata_path=paste0("2025/",Experiment,"/QAQC'd Data/GENX2_H2S_",Date_Run,"_",file_name,"_Summary_Data.csv")
+
 fulldata_path=paste0("2025/",Experiment,"/QAQC'd Data/GENX2_H2S_",Date_Run,"_",file_name,"_Data.csv")
+
 shortdata_path=paste0("2025/",Experiment,"/QAQC'd Data/GENX2_H2S_",Date_Run,"_",file_name,"_short_Data.csv")
+
 Need_dilute=paste0("2025/",Experiment,"/QAQC'd Data/GENX2_H2S_",Date_Run,"_",file_name,"_Need_dilute_Data.csv")
+
 high_CV=paste0("2025/",Experiment,"/QAQC'd Data/GENX2_H2S_",Date_Run,"_",file_name,"_high_CV_Data.csv")
-#QAQC log path
-log_path="S:/GlobalChangeEco/porewater_r scripts & Data/BGC_GCE_PorewaterAnalysis/Sulfide/Sulfide_STD_QAQC.csv"
+
 
 ```
 
@@ -84,7 +92,8 @@ log_path="S:/GlobalChangeEco/porewater_r scripts & Data/BGC_GCE_PorewaterAnalysi
 # standard units are in uM
   standards <- tibble(
     IDs = c("Std 0", "Std 1", "Std 2", "Std 3", "Std 4", "Std 5"),
-    Conc = c(0, 5.0, 12.5, 25.0, 50.0, 100.0))  #uM
+    Conc = c(0, 5.0, 12.5, 25.0, 50.0, 100.0)
+  )  #uM
 
 #Spike concentration calc
   #spike for these samples was 50 uL of the 100uM standard
@@ -105,7 +114,7 @@ log_path="S:/GlobalChangeEco/porewater_r scripts & Data/BGC_GCE_PorewaterAnalysi
 
 #read in the csv files
 dat<-read_plates(
-  files = file_paths_tidydata,#list of all file paths
+  files = Raw_plates,#list of all file paths
   plate_names = plates ,  #list of plate names          
   well_ids_column = "Wells",    # name to give column of well IDs (optional)
   sep = ","                     # separator used in the csv file (optional)
@@ -117,102 +126,48 @@ head(dat)
   
 ```
 
+#Remove High CV Stds
+```{r}
 
-#Standards
+#filter for STDs
+H2S_stds_raw <- dat %>% subset(IDs %like% "Std") %>% subset(!IDs %like% "Chk")
 
-```{r first look at Stds,echo=FALSE,fig.keep='none',include=FALSE}
-#subset by H2s Stds
-H2S_stds_all <- dat %>% subset(IDs %like% "Std"|IDs %like% "MC") 
-head(H2S_stds_all)
+#Add in STD values
+H2S_stds <- left_join(H2S_stds_raw, standards, by = "IDs")
 
-H2S_stds_all <- left_join(H2S_stds_all, standards, by = "IDs")
+#Calculate CVs
+H2S_STD_cv <- H2S_stds %>% group_by(Plate, IDs) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Abs_SD = sd(Abs)) %>% mutate(CV = (Abs_SD/Mean_Abs)*100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
-##Plot stds and calculate the slope, intercept, and R2
-H2S_stds <- na.omit(H2S_stds_all)
-H2S <- ggplot(H2S_stds, aes(Conc, Abs)) + geom_point() + geom_smooth(method = "lm", se = FALSE)+
-  ggtitle("Sulfide Standard Curve")
+H2S_STD_cv_cor <- H2S_STD_cv %>% mutate(Mean_diff = abs(Abs - Mean_Abs)) %>% group_by(Plate, IDs) %>% mutate(Abs_rm = ifelse(CV_Flag == "CV_High",  ifelse(max(Mean_diff) == Mean_diff, NA, Abs), Abs))
 
-H2S
+H2S_STD_cv_new <- H2S_STD_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Abs2 = mean(Abs_rm, na.rm = TRUE)) %>% mutate(Abs_SD2 = sd(Abs_rm, na.rm = TRUE)) %>% mutate(CV2 = (Abs_SD2/Mean_Abs2)*100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Abs_rm == "NA", "RMVD","KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
+
+H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate, Wells, Abs, Removed, IDs, Dilution, Conc, Mean_Abs2, CV_Flag2) %>% mutate(Mean_Abs = Mean_Abs2, CV_Flag = CV_Flag2) %>% dplyr::select(Plate, Wells, Abs, Removed, IDs, Dilution, Conc, Mean_Abs, CV_Flag)
+
+
 ```
 
 
-```{r Remove high cv stds,echo=FALSE,fig.keep='none',include=FALSE}
-
-H2S_stds_all_fixed<-H2S_stds_all
-#make a data frame for the averages 
-H2S_stds1_all <- -data.frame(matrix(ncol = 8, nrow =0 ))
-colnames(H2S_stds1_all)<-c("IDs", "H2S_mean_Abs", "H2S_sd", "H2S_cv", "Plate","Dilution",  "Conc", "H2S_cv_flag")
-#make dataframe for fixed data
-H2S_stds_HCV_fixed<-data.frame(matrix(ncol = 8, nrow =0 ))
-colnames(H2S_stds_HCV_fixed)<-c("IDs", "H2S_mean_Abs", "H2S_sd", "H2S_cv", "Plate","Dilution",  "Conc", "H2S_cv_flag")
-
-
-#make a loop for each plate 
-for(y in 1:length(plates)){
-# make a new dataframe for the high cv points for each plate
-  H2S_stds_HCV_fixed<-data.frame(matrix(ncol = 8, nrow =0 ))
-  colnames(H2S_stds_HCV_fixed)<-c("IDs", "H2S_mean_Abs", "H2S_sd", "H2S_cv", "Plate","Dilution",  "Conc", "H2S_cv_flag")
+#Check R2
+```{r}
+split_data <- H2S_STD_CV_fin %>% dplyr::select(Plate, IDs, Conc, Mean_Abs, CV_Flag) %>%
+      distinct() %>%
+      group_by(Plate) %>%
+      group_split()
   
-  #filter each plate    
-  std_plate<- H2S_stds_all %>% subset(Plate == plates[y])
-  
-  #Calculate cv for STDs
-  std_plate1 <- std_plate %>%
-    group_by(IDs) %>%
-    summarise(H2S_mean_Abs = mean(Abs), H2S_sd = sd(Abs), H2S_cv = cv(Abs),
-              Plate=first(Plate),
-              Dilution = first(Dilution), 
-              Conc = first(Conc))
-  #Flag high cvs
-  std_plate1$H2S_cv_flag <- ifelse(std_plate1$H2S_cv > cv_flag_stds, 'High CV', 'Within range')
-  
-  #add each plate to std average dataframe
-  H2S_stds1_all<-rbind(H2S_stds1_all,std_plate1)
-  # filter High CV Samples
-  H2S_stds1_all_HCV <- std_plate1 %>%  
-    filter(str_detect(H2S_cv_flag, "High CV"))
-  #this will keep the loop from breaking if there are no high cv points
-  if(!nrow(H2S_stds1_all_HCV)==0){  
-    
-    #make a loop to filter each high cv sample
-    for(x in 1:nrow(H2S_stds1_all_HCV)){
-      sing_ID<- std_plate %>% subset(IDs == H2S_stds1_all_HCV$IDs[x])
-      #make a dataframe for cvs
-      cv_trial<-data.frame(matrix(ncol = 3, nrow =1 ))
-      
-      #make a loop to find the cv for each deleted point
-      for(i in 1:nrow(sing_ID)){
-        sing_ID1<-sing_ID[-i,] 
-        cv_trial[i]<-cv(sing_ID1$Abs)
-      }
-      
-      # delete the point that gives the lowest cv
-      sing_ID<-sing_ID[-which.min(cv_trial),]
-        H2S_stds_HCV_fixed<-rbind(H2S_stds_HCV_fixed,sing_ID)
-    }
-  #recalculate the average and cv  
-  H2S_stds1_all_fixed <- H2S_stds_HCV_fixed %>%
-      group_by(IDs) %>%
-      summarise(H2S_mean_Abs = mean(Abs), H2S_sd = sd(Abs), H2S_cv = cv(Abs),
-                Plate=first(Plate),
-                Dilution = first(Dilution), 
-                Conc = first(Conc))
-  #Flag high cvs
-  H2S_stds1_all_fixed$H2S_cv_flag <- ifelse(H2S_stds1_all_fixed$H2S_cv > cv_flag_stds, 'High CV', 'Within range')
-  #bind fixed dataframes back together with non high cv points
-  #averaged stds
-  H2S_stds1_all <- subset(H2S_stds1_all, (!(IDs %in% H2S_stds1_all_fixed$IDs & Plate %in% H2S_stds1_all_fixed$Plate)))
-  H2S_stds1_all <- rbind(H2S_stds1_all_fixed, H2S_stds1_all) 
-  #all points  
-  H2S_stds_all_fixed <- subset(H2S_stds_all_fixed, (!(IDs %in% H2S_stds_HCV_fixed$IDs & Plate %in% H2S_stds_HCV_fixed$Plate)))
-  H2S_stds_all_fixed <- rbind(H2S_stds_HCV_fixed, H2S_stds_all_fixed) 
- }}
+#run regression and get coefficients by Run
+ 
+Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
+                                        R2 = summary(lm(Conc ~ Mean_Abs, data = .))$adj.r.squared , 
+                                        Slope = coef(lm(Conc ~ Mean_Abs, data = .))[2],
+                                        Intercept = coef(lm(Conc ~ Mean_Abs, data = .))[1]))
 
-# filter High CV Stds
-stds_HCV <- H2S_stds1_all %>%  
-  filter(str_detect(H2S_cv_flag, "High CV")) 
-head(stds_HCV)
+ Slope_H2S_raw <- bind_rows(Slope_H2S_raw_list)
+  
+ Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select(Plate, Curve, R2, Slope, Intercept) %>% distinct() %>%
+
 ```
+
 
 
 ```{r Plot all Standard Curves together, echo=FALSE,message=FALSE,fig.keep='none'}
