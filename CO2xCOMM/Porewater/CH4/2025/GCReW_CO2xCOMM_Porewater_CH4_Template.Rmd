@@ -1,7 +1,7 @@
 ---
 title: "CO2xCOMM: Porewater Methane"
 author: "Month Year Samples"
-date: "Name"
+date: "`r Sys.Date()`"
 output:  
   pdf_document:
     toc: true
