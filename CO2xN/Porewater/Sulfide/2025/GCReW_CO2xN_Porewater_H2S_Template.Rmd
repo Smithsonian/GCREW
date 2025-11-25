@@ -155,7 +155,7 @@ H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate,
                                                    CV_Flag2) %>% 
   mutate(Mean_Abs = Mean_Abs2, CV_Flag = CV_Flag2) %>% 
                                   dplyr::select(Plate, 
-                                                Wells,                                                                              Abs,
+                                                Wells,                                                                                                                Abs,
                                                 Removed,
                                                 IDs,
                                                 Dilution,
@@ -212,8 +212,23 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
  
  R2_Check_bind <- rbind(R2_Check_na,R2_Check_NRMVBL) %>% na.omit()
  
- R2_Check_fin <- R2_Check_bind %>% group_by(Plate) %>% 
-   mutate(STD_ABS_rmv = ifelse(length(STD_ABS_rm) == 6, ifelse(CV_Flag == "CV_High", NA, STD_ABS_rm), STD_ABS_rm)) %>% ungroup()
+ R2_Check_bind <- R2_Check_bind[order(R2_Check_bind$Plate,R2_Check_bind$IDs), ]
+ 
+ R2_Check_fin <- R2_Check_bind %>% group_by(Plate) %>% mutate(N_stds = length(STD_ABS_rm)) %>% group_by(Plate, CV_Flag) %>%
+   mutate(N_HCV = n()) %>% ungroup() %>% group_by(Plate) %>%
+   mutate(STD_ABS_rmv = ifelse(
+     N_stds == 6,
+     ifelse(
+       CV_Flag == "CV_High" ,
+       ifelse(
+         N_HCV == 1 ,
+         NA,
+         ifelse(max(Conc_Diff) == Conc_Diff, NA, STD_ABS_rm)
+       ),
+       STD_ABS_rm
+     ),
+     STD_ABS_rm
+   ))
  
  
  
