@@ -1,0 +1,173 @@
+---
+title: "combine_datafiles"
+author: "giessnerm"
+date: '2024-06-11'
+output: html_document
+---
+
+#info
+
+```{r}
+#packages
+library(ggplot2)
+library(dplyr)
+library(data.table)
+library(matrixStats)
+library(gridExtra)
+library(ggpubr)
+library(grid)
+library(stringr)
+library(plater)
+library(raster)
+library(tidyverse)
+```
+#create function for reading in data
+```{r}
+read_data<- function(data){
+  read_csv(
+  file = data, show_col_types = FALSE            # full path to the .csv file            # separator used in the csv file (optional)
+) 
+}
+```
+#list file paths 
+```{r}
+#summaries file paths
+plate1_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate1_Summary_Data.csv"
+plate2_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate2_Summary_Data.csv"
+plate3_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate3_Summary_Data.csv"
+plate4_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate4_Summary_Data.csv"
+plate5_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate5_Summary_Data.csv"
+plate6_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate6_Summary_Data.csv"
+plate7_path_sum<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250919_Plate7_Summary_Data.csv"
+
+
+file_path_sums<-c(plate1_path_sum,plate2_path_sum,plate3_path_sum,plate4_path_sum,plate5_path_sum,plate6_path_sum,plate7_path_sum)
+
+#full data file paths
+plate1_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate1_Data.csv"
+plate2_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate2_Data.csv"
+plate3_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate3_Data.csv"
+plate4_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate4_Data.csv"
+plate5_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate5_Data.csv"
+plate6_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250918_Plate6_Data.csv"
+plate7_path_dat<-"S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_20250919_Plate7_Data.csv"
+
+
+file_path_dats<-c(plate1_path_dat,plate2_path_dat,plate3_path_dat,plate4_path_dat,plate5_path_dat,plate6_path_dat,plate7_path_dat)
+
+```
+#read in file paths
+```{r}
+#read in plates and delete the first column
+Summary<- file_path_sums %>% 
+  map_df(read_data)
+Summary<-Summary[,-(1)]
+
+Dat<- file_path_dats %>% 
+  map_df(read_data)
+Dat<-Dat[,-(1)]
+
+#create a condensed version of the full data by deleting some columns
+Short <- Dat[,-(1:2)]
+Short <- Short[,-(2:4)]
+```
+
+
+```{r}
+#filter the high CV data in to one table
+HighCV<-filter(Summary ,H2S_cv_flag=="High CV")
+
+#filter out the samples that need to be run at a higher dilution
+ADL<-filter(Summary ,H2S_flag=="adl")
+#remove the samples that have already been run at a higher dilution 
+ww<-subset(Summary ,(IDs %in% ADL$IDs))
+ww<-filter(ww,H2S_flag=="Within_Range") 
+ADL<-ADL %>% 
+  subset((!IDs %in% ww$IDs)) %>% 
+  subset((!IDs %like% " Dup")) %>% 
+  subset((!IDs %like% " Spike"))
+#filter out the samples that need to be run at a lower dilution
+BDL<-filter(Summary ,H2S_flag=="bdl"& Dilution!=1)
+#remove the samples that have already been run at a higher dilution 
+ww<-subset(Summary ,(IDs %in% BDL$IDs))
+ww<-filter(ww,H2S_flag=="Within_Range") 
+BDL<-BDL %>% 
+  subset((!IDs %in% ww$IDs)) %>% 
+  subset((!IDs %like% " Dup")) %>% 
+  subset((!IDs %like% " Spike"))
+
+head(Summary)
+head(Dat)
+head(Short)
+print(HighCV)
+print(ADL)
+print(BDL)
+```
+#Graph the data
+
+```{r}
+depth20<-Summary %>%
+  filter(grepl("20", IDs))%>% 
+  mutate(depth="20")
+depth40<-Summary %>%
+  filter(grepl("40", IDs))%>% 
+  mutate(depth="40")
+depth80<-Summary %>%
+  filter(grepl("80", IDs))%>% 
+  mutate(depth="80")
+Summary1 <-rbind(depth20,depth40,depth80) %>% 
+  filter(!grepl("Spike", IDs))%>% 
+  filter(!grepl("Dup", IDs)) 
+
+twometer<-Summary1  %>% 
+  filter(grepl("L", IDs))
+onemeter<-Summary1  %>% 
+  filter(grepl("s", IDs))
+Phrag1<-Summary1  %>% 
+  filter(grepl("P", IDs))
+
+CO2xN <- ggplot(twometer, aes(x=IDs, y=H2S_mean,color=depth))+ 
+  geom_point(size=4) +
+  theme_classic()  + 
+  labs(y="Sulfide (uM)", x="Sample ID",title="September CO2xN") + 
+  guides(x = guide_axis(angle = 70))
+CO2xN
+ggsave("S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/September_2meter_Graph.png")
+
+CO2xCommunity <- ggplot(onemeter, aes(x=IDs, y=H2S_mean,color=depth))+ 
+  geom_point(size=4) +
+  theme_classic()  + 
+  labs(y="Sulfide (uM)", x="Sample ID",title="September CO2xCommunity") + 
+  guides(x = guide_axis(angle = 70))
+CO2xCommunity
+
+
+Phrag <- ggplot(Phrag1, aes(x=IDs, y=H2S_mean,color=depth))+ 
+  geom_point(size=4) +
+  theme_classic()  + 
+  labs(y="Sulfide (uM)", x="Sample ID",title="September Phragmites") + 
+  guides(x = guide_axis(angle = 70))
+Phrag
+ggsave("S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/September_phrag_Graph.png")
+```
+#Export Data
+
+```{r}
+# export data
+write.csv(Summary, file="S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_September2025_plate1-7_Summary_Data.csv")
+
+write.csv(HighCV, file="S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_September2025_plate1-7_HighCV.csv")
+
+write.csv(Dat, file="S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_September2025_plate1-7_FullData.csv")
+
+write.csv(Short, file="S:/GlobalChangeEco/Porewater_R scripts & Data/Data/Sulfide Microplate/LTREB/2025 September Porewater/QAQC'd Data/LTREB_H2S_September2025_plate1-7_ShortData.csv")
+
+
+```
+
+
+
+
+
+
+
