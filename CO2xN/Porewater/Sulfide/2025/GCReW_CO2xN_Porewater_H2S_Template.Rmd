@@ -266,10 +266,10 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
 #Remove check standards which have NAs in the Conc column
 
 
-CH4_Curve <- ggplot(Slope_H2S_raw_rm, aes(STD_ABS_rmv, Conc, color = Plate)) + geom_point(size =
+H2S_Curve <- ggplot(Slope_H2S_raw_rm, aes(STD_ABS_rmv, Conc, color = Plate)) + geom_point(size =
                                                                           4) +
   geom_smooth(method = "lm", se = FALSE) + labs(title = "H2S Standard Curves", x = "Absorbance", y = "Concentration (uM)")
-CH4_Curve
+H2S_Curve
 
 
 STD_run_date <- left_join(Run_dates, Slope_H2S_Std_Crvs_rm )
@@ -293,6 +293,9 @@ log <- rbind(log, new_log_stds)
 unique_log <- log %>% distinct(.keep_all = TRUE)
 
 Slopes_chk <- ggplot(unique_log, aes(x = Run_Date, y = Slope, col = Plate)) +
+    ylim(50,175) +
+  geom_abline(intercept = 60, slope = 0 )+
+    geom_abline(intercept = 150, slope = 0 )+
   geom_point(size = 4) +
   theme_bw()
 
