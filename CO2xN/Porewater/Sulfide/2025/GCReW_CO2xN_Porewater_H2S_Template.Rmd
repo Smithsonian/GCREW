@@ -36,14 +36,23 @@ library(readxl)
 
 ###things that need to be changed
 Date_Run = "20250527"
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate_rr")
 Run_by = "Melanie Giessner"#Instrument user
-Script_run_by ="Melanie Giessner"#Code user
+Script_run_by ="Brenden Blakley"#Code user
 
 Run_notes=""#any notes from run
 
 #Import Plate Data
+
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate_rr")
+
 Raw_plates <- c("Raw Data/20250527_LTREB_H2S_Plate1.csv","Raw Data/20250527_LTREB_H2S_Plate2.csv","Raw Data/20250527_LTREB_H2S_Plate3.csv","Raw Data/20250527_LTREB_H2S_Plate4.csv","Raw Data/20250527_LTREB_H2S_Plate5.csv","Raw Data/20250527_LTREB_H2S_Plate6.csv","Raw Data/20250527_LTREB_H2S_Plate7.csv","Raw Data/20250602_H2S_LTREBrr.csv")
+
+Run_dates <- tibble(
+    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate_rr"),
+    Run_Date = c("05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","06/02/2025")
+  )
+
+Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
@@ -205,19 +214,15 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
 
  R2_Check_RMVBL <- R2_Check_diff %>% filter(RMVBL == "Yes")
  
- R2_Check_NRMVBL <- R2_Check_diff %>% filter(RMVBL != "Yes") %>% mutate(STD_ABS_rm = Mean_Abs)
+ R2_Check_NRMVBL <- R2_Check_diff %>% filter(RMVBL != "Yes") %>% mutate(STD_ABS_rm = Mean_Abs) %>% mutate(N_HCV = 0, STD_ABS_rmv = STD_ABS_rm, N_stds = 3)
  
  
  R2_Check_na <- R2_Check_RMVBL %>% group_by(Plate) %>% mutate(STD_ABS_rm = ifelse(R2_Flag == "R2_Bad", ifelse(max(Conc_Diff) == Conc_Diff, NA, Mean_Abs), Mean_Abs)) %>% ungroup()
  
- R2_Check_bind <- rbind(R2_Check_na,R2_Check_NRMVBL) %>% na.omit()
- 
- R2_Check_bind <- R2_Check_bind[order(R2_Check_bind$Plate,R2_Check_bind$IDs), ]
- 
- R2_Check_fin <- R2_Check_bind %>% group_by(Plate) %>% mutate(N_stds = length(STD_ABS_rm)) %>% group_by(Plate, CV_Flag) %>%
+ R2_Check_CVrm <- R2_Check_na %>% na.omit() %>% group_by(Plate) %>% mutate(N_stds = length(STD_ABS_rm)) %>% group_by(Plate, CV_Flag) %>%
    mutate(N_HCV = n()) %>% ungroup() %>% group_by(Plate) %>%
    mutate(STD_ABS_rmv = ifelse(
-     N_stds == 6,
+     N_stds == 3,
      ifelse(
        CV_Flag == "CV_High" ,
        ifelse(
@@ -230,21 +235,25 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
      STD_ABS_rm
    ))
  
+  R2_Check_bind <- rbind(R2_Check_NRMVBL,R2_Check_CVrm) %>% na.omit()
+ 
+ R2_Check_fin <- R2_Check_bind[order(R2_Check_bind$Plate,R2_Check_bind$IDs), ]
  
  
- split_data_rm <- R2_Check_fin %>% dplyr::select(Plate, IDs, Conc, STD_ABS_rm, CV_Flag, R2_Flag) %>%
+ 
+ split_data_rmv <- R2_Check_fin %>% dplyr::select(Plate, IDs, Conc, STD_ABS_rmv, CV_Flag, R2_Flag) %>%
       distinct() %>%
       group_by(Plate) %>%
       group_split()
  
- Slope_H2S_raw_list_rm <- map(split_data_rm, ~ .x %>% mutate(Curve = "H2S",
-                                        R2 = summary(lm(Conc ~ STD_ABS_rm, data = .))$adj.r.squared , 
-                                        Slope = coef(lm(Conc ~ STD_ABS_rm, data = .))[2],
-                                        Intercept = coef(lm(Conc ~ STD_ABS_rm, data = .))[1]))
+ Slope_H2S_raw_list_rm <- map(split_data_rmv, ~ .x %>% mutate(Curve = "H2S",
+                                        R2 = summary(lm(Conc ~ STD_ABS_rmv, data = .))$adj.r.squared , 
+                                        Slope = coef(lm(Conc ~ STD_ABS_rmv, data = .))[2],
+                                        Intercept = coef(lm(Conc ~ STD_ABS_rmv, data = .))[1]))
 
  Slope_H2S_raw_rm <- bind_rows(Slope_H2S_raw_list_rm)
   
- Slope_H2S_Std_Crvs_rm <- Slope_H2S_raw_rm %>% dplyr::select(Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
+ Slope_H2S_Std_Crvs_rm <- Slope_H2S_raw_rm %>% dplyr::select(Plate, Curve, R2, Slope, Intercept, CV_Flag) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
  
  
  
@@ -254,175 +263,52 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
 
 ```{r Plot all Standard Curves together, echo=FALSE,message=FALSE,fig.keep='none'}
 ##this is to see if there are any stds or plates that look off
-#Remove check standards which have NAs in the Conc colum
-H2S_stds <- na.omit(H2S_stds_all_fixed)
-H2S_stds1 <- na.omit(H2S_stds1_all)
-head(H2S_stds1)
-
-##Plot stds and calculate the slope, intercept, and R2 
-H2S <- ggplot(H2S_stds, aes(Conc, Abs)) + geom_point() + geom_smooth(method = "lm", se = FALSE)+
-  ggtitle("Sulfide Standard Curve")
-H2S
-```
+#Remove check standards which have NAs in the Conc column
 
 
-```{r R2 of all Standard Curves together, echo=FALSE,message=FALSE,fig.keep='none',include=FALSE}
-H2S_lm <- lm(H2S_stds$Abs ~ H2S_stds$Conc)
-summary(H2S_lm)
-cf <- coef(H2S_lm)
-
-#create data frame with 1 rows and 0 columns
-Slopes <- data.frame(matrix(ncol = 0, nrow = 1))
-Slopes$Curve <- "H2S"
-Slopes$R2 <- summary(H2S_lm)$adj.r.squared
-Slopes$Slope <- cf[2]
-Slopes$Intercept <- cf[1]
-print(Slopes)
-
-```
-
-```{r Plot the Std Curve for each curve,echo=FALSE, message=FALSE, fig.show='hold', fig.keep='last'}
-#make a qaqc flag column
-dat$QAQC_flag<-"" 
-
-#delete stds that are off for each plate
-for(i in 1:nrow(stds_to_remove)){
-H2S_stds<-H2S_stds %>% subset(!(Plate %in% stds_to_remove$Plate[i] & IDs%in%stds_to_remove$IDs[i]))}
-
-#create a graph for each plate's std curves
-curves<-function(plate_names){
-  H2S_stds<- H2S_stds %>% filter(grepl(plate_names,H2S_stds$Plate ))
-#Plot stds and calculate the slope, intercept, and R2 
-H2S <- ggplot(H2S_stds, aes(Conc, Abs)) + geom_point() + geom_smooth(method = "lm", se = FALSE)+ labs(y="Cocentration (uM)", x="Absorbance",title = paste( plate_names,"STD Curve"))
-}
-#apply the function
-lapply(plates,curves)
-
-H2S <- ggplot(H2S_stds, aes(Conc, Abs)) + geom_point() + geom_smooth(method = "lm", se = FALSE)+ labs(y="Cocentration (uM)", x="Absorbance",title = paste("STD Curve"))+facet_wrap(~Plate)+ theme_classic()
-H2S
-
-#make dataframe for the slope and intercept
-qplate <- data.frame(matrix(ncol = 7, nrow = 0))
-#determine the r2 slope and intercept for each plate
-for(i in 1:length(plates)){
-H2S_stds2<-H2S_stds %>% subset(Plate==plates[i])
-H2S_lm <- lm(H2S_stds2$Abs ~ H2S_stds2$Conc)
-summary(H2S_lm)
-cf <- coef(H2S_lm)
-
-#create data frame 
-Date <- Date_Run
-R2 <-summary(H2S_lm)$adj.r.squared
-Slope <- cf[2]
-Intercept <- cf[1]
-Plate<- plates[i]
-qplate1 <- data.frame(Date, Project , R2, Slope, Intercept, Top_STD, Plate, row.names = NULL)
-qplate<-rbind(qplate, qplate1)
-
-}
-head(qplate)
-
-#Was the standard curve ok for each plate? 
-for(i in 1:nrow(qplate)){
-  print(plates[i]) 
-  if (qplate$R2[i] < (r2_cutoff)) {
-    print("Std Curve r2 is below cutoff! - REASSESS")
-  } else {
-    print("Std Curve r2 GOOD")
-  }
-  #writes a flag for plates that have a low R2   
-  dat$QAQC_flag<-if(qplate$R2[i] <= r2_cutoff){
-    ifelse(dat$Plate %in% qplate$Plate[i], ifelse(dat$QAQC_flag != "", paste0(dat$QAQC_flag, "; Std curve r2 low"),"Std curve r2 low"),paste0( dat$QAQC_flag,"") )                   
-  }else{
-    ifelse(dat$QAQC_flag != "", paste0(dat$QAQC_flag, ""),"")
-  } 
-}
-
-#Look a the percent cv for the std curves slopes and intercepts 
-std_curve_cv <- data.frame(IDs=c("Slope","Intercept") ,mean = c(mean(qplate$Slope),mean(qplate$Intercept)) , H2S_sd = c(sd(qplate$Slope),sd(qplate$Intercept)),H2S_cv = c(cv(qplate$Slope),cv(qplate$Intercept)))
-
-head(std_curve_cv)
-
-###Should I print out flag for high cv?
-```
+CH4_Curve <- ggplot(Slope_H2S_raw_rm, aes(STD_ABS_rmv, Conc, color = Plate)) + geom_point(size =
+                                                                          4) +
+  geom_smooth(method = "lm", se = FALSE) + labs(title = "H2S Standard Curves", x = "Absorbance", y = "Concentration (uM)")
+CH4_Curve
 
 
-## Checking STD Data against QAQC file
+STD_run_date <- left_join(Run_dates, Slope_H2S_Std_Crvs_rm )
+new_log_stds <- STD_run_date %>% dplyr::select(Plate,
+   Curve,
+   R2,
+   Slope,
+   Intercept,
+   Run_Date) %>% mutate(R2 = round(R2, digits = 4), Slope = round(Slope, digits = 4), Intercept = round(Intercept, digits = 4), )
 
-```{r,message=FALSE, warning = FALSE, echo=FALSE,fig.keep='none'}
-
-#read in datafile with all the slopes
-qlogO <- read.csv(log_path)
-qlogO <- qlogO[,c(2:8)]
-colnames(qlogO) <- c("Date", "Project", "R2", "Slope", "Intercept", "Top_STD","Plate")
-qlogO$Date<- as.character(qlogO$Date)
-#head(qlogO)
-
-#combine new slopes with log file
-qplate<- anti_join(qplate,qlogO ,by = c("Date", "Project", "R2", "Slope", "Intercept"))
-qlog<-rbind(qplate,qlogO)
-#head(qlog)
-
-##plot the slopes to make sure there are no crazy outliers 
-slope1 <- ggplot(data=qlog, aes(x=Date, y=Slope)) +
-            geom_hline(yintercept= (mean(qlog$Slope)+ (2*sd(qlog$Slope))), linetype="dashed", color = "red", linewidth=2)+
-            geom_hline(yintercept= (mean(qlog$Slope)- (2*sd(qlog$Slope))), linetype="dashed", color = "red", linewidth=2)+
-            geom_point() + 
-            theme_classic() + ylim(0, 0.02) + 
-            theme(legend.position="none") + 
-            ggtitle("Sulfide Slopes")+
-            guides(x = guide_axis(angle = 70)) +
-            geom_point(data = qlog %>% filter(Date %in% qplate$Date & Slope%in%qplate$Slope),color = "orange")
-slope1
+new_log_stds <- as.data.frame(new_log_stds)
 
 
-#Rerun if outside of red lines
 
-##plot the intercepts to make sure there are no crazy outliers 
-int1 <- ggplot(data=qlog, aes(x=Date, y=Intercept)) +
-          geom_hline(yintercept= (mean(qlog$Intercept)+ (2*sd(qlog$Intercept))), linetype="dashed", color = "red", linewidth=2)+
-          geom_hline(yintercept= (mean(qlog$Intercept)- (2*sd(qlog$Intercept))), linetype="dashed", color = "red", linewidth=2)+
-          geom_point() + 
-          theme_classic() + ylim(0.05,0.125) + 
-          theme(legend.position="none")+ 
-          ggtitle("Sulfide Intercepts")+
-          guides(x = guide_axis(angle = 70)) +
-          geom_point(data = qlog %>% filter(Date %in% qplate$Date & Intercept%in%qplate$Intercept),color = "orange")
-int1
+log <- read.csv(log_path)
+log <- log %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
+head(log)
+log <- log[, -c(1)]
+log <- rbind(log, new_log_stds)
 
-#plot the R2s to make sure there are no crazy outliers 
-Rsq1 <- ggplot(data=qlog, aes(x=Date, y=R2)) +
-          geom_hline(yintercept= (0.98), linetype="dashed", color = "red", linewidth=2)+
-          geom_point() + 
-          theme_classic() + ylim(0.96, 1.01) + 
-          theme(legend.position="none")+ 
-          ggtitle("Sulfide R2s")+
-          guides(x = guide_axis(angle = 70))+
-          geom_point(data = qlog %>% filter(Date %in% qplate$Date & R2 %in% qplate$R2),color = "orange")
-Rsq1
+unique_log <- log %>% distinct(.keep_all = TRUE)
 
-#Is the slope and intercept for each plate within 2 standard deviation of the log file?
-for(i in 1:nrow(qplate)){
-  print(plates[i])  
-  
-  if (qplate$Slope[i] > (mean(qlog$Slope)+ (2*sd(qlog$Slope)))| qplate$Slope[i] < (mean(qlog$Slope)- (2*sd(qlog$Slope)))) {
-    print("Std curve slope is 2 sd different from previous slopes! 
-      - REASSESS")
-  } else {
-    print("Std curve slope is with 2 sd of previous slopes")
-  }
+Slopes_chk <- ggplot(unique_log, aes(x = Run_Date, y = Slope, col = Plate)) +
+  geom_point(size = 4) +
+  theme_bw()
 
-  if (qplate$Intercept[i] > (mean(qlog$Intercept)+ (2*sd(qlog$Intercept)))| qplate$Intercept[i] < (mean(qlog$Intercept)- (2*sd(qlog$Intercept)))) {
-    print("Std curve intercept is 2 sd different from previous intercepts! 
-      - REASSESS")
-  } else {
-    print("Std curve intercept is with 2 sd of previous intercepts")
-  }
-}
+Slopes_chk
 
+write.csv(unique_log, log_path)
 
 
 ```
+
+#Return Flags For Standard Curve
+```{r}
+
+```
+
+
 
 ```{r Plot standard graphs, echo = FALSE, warning = FALSE, message = FALSE, fig.width=8, fig.height=12}
 
