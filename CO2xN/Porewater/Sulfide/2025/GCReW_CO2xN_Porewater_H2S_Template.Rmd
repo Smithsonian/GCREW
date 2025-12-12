@@ -55,7 +55,7 @@ plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate
 
 Raw_plates <- c("Raw Data/20250527_LTREB_H2S_Plate1.csv","Raw Data/20250527_LTREB_H2S_Plate2.csv","Raw Data/20250527_LTREB_H2S_Plate3.csv","Raw Data/20250527_LTREB_H2S_Plate4.csv","Raw Data/20250527_LTREB_H2S_Plate5.csv","Raw Data/20250527_LTREB_H2S_Plate6.csv","Raw Data/20250527_LTREB_H2S_Plate7.csv","Raw Data/20250602_H2S_LTREBrr.csv")
 
-#Import Run Date for Each Plate
+#Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
     Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate_rr"),
     Run_Date = c("05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","06/02/2025")
@@ -189,14 +189,17 @@ H2S_stds_raw <- dat %>% subset(IDs %like% "Std") %>% subset(!IDs %like% "Chk")
 #Add in STD values
 H2S_stds <- left_join(H2S_stds_raw, standards, by = "IDs")
 
-#Calculate CVs
+#Calculate CVs and add flags
 H2S_STD_cv <- H2S_stds %>% group_by(Plate, IDs) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Abs_SD = sd(Abs)) %>% mutate(CV = (Abs_SD / Mean_Abs) * 100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
+#remove replicates to fix CV if necessary
 H2S_STD_cv_cor <- H2S_STD_cv %>% mutate(Mean_diff = abs(Abs - Mean_Abs)) %>% group_by(Plate, IDs) %>% mutate(Abs_rm = ifelse(CV_Flag == "CV_High", ifelse(max(Mean_diff) == Mean_diff, NA, Abs), Abs))
 
-H2S_STD_cv_new <- H2S_STD_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Abs2 = mean(Abs_rm, na.rm = TRUE)) %>% mutate(Abs_SD2 = sd(Abs_rm, na.rm = TRUE)) %>% mutate(CV2 = (Abs_SD2 /
-                                                                                                                                                                                Mean_Abs2) * 100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Abs_rm == "NA", "RMVD", "KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
+#Calculate new CVs and note if removed
+H2S_STD_cv_new <- H2S_STD_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Abs2 = mean(Abs_rm, na.rm = TRUE)) %>% mutate(Abs_SD2 = sd(Abs_rm, na.rm = TRUE)) %>% mutate(CV2 = (Abs_SD2 / Mean_Abs2) * 100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Abs_rm == "NA", "RMVD", "KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
 
+
+#organize data
 H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate,
                                                    Wells,
                                                    Abs,
@@ -234,11 +237,13 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
                                         Slope = coef(lm(Conc ~ Mean_Abs, data = .))[2],
                                         Intercept = coef(lm(Conc ~ Mean_Abs, data = .))[1]))
 
+
  Slope_H2S_raw <- bind_rows(Slope_H2S_raw_list)
   
+ #check R2 and flag
  Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select(Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
 
- 
+ #join standard curve CVs and regression values
  R2_Check_Raw <- left_join(Slope_H2S_Std_Crvs, H2S_STD_CV_fin, by = "Plate")
  
  R2_Check <- R2_Check_Raw %>% 
@@ -253,6 +258,7 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
                  R2_Flag) %>%
    distinct()
  
+ #calculate concentrations from standard curve and separate removable points
  R2_Check_diff <- R2_Check %>% mutate(Calc_Conc = ((Slope*Mean_Abs) + Intercept)) %>%
    mutate(Conc_Diff = abs(Conc - Calc_Conc)) %>% mutate(RMVBL = ifelse(IDs %in% c("Std 0", "Std 1","Std 5"), "No", "Yes"))
 
@@ -260,9 +266,10 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
  
  R2_Check_NRMVBL <- R2_Check_diff %>% filter(RMVBL != "Yes") %>% mutate(STD_ABS_rm = Mean_Abs) %>% mutate(N_HCV = 0, STD_ABS_rmv = STD_ABS_rm, N_stds = 3)
  
- 
+ #remove standard curve point if r2 is bad
  R2_Check_na <- R2_Check_RMVBL %>% group_by(Plate) %>% mutate(STD_ABS_rm = ifelse(R2_Flag == "R2_Bad", ifelse(max(Conc_Diff) == Conc_Diff, NA, Mean_Abs), Mean_Abs)) %>% ungroup()
  
+ #remove high cv standard curve point if no other points were removed
  R2_Check_CVrm <- R2_Check_na %>% na.omit() %>% group_by(Plate) %>% mutate(N_stds = length(STD_ABS_rm)) %>% group_by(Plate, CV_Flag) %>%
    mutate(N_HCV = n()) %>% ungroup() %>% group_by(Plate) %>%
    mutate(STD_ABS_rmv = ifelse(
@@ -284,12 +291,13 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
  R2_Check_fin <- R2_Check_bind[order(R2_Check_bind$Plate,R2_Check_bind$IDs), ]
  
  
- 
+ #separate plates for regression
  split_data_rmv <- R2_Check_fin %>% dplyr::select(Plate, IDs, Conc, STD_ABS_rmv, CV_Flag, R2_Flag) %>%
       distinct() %>%
       group_by(Plate) %>%
       group_split()
  
+ #get new standard curve values
  Slope_H2S_raw_list_rm <- map(split_data_rmv, ~ .x %>% mutate(Curve = "H2S",
                                         R2 = summary(lm(Conc ~ STD_ABS_rmv, data = .))$adj.r.squared , 
                                         Slope = coef(lm(Conc ~ STD_ABS_rmv, data = .))[2],
@@ -307,8 +315,6 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
 
 ```{r Plot all Standard Curves together, echo=FALSE,message=FALSE,fig.keep='none'}
 ##this is to see if there are any stds or plates that look off
-#Remove check standards which have NAs in the Conc column
-
 
 H2S_Curve <- ggplot(Slope_H2S_raw_rm, aes(STD_ABS_rmv, Conc, color = Plate)) + geom_point(size =
                                                                           4) +
@@ -369,6 +375,7 @@ H2S_chk_stds <- full_join(H2S_Chk_Stds, chk_standards, by = join_by("IDs"))
 #Calculate CVs
 H2S_CHK_STD_cv <- H2S_chk_stds  %>% group_by(Plate, IDs) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Abs_SD = sd(Abs)) %>% mutate(CV = (Abs_SD / Mean_Abs) * 100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
+#remove replicates to fix CV 
 H2S_CHK_STD_cv_cor <- H2S_CHK_STD_cv %>% mutate(Mean_diff = abs(Abs - Mean_Abs)) %>% group_by(Plate, IDs) %>% mutate(Abs_rm = ifelse(CV_Flag == "CV_High", ifelse(max(Mean_diff) == Mean_diff, NA, Abs), Abs))
 
 H2S_CHK_STD_cv_new <- H2S_CHK_STD_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Abs2 = mean(Abs_rm, na.rm = TRUE)) %>% mutate(Abs_SD2 = sd(Abs_rm, na.rm = TRUE)) %>% mutate(CV2 = (Abs_SD2 /Mean_Abs2) * 100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Abs_rm == "NA", "RMVD", "KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
@@ -395,6 +402,8 @@ H2S_CHK_STD_CV_fin <- H2S_CHK_STD_cv_new %>% dplyr::select(Plate,
 ##Compare Check Standards to Standards
 
 ```{r, echo = FALSE}
+
+#Tag Check Standards and perform T Test
 H2S_CHKs_a <- H2S_CHK_STD_CV_fin %>%
   mutate(Std_ID = ifelse(
     IDs == "ChkStd 0",
@@ -428,6 +437,7 @@ H2S_CHKs_a <- H2S_CHK_STD_CV_fin %>%
 
 H2S_CHKs_1 <- H2S_CHKs_a %>% dplyr::select(-Plate, -Chk_Mean_Abs)
 
+#Get Standard Values and set values for standards with no variance
 H2S_STD_forCHK_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 0", "Std 3", "Std 4")) %>% mutate(Std_ID = ifelse(
   IDs == "Std 0",
   paste0("Std 0", Plate),
@@ -447,8 +457,10 @@ H2S_STD_forCHK_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 0", "Std 3", "Std 
 
 H2S_STD_forCHK <- H2S_STD_forCHK_a %>% dplyr::select(-Mean_Abs)
 
+#join check standards with standards
 Chk_Std_join <- full_join(H2S_CHKs_1, H2S_STD_forCHK, by = join_by(Std_ID))
 
+#flag data
 Chk_Std_flags <- Chk_Std_join %>% mutate(
   Chk_Flag_Std = ifelse(
     Chk_CI_low <= Std_CI_high |
@@ -459,6 +471,7 @@ Chk_Std_flags <- Chk_Std_join %>% mutate(
 ) %>% mutate(CHK_Flag = paste0(gsub(" ", "", IDs), Chk_Flag_Std)) %>%
   mutate(CHK_CV_Flag = paste0("Chk",gsub(" ", "", IDs), Chk_CV_Flag))
 
+#Organize Data for Plotting and Flagging
 Chk_Flags <- Chk_Std_flags %>% group_by(Plate) %>% mutate(Chk_Flag = ifelse(any(CHK_Flag %like% "Bad"), "Chk_Bad", "Chk_Good"), Chk_CV_Flag = ifelse(any(CHK_CV_Flag %like% "High"), "Chk_CV_High", "Chk_CV_Good")) %>% ungroup() %>% mutate(CHK_CV_Flags = ifelse(CHK_CV_Flag %like% "High", paste0(gsub(" ", "", IDs), Chk_CV_Flag), "Good")) %>% mutate(CHKs_Flag = ifelse(CHK_Flag %like% "Bad", CHK_Flag, "Good")) 
 
 
@@ -474,7 +487,7 @@ H2S_Chks_bind_1 <- left_join(H2S_Chks_bind, Chk_flags_plot, by = join_by(Std_ID)
 
 H2S_Chks_plot_bind <- H2S_Chks_bind_1 %>% mutate(Plot_ID = ifelse(IDs %like% "Chk", substr(IDs, 4, 8), IDs))
  
-
+#Plot Check Standards
 H2S_chk_plot <- ggplot(data = H2S_Chks_plot_bind, aes(x = Plot_ID, y = Mean_Abs, col = Type, fill = Check_Flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
@@ -518,8 +531,10 @@ H2S_mtx_stds <- full_join(H2S_Mtx_Stds, mtx_standards, by = join_by("IDs"))
 #Calculate CVs
 H2S_MTX_STD_cv <- H2S_mtx_stds  %>% group_by(Plate, IDs) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Abs_SD = sd(Abs)) %>% mutate(CV = (Abs_SD / Mean_Abs) * 100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
+#Remove Replicates to Fix CVs
 H2S_MTX_STD_cv_cor <- H2S_MTX_STD_cv %>% mutate(Mean_diff = abs(Abs - Mean_Abs)) %>% group_by(Plate, IDs) %>% mutate(Abs_rm = ifelse(CV_Flag == "CV_High", ifelse(max(Mean_diff) == Mean_diff, NA, Abs), Abs))
 
+#Tag Data with replicate removal
 H2S_MTX_STD_cv_new <- H2S_MTX_STD_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Abs2 = mean(Abs_rm, na.rm = TRUE)) %>% mutate(Abs_SD2 = sd(Abs_rm, na.rm = TRUE)) %>% mutate(CV2 = (Abs_SD2 /Mean_Abs2) * 100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Abs_rm == "NA", "RMVD", "KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
 
 H2S_MTX_STD_CV_fin <- H2S_MTX_STD_cv_new %>% dplyr::select(Plate,
@@ -544,6 +559,8 @@ H2S_MTX_STD_CV_fin <- H2S_MTX_STD_cv_new %>% dplyr::select(Plate,
 ##Compare Matrix to Standards
 
 ```{r, echo = FALSE}
+
+#Organize Matrix Check and T Test
 H2S_MTXs_a <- H2S_MTX_STD_CV_fin %>%
   mutate(Std_ID = paste0(gsub(" ", "",Plate), "MTX_STD_5")) %>%
   mutate(
@@ -569,6 +586,7 @@ H2S_MTXs_a <- H2S_MTX_STD_CV_fin %>%
 
 H2S_MTXs_1 <- H2S_MTXs_a %>% dplyr::select(-Plate, -Mtx_Mean_Abs)
 
+#Get Standatds for Matrix Check
 H2S_STD_forMTX_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 5")) %>% mutate(Std_ID = paste0(gsub(" ", "",Plate),"MTX_STD_5")) %>% filter(Removed == "KEPT") %>%
   group_by(Std_ID) %>%
   mutate(
@@ -582,6 +600,7 @@ H2S_STD_forMTX <- H2S_STD_forMTX_a %>% dplyr::select(-Mean_Abs)
 
 Mtx_Std_join <- full_join(H2S_MTXs_1, H2S_STD_forMTX, by = join_by(Std_ID))
 
+#Flag Data
 Mtx_Std_flags <- Mtx_Std_join %>% mutate(
   Mtx_Flag_Std = ifelse(
     Mtx_CI_low <= Std_CI_high |
@@ -592,6 +611,7 @@ Mtx_Std_flags <- Mtx_Std_join %>% mutate(
 ) %>% mutate(MTX_Flag = paste0(gsub(" ", "", IDs), Mtx_Flag_Std)) %>%
   mutate(MTX_CV_Flag = paste0("Mtx",gsub(" ", "", IDs), Mtx_CV_Flag))
 
+#Organize Data for Plotting
 Mtx_Flags <- Mtx_Std_flags %>% group_by(Plate) %>% mutate(Mtx_Flag = ifelse(any(MTX_Flag %like% "Bad"), "Mtx_Bad", "Mtx_Good"), Mtx_CV_Flag = ifelse(any(MTX_CV_Flag %like% "High"), "Mtx_CV_High", "Mtx_CV_Good")) %>% ungroup() %>% mutate(MTX_CV_Flags = ifelse(MTX_CV_Flag %like% "High", paste0(gsub(" ", "", IDs), Mtx_CV_Flag), "Good")) %>% mutate(MTXs_Flag = ifelse(MTX_Flag %like% "Bad", MTX_Flag, "Good")) 
 
 
@@ -655,6 +675,7 @@ raw_data <- dat %>%
       filter(!str_detect(IDs, "MC")) %>%  
       filter(str_detect(IDs, "L") | str_detect(IDs, "l"))
 
+#Calculate Concentrations and fix zeroes/negative values and flag conc
 Slopes_calc <- Slope_H2S_Std_Crvs_rm %>% dplyr::select(Plate, Slope, Intercept)
 
 joined_data <- right_join(Slopes_calc, raw_data, by = join_by(Plate))
@@ -674,8 +695,10 @@ data_dl_flags <- dl_data %>% mutate(Conc_Flag = ifelse(Abs < Low_DL, "bdl", ifel
 #Calculate CVs
 H2S_SPL_cv <- data_dl_flags  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = (Conc_SD / Mean_Conc) * 100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
+#Remove Replicates to fix CV
 H2S_SPL_cv_cor <- H2S_SPL_cv %>% mutate(Mean_diff = abs(Conc - Mean_Conc)) %>% group_by(Plate, IDs) %>% mutate(Conc_rm = ifelse(CV_Flag == "CV_High", ifelse(max(Mean_diff) == Mean_diff, NA, Conc), Conc))
 
+#Tag Data with CV reomved
 H2S_SPL_cv_new <- H2S_SPL_cv_cor %>% group_by(Plate, IDs) %>% mutate(Mean_Conc2 = mean(Conc_rm, na.rm = TRUE)) %>% mutate(Conc_SD2 = sd(Conc_rm, na.rm = TRUE)) %>% mutate(CV2 = (Conc_SD2 /Mean_Conc2) * 100) %>% mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Removed = ifelse(Conc_rm == "NA", "RMVD", "KEPT")) %>% mutate(Removed = replace_na(Removed, "RMVD")) %>% ungroup()
 
 H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
@@ -705,12 +728,13 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
 
 ```{r, echo=FALSE}
 
-
+#Filter samples and mark reruns
 H2S_Spl_pre_viz <- H2S_SPL_cv_cor %>%
   filter(!str_detect(IDs, "Dup")) %>%
   filter(!str_detect(IDs, "Spike")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
 
+#Plot Samples before corrections
 H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag)) +
   geom_bar(stat = 'identity',
            position = position_dodge2(),
@@ -741,6 +765,7 @@ H2S_Spl_rmv_viz <- H2S_SPL_CV_fin %>%
   filter(!str_detect(IDs, "Spike")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
 
+#Plot samples after Corrections
 H2S_Spl_Plot_CV <- ggplot(H2S_Spl_rmv_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag, col = Conc_Flag)) +
   geom_bar(stat = 'identity',
            position = position_dodge(),
@@ -776,9 +801,11 @@ H2S_Spl_Plot_CV
 
 ```{r,echo=FALSE}
 
-#pull out any rows that have "Dup" in the ID column
+#pull out any rows that have "Dup" in the ID column and tag reruns
 DUP_start <- H2S_SPL_CV_fin %>%  mutate(Dup_ID = gsub(" ", "", substr(IDs, 1, 6)),
                                         Dup = ifelse(IDs %like% "Dup", "Dup", "Org")) %>% mutate(Dup_ID = ifelse(Plate %like% "rr", paste0(Dup_ID, "_RR"), Dup_ID))
+
+#separate dups from originals and tag for pairing 
 
 dups_only <- DUP_start %>% filter(Dup == "Dup") %>% dplyr::select(Dup_ID, Mean_Conc, SD_Conc) %>% rename(Dup_Conc = Mean_Conc, Dup_SD = SD_Conc) %>% distinct(.keep_all = TRUE)
 
@@ -790,13 +817,16 @@ dup_spls <- no_dups %>% filter(Dup_ID %in% as.vector(dup_spls_l$Dup_ID)) %>% dpl
 
 dup_join <- full_join(dups_only, dup_spls, by = join_by(Dup_ID))
 
+#Calculate Percent difference and Flag
 dup_flags <- dup_join %>% mutate(Diff_P = (abs(100 * (Mean_Conc - Dup_Conc) /
                                                  Mean_Conc))) %>% mutate(Dup_Flag = ifelse(Diff_P >= dups_perc_diff, "Dup_Bad", "Dup_Good"))
 
+#oraganize data for flagging and plotting
 dup_flags_1 <- dup_flags %>% dplyr::select(Dup_ID, Dup_Flag)
 
 Dup_for_plot_1 <- DUP_start %>% dplyr::select(Plate, Mean_Conc, Dup_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Dup_ID %in% as.vector(dup_spls_l$Dup_ID)) %>% left_join(dup_flags_1) %>% mutate(Dup = ifelse(IDs %like% "Dup", "Duplicate", "Original"))
 
+#plot Data
 Dup_Plot <- ggplot(Dup_for_plot_1,
                    aes(
                      x = Dup_ID,
@@ -838,11 +868,11 @@ paste0(Dup_Flags_1$Dup_Flags)
 
 ```
 
-## Check the spks for QAQC (THIS SECTION NEEDS WORK)
+## Check the spks for QAQC
 ```{r, echo=FALSE}
 #pull out any rows that have "Spk" in the ID column
 SPK_start <- H2S_SPL_CV_fin %>%  mutate(Spk_ID = gsub(" ", "", substr(IDs, 1,6)), Spk = ifelse(IDs %like% "Spike", "Spk", "Org")) %>% mutate(Spk_ID = ifelse(Plate %like% "rr", paste0(Spk_ID, "_RR"), Spk_ID))
-
+ #separate spikes from originals
 spks_only <- SPK_start %>% filter(Spk == "Spk") %>% dplyr::select(Spk_ID, Mean_Conc, SD_Conc, Dilution) %>% rename(Spk_Conc = Mean_Conc, Spk_SD = SD_Conc, Spk_Dilution = Dilution) %>% distinct(.keep_all = TRUE)
 
 no_spks <- SPK_start %>% filter(!Spk == "Spk")
@@ -857,6 +887,7 @@ SPK_only <- spks_only %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
 
 spk_join <- full_join(SPK_only, spk_spls, by = join_by(Spk_ID))
 
+#Calculate recovery and flag data
 spk_flags <- spk_join %>% mutate(
   Spl_mol = sample_vol / Con1 * (Mean_Conc / Dilution),
   Spk_mol = (sample_vol + spkvol) / Con1 * (Spk_Conc / Spk_Dilution)
@@ -870,10 +901,12 @@ spk_flags <- spk_join %>% mutate(
                                                                           )
                                                                         )
 
+#organize data for flagging and plotting
 spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag)
 
 Spk_for_plot_1 <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>% left_join(spk_flags_1, by = join_by(Spk_ID)) %>% mutate(Spk = ifelse(IDs %like% "Spike", "Spike", "Original")) %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
 
+#plot data
 Spk_Plot <- ggplot(Spk_for_plot_1,
                    aes(
                      x = Spk_ID,
@@ -930,11 +963,12 @@ ifelse(length_bad/length_all > 0.4, paste0("<60% of Spikes Pass, Rerun"), paste0
 cat("Merge Samples with Metadata")
 
 
-
+#Get Samples Only
 H2S_spls_md <- H2S_SPL_CV_fin %>%
   filter(!str_detect(IDs, "Dup")) %>%
   filter(!str_detect(IDs, "Spike"))
 
+#Check for reruns and replace
 H2S_spl_rrn <- H2S_spls_md %>%
   filter(Plate %like% "rr") %>% 
   dplyr::select(IDs, Mean_Conc, Conc_Flag) %>%
@@ -981,6 +1015,8 @@ merged_data <- metadata %>%
 
 #Add Flags
 ```{r, echo=FALSE}
+
+#Get only bad flags for each plate and check
 Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(CHK_CV_Flags %like% "Good", "", CHK_CV_Flags))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit()
 
 Mtx_Flags_All <- Mtx_Flags %>% dplyr::select(Plate, Mtx_Flag, CV_Flag) %>% rename(MTXCV_Flag = CV_Flag) %>% mutate(Mtx_Flag = ifelse(Mtx_Flag %like% "Good", NA ,Mtx_Flag)) %>% mutate(Mtx_Flag = ifelse(MTXCV_Flag %like% "Good", NA ,MTXCV_Flag)) %>% na.omit()
@@ -991,6 +1027,7 @@ Spk_Flags_All <- Spk_Flag_1  %>% group_by(Plate) %>% mutate(SPK_Flags = paste0(i
 
 Dup_Flags_All <-  Dup_Flag_1  %>% group_by(Plate) %>% mutate(DUP_Flags = paste0(ifelse(Dup_Flag %like% "Good", NA, Dup_Flag))) %>% dplyr::select(Plate, DUP_Flags) %>% na.omit()
 
+#Join Flags
 Flags_Joined_1 <- left_join(Spk_Flags_All, Dup_Flags_All, by = join_by(Plate))
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Chk_Flags_All, by = join_by(Plate))
@@ -1001,8 +1038,10 @@ Flags_Joined <- left_join(Flags_Joined_3, STD_Flags_All, by = join_by(Plate))
 
 Flags_Joined[Flags_Joined =="NA"] <- NA
 
+#Merge Flags into one column
 Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(H2S_Flags = paste0(SPK_Flags, " ", DUP_Flags, " ",CHKSTD_Flags, " ", Mtx_Flag, " ", MTXCV_Flag," ", R2_Flag," ", STDCV_Flags )) %>% dplyr::select(Plate, H2S_Flags)
 
+#Add Flags to data
 flagged_data <- left_join(merged_data, Flags, by = join_by(Plate))
 
 
@@ -1113,7 +1152,6 @@ H2S_forplot <- H2S_forplot %>%
   ))  %>%
   mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
   mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
-#need to work out how best to plot these data
 
 viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
