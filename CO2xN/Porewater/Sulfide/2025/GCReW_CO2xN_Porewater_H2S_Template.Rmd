@@ -708,7 +708,6 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
 ```
 
 ## Plot Samples
-
 ```{r, echo=FALSE}
 
 #Filter samples and mark reruns
