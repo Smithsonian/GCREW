@@ -113,6 +113,7 @@ rerun_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202505_reruns.csv"
   spkvol <- 50                  # uL volume of spike added
   spk_Conc <- spk_std*(spkvol/Con1)  # umoles of S2- added to each spiked sample
   sample_vol <- 250             # the sample volume without the spike is 250 uL
+  samp_vol_a <- 300             # the sample volume 
 
 #Top standard Concentration- Update if running different standard curve: 
    Top_STD = 100
@@ -561,87 +562,66 @@ H2S_MTX_STD_CV_fin <- H2S_MTX_STD_cv_new %>% dplyr::select(Plate,
 ```{r, echo = FALSE}
 
 #Organize Matrix Check and T Test
-H2S_MTXs_a <- H2S_MTX_STD_CV_fin %>%
+H2S_MTXs_1 <- H2S_MTX_STD_CV_fin %>%
   mutate(Std_ID = paste0(gsub(" ", "",Plate), "MTX_STD_5")) %>%
-  mutate(
-    Mtx_Abs = Abs,
-    Mtx_Removed = Removed,
-    Mtx_IDs = IDs,
-    Mtx_Mean_Abs = Mean_Abs,
-    Mtx_CV_Flag = CV_Flag
-  ) %>% dplyr::select(Std_ID,
-                      Mtx_Abs,
-                      Mtx_Removed,
-                      Mtx_IDs,
-                      Mtx_Mean_Abs,
-                      Mtx_CV_Flag,
-                      Plate) %>% filter(Mtx_Removed == "KEPT") %>%
-  group_by(Std_ID) %>%
-  mutate(
-    Mtx_CI_low = t.test(Mtx_Abs)$conf.int[1],
-    Mtx_CI_high = t.test(Mtx_Abs)$conf.int[2]
-  ) %>%
-  ungroup() %>%
-  dplyr::select(Std_ID, Mtx_IDs, Mtx_CI_low, Mtx_CI_high, Mtx_CV_Flag, Mtx_Mean_Abs, Plate) %>% distinct(.keep_all = TRUE)
-
-H2S_MTXs_1 <- H2S_MTXs_a %>% dplyr::select(-Plate, -Mtx_Mean_Abs)
+  dplyr::select(
+    Plate,
+    Std_ID,
+    Abs,
+    Removed,
+    IDs,
+    CV_Flag
+  ) %>% mutate(MTX = "YES")#%>% dplyr::select(Std_ID,
+     #                 Mtx_Abs,
+    #                  Mtx_Removed,
+    #                  Mtx_Mean_Abs,
+    #                  Mtx_IDs,
+    #                  Mtx_CV_Flag,
+     #                 Plate) #%>% filter(Mtx_Removed == "KEPT") #%>%
+  # group_by(Std_ID) %>%
+  # mutate(
+  #   Mtx_CI_low = t.test(Mtx_Abs)$conf.int[1],
+  #   Mtx_CI_high = t.test(Mtx_Abs)$conf.int[2]
+  # ) %>%
+  # ungroup() %>%
+  # dplyr::select(Std_ID, Mtx_IDs, Mtx_CI_low, Mtx_CI_high, Mtx_CV_Flag, Mtx_Mean_Abs, Plate) %>% distinct(.keep_all = TRUE)
 
 #Get Standatds for Matrix Check
-H2S_STD_forMTX_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 5")) %>% mutate(Std_ID = paste0(gsub(" ", "",Plate),"MTX_STD_5")) %>% filter(Removed == "KEPT") %>%
-  group_by(Std_ID) %>%
-  mutate(
-    Std_CI_low = ifelse(length(unique(Abs)) == 1, Abs, t.test(Abs)$conf.int[1]),
-    Std_CI_high = ifelse(length(unique(Abs)) == 1, Abs, t.test(Abs)$conf.int[2])
-  ) %>%
-  ungroup() %>%
-  dplyr::select(Plate, Std_ID, IDs, Std_CI_low, Std_CI_high, CV_Flag, Mean_Abs) %>% distinct(.keep_all = TRUE)
+H2S_STD_forMTX_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 5")) %>% mutate(Std_ID = paste0(gsub(" ", "",Plate),"MTX_STD_5")) %>% dplyr::select(Plate, Std_ID,
+    Abs,
+    Removed,
+    IDs,
+    CV_Flag) %>% mutate(MTX = "NO") # %>% filter(Removed == "KEPT") # %>%
+ # group_by(Std_ID) %>%
+  # mutate(
+  #   Std_CI_low = ifelse(length(unique(Abs)) == 1, Abs, t.test(Abs)$conf.int[1]),
+  #   Std_CI_high = ifelse(length(unique(Abs)) == 1, Abs, t.test(Abs)$conf.int[2])
+  # ) %>%
+  # ungroup() %>%
+  # dplyr::select(Plate, Std_ID, IDs, Std_CI_low, Std_CI_high, CV_Flag, Mean_Abs) %>% distinct(.keep_all = TRUE)
 
-H2S_STD_forMTX <- H2S_STD_forMTX_a %>% dplyr::select(-Mean_Abs)
+H2S_mtxstd_join <- rbind(H2S_MTXs_1, H2S_STD_forMTX_a)
 
-Mtx_Std_join <- full_join(H2S_MTXs_1, H2S_STD_forMTX, by = join_by(Std_ID))
+H2S_ttest <- H2S_mtxstd_join %>% group_by(Std_ID) %>% mutate(T_Test = t.test(na.omit(ifelse(MTX == "YES" & Removed == "KEPT", Abs, NA)), na.omit(ifelse(MTX == "NO" & Removed == "KEPT", Abs, NA)), )$p.value) %>% ungroup()
 
-#Flag Data
-Mtx_Std_flags <- Mtx_Std_join %>% mutate(
-  Mtx_Flag_Std = ifelse(
-    Mtx_CI_low <= Std_CI_high |
-      Std_CI_low <= Mtx_CI_high,
-    "Mtx_Good",
-    "Mtx_Bad"
-  )
-) %>% mutate(MTX_Flag = paste0(gsub(" ", "", IDs), Mtx_Flag_Std)) %>%
-  mutate(MTX_CV_Flag = paste0("Mtx",gsub(" ", "", IDs), Mtx_CV_Flag))
+Mtx_Std_flags <- H2S_ttest %>% mutate(MTX_Flag = ifelse(T_Test >= p_value_MC, "Mtx_Good", "Mtx_Bad")) %>% mutate(MTX_CV_Flag = ifelse(MTX == "YES" & CV_Flag == "CV_High", paste0("Mtx_CV_High"), paste0("Mtx_CV_Good")))
+  
+MTX_plot1 <- Mtx_Std_flags %>% mutate(ID_stat = paste0(Std_ID, IDs)) 
 
-#Organize Data for Plotting
-Mtx_Flags <- Mtx_Std_flags %>% group_by(Plate) %>% mutate(Mtx_Flag = ifelse(any(MTX_Flag %like% "Bad"), "Mtx_Bad", "Mtx_Good"), Mtx_CV_Flag = ifelse(any(MTX_CV_Flag %like% "High"), "Mtx_CV_High", "Mtx_CV_Good")) %>% ungroup() %>% mutate(MTX_CV_Flags = ifelse(MTX_CV_Flag %like% "High", paste0(gsub(" ", "", IDs), Mtx_CV_Flag), "Good")) %>% mutate(MTXs_Flag = ifelse(MTX_Flag %like% "Bad", MTX_Flag, "Good")) 
+MTX_plot2 <- MTX_plot1 %>% group_by(ID_stat) %>% filter(Removed != "RMVD") %>% mutate(Mean_Abs = mean(Abs), SD_2 = 2* sd(Abs)) %>% ungroup() %>% dplyr::select(Plate, Mean_Abs, SD_2, IDs, MTX_Flag, Std_ID) %>% distinct() %>% mutate(IDs = ifelse(IDs == "Std 5", "Standard", "Matrix Check"), Matrix_Flag = ifelse(MTX_Flag %like% "Bad", "Bad", "Good"), Plot_ID = "Matrix Check")
 
 
-H2S_MTXs_plot <- H2S_MTXs_a %>% rename(IDs = Mtx_IDs, Std_CI_low = Mtx_CI_low, Std_CI_high = Mtx_CI_high, Mean_Abs = Mtx_Mean_Abs) %>% mutate(Type = "Matrix Check") %>% dplyr::select(-Mtx_CV_Flag)
-
-H2S_Std_mtxplot <- H2S_STD_forMTX_a %>% dplyr::select(IDs, Std_CI_low, Std_CI_high, Mean_Abs, Std_ID, Plate) %>% mutate(Type = "Standard")
-
-Mtx_flags_plot <- Mtx_Flags %>% dplyr::select(Std_ID, MTXs_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(Matrix_Flag = ifelse(MTXs_Flag == "Good", "Good", "Bad"))
-
-H2S_Mtxs_bind <- rbind(H2S_MTXs_plot, H2S_Std_mtxplot)
-
-H2S_Mtxs_bind_1 <- left_join(H2S_Mtxs_bind, Mtx_flags_plot, by = join_by(Std_ID)) 
-
-H2S_Mtxs_plot_bind <- H2S_Mtxs_bind_1 %>% mutate(Plot_ID = ifelse(IDs %like% "Mtx", substr(IDs, 4, 8), IDs), Plot_ID = ifelse(Plot_ID == "Std 5", Plot_ID, "10ppt Std 5"))
- 
-
-H2S_mtx_plot <- ggplot(data = H2S_Mtxs_plot_bind, aes(x = Plot_ID, y = Mean_Abs, col = Type, fill = Matrix_Flag)) +
+H2S_mtx_plot <- ggplot(data = MTX_plot2, aes(x = Plot_ID, y = Mean_Abs, col = IDs, fill = Matrix_Flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
-  geom_errorbar(aes(ymin = Std_CI_low, ymax = Std_CI_high), stat = 'identity',
+  geom_errorbar(aes(ymin = Mean_Abs- SD_2, ymax = Mean_Abs + SD_2), stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
   facet_wrap(.~Plate) +
   scale_color_manual(values =c("Standard" = "lightgreen", "Matrix Check" = "cornflowerblue" )) +
   scale_fill_manual(values = c("Good" = "darkgreen", "Bad" = "darkred")) +
   theme_classic() + labs(x = " ", y = "Absorbance", title =
-                           "Matrix Effects Checks with 95% CI: H2S") +
-  theme(legend.position = "bottom", axis.text.x = element_text(
-    angle = 90,
-    vjust = 0.5,
-    hjust = 1))
+                           "Matrix Effects Checks with 2 SD: H2S") +
+  theme(legend.position = "bottom")
 
 
 H2S_mtx_plot
@@ -651,13 +631,16 @@ H2S_mtx_plot
 
 ##Display Any Matrix Flags
 ```{r, echo=FALSE}
-Mtx_Flag_1 <- Mtx_Flags %>% dplyr::select(Plate, MTXs_Flag) %>% filter(MTXs_Flag != "Good")
 
-MTX_CV_Flag_1 <- Mtx_Flags %>% dplyr::select(Plate, MTX_CV_Flags) %>% filter(MTX_CV_Flags != "Good")
+Mtx_Flags_org <- Mtx_Std_flags %>% dplyr::select(Plate, MTX_Flag, MTX_CV_Flag) %>% distinct()
 
-ifelse(length(Mtx_Flag_1$MTXs_Flag) >= 1, paste0(Mtx_Flag_1$MTXs_Flag, "-", Mtx_Flag_1$Plate), paste0("All Matrix Checks Good"))
+Mtx_Flag_1 <- Mtx_Flags_org %>% dplyr::select(Plate, MTX_Flag) %>% filter(!MTX_Flag %like% "Good")
 
-ifelse(length(MTX_CV_Flag_1$MTX_CV_Flags) >= 1, paste0(MTX_CV_Flag_1$MTX_CV_Flags, "-", MTX_CV_Flag_1$Plate), paste0("All Matrix CV Good"))
+MTX_CV_Flag_1 <- Mtx_Flags_org %>% dplyr::select(Plate, MTX_CV_Flag) %>% filter(!MTX_CV_Flag %like% "Good")
+
+ifelse(length(Mtx_Flag_1$MTX_Flag) >= 1, paste0(Mtx_Flag_1$MTX_Flag, "-", Mtx_Flag_1$Plate), paste0("All Matrix Checks Good"))
+
+ifelse(length(MTX_CV_Flag_1$MTX_CV_Flag) >= 1, paste0(MTX_CV_Flag_1$MTX_CV_Flag, "-", MTX_CV_Flag_1$Plate), paste0("All Matrix CV Good"))
 
 ```
 
@@ -871,9 +854,12 @@ paste0(Dup_Flags_1$Dup_Flags)
 ## Check the spks for QAQC
 ```{r, echo=FALSE}
 #pull out any rows that have "Spk" in the ID column
-SPK_start <- H2S_SPL_CV_fin %>%  mutate(Spk_ID = gsub(" ", "", substr(IDs, 1,6)), Spk = ifelse(IDs %like% "Spike", "Spk", "Org")) %>% mutate(Spk_ID = ifelse(Plate %like% "rr", paste0(Spk_ID, "_RR"), Spk_ID))
- #separate spikes from originals
-spks_only <- SPK_start %>% filter(Spk == "Spk") %>% dplyr::select(Spk_ID, Mean_Conc, SD_Conc, Dilution) %>% rename(Spk_Conc = Mean_Conc, Spk_SD = SD_Conc, Spk_Dilution = Dilution) %>% distinct(.keep_all = TRUE)
+SPK_start <- H2S_SPL_CV_fin %>%  mutate(Spk_ID = gsub(" ", "", substr(IDs, 1, 6)),
+                                        Spk = ifelse(IDs %like% "Spike", "Spk", "Org")) %>% mutate(Spk_ID = ifelse(Plate %like% "rr", paste0(Spk_ID, "_RR"), Spk_ID))
+#separate spikes from originals
+spks_only <- SPK_start %>% filter(Spk == "Spk") %>% dplyr::select(Spk_ID, Mean_Conc, SD_Conc, Dilution) %>% rename(Spk_Conc = Mean_Conc,
+                                                                                                                   Spk_SD = SD_Conc,
+                                                                                                                   Spk_Dilution = Dilution) %>% distinct(.keep_all = TRUE)
 
 no_spks <- SPK_start %>% filter(!Spk == "Spk")
 
@@ -891,15 +877,15 @@ spk_join <- full_join(SPK_only, spk_spls, by = join_by(Spk_ID))
 spk_flags <- spk_join %>% mutate(
   Spl_mol = sample_vol / Con1 * (Mean_Conc / Dilution),
   Spk_mol = (sample_vol + spkvol) / Con1 * (Spk_Conc / Spk_Dilution)
-) %>% mutate(Diff_Spk = Spk_mol - Spl_mol) %>% mutate(Diff_P = 100 * (Diff_Spk /
-                                                                        spk_Conc)) %>% mutate(
-                                                                          Spk_Flag = ifelse(
-                                                                            Diff_P >= high_recovery_cutoff |
-                                                                              Diff_P <= low_recovery_cutoff,
-                                                                            "Spk_Bad",
-                                                                            "Spk_Good"
-                                                                          )
-                                                                        )
+) %>% mutate(Diff_Spk = Spk_mol - Spl_mol) %>% mutate(Diff_P = 100 * (Diff_Spk / spk_Conc)) %>%
+  mutate(
+    Spk_Flag = ifelse(
+      Diff_P >= high_recovery_cutoff |
+        Diff_P <= low_recovery_cutoff,
+      "Spk_Bad",
+      "Spk_Good"
+    )
+  )
 
 #organize data for flagging and plotting
 spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag)
@@ -928,8 +914,8 @@ Spk_Plot <- ggplot(Spk_for_plot_1,
     "Spike" = "goldenrod1",
     "Original" = "cornflowerblue"
   )) +
-  theme_classic()+
-  ggtitle("H2S Spikes") 
+  theme_classic() +
+  ggtitle("H2S Spikes")
 
 Spk_Plot
 
@@ -1017,11 +1003,16 @@ merged_data <- metadata %>%
 ```{r, echo=FALSE}
 
 #Get only bad flags for each plate and check
-Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(CHK_CV_Flags %like% "Good", "", CHK_CV_Flags))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit()
+Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(
+  CHK_CV_Flags %like% "Good", "", CHK_CV_Flags
+))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit()
 
-Mtx_Flags_All <- Mtx_Flags %>% dplyr::select(Plate, Mtx_Flag, CV_Flag) %>% rename(MTXCV_Flag = CV_Flag) %>% mutate(Mtx_Flag = ifelse(Mtx_Flag %like% "Good", NA ,Mtx_Flag)) %>% mutate(Mtx_Flag = ifelse(MTXCV_Flag %like% "Good", NA ,MTXCV_Flag)) %>% na.omit()
+Mtx_Flags_All <- Mtx_Flags_org %>% dplyr::select(Plate, MTX_Flag, MTX_CV_Flag) %>% rename(MTXCV_Flag = MTX_CV_Flag, Mtx_Flag = MTX_Flag) %>% mutate(Mtx_Flag = ifelse(Mtx_Flag %like% "Good", NA , Mtx_Flag)) %>% mutate(Mtx_Flag = ifelse(MTXCV_Flag %like% "Good", NA , MTXCV_Flag)) %>% na.omit()
 
-STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mutate(STDCV_Flags = paste0("STD", CV_Flag)) %>% dplyr::select(-CV_Flag) %>% mutate(R2_Flag = ifelse(R2_Flag %like% "Good", NA, R2_Flag), STDCV_Flags = ifelse(STDCV_Flags %like% "Good", NA, STDCV_Flags)) %>% na.omit()
+STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mutate(STDCV_Flags = paste0("STD", CV_Flag)) %>% dplyr::select(-CV_Flag) %>% mutate(
+  R2_Flag = ifelse(R2_Flag %like% "Good", NA, R2_Flag),
+  STDCV_Flags = ifelse(STDCV_Flags %like% "Good", NA, STDCV_Flags)
+) %>% na.omit()
 
 Spk_Flags_All <- Spk_Flag_1  %>% group_by(Plate) %>% mutate(SPK_Flags = paste0(ifelse(Spk_Flag %like% "Good", NA, Spk_Flag))) %>% dplyr::select(Plate, SPK_Flags) %>% na.omit()
 
@@ -1031,15 +1022,31 @@ Dup_Flags_All <-  Dup_Flag_1  %>% group_by(Plate) %>% mutate(DUP_Flags = paste0(
 Flags_Joined_1 <- left_join(Spk_Flags_All, Dup_Flags_All, by = join_by(Plate))
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Chk_Flags_All, by = join_by(Plate))
-  
+
 Flags_Joined_3 <- left_join(Flags_Joined_2, Mtx_Flags_All, by = join_by(Plate))
-                              
+
 Flags_Joined <- left_join(Flags_Joined_3, STD_Flags_All, by = join_by(Plate))
 
-Flags_Joined[Flags_Joined =="NA"] <- NA
+Flags_Joined[Flags_Joined == "NA"] <- NA
 
 #Merge Flags into one column
-Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(H2S_Flags = paste0(SPK_Flags, " ", DUP_Flags, " ",CHKSTD_Flags, " ", Mtx_Flag, " ", MTXCV_Flag," ", R2_Flag," ", STDCV_Flags )) %>% dplyr::select(Plate, H2S_Flags)
+Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(
+  H2S_Flags = paste0(
+    SPK_Flags,
+    " ",
+    DUP_Flags,
+    " ",
+    CHKSTD_Flags,
+    " ",
+    Mtx_Flag,
+    " ",
+    MTXCV_Flag,
+    " ",
+    R2_Flag,
+    " ",
+    STDCV_Flags
+  )
+) %>% dplyr::select(Plate, H2S_Flags)
 
 #Add Flags to data
 flagged_data <- left_join(merged_data, Flags, by = join_by(Plate))
