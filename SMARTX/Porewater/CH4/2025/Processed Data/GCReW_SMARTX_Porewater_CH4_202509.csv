@@ -1,151 +1,151 @@
-"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","CH4_Conc_ppm","CH4_Conc_uM","CH4_Conc_Flag","CH4_QAQC_Flags","Analysis_rundate","Run_notes"
-"1","GCReW","SMARTX","2025","September","SCAM","C3","620","10","Elevated","0",2351.00321647472,96.0919257377894,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"2","GCReW","SMARTX","2025","September","SCAM","C3","620","20","Elevated","0",1071.71705386851,43.8040045332972,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"3","GCReW","SMARTX","2025","September","SCAM","C3","322","10","Ambient","3.4",3534.3174468992,144.457211824007,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"4","GCReW","SMARTX","2025","September","SCAM","C3","322","20","Ambient","3.4",4627.86128149722,189.153336528923,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"5","GCReW","SMARTX","2025","September","SCAM","C3","311","120","Ambient","1.7",1286.87998913181,52.5983016452545,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"6","GCReW","SMARTX","2025","September","SCAM","C3","320","10","Ambient","0",2173.49149106464,88.8365364570936,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"7","GCReW","SMARTX","2025","September","SCAM","C3","320","20","Ambient","0",1186.55810753631,48.4978722078992,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"8","GCReW","SMARTX","2025","September","SCAM","C3","312","40","Ambient","3.4",6244.32227942004,255.222514606588,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"9","GCReW","SMARTX","2025","September","SCAM","C3","320","80","Ambient","0",1429.80714223144,58.4401249508633,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"10","GCReW","SMARTX","2025","September","SCAM","C3","320","120","Ambient","0",1139.39980934096,46.5703836973122,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"11","GCReW","SMARTX","2025","September","SCAM","C3","321","10","Ambient","1.7",2374.34174459658,97.0458351562879,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"12","GCReW","SMARTX","2025","September","SCAM","C3","321","20","Ambient","1.7",2039.3768678876,83.3549053302744,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"13","GCReW","SMARTX","2025","September","SCAM","C3","321","40","Ambient","1.7",1299.54928079434,53.1161302152262,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"14","GCReW","SMARTX","2025","September","SCAM","C3","321","80","Ambient","1.7",3077.88676029478,125.80164243376,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"15","GCReW","SMARTX","2025","September","SCAM","C3","321","120","Ambient","1.7",2029.54212545076,82.9529325327601,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"16","GCReW","SMARTX","2025","September","SCAM","C3","623","80","Elevated","5.1",2344.23044650625,95.815104122111,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"17","GCReW","SMARTX","2025","September","SCAM","C3","613","10","Elevated","5.1",7367.46932016971,301.128603239749,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"18","GCReW","SMARTX","2025","September","SCAM","C3","322","40","Ambient","3.4",2570.59460161198,105.067225697144,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"19","GCReW","SMARTX","2025","September","SCAM","C3","322","80","Ambient","3.4",4747.88165900605,194.058897321771,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"20","GCReW","SMARTX","2025","September","SCAM","C3","322","120","Ambient","3.4",3224.06656289721,131.77641041264,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"21","GCReW","SMARTX","2025","September","SCAM","C3","323","10","Ambient","5.1",4911.62508631089,200.75153863607,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"22","GCReW","SMARTX","2025","September","SCAM","C3","323","20","Ambient","5.1",5845.01262332857,238.901637820609,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"23","GCReW","SMARTX","2025","September","SCAM","C3","323","40","Ambient","5.1",6197.10595914541,253.292654575072,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"24","GCReW","SMARTX","2025","September","SCAM","C3","323","80","Ambient","5.1",6294.47724735668,257.272485198111,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"25","GCReW","SMARTX","2025","September","SCAM","C3","323","120","Ambient","5.1",4281.02576998159,174.977221421023,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"26","GCReW","SMARTX","2025","September","SCAM","C3","623","10","Elevated","5.1",3200.85431812435,130.827662539693,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"27","GCReW","SMARTX","2025","September","SCAM","C3","623","20","Elevated","5.1",2555.20339181883,104.438144895342,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"28","GCReW","SMARTX","2025","September","SCAM","C3","623","40","Elevated","5.1",1169.27264750806,47.791368222818,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"29","GCReW","SMARTX","2025","September","SCAM","C3","311","20","Ambient","1.7",1091.40701712312,44.6087871357128,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"30","GCReW","SMARTX","2025","September","SCAM","C3","312","20","Ambient","3.4",8128.2514105394,332.223846163348,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"31","GCReW","SMARTX","2025","September","SCAM","C3","610","10","Elevated","0",1040.96535185359,42.5470984407744,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"32","GCReW","SMARTX","2025","September","SCAM","C3","613","40","Elevated","5.1",9004.54522155203,368.040368753467,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"33","GCReW","SMARTX","2025","September","SCAM","C3","312","10","Ambient","3.4",3997.65276093715,163.39499220484,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"34","GCReW","SMARTX","2025","September","SCAM","C3","313","10","Ambient","5.1",6013.79031927625,245.800043450831,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"35","GCReW","SMARTX","2025","September","SCAM","C3","313","20","Ambient","5.1",9833.60223390911,401.926194304684,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"36","GCReW","SMARTX","2025","September","SCAM","C3","310","10","Ambient","0",1924.76278294166,78.6703144875429,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"37","GCReW","SMARTX","2025","September","SCAM","C3","310","20","Ambient","0",1105.33743574397,45.1781614105888,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"38","GCReW","SMARTX","2025","September","SCAM","C3","313","120","Ambient","5.1",11745.4178002463,480.067320670429,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"39","GCReW","SMARTX","2025","September","SCAM","C3","613","120","Elevated","5.1",6955.51255732838,284.290804641801,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"40","GCReW","SMARTX","2025","September","SCAM","C3","313","40","Ambient","5.1",9344.19111483298,381.922624517982,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"41","GCReW","SMARTX","2025","September","SCAM","C3","311","10","Ambient","1.7",1165.03020959412,47.6179681925176,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"42","GCReW","SMARTX","2025","September","SCAM","C3","613","80","Elevated","5.1",7597.59341922684,310.534403998385,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"43","GCReW","SMARTX","2025","September","SCAM","C3","613","20","Elevated","5.1",4681.40371494439,191.341762092347,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"44","GCReW","SMARTX","2025","September","SCAM","C3","312","80","Ambient","3.4",5775.01239774866,236.040537320654,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"45","GCReW","SMARTX","2025","September","SCAM","C3","312","120","Ambient","3.4",5410.60814193539,221.146339625489,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"46","GCReW","SMARTX","2025","September","SCAM","C3","313","80","Ambient","5.1",10707.9471856708,437.663061691825,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"47","GCReW","SMARTX","2025","September","SCAM","C3","610","120","Elevated","0",252.501768037455,10.320437238405,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"48","GCReW","SMARTX","2025","September","SCAM","C3","623","120","Elevated","5.1",200.283660026079,8.18614047435336,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"49","GCReW","SMARTX","2025","September","SCAM","C3","320","40","Ambient","0",613.011306839344,25.0554472067286,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"50","GCReW","SMARTX","2025","September","SCAM","C3","610","20","Elevated","0",671.050568186705,27.4276704143299,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"51","GCReW","SMARTX","2025","September","SCAM","C3","310","40","Ambient","0",858.938628426337,35.1071688535692,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"52","GCReW","SMARTX","2025","September","SCAM","C3","310","80","Ambient","0",246.943124434774,10.0932402849816,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"53","GCReW","SMARTX","2025","September","SCAM","C3","310","120","Ambient","0",862.257735866782,35.242829844353,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"54","GCReW","SMARTX","2025","September","SCAM","C3","620","80","Elevated","0",211.391103116443,8.64013202532045,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"55","GCReW","SMARTX","2025","September","SCAM","C3","620","40","Elevated","0",458.460342043302,18.7385269542102,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"56","GCReW","SMARTX","2025","September","SCAM","C3","311","40","Ambient","1.7",831.237288819586,33.9749394079963,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"57","GCReW","SMARTX","2025","September","SCAM","C3","311","80","Ambient","1.7",553.385502291337,22.6183776431767,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"58","GCReW","SMARTX","2025","September","SCAM","C3","620","120","Elevated","0",326.009415419668,13.3248956516958,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"59","GCReW","SMARTX","2025","September","SCAM","C3","610","40","Elevated","0",172.155742102711,7.03647560732531,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"60","GCReW","SMARTX","2025","September","SCAM","C3","610","80","Elevated","0",148.985976767095,6.08946398505687,"Within Range","","11/24/2025","Some Blanks Had Check Standard instead"
-"61","GCReW","SMARTX","2025","September","SPPA, DISP","C4","452","10","Ambient","3.4",1380.44016092861,56.4223615262928,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"62","GCReW","SMARTX","2025","September","SPPA, DISP","C4","452","20","Ambient","3.4",1445.54067054138,59.0831972458556,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"63","GCReW","SMARTX","2025","September","SPPA, DISP","C4","452","40","Ambient","3.4",2254.45617072798,92.1457841565755,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"64","GCReW","SMARTX","2025","September","SPPA, DISP","C4","452","80","Ambient","3.4",5902.68109608501,241.258705885294,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"65","GCReW","SMARTX","2025","September","SPPA, DISP","C4","452","120","Ambient","3.4",6176.75662259753,252.460921584376,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"66","GCReW","SMARTX","2025","September","SPPA, DISP","C4","453","10","Ambient","5.1",1573.40091466602,64.3091948102756,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"67","GCReW","SMARTX","2025","September","SPPA, DISP","C4","453","20","Ambient","5.1",3550.63105751502,145.123993667956,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"68","GCReW","SMARTX","2025","September","SPPA, DISP","C4","453","40","Ambient","5.1",4760.88531688821,194.590392352818,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"69","GCReW","SMARTX","2025","September","SPPA, DISP","C4","453","80","Ambient","5.1",4824.35476762277,197.184562239046,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"70","GCReW","SMARTX","2025","September","SPPA, DISP","C4","453","120","Ambient","5.1",3484.52560780657,142.422083300614,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"71","GCReW","SMARTX","2025","September","SPPA, DISP","C4","460","10","Ambient","0",1402.03061608525,57.3048224259713,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"72","GCReW","SMARTX","2025","September","SPPA, DISP","C4","460","20","Ambient","0",1343.76334896975,54.9232799995845,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"73","GCReW","SMARTX","2025","September","SPPA, DISP","C4","463","10","Ambient","5.1",3605.76270144,147.377374606237,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"74","GCReW","SMARTX","2025","September","SPPA, DISP","C4","460","80","Ambient","0",1999.46225066635,81.7234858549628,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"75","GCReW","SMARTX","2025","September","SPPA, DISP","C4","460","120","Ambient","0",1640.04209898994,67.0330021152842,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"76","GCReW","SMARTX","2025","September","SPPA, DISP","C4","461","10","Ambient","1.7",1369.19148477053,55.9625973939188,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"77","GCReW","SMARTX","2025","September","SPPA, DISP","C4","461","20","Ambient","1.7",1375.55202025415,56.2225698597421,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"78","GCReW","SMARTX","2025","September","SPPA, DISP","C4","462","20","Ambient","3.4",2007.54904213314,82.0540151199332,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"79","GCReW","SMARTX","2025","September","SPPA, DISP","C4","462","40","Ambient","3.4",2573.03093489185,105.166805295743,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"80","GCReW","SMARTX","2025","September","SPPA, DISP","C4","461","120","Ambient","1.7",1540.12934397214,62.9492947991264,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"81","GCReW","SMARTX","2025","September","SPPA, DISP","C4","462","10","Ambient","3.4",1082.17779221782,44.2315634943316,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"82","GCReW","SMARTX","2025","September","SPPA, DISP","C4","463","120","Ambient","5.1",4995.74892123535,204.189909643686,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"83","GCReW","SMARTX","2025","September","SPPA, DISP","C4","463","20","Ambient","5.1",6413.81743917477,262.150244943124,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"84","GCReW","SMARTX","2025","September","SPPA, DISP","C4","462","80","Ambient","3.4",3434.39240285923,140.373002221933,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"85","GCReW","SMARTX","2025","September","SPPA, DISP","C4","462","120","Ambient","3.4",3323.64065109517,135.84627549044,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"86","GCReW","SMARTX","2025","September","SPPA, DISP","C4","463","40","Ambient","5.1",3956.17340758963,161.699617688298,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"87","GCReW","SMARTX","2025","September","SPPA, DISP","C4","463","80","Ambient","5.1",5470.08764946277,223.577429630041,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"88","GCReW","SMARTX","2025","September","SPPA, DISP","C4","461","40","Ambient","1.7",700.254833162652,28.6213285265904,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"89","GCReW","SMARTX","2025","September","SPPA, DISP","C4","461","80","Ambient","1.7",1001.88784140439,40.9498938066893,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"90","GCReW","SMARTX","2025","September","SPPA, DISP","C4","460","40","Ambient","0",971.860074990975,39.7225769404044,"Within Range","","12/12/2025","Some Blanks Had Check Standard instead"
-"91","GCReW","SMARTX","2025","September","SCAM","C3","630","10","Elevated","0",1964.75472627835,80.3048944924913,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"92","GCReW","SMARTX","2025","September","SCAM","C3","630","20","Elevated","0",1171.8631822354,47.8972504559416,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"93","GCReW","SMARTX","2025","September","SCAM","C3","332","10","Ambient","3.4",4806.30854593544,196.446963846124,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"94","GCReW","SMARTX","2025","September","SCAM","C3","332","20","Ambient","3.4",3885.60753260983,158.815397551692,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"95","GCReW","SMARTX","2025","September","SCAM","C3","332","40","Ambient","3.4",3149.25600378623,128.718698436697,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"96","GCReW","SMARTX","2025","September","SCAM","C3","330","10","Ambient","0",1012.92091976234,41.400845867836,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"97","GCReW","SMARTX","2025","September","SCAM","C3","330","20","Ambient","0",1120.73498501848,45.8075013243167,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"98","GCReW","SMARTX","2025","September","SCAM","C3","333","10","Ambient","5.1",11906.0981923621,486.634767366594,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"99","GCReW","SMARTX","2025","September","SCAM","C3","333","20","Ambient","5.1",13120.1278820418,536.255478204711,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"100","GCReW","SMARTX","2025","September","SCAM","C3","330","120","Ambient","0",1638.59390178606,66.9738103382614,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"101","GCReW","SMARTX","2025","September","SCAM","C3","331","10","Ambient","1.7",3142.07868827816,128.425341939366,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"102","GCReW","SMARTX","2025","September","SCAM","C3","331","20","Ambient","1.7",1398.26406986188,57.1508733894716,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"103","GCReW","SMARTX","2025","September","SCAM","C3","633","10","Elevated","5.1",7587.13671363548,310.107009867188,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"104","GCReW","SMARTX","2025","September","SCAM","C3","633","20","Elevated","5.1",9631.87113889123,393.680893206998,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"105","GCReW","SMARTX","2025","September","SCAM","C3","331","120","Ambient","1.7",1050.09303727322,42.9201718859125,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"106","GCReW","SMARTX","2025","September","SCAM","C3","633","80","Elevated","5.1",8316.71117422414,339.926711684609,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"107","GCReW","SMARTX","2025","September","SCAM","C3","633","120","Elevated","5.1",12078.5725437858,493.684265407489,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"108","GCReW","SMARTX","2025","September","SCAM","C3","332","80","Ambient","3.4",8116.81310073866,331.756331185812,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"109","GCReW","SMARTX","2025","September","SCAM","C3","332","120","Ambient","3.4",7987.43316969786,326.468219864477,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"110","GCReW","SMARTX","2025","September","SCAM","C3","333","120","Ambient","5.1",11638.0902439229,475.680550163447,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"111","GCReW","SMARTX","2025","September","SCAM","C3","333","40","Ambient","5.1",11978.5666922818,489.596752983549,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"112","GCReW","SMARTX","2025","September","SCAM","C3","333","80","Ambient","5.1",11802.1119156461,482.384564087447,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"113","GCReW","SMARTX","2025","September","SCAM","C3","633","40","Elevated","5.1",6559.56459049383,268.107329281803,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"114","GCReW","SMARTX","2025","September","SCAM","C3","630","120","Elevated","0",183.368526642713,7.494772751192,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"115","GCReW","SMARTX","2025","September","SCAM","C3","330","80","Ambient","0",771.181778745082,31.5203066053762,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"116","GCReW","SMARTX","2025","September","SCAM","C3","330","40","Ambient","0",800.277754913244,32.7095386581557,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"117","GCReW","SMARTX","2025","September","SCAM","C3","331","40","Ambient","1.7",620.830952731846,25.3750575020836,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"118","GCReW","SMARTX","2025","September","SCAM","C3","331","80","Ambient","1.7",702.394248335672,28.7087722708131,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"119","GCReW","SMARTX","2025","September","SCAM","C3","630","40","Elevated","0",442.272314129243,18.0768780184459,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"120","GCReW","SMARTX","2025","September","SCAM","C3","630","80","Elevated","0",301.686362361238,12.3307460087567,"Within Range","","12/8/2025","Some Blanks Had Check Standard instead"
-"121","GCReW","SMARTX","2025","September","SPPA, DISP","C4","440","10","Ambient","0",3058.10081218456,124.99293666801,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"122","GCReW","SMARTX","2025","September","SPPA, DISP","C4","440","20","Ambient","0",4676.33645392965,191.13464928803,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"123","GCReW","SMARTX","2025","September","SPPA, DISP","C4","440","40","Ambient","0",9130.29582611383,373.180139584217,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"124","GCReW","SMARTX","2025","September","SPPA, DISP","C4","440","80","Ambient","0",1324.77182641336,54.1470445770429,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"125","GCReW","SMARTX","2025","September","SPPA, DISP","C4","440","120","Ambient","0",12580.5253160708,514.200446831783,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"126","GCReW","SMARTX","2025","September","SPPA, DISP","C4","441","10","Ambient","1.7",1934.15102707088,79.0540376791368,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"127","GCReW","SMARTX","2025","September","SPPA, DISP","C4","441","20","Ambient","1.7",2276.08662975189,93.0298801236226,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"128","GCReW","SMARTX","2025","September","SPPA, DISP","C4","441","40","Ambient","1.7",3526.40483220856,144.133801639829,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"129","GCReW","SMARTX","2025","September","SPPA, DISP","C4","441","80","Ambient","1.7",1954.89722909746,79.9019916464088,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"130","GCReW","SMARTX","2025","September","SPPA, DISP","C4","441","120","Ambient","1.7",8031.03742793043,328.250445050123,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"131","GCReW","SMARTX","2025","September","SPPA, DISP","C4","442","10","Ambient","3.4",2532.0470714987,103.491682807596,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"132","GCReW","SMARTX","2025","September","SPPA, DISP","C4","442","20","Ambient","3.4",3577.0646310422,146.204406049598,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"133","GCReW","SMARTX","2025","September","SPPA, DISP","C4","442","40","Ambient","3.4",4996.5240360441,204.221590703975,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"134","GCReW","SMARTX","2025","September","SPPA, DISP","C4","442","80","Ambient","3.4",6362.95082577092,260.071187456735,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"135","GCReW","SMARTX","2025","September","SPPA, DISP","C4","442","120","Ambient","3.4",4191.96809741771,171.337190987028,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"136","GCReW","SMARTX","2025","September","SPPA, DISP","C4","443","10","Ambient","5.1",7522.44587104208,307.46291835815,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"137","GCReW","SMARTX","2025","September","SPPA, DISP","C4","443","20","Ambient","5.1",5754.80166362229,235.214469389666,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"138","GCReW","SMARTX","2025","September","SPPA, DISP","C4","443","40","Ambient","5.1",5340.21156260409,218.269039064649,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"139","GCReW","SMARTX","2025","September","SPPA, DISP","C4","443","80","Ambient","5.1",5337.75484176231,218.168626170684,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"140","GCReW","SMARTX","2025","September","SPPA, DISP","C4","443","120","Ambient","5.1",5178.86507884988,211.67436738308,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"141","GCReW","SMARTX","2025","September","SPPA, DISP","C4","450","10","Ambient","0",1260.72759763844,51.5293819416845,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"142","GCReW","SMARTX","2025","September","SPPA, DISP","C4","451","10","Ambient","1.7",1417.81005976768,57.9497714077039,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"143","GCReW","SMARTX","2025","September","SPPA, DISP","C4","450","40","Ambient","0",1038.61922525038,42.4512058355463,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"144","GCReW","SMARTX","2025","September","SPPA, DISP","C4","450","80","Ambient","0",5191.68231504489,212.198242850364,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"145","GCReW","SMARTX","2025","September","SPPA, DISP","C4","450","120","Ambient","0",8700.22704132202,355.602053156788,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"146","GCReW","SMARTX","2025","September","SPPA, DISP","C4","451","120","Ambient","1.7",7771.33317184073,317.635622443721,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"147","GCReW","SMARTX","2025","September","SPPA, DISP","C4","451","20","Ambient","1.7",3940.11729319927,161.04336041871,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"148","GCReW","SMARTX","2025","September","SPPA, DISP","C4","451","40","Ambient","1.7",4298.28168499287,175.682517820527,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"149","GCReW","SMARTX","2025","September","SPPA, DISP","C4","451","80","Ambient","1.7",5203.47256137982,212.680142435744,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
-"150","GCReW","SMARTX","2025","September","SPPA, DISP","C4","450","20","Ambient","0",730.508195371369,29.8578661094856,"Within Range","","12/9/2025","Some Blanks Had Check Standard instead"
+,Site,Project,Year,Month,Community,Nickname,Plot,Depth_cm,CO2_Treatment,Temp_Treatment,CH4_Conc_ppm,CH4_Conc_uM,CH4_Conc_Flag,CH4_QAQC_Flags,Analysis_rundate,Run_notes
+1,GCReW,SMARTX,2025,September,SCAM,C3,620,10,Elevated,0,2351.003216,96.09192574,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+2,GCReW,SMARTX,2025,September,SCAM,C3,620,20,Elevated,0,1071.717054,43.80400453,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+3,GCReW,SMARTX,2025,September,SCAM,C3,322,10,Ambient,3.4,3534.317447,144.4572118,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+4,GCReW,SMARTX,2025,September,SCAM,C3,322,20,Ambient,3.4,4627.861281,189.1533365,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+5,GCReW,SMARTX,2025,September,SCAM,C3,311,120,Ambient,1.7,1286.879989,52.59830165,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+6,GCReW,SMARTX,2025,September,SCAM,C3,320,10,Ambient,0,2173.491491,88.83653646,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+7,GCReW,SMARTX,2025,September,SCAM,C3,320,20,Ambient,0,1186.558108,48.49787221,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+8,GCReW,SMARTX,2025,September,SCAM,C3,312,40,Ambient,3.4,6244.322279,255.2225146,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+9,GCReW,SMARTX,2025,September,SCAM,C3,320,80,Ambient,0,1429.807142,58.44012495,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+10,GCReW,SMARTX,2025,September,SCAM,C3,320,120,Ambient,0,1139.399809,46.5703837,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+11,GCReW,SMARTX,2025,September,SCAM,C3,321,10,Ambient,1.7,2374.341745,97.04583516,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+12,GCReW,SMARTX,2025,September,SCAM,C3,321,20,Ambient,1.7,2039.376868,83.35490533,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+13,GCReW,SMARTX,2025,September,SCAM,C3,321,40,Ambient,1.7,1299.549281,53.11613022,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+14,GCReW,SMARTX,2025,September,SCAM,C3,321,80,Ambient,1.7,3077.88676,125.8016424,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+15,GCReW,SMARTX,2025,September,SCAM,C3,321,120,Ambient,1.7,2029.542125,82.95293253,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+16,GCReW,SMARTX,2025,September,SCAM,C3,623,80,Elevated,5.1,2344.230447,95.81510412,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+17,GCReW,SMARTX,2025,September,SCAM,C3,613,10,Elevated,5.1,7367.46932,301.1286032,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+18,GCReW,SMARTX,2025,September,SCAM,C3,322,40,Ambient,3.4,2570.594602,105.0672257,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+19,GCReW,SMARTX,2025,September,SCAM,C3,322,80,Ambient,3.4,4747.881659,194.0588973,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+20,GCReW,SMARTX,2025,September,SCAM,C3,322,120,Ambient,3.4,3224.066563,131.7764104,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+21,GCReW,SMARTX,2025,September,SCAM,C3,323,10,Ambient,5.1,4911.625086,200.7515386,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+22,GCReW,SMARTX,2025,September,SCAM,C3,323,20,Ambient,5.1,5845.012623,238.9016378,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+23,GCReW,SMARTX,2025,September,SCAM,C3,323,40,Ambient,5.1,6197.105959,253.2926546,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+24,GCReW,SMARTX,2025,September,SCAM,C3,323,80,Ambient,5.1,6294.477247,257.2724852,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+25,GCReW,SMARTX,2025,September,SCAM,C3,323,120,Ambient,5.1,4281.02577,174.9772214,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+26,GCReW,SMARTX,2025,September,SCAM,C3,623,10,Elevated,5.1,3200.854318,130.8276625,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+27,GCReW,SMARTX,2025,September,SCAM,C3,623,20,Elevated,5.1,2555.203392,104.4381449,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+28,GCReW,SMARTX,2025,September,SCAM,C3,623,40,Elevated,5.1,1169.272648,47.79136822,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+29,GCReW,SMARTX,2025,September,SCAM,C3,311,20,Ambient,1.7,1091.407017,44.60878714,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+30,GCReW,SMARTX,2025,September,SCAM,C3,312,20,Ambient,3.4,8128.251411,332.2238462,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+31,GCReW,SMARTX,2025,September,SCAM,C3,610,10,Elevated,0,1040.965352,42.54709844,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+32,GCReW,SMARTX,2025,September,SCAM,C3,613,40,Elevated,5.1,9004.545222,368.0403688,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+33,GCReW,SMARTX,2025,September,SCAM,C3,312,10,Ambient,3.4,3997.652761,163.3949922,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+34,GCReW,SMARTX,2025,September,SCAM,C3,313,10,Ambient,5.1,6013.790319,245.8000435,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+35,GCReW,SMARTX,2025,September,SCAM,C3,313,20,Ambient,5.1,9833.602234,401.9261943,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+36,GCReW,SMARTX,2025,September,SCAM,C3,310,10,Ambient,0,1924.762783,78.67031449,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+37,GCReW,SMARTX,2025,September,SCAM,C3,310,20,Ambient,0,1105.337436,45.17816141,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+38,GCReW,SMARTX,2025,September,SCAM,C3,313,120,Ambient,5.1,11745.4178,480.0673207,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+39,GCReW,SMARTX,2025,September,SCAM,C3,613,120,Elevated,5.1,6955.512557,284.2908046,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+40,GCReW,SMARTX,2025,September,SCAM,C3,313,40,Ambient,5.1,9344.191115,381.9226245,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+41,GCReW,SMARTX,2025,September,SCAM,C3,311,10,Ambient,1.7,1165.03021,47.61796819,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+42,GCReW,SMARTX,2025,September,SCAM,C3,613,80,Elevated,5.1,7597.593419,310.534404,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+43,GCReW,SMARTX,2025,September,SCAM,C3,613,20,Elevated,5.1,4681.403715,191.3417621,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+44,GCReW,SMARTX,2025,September,SCAM,C3,312,80,Ambient,3.4,5775.012398,236.0405373,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+45,GCReW,SMARTX,2025,September,SCAM,C3,312,120,Ambient,3.4,5410.608142,221.1463396,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+46,GCReW,SMARTX,2025,September,SCAM,C3,313,80,Ambient,5.1,10707.94719,437.6630617,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+47,GCReW,SMARTX,2025,September,SCAM,C3,610,120,Elevated,0,252.501768,10.32043724,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+48,GCReW,SMARTX,2025,September,SCAM,C3,623,120,Elevated,5.1,200.28366,8.186140474,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+49,GCReW,SMARTX,2025,September,SCAM,C3,320,40,Ambient,0,613.0113068,25.05544721,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+50,GCReW,SMARTX,2025,September,SCAM,C3,610,20,Elevated,0,671.0505682,27.42767041,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+51,GCReW,SMARTX,2025,September,SCAM,C3,310,40,Ambient,0,858.9386284,35.10716885,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+52,GCReW,SMARTX,2025,September,SCAM,C3,310,80,Ambient,0,246.9431244,10.09324028,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+53,GCReW,SMARTX,2025,September,SCAM,C3,310,120,Ambient,0,862.2577359,35.24282984,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+54,GCReW,SMARTX,2025,September,SCAM,C3,620,80,Elevated,0,211.3911031,8.640132025,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+55,GCReW,SMARTX,2025,September,SCAM,C3,620,40,Elevated,0,458.460342,18.73852695,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+56,GCReW,SMARTX,2025,September,SCAM,C3,311,40,Ambient,1.7,831.2372888,33.97493941,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+57,GCReW,SMARTX,2025,September,SCAM,C3,311,80,Ambient,1.7,553.3855023,22.61837764,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+58,GCReW,SMARTX,2025,September,SCAM,C3,620,120,Elevated,0,326.0094154,13.32489565,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+59,GCReW,SMARTX,2025,September,SCAM,C3,610,40,Elevated,0,172.1557421,7.036475607,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+60,GCReW,SMARTX,2025,September,SCAM,C3,610,80,Elevated,0,148.9859768,6.089463985,Within Range,,11/24/2025,Some Blanks Had Check Standard instead
+61,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,452,10,Ambient,3.4,1380.440161,56.42236153,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+62,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,452,20,Ambient,3.4,1445.540671,59.08319725,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+63,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,452,40,Ambient,3.4,2254.456171,92.14578416,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+64,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,452,80,Ambient,3.4,5902.681096,241.2587059,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+65,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,452,120,Ambient,3.4,6176.756623,252.4609216,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+66,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,453,10,Ambient,5.1,1573.400915,64.30919481,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+67,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,453,20,Ambient,5.1,3550.631058,145.1239937,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+68,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,453,40,Ambient,5.1,4760.885317,194.5903924,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+69,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,453,80,Ambient,5.1,4824.354768,197.1845622,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+70,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,453,120,Ambient,5.1,3484.525608,142.4220833,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+71,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,460,10,Ambient,0,1402.030616,57.30482243,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+72,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,460,20,Ambient,0,1343.763349,54.92328,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+73,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,463,10,Ambient,5.1,3605.762701,147.3773746,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+74,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,460,80,Ambient,0,1999.462251,81.72348585,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+75,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,460,120,Ambient,0,1640.042099,67.03300212,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+76,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,461,10,Ambient,1.7,1369.191485,55.96259739,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+77,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,461,20,Ambient,1.7,1375.55202,56.22256986,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+78,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,462,20,Ambient,3.4,2007.549042,82.05401512,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+79,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,462,40,Ambient,3.4,2573.030935,105.1668053,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+80,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,461,120,Ambient,1.7,1540.129344,62.9492948,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+81,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,462,10,Ambient,3.4,1082.177792,44.23156349,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+82,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,463,120,Ambient,5.1,4995.748921,204.1899096,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+83,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,463,20,Ambient,5.1,6413.817439,262.1502449,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+84,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,462,80,Ambient,3.4,3434.392403,140.3730022,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+85,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,462,120,Ambient,3.4,3323.640651,135.8462755,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+86,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,463,40,Ambient,5.1,3956.173408,161.6996177,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+87,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,463,80,Ambient,5.1,5470.087649,223.5774296,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+88,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,461,40,Ambient,1.7,700.2548332,28.62132853,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+89,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,461,80,Ambient,1.7,1001.887841,40.94989381,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+90,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,460,40,Ambient,0,971.860075,39.72257694,Within Range,,12/12/2025,Some Blanks Had Check Standard instead
+91,GCReW,SMARTX,2025,September,SCAM,C3,630,10,Elevated,0,1964.754726,80.30489449,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+92,GCReW,SMARTX,2025,September,SCAM,C3,630,20,Elevated,0,1171.863182,47.89725046,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+93,GCReW,SMARTX,2025,September,SCAM,C3,332,10,Ambient,3.4,4806.308546,196.4469638,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+94,GCReW,SMARTX,2025,September,SCAM,C3,332,20,Ambient,3.4,3885.607533,158.8153976,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+95,GCReW,SMARTX,2025,September,SCAM,C3,332,40,Ambient,3.4,3149.256004,128.7186984,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+96,GCReW,SMARTX,2025,September,SCAM,C3,330,10,Ambient,0,1012.92092,41.40084587,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+97,GCReW,SMARTX,2025,September,SCAM,C3,330,20,Ambient,0,1120.734985,45.80750132,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+98,GCReW,SMARTX,2025,September,SCAM,C3,333,10,Ambient,5.1,11906.09819,486.6347674,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+99,GCReW,SMARTX,2025,September,SCAM,C3,333,20,Ambient,5.1,13120.12788,536.2554782,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+100,GCReW,SMARTX,2025,September,SCAM,C3,330,120,Ambient,0,1638.593902,66.97381034,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+101,GCReW,SMARTX,2025,September,SCAM,C3,331,10,Ambient,1.7,3142.078688,128.4253419,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+102,GCReW,SMARTX,2025,September,SCAM,C3,331,20,Ambient,1.7,1398.26407,57.15087339,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+103,GCReW,SMARTX,2025,September,SCAM,C3,633,10,Elevated,5.1,7587.136714,310.1070099,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+104,GCReW,SMARTX,2025,September,SCAM,C3,633,20,Elevated,5.1,9631.871139,393.6808932,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+105,GCReW,SMARTX,2025,September,SCAM,C3,331,120,Ambient,1.7,1050.093037,42.92017189,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+106,GCReW,SMARTX,2025,September,SCAM,C3,633,80,Elevated,5.1,8316.711174,339.9267117,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+107,GCReW,SMARTX,2025,September,SCAM,C3,633,120,Elevated,5.1,12078.57254,493.6842654,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+108,GCReW,SMARTX,2025,September,SCAM,C3,332,80,Ambient,3.4,8116.813101,331.7563312,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+109,GCReW,SMARTX,2025,September,SCAM,C3,332,120,Ambient,3.4,7987.43317,326.4682199,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+110,GCReW,SMARTX,2025,September,SCAM,C3,333,120,Ambient,5.1,11638.09024,475.6805502,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+111,GCReW,SMARTX,2025,September,SCAM,C3,333,40,Ambient,5.1,11978.56669,489.596753,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+112,GCReW,SMARTX,2025,September,SCAM,C3,333,80,Ambient,5.1,11802.11192,482.3845641,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+113,GCReW,SMARTX,2025,September,SCAM,C3,633,40,Elevated,5.1,6559.56459,268.1073293,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+114,GCReW,SMARTX,2025,September,SCAM,C3,630,120,Elevated,0,183.3685266,7.494772751,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+115,GCReW,SMARTX,2025,September,SCAM,C3,330,80,Ambient,0,771.1817787,31.52030661,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+116,GCReW,SMARTX,2025,September,SCAM,C3,330,40,Ambient,0,800.2777549,32.70953866,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+117,GCReW,SMARTX,2025,September,SCAM,C3,331,40,Ambient,1.7,620.8309527,25.3750575,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+118,GCReW,SMARTX,2025,September,SCAM,C3,331,80,Ambient,1.7,702.3942483,28.70877227,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+119,GCReW,SMARTX,2025,September,SCAM,C3,630,40,Elevated,0,442.2723141,18.07687802,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+120,GCReW,SMARTX,2025,September,SCAM,C3,630,80,Elevated,0,301.6863624,12.33074601,Within Range,,12/8/2025,Some Blanks Had Check Standard instead
+121,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,440,10,Ambient,0,3058.100812,124.9929367,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+122,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,440,20,Ambient,0,4676.336454,191.1346493,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+123,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,440,40,Ambient,0,9130.295826,373.1801396,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+124,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,440,80,Ambient,0,1324.771826,54.14704458,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+125,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,440,120,Ambient,0,12580.52532,514.2004468,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+126,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,441,10,Ambient,1.7,1934.151027,79.05403768,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+127,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,441,20,Ambient,1.7,2276.08663,93.02988012,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+128,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,441,40,Ambient,1.7,3526.404832,144.1338016,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+129,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,441,80,Ambient,1.7,1954.897229,79.90199165,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+130,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,441,120,Ambient,1.7,8031.037428,328.2504451,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+131,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,442,10,Ambient,3.4,2532.047071,103.4916828,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+132,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,442,20,Ambient,3.4,3577.064631,146.204406,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+133,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,442,40,Ambient,3.4,4996.524036,204.2215907,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+134,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,442,80,Ambient,3.4,6362.950826,260.0711875,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+135,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,442,120,Ambient,3.4,4191.968097,171.337191,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+136,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,443,10,Ambient,5.1,7522.445871,307.4629184,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+137,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,443,20,Ambient,5.1,5754.801664,235.2144694,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+138,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,443,40,Ambient,5.1,5340.211563,218.2690391,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+139,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,443,80,Ambient,5.1,5337.754842,218.1686262,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+140,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,443,120,Ambient,5.1,5178.865079,211.6743674,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+141,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,450,10,Ambient,0,1260.727598,51.52938194,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+142,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,451,10,Ambient,1.7,1417.81006,57.94977141,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+143,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,450,40,Ambient,0,1038.619225,42.45120584,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+144,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,450,80,Ambient,0,5191.682315,212.1982429,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+145,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,450,120,Ambient,0,8700.227041,355.6020532,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+146,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,451,120,Ambient,1.7,7771.333172,317.6356224,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+147,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,451,20,Ambient,1.7,3940.117293,161.0433604,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+148,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,451,40,Ambient,1.7,4298.281685,175.6825178,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+149,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,451,80,Ambient,1.7,5203.472561,212.6801424,Within Range,,12/9/2025,Some Blanks Had Check Standard instead
+150,GCReW,SMARTX,2025,September,"SPPA, DISP",C4,450,20,Ambient,0,730.5081954,29.85786611,Within Range,,12/9/2025,Some Blanks Had Check Standard instead

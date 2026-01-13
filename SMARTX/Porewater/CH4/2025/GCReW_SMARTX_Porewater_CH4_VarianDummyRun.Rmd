@@ -17,20 +17,20 @@ output_dir: "To Be Reviewed/PDF"
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
 sample_year <- "2025"
-sample_month <- "May"
+sample_month <- "Sept"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_files <- c("Raw Data/20250624_GHGdata_SMARTX.csv","Raw Data/20250813_GHGdata_SMARTX.csv","Raw Data/20250814_GHGdata_SMARTX.csv","Raw Data/20250815_GHGdata_SMARTX.csv" )
+GHG_files <- c("Raw Data/20260112_Varian_DummyRun_septSMARTX.csv" )
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/SMARTX_ShimadzuGC_QAQC_2025.csv"
+#log_path <- "Processed Data/SMARTX_ShimadzuGC_QAQC_2025.csv"
 
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_SMARTX_Porewater_CH4_202505.csv"
+final_path <- "Processed Data/GCReW_SMARTX_Porewater_CH4_Varian.csv"
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
@@ -215,23 +215,21 @@ Slope_CH4_raw_list_l <- map(split_data_l, ~ .x %>% mutate(Curve = "Low",
  Slope_CH4 <- rbind(Slope_CH4_High, Slope_CH4_Low)
 
 #add new standard curve data to log
-log <- read.csv(log_path)
-head(log)
-log <- log[, -c(1)]
-log <- rbind(log, Slope_CH4)
+##head(log)
+#
 
 #remove possible duplicates from multiple QAQC attempts 
 
-unique_log <- log %>% distinct(.keep_all = TRUE)
+#unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(log, aes(x = Run_Date, y = Slope, col = Curve)) +
-  geom_point(size = 4) +
-  ylim(400, 800) +
-  theme_bw()
+#Slopes_chk <- ggplot(log, aes(x = Run_Date, y = Slope, col = Curve)) +
+ # geom_point(size = 4) +
+#  ylim(400, 800) +
+ # theme_bw()
 
-Slopes_chk
+#Slopes_chk
 
-write.csv(unique_log, log_path)
+#write.csv(unique_log, log_path)
 
 #check r2
 
@@ -239,36 +237,10 @@ ifelse(Slope_CH4_High$R2 < r2_cutoff, paste0("High_R2 is Bad","-", Slope_CH4_Hig
 
 ifelse(Slope_CH4_Low$R2 < r2_cutoff, paste0("Low_R2 is Bad","-", Slope_CH4_Low$Run_Date), paste0("Low_R2 is Good","-", Slope_CH4_Low$Run_Date))
 
-High_R2_Flags <- data.frame()
-
-High_R2_Flags <- data.frame(ifelse(Slope_CH4_High$R2 < r2_cutoff, rbind(High_R2_Flags, data.frame(Flag = "R2 is Bad", Run_Date = Slope_CH4_High$Run_Date, Curve = "High")),rbind(High_R2_Flags,  data.frame(Flag = "", Run_Date = Slope_CH4_High$Run_Date, Curve = "High"))))
-
-High_R2_Flags <- High_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date = 2, Curve = 3)
+High_R2_Flags <- Slope_CH4_High %>% mutate(Flag = ifelse(R2 < r2_cutoff,"R2 is Bad", "")) %>% select(Flag, Run_Date, Curve)
 
 
-Low_R2_Flags <- data.frame()
-
-Low_R2_Flags <- data.frame(ifelse(
-  Slope_CH4_Low$R2 < r2_cutoff,
-  rbind(
-    Low_R2_Flags,
-    data.frame(
-      Flag = "R2 is Bad",
-      Run_Date = Slope_CH4_Low$Run_Date,
-      Curve = "Low"
-    )
-  ),
-  rbind(
-    Low_R2_Flags,
-    data.frame(
-      Flag = "",
-      Run_Date = Slope_CH4_Low$Run_Date,
-      Curve = "Low"
-    )
-  )
-))
-
-Low_R2_Flags <- Low_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date = 2, Curve = 3)
+Low_R2_Flags <- Slope_CH4_Low %>% mutate(Flag = ifelse(R2 < r2_cutoff,"R2 is Bad", "")) %>% select(Flag, Run_Date, Curve)
 
 Flags_df <- rbind(High_R2_Flags, Low_R2_Flags)
 
