@@ -1,7 +1,7 @@
 ---
-title: "CO2xN: Porewater Methane"
+title: "SMARTX: Porewater Methane"
 author: "Month Year Samples"
-date: "2025-08-22"
+date: "`r Sys.Date()`"
 output:  
   pdf_document:
     toc: true
@@ -239,36 +239,10 @@ ifelse(Slope_CH4_High$R2 < r2_cutoff, paste0("High_R2 is Bad","-", Slope_CH4_Hig
 
 ifelse(Slope_CH4_Low$R2 < r2_cutoff, paste0("Low_R2 is Bad","-", Slope_CH4_Low$Run_Date), paste0("Low_R2 is Good","-", Slope_CH4_Low$Run_Date))
 
-High_R2_Flags <- data.frame()
-
-High_R2_Flags <- data.frame(ifelse(Slope_CH4_High$R2 < r2_cutoff, rbind(High_R2_Flags, data.frame(Flag = "R2 is Bad", Run_Date = Slope_CH4_High$Run_Date, Curve = "High")),rbind(High_R2_Flags,  data.frame(Flag = "", Run_Date = Slope_CH4_High$Run_Date, Curve = "High"))))
-
-High_R2_Flags <- High_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date = 2, Curve = 3)
+High_R2_Flags <- Slope_CH4_High %>% mutate(Flag = ifelse(R2 < r2_cutoff,"R2 is Bad", "")) %>% select(Flag, Run_Date, Curve)
 
 
-Low_R2_Flags <- data.frame()
-
-Low_R2_Flags <- data.frame(ifelse(
-  Slope_CH4_Low$R2 < r2_cutoff,
-  rbind(
-    Low_R2_Flags,
-    data.frame(
-      Flag = "R2 is Bad",
-      Run_Date = Slope_CH4_Low$Run_Date,
-      Curve = "Low"
-    )
-  ),
-  rbind(
-    Low_R2_Flags,
-    data.frame(
-      Flag = "",
-      Run_Date = Slope_CH4_Low$Run_Date,
-      Curve = "Low"
-    )
-  )
-))
-
-Low_R2_Flags <- Low_R2_Flags %>% select(1,2, 3) %>% rename(Flag = 1, Run_Date = 2, Curve = 3)
+Low_R2_Flags <- Slope_CH4_Low %>% mutate(Flag = ifelse(R2 < r2_cutoff,"R2 is Bad", "")) %>% select(Flag, Run_Date, Curve)
 
 Flags_df <- rbind(High_R2_Flags, Low_R2_Flags)
 

@@ -531,19 +531,24 @@ H2S_Chks_bind <- rbind(H2S_CHKs_plot, H2S_Std_chkplot)
 
 H2S_Chks_bind_1 <- left_join(H2S_Chks_bind, Chk_flags_plot, by = join_by(Std_ID)) 
 
-H2S_Chks_plot_bind <- H2S_Chks_bind_1 %>% mutate(Plot_ID = ifelse(IDs %like% "Chk", substr(IDs, 4, 8), IDs))
+H2S_Chks_plot_bind_a <- H2S_Chks_bind_1 %>% mutate(Plot_ID = as.factor(ifelse(IDs %like% "Chk", substr(IDs, 4, 8), IDs))) 
+
+H2S_Chks_plot_bind <-H2S_Chks_plot_bind_a %>% filter(str_detect(Type, "Check"))
+
+Check_Val <- H2S_Chks_plot_bind_a %>% filter(!str_detect(Plot_ID, "Check")) %>% group_by(Plot_ID) %>% mutate(Z = mean(Mean_Abs)) %>% dplyr::select(Plot_ID, Z) %>% distinct(.keep_all = TRUE)
  
 #Plot Check Standards
-H2S_chk_plot <- ggplot(data = H2S_Chks_plot_bind, aes(x = Plot_ID, y = Mean_Abs, col = Type, fill = Check_Flag)) +
+H2S_chk_plot <- ggplot(data = H2S_Chks_plot_bind, aes(x = Plate, y = Mean_Abs, fill = Check_Flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
+      geom_hline(data = Check_Val, aes(yintercept = Z), linetype = "dashed") +
+ # annotate(data = Check_Val, "text", aes( x = 1.75, y = (Z + Z*0.10)), label = "Target Arbsorbance") +
   geom_errorbar(aes(ymin = Std_CI_low, ymax = Std_CI_high), stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
-  facet_wrap(.~Plate) +
-  scale_color_manual(values =c("Standard" = "lightgreen", "Check" = "cornflowerblue" )) +
+  facet_wrap(.~Plot_ID) +
   scale_fill_manual(values = c("Good" = "darkgreen", "Bad" = "darkred")) +
   theme_classic() + labs(x = " ", y = "Absorbance", title =
-                           "Check Stds: H2S") +
+                           "Check Stds: H2S with Confidence Interval") +
   theme(legend.position = "bottom", axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -641,16 +646,25 @@ Mtx_Std_flags <- H2S_ttest %>% mutate(MTX_Flag = ifelse(T_Test >= p_value_MC, "M
   
 MTX_plot1 <- Mtx_Std_flags %>% mutate(ID_stat = paste0(Std_ID, IDs)) 
 
-MTX_plot2 <- MTX_plot1 %>% group_by(ID_stat) %>% filter(Removed != "RMVD") %>% mutate(Mean_Abs = mean(Abs), SD_2 = 2* sd(Abs)) %>% ungroup() %>% dplyr::select(Plate, Mean_Abs, SD_2, IDs, MTX_Flag, Std_ID) %>% distinct() %>% mutate(IDs = ifelse(IDs == "Std 5", "Standard", "Matrix Check"), Matrix_Flag = ifelse(MTX_Flag %like% "Bad", "Bad", "Good"), Plot_ID = "Matrix Check")
+MTX_plota <- MTX_plot1 %>% group_by(ID_stat) %>% filter(Removed != "RMVD") %>% mutate(Mean_Abs = mean(Abs), SD_2 = 2* sd(Abs)) %>% ungroup() %>% dplyr::select(Plate, Mean_Abs, SD_2, IDs, MTX_Flag, Std_ID) %>% distinct() %>% mutate(IDs = ifelse(IDs == "Std 5", "Standard", "Matrix Check"), Matrix_Flag = ifelse(MTX_Flag %like% "Bad", "Bad", "Good"), Plot_ID = "Matrix Check") 
+
+MTX_plot2 <- MTX_plota %>% filter(str_detect(IDs, "Matrix Check"))
+
+MTX_Val <- MTX_plota %>% filter(!str_detect(IDs, "Matrix Check")) %>% group_by(IDs) %>% mutate(Z = mean(Mean_Abs))
+
+Z_mtx = mean(MTX_plota$Mean_Abs)
 
 
-H2S_mtx_plot <- ggplot(data = MTX_plot2, aes(x = Plot_ID, y = Mean_Abs, col = IDs, fill = Matrix_Flag)) +
+
+
+H2S_mtx_plot <- ggplot(data = MTX_plot2, aes(x = Plate, y = Mean_Abs, fill = Matrix_Flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
   geom_errorbar(aes(ymin = Mean_Abs- SD_2, ymax = Mean_Abs + SD_2), stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
-  facet_wrap(.~Plate) +
-  scale_color_manual(values =c("Standard" = "lightgreen", "Matrix Check" = "cornflowerblue" )) +
+  geom_hline(data = MTX_Val, aes(yintercept = Z), linetype = "dashed" ) +
+    annotate("text", x = 1.75 , y= (Z_mtx + 0.1 * Z_mtx), label= "Target Absorbance", colour = "Black") + 
+  facet_wrap(.~Plot_ID) +
   scale_fill_manual(values = c("Good" = "darkgreen", "Bad" = "darkred")) +
   theme_classic() + labs(x = " ", y = "Absorbance", title =
                            "Matrix Effects Checks with 2 SD: H2S") +
@@ -845,31 +859,28 @@ dup_flags <- dup_join %>%
   mutate(Dup_Flag = ifelse(Diff_P >= dups_perc_diff, "Dup_Bad", "Dup_Good"))
 
 #oraganize data for flagging and plotting
-dup_flags_1 <- dup_flags %>% dplyr::select(Dup_ID, Dup_Flag)
+dup_flags_1 <- dup_flags %>% dplyr::select(Dup_ID, Dup_Flag, Diff_P)
 
-Dup_for_plot_1 <- DUP_start %>% dplyr::select(Plate, Mean_Conc, Dup_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Dup_ID %in% as.vector(dup_spls_l$Dup_ID)) %>% left_join(dup_flags_1) %>% mutate(Dup = ifelse(IDs %like% "Dup", "Duplicate", "Original"))
+Dup_for_plot_1 <- DUP_start %>% dplyr::select(Plate, Mean_Conc, Dup_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Dup_ID %in% as.vector(dup_spls_l$Dup_ID)) %>% left_join(dup_flags_1) %>% mutate(Dup = ifelse(IDs %like% "Dup", "Duplicate", "Original")) %>% dplyr::select(-IDs, -Mean_Conc, -Dup) %>% distinct(.keep_all = TRUE)
 
 #plot Data
 Dup_Plot <- ggplot(Dup_for_plot_1,
                    aes(
                      x = Dup_ID,
-                     y = Mean_Conc,
-                     fill = Dup_Flag,
-                     col = Dup
+                     y = Diff_P,
+                     fill = Dup_Flag
                    )) +
   geom_bar(
     stat = 'identity',
     position = position_dodge2(preserve = "single"),
     linewidth = 0.9
   ) +
-  labs(y = "Sulfide (uM)", x = "Sample ID") +
+  geom_hline(aes(yintercept = dups_perc_diff), linetype = "dashed") +
+    annotate("text",x = 1.75, y=17.5, label= "Percent Difference Cutoff", colour = "Black") + 
+  labs(y = "Percent Difference", x = "Sample ID") +
   scale_fill_manual(values = c(
     "Dup_Good" = "darkgreen",
     "Dup_Bad" = "darkred"
-  )) +
-  scale_color_manual(values = c(
-    "Duplicate" = "goldenrod1",
-    "Original" = "cornflowerblue"
   )) +
   theme_classic()+
   ggtitle("H2S Duplicates") 
@@ -885,6 +896,16 @@ Dup_Plot
 Dup_Flag_1 <- dup_flags %>% group_by(Plate)  %>% mutate(Dup_Flags = ifelse("Dup_Bad" %in% Dup_Flag, "Dup_Bad", "Dup_Good")) %>% dplyr::select(Plate, Dup_Flags) %>% rename(Dup_Flag = Dup_Flags) %>% distinct(.keep_all = TRUE)
 
 Dup_Flags_1 <-Dup_Flag_1 %>% mutate(Dup_Flags = paste0(Dup_Flag, "-", Plate))
+
+Bad_Dups <- dup_flags %>% filter(str_detect(Dup_Flag, "Dup_Bad"))
+                                 
+Bad_D_N <- length(Bad_Dups$Dup_Flag)
+
+Total_D_N <- length(dup_flags$Dup_Flag)
+
+ifelse(Bad_D_N/Total_D_N > 0.4, paste0("<60% of Dups Pass, Rerun"), paste0("Dups Pass") )
+
+Duplicate_Flag <-  ifelse(Bad_D_N/Total_D_N > 0.4, paste0(" >40% Dups Fail"), "" )
 
 paste0(Dup_Flags_1$Dup_Flags)
 
@@ -929,31 +950,31 @@ spk_flags <- spk_join %>% mutate(
   )
 
 #organize data for flagging and plotting
-spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag)
+spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag, Spk_recovery)
 
-Spk_for_plot_1 <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>% left_join(spk_flags_1, by = join_by(Spk_ID)) %>% mutate(Spk = ifelse(IDs %like% "Spike", "Spike", "Original")) %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
+Spk_for_plot_a <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>% left_join(spk_flags_1, by = join_by(Spk_ID)) %>% mutate(Spk = ifelse(IDs %like% "Spike", "Spike", "Original")) %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
+
+Spk_for_plot_1 <- Spk_for_plot_a %>% dplyr::select(Plate, Spk_ID, Spk_recovery, Spk_Flag) %>% distinct(.keep_all = TRUE)
 
 #plot data
 Spk_Plot <- ggplot(Spk_for_plot_1,
                    aes(
-                     x = Spk_ID,
-                     y = Mean_Conc,
-                     fill = Spk_Flag,
-                     col = Spk
+                     x = Plate,
+                     y = Spk_recovery,
+                     fill = Spk_Flag
                    )) +
   geom_bar(
     stat = 'identity',
     position = position_dodge2(preserve = "single"),
     linewidth = 0.9
   ) +
-  labs(y = "Sulfide (uM)", x = "Sample ID") +
+  geom_hline(aes(yintercept = high_recovery_cutoff), linetype = "dashed") +
+    geom_hline(aes(yintercept = low_recovery_cutoff), linetype = "dashed") +
+  annotate("text",x = 1.25, y=115, label= "Acceptable Recovery Range", colour = "Black") + 
+  labs(y = "Spike Recovery (%)", x = "Plate") +
   scale_fill_manual(values = c(
     "Spk_Good" = "darkgreen",
     "Spk_Bad" = "darkred"
-  )) +
-  scale_color_manual(values = c(
-    "Spike" = "goldenrod1",
-    "Original" = "cornflowerblue"
   )) +
   theme_classic() +
   ggtitle("H2S Spikes")
@@ -980,6 +1001,8 @@ length_bad <- length(as.vector(bad$Spk_Flags))
 length_all <-  length(as.vector(Spk_Flags_1$Spk_Flags))
 
 ifelse(length_bad/length_all > 0.4, paste0("<60% of Spikes Pass, Rerun"), paste0("Spikes Pass") )
+
+Spike_Flag <- ifelse(length_bad/length_all > 0.4, paste0(">40% Spikes Fail"), "" )
 
 ```
 
@@ -1055,27 +1078,25 @@ STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mu
   STDCV_Flags = ifelse(STDCV_Flags %like% "Good", NA, STDCV_Flags)
 ) %>% na.omit()
 
-Spk_Flags_All <- Spk_Flag_1  %>% group_by(Plate) %>% mutate(SPK_Flags = paste0(ifelse(Spk_Flag %like% "Good", NA, Spk_Flag))) %>% dplyr::select(Plate, SPK_Flags) %>% na.omit()
-
-Dup_Flags_All <-  Dup_Flag_1  %>% group_by(Plate) %>% mutate(DUP_Flags = paste0(ifelse(Dup_Flag %like% "Good", NA, Dup_Flag))) %>% dplyr::select(Plate, DUP_Flags) %>% na.omit()
+Flags_Int <- tibble(Plate = c(plates))
 
 #Join Flags
-Flags_Joined_1 <- left_join(Spk_Flags_All, Dup_Flags_All, by = join_by(Plate))
+
+Flags_Joined_1 <- left_join(Flags_Int, Mtx_Flags_All, by = join_by(Plate))
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Chk_Flags_All, by = join_by(Plate))
 
-Flags_Joined_3 <- left_join(Flags_Joined_2, Mtx_Flags_All, by = join_by(Plate))
+Flags_Joined <- left_join(Flags_Joined_2, STD_Flags_All, by = join_by(Plate))
 
-Flags_Joined <- left_join(Flags_Joined_3, STD_Flags_All, by = join_by(Plate))
 
 Flags_Joined[Flags_Joined == "NA"] <- NA
 
 #Merge Flags into one column
 Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(
   H2S_Flags = paste0(
-    SPK_Flags,
+    Spike_Flag,
     " ",
-    DUP_Flags,
+    Duplicate_Flag,
     " ",
     CHKSTD_Flags,
     " ",
