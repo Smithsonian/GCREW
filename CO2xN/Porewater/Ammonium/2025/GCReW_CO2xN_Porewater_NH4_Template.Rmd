@@ -919,6 +919,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
     NH3_Conc,
     NH3_Conc_uM,
     Conc_flag,
+    NH3_flag,
     Analysis_rundate,
     Run_notes
   )
