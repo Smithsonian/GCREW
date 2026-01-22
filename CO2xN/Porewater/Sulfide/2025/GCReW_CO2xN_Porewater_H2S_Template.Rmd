@@ -384,12 +384,17 @@ Slopes_chk
 
 write.csv(unique_log, log_path)
 
-stdcrv_filtered <- new_log_stds %>% mutate(In_Range_Slope = ifelse(Slope >= hi_2sd_slope |  Slope <= lo_2sd_slope, "Out of Range", "In Range"), In_Range_Int = ifelse(Intercept >= hi_2sd_int |  Intercept <= lo_2sd_int, "Out of Range", "In Range")) %>% filter(In_Range_Slope == "In Range" & In_Range_Int == "In Range")
+Date_1 <-as.Date(new_log_stds$Run_Date[1]) 
+
+stdcrv_tagged <- new_log_stds %>% mutate(In_Range_Slope = ifelse(Slope >= hi_2sd_slope |  Slope <= lo_2sd_slope, "Out of Range", "In Range"), In_Range_Int = ifelse(Intercept >= hi_2sd_int |  Intercept <= lo_2sd_int, "Out of Range", "In Range")) %>% filter(In_Range_Slope == "In Range" & In_Range_Int == "In Range") %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 2, "Yes", "No"))
+
+stdcrv_filtered <- stdcrv_tagged %>% filter(Date_Close == "Yes")
 
 mean_slope_fin <- mean(stdcrv_filtered$Slope, na.rm = TRUE)
   
 mean_int_fin <- mean(stdcrv_filtered$Intercept, na.rm = TRUE)
 
+Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc)
 
 ```
 
@@ -706,11 +711,10 @@ raw_data <- dat %>%
       filter(str_detect(IDs, "L") | str_detect(IDs, "l"))
 
 #Calculate Concentrations and fix zeroes/negative values and flag conc
-Slopes_calc <- Slope_H2S_Std_Crvs_rm %>% dplyr::select(Plate, Slope, Intercept)
 
-joined_data <- right_join(Slopes_calc, raw_data, by = join_by(Plate))
+joined_data <- right_join(Std_crv_calc, raw_data, by = join_by(Plate))
 
-calc_data <- joined_data %>% mutate(Conc = ((mean_slope_fin*Abs) + mean_int_fin)*Dilution) %>% mutate(Conc = ifelse(Conc <= 0, 0, Conc))
+calc_data <- joined_data %>% mutate(Conc = ((Slope_Calc*Abs) + Int_Calc)*Dilution) %>% mutate(Conc = ifelse(Conc <= 0, 0, Conc))
 
 calc_data_1 <- right_join(High_Std, calc_data, by = join_by(Plate))
 
@@ -897,6 +901,8 @@ Dup_Flag_1 <- dup_flags %>% group_by(Plate)  %>% mutate(Dup_Flags = ifelse("Dup_
 
 Dup_Flags_1 <-Dup_Flag_1 %>% mutate(Dup_Flags = paste0(Dup_Flag, "-", Plate))
 
+Dup_Flags_2 <- Dup_Flags_1 %>% dplyr::select(Plate, Dup_Flag) %>% group_by(Plate) %>% mutate(Duplicate_Flag = ifelse("Dup_Bad" %in% Dup_Flag, "Dup_Bad", "")) %>% dplyr::select(Plate, Duplicate_Flag) %>% rename(Dup_Flag = Duplicate_Flag) %>% distinct(.keep_all = TRUE)
+
 Bad_Dups <- dup_flags %>% filter(str_detect(Dup_Flag, "Dup_Bad"))
                                  
 Bad_D_N <- length(Bad_Dups$Dup_Flag)
@@ -992,6 +998,8 @@ Spk_Flag_1 <- spk_flags %>% mutate(Spk_Flags = Spk_Flag) %>% dplyr::select(Plate
 
 Spk_Flags_1 <-Spk_Flag_1 %>% mutate(Spk_Flags = paste0(Spk_Flag, "-", Plate))
 
+Spk_Flags_2 <- Spk_Flags_1 %>% dplyr::select(Plate, Spk_Flag) %>% group_by(Plate) %>% mutate(Spike_Flag = ifelse("Spk_Bad" %in% Spk_Flag, "Spk_Bad", "")) %>% dplyr::select(Plate, Spike_Flag) %>% rename(Spk_Flag = Spike_Flag) %>% distinct(.keep_all = TRUE)
+
 paste0(Spk_Flags_1$Spk_Flags)
 
 bad <- Spk_Flags_1 %>% filter(Spk_Flags %like% "Bad")
@@ -1082,11 +1090,15 @@ Flags_Int <- tibble(Plate = c(plates))
 
 #Join Flags
 
-Flags_Joined_1 <- left_join(Flags_Int, Mtx_Flags_All, by = join_by(Plate))
+Flags_Joined_1 <-left_join(Flags_Int, Dup_Flags_2, by = join_by(Plate))
 
-Flags_Joined_2 <- left_join(Flags_Joined_1, Chk_Flags_All, by = join_by(Plate))
+Flags_Joined_2 <- left_join(Flags_Joined_1, Spk_Flags_2, by = join_by(Plate))
 
-Flags_Joined <- left_join(Flags_Joined_2, STD_Flags_All, by = join_by(Plate))
+Flags_Joined_3 <- left_join(Flags_Joined_2, Mtx_Flags_All, by = join_by(Plate))
+
+Flags_Joined_4 <- left_join(Flags_Joined_3, Chk_Flags_All, by = join_by(Plate))
+
+Flags_Joined <- left_join(Flags_Joined_4, STD_Flags_All, by = join_by(Plate))
 
 
 Flags_Joined[Flags_Joined == "NA"] <- NA
@@ -1094,9 +1106,9 @@ Flags_Joined[Flags_Joined == "NA"] <- NA
 #Merge Flags into one column
 Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(
   H2S_Flags = paste0(
-    Spike_Flag,
+    Spk_Flag,
     " ",
-    Duplicate_Flag,
+    Dup_Flag,
     " ",
     CHKSTD_Flags,
     " ",
@@ -1117,6 +1129,7 @@ flagged_data <- left_join(merged_data, Flags, by = join_by(Plate))
 df_all_clean <- flagged_data %>% dplyr::select(-Plate)
 
 ```
+
 #Organize Data  
 ```{r, echo=FALSE}
 #check results
