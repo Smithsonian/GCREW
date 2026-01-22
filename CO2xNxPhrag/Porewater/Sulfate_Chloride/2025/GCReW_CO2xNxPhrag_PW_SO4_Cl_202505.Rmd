@@ -33,7 +33,7 @@ lapply(c(
   Date_Run = "2026-01-14"  #Date that instrument was run
   Run_by = "Zoe Read"  #Instrument user 
   Script_run_by = "Zoe Read" #Code user 
-  sample_year <- "2024"
+  sample_year <- "2025"
   sample_month <- "May"
   Site = "GCReW"
   Project_name = "CO2xNxPhrag"

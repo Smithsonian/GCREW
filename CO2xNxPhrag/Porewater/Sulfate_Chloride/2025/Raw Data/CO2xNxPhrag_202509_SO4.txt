@@ -1,0 +1,101 @@
+Inj.	Injection Name	Type 	Ret.Time	Amount	Rel.Area 	Area	Height
+No.	Selected Peak:		min	µg/mL	%	µS*min	µS
+			CD	CD	CD	CD	CD
+			IC-SO4	IC-SO4	IC-SO4	IC-SO4	IC-SO4
+1	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+2	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+3	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+4	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+5	Standard 1	Calibration Standard	4.183	0.4756	6.77	0.4306	3.61
+6	Standard 2	Calibration Standard	4.18	0.9687	6.89	0.8772	7.22
+7	Standard 3	Calibration Standard	4.17	1.9666	6.99	1.7808	14.28
+8	Standard 4	Calibration Standard	4.137	10.0334	7.08	9.0856	65.44
+9	Standard 5	Calibration Standard	4.097	20.0086	7.11	18.1185	116.49
+10	Lab Blank	Unknown	4.187	0.0015	4.55	0.0013	0.01
+11	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+12	P1A_20	Unknown	4.18	138.0137	2.36	1.2498	10.12
+13	P1A_40	Unknown	4.173	170.7013	3.04	1.5458	12.43
+14	P2A_20	Unknown	4.18	109.6574	1.88	0.993	8.09
+15	P2A_40	Unknown	4.173	181.2584	2.92	1.6414	13.22
+16	P3A_20	Unknown	4.153	558.2533	7	5.0552	38.75
+17	P3A_40	Unknown	4.157	472.5642	6.51	4.2793	33.12
+18	P4A_20	Unknown	4.173	170.7913	2.51	1.5466	12.44
+19	P4A_40	Unknown	4.16	463.8166	6.52	4.2	32.54
+20	P5A_20	Unknown	4.17	210.4745	3.36	1.9059	15.25
+21	P5A_20_DUP	Unknown	4.173	208.8734	3.33	1.8914	15.14
+22	P5A_40	Unknown	4.15	621.9962	7.57	5.6324	42.75
+23	P5A_40_SPK	Spiked	4.147	777.2626	9.63	6.9918	51.98
+24	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+25	Standard 1	Check Standard	4.18	0.47	6.64	0.4256	3.56
+26	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+27	P6A_20	Unknown	4.177	161.8888	2.41	1.466	11.79
+28	P6A_40	Unknown	4.173	271.113	3.93	2.455	19.51
+29	P7A_20	Unknown	4.17	268.6226	3.96	2.4325	19.31
+30	P7A_40	Unknown	4.163	432.9828	6.21	3.9208	30.6
+31	P8A_20	Unknown	4.16	494.5472	6.55	4.4783	34.5
+32	P8A_40	Unknown	4.167	321.8085	5.34	2.9141	23.08
+33	P9A_20	Unknown	4.17	296.265	4.72	2.6828	21.21
+34	P9A_40	Unknown	4.157	489.0625	6.96	4.4287	34.24
+35	P10A_20	Unknown	4.17	264.9634	3.92	2.3993	19.05
+36	P10A_20_DUP	Unknown	4.173	267.6141	3.91	2.4234	19.25
+37	P10A_40	Unknown	4.157	461.8083	6.49	4.1819	32.45
+38	P10A_40_SPK	Spiked	4.15	618.5391	8.86	5.564	42.3
+39	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+40	Standard 1	Check Standard	4.183	0.4687	6.64	0.4245	3.55
+41	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+42	P11A_20	Unknown	4.18	76.2783	1.27	0.6907	5.69
+43	P11A_40	Unknown	4.163	410.9083	5.7	3.7209	29.08
+44	P12A_20	Unknown	4.17	215.4975	2.89	1.9514	15.58
+45	P12A_40	Unknown	4.157	477.2249	5.86	4.3215	33.51
+46	P1B_20	Unknown	4.18	103.9779	1.86	0.9416	7.71
+47	P1B_40	Unknown	4.157	521.5017	7.32	4.7224	36.44
+48	P2B_20	Unknown	4.183	21.5937	0.38	0.1955	1.65
+49	P2B_40	Unknown	4.167	350.2938	4.92	3.172	24.99
+50	P3B_20	Unknown	4.15	653.7591	8.03	5.92	44.58
+51	P3B_20_DUP	Unknown	4.15	640.8307	8.03	5.803	43.93
+52	P3B_40	Unknown	4.153	590.1262	7.72	5.3438	40.76
+53	P3B_40_SPK	Spiked	4.143	754.7361	9.86	6.7892	50.7
+54	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+55	Standard 1	Check Standard	4.183	0.4676	6.62	0.4235	3.54
+56	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+57	P4B_20	Unknown	4.177	128.7615	2.04	1.166	9.47
+58	P4B_40	Unknown	4.17	317.824	5.07	2.878	22.69
+59	P5B_20	Unknown	4.18	51.1673	0.81	0.4633	3.85
+60	P5B_40	Unknown	4.153	629.4681	7.75	5.7001	43.29
+61	P6B_20	Unknown	4.173	111.9528	1.68	1.0138	8.27
+62	P6B_40	Unknown	4.153	545.4534	6.93	4.9393	37.99
+63	P7B_20	Unknown	4.173	210.0952	3.54	1.9025	15.23
+64	P7B_40	Unknown	4.16	484.2188	6.67	4.3848	33.9
+65	P8B_20	Unknown	4.163	402.3919	5.89	3.6438	28.52
+66	P8B_20_DUP	Unknown	4.163	404.6955	5.92	3.6647	28.57
+67	P8B_40	Unknown	4.167	361.2981	5.75	3.2717	25.63
+68	P8B_40_SPK	Spiked	4.157	529.7472	8.28	4.7653	36.65
+69	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+70	Standard 2	Check Standard	4.177	0.9611	6.79	0.8703	7.17
+71	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+72	P9B_20	Unknown	4.167	333.6858	5.13	3.0217	23.76
+73	P9B_40	Unknown	4.17	338.7981	5.31	3.068	24.08
+74	P10B_20	Unknown	4.163	372.2495	5.05	3.3709	26.4
+75	P10B_40	Unknown	4.157	583.5198	7.57	5.284	40.33
+76	P11B_20	Unknown	4.18	124.2579	2.1	1.1252	9.12
+77	P11B_40	Unknown	4.157	491.5604	6.6	4.4513	34.4
+78	P12B_20	Unknown	4.167	373.2423	5.28	3.3799	26.44
+79	P12B_20_DUP	Unknown	4.163	367.3732	5.26	3.3267	26.09
+80	P12B_40	Unknown	4.157	541.4403	6.77	4.903	37.54
+81	P12B_40_SPK	Spiked	4.15	730.1796	8.7	6.5683	48.97
+82	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+83	Standard 2	Check Standard	4.183	0.9598	6.78	0.8692	7.17
+84	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+85	Standard 1	Calibration Standard	4.183	0.4662	6.62	0.4222	3.53
+86	Standard 2	Calibration Standard	4.183	0.9605	6.79	0.8697	7.17
+87	Standard 3	Calibration Standard	4.177	1.9517	6.93	1.7673	14.17
+88	Standard 4	Calibration Standard	4.133	10.0308	7.06	9.0833	65.47
+89	Standard 5	Calibration Standard	4.103	19.9725	7.09	18.0859	116.24
+90	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+91	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+92	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+Maximum			4.187	777.2626	9.86	18.1185	116.49
+Average			4.165	293.9615	5.53	3.5092	26.45
+Minimum			4.097	0.0015	0.38	0.0013	0.01
+Standard Deviation			0.016	229.5132	2.18	3.219	21.56
+Relative Standard Deviation			0.39%	78.08%	39.46%	91.73%	81.51%
