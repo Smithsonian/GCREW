@@ -85,6 +85,10 @@ rerun_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202505_reruns.csv"
   dups_perc_diff = 15.5       #this is the maximum percent difference allowed between duplicates
   high_recovery_cutoff = 120  #this is the maximum percent recovery of SO4 allowed in spiked samples
   low_recovery_cutoff = 80    #this is the minimum percent recovery of SO4 allowed in spiked samples
+  
+  
+#significant digits
+  sigdigs <- 3 #this is the number of significant digits to be included in output concentration
 
 #Standard concentrations - Update if running different standard curve:
 # standard units are in uM
@@ -425,6 +429,8 @@ mean_int_fin <- mean(stdcrv_filtered$Intercept, na.rm = TRUE)
 Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame()
 
 Curve_Flags <- Std_crv_calc %>% dplyr::select(Plate, Slope_Flag, Int_Flag) %>% distinct()
+
+Curve_Flags_forJoin <- Curve_Flags %>% mutate(Slope_Flag = ifelse(Slope_Flag %like% "Good", "", Slope_Flag), Int_Flag = ifelse(Int_Flag %like% "Good", "", Int_Flag)) 
 ```
 
 #Return Flags For Standard Curve
@@ -766,7 +772,7 @@ Dup_Plot <- ggplot(Dup_for_plot_1,
     linewidth = 0.9
   ) +
   geom_hline(aes(yintercept = dups_perc_diff), linetype = "dashed") +
-    annotate("text",x = 1.15, y=17.5, label= "Percent Difference Cutoff", colour = "Black", fontface = "bold") + 
+    annotate("text",x = 1.15, y=17.5, label= "Percent Difference Cutoff", colour = "Black") + 
   labs(y = "Percent Difference", x = "Sample ID") +
   scale_fill_manual(values = c(
     "Dup_Good" = "darkgreen",
@@ -934,7 +940,7 @@ H2S_spl_og <- H2S_spls_md %>%
 
 H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) ) 
 
-Samples <-  H2S_spl_rr_join %>% mutate(Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc), Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate) %>% rename(Sample_ID = IDs)
+Samples <-  H2S_spl_rr_join %>% mutate(Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc), Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate) %>% rename(Sample_ID = IDs) %>% mutate(Conc = signif(Conc, digits = sigdigs))
 
 
 
@@ -966,9 +972,7 @@ merged_data <- metadata %>%
 ```{r, echo=FALSE}
 
 #Get only bad flags for each plate and check
-Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags, Chk_Flag) %>% mutate(Chk_Flag = ifelse(IDs %like% )) group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(CHK_CV_Flags %like% "Good", "", CHK_CV_Flags), " ", ifelse(Chk_Flag %like% "Good", NA, Chk_Flag))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit() %>% distinct(.keep_all = TRUE)
-
-Mtx_Flags_All <- Mtx_Flags_org %>% dplyr::select(Plate, MTX_Flag, MTX_CV_Flag) %>% rename(MTXCV_Flag = MTX_CV_Flag, Mtx_Flag = MTX_Flag) %>% mutate(Mtx_Flag = ifelse(Mtx_Flag %like% "Good", NA , Mtx_Flag)) %>% mutate(Mtx_Flag = ifelse(MTXCV_Flag %like% "Good", NA , MTXCV_Flag)) %>% na.omit()
+Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags, Chk_Flag, Chk_IDs) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = ifelse(Chk_Flag %like% "Good", NA,paste0(Chk_IDs, "_",Chk_Flag))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit() %>% distinct(.keep_all = TRUE)
 
 STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mutate(STDCV_Flags = paste0("STD", CV_Flag)) %>% dplyr::select(-CV_Flag) %>% mutate(
   R2_Flag = ifelse(R2_Flag %like% "Good", NA, R2_Flag),
@@ -983,13 +987,11 @@ Flags_Joined_1 <-left_join(Flags_Int, Dup_Flags_2, by = join_by(Plate))
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Spk_Flags_2, by = join_by(Plate))
 
-Flags_Joined_3 <- left_join(Flags_Joined_2, Mtx_Flags_All, by = join_by(Plate))
+Flags_Joined_3 <- left_join(Flags_Joined_2, Chk_Flags_All, by = join_by(Plate))
 
-Flags_Joined_4 <- left_join(Flags_Joined_3, Chk_Flags_All, by = join_by(Plate))
+Flags_Joined_4 <- left_join(Flags_Joined_3, STD_Flags_All, by = join_by(Plate))
 
-Flags_Joined_5 <- left_join(Flags_Joined_4, STD_Flags_All, by = join_by(Plate))
-
-Flags_Joined <- left_join(Flags_Joined__5, Curve_Flags, by = join_by(Plate))
+Flags_Joined <- left_join(Flags_Joined_4, Curve_Flags_forJoin, by = join_by(Plate))
 
 
 Flags_Joined[Flags_Joined == "NA"] <- NA
@@ -1002,10 +1004,6 @@ Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(
     Dup_Flag,
     " ",
     CHKSTD_Flags,
-    " ",
-    Mtx_Flag,
-    " ",
-    MTXCV_Flag,
     " ",
     R2_Flag,
     " ",
