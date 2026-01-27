@@ -837,22 +837,20 @@ cat("Sample Flagging")
 #Flagging data if the concentration is outside the standards range 
 samples_flagged <- samples %>%
   mutate(
-    Conc_flag = case_when(
-      Test == "Vanadium NOx" & Conc < NOx_dl ~ "bdl",
-      Test == "Vanadium NOx" & Conc > NOx_top ~ "adl",
-      Test == "Vanadium NOx" ~ "Within_Range",
+     Conc_flag = case_when(
+        Test == "Vanadium NOx" & Conc/Dilution < NOx_dl ~ "bdl",
+        Test == "Vanadium NOx" & Conc/Dilution > NOx_top    ~ "adl",
+        Test == "Vanadium NOx"               ~ "Within_Range",
       
-      Test == "Ammonia 2" & Conc > NH3_top & Dilution == 1 ~ "adl",       # will flag if it wasn't diluted 
-      Test == "Ammonia 2" & Conc < NH3_dl ~ "bdl",
-        # Test == "Ammonia 2" & Conc > NH3_top ~ "adl",     #this would flag if above 2, but we want that only if not diluted
-      Test == "Ammonia 2" & Dilution != 1 ~ "Within_Range_Diluted",# your new condition
-      Test == "Ammonia 2" ~ "Within_Range",
+      Test == "Ammonia 2" & Conc/Dilution < NH3_dl ~ "bdl",
+      Test == "Ammonia 2" & Conc/Dilution > NH3_top    ~ "adl",
+      Test == "Ammonia 2"                ~ "Within_Range",
       
-      Test == "o-PHOS 0.3" & Conc < PO4_dl ~ "bdl",
-      Test == "o-PHOS 0.3" & Conc > PO4_top ~ "adl",
-      Test == "o-PHOS 0.3" ~ "Within_Range",
+      Test == "o-PHOS 0.3" & Conc/Dilution < PO4_dl  ~ "bdl",
+      Test == "o-PHOS 0.3" & Conc/Dilution > PO4_top   ~ "adl",
+      Test == "o-PHOS 0.3"                ~ "Within_Range",
       
-      TRUE ~ NA_character_
+      TRUE ~ NA_character_  # fallback for unexpected values
     )
   )
 
