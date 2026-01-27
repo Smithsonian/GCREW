@@ -15,7 +15,7 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- "09/12/2025"
+  run_date <- ""
   sample_year <- "2025"
   sample_month <- "July"
   user <- "Victoria Ellis"
