@@ -407,7 +407,7 @@ stdcrv_tagged <- new_log_stds %>% mutate(
 ) %>% mutate(
   Slope = ifelse(In_Range_Slope == "Out of Range", NA, Slope),
   Intercept = ifelse(In_Range_Int == "Out of Range", NA, Intercept)
-) %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 2, "Yes", "No")) %>% mutate(
+) %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 2, "Yes", "No")) %>% mutate(Slope_Flag = ifelse(is.na(Slope), "Slope_Bad" , "Slope_Good"), Int_Flag = ifelse(is.na(Intercept), "Intercept_Bad" , "Intercept_Good")) %>% mutate(
   Slope = ifelse(is.na(Intercept), NA, Slope),
   Intercept = ifelse(is.na(Slope), NA, Intercept),
   Curve_RMVD = ifelse(is.na(Slope) |
@@ -422,8 +422,9 @@ mean_slope_fin <- mean(stdcrv_filtered$Slope, na.rm = TRUE)
 mean_int_fin <- mean(stdcrv_filtered$Intercept, na.rm = TRUE)
 
 #Attach Slope and Intercept to Plates
-Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD) %>% as.data.frame()
+Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame()
 
+Curve_Flags <- Std_crv_calc %>% dplyr::select(Plate, Slope_Flag, Int_Flag) %>% distinct()
 ```
 
 #Return Flags For Standard Curve
@@ -536,7 +537,6 @@ Chk_Std_flags <- Chk_Std_join %>% mutate(
 #Organize Data for Plotting and Flagging
 Chk_Flags <- Chk_Std_flags %>% group_by(Plate) %>% mutate(Chk_Flag = ifelse(any(CHK_Flag %like% "Bad"), "Chk_Bad", "Chk_Good"), Chk_CV_Flag = ifelse(any(CHK_CV_Flag %like% "High"), "Chk_CV_High", "Chk_CV_Good")) %>% ungroup() %>% mutate(CHK_CV_Flags = ifelse(CHK_CV_Flag %like% "High", paste0(gsub(" ", "", IDs), Chk_CV_Flag), "Good")) %>% mutate(CHKs_Flag = ifelse(CHK_Flag %like% "Bad", CHK_Flag, "Good")) 
 
-
 H2S_CHKs_plot <- H2S_CHKs_a %>% rename(IDs = Chk_IDs, Std_CI_low = Chk_CI_low, Std_CI_high = Chk_CI_high, Mean_Abs = Chk_Mean_Abs) %>% mutate(Type = "Check") %>% dplyr::select(-Chk_CV_Flag)
 
 H2S_Std_chkplot <- H2S_STD_forCHK_a %>% dplyr::select(IDs, Std_CI_low, Std_CI_high, Mean_Abs, Std_ID, Plate) %>% mutate(Type = "Standard")
@@ -602,7 +602,7 @@ joined_data <- right_join(Std_crv_calc, raw_data, by = join_by(Plate))
 
 calc_data <- joined_data %>% mutate(Conc = ((Abs - Int_Calc) / Slope_Calc)*Dilution) %>% mutate(Conc = ifelse(Conc <= 0, 0, Conc))
 
-calc_data_1 <- right_join(High_Std, calc_data, by = join_by(Plate))
+dl_data <- right_join(High_Std, calc_data, by = join_by(Plate))
 
 data_dl_flags <- dl_data %>% mutate(Conc_Flag = ifelse(Abs < MDL, "bdl", ifelse(Abs > High_DL, "adl", "Within_Range")))
 ```
@@ -966,7 +966,7 @@ merged_data <- metadata %>%
 ```{r, echo=FALSE}
 
 #Get only bad flags for each plate and check
-Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags, Chk_Flag) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(CHK_CV_Flags %like% "Good", "", CHK_CV_Flags), " ", ifelse(Chk_Flag %like% "Good", NA, Chk_Flag))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit() %>% distinct(.keep_all = TRUE)
+Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags, Chk_Flag) %>% mutate(Chk_Flag = ifelse(IDs %like% )) group_by(Plate) %>% mutate(CHKSTD_Flags = paste0(ifelse(CHK_CV_Flags %like% "Good", "", CHK_CV_Flags), " ", ifelse(Chk_Flag %like% "Good", NA, Chk_Flag))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit() %>% distinct(.keep_all = TRUE)
 
 Mtx_Flags_All <- Mtx_Flags_org %>% dplyr::select(Plate, MTX_Flag, MTX_CV_Flag) %>% rename(MTXCV_Flag = MTX_CV_Flag, Mtx_Flag = MTX_Flag) %>% mutate(Mtx_Flag = ifelse(Mtx_Flag %like% "Good", NA , Mtx_Flag)) %>% mutate(Mtx_Flag = ifelse(MTXCV_Flag %like% "Good", NA , MTXCV_Flag)) %>% na.omit()
 
@@ -987,7 +987,9 @@ Flags_Joined_3 <- left_join(Flags_Joined_2, Mtx_Flags_All, by = join_by(Plate))
 
 Flags_Joined_4 <- left_join(Flags_Joined_3, Chk_Flags_All, by = join_by(Plate))
 
-Flags_Joined <- left_join(Flags_Joined_4, STD_Flags_All, by = join_by(Plate))
+Flags_Joined_5 <- left_join(Flags_Joined_4, STD_Flags_All, by = join_by(Plate))
+
+Flags_Joined <- left_join(Flags_Joined__5, Curve_Flags, by = join_by(Plate))
 
 
 Flags_Joined[Flags_Joined == "NA"] <- NA
@@ -1007,7 +1009,11 @@ Flags <- Flags_Joined %>% replace(is.na(.), "") %>% mutate(
     " ",
     R2_Flag,
     " ",
-    STDCV_Flags
+    STDCV_Flags,
+    " ",
+    Slope_Flag,
+    " ",
+    Int_Flag
   )
 ) %>% dplyr::select(Plate, H2S_Flags)
 
