@@ -1,0 +1,62 @@
+---
+title: "GCReW_CO2xN_Porewater_Collation"
+output: html_document
+date: "2026-01-28"
+---
+
+```{r}
+library(here)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(data.table)
+```
+##Read in Data
+```{r}
+
+year <- "2025"
+
+ch4_path <- "GCReW_CO2xN_Porewater_"
+nh3_path <- "CO2xN_Porewater_"
+pH_path <- "GCReW_CO2xN_Porewater_"
+SO4_path <- "GCReW_CO2xN_PW_"
+H2S_path <- "GCReW_CO2xN_Porewater_"
+
+CH4_may_dat <- read.csv(here("..", "GCREW","CO2xN", "Porewater", "CH4", year, "Processed Data", paste0(ch4_path, "CH4_", year, "05", ".csv")))
+  
+NH3_may_dat <- read.csv(here("..","Porewater", "Ammonium", year, "Processed Data", paste0(nh3_path, "NH4_", year, "05", ".csv")))
+  
+pH_may_dat <-  read.csv(here("..","Porewater", "pH", year, "Processed Data", paste0(pH_path, "pH_", year, "05", ".csv")))
+
+SO4_may_dat <- read.csv(here("..","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(SO4_path, "Cl_SO4_", year, "05", ".csv")))
+  
+H2S_may_dat <-  read.csv(here("..","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(H2S_path, "H2S_", year, "05", ".csv")))
+  
+CH4_july_dat <- read.csv(here("..","Porewater", "CH4", year, "Processed Data", paste0(ch4_path, "CH4_", year, "07", ".csv")))
+  
+NH3_july_dat <- read.csv(here("...","Porewater", "Ammonium", year, "Processed Data", paste0(nh3_path, "NH4_", year, "07", ".csv")))
+  
+pH_july_dat <-  read.csv(here("..","Porewater", "pH", year, "Processed Data", paste0(pH_path, "pH_", year, "07", ".csv")))
+
+SO4_july_dat <- read.csv(here("..","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(SO4_path, "Cl_SO4_", year, "07", ".csv")))
+  
+H2S_july_dat <-  read.csv(here("...","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(H2S_path, "H2S_", year, "07", ".csv")))
+
+CH4_sept_dat <- read.csv(here("...","Porewater", "CH4", year, "Processed Data", paste0(ch4_path, "CH4_", year, "09", ".csv")))
+  
+NH3_sept_dat <- read.csv(here("...","Porewater", "Ammonium", year, "Processed Data", paste0(nh3_path, "NH4_", year, "09", ".csv")))
+  
+pH_sept_dat <-  read.csv(here("...","Porewater", "pH", year, "Processed Data", paste0(pH_path, "pH_", year, "09", ".csv")))
+
+SO4_sept_dat <- read.csv(here("...","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(SO4_path, "Cl_SO4_", year, "09", ".csv")))
+  
+H2S_sept_dat <-  read.csv(here("...","Porewater", "Sulfate_Chloride", year, "Processed Data", paste0(H2S_path, "H2S_", year, "09", ".csv")))
+
+
+
+
+
+  
+```
+
+
