@@ -611,7 +611,7 @@ ifelse(length(CHK_CV_Flag_1$CHK_CV_Flags) >= 1, paste0(CHK_CV_Flag_1$CHK_CV_Flag
 ```
 
 
-##Calculate Sulfide Concentrations & Add Concentration Flags
+##Calculate Sulfide Concentrations
 ```{r Calculate Sulfide Concentrations,echo=FALSE,include=FALSE}
 
 High_Std <- H2S_STD_CV_fin %>% filter(IDs == "Std 5") %>% mutate(Mean_Abs = round(Mean_Abs, digits = 4)) %>% ungroup() %>% dplyr::select(Plate, Mean_Abs) %>% distinct(.keep_all = TRUE) %>% rename(High_DL = Mean_Abs)
@@ -629,14 +629,13 @@ calc_data <- joined_data %>% mutate(Conc = ((Abs - Int_Calc) / Slope_Calc)*Dilut
 
 dl_data <- right_join(High_Std, calc_data, by = join_by(Plate))
 
-data_dl_flags <- dl_data %>% mutate(Conc_Flag = ifelse(Abs < MDL, "bdl", ifelse(Abs > High_DL, "adl", "Within_Range")))
 ```
 
 ##Remove High CV Samples and Average
 ```{r, echo=FALSE}
 
 #Calculate CVs
-H2S_SPL_cv <- data_dl_flags  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
+H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc), Mean_Abs = mean(Abs)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
 
 #calculate new cv getting best cv from points if cv was high
 H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs) %>%
@@ -662,15 +661,17 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
                                                    Conc,
                                                    Mean_Conc2,
                                                    Conc_SD2,
+                                                   CV2,
                                                    CV_Flag2,
                                                    Conc_Flag) %>% 
-  mutate(Mean_Conc = Mean_Conc2, CV_Flag = CV_Flag2, SD_Conc = Conc_SD2) %>% 
+  mutate(Mean_Conc = Mean_Conc2, CV_Flag = CV_Flag2, SD_Conc = Conc_SD2, CV = CV2) %>% 
                                   dplyr::select(Plate,                                                                                                      Conc,
                                                 Removed,
                                                 IDs,
                                                 Dilution,
                                                 Mean_Conc,
                                                 SD_Conc,
+                                                CV,
                                                 CV_Flag,
                                                 Conc_Flag) 
 
@@ -937,7 +938,7 @@ bad <- Spk_Flags_1 %>% filter(Spk_Flags %like% "Bad")
 
 length_bad <- length(as.vector(bad$Spk_Flags))
 
-length_all <-  length(as.vector(Spk_Flags_1$Spk_Flags))
+length_all <-  length(as.vector(Spk_Flags_1$-pk_Flags))
 
 ifelse(length_bad/length_all > 0.4, paste0("<60% of Spikes Pass, Rerun"), paste0("Spikes Pass") )
 
@@ -965,15 +966,28 @@ RRN_IDs <- as.vector(H2S_spl_rrn$IDs)
 
 H2S_spl_og <- H2S_spls_md %>%
   filter(!Plate %like% "rr") %>% 
-  dplyr::select(IDs, Mean_Conc, Conc_Flag, Plate, CV_Flag) %>% 
+  dplyr::select(IDs, Mean_Conc, Conc_Flag, Plate, CV_Flag, Dilution, CV) %>% 
   distinct(.keep_all = TRUE) %>%
   mutate(Rerun = ifelse(IDs %in% RRN_IDs, "RRN", "Org"))
 
 H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) ) 
 
-Samples <-  H2S_spl_rr_join %>% mutate(Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc), Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate) %>% rename(Sample_ID = IDs) %>% mutate(Conc = signif(Conc, digits = sigdigs))
-
-
+Samples <-  H2S_spl_rr_join %>% mutate(
+  Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
+  Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)
+) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% mutate(Conc = signif(Conc, digits = sigdigs)) %>% group_by(Sample_ID) %>%
+  mutate(
+    Conc = ifelse(
+      length(Conc) == 1,
+      Conc,
+      ifelse(Conc_Flag == "Within_Range" & CV_Flag == "CV_Good",
+        Conc,
+        ifelse(!("Within_Range" %in% Conc_Flag) & "bdl" %in% Conc_Flag,
+          ifelse(Dilution == min(Dilution), Conc, NA),
+          ifelse(CV == min(CV[which(Dilution == max(Dilution))]), Conc, NA)
+        )
+      ))) %>% ungroup()
+      
 
 #check to see if all samples are present in the metadata
 all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
