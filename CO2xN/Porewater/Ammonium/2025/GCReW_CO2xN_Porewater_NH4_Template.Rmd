@@ -15,22 +15,22 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- "09/12/2025"
+  run_date <- "01/30/2025"
   sample_year <- "2025"
-  sample_month <- "July"
+  sample_month <- "Sept"
   user <- "Victoria Ellis"
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  NH3_files <- c("Raw Data/LTREB_July_2M_2025_Run1.csv",
-                 "Raw Data/LTREB_July_2M_2025_Run2.csv")
+  NH3_files <- c("Raw Data/LTREB_2M_Sept_2025_Run1.csv",
+                 "Raw Data/LTREB_2M_Sept_2025_Run2.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
   file_path <- "Raw Data/SEAL_CO2xN_QAQC_Log_2025.csv"
-  final_path <- "Processed Data/CO2xN_Porewater_NH4_202507.csv"
+  final_path <- "Processed Data/CO2xN_Porewater_NH4_202509.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- "pe_chk DUP out of range -- not sure why"
+  run_notes <- ""
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -47,6 +47,7 @@ cat("Setup")
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(
   dplyr,
+  DescTools,
   purrr,
   ggplot2,
   ggpubr,
@@ -61,7 +62,9 @@ pacman::p_load(
   purrr,
   tinytex,
   broom,
-  here)
+  here, 
+  data.table,
+  raster)
 
 Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
@@ -123,7 +126,7 @@ metadata <- raw_metadata %>%
     Sample_ID = Sample.ID,
     Plot_Name = Plot,
   ) %>%
-  select(-Temp_Treatment) %>%
+  dplyr::select(-Temp_Treatment) %>%
   mutate(Treatment = ifelse(
     CO2_Treatment == "Elevated" &
       N_Treatment == "Amended",
@@ -159,7 +162,7 @@ df_combo <- bind_rows(data_NH3)
 
 # Select needed columns & rename 
 df <- df_combo %>%
-  select(Sample_Name = 4, 
+  dplyr::select(Sample_Name = 4, 
          Run_Number = 5,
          Conc = 6, 
          Absorbance = 7, 
@@ -171,8 +174,8 @@ df <- df_combo %>%
 #Checking column headers
 head(df)
 
-df_all <- df %>%
-  mutate(Run_Number = as.numeric(Run_Number))
+df_all <- df %>% mutate(Run_Number = as.numeric(Run_Number),
+         Run_Date = format(as.POSIXct(Run_Time,format='%m/%d/%Y %H:%M'),format='%m/%d/%Y'))
 
 #Need to add some extra code to deal with July and Sept being run in the same file 
 
@@ -182,20 +185,10 @@ df_all <- df %>%
 
 
 ## Assessing standard Curves
-  #Pull out standards data  
-```{r Pull out Standard Curves, echo=FALSE}
-cat("Assess Standard Curves")
-
-#Pull out standards 
-stds <- df_all %>%
-  filter(str_detect(Sample_Name, "Standard"))
-
-#Making standards dataframe based on the test
-stds_NH3 <- stds[stds$Test == "Ammonia 2", ]
-
-#Inputting Standard Values Based on Protocol (LINK PROTOCOL)
-stds_NH3 <- stds_NH3 %>%
-  mutate(`Conc` = case_when(
+# Assess Standard Curves
+```{r, echo=FALSE}
+split_data <- df_all %>% dplyr::select(Sample_Name, Conc, Absorbance, Test, Run_Date) %>% filter(Sample_Name %ilike% "Standard") %>%
+  mutate(Conc = ifelse(Test == "Ammonia 2", case_when(
     Sample_Name == "Standard 0" ~  0.0,
     Sample_Name == "Standard 1" ~  0.0,
     Sample_Name == "Standard .0389" ~ 0.0389,
@@ -204,32 +197,57 @@ stds_NH3 <- stds_NH3 %>%
     Sample_Name == "Standard .5000" ~ 0.5,
     Sample_Name == "Standard 1.0000" ~ 1.0,
     Sample_Name == "Standard 1.5000" ~ 1.5,
-    Sample_Name == "Standard 2.0000" ~ 2,
-    TRUE ~ `Conc`),  # leave unchanged if no match
-    Run_Date = format(lubridate::mdy_hm(Run_Time), "%m-%d-%Y"))
+    Sample_Name == "Standard 2.0000" ~ 2),
+    ifelse(Test == "o-PHOS 0.3", 
+           case_when(
+    Sample_Name == "Standard 0" ~  0.0,
+    Sample_Name == "Standard 1" ~  0.0,
+    Sample_Name == "Standard .006" ~ 0.0060,
+    Sample_Name == "Standard .0150" ~ 0.0150,
+    Sample_Name == "Standard .03" ~ 0.0300,
+    Sample_Name == "Standard .075" ~ 0.0750,
+    Sample_Name == "Standard .15" ~ 0.1500,
+    Sample_Name == "Standard .225" ~ 0.2250,
+    Sample_Name == "Standard .3" ~ 0.3000),
+    "Test Not Found"))) %>%
+  group_by(Run_Date, Test) %>% 
+  na.omit() %>%
+  group_split()
+  
+#run regression and get coefficients by Run
+ 
+Slope_raw_list <- map(split_data, ~ .x %>% mutate(
+                                        R2 = summary(lm(Conc ~ Absorbance, data = .))$adj.r.squared , 
+                                        Slope = coef(lm(Conc ~ Absorbance, data = .))[2],
+                                        Intercept = coef(lm(Conc ~ Absorbance, data = .))[1]))
 
-# identifying x and y
-x2 <- stds_NH3$Absorbance
-y2 <- stds_NH3$Conc
 
-#generating line of best fit aka standard curves
-#NH3
-lin_reg_NH3 <- lm(y2 ~ x2)
-NH3_coefs <- coef(lin_reg_NH3)                        # intercept and slope
-NH3_r2 <- summary(lin_reg_NH3)$r.squared              # R squared
-# Store in a clean dataframe
-std_curve_NH3_1 <- data.frame(
-  Test = "NH3",
-  Intercept = NH3_coefs["(Intercept)"],
-  Slope = NH3_coefs[2],
-  R_squared = NH3_r2
-)
+ Slope_raw <- bind_rows(Slope_raw_list)
+  
+ #check R2 and flag
+ Slope_Std_Crvs <- Slope_raw %>% dplyr::select(Run_Date, R2, Slope, Intercept, Test) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Pass", "R2_Fail"))
 
-#Combining standards & curve data frames
-stds_combo <- bind_rows(stds_NH3)
-std_curve_combo <- bind_rows( std_curve_NH3_1)
+ #join standard curve CVs and regression values
+ 
+ R2_Check <- Slope_Std_Crvs %>% 
+   dplyr::select(Run_Date,
+                 R2,
+                 Slope,
+                 Intercept,
+                 Test,
+                 R2_Flag) %>%
+   distinct()
+ 
+ For_crv_plot <- Slope_raw %>% mutate(Conc =  as.numeric(Conc))
 
+ Curves_Plot <- ggplot(For_crv_plot, aes(Conc, Absorbance, color = Run_Date)) + geom_point(size = 4) +
+  geom_smooth(method = "lm", se = FALSE) + facet_grid(.~Test, scales = "free") + labs(title = "Standard Curves") + theme_classic()
+ 
+Curves_Plot
+ 
 
+R2_Flags <- R2_Check %>% dplyr::select(Test, Run_Date, R2_Flag)
+ 
 ```
   #Plot standards data 
 ```{r Assess Standard Curves, echo=FALSE}
@@ -425,21 +443,34 @@ df_all_cor <- df_all %>%
 
 NH3_peChk <- df_all_cor %>%
   filter(Test == "Ammonia 2", 
-         str_detect(Sample_Name, "pe_chk")) %>%
+         Sample_Name %ilike% "pe") %>% group_by(Run_Date) %>%
   summarise(
     Mean_Chk_Conc = mean(Conc, na.rm = TRUE),
     SD_Chk_Conc = sd(Conc, na.rm = TRUE),
     CV = (SD_Chk_Conc / Mean_Chk_Conc) * 100,
-    pct_diff_Chk = abs(Mean_Chk_Conc - NH3_pe) / NH3_pe,
-    NH3_pe_flag = ifelse(abs(pct_diff_Chk) < 25, "YES, Pass", "NO, rerun"))
+    pct_diff_Chk = 100*(abs(Mean_Chk_Conc - NH3_pe) / NH3_pe),
+    NH3_pe_flag = ifelse(abs(pct_diff_Chk) < 25, "YES, Pass", "NO, rerun"),
+    Run_Date = Run_Date)
 
 #flag write out 
 
-ifelse(NH3_peChk$pct_diff_Chk >= chk_flag, 
-       "NH3 pe Check has a % Difference >25% - REASSESS",  
-       "NH3 pe Check has a % Difference <25% - PROCEED")
-cat("Run mean =", NH3_peChk$Mean_Chk_Conc, "\n")
-cat("Expected  =", NH3_pe, "\n\n")
+Print <- NH3_peChk %>% mutate(Print = ifelse(pct_diff_Chk >= chk_flag, 
+       paste0(Run_Date, "--NH3 pe Check has a % Difference >25% - REASSESS"),  
+       paste0(Run_Date, "--NH3 pe Check has a % Difference <25% - PROCEED")))
+
+Print$Print
+
+PE_Plot <- ggplot(data = NH3_peChk, aes(x = Run_Date, y = pct_diff_Chk, fill = NH3_pe_flag)) +
+  geom_bar(stat = 'identity',
+    position = position_dodge2(preserve = "single"), linewidth = 0.75) +
+  scale_fill_manual(values = c("YES, Pass" = "darkgreen", "NO, rerun" = "darkred")) +
+  geom_hline(yintercept = 25 , linetype = "dashed" ) +
+  theme_classic() + 
+    theme(legend.position = "bottom", strip.text = element_text(size = 8))+
+   labs(title = "Performance Check")
+
+PE_Plot
+
 
 
 ```
