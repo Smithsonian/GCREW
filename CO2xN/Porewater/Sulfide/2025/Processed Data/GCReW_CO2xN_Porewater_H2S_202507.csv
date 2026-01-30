@@ -1,61 +1,61 @@
-,Site,Project,Year,Month,Community,Nickname,Plot,Depth_cm,CO2_Treatment,N_Treatment,H2S_Conc_uM,H2S_Conc_Flag,H2S_CV_Flag,H2S_Flags,Analysis_rundate,Run_notes
-1,GCReW,CO2xN,2025,July,SCAM,2-Meter,L1,40,Elevated,Amended,3860,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-2,GCReW,CO2xN,2025,July,SCAM,2-Meter,L4,20,Ambient,Amended,3020,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-3,GCReW,CO2xN,2025,July,SCAM,2-Meter,L5,80,Elevated,Amended,3380,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-4,GCReW,CO2xN,2025,July,SCAM,2-Meter,L1,80,Elevated,Amended,3970,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-5,GCReW,CO2xN,2025,July,SCAM,2-Meter,L6,20,Ambient,Ambient,2780,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-6,GCReW,CO2xN,2025,July,SCAM,2-Meter,L2,20,Ambient,Ambient,3140,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-7,GCReW,CO2xN,2025,July,SCAM,2-Meter,L6,40,Ambient,Ambient,2970,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-8,GCReW,CO2xN,2025,July,SCAM,2-Meter,L2,40,Ambient,Ambient,3090,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-9,GCReW,CO2xN,2025,July,SCAM,2-Meter,L2,80,Ambient,Ambient,3110,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-10,GCReW,CO2xN,2025,July,SCAM,2-Meter,L4,40,Ambient,Amended,3290,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-11,GCReW,CO2xN,2025,July,SCAM,2-Meter,L3,20,Elevated,Ambient,2900,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-12,GCReW,CO2xN,2025,July,SCAM,2-Meter,L4,80,Ambient,Amended,3660,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-13,GCReW,CO2xN,2025,July,SCAM,2-Meter,L3,40,Elevated,Ambient,3040,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-14,GCReW,CO2xN,2025,July,SCAM,2-Meter,L5,20,Elevated,Amended,2280,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-15,GCReW,CO2xN,2025,July,SCAM,2-Meter,L1,20,Elevated,Amended,3020,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-16,GCReW,CO2xN,2025,July,SCAM,2-Meter,L3,80,Elevated,Ambient,3010,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-17,GCReW,CO2xN,2025,July,SCAM,2-Meter,L5,40,Elevated,Amended,2540,Within_Range,CV_Good,      Intercept_Bad,7/14/2025,
-18,GCReW,CO2xN,2025,July,SCAM,2-Meter,L7,20,Ambient,Ambient,2420,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-19,GCReW,CO2xN,2025,July,SCAM,2-Meter,L9,80,Elevated,Ambient,2570,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-20,GCReW,CO2xN,2025,July,SCAM,2-Meter,L11,40,Ambient,Amended,2130,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-21,GCReW,CO2xN,2025,July,SCAM,2-Meter,L7,40,Ambient,Ambient,2300,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-22,GCReW,CO2xN,2025,July,SCAM,2-Meter,L11,80,Ambient,Amended,2320,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-23,GCReW,CO2xN,2025,July,SCAM,2-Meter,L7,80,Ambient,Ambient,2350,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-24,GCReW,CO2xN,2025,July,SCAM,2-Meter,L12,20,Elevated,Amended,2800,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-25,GCReW,CO2xN,2025,July,SCAM,2-Meter,L8,20,Elevated,Ambient,2560,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-26,GCReW,CO2xN,2025,July,SCAM,2-Meter,L8,40,Elevated,Ambient,2430,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-27,GCReW,CO2xN,2025,July,SCAM,2-Meter,L10,20,Ambient,Amended,2790,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-28,GCReW,CO2xN,2025,July,SCAM,2-Meter,L8,80,Elevated,Ambient,2810,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-29,GCReW,CO2xN,2025,July,SCAM,2-Meter,L10,40,Ambient,Amended,2300,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-30,GCReW,CO2xN,2025,July,SCAM,2-Meter,L9,20,Elevated,Ambient,3030,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-31,GCReW,CO2xN,2025,July,SCAM,2-Meter,L10,80,Ambient,Amended,3440,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-32,GCReW,CO2xN,2025,July,SCAM,2-Meter,L6,80,Ambient,Ambient,2920,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-33,GCReW,CO2xN,2025,July,SCAM,2-Meter,L9,40,Elevated,Ambient,1840,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-34,GCReW,CO2xN,2025,July,SCAM,2-Meter,L11,20,Ambient,Amended,2290,Within_Range,CV_High, Dup_Bad     Intercept_Bad,7/14/2025,
-35,GCReW,CO2xN,2025,July,SCAM,2-Meter,L12,80,Elevated,Amended,2410,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-36,GCReW,CO2xN,2025,July,SCAM,2-Meter,L15,40,Elevated,Amended,2910,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-37,GCReW,CO2xN,2025,July,SCAM,2-Meter,L17,20,Ambient,Ambient,2080,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-38,GCReW,CO2xN,2025,July,SCAM,2-Meter,L13,20,Elevated,Ambient,2530,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-39,GCReW,CO2xN,2025,July,SCAM,2-Meter,L17,40,Ambient,Ambient,1680,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-40,GCReW,CO2xN,2025,July,SCAM,2-Meter,L13,40,Elevated,Ambient,2540,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-41,GCReW,CO2xN,2025,July,SCAM,2-Meter,L17,80,Ambient,Ambient,2020,Within_Range,CV_High, Dup_Bad     Intercept_Bad,7/14/2025,
-42,GCReW,CO2xN,2025,July,SCAM,2-Meter,L13,80,Elevated,Ambient,2880,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-43,GCReW,CO2xN,2025,July,SCAM,2-Meter,L14,20,Ambient,Amended,3040,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-44,GCReW,CO2xN,2025,July,SCAM,2-Meter,L15,80,Elevated,Amended,2630,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-45,GCReW,CO2xN,2025,July,SCAM,2-Meter,L14,40,Ambient,Amended,3080,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-46,GCReW,CO2xN,2025,July,SCAM,2-Meter,L16,20,Ambient,Ambient,3230,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-47,GCReW,CO2xN,2025,July,SCAM,2-Meter,L14,80,Ambient,Amended,3140,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-48,GCReW,CO2xN,2025,July,SCAM,2-Meter,L16,40,Ambient,Ambient,2710,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-49,GCReW,CO2xN,2025,July,SCAM,2-Meter,L12,40,Elevated,Amended,2160,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-50,GCReW,CO2xN,2025,July,SCAM,2-Meter,L15,20,Elevated,Amended,3120,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-51,GCReW,CO2xN,2025,July,SCAM,2-Meter,L16,80,Ambient,Ambient,3130,Within_Range,CV_Good, Dup_Bad     Intercept_Bad,7/14/2025,
-52,GCReW,CO2xN,2025,July,SCAM,2-Meter,L18,40,Elevated,Amended,2090,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-53,GCReW,CO2xN,2025,July,SCAM,2-Meter,L18,20,Elevated,Amended,1460,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-54,GCReW,CO2xN,2025,July,SCAM,2-Meter,L19,20,Elevated,Ambient,2880,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-55,GCReW,CO2xN,2025,July,SCAM,2-Meter,L19,40,Elevated,Ambient,2650,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-56,GCReW,CO2xN,2025,July,SCAM,2-Meter,L19,80,Elevated,Ambient,2600,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-57,GCReW,CO2xN,2025,July,SCAM,2-Meter,L20,20,Ambient,Amended,2630,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-58,GCReW,CO2xN,2025,July,SCAM,2-Meter,L20,40,Ambient,Amended,2600,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-59,GCReW,CO2xN,2025,July,SCAM,2-Meter,L18,80,Elevated,Amended,2590,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
-60,GCReW,CO2xN,2025,July,SCAM,2-Meter,L20,80,Ambient,Amended,2450,Within_Range,CV_Good,Spk_Bad Dup_Bad     Intercept_Bad,7/14/2025,
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","N_Treatment","H2S_Conc_uM","H2S_Conc_Flag","H2S_CV_Flag","H2S_Flags","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xN","2025","July","SCAM","2-Meter","L1","40","Elevated","Amended",3860,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"2","GCReW","CO2xN","2025","July","SCAM","2-Meter","L4","20","Ambient","Amended",3020,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"3","GCReW","CO2xN","2025","July","SCAM","2-Meter","L5","80","Elevated","Amended",3380,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"4","GCReW","CO2xN","2025","July","SCAM","2-Meter","L1","80","Elevated","Amended",3970,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"5","GCReW","CO2xN","2025","July","SCAM","2-Meter","L6","20","Ambient","Ambient",2780,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"6","GCReW","CO2xN","2025","July","SCAM","2-Meter","L2","20","Ambient","Ambient",3140,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"7","GCReW","CO2xN","2025","July","SCAM","2-Meter","L6","40","Ambient","Ambient",2970,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"8","GCReW","CO2xN","2025","July","SCAM","2-Meter","L2","40","Ambient","Ambient",3090,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"9","GCReW","CO2xN","2025","July","SCAM","2-Meter","L2","80","Ambient","Ambient",3110,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"10","GCReW","CO2xN","2025","July","SCAM","2-Meter","L4","40","Ambient","Amended",3290,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"11","GCReW","CO2xN","2025","July","SCAM","2-Meter","L3","20","Elevated","Ambient",2900,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"12","GCReW","CO2xN","2025","July","SCAM","2-Meter","L4","80","Ambient","Amended",3660,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"13","GCReW","CO2xN","2025","July","SCAM","2-Meter","L3","40","Elevated","Ambient",3040,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"14","GCReW","CO2xN","2025","July","SCAM","2-Meter","L5","20","Elevated","Amended",2280,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"15","GCReW","CO2xN","2025","July","SCAM","2-Meter","L1","20","Elevated","Amended",3020,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"16","GCReW","CO2xN","2025","July","SCAM","2-Meter","L3","80","Elevated","Ambient",3010,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"17","GCReW","CO2xN","2025","July","SCAM","2-Meter","L5","40","Elevated","Amended",2540,"Within_Range","CV_Good","      Intercept_Bad",2025-07-14,""
+"18","GCReW","CO2xN","2025","July","SCAM","2-Meter","L7","20","Ambient","Ambient",2420,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"19","GCReW","CO2xN","2025","July","SCAM","2-Meter","L9","80","Elevated","Ambient",2570,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"20","GCReW","CO2xN","2025","July","SCAM","2-Meter","L11","40","Ambient","Amended",2130,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"21","GCReW","CO2xN","2025","July","SCAM","2-Meter","L7","40","Ambient","Ambient",2300,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"22","GCReW","CO2xN","2025","July","SCAM","2-Meter","L11","80","Ambient","Amended",2320,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"23","GCReW","CO2xN","2025","July","SCAM","2-Meter","L7","80","Ambient","Ambient",2350,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"24","GCReW","CO2xN","2025","July","SCAM","2-Meter","L12","20","Elevated","Amended",2800,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"25","GCReW","CO2xN","2025","July","SCAM","2-Meter","L8","20","Elevated","Ambient",2560,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"26","GCReW","CO2xN","2025","July","SCAM","2-Meter","L8","40","Elevated","Ambient",2430,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"27","GCReW","CO2xN","2025","July","SCAM","2-Meter","L10","20","Ambient","Amended",2790,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"28","GCReW","CO2xN","2025","July","SCAM","2-Meter","L8","80","Elevated","Ambient",2810,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"29","GCReW","CO2xN","2025","July","SCAM","2-Meter","L10","40","Ambient","Amended",2300,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"30","GCReW","CO2xN","2025","July","SCAM","2-Meter","L9","20","Elevated","Ambient",3030,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"31","GCReW","CO2xN","2025","July","SCAM","2-Meter","L10","80","Ambient","Amended",3440,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"32","GCReW","CO2xN","2025","July","SCAM","2-Meter","L6","80","Ambient","Ambient",2920,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"33","GCReW","CO2xN","2025","July","SCAM","2-Meter","L9","40","Elevated","Ambient",1840,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"34","GCReW","CO2xN","2025","July","SCAM","2-Meter","L11","20","Ambient","Amended",2290,"Within_Range","CV_High"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"35","GCReW","CO2xN","2025","July","SCAM","2-Meter","L12","80","Elevated","Amended",2410,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"36","GCReW","CO2xN","2025","July","SCAM","2-Meter","L15","40","Elevated","Amended",2910,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"37","GCReW","CO2xN","2025","July","SCAM","2-Meter","L17","20","Ambient","Ambient",2080,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"38","GCReW","CO2xN","2025","July","SCAM","2-Meter","L13","20","Elevated","Ambient",2530,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"39","GCReW","CO2xN","2025","July","SCAM","2-Meter","L17","40","Ambient","Ambient",1680,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"40","GCReW","CO2xN","2025","July","SCAM","2-Meter","L13","40","Elevated","Ambient",2540,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"41","GCReW","CO2xN","2025","July","SCAM","2-Meter","L17","80","Ambient","Ambient",2020,"Within_Range","CV_High"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"42","GCReW","CO2xN","2025","July","SCAM","2-Meter","L13","80","Elevated","Ambient",2880,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"43","GCReW","CO2xN","2025","July","SCAM","2-Meter","L14","20","Ambient","Amended",3040,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"44","GCReW","CO2xN","2025","July","SCAM","2-Meter","L15","80","Elevated","Amended",2630,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"45","GCReW","CO2xN","2025","July","SCAM","2-Meter","L14","40","Ambient","Amended",3080,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"46","GCReW","CO2xN","2025","July","SCAM","2-Meter","L16","20","Ambient","Ambient",3230,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"47","GCReW","CO2xN","2025","July","SCAM","2-Meter","L14","80","Ambient","Amended",3140,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"48","GCReW","CO2xN","2025","July","SCAM","2-Meter","L16","40","Ambient","Ambient",2710,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"49","GCReW","CO2xN","2025","July","SCAM","2-Meter","L12","40","Elevated","Amended",2160,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"50","GCReW","CO2xN","2025","July","SCAM","2-Meter","L15","20","Elevated","Amended",3120,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"51","GCReW","CO2xN","2025","July","SCAM","2-Meter","L16","80","Ambient","Ambient",3130,"Within_Range","CV_Good"," Dup_Bad     Intercept_Bad",2025-07-14,""
+"52","GCReW","CO2xN","2025","July","SCAM","2-Meter","L18","40","Elevated","Amended",2090,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"53","GCReW","CO2xN","2025","July","SCAM","2-Meter","L18","20","Elevated","Amended",1460,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"54","GCReW","CO2xN","2025","July","SCAM","2-Meter","L19","20","Elevated","Ambient",2880,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"55","GCReW","CO2xN","2025","July","SCAM","2-Meter","L19","40","Elevated","Ambient",2650,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"56","GCReW","CO2xN","2025","July","SCAM","2-Meter","L19","80","Elevated","Ambient",2600,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"57","GCReW","CO2xN","2025","July","SCAM","2-Meter","L20","20","Ambient","Amended",2630,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"58","GCReW","CO2xN","2025","July","SCAM","2-Meter","L20","40","Ambient","Amended",2600,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"59","GCReW","CO2xN","2025","July","SCAM","2-Meter","L18","80","Elevated","Amended",2590,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
+"60","GCReW","CO2xN","2025","July","SCAM","2-Meter","L20","80","Ambient","Amended",2450,"Within_Range","CV_Good","Spk_Bad Dup_Bad     Intercept_Bad",2025-07-14,""
