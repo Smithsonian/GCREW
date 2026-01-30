@@ -1,0 +1,39 @@
+---
+title: "CO2xN_H2s_Compile"
+output: pdf_document
+date: "`r Sys.Date()`"
+---
+
+```{r}
+library(here)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(data.table)
+library(tidyverse)
+```
+
+
+```{r}
+
+
+year <- "2025"
+
+H2S_path <- "GCReW_CO2xN_Porewater_"
+
+H2S_may_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfide", year, "Processed Data", paste0(H2S_path, "H2S_", year, "05", ".csv")))
+
+H2S_july_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfide", year, "Processed Data", paste0(H2S_path, "H2S_", year, "07", ".csv")))
+
+H2S_sept_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfide", year, "Processed Data", paste0(H2S_path, "H2S_", year, "09", ".csv")))
+
+```
+
+```{r}
+H2S_dat <- rbind(H2S_july_dat[,-1], H2S_may_dat[,-1], H2S_sept_dat[,-1]) %>% filter(H2S_Conc_Flag != "adl")
+```
+
+```{r}
+write.csv(H2S_dat, paste0("CO2xN_Porewater_H2S_", year, ".csv"))
+
+```

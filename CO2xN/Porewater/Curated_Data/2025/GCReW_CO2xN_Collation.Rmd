@@ -10,7 +10,10 @@ library(dplyr)
 library(ggplot2)
 library(purrr)
 library(data.table)
+library(tidyverse)
 ```
+
+
 ##Read in Data
 ```{r}
 
@@ -60,3 +63,67 @@ H2S_sept_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfide", ye
 ```
 
 
+##Group Data By Analyte
+```{r}
+
+#CH4
+CH4_dat <- rbind(CH4_july_dat[,-1], CH4_may_dat[,-1], CH4_sept_dat[,-1])
+
+#NH3
+NH3_dat <- rbind(NH3_july_dat[,-1], NH3_may_dat[,-1], NH3_sept_dat[,-1])
+
+#pH
+pH_dat <- rbind(pH_july_dat[,-1], pH_may_dat[,-1], pH_sept_dat[,-1])
+
+#SO4
+SO4_dat <- rbind(SO4_july_dat[,-1], SO4_may_dat[,-1], SO4_sept_dat[,-1])
+
+#H2S
+H2S_dat <- rbind(H2S_july_dat[,-1], H2S_may_dat[,-1], H2S_sept_dat[,-1])
+```
+
+##Select Columns we want
+```{r}
+
+#CH4
+CH4_sel <- CH4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, CH4_Conc_uM)
+
+#NH3
+NH3_sel <- NH3_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, NH3_Conc_uM)
+
+#pH
+pH_sel <- pH_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, pH)
+
+#SO4
+SO4_sel <- SO4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, SO4_Conc_mM, Cl_Conc_mM)
+
+#H2S
+H2S_sel <- H2S_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, H2S_Conc_uM)
+
+
+```
+
+##Join all Analytes
+```{r}
+CH4_NH3_join <- full_join(CH4_sel, NH3_sel)
+
+CH4_NH3_pH_join <- full_join(CH4_NH3_join, pH_sel)
+
+CH4_NH3_pH_SO4_join <- full_join(CH4_NH3_pH_join, SO4_sel)
+
+All_join <- full_join(CH4_NH3_pH_SO4_join, H2S_sel)
+```
+##Pivot Data
+```{r}
+
+df_wide <- pivot_wider(All_join, names_from = Depth_cm, values_from = c(CH4_Conc_uM, NH3_Conc_uM, pH, SO4_Conc_mM, Cl_Conc_mM, H2S_Conc_uM))
+
+```
+
+```{r}
+write.csv(df_wide, "CO2xN_2025_DepthWide.csv")
+
+write.csv(All_join, "CO2xN_2025_Long.csv")
+```
+
+write.csv(df_wide, )

@@ -1,0 +1,181 @@
+"","Site","Project","Year","Month","Community","Nickname","Sample_ID","Plot","Depth_cm","CO2_Treatment","N_Treatment","NH3_Conc","NH3_Conc_uM","Conc_flag","NH3_Flag","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L1-20","L1",20,"Elevated","Amended",0.886228,63.27171996,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"2","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L2-20","L2",20,"Ambient","Ambient",0.572983,40.90777985,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"3","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L3-20","L3",20,"Elevated","Ambient",0.712918,50.89835579,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"4","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L4-20","L4",20,"Ambient","Amended",0.992503,70.85916026,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"5","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L5-20","L5",20,"Elevated","Amended",1.144692,81.72460323,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"6","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L6-20","L6",20,"Ambient","Ambient",0.566011,40.41001806,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"7","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L7-20","L7",20,"Ambient","Ambient",0.184761,13.1909015,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"8","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L8-20","L8",20,"Elevated","Ambient",0.217066,15.49729772,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"9","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L9-20","L9",20,"Elevated","Ambient",0.18587,13.27007789,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"10","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L11-20","L11",20,"Ambient","Amended",0.920364,65.70883934,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"11","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L12-20","L12",20,"Elevated","Amended",0.973887,69.53008203,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"12","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L13-20","L13",20,"Elevated","Ambient",0.292676,20.89542862,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"13","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L14-20","L14",20,"Ambient","Amended",1.519892,108.5117836,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"14","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L15-20","L15",20,"Elevated","Amended",0.616737,44.03157061,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"15","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L16-20","L16",20,"Ambient","Ambient",0.289955,20.70116444,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"16","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L17-20","L17",20,"Ambient","Ambient",0.150479,10.74335854,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"17","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L18-20","L18",20,"Elevated","Amended",0.473335,33.79347027,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"18","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L19-20","L19",20,"Elevated","Ambient",0.320687,22.89525727,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"19","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L1-40","L1",40,"Elevated","Amended",1.462489,104.4135307,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"20","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L2-40","L2",40,"Ambient","Ambient",1.168386,83.41622224,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"21","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L3-40","L3",40,"Elevated","Ambient",1.069531,76.35852842,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"22","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L4-40","L4",40,"Ambient","Amended",1.697277,121.17608,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"23","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L5-40","L5",40,"Elevated","Amended",1.12438,80.27444009,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"24","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L6-40","L6",40,"Ambient","Ambient",0.791019,56.47433014,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"25","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L7-40","L7",40,"Ambient","Ambient",0.293797,20.97546174,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"26","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L8-40","L8",40,"Elevated","Ambient",1.747364,124.7520115,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"27","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L9-40","L9",40,"Elevated","Ambient",0.498821,35.61302805,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"28","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L10-40","L10",40,"Ambient","Amended",0.343591,24.5304747,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"29","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L11-40","L11",40,"Ambient","Amended",0.921947,65.82185668,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"30","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L12-40","L12",40,"Elevated","Amended",0.960096,68.54548181,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"31","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L13-40","L13",40,"Elevated","Ambient",0.682985,48.76130709,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"32","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L14-40","L14",40,"Ambient","Amended",1.35474,96.72085502,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"33","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L15-40","L15",40,"Elevated","Amended",0.720531,51.44188139,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"34","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L16-40","L16",40,"Ambient","Ambient",0.686749,49.03003563,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"35","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L17-40","L17",40,"Ambient","Ambient",0.348757,24.89929819,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"36","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L18-40","L18",40,"Elevated","Amended",0.894266,63.84558818,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"37","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L19-40","L19",40,"Elevated","Ambient",0.410515,29.3084738,"Within_Range",NA,NA,"pe_chk DUP out of range -- not sure why"
+"38","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L10-20","L10",20,"Ambient","Amended",1.361268,97.18691769,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"39","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L20-20","L20",20,"Ambient","Amended",1.688712,120.5645869,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"40","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L20-40","L20",40,"Ambient","Amended",1.337021,95.45581757,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"41","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L2-80","L2",80,"Ambient","Ambient",1.596741,113.9983722,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"42","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L3-80","L3",80,"Elevated","Ambient",1.948594,139.1187075,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"43","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L4-80","L4",80,"Ambient","Amended",3.620597,258.4903653,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"44","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L5-80","L5",80,"Elevated","Amended",2.449253,174.8629584,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"45","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L6-80","L6",80,"Ambient","Ambient",1.327028,94.74237329,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"46","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L7-80","L7",80,"Ambient","Ambient",0.9168,65.45438968,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"47","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L8-80","L8",80,"Elevated","Ambient",1.30577,93.22467105,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"48","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L9-80","L9",80,"Elevated","Ambient",1.916844,136.8519351,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"49","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L10-80","L10",80,"Ambient","Amended",2.436878,173.9794527,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"50","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L11-80","L11",80,"Ambient","Amended",2.585527,184.5921595,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"51","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L12-80","L12",80,"Elevated","Amended",2.360244,168.5082139,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"52","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L13-80","L13",80,"Elevated","Ambient",1.915212,136.7354195,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"53","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L14-80","L14",80,"Ambient","Amended",2.361157,168.573397,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"54","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L15-80","L15",80,"Elevated","Amended",1.255683,89.64873953,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"55","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L16-80","L16",80,"Ambient","Ambient",1.45775,104.0751926,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"56","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L17-80","L17",80,"Ambient","Ambient",1.306887,93.3044186,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"57","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L18-80","L18",80,"Elevated","Amended",2.388342,170.5142539,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"58","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L19-80","L19",80,"Elevated","Ambient",0.84459,60.29899976,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"59","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L20-80","L20",80,"Ambient","Amended",1.545844,110.3646112,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"60","GCReW","CO2xN",2025,"July","SCAM","2-Meter","L1-80","L1",80,"Elevated","Amended",3.050827,217.8119757,"Within_Range_Diluted",NA,NA,"pe_chk DUP out of range -- not sure why"
+"61","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L1-20","L1",20,"Elevated","Amended",1.601046,114.3057251,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"62","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L2-20","L2",20,"Ambient","Ambient",0.690348,49.28698409,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"63","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L3-20","L3",20,"Elevated","Ambient",1.181723,84.3684094,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"64","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L4-20","L4",20,"Ambient","Amended",1.614016,115.2317105,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"65","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L6-20","L6",20,"Ambient","Ambient",1.110139,79.25771238,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"66","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L7-20","L7",20,"Ambient","Ambient",0.31019,22.14583021,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"67","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L8-20","L8",20,"Elevated","Ambient",0.347136,24.78356786,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"68","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L9-20","L9",20,"Elevated","Ambient",0.309141,22.07093748,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"69","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L2-40","L2",40,"Ambient","Ambient",1.538155,109.8156596,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"70","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L3-40","L3",40,"Elevated","Ambient",1.721675,122.9179607,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"71","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L4-40","L4",40,"Ambient","Amended",1.892551,135.1175509,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"72","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L5-40","L5",40,"Elevated","Amended",1.604828,114.5757388,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"73","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L6-40","L6",40,"Ambient","Ambient",0.961841,68.67006504,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"74","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L7-40","L7",40,"Ambient","Ambient",0.447635,31.95863408,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"75","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L8-40","L8",40,"Elevated","Ambient",0.860733,61.45151963,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"76","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L9-40","L9",40,"Elevated","Ambient",0.799633,57.08932154,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"77","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L10-40","L10",40,"Ambient","Amended",1.940276,138.5248488,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"78","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L6-80","L6",80,"Ambient","Ambient",1.434034,102.3820029,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"79","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L7-80","L7",80,"Ambient","Ambient",1.017596,72.65066004,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"80","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L8-80","L8",80,"Elevated","Ambient",1.406212,100.3956678,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"81","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L5-20","L5",20,"Elevated","Amended",1.969631,140.6206316,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"82","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L10-20","L10",20,"Ambient","Amended",2.341309,167.1563609,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"83","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L1-40","L1",40,"Elevated","Amended",1.914918,136.7144295,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"84","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L1-80","L1",80,"Elevated","Amended",3.949686,281.9854784,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"85","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L2-80","L2",80,"Ambient","Ambient",1.736392,123.9686721,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"86","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L3-80","L3",80,"Elevated","Ambient",2.46235,175.798011,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"87","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L4-80","L4",80,"Ambient","Amended",3.808269,271.8890959,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"88","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L5-80","L5",80,"Elevated","Amended",2.520369,179.9402429,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"89","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L9-80","L9",80,"Elevated","Ambient",2.091584,149.3273933,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"90","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L10-80","L10",80,"Ambient","Amended",2.425163,173.1430672,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"91","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L11-20","L11",20,"Ambient","Amended",1.349483,96.34553464,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"92","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L12-20","L12",20,"Elevated","Amended",1.13251,80.85487659,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"93","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L13-20","L13",20,"Elevated","Ambient",0.231521,16.52930383,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"94","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L15-20","L15",20,"Elevated","Amended",0.941235,67.19891195,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"95","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L16-20","L16",20,"Ambient","Ambient",0.348438,24.87652338,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"96","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L17-20","L17",20,"Ambient","Ambient",0.37971,27.10916918,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"97","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L19-20","L19",20,"Elevated","Ambient",0.564537,40.30478271,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"98","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L11-40","L11",40,"Ambient","Amended",1.461674,104.3553442,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"99","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L12-40","L12",40,"Elevated","Amended",1.087353,77.63091949,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"100","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L13-40","L13",40,"Elevated","Ambient",0.638529,45.58739746,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"101","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L14-40","L14",40,"Ambient","Amended",1.421246,101.4690113,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"102","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L15-40","L15",40,"Elevated","Amended",1.00988,72.09978082,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"103","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L16-40","L16",40,"Ambient","Ambient",0.729823,52.10527819,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"104","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L17-40","L17",40,"Ambient","Ambient",0.73148,52.22357872,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"105","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L18-40","L18",40,"Elevated","Amended",1.370544,97.84917218,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"106","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L19-40","L19",40,"Elevated","Ambient",0.395919,28.26640108,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"107","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L20-40","L20",40,"Ambient","Amended",1.906601,136.1206423,"Within_Range",NA,"9/23/2025","L9-20 DUP out of range"
+"108","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L11-80","L11",80,"Ambient","Amended",2.686835,191.8249838,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"109","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L12-80","L12",80,"Elevated","Amended",2.567232,183.2859988,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"110","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L13-80","L13",80,"Elevated","Ambient",2.043628,145.9036033,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"111","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L14-80","L14",80,"Ambient","Amended",1.840134,131.3752704,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"112","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L15-80","L15",80,"Elevated","Amended",1.181223,84.3327122,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"113","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L16-80","L16",80,"Ambient","Ambient",1.15891,82.73968886,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"114","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L17-80","L17",80,"Ambient","Ambient",1.569569,112.0584435,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"115","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L18-80","L18",80,"Elevated","Amended",1.280612,91.42853063,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"116","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L19-80","L19",80,"Elevated","Ambient",0.903532,64.50712873,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"117","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L20-80","L20",80,"Ambient","Amended",1.489714,106.3572433,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"118","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L14-20","L14",20,"Ambient","Amended",2.403164,171.5724618,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"119","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L18-20","L18",20,"Elevated","Amended",2.421737,172.89847,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"120","GCReW","CO2xN",2025,"May","SCAM","2-Meter","L20-20","L20",20,"Ambient","Amended",3.087894,220.4583521,"Within_Range_Diluted",NA,"9/23/2025","L9-20 DUP out of range"
+"121","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L1-20","L1",20,"Elevated","Amended",1.195422,85.34644135,"Within_Range",NA,"1/14/2026",NA
+"122","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L2-20","L2",20,"Ambient","Ambient",0.531851,37.97118522,"Within_Range",NA,"1/14/2026",NA
+"123","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L2-40","L2",40,"Ambient","Ambient",1.667846,119.0748713,"Within_Range",NA,"1/14/2026",NA
+"124","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L2-80","L2",80,"Ambient","Ambient",1.888882,134.8556048,"Within_Range",NA,"1/14/2026",NA
+"125","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L3-20","L3",20,"Elevated","Ambient",0.700486,50.01078056,"Within_Range",NA,"1/14/2026",NA
+"126","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L3-40","L3",40,"Elevated","Ambient",1.820998,130.0090671,"Within_Range",NA,"1/14/2026",NA
+"127","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L3-80","L3",80,"Elevated","Ambient",1.946095,138.9402929,"Within_Range",NA,"1/14/2026",NA
+"128","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L4-20","L4",20,"Ambient","Amended",1.203702,85.93758701,"Within_Range",NA,"1/14/2026",NA
+"129","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L4-40","L4",40,"Ambient","Amended",1.967499,140.4684187,"Within_Range",NA,"1/14/2026",NA
+"130","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L5-20","L5",20,"Elevated","Amended",1.606818,114.7178136,"Within_Range",NA,"1/14/2026",NA
+"131","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L5-40","L5",40,"Elevated","Amended",1.759846,125.6431565,"Within_Range",NA,"1/14/2026",NA
+"132","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L6-20","L6",20,"Ambient","Ambient",0.493622,35.24184854,"Within_Range",NA,"1/14/2026",NA
+"133","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L6-40","L6",40,"Ambient","Ambient",1.307691,93.3618197,"Within_Range",NA,"1/14/2026",NA
+"134","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L6-80","L6",80,"Ambient","Ambient",1.37616,98.25012316,"Within_Range",NA,"1/14/2026",NA
+"135","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L7-20","L7",20,"Ambient","Ambient",0.252909,18.05628735,"Within_Range",NA,"1/14/2026",NA
+"136","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L7-40","L7",40,"Ambient","Ambient",0.622634,44.45258341,"Within_Range",NA,"1/14/2026",NA
+"137","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L7-80","L7",80,"Ambient","Ambient",1.011738,72.23243162,"Within_Range",NA,"1/14/2026",NA
+"138","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L8-20","L8",20,"Elevated","Ambient",0.320748,22.89961233,"Within_Range",NA,"1/14/2026",NA
+"139","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L8-40","L8",40,"Elevated","Ambient",0.835766,59.66901554,"Within_Range",NA,"1/14/2026",NA
+"140","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L8-80","L8",80,"Elevated","Ambient",1.473456,105.1965131,"Within_Range",NA,"1/14/2026",NA
+"141","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L9-20","L9",20,"Elevated","Ambient",0.336866,24.05034733,"Within_Range",NA,"1/14/2026",NA
+"142","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L9-40","L9",40,"Elevated","Ambient",0.717147,51.20028272,"Within_Range",NA,"1/14/2026",NA
+"143","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L10-20","L10",20,"Ambient","Amended",1.998059,142.6502317,"Within_Range",NA,"1/14/2026",NA
+"144","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L10-40","L10",40,"Ambient","Amended",1.447762,103.3621053,"Within_Range",NA,"1/14/2026",NA
+"145","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L11-20","L11",20,"Ambient","Amended",0.531931,37.97689677,"Within_Range",NA,"1/14/2026",NA
+"146","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L11-40","L11",40,"Ambient","Amended",1.464893,104.5851628,"Within_Range",NA,"1/14/2026",NA
+"147","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L12-20","L12",20,"Elevated","Amended",0.933825,66.66987941,"Within_Range",NA,"1/14/2026",NA
+"148","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L12-40","L12",40,"Elevated","Amended",1.276732,91.15152034,"Within_Range",NA,"1/14/2026",NA
+"149","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L13-20","L13",20,"Elevated","Ambient",0.21267,15.18344792,"Within_Range",NA,"1/14/2026",NA
+"150","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L13-40","L13",40,"Elevated","Ambient",0.840418,60.00114231,"Within_Range",NA,"1/14/2026",NA
+"151","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L13-80","L13",80,"Elevated","Ambient",1.505915,107.5139041,"Within_Range",NA,"1/14/2026",NA
+"152","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L14-40","L14",40,"Ambient","Amended",1.938933,138.4289661,"Within_Range",NA,"1/14/2026",NA
+"153","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L14-80","L14",80,"Ambient","Amended",1.840769,131.4206059,"Within_Range",NA,"1/14/2026",NA
+"154","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L15-20","L15",20,"Elevated","Amended",0.796853,56.8908451,"Within_Range",NA,"1/14/2026",NA
+"155","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L15-40","L15",40,"Elevated","Amended",0.967147,69.04888375,"Within_Range",NA,"1/14/2026",NA
+"156","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L15-80","L15",80,"Elevated","Amended",1.534249,109.5367931,"Within_Range",NA,"1/14/2026",NA
+"157","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L16-20","L16",20,"Ambient","Ambient",0.308574,22.03045685,"Within_Range",NA,"1/14/2026",NA
+"158","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L16-40","L16",40,"Ambient","Ambient",0.86313,61.62265202,"Within_Range",NA,"1/14/2026",NA
+"159","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L16-80","L16",80,"Ambient","Ambient",1.387207,99.03881714,"Within_Range",NA,"1/14/2026",NA
+"160","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L17-20","L17",20,"Ambient","Ambient",0.323322,23.08338152,"Within_Range",NA,"1/14/2026",NA
+"161","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L17-40","L17",40,"Ambient","Ambient",0.549054,39.19938315,"Within_Range",NA,"1/14/2026",NA
+"162","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L1-40","L1",40,"Elevated","Amended",1.788169,127.6652602,"Within_Range",NA,"1/14/2026",NA
+"163","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L1-80","L1",80,"Elevated","Amended",3.282885,234.3796183,"Within_Range",NA,"1/14/2026",NA
+"164","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L4-80","L4",80,"Ambient","Amended",2.890433,206.3607416,"Within_Range",NA,"1/14/2026",NA
+"165","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L5-80","L5",80,"Elevated","Amended",1.682997,120.1565679,"Within_Range",NA,"1/14/2026",NA
+"166","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L9-80","L9",80,"Elevated","Ambient",1.934405,138.1056923,"Within_Range",NA,"1/14/2026",NA
+"167","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L10-80","L10",80,"Ambient","Amended",2.063088,147.2929384,"Within_Range",NA,"1/14/2026",NA
+"168","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L11-80","L11",80,"Ambient","Amended",2.336297,166.7985321,"Within_Range",NA,"1/14/2026",NA
+"169","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L12-80","L12",80,"Elevated","Amended",2.175686,155.3318055,"Within_Range",NA,"1/14/2026",NA
+"170","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L14-20","L14",20,"Ambient","Amended",1.456405,103.9791671,"Within_Range",NA,"1/14/2026",NA
+"171","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L17-80","L17",80,"Ambient","Ambient",1.457638,104.0671964,"Within_Range",NA,"1/14/2026",NA
+"172","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L18-20","L18",20,"Elevated","Amended",2.015425,143.8900669,"adl",NA,"1/14/2026",NA
+"173","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L18-40","L18",40,"Elevated","Amended",1.905835,136.0659542,"Within_Range",NA,"1/14/2026",NA
+"174","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L19-20","L19",20,"Elevated","Ambient",0.550673,39.31497069,"Within_Range",NA,"1/14/2026",NA
+"175","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L19-40","L19",40,"Elevated","Ambient",1.034577,73.86300842,"Within_Range",NA,"1/14/2026",NA
+"176","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L19-80","L19",80,"Elevated","Ambient",1.291404,92.19901904,"Within_Range",NA,"1/14/2026",NA
+"177","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L18-80","L18",80,"Elevated","Amended",2.360704,168.5410554,"Within_Range",NA,"1/14/2026",NA
+"178","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L20-20","L20",20,"Ambient","Amended",3.303526,235.8532702,"Within_Range",NA,"1/14/2026",NA
+"179","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L20-40","L20",40,"Ambient","Amended",3.000701,214.2332598,"Within_Range",NA,"1/14/2026",NA
+"180","GCReW","CO2xN",2025,"September","SCAM","2-Meter","L20-80","L20",80,"Ambient","Amended",2.179346,155.593109,"Within_Range",NA,"1/14/2026",NA
