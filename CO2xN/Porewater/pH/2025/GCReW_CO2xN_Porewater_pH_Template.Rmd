@@ -104,10 +104,7 @@ metadata <- raw_metadata %>%
         "aCO2 & aN"
       )
     )
-  ))  %>%
-  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
-  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
-
+  ))
 #Bring in the collection date and any field notes if relevant
 #collection_metadata <- read.csv(Collection_Dates)
 #then we will merge the collection date for SMARTX based on the project and the chambers
