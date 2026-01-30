@@ -886,28 +886,29 @@ Spk_Plot
 
 ```
 
-##Display Spike Flags
+## Display Spike Flags
 ```{r, echo=FALSE}
 
 #Check if all Spikes are paired
 ifelse(all(as.vector(spk_spls_l$Spk_ID) %in% as.vector(spls_l$Spk_ID)), paste0("Spikes Paired"), paste0("Spike Missing Pair"))
 
 #Format Data frame
-Spk_Flag_1 <- spk_flags %>% mutate(Spk_Flags = Spk_Flag) %>% dplyr::select(Plate, IDs, Spk_Flags) %>% rename(Spk_Flag = Spk_Flags)
+Spk_Flag_1 <- spk_flags  %>% dplyr::select(Plate, IDs, Spk_Flag) %>% na.omit()
 
 #Attach Plate to Flag
-Spk_Flags_1 <-Spk_Flag_1 %>% mutate(Spk_Flags = paste0(Spk_Flag, "-", Plate))
-
+Spk_Flags_1 <-Spk_Flag_1 %>% group_by(Plate) %>% mutate(Spk_Flags = ifelse( "Spk_Bad" %in% Spk_Flag, paste0("Spk_Bad", "-", Plate), paste0("Spk_Good", "-", Plate))) %>% ungroup()
 #If any Spikes in Plate are bad, then flag plate
 Spk_Flags_2 <- Spk_Flags_1 %>% dplyr::select(Plate, Spk_Flag) %>% group_by(Plate) %>% mutate(Spike_Flag = ifelse("Spk_Bad" %in% Spk_Flag, "Spk_Bad", "")) %>% dplyr::select(Plate, Spike_Flag) %>% rename(Spk_Flag = Spike_Flag) %>% distinct(.keep_all = TRUE)
 
-paste0(Spk_Flags_1$Spk_Flags)
+Spk_disp <- Spk_Flags_1 %>% dplyr::select(Plate, Spk_Flags) %>% distinct(.keep_all = TRUE) %>% na.omit()
 
-bad <- Spk_Flags_1 %>% filter(Spk_Flags %like% "Bad")
+paste0(Spk_disp$Spk_Flags)
 
-length_bad <- length(as.vector(bad$Spk_Flags))
+bad <- Spk_Flag_1 %>% filter(Spk_Flag %like% "Bad")
 
-length_all <-  length(as.vector(Spk_Flags_1$Spk_Flags))
+length_bad <- length(as.vector(bad$Spk_Flag))
+
+length_all <-  length(as.vector(Spk_Flag_1$Spk_Flag))
 
 ifelse(length_bad/length_all > 0.4, paste0("<60% of Spikes Pass, Rerun"), paste0("Spikes Pass") )
 
