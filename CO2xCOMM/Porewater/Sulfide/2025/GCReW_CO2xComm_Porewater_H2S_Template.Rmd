@@ -969,21 +969,30 @@ H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) )
 Samples <-  H2S_spl_rr_join %>% mutate(
   Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
   Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)
-) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% mutate(Conc = signif(Conc, digits = sigdigs)) %>% mutate(Conc = signif(Conc, digits = sigdigs)) %>% ungroup() %>% group_by(Sample_ID) %>%
-  mutate(Conc = ifelse(
-    length(Conc) == 1,
-    Conc,
+) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% ungroup() %>% group_by(Sample_ID) %>% mutate(
+  Min_CV = ifelse(CV == min(CV), "KEEP", "RMV"),
+  Within_Range = "Within_Range" %in% Conc_Flag,
+  BDL = "bdl" %in% Conc_Flag,
+  Max_Dil = max(Dilution),
+  Min_Dil = min(Dilution),
+  All_Good = all(Conc_Flag == "Within_Range") &
+    all(CV_Flag == "CV_Good"),
+  Number = length(Conc)
+) %>% ungroup() %>%
+  mutate(Remove = ifelse(Number == 1, "KEEP", ifelse(
+    All_Good,
+    ifelse(Min_CV == "KEEP", "KEEP1", "RMV1"),
     ifelse(
       Conc_Flag == "Within_Range" & CV_Flag == "CV_Good",
-      Conc,
+      "KEEP2",
       ifelse(
-        !("Within_Range" %in% Conc_Flag) & "bdl" %in% Conc_Flag,
-        ifelse(Dilution == min(Dilution), Conc, NA),
-        ifelse(!("Within_Range" %in% Conc_Flag) &
-                 CV == min(CV[which(Dilution == max(Dilution))]), Conc, NA)
+        !(Within_Range) & BDL,
+        ifelse(Dilution == Min_Dil, "KEEP3", "RMV3"),
+        ifelse(!(Within_Range) &
+                 CV == min(CV[which(Dilution == Max_Dil)]), "KEEP4", "RMV4")
       )
     )
-  )) %>% ungroup()
+  ))) %>% filter(Remove %like% "KEEP")
 
 
 
