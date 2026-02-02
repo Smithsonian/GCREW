@@ -814,13 +814,13 @@ paste0(Dup_Flags_1$Dup_Flags)
 
 ```
 
-## Check the spks for QAQC
+## Spike QAQC
 ```{r, echo=FALSE}
 #pull out any rows that have "Spk" in the ID column
 SPK_start <- H2S_SPL_CV_fin %>%  mutate(Spk_ID = gsub(" ", "", substr(IDs, 1, 6)),
                                         Spk = ifelse(IDs %like% "Spike", "Spk", "Org")) %>% mutate(Spk_ID = ifelse(Plate %like% "rr", paste0(Spk_ID, "_RR"), Spk_ID))
 #separate spikes from originals
-spks_only <- SPK_start %>% filter(Spk == "Spk") %>% dplyr::select(Spk_ID, Mean_Conc, SD_Conc, Dilution) %>% rename(Spk_Conc = Mean_Conc,
+spks_only <- SPK_start %>% filter(Spk == "Spk") %>% dplyr::select(Spk_ID, Mean_Conc, SD_Conc, Dilution, Plate) %>% rename(Spk_Conc = Mean_Conc,
                                                                                                                    Spk_SD = SD_Conc,
                                                                                                                    Spk_Dilution = Dilution) %>% distinct(.keep_all = TRUE)
 
@@ -834,7 +834,7 @@ spk_spls <- no_spks %>% filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>% dpl
 
 SPK_only <- spks_only %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
 
-spk_join <- full_join(SPK_only, spk_spls, by = join_by(Spk_ID))
+spk_join <- full_join(SPK_only, spk_spls, by = join_by(Spk_ID, Plate))
 
 #Calculate recovery and flag data
 spk_flags <- spk_join %>% mutate(
@@ -852,11 +852,16 @@ spk_flags <- spk_join %>% mutate(
   )
 
 #organize data for flagging and plotting
-spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag, Spk_recovery)
+spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag, Spk_recovery, Plate)
 
-Spk_for_plot_a <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>% distinct(.keep_all = TRUE) %>% filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>% left_join(spk_flags_1, by = join_by(Spk_ID)) %>% mutate(Spk = ifelse(IDs %like% "Spike", "Spike", "Original")) %>% filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
+Spk_for_plot_a <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>%
+  distinct(.keep_all = TRUE) %>%
+  filter(Spk_ID %in% as.vector(spk_spls_l$Spk_ID)) %>%
+  left_join(spk_flags_1, by = join_by(Spk_ID, Plate)) %>%
+  mutate(Spk = ifelse(IDs %like% "Spike", "Spike", "Original")) %>%
+  filter(Spk_ID %in% as.vector(spls_l$Spk_ID))
 
-Spk_for_plot_1 <- Spk_for_plot_a %>% dplyr::select(Plate, Spk_ID, Spk_recovery, Spk_Flag) %>% distinct(.keep_all = TRUE)
+Spk_for_plot_1 <- Spk_for_plot_a %>% dplyr::select(Plate, Spk_ID, Spk_recovery, Spk_Flag) %>% na.omit() %>% distinct(.keep_all = TRUE)
 
 #plot data
 Spk_Plot <- ggplot(Spk_for_plot_1,
@@ -865,20 +870,22 @@ Spk_Plot <- ggplot(Spk_for_plot_1,
                      y = Spk_recovery,
                      fill = Spk_Flag
                    )) +
+  geom_rect(aes(xmin=0, xmax=Inf, ymin=low_recovery_cutoff, ymax=high_recovery_cutoff), alpha = 0.25, fill ="palegreen") +
   geom_bar(
     stat = 'identity',
     position = position_dodge2(preserve = "single"),
     linewidth = 0.9
   ) +
-  geom_hline(aes(yintercept = high_recovery_cutoff), linetype = "dashed") +
-    geom_hline(aes(yintercept = low_recovery_cutoff), linetype = "dashed") +
-  annotate("text",x = 1.25, y=115, label= "Acceptable Recovery Range", colour = "Black") + 
+  geom_hline(aes(yintercept = high_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
+    geom_hline(aes(yintercept = low_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
+  annotate("text",x = 1.75, y=high_recovery_cutoff - 5, label= "Acceptable Recovery Range", color = "black") + 
   labs(y = "Spike Recovery (%)", x = "Plate") +
   scale_fill_manual(values = c(
     "Spk_Good" = "darkgreen",
     "Spk_Bad" = "darkred"
   )) +
   theme_classic() +
+    theme(legend.position = "bottom") +
   ggtitle("H2S Spikes")
 
 Spk_Plot
