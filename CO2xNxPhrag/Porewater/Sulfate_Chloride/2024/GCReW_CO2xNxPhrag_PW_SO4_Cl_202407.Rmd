@@ -1088,7 +1088,7 @@ colnames(final_data)
 final_data <- final_data %>%
   select(
          Site, Project, Year, Month, 
-         Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, 
+         Community, Nickname, Plot, SubPlot, Depth_cm, CO2_Treatment, Temp_Treatment, 
          SO4_Conc_mM, SO4_Conc_flag, SO4_QAQC_flag, Cl_Conc_mM, Cl_Conc_flag, Cl_QAQC_flag, salinity,
          Analysis_rundate,  Run_notes
         # list columns in the order you want them
