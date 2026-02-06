@@ -27,7 +27,7 @@ library(plater)
 library(raster)
 library(knitr)  
 library(readxl)
-
+library(ggrepel)
 
 ```
 
@@ -462,10 +462,16 @@ ifelse(Std_crv_calc$Curve_RMVD == "RMVD", paste0("Curve_Removed-", Std_crv_calc$
 #get only lowest standard
  STD_MDL_df <- H2S_STD_CV_fin %>% filter(IDs == "Std 1"
                                          #, Removed != "RMVD"
-                                         ) %>% dplyr::select(Plate, Abs, Removed, Conc, Mean_Abs)
+                                         ) %>% dplyr::select(Plate, Mean_Abs, IDs) %>% distinct()
 
+ STD0_df <- H2S_STD_CV_fin %>% filter(IDs == "Std 0"
+                                         #, Removed != "RMVD"
+                                         ) %>% dplyr::select(Plate, Mean_Abs, IDs) %>% distinct()
 #calculate the standard deviation of abs
 stddev_mdl <- sd(STD_MDL_df$Mean_Abs)
+
+#Calculate Mean Std 0
+std0_mean <- mean(STD0_df$Mean_Abs)
 
 #calculate n
 n <- length(STD_MDL_df$Mean_Abs)
@@ -474,15 +480,18 @@ n <- length(STD_MDL_df$Mean_Abs)
 StudentsT <-qt(.99,(n-1))
 
 #Multiply Standard deviation by Student's T
-MDL <- stddev_mdl*StudentsT
+STD_var <- (stddev_mdl*StudentsT)
+MDL <- STD_var + std0_mean 
 
 MDL_df <- as.data.frame(MDL)
 
-MDL_Plot <- ggplot(data = STD_MDL_df, aes(x = Plate, y = Mean_Abs)) +
-  geom_bar(stat = 'identity', fill = "cornflowerblue") +
+MDL_Plot <- ggplot() +
+  geom_bar(stat = 'identity', data = STD_MDL_df, aes(x = Plate, y = Mean_Abs, fill = IDs)) +
+  geom_bar(data = STD0_df, aes(x = Plate, y = Mean_Abs, fill = IDs), stat = 'identity') +
+  scale_fill_manual(name = "Standard:", values = c("Std 0" = "lightgreen", "Std 1" = "cornflowerblue")) +
   geom_hline(yintercept  = MDL, linetype = "dashed", linewidth = 1.5, color = "blue3") +
- geom_text_repel(data = MDL_df, aes(x = 1.25, y = MDL + 0.05, label = paste0("MDL: ",  signif(MDL, digits = sigdigs)))) +
-  ggtitle(label = "H2S Minimum Detection Limit (Standard 1)") +
+  geom_label_repel(data = MDL_df, aes(x = 1.25, y = MDL + 0.015), label = paste0("MDL: ",     signif(MDL, digits = sigdigs)),  alpha = 0.7) +
+  ggtitle(label = "H2S Minimum Detection Limit") +
   labs(y = "Mean Absorbance") +
   theme_classic()
 
@@ -585,7 +594,8 @@ H2S_chk_plot <- ggplot(data = H2S_Chks_plot_bind, aes(x = Plate, y = Mean_Abs)) 
     position = position_dodge2(preserve = "single"), linewidth = 0.75, aes(fill = Check_Flag)) +
       geom_hline(data = Check_Val, aes(yintercept = Z), linetype = "dashed", linewidth = 1, color = "green3") +
   facet_wrap(.~Plot_ID) +
-  geom_text_repel(data = Check_Val, aes( x = "Plate1", y = Z + 0.2, label = "Mean Target Arbsorbance")) +
+  ylim(0, max(H2S_Chks_plot_bind$Mean_Abs) + 0.2) +
+  geom_label_repel(data = Check_Val, aes( x = "Plate1", y = Z + 0.25), label = "Mean Target Arbsorbance",  alpha = 0.7) +
   scale_fill_manual(values = c("Good" = "darkgreen", "Bad" = "darkred")) +
   theme_classic() + labs(x = " ", y = "Absorbance", title =
                            "Check Stds: H2S with Confidence Interval") +
@@ -798,7 +808,7 @@ Dup_Plot <- ggplot(Dup_for_plot_1,
     position = position_dodge2(preserve = "single"),
     linewidth = 0.9
   ) +
-  geom_text_repel(data = as.data.frame(1), aes(x = "Plate1", y=17.5), label= "Percent Difference Cutoff", colour = "Black") + 
+  geom_label_repel(data = as.data.frame(1), aes(x = "Plate1", y=17.5), label= "Percent Difference Cutoff", colour = "black",  alpha = 0.7) + 
   geom_hline(aes(yintercept = dups_perc_diff), linetype = "dashed", linewidth = 1.5, color = "red3") +
   labs(y = "Percent Difference", x = "Sample ID") +
   scale_fill_manual(values = c(
@@ -876,7 +886,7 @@ spk_flags <- spk_join %>% mutate(
   )
 
 #organize data for flagging and plotting
-spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag, Spk_recovery, Plate)
+spk_flags_1 <- spk_flags %>% dplyr::select(Spk_ID, Spk_Flag, Spk_recovery, Plate) %>% na.omit()
 
 Spk_for_plot_a <- SPK_start %>% dplyr::select(Plate, Mean_Conc, Spk_ID, IDs) %>%
   distinct(.keep_all = TRUE) %>%
@@ -901,7 +911,7 @@ Spk_Plot <- ggplot(Spk_for_plot_1,
   ) +
   geom_hline(aes(yintercept = high_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
     geom_hline(aes(yintercept = low_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
-  geom_text_repel(data = as.data.frame(1),aes(x = "Plate1", y=high_recovery_cutoff - 5), label= "Acceptable Recovery Range", color = "black") + 
+  geom_label_repel(data = as.data.frame(1),aes(x = "Plate1", y=high_recovery_cutoff - 7.5), label= "Acceptable Recovery Range", color = "black",  alpha = 0.7) + 
   labs(y = "Spike Recovery (%)", x = "Plate") +
   scale_fill_manual(values = c(
     "Spk_Good" = "darkgreen",
@@ -972,13 +982,13 @@ H2S_spl_og <- H2S_spls_md %>%
 
 H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) ) 
 
-Samples <-  H2S_spl_rr_join %>% mutate(
+Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
   Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
   Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)
 ) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% ungroup() %>% group_by(Sample_ID) %>% mutate(
   Min_CV = ifelse(CV == min(CV), "KEEP", "RMV"), # get if CV is lowest of reruns
   Within_Range = "Within_Range" %in% Conc_Flag, #Get if any are within range
-  BDL = "bdl" %in% Conc_Flag, #getif any or below detection limit
+  BDL = "bdl" %in% Conc_Flag, #get if any are below detection limit
   Max_Dil = max(Dilution), #get maximum dilution of reruns
   Min_Dil = min(Dilution),#get minimum dilution of reruns
   All_Good = all(Conc_Flag == "Within_Range") & all(CV_Flag == "CV_Good"), #get if all are within range and good cv
@@ -1002,9 +1012,9 @@ Samples <-  H2S_spl_rr_join %>% mutate(
                "RMV4")
       )
     )
-  ))) %>% filter(Remove %like% "KEEP")
+  )))
 
-
+Samples <- Samples_Tagged %>% filter(Remove %like% "KEEP")
 
 #check to see if all samples are present in the metadata
 all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
