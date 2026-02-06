@@ -195,7 +195,7 @@ H2S_stds_raw <- dat %>% subset(IDs %like% "Std" | IDs %like% "Chk" | IDs %like% 
 H2S_stds <- left_join(H2S_stds_raw, standards, by = "IDs")
 
 #Calculate CVs and add flags
-H2S_STD_cv <- H2S_stds %>% group_by(Plate, IDs) %>% mutate(CV = cv(Abs) * 100) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
+H2S_STD_cv <- H2S_stds %>% group_by(Plate, IDs) %>% mutate(CV = cv(Abs)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
 #calculate new cv getting best cv from points if cv was high
 H2S_STD_cv_new <- H2S_STD_cv %>% group_by(Plate, IDs) %>%
