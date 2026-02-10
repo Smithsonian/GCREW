@@ -30,16 +30,16 @@ for (file in files){
   #load in the data 
   dt <- read_datalogger_file_waterlevel(file)
   
-  #filter out any weird time stamps that are marked before 2025 -- note that we want to put it int he proper timezone here as well
+  #filter out any weird time stamps that are marked before 2018
   dt <- dt %>%
     filter(year(TIMESTAMP) > 2018)
   
-  #write it out as a csv file. break into monthly files and handle duplicate timestamps. 
+  #change basename file from gcrew_met site to align with previous files site name for consistency
   if (grepl("GCREW_MET_GCREW_WaterLevel200", file)) {
     filename <- substr(basename(file),1,(nchar(basename(file))-19))
     filename <- gsub("GCREW_MET_GCREW_WaterLevel200", "gcrew_met_gcrewwaterlevel200", filename)
   } else{
-    filename <- substr(basename(file),1,(nchar(basename(file))-19)) #will need to change the number once the renaming functions kick in. 
+    filename <- substr(basename(file),1,(nchar(basename(file))-19))
   }
   
   #write and move newly converted .csv file
