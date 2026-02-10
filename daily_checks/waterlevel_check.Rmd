@@ -40,6 +40,7 @@ pattern <- "GENX_WaterlevelHydros"
 dt_genx <- load_data(dir=dir, pattern=pattern)
 dt_genx$logger <- "GENX"
 dt_genx <- dt_genx %>%
+  dplyr::mutate(H21_Depth = as.numeric(H21_Depth), H21_Depth = H21_Depth/10) %>%
   dplyr::rename(Depth = H21_Depth, Salinity = Derived_Salinity, Temperature = H21_Temperature)
 
 # Read in C3LOG water level data
