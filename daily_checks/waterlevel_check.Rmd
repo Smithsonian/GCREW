@@ -33,7 +33,7 @@ knitr::opts_chunk$set(fig.width=15, fig.height=10, echo = T)
 
 ```{r load data, echo=FALSE}
 
-dir <- paste("C:/Users/", Sys.getenv("USERNAME"), "/Smithsonian Dropbox/Taylor Smith/GCREW_LOGGERNET_DATA/current_data", sep = "")
+dir <- paste0(Sys.getenv("dropbox_filepath"), "GCREW_LOGGERNET_DATA/current_data", sep = "")
 
 # Read in GENX Water level data
 pattern <- "GENX_WaterlevelHydros"
