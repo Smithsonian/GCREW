@@ -4,14 +4,15 @@
 #Need to be .csv files to manipulate
 
 #### Load Functions and Directories ####
-#invisible(lapply(list.files("functions/", pattern = "//.R$", full.names = TRUE), source))
-source(paste0(Sys.getenv("repository_filepath"),"/GCREW/Loggernet processing/scripts/waterlevelfunctions.R"))
+invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE), source))
 
-#relevant directories
+# previous relevant directories
 #rawData_dir <- paste0(Sys.getenv("dropbox_filepath") , "GCREW_LOGGERNET_DATA/0_RawData/unprocessed_data/")
 #rawDataArchive_dir <- paste0(Sys.getenv("dropbox_filepath") , "GCREW_LOGGERNET_DATA/0_RawData/archive_data/")
 #rawCSVData_dir <- paste0(Sys.getenv("dropbox_filepath") , "GCREW_LOGGERNET_WORKFLOW/1_RawCSVData/unprocessed/")
 
+#current relevant directories
+#will have to modify once dropbox folder is created
 rawData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/unprocessed_data/")
 rawDataArchive_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/archive_data/")
 rawCSVData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/1_RawCSVData/unprocessed/")
@@ -22,7 +23,6 @@ rawCSVData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TE
 #list files in the raw data folder to be converted. 
 files <- list.files(rawData_dir, full.names = T, ignore.case = T)%>%
   str_subset(pattern = "(?i)WaterLevel") #Only include water level datasets in current data
- #will have to modify once dropbox folder is created
 
 #load the files and save as a csv in a for loop 
 for (file in files){

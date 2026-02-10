@@ -18,8 +18,7 @@ pacman::p_load(reshape2, lubridate, data.table, tools, plyr, tidyverse, stringr)
 
 #### Load Functions and Directories ####
 #Load all functions 
-#invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE), source))
-source(paste0(Sys.getenv("repository_filepath"),"/GCREW/Loggernet processing/scripts/waterlevelfunctions.R"))
+invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE), source))
 
 #relevant directories
 L0_NormalizedYearly_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Projects/TEST/2_L0_NormalizedData/processed/yearly/")

@@ -19,8 +19,7 @@ exclude_months <- c("2026-02", "2026-01")%>%
 
 #### Load Functions, Directories, and Design Tables ####
 #Load all functions 
-#invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE), source))
-source(paste0(Sys.getenv("repository_filepath"),"/GCREW/Loggernet processing/scripts/waterlevelfunctions.R"))
+invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE), source))
 
 #relevant directories
 rawCSVData_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Projects/TEST/1_RawCSVData/unprocessed/")
