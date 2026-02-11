@@ -490,7 +490,7 @@ MDL_Plot <- ggplot() +
   geom_bar(data = STD0_df, aes(x = Plate, y = Mean_Abs, fill = IDs), stat = 'identity') +
   scale_fill_manual(name = "Standard:", values = c("Std 0" = "lightgreen", "Std 1" = "cornflowerblue")) +
   geom_hline(yintercept  = MDL, linetype = "dashed", linewidth = 1.5, color = "blue3") +
-  geom_label_repel(data = MDL_df, aes(x = 1.25, y = MDL + 0.015), label = paste0("MDL: ",     signif(MDL, digits = sigdigs)),  alpha = 0.7) +
+  geom_label_repel(data = MDL_df, aes(x = 1.25, y = MDL + 0.015), label = paste0("MDL: ",     signif(MDL, digits = sigdigs)),  alpha = 0.7, color = "blue3") +
   ggtitle(label = "H2S Minimum Detection Limit") +
   labs(y = "Mean Absorbance") +
   theme_classic()
@@ -525,7 +525,7 @@ H2S_CHKs_a <- H2S_CHK_STD_CV_fin %>%
                       Chk_IDs,
                       Chk_Mean_Abs,
                       Chk_CV_Flag,
-                      Plate) %>% filter(Chk_Removed == "KEPT") %>%
+                      Plate) %>% filter(Chk_Removed != "RMVD") %>%
   group_by(Std_ID) %>%
   mutate(
     Chk_CI_low = ifelse(length(unique(Chk_Abs)) == 1, Chk_Abs, t.test(Chk_Abs)$conf.int[1]),
@@ -592,10 +592,10 @@ Check_Val <- H2S_Chks_plot_bind_a %>% filter(!str_detect(Plot_ID, "Check")) %>% 
 H2S_chk_plot <- ggplot(data = H2S_Chks_plot_bind, aes(x = Plate, y = Mean_Abs)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75, aes(fill = Check_Flag)) +
-      geom_hline(data = Check_Val, aes(yintercept = Z), linetype = "dashed", linewidth = 1, color = "green3") +
+      geom_hline(data = Check_Val, aes(yintercept = Z), linetype = "dashed", linewidth = 1, color = "darkblue") +
   facet_wrap(.~Plot_ID) +
   ylim(0, max(H2S_Chks_plot_bind$Mean_Abs) + 0.2) +
-  geom_label_repel(data = Check_Val, aes( x = "Plate1", y = Z + 0.25), label = "Mean Target Arbsorbance",  alpha = 0.7) +
+  geom_label_repel(data = Check_Val, aes( x = "Plate1", y = Z + 0.25), label = "Mean Target Arbsorbance",  alpha = 0.7, color = "darkblue") +
   scale_fill_manual(values = c("Good" = "darkgreen", "Bad" = "darkred")) +
   theme_classic() + labs(x = " ", y = "Absorbance", title =
                            "Check Stds: H2S with Confidence Interval") +
@@ -808,7 +808,7 @@ Dup_Plot <- ggplot(Dup_for_plot_1,
     position = position_dodge2(preserve = "single"),
     linewidth = 0.9
   ) +
-  geom_label_repel(data = as.data.frame(1), aes(x = "Plate1", y=17.5), label= "Percent Difference Cutoff", colour = "black",  alpha = 0.7) + 
+  geom_label_repel(data = as.data.frame(1), aes(x = "Plate1", y=17.5), label= "Percent Difference Cutoff", color = "red3",  alpha = 0.7) + 
   geom_hline(aes(yintercept = dups_perc_diff), linetype = "dashed", linewidth = 1.5, color = "red3") +
   labs(y = "Percent Difference", x = "Sample ID") +
   scale_fill_manual(values = c(
@@ -911,7 +911,7 @@ Spk_Plot <- ggplot(Spk_for_plot_1,
   ) +
   geom_hline(aes(yintercept = high_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
     geom_hline(aes(yintercept = low_recovery_cutoff), linetype = "dashed", color = "green3", linewidth = 1.5) +
-  geom_label_repel(data = as.data.frame(1),aes(x = "Plate1", y=high_recovery_cutoff - 7.5), label= "Acceptable Recovery Range", color = "black",  alpha = 0.7) + 
+  geom_label_repel(data = as.data.frame(1),aes(x = "Plate1", y=high_recovery_cutoff - 7.5), label= "Acceptable Recovery Range", color = "darkgreen",  alpha = 0.7) + 
   labs(y = "Spike Recovery (%)", x = "Plate") +
   scale_fill_manual(values = c(
     "Spk_Good" = "darkgreen",
