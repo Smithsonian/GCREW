@@ -545,7 +545,7 @@ H2S_STD_forCHK_a <- H2S_STD_CV_fin %>% filter(IDs %in% c("Std 0", "Std 3", "Std 
     paste0("Std 3", Plate),
     ifelse(IDs == "Std 4", paste0("Std 4", Plate), ifelse(IDs == "Std 5", paste0("Std 5", Plate), "ID Not Found"))
   )
-)) %>% filter(Removed == "KEPT") %>%
+)) %>% filter(Removed != "RMVD") %>%
   group_by(Std_ID) %>%
   mutate(
     Std_CI_low = ifelse(length(unique(Abs)) == 1, Abs, t.test(Abs)$conf.int[1]),
