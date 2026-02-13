@@ -36,10 +36,10 @@ for (file in files){
   
   #change basename file from gcrew_met site to align with previous files site name for consistency
   if (grepl("GCREW_MET_GCREW_WaterLevel200", file)) {
-    filename <- substr(basename(file),1,(nchar(basename(file))-19))
+    filename <- substr(basename(file),1, (nchar(basename(file))-19))
     filename <- gsub("GCREW_MET_GCREW_WaterLevel200", "gcrew_met_gcrewwaterlevel200", filename)
   } else{
-    filename <- substr(basename(file),1,(nchar(basename(file))-19))
+    filename <- substr(basename(file),1, (nchar(basename(file))-19))
   }
   
   #write and move newly converted .csv file

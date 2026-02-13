@@ -26,7 +26,7 @@ normalize_loggernet_csv_data_waterlevel <- function(csv_data, design_table, data
     
     #normalize the data. See below comments for specific steps. 
     normalized_data <- csv_data %>%
-      left_join(plotnames, by = "logger")%>%
+      left_join(plotnames, by = "logger")%>% 
       relocate(site, .before = 1)
   }
   

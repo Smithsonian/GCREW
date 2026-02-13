@@ -15,7 +15,7 @@ write_monthly_data_waterlevel_01 <- function(dt, rawCSVData_dir, filename) {
       select(!year_month) #once this has been used for filtering, immediately get rid of it so it does not create an aggragation issue
     
     #define a name for this monthly file
-    file_path <- paste0(rawCSVData_dir,filename,"_",m,".csv") 
+    file_path <- paste0(rawCSVData_dir,filename,"_", m, ".csv") 
     
     #This is here just in case this is a brand new table. Might move to the automated steps script. Makes a folder for this table in the rawCSV folder for neatness. 
     if (!dir.exists(paste0(rawCSVData_dir))){
