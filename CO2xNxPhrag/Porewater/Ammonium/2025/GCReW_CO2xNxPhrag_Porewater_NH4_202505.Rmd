@@ -15,9 +15,9 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- "09/23/2025"
+  run_date <- ""
   sample_year <- "2025"
-  sample_month <- "July"
+  sample_month <- "May"
   user <- "Victoria Ellis"
 
 #identify the files you want to read in 
