@@ -39,6 +39,8 @@ cat("Run Information: ") #lets you know what section you're in
   cat(run_notes)
 ```
 
+
+
 ##Setup
 ```{r setup, include=FALSE}
 
@@ -62,7 +64,12 @@ pacman::p_load(
   readxl,
   purrr,
   tinytex,
-  broom)
+  broom,
+  here, 
+  ggpattern)
+
+#get metadata path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
 #Coefficients / constants that are needed for calculations 
 N_mw <- 14.0067    # molecular weight of N 
@@ -107,29 +114,38 @@ PO4_pe <- 0.824
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in the raw metadata file 
-raw_metadata <- read.csv(Raw_Metadata)
+#read in metadata
 
+raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
+#Pull out only SMARTX Rows
+#Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("Phragmites", Experiment, ignore.case = TRUE)) %>%
+  filter(grepl("Phrag", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-    rename(
+  rename(
     Sample_ID = Sample.ID,
-    Plot_Name = Chamber.Plot.Name, 
-    CO2_Treatment = CO2.Treatment, 
-    N_Treatment = N.Treatment,
-    Temp_Treatment = Temp.Treatment
+    Plot_Name = Plot,
   ) %>%
-  select(-Temp_Treatment)
+  select(-Temp_Treatment) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_N",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2",
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
+    )
+  ))
 
-#Bring in the collection date and any field notes if relevant 
+#Bring in the collection date and any field notes if relevant
 #collection_metadata <- read.csv(Collection_Dates)
-  #then we will merge the collection date for SMARTX based on the project and the chambers 
+#then we will merge the collection date for SMARTX based on the project and the chambers
 
 ```
 
@@ -297,7 +313,7 @@ Slopes_chk <- ggplot(log, aes(run_date, Slope, col=Test)) +
   theme_bw() + 
   labs(title="Slope Drift Assessment", x="Run Date", y="Slope") +
   scale_color_manual(values=c( "darkgoldenrod"))+
-  ylim(1.5,2.5)
+  ylim(1.5,2)
 Slopes_chk
 
 #averaging the slopes from the log and printing
@@ -414,7 +430,7 @@ df_all_cor <- df_all %>%
 
 NH3_peChk <- df_all_cor %>%
   filter(Test == "Ammonia 2", 
-         str_detect(Sample_Name, "pe_chk")) %>%
+         str_detect(Sample_Name, "PEchk")) %>%
   summarise(
     Mean_Chk_Conc = mean(Conc, na.rm = TRUE),
     SD_Chk_Conc = sd(Conc, na.rm = TRUE),
@@ -801,22 +817,20 @@ cat("Sample Flagging")
 #Flagging data if the concentration is outside the standards range 
 samples_flagged <- samples %>%
   mutate(
-    Conc_flag = case_when(
-      Test == "Vanadium NOx" & Conc < NOx_dl ~ "bdl",
-      Test == "Vanadium NOx" & Conc > NOx_top ~ "adl",
-      Test == "Vanadium NOx" ~ "Within_Range",
+     Conc_flag = case_when(
+        Test == "Vanadium NOx" & Conc/Dilution < NOx_dl ~ "bdl",
+        Test == "Vanadium NOx" & Conc/Dilution > NOx_top    ~ "adl",
+        Test == "Vanadium NOx"               ~ "Within_Range",
       
-      Test == "Ammonia 2" & Conc > NH3_top & Dilution == 1 ~ "adl",       # will flag if it wasn't diluted 
-      Test == "Ammonia 2" & Conc < NH3_dl ~ "bdl",
-        # Test == "Ammonia 2" & Conc > NH3_top ~ "adl",     #this would flag if above 2, but we want that only if not diluted
-      Test == "Ammonia 2" & Dilution != 1 ~ "Within_Range_Diluted",# your new condition
-      Test == "Ammonia 2" ~ "Within_Range",
+      Test == "Ammonia 2" & Conc/Dilution < NH3_dl ~ "bdl",
+      Test == "Ammonia 2" & Conc/Dilution > NH3_top    ~ "adl",
+      Test == "Ammonia 2"                ~ "Within_Range",
       
-      Test == "o-PHOS 0.3" & Conc < PO4_dl ~ "bdl",
-      Test == "o-PHOS 0.3" & Conc > PO4_top ~ "adl",
-      Test == "o-PHOS 0.3" ~ "Within_Range",
+      Test == "o-PHOS 0.3" & Conc/Dilution < PO4_dl  ~ "bdl",
+      Test == "o-PHOS 0.3" & Conc/Dilution > PO4_top   ~ "adl",
+      Test == "o-PHOS 0.3"                ~ "Within_Range",
       
-      TRUE ~ NA_character_
+      TRUE ~ NA_character_  # fallback for unexpected values
     )
   )
 
@@ -852,118 +866,340 @@ df_all_clean <- merged_data
 ```
 
 \newpage
+## Organize Data
+```{r Organize Data, include=FALSE}
+
+cat("Export Processed Data")
+
+df_all_clean_cols <- merged_data %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Sample_Name,
+    Plot_Name,
+    SubPlot,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    Conc,
+    Conc_uM,
+    Conc_flag,
+    NH3_flag
+  )
+
+final_data_labeled <- df_all_clean_cols %>%
+  mutate(
+    Run_notes = run_notes,# new column with notes about the run
+    Analysis_rundate = run_date) 
+
+#rename columns
+org_labeled_fin_data <- final_data_labeled %>%
+  rename(
+   NH3_Conc = Conc,
+   NH3_Conc_uM = Conc_uM,
+    Plot = Plot_Name,
+   Sample_ID = Sample_Name
+  )
+
+#Order Columns for Final Data Frame
+All_Clean_Data <- org_labeled_fin_data %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Sample_ID,
+    Plot,
+    SubPlot,
+    Depth_cm,
+    CO2_Treatment,
+    N_Treatment,
+    NH3_Conc,
+    NH3_Conc_uM,
+    Conc_flag,
+    NH3_flag,
+    Analysis_rundate,
+    Run_notes
+  )
+#head(Samples1)
+
+
+```
 
 ## Visualize Data
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia 
-NH3_forplot <- df_all_clean %>%
-  filter(Test == "Ammonia 2")
+### Ammonia
+NH3_forplot <- All_Clean_Data
 
-#need to work out how best to plot these data 
+color1 <- c("P1", "P2", "P3", "P4")
+color2 <- c("P5", "P6", "P7", "P8")
+color3 <- c("P10", "P9", "P11", "P12")
 
-viz_NH3_plot <- ggplot(data = NH3_forplot, aes(x = as.factor(CO2_Treatment), y = Conc, fill=as.factor(CO2_Treatment))) +
-       geom_bar(stat = "identity", position = position_dodge2(preserve = "single"), 
-                 color="black") + 
-       facet_grid(N_Treatment~Depth, scales="free_x") +
-        scale_fill_manual(values = c("Amb" = "deeppink2", 
-                                     "Elev" = "darkorchid4")) +
-        theme_classic() + 
-        labs(x= " ", y="NH3 (mg/L)", title="Phrag: Porewater NH3", fill="CO2 Trtmt:") + 
-          theme(legend.position = "right") +
-          scale_x_discrete(drop = TRUE)+
-        theme(axis.text.x = element_text(angle = 0, hjust = 0.5), 
-              panel.border = element_rect(color = "black", fill = NA, linewidth = 0.8))
-print(viz_NH3_plot) 
+
+NH3_forplot <- NH3_forplot %>%
+  mutate(
+    Treatment1 = ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2 & eN",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2 & aN",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2 & eN" ,
+          "aCO2 & aN"
+        )
+      )
+    )
+  ) %>%
+  mutate(Treatment = ifelse(
+    SubPlot == "A",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2_eN_Phrag",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2_aN_Phrag",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2_eN_Phrag" ,
+          "aCO2_aN_Phrag"
+        )
+      )
+    ),
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Amended",
+      "eCO2_eN_Native",
+      ifelse(
+        CO2_Treatment == "Elevated" &
+          N_Treatment == "Ambient",
+        "eCO2_aN_Native",
+        ifelse(
+          CO2_Treatment == "Ambient" &
+            N_Treatment == "Amended"  ,
+          "aCO2_eN_Native" ,
+          "aCO2_aN_Native"
+        )
+      )
+    )
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3"
+    )
+  )
+
+
+NH3_forplot <- NH3_forplot[order(NH3_forplot$Depth_cm), ]
+
+viz_NH3_plot_v2 <- ggplot(
+  data = NH3_forplot,
+  aes(
+    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+    y = NH3_Conc_uM,
+    fill = as.factor(Treatment),
+    color = as.factor(Treatment),
+    pattern = as.factor(Treatment)
+  )
+) +
+  geom_bar_pattern(
+    stat = "identity",
+    position = position_dodge2(padding = 0.25, preserve = "single"),
+    pattern_angle = 45,
+    pattern_density = 0.1,
+    pattern_spacing = 0.025,
+    pattern_key_scale_factor = 0.6
+  ) +
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_fill_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "white",
+      "aCO2_aN_Phrag" = "white",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "white",
+      "aCO2_aN_Native" = "white"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
+  ) +
+  scale_color_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "#DB5461",
+      "aCO2_aN_Phrag" = "#454ADE",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "#DB5461",
+      "aCO2_aN_Native" = "#454ADE"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
+  ) +
+  scale_pattern_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "stripe",
+      "eCO2_aN_Phrag" = "stripe",
+      "aCO2_eN_Phrag" = "stripe",
+      "aCO2_aN_Phrag" = "stripe",
+      "eCO2_eN_Native" = "none",
+      "eCO2_aN_Native" = "none",
+      "aCO2_eN_Native" = "none",
+      "aCO2_aN_Native" = "none"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "NH3 (uM)",
+    title = "CO2xNxPhrag: Porewater Methane",
+    fill = "CO2 Treatment:",
+    color = "N Treatment:",
+    pattern = "Subplot:"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  ) +
+  coord_flip()
+print(viz_NH3_plot_v2)
 
 
 ```
 
-## Export Processed Data
-```{r Export Processed Data, include=FALSE}
+```{r, echo = FALSE}
+#make plot
 
-cat("Export Processed Data")
+NH3_forplot <- NH3_forplot %>% 
+  mutate(Sub_Plot = ifelse(SubPlot == "A", "Phrag", "Native"))
 
-#pivot the data set wider to make it wide format 
-final_data1 <- df_all_clean %>%
-  pivot_wider(
-    id_cols = Sample_Name,
-    names_from = Test,
-    values_from = Conc,
-    names_glue = "{Test}_Conc"
+viz_NH3_plot_2 <- ggplot(data = NH3_forplot, aes(x = NH3_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color, shape = Sub_Plot)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075"
+   
+    ),
+    labels = c("1", "2", "3")
+  ) +
+  facet_grid(Treatment1 ~ ., scales = "fixed") +
+  labs(
+    x = "NH3 (uM)",
+    y = "Depth (cm)",
+    title = "CO2xNxPhrag: Porewater NH3 by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40), limits = c(45, 15)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
   )
 
-final_data2 <- df_all_clean %>%
-  pivot_wider(
-    id_cols = Sample_Name,
-    names_from = Test,
-    values_from = Conc_uM,
-    names_glue = "{Test}_Conc_uM"
-  )
-
-final_data3 <- df_all_clean %>%
-  pivot_wider(
-    id_cols = Sample_Name,
-    names_from = Test,
-    values_from = Conc_flag,
-    names_glue = "{Test}_Conc_flag"
-  )
-
-#take out only the columns we want to merge 
-df_all_clean_cols <- df_all_clean %>%
-  select(Sample_Name, Sample_ID, Experiment, Plot_Name, Depth, CO2_Treatment, N_Treatment, 
-         #Community,
-         Year, Month,
-         #Day, Time..24hr., Time.Zone_EDT.EST,
-        NH3_flag)
-
-df_all_clean_cols_one_row <- df_all_clean_cols %>%
-  group_by(Sample_Name) %>%
-  slice(1) %>%  # or use summarise() if you want to aggregate
-  ungroup()
-
-#merge these together
-data_list <- list(df_all_clean_cols_one_row, final_data1, final_data2, final_data3)
-
-final_data4 <- reduce(data_list, full_join, by = c("Sample_Name"))
+viz_NH3_plot_2
+```
 
 
-#Add project information 
-final_data_labeled <- final_data4 %>% 
-  mutate(
-    Site = "GCReW",   # new column with same value on every row
-    Run_notes = run_notes, 
-    Analysis_rundate = print(run_date)# new column with notes about the run
-  ) 
-
-#Prepare data to be exported 
-final_data <- final_data_labeled %>%
-    rename(
-    Site = Site,
-    Sample_Name = Sample_Name, 
-    #Time = Time..24hr., 
-    #Time_Zone = Time.Zone_EDT.EST,
-    #Replicate = Lysimeter,
-    
-    NH3_Conc_mgL = `Ammonia 2_Conc`,
-    NH3_Conc_uM = `Ammonia 2_Conc_uM`,
-    NH3_Conc_Flag =`Ammonia 2_Conc_flag`,
-    NH3_QAQC_Flag = NH3_flag
-    
-
-    # add more rename pairs as needed
-  ) %>%
-  select(Site, Experiment, Month, Year, Sample_Name, Sample_ID,  
-         Plot_Name, Depth, CO2_Treatment, N_Treatment,
-         #Community, 
-         #Sample_ID, Day, Time, Time_Zone,
-         NH3_Conc_mgL, NH3_Conc_uM, NH3_Conc_Flag, NH3_QAQC_Flag,
-         Analysis_rundate,  Run_notes)
-
+```{r}
 
 #Write out data frame 
-  write.csv(final_data, final_path)
+  write.csv(All_Clean_Data, final_path)
   
 
 ```
