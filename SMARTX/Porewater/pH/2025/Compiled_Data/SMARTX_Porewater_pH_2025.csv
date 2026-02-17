@@ -1,0 +1,451 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","pH","Analysis_rundate","Run_notes"
+"1","GCReW","SMARTX",2025,"July","SCAM","C3",610,10,"Elevated",0,6.39,"7/10/2025",NA
+"2","GCReW","SMARTX",2025,"July","SCAM","C3",610,20,"Elevated",0,6.5,"7/10/2025",NA
+"3","GCReW","SMARTX",2025,"July","SCAM","C3",610,40,"Elevated",0,6.4,"7/10/2025",NA
+"4","GCReW","SMARTX",2025,"July","SCAM","C3",610,80,"Elevated",0,6.7,"7/10/2025",NA
+"5","GCReW","SMARTX",2025,"July","SCAM","C3",610,120,"Elevated",0,6.61,"7/10/2025",NA
+"6","GCReW","SMARTX",2025,"July","SCAM","C3",310,10,"Ambient",0,6.55,"7/10/2025",NA
+"7","GCReW","SMARTX",2025,"July","SCAM","C3",310,20,"Ambient",0,6.48,"7/10/2025",NA
+"8","GCReW","SMARTX",2025,"July","SCAM","C3",310,40,"Ambient",0,6.54,"7/10/2025",NA
+"9","GCReW","SMARTX",2025,"July","SCAM","C3",310,80,"Ambient",0,6.78,"7/10/2025",NA
+"10","GCReW","SMARTX",2025,"July","SCAM","C3",310,120,"Ambient",0,6.74,"7/10/2025",NA
+"11","GCReW","SMARTX",2025,"July","SCAM","C3",311,10,"Ambient",1.7,6.36,"7/10/2025",NA
+"12","GCReW","SMARTX",2025,"July","SCAM","C3",311,20,"Ambient",1.7,6.42,"7/10/2025",NA
+"13","GCReW","SMARTX",2025,"July","SCAM","C3",311,40,"Ambient",1.7,6.44,"7/10/2025",NA
+"14","GCReW","SMARTX",2025,"July","SCAM","C3",311,80,"Ambient",1.7,6.65,"7/10/2025",NA
+"15","GCReW","SMARTX",2025,"July","SCAM","C3",311,120,"Ambient",1.7,6.56,"7/10/2025",NA
+"16","GCReW","SMARTX",2025,"July","SCAM","C3",312,10,"Ambient",3.4,6.52,"7/10/2025",NA
+"17","GCReW","SMARTX",2025,"July","SCAM","C3",312,20,"Ambient",3.4,6.67,"7/10/2025",NA
+"18","GCReW","SMARTX",2025,"July","SCAM","C3",312,40,"Ambient",3.4,6.92,"7/10/2025",NA
+"19","GCReW","SMARTX",2025,"July","SCAM","C3",312,80,"Ambient",3.4,7,"7/10/2025",NA
+"20","GCReW","SMARTX",2025,"July","SCAM","C3",312,120,"Ambient",3.4,6.73,"7/10/2025",NA
+"21","GCReW","SMARTX",2025,"July","SCAM","C3",313,10,"Ambient",5.1,6.47,"7/10/2025",NA
+"22","GCReW","SMARTX",2025,"July","SCAM","C3",313,20,"Ambient",5.1,6.72,"7/10/2025",NA
+"23","GCReW","SMARTX",2025,"July","SCAM","C3",313,40,"Ambient",5.1,6.95,"7/10/2025",NA
+"24","GCReW","SMARTX",2025,"July","SCAM","C3",313,80,"Ambient",5.1,6.8,"7/10/2025",NA
+"25","GCReW","SMARTX",2025,"July","SCAM","C3",313,120,"Ambient",5.1,6.76,"7/10/2025",NA
+"26","GCReW","SMARTX",2025,"July","SCAM","C3",613,10,"Elevated",5.1,6.69,"7/10/2025",NA
+"27","GCReW","SMARTX",2025,"July","SCAM","C3",613,20,"Elevated",5.1,6.86,"7/10/2025",NA
+"28","GCReW","SMARTX",2025,"July","SCAM","C3",613,40,"Elevated",5.1,6.76,"7/10/2025",NA
+"29","GCReW","SMARTX",2025,"July","SCAM","C3",613,80,"Elevated",5.1,6.78,"7/10/2025",NA
+"30","GCReW","SMARTX",2025,"July","SCAM","C3",613,120,"Elevated",5.1,6.77,"7/10/2025",NA
+"31","GCReW","SMARTX",2025,"July","SCAM","C3",620,10,"Elevated",0,6.47,"7/10/2025",NA
+"32","GCReW","SMARTX",2025,"July","SCAM","C3",620,20,"Elevated",0,6.37,"7/10/2025",NA
+"33","GCReW","SMARTX",2025,"July","SCAM","C3",620,40,"Elevated",0,6.39,"7/10/2025",NA
+"34","GCReW","SMARTX",2025,"July","SCAM","C3",620,80,"Elevated",0,6.6,"7/10/2025",NA
+"35","GCReW","SMARTX",2025,"July","SCAM","C3",620,120,"Elevated",0,6.55,"7/10/2025",NA
+"36","GCReW","SMARTX",2025,"July","SCAM","C3",320,10,"Ambient",0,6.39,"7/10/2025",NA
+"37","GCReW","SMARTX",2025,"July","SCAM","C3",320,20,"Ambient",0,6.38,"7/10/2025",NA
+"38","GCReW","SMARTX",2025,"July","SCAM","C3",320,40,"Ambient",0,6.51,"7/10/2025",NA
+"39","GCReW","SMARTX",2025,"July","SCAM","C3",320,80,"Ambient",0,6.56,"7/10/2025",NA
+"40","GCReW","SMARTX",2025,"July","SCAM","C3",320,120,"Ambient",0,6.47,"7/10/2025",NA
+"41","GCReW","SMARTX",2025,"July","SCAM","C3",321,10,"Ambient",1.7,6.35,"7/10/2025",NA
+"42","GCReW","SMARTX",2025,"July","SCAM","C3",321,20,"Ambient",1.7,6.56,"7/10/2025",NA
+"43","GCReW","SMARTX",2025,"July","SCAM","C3",321,40,"Ambient",1.7,6.55,"7/10/2025",NA
+"44","GCReW","SMARTX",2025,"July","SCAM","C3",321,80,"Ambient",1.7,6.66,"7/10/2025",NA
+"45","GCReW","SMARTX",2025,"July","SCAM","C3",321,120,"Ambient",1.7,6.66,"7/10/2025",NA
+"46","GCReW","SMARTX",2025,"July","SCAM","C3",322,10,"Ambient",3.4,6.4,"7/10/2025",NA
+"47","GCReW","SMARTX",2025,"July","SCAM","C3",322,20,"Ambient",3.4,6.52,"7/10/2025",NA
+"48","GCReW","SMARTX",2025,"July","SCAM","C3",322,40,"Ambient",3.4,6.75,"7/10/2025",NA
+"49","GCReW","SMARTX",2025,"July","SCAM","C3",322,80,"Ambient",3.4,6.71,"7/10/2025",NA
+"50","GCReW","SMARTX",2025,"July","SCAM","C3",322,120,"Ambient",3.4,6.61,"7/10/2025",NA
+"51","GCReW","SMARTX",2025,"July","SCAM","C3",323,10,"Ambient",5.1,6.47,"7/11/2025",NA
+"52","GCReW","SMARTX",2025,"July","SCAM","C3",323,20,"Ambient",5.1,6.61,"7/11/2025",NA
+"53","GCReW","SMARTX",2025,"July","SCAM","C3",323,40,"Ambient",5.1,6.69,"7/11/2025",NA
+"54","GCReW","SMARTX",2025,"July","SCAM","C3",323,80,"Ambient",5.1,6.64,"7/11/2025",NA
+"55","GCReW","SMARTX",2025,"July","SCAM","C3",323,120,"Ambient",5.1,6.57,"7/11/2025",NA
+"56","GCReW","SMARTX",2025,"July","SCAM","C3",623,10,"Elevated",5.1,6.48,"7/11/2025",NA
+"57","GCReW","SMARTX",2025,"July","SCAM","C3",623,20,"Elevated",5.1,6.5,"7/11/2025",NA
+"58","GCReW","SMARTX",2025,"July","SCAM","C3",623,40,"Elevated",5.1,6.65,"7/11/2025",NA
+"59","GCReW","SMARTX",2025,"July","SCAM","C3",623,80,"Elevated",5.1,6.72,"7/11/2025",NA
+"60","GCReW","SMARTX",2025,"July","SCAM","C3",623,120,"Elevated",5.1,6.83,"7/11/2025",NA
+"61","GCReW","SMARTX",2025,"July","SCAM","C3",630,10,"Elevated",0,6.39,"7/11/2025",NA
+"62","GCReW","SMARTX",2025,"July","SCAM","C3",630,20,"Elevated",0,6.34,"7/11/2025",NA
+"63","GCReW","SMARTX",2025,"July","SCAM","C3",630,40,"Elevated",0,6.25,"7/11/2025",NA
+"64","GCReW","SMARTX",2025,"July","SCAM","C3",630,80,"Elevated",0,6.21,"7/11/2025",NA
+"65","GCReW","SMARTX",2025,"July","SCAM","C3",630,120,"Elevated",0,6.3,"7/11/2025",NA
+"66","GCReW","SMARTX",2025,"July","SCAM","C3",330,10,"Ambient",0,6.28,"7/11/2025",NA
+"67","GCReW","SMARTX",2025,"July","SCAM","C3",330,20,"Ambient",0,6.47,"7/11/2025",NA
+"68","GCReW","SMARTX",2025,"July","SCAM","C3",330,40,"Ambient",0,6.44,"7/11/2025",NA
+"69","GCReW","SMARTX",2025,"July","SCAM","C3",330,80,"Ambient",0,6.47,"7/11/2025",NA
+"70","GCReW","SMARTX",2025,"July","SCAM","C3",330,120,"Ambient",0,6.47,"7/11/2025",NA
+"71","GCReW","SMARTX",2025,"July","SCAM","C3",331,10,"Ambient",1.7,6.33,"7/11/2025",NA
+"72","GCReW","SMARTX",2025,"July","SCAM","C3",331,20,"Ambient",1.7,6.43,"7/11/2025",NA
+"73","GCReW","SMARTX",2025,"July","SCAM","C3",331,40,"Ambient",1.7,6.51,"7/11/2025",NA
+"74","GCReW","SMARTX",2025,"July","SCAM","C3",331,80,"Ambient",1.7,6.55,"7/11/2025",NA
+"75","GCReW","SMARTX",2025,"July","SCAM","C3",331,120,"Ambient",1.7,6.67,"7/11/2025",NA
+"76","GCReW","SMARTX",2025,"July","SCAM","C3",332,10,"Ambient",3.4,6.39,"7/11/2025",NA
+"77","GCReW","SMARTX",2025,"July","SCAM","C3",332,20,"Ambient",3.4,6.59,"7/11/2025",NA
+"78","GCReW","SMARTX",2025,"July","SCAM","C3",332,40,"Ambient",3.4,6.62,"7/11/2025",NA
+"79","GCReW","SMARTX",2025,"July","SCAM","C3",332,80,"Ambient",3.4,6.74,"7/11/2025",NA
+"80","GCReW","SMARTX",2025,"July","SCAM","C3",332,120,"Ambient",3.4,6.73,"7/11/2025",NA
+"81","GCReW","SMARTX",2025,"July","SCAM","C3",333,10,"Ambient",5.1,6.65,"7/11/2025",NA
+"82","GCReW","SMARTX",2025,"July","SCAM","C3",333,20,"Ambient",5.1,6.73,"7/11/2025",NA
+"83","GCReW","SMARTX",2025,"July","SCAM","C3",333,40,"Ambient",5.1,6.99,"7/11/2025",NA
+"84","GCReW","SMARTX",2025,"July","SCAM","C3",333,80,"Ambient",5.1,6.71,"7/11/2025",NA
+"85","GCReW","SMARTX",2025,"July","SCAM","C3",333,120,"Ambient",5.1,6.81,"7/11/2025",NA
+"86","GCReW","SMARTX",2025,"July","SCAM","C3",633,10,"Elevated",5.1,6.69,"7/11/2025",NA
+"87","GCReW","SMARTX",2025,"July","SCAM","C3",633,20,"Elevated",5.1,6.76,"7/11/2025",NA
+"88","GCReW","SMARTX",2025,"July","SCAM","C3",633,40,"Elevated",5.1,6.74,"7/11/2025",NA
+"89","GCReW","SMARTX",2025,"July","SCAM","C3",633,80,"Elevated",5.1,6.76,"7/11/2025",NA
+"90","GCReW","SMARTX",2025,"July","SCAM","C3",633,120,"Elevated",5.1,6.68,"7/11/2025",NA
+"91","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,10,"Ambient",0,6.13,"7/11/2025",NA
+"92","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,20,"Ambient",0,6.28,"7/11/2025",NA
+"93","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,40,"Ambient",0,6.55,"7/11/2025",NA
+"94","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,80,"Ambient",0,6.98,"7/11/2025",NA
+"95","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,120,"Ambient",0,6.75,"7/11/2025",NA
+"96","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,10,"Ambient",1.7,6.4,"7/11/2025",NA
+"97","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,20,"Ambient",1.7,6.54,"7/11/2025",NA
+"98","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,40,"Ambient",1.7,6.57,"7/11/2025",NA
+"99","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,80,"Ambient",1.7,7.11,"7/11/2025",NA
+"100","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,120,"Ambient",1.7,6.63,"7/11/2025",NA
+"101","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,10,"Ambient",3.4,6.15,"7/14/2025",NA
+"102","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,20,"Ambient",3.4,6.43,"7/14/2025",NA
+"103","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,40,"Ambient",3.4,6.72,"7/14/2025",NA
+"104","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,80,"Ambient",3.4,6.72,"7/14/2025",NA
+"105","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,120,"Ambient",3.4,6.64,"7/14/2025",NA
+"106","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,10,"Ambient",5.1,6.55,"7/14/2025",NA
+"107","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,20,"Ambient",5.1,6.66,"7/14/2025",NA
+"108","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,40,"Ambient",5.1,6.73,"7/14/2025",NA
+"109","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,80,"Ambient",5.1,6.66,"7/14/2025",NA
+"110","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,120,"Ambient",5.1,6.71,"7/14/2025",NA
+"111","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,10,"Ambient",0,6.03,"7/14/2025",NA
+"112","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,20,"Ambient",0,6.3,"7/14/2025",NA
+"113","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,40,"Ambient",0,6.6,"7/14/2025",NA
+"114","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,80,"Ambient",0,7.05,"7/14/2025",NA
+"115","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,120,"Ambient",0,6.69,"7/14/2025",NA
+"116","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,10,"Ambient",1.7,6.43,"7/14/2025",NA
+"117","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,20,"Ambient",1.7,6.5,"7/14/2025",NA
+"118","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,40,"Ambient",1.7,6.66,"7/14/2025",NA
+"119","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,80,"Ambient",1.7,6.62,"7/14/2025",NA
+"120","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,120,"Ambient",1.7,6.63,"7/14/2025",NA
+"121","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,10,"Ambient",3.4,6.34,"7/14/2025",NA
+"122","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,20,"Ambient",3.4,6.51,"7/14/2025",NA
+"123","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,40,"Ambient",3.4,6.74,"7/14/2025",NA
+"124","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,80,"Ambient",3.4,6.75,"7/14/2025",NA
+"125","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,120,"Ambient",3.4,6.7,"7/14/2025",NA
+"126","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,10,"Ambient",5.1,6.2,"7/14/2025",NA
+"127","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,20,"Ambient",5.1,6.61,"7/14/2025",NA
+"128","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,40,"Ambient",5.1,6.33,"7/14/2025",NA
+"129","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,80,"Ambient",5.1,6.81,"7/14/2025",NA
+"130","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,120,"Ambient",5.1,6.74,"7/14/2025",NA
+"131","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,10,"Ambient",0,6.21,"7/14/2025",NA
+"132","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,20,"Ambient",0,6.34,"7/14/2025",NA
+"133","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,40,"Ambient",0,6.66,"7/14/2025",NA
+"134","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,80,"Ambient",0,6.66,"7/14/2025",NA
+"135","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,120,"Ambient",0,6.72,"7/14/2025",NA
+"136","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,10,"Ambient",1.7,6.08,"7/14/2025",NA
+"137","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,20,"Ambient",1.7,6.34,"7/14/2025",NA
+"138","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,40,"Ambient",1.7,6.53,"7/14/2025",NA
+"139","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,80,"Ambient",1.7,6.62,"7/14/2025",NA
+"140","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,120,"Ambient",1.7,6.68,"7/14/2025",NA
+"141","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,10,"Ambient",3.4,6.05,"7/14/2025",NA
+"142","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,20,"Ambient",3.4,6.49,"7/14/2025",NA
+"143","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,40,"Ambient",3.4,6.77,"7/14/2025",NA
+"144","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,80,"Ambient",3.4,6.65,"7/14/2025",NA
+"145","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,120,"Ambient",3.4,6.66,"7/14/2025",NA
+"146","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,10,"Ambient",5.1,6.34,"7/14/2025",NA
+"147","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,20,"Ambient",5.1,6.6,"7/14/2025",NA
+"148","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,40,"Ambient",5.1,6.76,"7/14/2025",NA
+"149","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,80,"Ambient",5.1,6.79,"7/14/2025",NA
+"150","GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,120,"Ambient",5.1,6.67,"7/14/2025",NA
+"151","GCReW","SMARTX",2025,"May","SCAM","C3",610,10,"Elevated",0,6.2,"5/20/2025",NA
+"152","GCReW","SMARTX",2025,"May","SCAM","C3",610,20,"Elevated",0,6.23,"5/20/2025",NA
+"153","GCReW","SMARTX",2025,"May","SCAM","C3",610,40,"Elevated",0,6.23,"5/20/2025",NA
+"154","GCReW","SMARTX",2025,"May","SCAM","C3",610,80,"Elevated",0,6.46,"5/20/2025",NA
+"155","GCReW","SMARTX",2025,"May","SCAM","C3",610,120,"Elevated",0,6.42,"5/20/2025",NA
+"156","GCReW","SMARTX",2025,"May","SCAM","C3",310,10,"Ambient",0,6.46,"5/20/2025",NA
+"157","GCReW","SMARTX",2025,"May","SCAM","C3",310,20,"Ambient",0,6.41,"5/20/2025",NA
+"158","GCReW","SMARTX",2025,"May","SCAM","C3",310,40,"Ambient",0,6.55,"5/20/2025",NA
+"159","GCReW","SMARTX",2025,"May","SCAM","C3",310,80,"Ambient",0,6.5,"5/20/2025",NA
+"160","GCReW","SMARTX",2025,"May","SCAM","C3",310,120,"Ambient",0,6.58,"5/20/2025",NA
+"161","GCReW","SMARTX",2025,"May","SCAM","C3",311,10,"Ambient",1.7,6.28,"5/20/2025",NA
+"162","GCReW","SMARTX",2025,"May","SCAM","C3",311,20,"Ambient",1.7,6.43,"5/20/2025",NA
+"163","GCReW","SMARTX",2025,"May","SCAM","C3",311,40,"Ambient",1.7,6.47,"5/20/2025",NA
+"164","GCReW","SMARTX",2025,"May","SCAM","C3",311,80,"Ambient",1.7,6.53,"5/20/2025",NA
+"165","GCReW","SMARTX",2025,"May","SCAM","C3",311,120,"Ambient",1.7,6.55,"5/20/2025",NA
+"166","GCReW","SMARTX",2025,"May","SCAM","C3",312,10,"Ambient",3.4,6.32,"5/20/2025",NA
+"167","GCReW","SMARTX",2025,"May","SCAM","C3",312,20,"Ambient",3.4,6.55,"5/20/2025",NA
+"168","GCReW","SMARTX",2025,"May","SCAM","C3",312,40,"Ambient",3.4,6.73,"5/20/2025",NA
+"169","GCReW","SMARTX",2025,"May","SCAM","C3",312,80,"Ambient",3.4,6.87,"5/20/2025",NA
+"170","GCReW","SMARTX",2025,"May","SCAM","C3",312,120,"Ambient",3.4,6.58,"5/20/2025",NA
+"171","GCReW","SMARTX",2025,"May","SCAM","C3",313,10,"Ambient",5.1,6.34,"5/20/2025",NA
+"172","GCReW","SMARTX",2025,"May","SCAM","C3",313,20,"Ambient",5.1,6.75,"5/20/2025",NA
+"173","GCReW","SMARTX",2025,"May","SCAM","C3",313,40,"Ambient",5.1,6.42,"5/20/2025",NA
+"174","GCReW","SMARTX",2025,"May","SCAM","C3",313,80,"Ambient",5.1,6.65,"5/20/2025",NA
+"175","GCReW","SMARTX",2025,"May","SCAM","C3",313,120,"Ambient",5.1,6.58,"5/20/2025",NA
+"176","GCReW","SMARTX",2025,"May","SCAM","C3",613,10,"Elevated",5.1,6.47,"5/20/2025",NA
+"177","GCReW","SMARTX",2025,"May","SCAM","C3",613,20,"Elevated",5.1,6.68,"5/20/2025",NA
+"178","GCReW","SMARTX",2025,"May","SCAM","C3",613,40,"Elevated",5.1,6.63,"5/20/2025",NA
+"179","GCReW","SMARTX",2025,"May","SCAM","C3",613,80,"Elevated",5.1,6.64,"5/20/2025",NA
+"180","GCReW","SMARTX",2025,"May","SCAM","C3",613,120,"Elevated",5.1,6.61,"5/20/2025",NA
+"181","GCReW","SMARTX",2025,"May","SCAM","C3",620,10,"Elevated",0,6.68,"5/20/2025",NA
+"182","GCReW","SMARTX",2025,"May","SCAM","C3",620,20,"Elevated",0,6.37,"5/20/2025",NA
+"183","GCReW","SMARTX",2025,"May","SCAM","C3",620,40,"Elevated",0,6.47,"5/20/2025",NA
+"184","GCReW","SMARTX",2025,"May","SCAM","C3",620,80,"Elevated",0,6.69,"5/20/2025",NA
+"185","GCReW","SMARTX",2025,"May","SCAM","C3",620,120,"Elevated",0,6.55,"5/20/2025",NA
+"186","GCReW","SMARTX",2025,"May","SCAM","C3",320,10,"Ambient",0,6.36,"5/20/2025",NA
+"187","GCReW","SMARTX",2025,"May","SCAM","C3",320,20,"Ambient",0,6.41,"5/20/2025",NA
+"188","GCReW","SMARTX",2025,"May","SCAM","C3",320,40,"Ambient",0,6.49,"5/20/2025",NA
+"189","GCReW","SMARTX",2025,"May","SCAM","C3",320,80,"Ambient",0,6.54,"5/20/2025",NA
+"190","GCReW","SMARTX",2025,"May","SCAM","C3",320,120,"Ambient",0,6.42,"5/20/2025",NA
+"191","GCReW","SMARTX",2025,"May","SCAM","C3",321,10,"Ambient",1.7,6.34,"5/20/2025",NA
+"192","GCReW","SMARTX",2025,"May","SCAM","C3",321,20,"Ambient",1.7,6.39,"5/20/2025",NA
+"193","GCReW","SMARTX",2025,"May","SCAM","C3",321,40,"Ambient",1.7,6.49,"5/20/2025",NA
+"194","GCReW","SMARTX",2025,"May","SCAM","C3",321,80,"Ambient",1.7,6.73,"5/20/2025",NA
+"195","GCReW","SMARTX",2025,"May","SCAM","C3",321,120,"Ambient",1.7,6.62,"5/20/2025",NA
+"196","GCReW","SMARTX",2025,"May","SCAM","C3",322,10,"Ambient",3.4,6.46,"5/20/2025",NA
+"197","GCReW","SMARTX",2025,"May","SCAM","C3",322,20,"Ambient",3.4,6.54,"5/20/2025",NA
+"198","GCReW","SMARTX",2025,"May","SCAM","C3",322,40,"Ambient",3.4,6.67,"5/20/2025",NA
+"199","GCReW","SMARTX",2025,"May","SCAM","C3",322,80,"Ambient",3.4,6.65,"5/20/2025",NA
+"200","GCReW","SMARTX",2025,"May","SCAM","C3",322,120,"Ambient",3.4,6.62,"5/20/2025",NA
+"201","GCReW","SMARTX",2025,"May","SCAM","C3",323,10,"Ambient",5.1,6.13,"5/21/2025",NA
+"202","GCReW","SMARTX",2025,"May","SCAM","C3",323,20,"Ambient",5.1,6.55,"5/21/2025",NA
+"203","GCReW","SMARTX",2025,"May","SCAM","C3",323,40,"Ambient",5.1,6.7,"5/21/2025",NA
+"204","GCReW","SMARTX",2025,"May","SCAM","C3",323,80,"Ambient",5.1,6.61,"5/21/2025",NA
+"205","GCReW","SMARTX",2025,"May","SCAM","C3",323,120,"Ambient",5.1,6.54,"5/21/2025",NA
+"206","GCReW","SMARTX",2025,"May","SCAM","C3",623,10,"Elevated",5.1,6.43,"5/21/2025",NA
+"207","GCReW","SMARTX",2025,"May","SCAM","C3",623,20,"Elevated",5.1,6.49,"5/21/2025",NA
+"208","GCReW","SMARTX",2025,"May","SCAM","C3",623,40,"Elevated",5.1,6.48,"5/21/2025",NA
+"209","GCReW","SMARTX",2025,"May","SCAM","C3",623,80,"Elevated",5.1,6.63,"5/21/2025",NA
+"210","GCReW","SMARTX",2025,"May","SCAM","C3",623,120,"Elevated",5.1,6.71,"5/21/2025",NA
+"211","GCReW","SMARTX",2025,"May","SCAM","C3",630,10,"Elevated",0,6.5,"5/21/2025",NA
+"212","GCReW","SMARTX",2025,"May","SCAM","C3",630,20,"Elevated",0,6.48,"5/21/2025",NA
+"213","GCReW","SMARTX",2025,"May","SCAM","C3",630,40,"Elevated",0,6.41,"5/21/2025",NA
+"214","GCReW","SMARTX",2025,"May","SCAM","C3",630,80,"Elevated",0,6.34,"5/21/2025",NA
+"215","GCReW","SMARTX",2025,"May","SCAM","C3",630,120,"Elevated",0,6.34,"5/21/2025",NA
+"216","GCReW","SMARTX",2025,"May","SCAM","C3",330,10,"Ambient",0,6.28,"5/21/2025",NA
+"217","GCReW","SMARTX",2025,"May","SCAM","C3",330,20,"Ambient",0,6.46,"5/21/2025",NA
+"218","GCReW","SMARTX",2025,"May","SCAM","C3",330,40,"Ambient",0,6.47,"5/21/2025",NA
+"219","GCReW","SMARTX",2025,"May","SCAM","C3",330,80,"Ambient",0,6.4,"5/21/2025",NA
+"220","GCReW","SMARTX",2025,"May","SCAM","C3",330,120,"Ambient",0,6.54,"5/21/2025",NA
+"221","GCReW","SMARTX",2025,"May","SCAM","C3",331,10,"Ambient",1.7,6.31,"5/21/2025",NA
+"222","GCReW","SMARTX",2025,"May","SCAM","C3",331,20,"Ambient",1.7,6.48,"5/21/2025",NA
+"223","GCReW","SMARTX",2025,"May","SCAM","C3",331,40,"Ambient",1.7,6.52,"5/21/2025",NA
+"224","GCReW","SMARTX",2025,"May","SCAM","C3",331,80,"Ambient",1.7,6.51,"5/21/2025",NA
+"225","GCReW","SMARTX",2025,"May","SCAM","C3",331,120,"Ambient",1.7,6.56,"5/21/2025",NA
+"226","GCReW","SMARTX",2025,"May","SCAM","C3",332,10,"Ambient",3.4,6.41,"5/21/2025",NA
+"227","GCReW","SMARTX",2025,"May","SCAM","C3",332,20,"Ambient",3.4,6.52,"5/21/2025",NA
+"228","GCReW","SMARTX",2025,"May","SCAM","C3",332,40,"Ambient",3.4,6.62,"5/21/2025",NA
+"229","GCReW","SMARTX",2025,"May","SCAM","C3",332,80,"Ambient",3.4,6.65,"5/21/2025",NA
+"230","GCReW","SMARTX",2025,"May","SCAM","C3",332,120,"Ambient",3.4,6.6,"5/21/2025",NA
+"231","GCReW","SMARTX",2025,"May","SCAM","C3",333,10,"Ambient",5.1,6.55,"5/21/2025",NA
+"232","GCReW","SMARTX",2025,"May","SCAM","C3",333,20,"Ambient",5.1,6.63,"5/21/2025",NA
+"233","GCReW","SMARTX",2025,"May","SCAM","C3",333,40,"Ambient",5.1,6.71,"5/21/2025",NA
+"234","GCReW","SMARTX",2025,"May","SCAM","C3",333,80,"Ambient",5.1,6.67,"5/21/2025",NA
+"235","GCReW","SMARTX",2025,"May","SCAM","C3",333,120,"Ambient",5.1,6.62,"5/21/2025",NA
+"236","GCReW","SMARTX",2025,"May","SCAM","C3",633,10,"Elevated",5.1,6.51,"5/21/2025",NA
+"237","GCReW","SMARTX",2025,"May","SCAM","C3",633,20,"Elevated",5.1,6.61,"5/21/2025",NA
+"238","GCReW","SMARTX",2025,"May","SCAM","C3",633,40,"Elevated",5.1,6.68,"5/21/2025",NA
+"239","GCReW","SMARTX",2025,"May","SCAM","C3",633,80,"Elevated",5.1,6.62,"5/21/2025",NA
+"240","GCReW","SMARTX",2025,"May","SCAM","C3",633,120,"Elevated",5.1,6.69,"5/21/2025",NA
+"241","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,10,"Ambient",0,6.4,"5/21/2025",NA
+"242","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,20,"Ambient",0,6.22,"5/21/2025",NA
+"243","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,40,"Ambient",0,6.46,"5/21/2025",NA
+"244","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,80,"Ambient",0,6.68,"5/21/2025",NA
+"245","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,120,"Ambient",0,6.6,"5/21/2025",NA
+"246","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,10,"Ambient",1.7,6.34,"5/21/2025",NA
+"247","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,20,"Ambient",1.7,6.45,"5/21/2025",NA
+"248","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,40,"Ambient",1.7,6.41,"5/21/2025",NA
+"249","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,80,"Ambient",1.7,6.69,"5/21/2025",NA
+"250","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,120,"Ambient",1.7,6.5,"5/21/2025",NA
+"251","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,10,"Ambient",3.4,5.92,"5/22/2025",NA
+"252","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,20,"Ambient",3.4,6.25,"5/22/2025",NA
+"253","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,40,"Ambient",3.4,6.58,"5/22/2025",NA
+"254","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,80,"Ambient",3.4,6.54,"5/22/2025",NA
+"255","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,120,"Ambient",3.4,6.52,"5/22/2025",NA
+"256","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,10,"Ambient",5.1,6.32,"5/22/2025",NA
+"257","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,20,"Ambient",5.1,6.53,"5/22/2025",NA
+"258","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,40,"Ambient",5.1,6.62,"5/22/2025",NA
+"259","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,80,"Ambient",5.1,6.57,"5/22/2025",NA
+"260","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,120,"Ambient",5.1,6.55,"5/22/2025",NA
+"261","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,10,"Ambient",0,6.19,"5/22/2025",NA
+"262","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,20,"Ambient",0,6.26,"5/22/2025",NA
+"263","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,40,"Ambient",0,6.51,"5/22/2025",NA
+"264","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,80,"Ambient",0,6.63,"5/22/2025",NA
+"265","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,120,"Ambient",0,6.52,"5/22/2025",NA
+"266","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,10,"Ambient",1.7,6.2,"5/22/2025",NA
+"267","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,20,"Ambient",1.7,6.35,"5/22/2025",NA
+"268","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,40,"Ambient",1.7,6.45,"5/22/2025",NA
+"269","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,80,"Ambient",1.7,6.42,"5/22/2025",NA
+"270","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,120,"Ambient",1.7,6.46,"5/22/2025",NA
+"271","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,10,"Ambient",3.4,6.13,"5/22/2025",NA
+"272","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,20,"Ambient",3.4,6.35,"5/22/2025",NA
+"273","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,40,"Ambient",3.4,6.56,"5/22/2025",NA
+"274","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,80,"Ambient",3.4,6.57,"5/22/2025",NA
+"275","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,120,"Ambient",3.4,6.55,"5/22/2025",NA
+"276","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,10,"Ambient",5.1,5.86,"5/22/2025",NA
+"277","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,20,"Ambient",5.1,6.44,"5/22/2025",NA
+"278","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,40,"Ambient",5.1,6.31,"5/22/2025",NA
+"279","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,80,"Ambient",5.1,6.59,"5/22/2025",NA
+"280","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,120,"Ambient",5.1,6.56,"5/22/2025",NA
+"281","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,10,"Ambient",0,6.2,"5/22/2025",NA
+"282","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,20,"Ambient",0,6.29,"5/22/2025",NA
+"283","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,40,"Ambient",0,6.56,"5/22/2025",NA
+"284","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,80,"Ambient",0,6.58,"5/22/2025",NA
+"285","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,120,"Ambient",0,6.56,"5/22/2025",NA
+"286","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,10,"Ambient",1.7,6.03,"5/22/2025",NA
+"287","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,20,"Ambient",1.7,6.17,"5/22/2025",NA
+"288","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,40,"Ambient",1.7,6.33,"5/22/2025",NA
+"289","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,80,"Ambient",1.7,6.56,"5/22/2025",NA
+"290","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,120,"Ambient",1.7,6.56,"5/22/2025",NA
+"291","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,10,"Ambient",3.4,5.88,"5/22/2025",NA
+"292","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,20,"Ambient",3.4,6.36,"5/22/2025",NA
+"293","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,40,"Ambient",3.4,6.58,"5/22/2025",NA
+"294","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,80,"Ambient",3.4,6.49,"5/22/2025",NA
+"295","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,120,"Ambient",3.4,6.48,"5/22/2025",NA
+"296","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,10,"Ambient",5.1,6.12,"5/22/2025",NA
+"297","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,20,"Ambient",5.1,6.5,"5/22/2025",NA
+"298","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,40,"Ambient",5.1,6.58,"5/22/2025",NA
+"299","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,80,"Ambient",5.1,6.51,"5/22/2025",NA
+"300","GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,120,"Ambient",5.1,6.53,"5/22/2025",NA
+"301","GCReW","SMARTX",2025,"September","SCAM","C3",610,10,"Elevated",0,6.3,"9/15/2025",NA
+"302","GCReW","SMARTX",2025,"September","SCAM","C3",610,20,"Elevated",0,6.25,"9/15/2025",NA
+"303","GCReW","SMARTX",2025,"September","SCAM","C3",610,40,"Elevated",0,6.3,"9/15/2025",NA
+"304","GCReW","SMARTX",2025,"September","SCAM","C3",610,80,"Elevated",0,6.29,"9/15/2025",NA
+"305","GCReW","SMARTX",2025,"September","SCAM","C3",610,120,"Elevated",0,6.43,"9/15/2025",NA
+"306","GCReW","SMARTX",2025,"September","SCAM","C3",310,10,"Ambient",0,6.37,"9/15/2025",NA
+"307","GCReW","SMARTX",2025,"September","SCAM","C3",310,20,"Ambient",0,6.43,"9/15/2025",NA
+"308","GCReW","SMARTX",2025,"September","SCAM","C3",310,40,"Ambient",0,6.41,"9/15/2025",NA
+"309","GCReW","SMARTX",2025,"September","SCAM","C3",310,80,"Ambient",0,6.56,"9/15/2025",NA
+"310","GCReW","SMARTX",2025,"September","SCAM","C3",310,120,"Ambient",0,6.39,"9/15/2025",NA
+"311","GCReW","SMARTX",2025,"September","SCAM","C3",311,10,"Ambient",1.7,6.44,"9/15/2025",NA
+"312","GCReW","SMARTX",2025,"September","SCAM","C3",311,20,"Ambient",1.7,6.51,"9/15/2025",NA
+"313","GCReW","SMARTX",2025,"September","SCAM","C3",311,40,"Ambient",1.7,6.45,"9/15/2025",NA
+"314","GCReW","SMARTX",2025,"September","SCAM","C3",311,80,"Ambient",1.7,6.61,"9/15/2025",NA
+"315","GCReW","SMARTX",2025,"September","SCAM","C3",311,120,"Ambient",1.7,6.54,"9/15/2025",NA
+"316","GCReW","SMARTX",2025,"September","SCAM","C3",312,10,"Ambient",3.4,6.58,"9/15/2025",NA
+"317","GCReW","SMARTX",2025,"September","SCAM","C3",312,20,"Ambient",3.4,6.51,"9/15/2025",NA
+"318","GCReW","SMARTX",2025,"September","SCAM","C3",312,40,"Ambient",3.4,6.6,"9/15/2025",NA
+"319","GCReW","SMARTX",2025,"September","SCAM","C3",312,80,"Ambient",3.4,6.64,"9/15/2025",NA
+"320","GCReW","SMARTX",2025,"September","SCAM","C3",312,120,"Ambient",3.4,6.54,"9/15/2025",NA
+"321","GCReW","SMARTX",2025,"September","SCAM","C3",313,10,"Ambient",5.1,6.41,"9/15/2025",NA
+"322","GCReW","SMARTX",2025,"September","SCAM","C3",313,20,"Ambient",5.1,6.46,"9/15/2025",NA
+"323","GCReW","SMARTX",2025,"September","SCAM","C3",313,40,"Ambient",5.1,6.48,"9/15/2025",NA
+"324","GCReW","SMARTX",2025,"September","SCAM","C3",313,80,"Ambient",5.1,6.48,"9/15/2025",NA
+"325","GCReW","SMARTX",2025,"September","SCAM","C3",313,120,"Ambient",5.1,6.46,"9/15/2025",NA
+"326","GCReW","SMARTX",2025,"September","SCAM","C3",613,10,"Elevated",5.1,6.52,"9/15/2025",NA
+"327","GCReW","SMARTX",2025,"September","SCAM","C3",613,20,"Elevated",5.1,6.67,"9/15/2025",NA
+"328","GCReW","SMARTX",2025,"September","SCAM","C3",613,40,"Elevated",5.1,6.54,"9/15/2025",NA
+"329","GCReW","SMARTX",2025,"September","SCAM","C3",613,80,"Elevated",5.1,6.56,"9/15/2025",NA
+"330","GCReW","SMARTX",2025,"September","SCAM","C3",613,120,"Elevated",5.1,6.57,"9/15/2025",NA
+"331","GCReW","SMARTX",2025,"September","SCAM","C3",620,10,"Elevated",0,6.27,"9/15/2025",NA
+"332","GCReW","SMARTX",2025,"September","SCAM","C3",620,20,"Elevated",0,6.33,"9/15/2025",NA
+"333","GCReW","SMARTX",2025,"September","SCAM","C3",620,40,"Elevated",0,6.36,"9/15/2025",NA
+"334","GCReW","SMARTX",2025,"September","SCAM","C3",620,80,"Elevated",0,6.54,"9/15/2025",NA
+"335","GCReW","SMARTX",2025,"September","SCAM","C3",620,120,"Elevated",0,6.44,"9/15/2025",NA
+"336","GCReW","SMARTX",2025,"September","SCAM","C3",320,10,"Ambient",0,6.29,"9/15/2025",NA
+"337","GCReW","SMARTX",2025,"September","SCAM","C3",320,20,"Ambient",0,6.42,"9/15/2025",NA
+"338","GCReW","SMARTX",2025,"September","SCAM","C3",320,40,"Ambient",0,6.43,"9/15/2025",NA
+"339","GCReW","SMARTX",2025,"September","SCAM","C3",320,80,"Ambient",0,6.47,"9/15/2025",NA
+"340","GCReW","SMARTX",2025,"September","SCAM","C3",320,120,"Ambient",0,6.41,"9/15/2025",NA
+"341","GCReW","SMARTX",2025,"September","SCAM","C3",321,10,"Ambient",1.7,6.42,"9/15/2025",NA
+"342","GCReW","SMARTX",2025,"September","SCAM","C3",321,20,"Ambient",1.7,6.45,"9/15/2025",NA
+"343","GCReW","SMARTX",2025,"September","SCAM","C3",321,40,"Ambient",1.7,6.73,"9/15/2025",NA
+"344","GCReW","SMARTX",2025,"September","SCAM","C3",321,80,"Ambient",1.7,6.57,"9/15/2025",NA
+"345","GCReW","SMARTX",2025,"September","SCAM","C3",321,120,"Ambient",1.7,6.69,"9/15/2025",NA
+"346","GCReW","SMARTX",2025,"September","SCAM","C3",322,10,"Ambient",3.4,6.36,"9/15/2025",NA
+"347","GCReW","SMARTX",2025,"September","SCAM","C3",322,20,"Ambient",3.4,6.45,"9/15/2025",NA
+"348","GCReW","SMARTX",2025,"September","SCAM","C3",322,40,"Ambient",3.4,6.75,"9/15/2025",NA
+"349","GCReW","SMARTX",2025,"September","SCAM","C3",322,80,"Ambient",3.4,6.58,"9/15/2025",NA
+"350","GCReW","SMARTX",2025,"September","SCAM","C3",322,120,"Ambient",3.4,6.59,"9/15/2025",NA
+"351","GCReW","SMARTX",2025,"September","SCAM","C3",323,10,"Ambient",5.1,6.52,"9/18/2025",NA
+"352","GCReW","SMARTX",2025,"September","SCAM","C3",323,20,"Ambient",5.1,6.71,"9/18/2025",NA
+"353","GCReW","SMARTX",2025,"September","SCAM","C3",323,40,"Ambient",5.1,6.71,"9/18/2025",NA
+"354","GCReW","SMARTX",2025,"September","SCAM","C3",323,80,"Ambient",5.1,6.62,"9/18/2025",NA
+"355","GCReW","SMARTX",2025,"September","SCAM","C3",323,120,"Ambient",5.1,6.55,"9/18/2025",NA
+"356","GCReW","SMARTX",2025,"September","SCAM","C3",623,10,"Elevated",5.1,6.56,"9/18/2025",NA
+"357","GCReW","SMARTX",2025,"September","SCAM","C3",623,20,"Elevated",5.1,6.57,"9/18/2025",NA
+"358","GCReW","SMARTX",2025,"September","SCAM","C3",623,40,"Elevated",5.1,6.6,"9/18/2025",NA
+"359","GCReW","SMARTX",2025,"September","SCAM","C3",623,80,"Elevated",5.1,6.63,"9/18/2025",NA
+"360","GCReW","SMARTX",2025,"September","SCAM","C3",623,120,"Elevated",5.1,6.67,"9/18/2025",NA
+"361","GCReW","SMARTX",2025,"September","SCAM","C3",630,10,"Elevated",0,6.59,"9/18/2025",NA
+"362","GCReW","SMARTX",2025,"September","SCAM","C3",630,20,"Elevated",0,6.49,"9/18/2025",NA
+"363","GCReW","SMARTX",2025,"September","SCAM","C3",630,40,"Elevated",0,6.36,"9/18/2025",NA
+"364","GCReW","SMARTX",2025,"September","SCAM","C3",630,80,"Elevated",0,6.3,"9/18/2025",NA
+"365","GCReW","SMARTX",2025,"September","SCAM","C3",630,120,"Elevated",0,6.38,"9/18/2025",NA
+"366","GCReW","SMARTX",2025,"September","SCAM","C3",330,10,"Ambient",0,6.4,"9/18/2025",NA
+"367","GCReW","SMARTX",2025,"September","SCAM","C3",330,20,"Ambient",0,6.52,"9/18/2025",NA
+"368","GCReW","SMARTX",2025,"September","SCAM","C3",330,40,"Ambient",0,6.49,"9/18/2025",NA
+"369","GCReW","SMARTX",2025,"September","SCAM","C3",330,80,"Ambient",0,6.43,"9/18/2025",NA
+"370","GCReW","SMARTX",2025,"September","SCAM","C3",330,120,"Ambient",0,6.43,"9/18/2025",NA
+"371","GCReW","SMARTX",2025,"September","SCAM","C3",331,10,"Ambient",1.7,6.56,"9/18/2025",NA
+"372","GCReW","SMARTX",2025,"September","SCAM","C3",331,20,"Ambient",1.7,6.57,"9/18/2025",NA
+"373","GCReW","SMARTX",2025,"September","SCAM","C3",331,40,"Ambient",1.7,6.56,"9/18/2025",NA
+"374","GCReW","SMARTX",2025,"September","SCAM","C3",331,80,"Ambient",1.7,6.55,"9/18/2025",NA
+"375","GCReW","SMARTX",2025,"September","SCAM","C3",331,120,"Ambient",1.7,6.62,"9/18/2025",NA
+"376","GCReW","SMARTX",2025,"September","SCAM","C3",332,10,"Ambient",3.4,6.5,"9/18/2025",NA
+"377","GCReW","SMARTX",2025,"September","SCAM","C3",332,20,"Ambient",3.4,6.65,"9/18/2025",NA
+"378","GCReW","SMARTX",2025,"September","SCAM","C3",332,40,"Ambient",3.4,6.6,"9/18/2025",NA
+"379","GCReW","SMARTX",2025,"September","SCAM","C3",332,80,"Ambient",3.4,6.54,"9/18/2025",NA
+"380","GCReW","SMARTX",2025,"September","SCAM","C3",332,120,"Ambient",3.4,6.54,"9/18/2025",NA
+"381","GCReW","SMARTX",2025,"September","SCAM","C3",333,10,"Ambient",5.1,6.5,"9/18/2025",NA
+"382","GCReW","SMARTX",2025,"September","SCAM","C3",333,20,"Ambient",5.1,6.52,"9/18/2025",NA
+"383","GCReW","SMARTX",2025,"September","SCAM","C3",333,40,"Ambient",5.1,6.55,"9/18/2025",NA
+"384","GCReW","SMARTX",2025,"September","SCAM","C3",333,80,"Ambient",5.1,6.56,"9/18/2025",NA
+"385","GCReW","SMARTX",2025,"September","SCAM","C3",333,120,"Ambient",5.1,6.57,"9/18/2025",NA
+"386","GCReW","SMARTX",2025,"September","SCAM","C3",633,10,"Elevated",5.1,6.61,"9/18/2025",NA
+"387","GCReW","SMARTX",2025,"September","SCAM","C3",633,20,"Elevated",5.1,6.54,"9/18/2025",NA
+"388","GCReW","SMARTX",2025,"September","SCAM","C3",633,40,"Elevated",5.1,6.58,"9/18/2025",NA
+"389","GCReW","SMARTX",2025,"September","SCAM","C3",633,80,"Elevated",5.1,6.58,"9/18/2025",NA
+"390","GCReW","SMARTX",2025,"September","SCAM","C3",633,120,"Elevated",5.1,6.48,"9/18/2025",NA
+"391","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,10,"Ambient",0,6.35,"9/18/2025",NA
+"392","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,20,"Ambient",0,6.26,"9/18/2025",NA
+"393","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,40,"Ambient",0,6.36,"9/18/2025",NA
+"394","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,80,"Ambient",0,6.55,"9/18/2025",NA
+"395","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,120,"Ambient",0,6.5,"9/18/2025",NA
+"396","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,10,"Ambient",1.7,6.41,"9/18/2025",NA
+"397","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,20,"Ambient",1.7,6.55,"9/18/2025",NA
+"398","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,40,"Ambient",1.7,6.56,"9/18/2025",NA
+"399","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,80,"Ambient",1.7,6.97,"9/18/2025",NA
+"400","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,120,"Ambient",1.7,6.56,"9/18/2025",NA
+"401","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,10,"Ambient",3.4,6.52,"9/19/2025",NA
+"402","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,20,"Ambient",3.4,6.65,"9/19/2025",NA
+"403","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,40,"Ambient",3.4,6.71,"9/19/2025",NA
+"404","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,80,"Ambient",3.4,6.7,"9/19/2025",NA
+"405","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,120,"Ambient",3.4,6.69,"9/19/2025",NA
+"406","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,10,"Ambient",5.1,6.49,"9/19/2025",NA
+"407","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,20,"Ambient",5.1,6.59,"9/19/2025",NA
+"408","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,40,"Ambient",5.1,6.6,"9/19/2025",NA
+"409","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,80,"Ambient",5.1,6.51,"9/19/2025",NA
+"410","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,120,"Ambient",5.1,651,"9/19/2025",NA
+"411","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,10,"Ambient",0,6.41,"9/19/2025",NA
+"412","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,20,"Ambient",0,6.42,"9/19/2025",NA
+"413","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,40,"Ambient",0,6.6,"9/19/2025",NA
+"414","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,80,"Ambient",0,6.74,"9/19/2025",NA
+"415","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,120,"Ambient",0,6.6,"9/19/2025",NA
+"416","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,10,"Ambient",1.7,6.66,"9/19/2025",NA
+"417","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,20,"Ambient",1.7,6.59,"9/19/2025",NA
+"418","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,40,"Ambient",1.7,6.65,"9/19/2025",NA
+"419","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,80,"Ambient",1.7,6.6,"9/19/2025",NA
+"420","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,120,"Ambient",1.7,6.68,"9/19/2025",NA
+"421","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,10,"Ambient",3.4,6.54,"9/19/2025",NA
+"422","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,20,"Ambient",3.4,6.53,"9/19/2025",NA
+"423","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,40,"Ambient",3.4,6.57,"9/19/2025",NA
+"424","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,80,"Ambient",3.4,6.55,"9/19/2025",NA
+"425","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,120,"Ambient",3.4,6.46,"9/19/2025",NA
+"426","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,10,"Ambient",5.1,6.45,"9/19/2025",NA
+"427","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,20,"Ambient",5.1,6.61,"9/19/2025",NA
+"428","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,40,"Ambient",5.1,6.39,"9/19/2025",NA
+"429","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,80,"Ambient",5.1,6.72,"9/19/2025",NA
+"430","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,120,"Ambient",5.1,6.7,"9/19/2025",NA
+"431","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,10,"Ambient",0,6.44,"9/19/2025",NA
+"432","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,20,"Ambient",0,6.41,"9/19/2025",NA
+"433","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,40,"Ambient",0,6.57,"9/19/2025",NA
+"434","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,80,"Ambient",0,6.59,"9/19/2025",NA
+"435","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,120,"Ambient",0,6.82,"9/19/2025",NA
+"436","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,10,"Ambient",1.7,6.5,"9/19/2025",NA
+"437","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,20,"Ambient",1.7,6.4,"9/19/2025",NA
+"438","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,40,"Ambient",1.7,6.44,"9/19/2025",NA
+"439","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,80,"Ambient",1.7,6.54,"9/19/2025",NA
+"440","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,120,"Ambient",1.7,6.61,"9/19/2025",NA
+"441","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,10,"Ambient",3.4,6.41,"9/19/2025",NA
+"442","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,20,"Ambient",3.4,6.55,"9/19/2025",NA
+"443","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,40,"Ambient",3.4,6.69,"9/19/2025",NA
+"444","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,80,"Ambient",3.4,6.64,"9/19/2025",NA
+"445","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,120,"Ambient",3.4,6.65,"9/19/2025",NA
+"446","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,10,"Ambient",5.1,6.48,"9/19/2025",NA
+"447","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,20,"Ambient",5.1,6.62,"9/19/2025",NA
+"448","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,40,"Ambient",5.1,6.7,"9/19/2025",NA
+"449","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,80,"Ambient",5.1,6.62,"9/19/2025",NA
+"450","GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,120,"Ambient",5.1,6.65,"9/19/2025",NA
