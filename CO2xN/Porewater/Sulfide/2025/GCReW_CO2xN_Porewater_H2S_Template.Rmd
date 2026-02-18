@@ -1046,7 +1046,12 @@ merged_data <- metadata %>%
 ```{r, echo=FALSE}
 
 #Get only bad flags for each plate and check
-Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHK_CV_Flags, Chk_Flag, Chk_IDs) %>% group_by(Plate) %>% mutate(CHKSTD_Flags = ifelse(Chk_Flag %like% "Good", NA,paste0(Chk_IDs, "_",Chk_Flag))) %>% dplyr::select(Plate, CHKSTD_Flags) %>% mutate(CHKSTD_Flags = ifelse(CHKSTD_Flags == "", NA, CHKSTD_Flags)) %>% na.omit() %>% distinct(.keep_all = TRUE)
+Chk_Flags_All <- Chk_Flags %>% dplyr::select(Plate, CHKs_Flag) %>% filter(CHKs_Flag %like% "Bad") %>% na.omit() %>% distinct(.keep_all = TRUE) %>% group_by(Plate) %>%
+  summarise(
+    CHKSTD_Flags = paste(CHKs_Flag, collapse = ", "),
+    .groups = 'drop' # Drops the grouping structure after summarizing
+  )
+
 
 STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mutate(STDCV_Flags = paste0("STD", CV_Flag)) %>% dplyr::select(-CV_Flag) %>% mutate(
   R2_Flag = ifelse(R2_Flag %like% "Good", NA, R2_Flag),
