@@ -247,6 +247,58 @@ R2_Flags <- R2_Check %>% dplyr::select(Test, Run_Date, R2_Flag)
 ```
  
  \newpage
+ 
+ ##Update Standard Log
+```{r, echo = FALSE}
+
+#log <- tibble(Test = c(), Intercept= c(), Slope= c(), Quadratic= c(), Run_Date= c(), User= c()) #create standard log in proper format
+
+old_log <- read.csv(file_path) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")#read in log and format date
+
+add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
+  mutate(Test = case_when(
+    Test == "Ammonia 2" ~ "NH3",
+    Test == "Vanadium NOx" ~ "NOx",
+    Test == "o-PHOS 0.3" ~ "PO4"
+  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs")#Format new run data for log
+
+
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct() #bind rows, round data, and remove possible duplicate data from rerunning code
+mean_slope = mean(new_log$Slope)
+
+sd_slope = sd(new_log$Slope)
+
+mean_int = mean(new_log$Intercept)
+
+sd_int = sd(new_log$Intercept)
+#Plot Slope log
+Slopes_chk <- ggplot(new_log, aes(x = Run_Date, y = Slope, col = Run)) +
+    ylim(1.25,2.25) +
+  scale_color_manual(values = c("Past Runs" = "grey27", "Current Runs" = "cyan3")) +
+  geom_abline(intercept = mean_slope - 2*sd_slope, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_abline(intercept = mean_slope + 2*sd_slope, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_point(size = 2) +
+  theme_classic()+
+  ggtitle("Slope Log") 
+
+#Plot Intercept log
+ints_chk <- ggplot(new_log, aes(x = Run_Date, y = Intercept, col = Run)) +
+  ylim(-0.07, 0.01) +
+  scale_color_manual(values = c("Past Runs" = "grey27", "Current Runs" = "cyan3")) +
+  geom_abline(intercept = mean_int - 2*sd_int, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_abline(intercept = mean_int + 2*sd_int, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_point(size = 2) +
+  theme_classic()+
+  ggtitle("Intercept Log") 
+
+Slopes_chk
+
+ints_chk
+
+
+write.csv(new_log, file_path, row.names = FALSE) #write out log
+
+```
 
 
 ## Dilution Corrections - ensure the latest dilution is kept
