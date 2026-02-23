@@ -500,9 +500,26 @@ Dup_ready <- df_all_cor %>% mutate(Date_Num = paste0(Run_Number, "_", Run_Date, 
 
 Dup_Joined <- left_join(Duplicates, Dup_ready, by = join_by(Date_Num))
 
-Dup_plot_df <- Dup_Joined %>% filter(!Sample_Name %ilike% "pe") %>% group_by(Date_Num) %>% mutate(Duplicate_CV = cv(c(Dup_Conc, Conc))) %>% mutate(Dup_Flag = ifelse(Duplicate_CV >= 10, "NO, rerun", "YES")) %>% ungroup() %>% group_by(Sample_Name) %>% ungroup() %>% group_by(Sample_Name) %>% mutate(Num_Runs = length(Sample_Name), Max_Dil = max(Dilution), Rerun = ifelse(Num_Runs != 1 , ifelse(Dilution == Max_Dil, "KEEP", "REMOVE"), "KEEP")) %>% filter(Rerun == "KEEP")
+Dup_plot_df <- Dup_Joined %>% filter(!Sample_Name %ilike% "pe") %>% group_by(Date_Num) %>% mutate(Duplicate_CV = cv(c(Dup_Conc, Conc))) %>% mutate(Dup_Flag = ifelse(Duplicate_CV >= 10, "NO, rerun", "YES")) %>% ungroup() %>% group_by(Sample_Name) %>% ungroup() %>% group_by(Sample_Name) %>% mutate(Num_Runs = length(Sample_Name), Max_Dil = max(Dilution), Rerun = ifelse(Num_Runs != 1 , ifelse(Dilution == Max_Dil, "KEEP", "REMOVE"), "KEEP")) %>% filter(Rerun == "KEEP") %>% mutate(Dilution = ifelse(Dilution == 0, 1, Dilution)) %>% 
+  mutate(
+     Conc_flag = case_when(
+        Test == "Vanadium NOx" & Conc/Dilution < NOx_dl ~ "bdl",
+        Test == "Vanadium NOx" & Conc/Dilution > NOx_top    ~ "adl",
+        Test == "Vanadium NOx"               ~ "Within_Range",
+      
+      Test == "Ammonia 2" & Conc/Dilution < NH3_dl ~ "bdl",
+      Test == "Ammonia 2" & Conc/Dilution > NH3_top    ~ "adl",
+      Test == "Ammonia 2"                ~ "Within_Range",
+      
+      Test == "o-PHOS 0.3" & Conc/Dilution < PO4_dl  ~ "bdl",
+      Test == "o-PHOS 0.3" & Conc/Dilution > PO4_top   ~ "adl",
+      Test == "o-PHOS 0.3"                ~ "Within_Range",
+      
+      TRUE ~ NA_character_  # fallback for unexpected values
+    )
+  )
 
-Dup_Plot <-  ggplot(Dup_plot_df, aes(x = Run_Date, y = Duplicate_CV, fill =  Dup_Flag)) +
+Dup_Plot <-  ggplot(Dup_plot_df, aes(x = Run_Date, y = Duplicate_CV, fill =  Dup_Flag, col = Conc_flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
   scale_fill_manual(values = c("YES" = "darkgreen", "NO, rerun" = "darkred"), name = "CV below 10% ?") +
