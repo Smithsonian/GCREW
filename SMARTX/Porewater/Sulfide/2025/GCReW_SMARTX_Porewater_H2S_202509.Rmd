@@ -1,6 +1,6 @@
 ---
 title: "SMARTX: Porewater Sulfide"
-author: "May 2025 Samples"
+author: "Sept 2025 Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -43,9 +43,9 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "May"
+sample_month = "September"
 sample_year = "2025"
-Run_Date = as.Date("06/02/2025", format = "%m/%d/%Y")
+Run_Date = as.Date("09/19/2025", format = "%m/%d/%Y")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Brenden Blakley"#Code user
 
@@ -53,23 +53,22 @@ Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10")
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9")
 
-Raw_plates <- c("Raw Data/20250602_SMARTX_H2S_Plate1.csv",
-                "Raw Data/20250602_SMARTX_H2S_Plate2.csv",
-                "Raw Data/20250602_SMARTX_H2S_Plate3.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate4.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate5.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate6.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate7.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate8.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate9.csv",
-                "Raw Data/20250603_SMARTX_H2S_Plate10.csv")
+Raw_plates <- c("Raw Data/20250919_SMARTX_H2S_Plate1.csv",
+                "Raw Data/20250919_SMARTX_H2S_Plate2.csv",
+                "Raw Data/20250919_SMARTX_H2S_Plate3.csv",
+                "Raw Data/20250919_SMARTX_H2S_Plate4.csv",
+                "Raw Data/20250919_SMARTX_H2S_Plate5.csv",
+                "Raw Data/20250919_SMARTX_H2S_Plate6.csv",
+                "Raw Data/20250922_SMARTX_H2S_Plate7.csv",
+                "Raw Data/20250922_SMARTX_H2S_Plate8.csv",
+                "Raw Data/20250922_SMARTX_H2S_Plate9.csv")
 
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
-    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10"),
-    Run_Date = c("06/02/2025","06/02/2025","06/02/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025", "06/03/2025")
+    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9"),
+    Run_Date = c("09/19/2025","09/19/2025","09/19/2025","09/19/2025","09/19/2025","09/19/2025","09/22/2025","09/22/2025", "09/22/2025")
   )
 
   Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
@@ -79,8 +78,8 @@ Run_dates <- tibble(
 log_path <- "Processed Data/SMARTX_H2S_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202505.csv"
-rerun_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202505_reruns.csv"
+final_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202509.csv"
+rerun_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202509_reruns.csv"
 
 
 ```
@@ -418,7 +417,7 @@ stdcrv_tagged <- new_log_stds %>% mutate(
 ) %>% mutate(
   Slope = ifelse(In_Range_Slope == "Out of Range", NA, Slope),
   Intercept = ifelse(In_Range_Int == "Out of Range", NA, Intercept)
-) %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 2, "Yes", "No")) %>% mutate(Slope_Flag = ifelse(is.na(Slope), "Slope_Bad" , "Slope_Good"), Int_Flag = ifelse(is.na(Intercept), "Intercept_Bad" , "Intercept_Good")) %>% mutate(
+) %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 3, "Yes", "No")) %>% mutate(Slope_Flag = ifelse(is.na(Slope), "Slope_Bad" , "Slope_Good"), Int_Flag = ifelse(is.na(Intercept), "Intercept_Bad" , "Intercept_Good")) %>% mutate(
   Slope = ifelse(is.na(Intercept) | R2 <= r2_cutoff, NA, Slope),
   Intercept = ifelse(is.na(Slope)| R2 <= r2_cutoff, NA, Intercept),
   Curve_RMVD = ifelse(is.na(Slope) |

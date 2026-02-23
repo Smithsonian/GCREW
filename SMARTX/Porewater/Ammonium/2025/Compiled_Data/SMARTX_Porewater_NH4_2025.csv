@@ -1,0 +1,601 @@
+"Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","NH3_Conc_mgL","NH3_Conc_uM","NH3_Conc_Flag","NH3_QAQC_Flag","Analysis_rundate","Run_notes"
+"GCReW","SMARTX",2025,"July","SCAM","C3",310,10,"Ambient",0,0.692652,49.451476793249,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",310,120,"Ambient",0,2.469534,176.310908351003,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",310,20,"Ambient",0,0.793714,56.6667380610708,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",310,40,"Ambient",0,3.142452,224.353487973613,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",310,80,"Ambient",0,1.765669,126.058886104507,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",311,10,"Ambient",1.7,0.3178,22.6891416250794,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",311,120,"Ambient",1.7,3.199928,228.456952744044,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",311,20,"Ambient",1.7,0.53976,38.5358435605817,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",311,40,"Ambient",1.7,1.933207,138.02016177972,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",311,80,"Ambient",1.7,2.682739,191.532552278552,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",312,10,"Ambient",3.4,0.600202,42.8510641335932,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",312,120,"Ambient",3.4,2.582142,184.35048940864,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",312,20,"Ambient",3.4,1.531901,109.369159045314,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",312,40,"Ambient",3.4,3.609304,257.68410831959,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",312,80,"Ambient",3.4,6.296645,449.545217645841,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",313,10,"Ambient",5.1,0.515718,36.8193792970507,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",313,120,"Ambient",5.1,7.027652,501.735026808599,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",313,20,"Ambient",5.1,1.865708,133.201110896928,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",313,40,"Ambient",5.1,2.823335,201.570319918325,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",313,80,"Ambient",5.1,6.493976,463.633546802602,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",320,10,"Ambient",0,0.542629,38.7406741059636,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",320,120,"Ambient",0,1.468177,104.819622038025,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",320,20,"Ambient",0,0.866792,61.8840983243733,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",320,40,"Ambient",0,2.276843,162.553849229297,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",320,80,"Ambient",0,2.204086,157.359406569713,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",321,10,"Ambient",1.7,0.43576,31.1108255334947,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",321,120,"Ambient",1.7,4.331007,309.20966394654,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",321,20,"Ambient",1.7,1.54319,110.175130473274,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",321,40,"Ambient",1.7,2.482927,177.267093605203,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",321,80,"Ambient",1.7,3.669703,261.996258933225,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",322,10,"Ambient",3.4,0.28669,20.4680617133229,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",322,120,"Ambient",3.4,4.122565,294.328071565751,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",322,20,"Ambient",3.4,1.287832,91.9439982294188,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",322,40,"Ambient",3.4,3.642645,260.064469146908,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",322,80,"Ambient",3.4,2.999563,214.152012965224,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",323,10,"Ambient",5.1,0.269154,19.2160894429095,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",323,120,"Ambient",5.1,4.024207,287.305860766633,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",323,20,"Ambient",5.1,2.054242,146.661383480763,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",323,40,"Ambient",5.1,2.963807,211.599234651988,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",323,80,"Ambient",5.1,7.498795,535.372000542597,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",330,10,"Ambient",0,0.076119,5.43447064619075,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",330,120,"Ambient",0,1.645531,117.481705183948,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",330,20,"Ambient",0,0.54037,38.5793941470868,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",330,40,"Ambient",0,0.621046,44.3392090927913,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",330,80,"Ambient",0,1.316254,93.9731699829367,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",331,10,"Ambient",1.7,0.208932,14.9165756388014,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",331,120,"Ambient",1.7,3.501534,249.989933389021,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",331,20,"Ambient",1.7,0.389366,27.7985535493728,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",331,40,"Ambient",1.7,1.424795,101.722389999072,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",331,80,"Ambient",1.7,3.36603,240.315706054959,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",332,10,"Ambient",3.4,0.296929,21.1990690169704,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",332,120,"Ambient",3.4,6.299486,449.748049147908,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",332,20,"Ambient",3.4,1.419205,101.323295280116,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",332,40,"Ambient",3.4,2.718863,194.111603732499,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",332,80,"Ambient",3.4,6.05033,431.959704998322,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",333,10,"Ambient",5.1,0.695283,49.6393154704534,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",333,120,"Ambient",5.1,8.62654,615.886682801802,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",333,20,"Ambient",5.1,3.081877,220.028771944855,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",333,40,"Ambient",5.1,3.366996,240.384673049326,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",333,80,"Ambient",5.1,6.502042,464.209414066125,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,10,"Ambient",0,0.114789,8.19529225299321,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,120,"Ambient",0,6.404666,457.257312571841,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,20,"Ambient",0,0.560292,40.0017134656986,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,40,"Ambient",0,1.979549,141.328721254828,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",440,80,"Ambient",0,4.846376,346.004126596557,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,10,"Ambient",1.7,0.748347,53.4277881299664,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,120,"Ambient",1.7,7.897312,563.82388428395,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,20,"Ambient",1.7,1.344988,96.024616790536,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,40,"Ambient",1.7,2.451748,175.041087479563,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",441,80,"Ambient",1.7,6.169444,440.463778049077,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,10,"Ambient",3.4,0.129975,9.27948767375613,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,120,"Ambient",3.4,2.688975,191.977767782561,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,20,"Ambient",3.4,0.489309,34.9339244789993,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,40,"Ambient",3.4,2.748899,196.256006054245,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",442,80,"Ambient",3.4,5.850232,417.673827525399,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,10,"Ambient",5.1,0.270213,19.2916961168584,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,120,"Ambient",5.1,3.501183,249.96487395318,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,20,"Ambient",5.1,0.724859,51.7508763663104,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,40,"Ambient",5.1,1.720971,122.86769902975,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",443,80,"Ambient",5.1,4.356018,310.99530938765,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,10,"Ambient",0,0.087269,6.23051825197941,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,120,"Ambient",0,5.646666,403.140354259033,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,20,"Ambient",0,0.104005,7.42537499910757,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,40,"Ambient",0,1.384606,98.8531202924315,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",450,80,"Ambient",0,3.271143,233.541305232496,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,10,"Ambient",1.7,0.127766,9.12177743508464,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,120,"Ambient",1.7,6.337523,452.463678096911,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,20,"Ambient",1.7,0.464787,33.1831909014971,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,40,"Ambient",1.7,2.911221,207.844888517638,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",451,80,"Ambient",1.7,4.32421,308.724396181827,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,10,"Ambient",3.4,0.177681,12.6854291160659,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,120,"Ambient",3.4,3.489846,249.155475593823,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,20,"Ambient",3.4,0.375802,26.8301598520708,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,40,"Ambient",3.4,2.174723,155.263052681931,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",452,80,"Ambient",3.4,4.873309,347.926992082361,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,10,"Ambient",5.1,0.146765,10.478199718706,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,120,"Ambient",5.1,3.657318,261.112039238365,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,20,"Ambient",5.1,0.404172,28.8556190965752,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,40,"Ambient",5.1,2.579942,184.193421719606,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",453,80,"Ambient",5.1,6.288176,448.940578437462,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,10,"Ambient",0,0.118545,8.46344963481762,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,120,"Ambient",0,3.230347,230.628699122563,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,20,"Ambient",0,0.254994,18.2051446807599,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,40,"Ambient",0,2.503483,178.734676976019,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",460,80,"Ambient",0,3.721168,265.670571940571,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,10,"Ambient",1.7,0.11635,8.30673891780362,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,120,"Ambient",1.7,3.374553,240.92420056116,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,20,"Ambient",1.7,0.171988,12.278980773487,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,40,"Ambient",1.7,1.210824,86.4460579579772,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",461,80,"Ambient",1.7,3.184045,227.322995423619,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,10,"Ambient",3.4,0.164463,11.7417378825848,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,120,"Ambient",3.4,3.226774,230.37360691669,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,20,"Ambient",3.4,0.759044,54.1914940706947,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,40,"Ambient",3.4,2.720738,194.245468240199,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",462,80,"Ambient",3.4,4.213264,300.803472623816,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,10,"Ambient",5.1,0.273026,19.4925285756102,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,120,"Ambient",5.1,4.280202,305.582471245904,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,20,"Ambient",5.1,1.985135,141.727530396168,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,40,"Ambient",5.1,2.503878,178.762877765641,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SPPA, DISP","C4",463,80,"Ambient",5.1,5.12424,365.842061299235,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",610,10,"Elevated",0,0.105299,7.51775935802152,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",610,120,"Elevated",0,1.100863,78.5954578880107,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",610,20,"Elevated",0,0.22251,15.8859688577609,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",610,40,"Elevated",0,0.278286,19.868063141211,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",610,80,"Elevated",0,0.258079,18.4253964174288,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",613,10,"Elevated",5.1,0.069619,4.97040701949781,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",613,120,"Elevated",5.1,5.221435,372.781240406377,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",613,20,"Elevated",5.1,1.033662,73.7976825376427,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",613,40,"Elevated",5.1,3.08536,220.277438654358,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",613,80,"Elevated",5.1,4.72508,337.344270956042,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",620,10,"Elevated",0,0.245666,17.5391776792535,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",620,120,"Elevated",0,1.489216,106.321688906024,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",620,20,"Elevated",0,0.369382,26.3718077777064,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",620,40,"Elevated",0,0.738113,52.6971377983394,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",620,80,"Elevated",0,1.329539,94.921644641493,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",623,10,"Elevated",5.1,0.120004,8.56761407040916,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",623,120,"Elevated",5.1,4.583936,327.26737918282,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",623,20,"Elevated",5.1,0.431216,30.7864093612343,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",623,40,"Elevated",5.1,1.191759,85.0849236436848,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",623,80,"Elevated",5.1,4.203263,300.089457188346,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",630,10,"Elevated",0,0.07772,5.54877308716543,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",630,120,"Elevated",0,0.566596,40.4517837891866,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",630,20,"Elevated",0,0.339928,24.2689569991504,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",630,40,"Elevated",0,0.183504,13.1011587311786,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",630,80,"Elevated",0,0.371327,26.5106698936937,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",633,10,"Elevated",5.1,0.253235,18.0795619239364,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",633,120,"Elevated",5.1,7.0783,505.35101058779,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",633,20,"Elevated",5.1,1.597583,114.058486295844,"Within_Range",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",633,40,"Elevated",5.1,2.340748,167.11630862373,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"July","SCAM","C3",633,80,"Elevated",5.1,4.787568,341.805564479856,"Within_Range_Diluted",NA,"10/06/2025","updated chunk 368-448 to calculate average PE_chk values for all runs"
+"GCReW","SMARTX",2025,"May","SCAM","C3",310,10,"Ambient",0,0.932318,66.5622880478628,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",310,120,"Ambient",0,2.367778,169.046099366732,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",310,20,"Ambient",0,1.654718,118.137605574475,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",310,40,"Ambient",0,2.043936,145.92559275204,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",310,80,"Ambient",0,2.180881,155.702699422419,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",311,10,"Ambient",1.7,0.297376,21.2309823156061,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",311,120,"Ambient",1.7,2.402793,171.545974426524,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",311,20,"Ambient",1.7,1.681926,120.080104521408,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",311,40,"Ambient",1.7,1.990404,142.103707511405,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",311,80,"Ambient",1.7,2.819143,201.27103457631,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",312,10,"Ambient",3.4,0.948453,67.7142367581229,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",312,120,"Ambient",3.4,2.794161,199.487459572919,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",312,20,"Ambient",3.4,2.443131,174.425881899377,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",312,40,"Ambient",3.4,3.940602,281.3369316113,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",312,80,"Ambient",3.4,4.494594,320.888860331127,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",313,10,"Ambient",5.1,0.418062,29.847287369616,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",313,120,"Ambient",5.1,7.846072,560.165635017527,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",313,20,"Ambient",5.1,2.924169,208.76930326201,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",313,40,"Ambient",5.1,0.96523,68.9120206758194,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",313,80,"Ambient",5.1,8.071135,576.233873788972,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",320,10,"Ambient",0,1.139218,81.3337902575196,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",320,120,"Ambient",0,1.737274,124.0316419999,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",320,20,"Ambient",0,1.747435,124.757080540027,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",320,40,"Ambient",0,2.177625,155.470239242648,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",320,80,"Ambient",0,2.291361,163.590353188117,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",321,10,"Ambient",1.7,0.688017,49.1205637302148,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",321,120,"Ambient",1.7,2.518774,179.826368809213,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",321,20,"Ambient",1.7,1.887441,134.752725481377,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",321,40,"Ambient",1.7,2.373589,169.460972248995,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",321,80,"Ambient",1.7,4.934336,352.283978381774,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",322,10,"Ambient",3.4,0.423375,30.2266058386344,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",322,120,"Ambient",3.4,2.922059,208.618661069345,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",322,20,"Ambient",3.4,2.308631,164.823334547038,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",322,40,"Ambient",3.4,2.889422,206.288561902518,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",322,80,"Ambient",3.4,4.169796,297.70010066611,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",323,10,"Ambient",5.1,0.356126,25.4254035568692,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",323,120,"Ambient",5.1,4.370399,312.022032313107,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",323,20,"Ambient",5.1,2.717235,193.995373642614,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",323,40,"Ambient",5.1,3.953397,282.250423011844,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",323,80,"Ambient",5.1,4.680665,334.173288497648,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",330,10,"Ambient",0,0.186136,13.2890688027872,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",330,120,"Ambient",0,2.905736,207.453290211113,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",330,20,"Ambient",0,0.768477,54.8649574846323,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",330,40,"Ambient",0,0.984292,70.2729408068995,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",330,80,"Ambient",0,1.394393,99.5518573254228,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",331,10,"Ambient",1.7,0.112327,8.01951923008275,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",331,120,"Ambient",1.7,2.83043,202.076863215461,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",331,20,"Ambient",1.7,0.798201,56.9870847522971,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",331,40,"Ambient",1.7,1.537833,109.792670650474,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",331,80,"Ambient",1.7,2.620658,187.10031627721,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",332,10,"Ambient",3.4,0.376414,26.873853227384,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",332,120,"Ambient",3.4,2.890864,206.39151263324,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",332,20,"Ambient",3.4,1.59575,113.927620353117,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",332,40,"Ambient",3.4,2.254287,160.943477050269,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",332,80,"Ambient",3.4,3.133826,223.737639843789,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",333,10,"Ambient",5.1,0.974286,69.5585683994089,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",333,120,"Ambient",5.1,5.444939,388.73817530182,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",333,20,"Ambient",5.1,3.409522,243.420791478364,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",333,40,"Ambient",5.1,5.735538,409.485317740795,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",333,80,"Ambient",5.1,6.816103,486.63161201425,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,10,"Ambient",0,0.226559,16.1750447999886,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,120,"Ambient",0,2.071196,147.871804207986,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,20,"Ambient",0,0.588979,42.0498047363048,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,40,"Ambient",0,2.052773,146.55650510113,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",440,80,"Ambient",0,2.703559,193.018983772052,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,10,"Ambient",1.7,0.52935,37.7926278138319,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,120,"Ambient",1.7,3.127091,223.256798532131,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,20,"Ambient",1.7,0.875527,62.5077284442445,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,40,"Ambient",1.7,1.983801,141.632290261089,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",441,80,"Ambient",1.7,3.13645,223.924978760165,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,10,"Ambient",3.4,0.398828,28.4740874010295,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,120,"Ambient",3.4,3.92361,280.123797896721,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,20,"Ambient",3.4,0.932007,66.5400843881857,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,40,"Ambient",3.4,3.444581,245.923807891937,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",442,80,"Ambient",3.4,3.847667,274.701892665653,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,10,"Ambient",5.1,0.329367,23.5149606973805,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,120,"Ambient",5.1,3.09973,221.30337624137,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,20,"Ambient",5.1,1.293853,92.3738639365447,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,40,"Ambient",5.1,2.279743,162.760893001207,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",443,80,"Ambient",5.1,3.116759,222.519151548902,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,10,"Ambient",0,0.393481,28.0923415222715,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,120,"Ambient",0,5.392736,385.011173224243,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,20,"Ambient",0,0.347493,24.8090556662169,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,40,"Ambient",0,2.364739,168.829131772652,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",450,80,"Ambient",0,3.131178,223.548587461715,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,10,"Ambient",1.7,0.184094,13.1432814296015,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,120,"Ambient",1.7,5.782453,412.834786209457,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,20,"Ambient",1.7,1.012262,72.2698422897613,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,40,"Ambient",1.7,2.978106,212.620103236308,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",451,80,"Ambient",1.7,3.184139,227.329706497605,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,10,"Ambient",3.4,0.208768,14.9048669565279,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,120,"Ambient",3.4,5.225339,373.059964160009,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,20,"Ambient",3.4,0.436134,31.1375270406306,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,40,"Ambient",3.4,2.229143,159.148336153412,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",452,80,"Ambient",3.4,3.68176,262.857061263538,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,10,"Ambient",5.1,0.184386,13.1641285956007,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,120,"Ambient",5.1,3.634345,259.471895592823,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,20,"Ambient",5.1,0.908364,64.8521064918932,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,40,"Ambient",5.1,2.747442,196.151984407462,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",453,80,"Ambient",5.1,4.717268,336.786537871162,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,10,"Ambient",0,0.306229,21.8630369751619,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,120,"Ambient",0,3.868031,276.15576831088,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,20,"Ambient",0,0.792569,56.5849914683687,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,40,"Ambient",0,2.554978,182.411131815488,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",460,80,"Ambient",0,3.80352,271.550043907559,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,10,"Ambient",1.7,0.224224,16.0083388663997,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,120,"Ambient",1.7,3.099312,221.273533380454,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,20,"Ambient",1.7,0.381387,27.2288975990062,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,40,"Ambient",1.7,1.271356,90.7677040273583,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",461,80,"Ambient",1.7,2.585896,184.618504001656,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,10,"Ambient",3.4,0.702203,50.1333647468711,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,120,"Ambient",3.4,3.740511,267.051553899205,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,20,"Ambient",3.4,1.562087,111.524270527676,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,40,"Ambient",3.4,2.044519,145.967215689634,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",462,80,"Ambient",3.4,2.84517,203.129216731993,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,10,"Ambient",5.1,0.620224,44.2805228926157,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,120,"Ambient",5.1,0.11966,8.54305439539649,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,20,"Ambient",5.1,1.981185,141.445522499946,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,40,"Ambient",5.1,3.12561,223.151063419649,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SPPA, DISP","C4",463,80,"Ambient",5.1,4.286596,306.038967065761,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",610,10,"Elevated",0,0.105252,7.51440382102851,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",610,120,"Elevated",0,0.726016,51.8334796918617,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",610,20,"Elevated",0,0.235949,16.8454382545496,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",610,40,"Elevated",0,0.30698,21.9166541726459,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",610,80,"Elevated",0,0.329035,23.4912577552171,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",613,10,"Elevated",5.1,0.252406,18.020375962932,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",613,120,"Elevated",5.1,6.362422,454.241327364761,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",613,20,"Elevated",5.1,1.506453,107.552314249609,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",613,40,"Elevated",5.1,3.5142,250.894214911435,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",613,80,"Elevated",5.1,5.451845,389.23122505658,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",620,10,"Elevated",0,0.418444,29.8745600319847,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",620,120,"Elevated",0,1.275642,91.0737004433593,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",620,20,"Elevated",0,0.439959,31.4106106363383,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",620,40,"Elevated",0,0.66097,47.1895592823434,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",620,80,"Elevated",0,1.048512,74.8578894386258,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",623,10,"Elevated",5.1,0.175434,12.5250058900383,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",623,120,"Elevated",5.1,3.931203,280.665895607102,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",623,20,"Elevated",5.1,0.438042,31.273747563666,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",623,40,"Elevated",5.1,1.390146,99.2486452911821,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",623,80,"Elevated",5.1,2.704723,193.102086858432,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",630,10,"Elevated",0,0.202051,14.4253107441439,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",630,120,"Elevated",0,0.773998,55.2591259897049,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",630,20,"Elevated",0,0.281692,20.1112324815981,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",630,40,"Elevated",0,0.23659,16.8912020675819,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",630,80,"Elevated",0,0.25549,18.2405563051968,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",633,10,"Elevated",5.1,0.319252,22.7928062998422,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",633,120,"Elevated",5.1,2.750741,196.38751454661,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",633,20,"Elevated",5.1,1.70642,121.828839055595,"Within_Range",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",633,40,"Elevated",5.1,3.593198,256.534230047049,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"May","SCAM","C3",633,80,"Elevated",5.1,6.448018,460.35240277867,"Within_Range_Diluted",NA,"08/12/2025","PE Check contaminated, NH3 high, PE Check changed after this run
+                Moved metadata chunk to setup because 'here' package was needed"
+"GCReW","SMARTX",2025,"September","SCAM","C3",310,10,"Ambient",0,0.748709,53.453632904253,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",310,120,"Ambient",0,2.879583,205.586112360513,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",310,20,"Ambient",0,0.795928,56.8248052717628,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",310,40,"Ambient",0,2.415697,172.467247817116,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",310,80,"Ambient",0,2.423181,173.00156353745,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",311,10,"Ambient",1.7,0.168886,12.0575153319483,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",311,120,"Ambient",1.7,3.389056,241.959633603918,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",311,20,"Ambient",1.7,0.626205,44.7075328235773,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",311,40,"Ambient",1.7,2.313501,165.171025295037,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",311,80,"Ambient",1.7,3.358585,239.784174716386,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",312,10,"Ambient",3.4,0.7088,50.6043536307624,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",312,120,"Ambient",3.4,2.70671,193.243947539392,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",312,20,"Ambient",3.4,2.249959,160.634482069295,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",312,40,"Ambient",3.4,4.730734,337.747934916861,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",312,80,"Ambient",3.4,5.939711,424.062127410454,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",313,10,"Ambient",5.1,0.831845,59.3890780840598,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",313,120,"Ambient",5.1,9.152415,653.431215061363,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",313,20,"Ambient",5.1,1.52132,108.613734855462,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",313,40,"Ambient",5.1,4.089428,291.96227519687,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",313,80,"Ambient",5.1,7.642259,545.614527333348,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",320,10,"Ambient",0,0.821678,58.6632111775079,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",320,120,"Ambient",0,2.15098,153.567935345228,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",320,20,"Ambient",0,1.338959,95.5941799281772,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",320,40,"Ambient",0,3.423454,244.415458316377,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",320,80,"Ambient",0,4.383846,312.982072865129,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",321,10,"Ambient",1.7,0.912597,65.1543190044764,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",321,120,"Ambient",1.7,6.08653,434.544182426981,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",321,20,"Ambient",1.7,1.846978,131.863893708011,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",321,40,"Ambient",1.7,3.393952,242.309180606424,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",321,80,"Ambient",1.7,5.254973,375.175665931304,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",322,10,"Ambient",3.4,0.899982,64.2536785966716,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",322,120,"Ambient",3.4,4.02087,287.067617640129,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",322,20,"Ambient",3.4,1.717159,122.595543561296,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",322,40,"Ambient",3.4,3.035312,216.704291517631,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",322,80,"Ambient",3.4,6.051311,432.029742908751,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",323,10,"Ambient",5.1,0.835582,59.6558789722062,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",323,120,"Ambient",5.1,5.339583,381.216346462764,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",323,20,"Ambient",5.1,3.554442,253.767268521493,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",323,40,"Ambient",5.1,5.579564,398.349646954672,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",323,80,"Ambient",5.1,5.994758,427.99217517331,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",330,10,"Ambient",0,0.176058,12.5695559982009,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",330,120,"Ambient",0,2.011057,143.578216139419,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",330,20,"Ambient",0,0.512026,36.5557911570891,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",330,40,"Ambient",0,0.705473,50.3668244482997,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",330,80,"Ambient",0,1.143539,81.6422854776643,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",331,10,"Ambient",1.7,0.298508,21.3118007810548,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",331,120,"Ambient",1.7,2.990288,213.489829867135,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",331,20,"Ambient",1.7,0.394229,28.1457445365432,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",331,40,"Ambient",1.7,1.388907,99.160187624494,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",331,80,"Ambient",1.7,2.566932,183.264580522179,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",332,10,"Ambient",3.4,1.473655,105.210720583721,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",332,120,"Ambient",3.4,5.142552,367.149435627236,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",332,20,"Ambient",3.4,1.890692,134.984828689127,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",332,40,"Ambient",3.4,3.142741,224.374120956399,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",332,80,"Ambient",3.4,6.430556,459.105713694161,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",333,10,"Ambient",5.1,1.66115,118.596814381689,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",333,120,"Ambient",5.1,13.588799,970.164207129445,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",333,20,"Ambient",5.1,4.839265,345.496440988955,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",333,40,"Ambient",5.1,4.444843,317.336917332419,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",333,80,"Ambient",5.1,9.563777,682.800159923465,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,10,"Ambient",0,0.215732,15.4020575867264,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,120,"Ambient",0,9.053652,646.380089528583,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,20,"Ambient",0,0.560196,39.9948596029043,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,40,"Ambient",0,1.652362,117.9694003584,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",440,80,"Ambient",0,3.864761,275.922308609451,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,10,"Ambient",1.7,0.731224,52.205301748449,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,120,"Ambient",1.7,3.567235,254.680617133229,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,20,"Ambient",1.7,1.373568,98.0650688599028,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,40,"Ambient",1.7,2.282685,162.970935338088,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",441,80,"Ambient",1.7,8.500045,606.855647654337,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,10,"Ambient",3.4,0.317677,22.6803601133743,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,120,"Ambient",3.4,3.766832,268.930726009695,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,20,"Ambient",3.4,1.114894,79.5971927720305,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,40,"Ambient",3.4,3.6118,257.86230875224,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",442,80,"Ambient",3.4,7.239995,516.895128759808,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,10,"Ambient",5.1,0.624653,44.5967287084038,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,120,"Ambient",5.1,3.739254,266.961811133243,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,20,"Ambient",5.1,1.555654,111.064990326058,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,40,"Ambient",5.1,2.826333,201.784360341836,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",443,80,"Ambient",5.1,4.930622,352.018819564923,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,10,"Ambient",0,0.084999,6.06845295465741,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,120,"Ambient",0,7.288669,520.370179985293,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,20,"Ambient",0,0.100739,7.19220087529539,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,40,"Ambient",0,1.294666,92.4319075870833,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",450,80,"Ambient",0,5.371338,383.483475765169,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,10,"Ambient",1.7,0.187827,13.4097967401315,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,120,"Ambient",1.7,3.515274,250.970892501446,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,20,"Ambient",1.7,1.366168,97.5367502695139,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,40,"Ambient",1.7,3.871105,276.375234709103,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",451,80,"Ambient",1.7,2.939806,209.885697559025,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,10,"Ambient",3.4,0.116399,8.31023724360485,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,120,"Ambient",3.4,4.942883,352.894186353674,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,20,"Ambient",3.4,0.394688,28.1785145680282,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,40,"Ambient",3.4,2.176966,155.423190330342,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",452,80,"Ambient",3.4,5.160738,368.447814260318,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,10,"Ambient",5.1,0.151081,10.7863379668302,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,120,"Ambient",5.1,2.923501,208.721611800067,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,20,"Ambient",5.1,0.713741,50.9571133814532,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,40,"Ambient",5.1,3.67168,262.137405670144,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",453,80,"Ambient",5.1,5.037236,359.630462564344,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,10,"Ambient",0,0.125372,8.95085923165342,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,120,"Ambient",0,4.514291,322.295115908815,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,20,"Ambient",0,0.253085,18.0688527633204,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,40,"Ambient",0,1.588307,113.396231803351,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",460,80,"Ambient",0,5.388815,384.731235765741,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,10,"Ambient",1.7,0.149696,10.6874567171425,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,120,"Ambient",1.7,2.674349,190.933553228098,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,20,"Ambient",1.7,0.2031,14.5002034740517,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,40,"Ambient",1.7,0.875148,62.4806699650881,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",461,80,"Ambient",1.7,3.072042,219.326607980466,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,10,"Ambient",3.4,0.15829,11.3010202260347,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,120,"Ambient",3.4,4.184978,298.784010509256,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,20,"Ambient",3.4,0.831469,59.3622337881157,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,40,"Ambient",3.4,2.350697,167.826611550187,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",462,80,"Ambient",3.4,4.17433,298.023802894329,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,10,"Ambient",5.1,0.689011,49.1915297678968,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,120,"Ambient",5.1,3.673717,262.282836071309,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,20,"Ambient",5.1,2.465575,176.028257905145,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,40,"Ambient",5.1,3.314205,236.615691062135,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SPPA, DISP","C4",463,80,"Ambient",5.1,6.433611,459.323823598706,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",610,10,"Elevated",0,0.091564,6.53715721761728,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",610,120,"Elevated",0,0.975318,69.6322474244469,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",610,20,"Elevated",0,0.169664,12.1130601783432,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",610,40,"Elevated",0,0.176378,12.592402207515,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",610,80,"Elevated",0,0.245811,17.549529867849,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",613,10,"Elevated",5.1,1.086278,77.5541705041159,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",613,120,"Elevated",5.1,8.684349,620.013921908801,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",613,20,"Elevated",5.1,1.918345,136.959098145887,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",613,40,"Elevated",5.1,3.5693,254.828046577709,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",613,80,"Elevated",5.1,5.273038,376.46540584149,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",620,10,"Elevated",0,0.218692,15.6133850228819,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",620,120,"Elevated",0,1.716688,122.561916796961,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",620,20,"Elevated",0,0.369742,26.3975097631848,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",620,40,"Elevated",0,1.063831,75.9515803151349,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",620,80,"Elevated",0,1.444846,103.153919195813,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",623,10,"Elevated",5.1,0.482937,34.478999336032,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",623,120,"Elevated",5.1,4.632215,330.714229618683,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",623,20,"Elevated",5.1,0.903783,64.5250487266808,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",623,40,"Elevated",5.1,1.090561,77.8599527369045,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",623,80,"Elevated",5.1,2.979954,212.752040095097,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",630,10,"Elevated",0,0.050861,3.63119078726609,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",630,120,"Elevated",0,0.570853,40.7557097674684,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",630,20,"Elevated",0,0.206214,14.7225256484397,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",630,40,"Elevated",0,0.126184,9.00883148778799,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",630,80,"Elevated",0,0.223275,15.9405855769025,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",633,10,"Elevated",5.1,1.375317,98.1899376726852,"Within_Range","","02/13/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",633,120,"Elevated",5.1,5.002687,357.163857296865,"Within_Range","","02/18/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",633,20,"Elevated",5.1,1.90944,136.323330977318,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",633,40,"Elevated",5.1,4.721127,337.062048876609,"Within_Range","-NH3 pe Check has a % Difference >25% - REASSESS","02/17/2026",NA
+"GCReW","SMARTX",2025,"September","SCAM","C3",633,80,"Elevated",5.1,5.41513,386.609979509806,"Within_Range","","02/18/2026",NA

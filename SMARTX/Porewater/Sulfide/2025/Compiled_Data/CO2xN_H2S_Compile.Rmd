@@ -30,7 +30,7 @@ H2S_sept_dat <-  read.csv(here("..", "GCREW","SMARTX", "Porewater", "Sulfide", y
 ```
 
 ```{r}
-H2S_dat <- rbind(H2S_july_dat[,-1], H2S_may_dat[,-1], H2S_sept_dat[,-1]) %>% filter(H2S_Conc_Flag != "adl")
+H2S_dat <- rbind(H2S_july_dat[,-1], H2S_may_dat[,-1], H2S_sept_dat[,-1])
 ```
 
 ```{r}

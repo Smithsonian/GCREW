@@ -40,19 +40,19 @@ H2S_dat <-  read.csv(here("..", "GCREW","SMARTX", "Porewater", "Sulfide", year, 
 ```{r}
 
 #CH4
-CH4_sel <- CH4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, CH4_Conc_uM)
+CH4_sel <- CH4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, CH4_Conc_uM)
 
 #NH3
-NH3_sel <- NH3_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, NH3_Conc_uM)
+NH3_sel <- NH3_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, NH3_Conc_uM)
 
 #pH
-pH_sel <- pH_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, pH)
+pH_sel <- pH_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, pH)
 
 #SO4
-SO4_sel <- SO4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, SO4_Conc_mM, Cl_Conc_mM)
+SO4_sel <- SO4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, SO4_Conc_mM, Cl_Conc_mM)
 
 #H2S
-H2S_sel <- H2S_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, H2S_Conc_uM)
+H2S_sel <- H2S_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, H2S_Conc_uM)
 
 
 ```
