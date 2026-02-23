@@ -252,112 +252,60 @@ Curves_Plot
 R2_Flags <- R2_Check %>% dplyr::select(Test, Run_Date, R2_Flag)
  
 ```
-  #Plot standards data 
-```{r Assess Standard Curves, echo=FALSE}
-cat("Assess Standard Curves")
 
-# #Plot standard Curve or Curves 
-#   #NH3 
-# std_curve_NH3 <- ggplot(stds_NH3, aes(x = Conc, y = Absorbance)) +
-#   geom_point(size=3) +
-#   geom_smooth(method = "lm", se = FALSE, color = "darkgoldenrod") +
-#   theme_bw() + 
-#   facet_wrap(~Run_Date) +
-#   labs(x="Concentration",
-#        y="Absorbance",
-#        title = "NH3 Standard Curve")+ 
-#   annotate("text", x = 1.7, y = max(stds_NH3$Absorbance), label = paste("r^2 =", round(NH3_r2, 4)),
-#           color = "black", size = 4)
-# print(std_curve_NH3)
-# 
-# ############## Report on Cutoffs 
-# 
-# #Report out a flag if the run has an R2 lower than appropriate 
-# #Write out to the user whether or not the r2 is above the cutoff of 0.98
-#   ifelse(std_curve_NH3_1$R_squared <= r2_cutoff, 
-#          "NH3 Curve r2 is below cutoff! - REASSESS", 
-#          "NH3 Curve r2 GOOD - PROCEED")
-# 
-# #check for the a slope QAQC file, if there is not one, make one 
-# if (file.exists(file_path)) {
-#   # If it exists, read it back into R
-#   stds_log <- read.csv(file_path)
-#   print("QAQC log file exists and has been read into the code.")
-#   } else {
-#   # If it does not exist, create the CSV file
-#   stds_log <- as.data.frame(matrix(ncol = 6, nrow = 0))
-#   colnames(stds_log) <- c("Test", "Intercept", "Slope", "R_squared", "run_date", "user")
-#   
-#   #maybe add here the last slopes from the previous year
-#   
-#   # Write add_log to CSV
-#   write.csv(stds_log, file = file_path, row.names = FALSE)
-#   print("QAQC log file does not exist. It has been created.")
-#   }
-#   
-#   #getting rid of first "X" column
-#   #stds_log <- stds_log %>%
-#   #  select(-1)
-#   
-# #create a dataframe that can be appended to the QAQC log 
-# add_log <- as.data.frame(bind_rows(std_curve_NH3_1))
-# add_log$run_date <- run_date
-# add_log$user <- user
-# 
-# #compare slopes to previous runs (from log) in order to assess drift 
-# stds_log$run_date <- as.character(stds_log$run_date)
-# add_log$run_date  <- as.character(add_log$run_date)     #getting the run_date column in the same type to merge
-# 
-# #Filter to only rows in Slopes that are NOT already in log (by run_date + analyte) but need to add if none
-# if (nrow(stds_log) == 0) {
-#   # If log is empty, everything in add_log is new
-#   new_rows <- add_log
-# } else {
-#   # Otherwise, compare to existing log
-#   new_rows <- anti_join(add_log, stds_log, by = c("run_date", "Test"))
-# }
-# 
-# 
-# # Append the new, non-duplicate rows to log
-# log <- bind_rows(stds_log, new_rows)
-# 
-# 
-# #Plot the slopes through time 
-# Slopes_chk <- ggplot(log, aes(run_date, Slope, col=Test)) + 
-#   geom_point(size=4) + 
-#   geom_line(aes(group = Test)) + 
-#   theme_bw() + 
-#   labs(title="Slope Drift Assessment", x="Run Date", y="Slope") +
-#   scale_color_manual(values=c( "darkgoldenrod"))+
-#   ylim(1.5,2.3)
-# Slopes_chk
-# 
-# #averaging the slopes from the log and printing
-# avg_slopes <- log %>%
-#   group_by(Test) %>%
-#   summarise(avg_slope = mean(Slope, na.rm = TRUE))
-# knitr::kable(avg_slopes, caption = "Average Slope by Analyte", digits = 3)
-# 
-# 
-# #write out the log file with the added lines for this run date 
-# write.csv(log, file_path)
-# 
-# #write out a flag to the sample dataframe if the r2 is above the cutoff of 0.98
-# df_all <- df_all %>%
-#   mutate(
-#     NH3_flag = if (NH3_r2 <= r2_cutoff) {
-#       "NH3 r2 low"
-#     } else {
-#       ""
-#     }
-#   )
-
-
-
-```
  
  \newpage
+## Update Standard Log
+```{r, echo = FALSE}
 
+#log <- tibble(Test = c(), Intercept= c(), Slope= c(), Quadratic= c(), Run_Date= c(), User= c()) #create standard log in proper format
+
+old_log <- read.csv(file_path) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")#read in log and format date
+
+add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
+  mutate(Test = case_when(
+    Test == "Ammonia 2" ~ "NH3",
+    Test == "Vanadium NOx" ~ "NOx",
+    Test == "o-PHOS 0.3" ~ "PO4"
+  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs")#Format new run data for log
+
+
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct() #bind rows, round data, and remove possible duplicate data from rerunning code
+mean_slope = mean(new_log$Slope)
+
+sd_slope = sd(new_log$Slope)
+
+mean_int = mean(new_log$Intercept)
+
+sd_int = sd(new_log$Intercept)
+#Plot Slope log
+Slopes_chk <- ggplot(new_log, aes(x = Run_Date, y = Slope, col = Run)) +
+    ylim(1.25,2.25) +
+  scale_color_manual(values = c("Past Runs" = "grey27", "Current Runs" = "cyan3")) +
+  geom_abline(intercept = mean_slope - 2*sd_slope, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_abline(intercept = mean_slope + 2*sd_slope, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_point(size = 2) +
+  theme_classic()+
+  ggtitle("Slope Log") 
+
+#Plot Intercept log
+ints_chk <- ggplot(new_log, aes(x = Run_Date, y = Intercept, col = Run)) +
+  ylim(-0.09, 0.01) +
+  scale_color_manual(values = c("Past Runs" = "grey27", "Current Runs" = "cyan3")) +
+  geom_abline(intercept = mean_int - 2*sd_int, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_abline(intercept = mean_int + 2*sd_int, slope = 0, linetype = "dashed", linewidth = 1.5, col = "red" )+
+  geom_point(size = 2) +
+  theme_classic()+
+  ggtitle("Intercept Log") 
+
+Slopes_chk
+
+ints_chk
+
+
+write.csv(new_log, file_path, row.names = FALSE) #write out log
+
+```
 
 ## Dilution Corrections - ensure the latest dilution is kept
 
@@ -371,85 +319,7 @@ df_all_cor <- df_all %>% na.omit() %>% group_by(Run_Number, Run_Date, Sample_Nam
      ))
 ```
 
-```{r Dilution Corrections, echo=FALSE}
 
-# cat("Dilution Corrections")
-# 
-# #Calculate the concentration when accounting for the dilution factor if applicable
-# 
-# #checking to see if duplicate samples (mislabeled/wrongly inputted/reran)
-# df_duplicates <- df_all %>% 
-#   filter(!if_all(everything(), is.na)) %>%                    #removing NA rows
-#   filter(!(Sample_Name %in% c("Duplicate",                    #removing duplicates, autospikes, ccv/bs 
-#                               "CCV", "CCB", "1mg/L ammonia", "DI",
-#                               "Blank", "Auto Spike", 
-#                               "0.15 mg/L")) &
-#   !startsWith(Sample_Name, "Standard ") &               #removing standards
-#   !startsWith(Sample_Name, "Nitrite ") &                #removing standards
-#   !startsWith(Sample_Name, "Nitrate ") &                #removing standards
-#   !startsWith(Sample_Name, "Abs_Chk_") &                #removing abs_chks
-#   !startsWith(Sample_Name, "peChk_") &                 #removing peChks
-#   !grepl("^\\d{1,2}/\\d{1,2}/\\d{4}\\s+\\d{1,2}:\\d{2}$", Sample_Name) & #removing naything that is a date
-#   !grepl("^\\d+$", Sample_Name)) %>%                    #removing any rows with just numbers in the sample name column
-#   group_by(Test, Sample_Name)%>%                              #grouping by test & sample name to avoid fake dups
-#   filter(n() > 1) %>%                                         #count how many times each Sample_Name appears
-#   ungroup() 
-# 
-# #pulling them out into a string and printing them out
-# dil_dups_string <- df_duplicates %>%
-#   distinct(Sample_Name) %>%
-#   pull(Sample_Name) %>%
-#   paste(collapse = ", ")
-# 
-# #Report duplicated samples
-# if (dil_dups_string != "") {
-#   message("Duplicated samples: ", dil_dups_string)
-#   
-#   bad_dups <- df_duplicates %>%
-#     group_by(Sample_Name) %>%
-#     summarise(
-#       n_dups = n(),
-#       has_dilution = any(Dilution > 0, na.rm = TRUE)
-#     ) %>%
-#     filter(n_dups > 1 & !has_dilution) %>%
-#     pull(Sample_Name)
-#   
-#   if (length(bad_dups) > 0) {
-#     message("Duplicated samples with NO dilution present (possible input error): ",
-#             paste(bad_dups, collapse = ", "))
-#   } else {
-#     message("All duplicated samples have valid dilutions. No naming issues detected.")
-#   }
-#   
-# } else {
-#   message("No duplicated samples.")
-# }
-# 
-# #This is to pick out the dilutions and keep the last run
-# df_all_cor <- df_all %>%
-#   arrange(row_number()) %>%
-#   mutate(
-#     Dilution = case_when(
-#       Dilution == "0" ~ 1.0,
-#       TRUE ~ as.numeric(Dilution)
-#     ),
-#     Pair_ID = ifelse(
-#       grepl("Duplicate", Sample_Name, ignore.case = TRUE),
-#       paste0(lag(Sample_Name), "_", lag(Run_Number)),  # pair only if same run
-#       paste0(Sample_Name, "_", Run_Number)
-#     ),
-#     Original_Name = Sample_Name
-#   ) %>%
-#   group_by(Pair_ID, Test, Run_Number) %>%  # group by Pair_ID, Test, and Run_Number
-#   filter(
-#     Dilution == ifelse(any(Dilution > 1, na.rm = TRUE), max(Dilution, na.rm = TRUE), 1)
-#   ) %>%
-#   ungroup()
-# 
-# 
-# 
-
-```
 
 
 ## Performance Check
@@ -692,9 +562,26 @@ Dup_ready <- df_all_cor %>% mutate(Date_Num = paste0(Run_Number, "_", Run_Date, 
 
 Dup_Joined <- left_join(Duplicates, Dup_ready, by = join_by(Date_Num))
 
-Dup_plot_df <- Dup_Joined %>% filter(!Sample_Name %ilike% "pe") %>% group_by(Date_Num) %>% mutate(Duplicate_CV = cv(c(Dup_Conc, Conc))) %>% mutate(Dup_Flag = ifelse(Duplicate_CV >= 10, "NO, rerun", "YES")) %>% ungroup() %>% group_by(Sample_Name) %>% ungroup() %>% group_by(Sample_Name) %>% mutate(Num_Runs = length(Sample_Name), Max_Dil = max(Dilution), Rerun = ifelse(Num_Runs != 1 , ifelse(Dilution == Max_Dil, "KEEP", "REMOVE"), "KEEP")) %>% filter(Rerun == "KEEP")
+Dup_plot_df <- Dup_Joined %>% filter(!Sample_Name %ilike% "pe") %>% group_by(Date_Num) %>% mutate(Duplicate_CV = cv(c(Dup_Conc, Conc))) %>% mutate(Dup_Flag = ifelse(Duplicate_CV >= 10, "NO, rerun", "YES")) %>% ungroup() %>% group_by(Sample_Name) %>% ungroup() %>% group_by(Sample_Name) %>% mutate(Num_Runs = length(Sample_Name), Max_Dil = max(Dilution), Rerun = ifelse(Num_Runs != 1 , ifelse(Dilution == Max_Dil, "KEEP", "REMOVE"), "KEEP")) %>% filter(Rerun == "KEEP") %>% mutate(Dilution = ifelse(Dilution == 0, 1, Dilution)) %>% 
+  mutate(
+     Conc_flag = case_when(
+        Test == "Vanadium NOx" & Conc/Dilution < NOx_dl ~ "bdl",
+        Test == "Vanadium NOx" & Conc/Dilution > NOx_top    ~ "adl",
+        Test == "Vanadium NOx"               ~ "Within_Range",
+      
+      Test == "Ammonia 2" & Conc/Dilution < NH3_dl ~ "bdl",
+      Test == "Ammonia 2" & Conc/Dilution > NH3_top    ~ "adl",
+      Test == "Ammonia 2"                ~ "Within_Range",
+      
+      Test == "o-PHOS 0.3" & Conc/Dilution < PO4_dl  ~ "bdl",
+      Test == "o-PHOS 0.3" & Conc/Dilution > PO4_top   ~ "adl",
+      Test == "o-PHOS 0.3"                ~ "Within_Range",
+      
+      TRUE ~ NA_character_  # fallback for unexpected values
+    )
+  )
 
-Dup_Plot <-  ggplot(Dup_plot_df, aes(x = Run_Date, y = Duplicate_CV, fill =  Dup_Flag)) +
+Dup_Plot <-  ggplot(Dup_plot_df, aes(x = Run_Date, y = Duplicate_CV, fill =  Dup_Flag, col = Conc_flag)) +
   geom_bar(stat = 'identity',
     position = position_dodge2(preserve = "single"), linewidth = 0.75) +
   scale_fill_manual(values = c("YES" = "darkgreen", "NO, rerun" = "darkred"), name = "CV below 10% ?") +
@@ -757,90 +644,7 @@ Spike_Plot
 Flags_Spike <- Spike_plot_df %>% group_by(Run_Date, Test) %>% mutate(Spike_Flags = ifelse(length(which(Spike_Flag == "YES"))/(length(Spike_Flag)) >= 0.6,  ">60% of Spikes have a CV <50% - PROCEED", ">60% of Spikes have a CV <50% - REASSESS")) %>% ungroup() %>% dplyr::select(Test, Run_Date, Spike_Flags) %>% distinct()
 ```
 
-```{r Analyze Spikes, echo=FALSE}
 
-# #getting spikes and samples pulled 
-# df_NH3_spk <- df_all_cor %>%
-#   filter(Test == "Ammonia 2") %>%
-#   filter(
-#      !grepl("CCV|CCB|Blank|1mg/L ammonia|Standard|Duplicate", Sample_Name, ignore.case = TRUE),
-#      #^removes dup, ccv, ccb, standards
-#      !is.na(Sample_Name),                                         # Remove NA
-#      !grepl("^\\d+$", Sample_Name),                               # removes all numbers
-#      !grepl("^\\d{1,2}/\\d{1,2}/\\d{2,4}", Sample_Name)) %>%      # removes all date/time
-#   mutate(`Spike?` = if_else(                                      # adds duplicate column
-#      grepl("Auto Spike", Sample_Name, ignore.case = TRUE),        # keeps sample ID if there
-#      lag(Sample_Name),                                            # get previous row's SampleID
-#      Sample_Name)) %>%                                            # keeps sample ID if not duplicate
-#   group_by(`Spike?`) %>%                                          # groups by duplicate
-#   filter(n() > 1) %>%                                             # filters anything that appears more than once
-#   ungroup()  %>%
-#   transmute(
-#     Pair_ID = `Spike?`,
-#     Sample_Name,
-#     Conc,
-#     Type = if_else(str_detect(Sample_Name, "Auto Spike"), "Auto_Spike", "Original"))
-#  
-# 
-# #checking and flagging against the expected spike conc
-# df_spk_NH3_chk <- df_NH3_spk %>%
-#   dplyr::select(Pair_ID, Conc, Type) %>%
-#   pivot_wider(
-#     names_from = Type,
-#     values_from = Conc,
-#     values_fn = mean,  # in case there are duplicates
-#     names_prefix = "" ) %>%
-#   rename(
-#     Spike_Conc = Auto_Spike,
-#     OG_Conc = Original) %>%
-#   filter(!is.na(Spike_Conc), !is.na(OG_Conc)) %>%
-#   rowwise() %>%# keep only rows with both
-#    mutate(
-#     Exp_Conc = OG_Conc + NH3_Spk,
-#     Mean_Conc = mean(c(Spike_Conc, Exp_Conc), na.rm = TRUE),
-#     Pct_Diff = abs(Spike_Conc - Exp_Conc) / Mean_Conc * 100,
-#     SD_Conc = sd(c(Spike_Conc, Exp_Conc)),
-#     CV = (SD_Conc / Mean_Conc) * 100,
-#     Spike_diff_flag = ifelse(CV < 50, "YES", "NO, check"),
-#     Test = "Ammonia 2") %>%
-#     ungroup()
-# 
-# # Combining Auto Spike data frames
-# df_spk_combo <- bind_rows(df_spk_NH3_chk)
-# 
-# #calculate the percent of check standards that are within the range based on the flag
-# NH3_spk_percent <- (sum(df_spk_NH3_chk$Spike_diff_flag == "YES")/nrow(df_spk_NH3_chk))*100
-#  
-# #spk flag report out
-# ifelse(NH3_spk_percent >= chks_flag, 
-#        ">60% of Spikes have a CV <50% - PROCEED",
-#        "<60% of Spikes have a CV <50% - REASSESS")
-# 
-# #plot spikes output as a bar graph to easily check - want any over 10% to be red need to work on this 
-# NH3_spk_plot <- ggplot(data = df_spk_NH3_chk, aes(x =Pair_ID, y =CV, fill=Spike_diff_flag)) +
-#         geom_bar(stat = 'identity') + 
-#         theme_classic() + 
-#         labs(x= "Sample ID", y="NH3 N(mg/L)", title = "NH3 Auto Spike CV") + 
-#         scale_fill_manual(values = c("YES" = "darkcyan", "NO, check" = "darkred")) +
-#         theme(legend.position="none")  + 
-#         geom_hline(yintercept=50, linetype="dashed", 
-#             color = "black", size=1)  +
-#         guides(fill=guide_legend(title="CV Between Spks <50%"))+
-#         theme(axis.text.x = element_text(angle = 90, hjust = 0.5))
-#  
-# print(NH3_spk_plot)
-# 
-# 
-# #write out a flag to the sample dataframe if more than 60% of the dups have CVs out of range
-# if (NH3_spk_percent <= chks_flag) {  
-#     df_all_cor$NH3_flag <- ifelse(
-#     df_all_cor$NH3_flag != "",
-#     paste0(df_all_cor$NH3_flag, "; NH3 spikes out of range"),
-#     "NH3 spikes out of range"
-#   )
-# }
-
-```
 
 \newpage
 
@@ -887,32 +691,7 @@ Spike_Plot
 Flags_Matrix <- Spike_plot_df %>% group_by(Run_Date, Test) %>% mutate(Matrix_Flags = ifelse(length(which(Spike_Flag == "YES"))/(length(Spike_Flag)) >= 0.6,  "Matrix Has CV <50% - PROCEED", "Matrix Has CV >50% - REASSESS")) %>% ungroup() %>% dplyr::select(Test, Run_Date, Matrix_Flags) %>% distinct()
 ```
 
-```{r Analyze Matrix Effects, echo=FALSE}
 
-# df_matrix <- df_spk_combo%>%
-#   filter(str_detect(Pair_ID, "10ppt")) 
-#   
-# df_matrix_NH3 <- df_matrix %>%
-#   filter(str_detect(Test, "Ammonia")) 
-#   ifelse(
-#   all(df_matrix_NH3$Spike_diff_flag == "YES"),
-#   "NO NH3 Matrix Effect, PROCEED",
-#   ">20% CV in ASW NH3 matrix effect checks - REASSESS"
-# )
-# 
-# #write out a flag to the sample dataframe if more than 60% of the dups have CVs out of range
-# if (any(df_matrix$Spike_diff_flag[df_matrix$Test == "Ammonia 2"] != "YES")) {
-#   
-#     df_all_cor$NOx_flag <- ifelse(
-#     df_all_cor$NOx_flag != "",
-#     paste0(df_all_cor$NOx_flag, "; NH3 matrix check out of range"),
-#     "NH3 matrix check out of range"
-#   )
-# 
-# }
-
-
-```
 
 ## Unit Converted Data Column Added (mg/L to uM )
 ```{r Add unit conversion, include=FALSE}
@@ -946,7 +725,7 @@ head(samples)
 cat("Sample Flagging")
 
 #Flagging data if the concentration is outside the standards range 
-samples_limit<- samples %>%
+samples_limit<- samples %>% mutate(Dilution = ifelse(Dilution == 0, 1, Dilution)) %>% 
   mutate(
      Conc_flag = case_when(
         Test == "Vanadium NOx" & Conc/Dilution < NOx_dl ~ "bdl",
