@@ -1,5 +1,5 @@
 ---
-title: "CO2xComm: Porewater Sulfide"
+title: "CO2xN: Porewater Sulfide"
 author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:
@@ -75,11 +75,11 @@ Run_dates <- tibble(
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_1M_H2S_QAQC_2025.csv"
+log_path <- "Processed Data/LTREB_2M_H2S_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_202507.csv"
-rerun_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_202507_reruns.csv"
+final_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202507.csv"
+rerun_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202507_reruns.csv"
 
 
 ```
@@ -143,7 +143,7 @@ sigdigs <- 3
 raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
 metadata <- raw_metadata %>%
-  filter(grepl("1-Meter", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
@@ -695,7 +695,7 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
 
 #Filter samples and mark reruns
 H2S_Spl_pre_viz <- H2S_SPL_cv_new %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
@@ -728,7 +728,7 @@ H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = C
 H2S_Spl_Plot_Pre
 
 H2S_Spl_rmv_viz <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
@@ -963,7 +963,7 @@ Spike_Flag <- ifelse(length_bad/length_all > 0.4, paste0(">40% Spikes Fail"), ""
 ```{r check sample ids with metadata, echo=FALSE}
 #Get Samples Only
 H2S_spls_md <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE"))
 
@@ -1168,69 +1168,85 @@ All_Clean_Data <- org_labeled_fin_data %>%
 
 ## Visualize Data
 ```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
 
-### Ammonia 
 H2S_forplot <- All_Clean_Data
 
-#need to work out how best to plot these data 
+#ensure points are in correct order
 
- H2S_forplot <- H2S_forplot %>%
+H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "L10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
+
+H2S_forplot <- H2S_forplot %>%
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
+    )
+  ) %>%
   mutate(Treatment = ifelse(
     CO2_Treatment == "Elevated" &
-      Community == "SPPA",
-    "eCO2_SPPA",
+      N_Treatment == "Amended",
+    "eCO2 & eN",
     ifelse(
       CO2_Treatment == "Elevated" &
-        Community == "SCAM",
-      "eCO2_SCAM",
-      ifelse(CO2_Treatment == "Ambient" &
-               Community == "SPPA"  , "aCO2_SPPA" , "aCO2_SCAM")
+        N_Treatment == "Ambient",
+      "eCO2 & aN",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2 & eN" ,
+        "aCO2 & aN"
+      )
     )
-  )) %>%
-  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2")) %>%
-  mutate(Order = ifelse(CO2_Treatment == "Ambient", "1", "2"))
- 
- H2S_forplot <- H2S_forplot[order(H2S_forplot$CO2_Treatment), ]
- 
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
+
 viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
-  x =  factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")), 
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = H2S_Conc_uM,
-  color = as.factor(Treatment),
-  fill = as.factor(Treatment)
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
 )) +
   geom_bar(
     stat = "identity",
-    position = position_dodge2(padding = 0.5, preserve = "single")
+    position = position_dodge2(padding = 0.25,preserve = "single")
   ) +
-  facet_grid(Depth_cm ~ ., scales = "fixed", space = "free_x") +
-  scale_fill_manual(
-    values = c(
-    "eCO2_SPPA" = "#EAC435",
-    "eCO2_SCAM" = "#149911", 
-    "aCO2_SPPA" = "white",
-    "aCO2_SCAM" = "white"
+  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
   ),
     name = "Treatment:",
-    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
-    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    
   ) +
   scale_color_manual(values = c(
-    "eCO2_SPPA" = "#EAC435",
-    "eCO2_SCAM" = "#149911", 
-    "aCO2_SPPA" = "#EAC435",
-    "aCO2_SCAM" = "#149911"
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
   ),
     name = "Treatment:",
-    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
-    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
   ) +
   theme_classic() +
   labs(x = " ",
        y = "H2S (uM)",
-       title = "CO2xCOMM: Porewater Methane",
-       fill = "CO2 Treatment:",
-       color = "Community:") +
+       title = "CO2xN: Porewater Sulfide"
+       ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1244,28 +1260,12 @@ viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
 coord_flip()
 print(viz_H2S_plot2)
 
-
 ```
-```{r, echo = FALSE}
+
+
+
+```{r, echo=FALSE}
 #ensure points are in correct order
-H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
-
-color1 <- c("SC1", "SC2", "SP1", "SP2")
-color2 <- c("SC6", "SC4", "SP4", "SP5")
-color3 <- c("SC9", "SC8", "SP8", "SP9")
-color4 <- c("SC10", "SC12", "SP10", "SP11")
-color5 <- c("SC14", "SC15", "SP14", "SP13")
-
-H2S_forplot <- H2S_forplot %>%
-  mutate(
-    Plot_Color = case_when(
-      Plot %in% color1 ~ "Color1",
-      Plot %in% color2 ~ "Color2",
-      Plot %in% color3 ~ "Color3",
-      Plot %in% color4 ~ "Color4",
-      Plot %in% color5 ~ "Color5"
-    )
-  )
 
 #make plot
 viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
@@ -1285,7 +1285,7 @@ viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric
   labs(
     x = "H2S (uM)",
     y = "Depth (cm)",
-    title = "CO2xCOMM: Porewater H2S by Replicate",
+    title = "CO2xN: Porewater H2S by Replicate",
     color = "Replicate"
   ) +
   scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
