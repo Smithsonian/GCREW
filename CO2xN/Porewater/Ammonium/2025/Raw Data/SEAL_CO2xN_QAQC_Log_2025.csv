@@ -1,8 +1,10 @@
-"Test","Intercept","Slope","R2","Run_Date","User","Run"
-"NH3",-0.0365,1.8916,0.9986,2024-02-03,"Stephanie Wilson","Past Runs"
-"NH3",-0.0826,1.8786,0.9989,2025-02-18,"Max Wegner","Past Runs"
-"NH3",-0.0441,2.0617,0.9974,2025-09-12,"Victoria Ellis","Past Runs"
-"NH3",-0.0339,2.1226,0.9997,2025-09-23,"Victoria Ellis","Past Runs"
-"NH3",-0.03,1.924,0.9991,2026-01-14,"Brenden Blakley","Past Runs"
-"NH3",-0.0284,1.94,0.9991,2026-01-13,"Victoria Ellis","Current Runs"
-"NH3",-0.0316,1.9089,0.9992,2025-12-18,"Victoria Ellis","Current Runs"
+Test,Intercept,Slope,R2,Run_Date,User,Run
+NH3,-0.0365,1.8916,0.9986,2/3/2024,Stephanie Wilson,Past Runs
+NH3,-0.0826,1.8786,0.9989,2/18/2025,Max Wegner,Past Runs
+NH3,-0.0441,2.0617,0.9974,9/12/2025,Victoria Ellis,Past Runs
+NH3,-0.0339,2.1226,0.9997,9/23/2025,Victoria Ellis,Past Runs
+NH3,-0.03,1.924,0.9991,1/14/2026,Brenden Blakley,Past Runs
+NH3,-0.0284,1.94,0.9991,1/13/2026,Victoria Ellis,Past Runs
+NH3,-0.0316,1.9089,0.9992,12/18/2025,Victoria Ellis,Past Runs
+NH3,-0.0284,1.94,0.9991,1/13/2026,Victoria Ellis,Current Runs
+NH3,-0.0316,1.9089,0.9992,12/18/2025,Victoria Ellis,Current Runs

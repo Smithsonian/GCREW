@@ -26,7 +26,7 @@ cat("Run Information: ") #lets you know what section you're in
                  "Raw Data/LTREB_2M_Sept_2025_Run2.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
-  file_path <- "Raw Data/SEAL_CO2xN_QAQC_Log_2025.csv"
+  file_path <- here("..", "GCReW", "GCReW_SEAL_StdCrv_QAQC_Log.csv")
   final_path <- "Processed Data/CO2xN_Porewater_NH4_202509.csv"
 
 #record any notes about the run or anything other info here: 
@@ -67,6 +67,8 @@ pacman::p_load(
   raster)
 
 Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
+file_path_QAQC = here("..", "GCReW", "SEAL_Check_QAQC_Log.csv")
 
 #Coefficients / constants that are needed for calculations 
 N_mw <- 14.0067    # molecular weight of N 
@@ -771,6 +773,48 @@ Flags_Merged <- Flags_All %>% mutate(Blank_Flag = ifelse(Blank_Flag %like% "PROC
   mutate(NH3_flag = paste0(Blank_Flag, CHKRSD_Flag, CHK_Flag, Dup_Flags, Matrix_Flags, Spike_Flags, PeCHK_Flag)) %>% dplyr::select(Test, Run_Date, NH3_flag)
   
 Flagged_Samples <- samples_limit %>% left_join(Flags_Merged, by = join_by(Test, Run_Date))
+```
+
+## Create Log for QAQC
+```{r}
+#Old_Log_QAQC <- tibble(Test = c(), Mean_PE_Conc= c(), Spike_CV= c(), Top_Std_Absorbance= c(), Run_Date= c()) #create standard log in proper format
+Old_Log_QAQC <- read.csv(file_path_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")
+
+Top_Standards <- Slope_raw %>% group_by(Test, Run_Date) %>% filter(Sample_Name == "Standard 2.0000") %>% dplyr::select(Test, Run_Date, Absorbance) %>% distinct() %>% ungroup() %>% rename(Top_Std_Absorbance = Absorbance)
+
+PE_Check <- NH3_peChk %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Mean_Chk_Conc) %>% rename(Mean_PE_Conc = Mean_Chk_Conc) %>% ungroup()
+
+Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_CV) %>% ungroup()
+
+Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
+  left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% distinct()
+
+Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_CV, col = Run)) +
+  geom_point(size = 2) +
+  geom_path(linewidth = 1.5) +
+  facet_grid(~Test, scales = "free") +
+  theme_classic()
+
+Spike_Log_Plot
+
+TopStd_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Top_Std_Absorbance, col = Run)) +
+  geom_point(size = 2) +
+  geom_path(linewidth = 1.5) +
+  facet_grid(~Test, scales = "free") +
+  theme_classic()
+
+TopStd_Log_Plot
+
+PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc, col = Run)) +
+  geom_point(size = 2) +
+  geom_path(linewidth = 1.5) +
+  facet_grid(~Test, scales = "free") +
+  theme_classic()
+
+PE_Log_Plot
+  
+write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
+
 ```
 
 
