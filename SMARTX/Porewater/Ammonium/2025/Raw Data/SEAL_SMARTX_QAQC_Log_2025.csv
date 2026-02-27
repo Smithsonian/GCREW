@@ -1,10 +1,10 @@
-"Test","Intercept","Slope","R2","Run_Date","User"
-"NH3",-0.0365,1.8916,0.9986,2024-02-03,"Stephanie Wilson"
-"NH3",-0.0329,1.8672,0.9992,2024-09-19,"Instrument User Name"
-"NH3",-0.033,1.7716,0.9939,2025-01-13,"Max Wegner"
-"NH3",-0.0255,1.8161,0.9994,2025-05-08,"Max Wegner"
-"NH3",-0.02,2.008,0.9983,2025-08-12,"Victoria Ellis"
-"NH3",-0.0296,1.9937,0.9984,2025-10-06,"Victoria Ellis"
-"NH3",-0.0296,1.7982,0.9995,2026-02-13,"Brenden Blakley"
-"NH3",-0.0161,1.8248,0.9999,2026-02-17,"Brenden Blakley"
-"NH3",-0.0166,1.8219,1,2026-02-18,"Brenden Blakley"
+Test,Intercept,Slope,R2,Run_Date,User
+NH3,-0.0365,1.8916,0.9986,2/3/2024,Stephanie Wilson
+NH3,-0.0329,1.8672,0.9992,9/19/2024,Instrument User Name
+NH3,-0.033,1.7716,0.9939,1/13/2025,Max Wegner
+NH3,-0.0255,1.8161,0.9994,5/8/2025,Max Wegner
+NH3,-0.02,2.008,0.9983,8/12/2025,Victoria Ellis
+NH3,-0.0296,1.9937,0.9984,10/6/2025,Victoria Ellis
+NH3,-0.0296,1.7982,0.9995,2/13/2026,Brenden Blakley
+NH3,-0.0161,1.8248,0.9999,2/17/2026,Brenden Blakley
+NH3,-0.0166,1.8219,1,2/18/2026,Brenden Blakley
