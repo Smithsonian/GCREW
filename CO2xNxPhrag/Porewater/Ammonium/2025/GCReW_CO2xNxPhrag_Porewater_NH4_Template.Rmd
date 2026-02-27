@@ -15,7 +15,7 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: ") #lets you know what section you're in 
 #set the run date & user name 
-  run_date <- ""
+  run_date <- "May"
   sample_year <- "2025"
   sample_month <- "Sept"
   user <- "Max Wegner"
@@ -26,7 +26,7 @@ cat("Run Information: ") #lets you know what section you're in
 
 # Define the file path for QAQC log file - NO Need to change just check year 
   file_path <- "Raw Data/SEAL_Phrag_QAQC_Log_2025.csv"
-  final_path <- "Processed Data/Phrag_Porewater_NH4_YYYYMM.csv"
+  final_path <- "Processed Data/Phrag_Porewater_NH4_202505.csv"
 
 #record any notes about the run or anything other info here (Leave empty otherwise): 
   run_notes <- ""
@@ -1188,8 +1188,9 @@ viz_NH3_plot_2 <- ggplot(data = NH3_forplot, aes(x = NH3_Conc_uM, y = as.numeric
 viz_NH3_plot_2
 ```
 
+##Export Data
 
-```{r}
+```{r, echo = FALSE}
 
 #Write out data frame 
   write.csv(All_Clean_Data, final_path)

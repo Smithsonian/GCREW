@@ -41,9 +41,9 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "May"
+sample_month = "July"
 sample_year = "2025"
-Run_Date = as.Date("05/27/2025", format = "%m/%d/%Y")
+Run_Date = as.Date("07/14/2025", format = "%m/%d/%Y")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Brenden Blakley"#Code user
 
@@ -425,10 +425,10 @@ stdcrv_tagged <- new_log_stds %>% mutate(
   Slope = ifelse(In_Range_Slope == "Out of Range", NA, Slope),
   Intercept = ifelse(In_Range_Int == "Out of Range", NA, Intercept)
 ) %>% mutate(Date_Diff = abs(difftime(Date_1, Run_Date, units = "days"))) %>% mutate(Date_Close = ifelse(Date_Diff <= 2, "Yes", "No")) %>% mutate(Slope_Flag = ifelse(is.na(Slope), "Slope_Bad" , "Slope_Good"), Int_Flag = ifelse(is.na(Intercept), "Intercept_Bad" , "Intercept_Good")) %>% mutate(
-  Slope = ifelse(is.na(Intercept), NA, Slope),
-  Intercept = ifelse(is.na(Slope), NA, Intercept),
+  Slope = ifelse(is.na(Intercept) | R2 <= r2_cutoff, NA, Slope),
+  Intercept = ifelse(is.na(Slope)| R2 <= r2_cutoff, NA, Intercept),
   Curve_RMVD = ifelse(is.na(Slope) |
-                        is.na(Intercept), "RMVD", "KEPT")
+                        is.na(Intercept) | R2 <= r2_cutoff , "RMVD", "KEPT")
 )
 
 #Calculate Combo Std Crv
@@ -698,7 +698,7 @@ H2S_Spl_pre_viz <- H2S_SPL_cv_new %>%  mutate(IDs = toupper(IDs)) %>%
       filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
-  dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
+  dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
 
 #Plot Samples before corrections
 H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag)) +
@@ -717,11 +717,12 @@ H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = C
     position = position_dodge(.1)
   ) +
   theme_classic() +
+  facet_wrap(~ ForPlot ,, scale = "free_x", ncol = 1) +
   theme(legend.position = "bottom", axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
-    hjust = 1
-  )) +
+    hjust = 1)
+  ) +
   ggtitle("Sample triplicate means and sd dev before bad reps removed")
 
 
@@ -731,7 +732,7 @@ H2S_Spl_rmv_viz <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
       filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
-  dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
+  dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
 
 #Plot samples after Corrections
 H2S_Spl_Plot_CV <- ggplot(H2S_Spl_rmv_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag)) +
@@ -750,11 +751,14 @@ H2S_Spl_Plot_CV <- ggplot(H2S_Spl_rmv_viz, aes(y = Mean_Conc, x = IDs, fill = CV
     position = position_dodge(.1)
   ) +
   theme_classic() +
+   facet_wrap(~ForPlot, scales = "free_x", ncol = 1) +
   theme(legend.position = "bottom", axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
-    hjust = 1
-  )) +
+    hjust = 1),
+    strip.text = element_blank(),
+          strip.background = element_blank()
+  ) +
   ggtitle("Sample triplicate means and sd dev after bad reps removed")
 
 
@@ -1004,7 +1008,7 @@ Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
            "KEEP1",
            "RMV1"),
     ifelse(Conc_Flag == "Within_Range" & CV_Flag == "CV_Good", #If only one sample meets all criteria keep that one
-      "KEEP2",
+      "KEEP2", ifelse(Conc_Flag == "Within_Range", "KEEP2a",
       ifelse(!(Within_Range) & BDL, #Check if none are within range but are under detection limit
         ifelse(Dilution == Min_Dil, #keep lowest dilution
                "KEEP3",
@@ -1014,7 +1018,7 @@ Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
                "RMV4")
       )
     )
-  )))
+  ))))
 
 Samples <- Samples_Tagged %>% filter(Remove %like% "KEEP")
 
