@@ -26,7 +26,6 @@ cat("Run Information: ") #lets you know what section you're in
                  "Raw Data/LTREB_2M_Sept_2025_Run2.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
-  file_path <- here("..", "GCReW", "GCReW_SEAL_StdCrv_QAQC_Log.csv")
   final_path <- "Processed Data/CO2xN_Porewater_NH4_202509.csv"
 
 #record any notes about the run or anything other info here: 
@@ -64,11 +63,15 @@ pacman::p_load(
   broom,
   here, 
   data.table,
-  raster)
+  raster,
+  curl,
+  googledrive,
+  httr,
+  gargle)
 
 Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
-file_path_QAQC = here("..", "GCReW", "SEAL_Check_QAQC_Log.csv")
+#file_path_QAQC = here("..", "GCReW", "SEAL_Check_QAQC_Log.csv")
 
 #Coefficients / constants that are needed for calculations 
 N_mw <- 14.0067    # molecular weight of N 
@@ -107,6 +110,38 @@ rep_flag = 25  #this is a 25% error between samples
 NH3_pe <- 1.034
 NOx_pe <- 1.51
 PO4_pe <- 0.824
+
+```
+
+
+## Enable Google Drive Access and Retrieve QAQC Files
+```{r Enable Google Drive, echo = FALSE}
+
+
+my_token <- readRDS("Token/httr-oauth") 
+
+drive_auth(token = my_token, scopes = c("https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"), email = "blakleybd@si.edu")
+
+
+drive_download("GCReW_SEAL_StdCrv_QAQC_Log.csv", overwrite = TRUE)
+file_path <-"GCReW_SEAL_StdCrv_QAQC_Log.csv"
+
+drive_download("SEAL_Check_QAQC_Log.csv", overwrite = TRUE)
+file_path_QAQC <- "SEAL_Check_QAQC_Log.csv"
+
+
+# Get Authorization/Refresh Token for Offline Use
+ # google_client <- gargle::gargle_oauth_client_from_json("S:/Biogeochemistry/People/Brenden Blakley/client_secret_949417754999-vi67ohqh65kq1ugiui68sfrl9e7a4quq.apps.googleusercontent.com.json")
+ # app <- httr::oauth_app(appname = "myapp", key = google_client$id, secret = google_client$secret)
+ # endpoint <- httr::oauth_endpoints("google")
+ # token <- httr::oauth2.0_token(
+ #     endpoint = endpoint,
+ #     app = app,
+ #     scope = "https://www.googleapis.com/auth/drive",
+ #     cache = "Token/httr-oauth" # Saves the token for future use
+ # )
+
+
 
 ```
 
@@ -304,8 +339,14 @@ Slopes_chk
 
 ints_chk
 
+```
+
+## Write Standard Log to Google Drive
+```{r Write Standard Log, echo = FALSE}
 
 write.csv(new_log, file_path, row.names = FALSE) #write out log
+
+drive_upload(file_path, name = "GCReW_SEAL_StdCrv_QAQC_Log.csv", overwrite = TRUE)
 
 ```
 
@@ -789,33 +830,45 @@ Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test,
 Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
   left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% distinct()
 
-Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_CV, col = Run)) +
-  geom_point(size = 2) +
-  geom_path(linewidth = 1.5) +
+Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_CV)) +
+  geom_point(size = 3, aes(col = Run)) +
+ # geom_path(linewidth = 1) +
   facet_grid(~Test, scales = "free") +
+  labs(title = "Spike") +
   theme_classic()
 
 Spike_Log_Plot
 
-TopStd_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Top_Std_Absorbance, col = Run)) +
-  geom_point(size = 2) +
-  geom_path(linewidth = 1.5) +
+TopStd_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Top_Std_Absorbance)) +
+  geom_point(size = 3, aes(col = Run)) +
+ # geom_path(linewidth = 1) +
   facet_grid(~Test, scales = "free") +
+  labs(title = "Top Standard Absorbance") +
   theme_classic()
 
 TopStd_Log_Plot
 
-PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc, col = Run)) +
-  geom_point(size = 2) +
-  geom_path(linewidth = 1.5) +
+PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc)) +
+  geom_point(size = 3, aes(col = Run)) +
+  #geom_path(linewidth = 1) +
   facet_grid(~Test, scales = "free") +
+  labs(title = "Performance Check") +
   theme_classic()
 
 PE_Log_Plot
-  
-write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
+
 
 ```
+##Write Log To Google Drive
+```{r}
+
+write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
+
+drive_upload(file_path_QAQC, name = "SEAL_Check_QAQC_Log.csv", overwrite = TRUE)
+
+
+```
+
 
 
 ## Merge samples with Metadata & check all samples are present 
