@@ -1,6 +1,6 @@
 ---
 title: "CO2xNxPhrag: Porewater Sulfide"
-author: "Month Year Samples"
+author: "May 2025 Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -42,9 +42,9 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "July"
+sample_month = "May"
 sample_year = "2025"
-Run_Date = as.Date("07/14/2025", format = "%m/%d/%Y")
+Run_Date = as.Date("05/27/2025", format = "%m/%d/%Y")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Brenden Blakley"#Code user
 
@@ -52,35 +52,32 @@ Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10", "Plate_rr")
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate_rr")
 
-Raw_plates <- c("Raw Data/20250714_LTREB_H2S_Plate1.csv",
-                "Raw Data/20250714_LTREB_H2S_Plate2.csv",
-                "Raw Data/20250714_LTREB_H2S_Plate3.csv",
-                "Raw Data/20250714_LTREB_H2S_Plate4.csv",
-                "Raw Data/20250714_LTREB_H2S_Plate5.csv",
-                "Raw Data/20250714_LTREB_H2S_Plate6.csv",
-                "Raw Data/20250715_LTREB_H2S_Plate7.csv",
-                "Raw Data/20250715_LTREB_H2S_Plate8.csv",
-                "Raw Data/20250715_LTREB_H2S_Plate9.csv",
-                "Raw Data/20250715_LTREB_H2S_Plate10.csv", 
-                "Raw Data/20250716_LTREB_H2S_reruns.csv")
+Raw_plates <- c("Raw Data/20250527_LTREB_H2S_Plate1.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate2.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate3.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate4.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate5.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate6.csv",
+                "Raw Data/20250527_LTREB_H2S_Plate7.csv",
+                "Raw Data/20250602_H2S_LTREBrr.csv")
 
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
-    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10", "Plate_rr"),
-    Run_Date = c("07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/15/2025","07/15/2025", "07/15/2025", "07/15/2025", "07/16/2025")
+    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate_rr"),
+    Run_Date = c("05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","05/27/2025","06/02/2025")
   )
 
   Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_1M_H2S_QAQC_2025.csv"
+log_path <- "Processed Data/LTREB_Phrag_H2S_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_2025.csv"
-rerun_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_2025_reruns.csv"
+final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202505.csv"
+rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202505_reruns.csv"
 
 
 ```
