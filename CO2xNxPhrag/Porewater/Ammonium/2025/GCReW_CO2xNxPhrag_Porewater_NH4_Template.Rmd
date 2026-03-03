@@ -1002,7 +1002,6 @@ NH3_forplot <- NH3_forplot %>%
     )
   )
 
-
 NH3_forplot <- NH3_forplot[order(NH3_forplot$Depth_cm), ]
 
 viz_NH3_plot_v2 <- ggplot(

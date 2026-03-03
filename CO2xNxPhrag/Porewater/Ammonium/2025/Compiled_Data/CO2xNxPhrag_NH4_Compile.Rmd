@@ -38,7 +38,7 @@ NH3_dat <- rbind(NH3_july_dat[,-1], NH3_may_dat[,-1], NH3_sept_dat[,-1])
 ```
 
 ```{r}
-write.csv(NH3_dat, paste0("CO2xN_Porewater_NH4_", year, ".csv"))
+write.csv(NH3_dat, paste0("CO2xNxPhrag_Porewater_NH4_", year, ".csv"))
 
 ```
 

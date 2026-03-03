@@ -1,0 +1,77 @@
+---
+title: "GCReW_CO2xN_Porewater_Collation"
+output: html_document
+date: "2026-01-28"
+---
+
+```{r}
+library(here)
+library(dplyr)
+library(ggplot2)
+library(purrr)
+library(data.table)
+library(tidyverse)
+```
+
+##Read in Data
+```{r}
+
+year <- "2025"
+
+path <- "CO2xNxPhrag_Porewater_"
+
+CH4_dat <- read.csv(here("..", "GCREW","CO2xNxPhrag", "Porewater", "CH4", year, "Compiled_Data", paste0(path, "CH4_", year, ".csv")))
+  
+NH3_dat <- read.csv(here("..", "GCREW","CO2xNxPhrag", "Porewater", "Ammonium", year, "Compiled_Data", paste0(path, "NH4_", year, ".csv"))) 
+
+pH_dat <-  read.csv(here("..", "GCREW","CO2xNxPhrag", "Porewater", "pH", year, "Compiled_Data", paste0(path, "pH_", year, ".csv"))) 
+
+SO4_dat <- read.csv(here("..", "GCREW","CO2xNxPhrag", "Porewater", "Sulfate_Chloride", year, "Compiled_Data", paste0(path, "SO4_Cl_", year,  ".csv"))) 
+  
+H2S_dat <-  read.csv(here("..", "GCREW","CO2xNxPhrag", "Porewater", "Sulfide", year, "Compiled_Data", paste0(path, "H2S_", year, ".csv"))) 
+
+
+
+
+  
+```
+
+##Select Columns we want
+```{r}
+
+#CH4
+CH4_sel <- CH4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, CH4_Conc_uM)
+
+#NH3
+NH3_sel <- NH3_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, NH3_Conc_uM)
+
+#pH
+pH_sel <- pH_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, pH)
+
+#SO4
+SO4_sel <- SO4_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, SO4_Conc_mM, Cl_Conc_mM)
+
+#H2S
+H2S_sel <- H2S_dat %>% mutate(Month  = ifelse(Month %like% "Sept", "September", Month)) %>% dplyr::select(Site, Project, Year, Month, Community, Nickname, Plot, Depth_cm, CO2_Treatment, N_Treatment, H2S_Conc_uM)
+
+
+```
+
+##Join all Analytes
+```{r}
+CH4_NH3_join <- full_join(CH4_sel, NH3_sel)
+
+CH4_NH3_pH_join <- full_join(CH4_NH3_join, pH_sel)
+
+CH4_NH3_pH_SO4_join <- full_join(CH4_NH3_pH_join, SO4_sel)
+
+All_join <- full_join(CH4_NH3_pH_SO4_join, H2S_sel)
+```
+
+
+##Write Data
+```{r}
+
+write.csv(All_join, paste0("CO2xN_Porewater_", year, ".csv"),row.names = FALSE)
+
+```

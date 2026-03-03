@@ -76,11 +76,11 @@ Run_dates <- tibble(
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_1M_H2S_QAQC_2025.csv"
+log_path <- "Processed Data/LTREB_Phrag_H2S_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_2025.csv"
-rerun_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_2025_reruns.csv"
+final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202507.csv"
+rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202507_reruns.csv"
 
 
 ```
