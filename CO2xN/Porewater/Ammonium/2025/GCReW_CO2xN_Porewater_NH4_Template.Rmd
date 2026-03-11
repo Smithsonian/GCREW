@@ -113,6 +113,24 @@ PO4_pe <- 0.824
 
 ```
 
+```{r Get Authorization, include=FALSE}
+
+#Should Not Be Necessary
+
+# Get Authorization/Refresh Token for Offline Use 
+ # google_client <- gargle::gargle_oauth_client_from_json("S:/Biogeochemistry/People/Brenden Blakley/Admin_Docs/Google/client_secret_949417754999-vi67ohqh65kq1ugiui68sfrl9e7a4quq.apps.googleusercontent.com.json")
+ # app <- httr::oauth_app(appname = "myapp", key = google_client$id, secret = google_client$secret)
+ # endpoint <- httr::oauth_endpoints("google")
+ # token <- httr::oauth2.0_token(
+ #     endpoint = endpoint,
+ #     app = app,
+ #     scope = "https://www.googleapis.com/auth/drive",
+ #     cache = "Token/httr-oauth" # Saves the token for future use
+ # )
+
+
+
+```
 
 ## Enable Google Drive Access and Retrieve QAQC Files
 ```{r Enable Google Drive, echo = FALSE}
@@ -129,21 +147,8 @@ file_path <-"GCReW_SEAL_StdCrv_QAQC_Log.csv"
 drive_download("SEAL_Check_QAQC_Log.csv", overwrite = TRUE)
 file_path_QAQC <- "SEAL_Check_QAQC_Log.csv"
 
-
-# Get Authorization/Refresh Token for Offline Use
- # google_client <- gargle::gargle_oauth_client_from_json("S:/Biogeochemistry/People/Brenden Blakley/client_secret_949417754999-vi67ohqh65kq1ugiui68sfrl9e7a4quq.apps.googleusercontent.com.json")
- # app <- httr::oauth_app(appname = "myapp", key = google_client$id, secret = google_client$secret)
- # endpoint <- httr::oauth_endpoints("google")
- # token <- httr::oauth2.0_token(
- #     endpoint = endpoint,
- #     app = app,
- #     scope = "https://www.googleapis.com/auth/drive",
- #     cache = "Token/httr-oauth" # Saves the token for future use
- # )
-
-
-
 ```
+
 
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
@@ -859,7 +864,8 @@ PE_Log_Plot
 
 
 ```
-##Write Log To Google Drive
+
+##Write QAQC Log To Google Drive
 ```{r}
 
 write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
