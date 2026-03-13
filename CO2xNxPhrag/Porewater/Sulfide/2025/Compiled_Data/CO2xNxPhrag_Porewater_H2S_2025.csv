@@ -1,0 +1,145 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","SubPlot","Depth_cm","CO2_Treatment","N_Treatment","H2S_Conc_uM","H2S_Conc_Flag","H2S_CV_Flag","H2S_Flags","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","B",40,"Ambient","Ambient",1661.2443517553,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"2","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","B",20,"Elevated","Ambient",1463.81647549531,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"3","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","B",40,"Ambient","Amended",184.963503649635,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"4","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","A",40,"Ambient","Ambient",1322.00208550574,"Within_Range","CV_High","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"5","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","B",40,"Elevated","Ambient",1937.22627737226,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"6","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","B",20,"Ambient","Ambient",149.947862356621,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"7","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","A",20,"Elevated","Ambient",1795.41188738269,"Within_Range","CV_High","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"8","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","A",20,"Ambient","Ambient",857.629475147723,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"9","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","A",40,"Elevated","Ambient",1278.20646506778,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"10","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","B",20,"Elevated","Ambient",1727.98053527981,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"11","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","B",40,"Ambient","Amended",1519.42996176573,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"12","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","A",20,"Elevated","Amended",1534.72367049009,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"13","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","A",20,"Elevated","Amended",1217.7267987487,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"14","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","A",40,"Elevated","Amended",2136.7396593674,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"15","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","A",40,"Elevated","Amended",1643.16996871741,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"16","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","B",20,"Elevated","Amended",1067.57038581856,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"17","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","B",40,"Elevated","Ambient",1709.90615224192,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"18","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","B",40,"Elevated","Amended",965.380604796663,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"19","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","A",20,"Ambient","Amended",1436.70490093848,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"20","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","A",20,"Elevated","Ambient",1562.5304136253,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"21","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","A",40,"Ambient","Amended",1511.08793882517,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"22","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","A",40,"Elevated","Ambient",1935.14077163712,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"23","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","B",20,"Ambient","Amended",2257.69899200556,"Within_Range","CV_Good","Spk_Bad  Std5Chk_Bad    ","2025-07-14",NA
+"24","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","B",40,"Elevated","Amended",1722.41918665276,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"25","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","B",40,"Elevated","Amended",1864.23357664234,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"26","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","A",20,"Ambient","Ambient",1672.36704900938,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"27","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","A",20,"Ambient","Ambient",1992.1445950643,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"28","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","A",40,"Ambient","Ambient",2074.86965589155,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"29","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","A",40,"Ambient","Ambient",1960.16684045881,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"30","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","B",20,"Ambient","Ambient",2043.58706986444,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"31","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","B",20,"Ambient","Ambient",1455.47445255474,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"32","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","B",40,"Ambient","Ambient",2206.25651720542,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"33","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","A",20,"Elevated","Ambient",1401.25130344108,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"34","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","A",20,"Elevated","Amended",1035.59263121307,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"35","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","A",40,"Elevated","Ambient",1113.45151199166,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"36","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","A",40,"Elevated","Amended",1482.58602711157,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"37","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","B",20,"Elevated","Ambient",1924.01807438304,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"38","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","B",20,"Elevated","Amended",1632.04727146333,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"39","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","B",20,"Elevated","Amended",1162.11331247828,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"40","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","B",40,"Elevated","Ambient",1493.01355578728,"Within_Range","CV_Good","Spk_Bad Dup_Bad Std4Chk_Bad    ","2025-07-14",NA
+"41","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","A",20,"Ambient","Amended",1870.49009384776,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"42","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","A",40,"Ambient","Amended",72.696558915537,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"43","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","A",40,"Ambient","Amended",2218.76955161627,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"44","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","B",20,"Ambient","Amended",2274.38303788669,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"45","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","B",40,"Ambient","Amended",2348.070907195,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"46","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","B",20,"Ambient","Amended",1.87278415015641,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"47","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","B",40,"Ambient","Ambient",2028.98852971846,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"48","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","A",20,"Ambient","Amended",26.9405630865485,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-07-14",NA
+"49","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P1","B",40,"Ambient","Ambient",1758.40108401084,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"50","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P5","A",20,"Elevated","Ambient",835.636856368564,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"51","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P7","B",40,"Elevated","Amended",1755.69105691057,"Within_Range","CV_High","  Std3Chk_Bad    ","2025-05-27",NA
+"52","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P3","A",40,"Ambient","Amended",50.4065040650407,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"53","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P1","A",20,"Ambient","Ambient",677.720207253886,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"54","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P4","A",20,"Elevated","Amended",245.077720207254,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"55","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P4","A",40,"Elevated","Amended",1284.80138169257,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"56","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P1","A",40,"Ambient","Ambient",1075.82037996546,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"57","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P2","A",20,"Elevated","Ambient",998.100172711572,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"58","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P2","A",40,"Elevated","Ambient",1524.87046632124,"Within_Range","CV_Good","Spk_Bad  Std3Chk_Bad    ","2025-05-27",NA
+"59","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P5","A",40,"Elevated","Ambient",1647.49568221071,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"60","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P9","A",40,"Elevated","Amended",1398.79101899827,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"61","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P12","A",20,"Ambient","Amended",896.200345423143,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"62","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P6","A",20,"Ambient","Amended",661.312607944732,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"63","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P12","A",40,"Ambient","Amended",1913.47150259067,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"64","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P6","A",40,"Ambient","Amended",1058.54922279793,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"65","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P1","B",20,"Ambient","Ambient",775.302245250432,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"66","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P7","A",20,"Elevated","Amended",761.485319516408,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"67","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P7","A",40,"Elevated","Amended",1592.22797927461,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"68","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P10","A",20,"Elevated","Ambient",533.506044905009,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"69","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P8","A",20,"Ambient","Ambient",141.450777202073,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"70","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P10","A",40,"Elevated","Ambient",1096.54576856649,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"71","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P8","A",40,"Ambient","Ambient",410.880829015544,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"72","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P11","A",20,"Ambient","Ambient",911.74438687392,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"73","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P9","A",20,"Elevated","Amended",478.238341968912,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"74","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P11","A",40,"Ambient","Ambient",1922.10708117444,"Within_Range","CV_Good","Spk_Bad      ","2025-05-27",NA
+"75","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P2","B",20,"Elevated","Ambient",991.191709844559,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"76","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P6","B",20,"Ambient","Amended",968.73920552677,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"77","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P8","B",40,"Ambient","Ambient",973.056994818653,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"78","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P2","B",40,"Elevated","Ambient",1305.52677029361,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"79","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P9","B",20,"Elevated","Amended",497.236614853195,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"80","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P9","B",40,"Elevated","Amended",1053.36787564767,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"81","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P4","B",20,"Elevated","Amended",374.611398963731,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"82","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P6","B",40,"Ambient","Amended",1457.51295336788,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"83","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P4","B",40,"Elevated","Amended",947.150259067358,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"84","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P7","B",20,"Elevated","Amended",615.544041450777,"Within_Range","CV_High","  Std3Chk_Bad    ","2025-05-27",NA
+"85","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P5","B",20,"Elevated","Ambient",714.853195164076,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"86","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P5","B",40,"Elevated","Ambient",1516.23488773748,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"87","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P8","B",20,"Ambient","Ambient",377.20207253886,"Within_Range","CV_Good","  Std3Chk_Bad    ","2025-05-27",NA
+"88","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P10","B",40,"Elevated","Ambient",1550.77720207254,"Within_Range","CV_Good","      ","2025-05-27",NA
+"89","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P3","B",40,"Ambient","Amended",89.426597582038,"Within_Range","CV_Good","      ","2025-05-27",NA
+"90","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P11","B",20,"Ambient","Ambient",897.927461139896,"Within_Range","CV_Good","      ","2025-05-27",NA
+"91","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P11","B",40,"Ambient","Ambient",1566.32124352332,"Within_Range","CV_Good","      ","2025-05-27",NA
+"92","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P12","B",20,"Ambient","Amended",1062.00345423143,"Within_Range","CV_Good","      ","2025-05-27",NA
+"93","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P10","B",20,"Elevated","Ambient",840.932642487047,"Within_Range","CV_Good","      ","2025-05-27",NA
+"94","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P3","A",20,"Ambient","Amended",0,"bdl","CV_Good","      ","2025-05-27",NA
+"95","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P12","B",40,"Ambient","Amended",1972.19343696028,"Within_Range","CV_Good","      ","2025-05-27",NA
+"96","GCReW","CO2xNxPhrag",2025,"May","PHAU","Phrag","P3","B",20,"Ambient","Amended",0,"bdl","CV_Good","      ","2025-05-27",NA
+"97","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","A",20,"Ambient","Ambient",2239.77749790092,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"98","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","A",40,"Elevated","Ambient",2812.09068010076,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"99","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","B",20,"Elevated","Ambient",2668.82871536524,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"100","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","B",40,"Elevated","Ambient",2783.43828715365,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"101","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","A",40,"Ambient","Ambient",2211.85978169605,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"102","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","B",20,"Ambient","Ambient",2921.55751469353,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"103","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P1","B",40,"Ambient","Ambient",2219.20654911839,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"104","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P2","A",20,"Elevated","Ambient",3040.57514693535,"Within_Range","CV_Good","  Std0Chk_Bad    ","2025-07-14",NA
+"105","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","A",40,"Ambient","Amended",331.087321578506,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"106","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","A",40,"Elevated","Ambient",3017.06549118388,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"107","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","B",20,"Ambient","Amended",2790.78505457599,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"108","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","B",40,"Ambient","Amended",2651.19647355164,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"109","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","B",40,"Ambient","Amended",441.288832913518,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"110","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","A",20,"Elevated","Amended",2501.32241813602,"Within_Range","CV_High","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"111","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","A",20,"Elevated","Amended",2221.41057934509,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"112","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","A",40,"Elevated","Amended",862.9932829555,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"113","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","B",20,"Elevated","Ambient",2972.98488664987,"Within_Range","CV_High","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"114","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","B",20,"Elevated","Amended",2571.85138539043,"Within_Range","CV_High","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"115","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","B",40,"Elevated","Ambient",3014.12678421495,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"116","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P4","B",40,"Elevated","Amended",2604.91183879093,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"117","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","A",20,"Ambient","Amended",2708.50125944584,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"118","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","A",20,"Ambient","Amended",228.967254408061,"Within_Range","CV_High","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"119","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P5","A",20,"Elevated","Ambient",3318.28295549958,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"120","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P6","A",40,"Ambient","Amended",2920.08816120907,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ","2025-07-14",NA
+"121","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","B",20,"Elevated","Amended",2837.80436607893,"Within_Range","CV_Good","      ","2025-07-14",NA
+"122","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","B",20,"Elevated","Amended",2235.36943744752,"Within_Range","CV_Good","      ","2025-07-14",NA
+"123","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","B",40,"Elevated","Ambient",2926.70025188917,"Within_Range","CV_High","      ","2025-07-14",NA
+"124","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","B",40,"Elevated","Amended",2905.3946263644,"Within_Range","CV_Good","      ","2025-07-14",NA
+"125","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","A",20,"Ambient","Ambient",3384.40386230059,"Within_Range","CV_Good","      ","2025-07-14",NA
+"126","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","A",20,"Ambient","Ambient",1383.14441645676,"Within_Range","CV_Good","      ","2025-07-14",NA
+"127","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","A",40,"Ambient","Ambient",2631.36020151134,"Within_Range","CV_High","      ","2025-07-14",NA
+"128","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","A",40,"Ambient","Ambient",1725.50377833753,"Within_Range","CV_High","      ","2025-07-14",NA
+"129","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","B",20,"Ambient","Ambient",1606.48614609572,"Within_Range","CV_Good","      ","2025-07-14",NA
+"130","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","B",40,"Elevated","Amended",2437.40554156171,"Within_Range","CV_Good","      ","2025-07-14",NA
+"131","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P8","B",40,"Ambient","Ambient",2139.86146095718,"Within_Range","CV_Good","      ","2025-07-14",NA
+"132","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","A",20,"Elevated","Ambient",2648.99244332494,"Within_Range","CV_Good","      ","2025-07-14",NA
+"133","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","A",20,"Elevated","Amended",2333.8161209068,"Within_Range","CV_Good","      ","2025-07-14",NA
+"134","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","A",40,"Elevated","Ambient",2239.04282115869,"Within_Range","CV_High","      ","2025-07-14",NA
+"135","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P7","A",40,"Elevated","Amended",3162.5314861461,"Within_Range","CV_High","      ","2025-07-14",NA
+"136","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P9","A",40,"Elevated","Amended",2580.66750629723,"Within_Range","CV_Good","      ","2025-07-14",NA
+"137","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P10","B",20,"Elevated","Ambient",2287.5314861461,"Within_Range","CV_High","      ","2025-07-14",NA
+"138","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","B",40,"Ambient","Ambient",3177.22502099076,"Within_Range","CV_Good","      ","2025-07-14",NA
+"139","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","A",20,"Ambient","Amended",4134.50881612091,"Within_Range","CV_Good","      ","2025-07-14",NA
+"140","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","A",40,"Ambient","Amended",2996.49454240134,"Within_Range","CV_Good","      ","2025-07-14",NA
+"141","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","B",20,"Ambient","Amended",3141.96053736356,"Within_Range","CV_Good","      ","2025-07-14",NA
+"142","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P12","B",40,"Ambient","Amended",3330.03778337531,"Within_Range","CV_Good","      ","2025-07-14",NA
+"143","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P3","B",20,"Ambient","Amended",1.0088161209068,"Within_Range","CV_High","      ","2025-07-14",NA
+"144","GCReW","CO2xNxPhrag",2025,"July","PHAU","Phrag","P11","B",20,"Ambient","Ambient",3034.69773299748,"Within_Range","CV_Good","      ","2025-07-14",NA
