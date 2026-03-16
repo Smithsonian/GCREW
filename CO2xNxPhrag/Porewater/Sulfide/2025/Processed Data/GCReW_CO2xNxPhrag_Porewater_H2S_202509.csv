@@ -1,49 +1,49 @@
-"","Site","Project","Year","Month","Community","Nickname","Plot","SubPlot","Depth_cm","CO2_Treatment","N_Treatment","H2S_Conc_uM","H2S_Conc_Flag","H2S_CV_Flag","H2S_Flags","Analysis_rundate","Run_notes"
-"1","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P1","A","20","Ambient","Ambient",2239.77749790092,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"2","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P2","A","40","Elevated","Ambient",2812.09068010076,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"3","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P2","B","20","Elevated","Ambient",2668.82871536524,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"4","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P2","B","40","Elevated","Ambient",2783.43828715365,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"5","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P1","A","40","Ambient","Ambient",2211.85978169605,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"6","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P1","B","20","Ambient","Ambient",2921.55751469353,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"7","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P1","B","40","Ambient","Ambient",2219.20654911839,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"8","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P2","A","20","Elevated","Ambient",3040.57514693535,"Within_Range","CV_Good","  Std0Chk_Bad    ",2025-07-14,""
-"9","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P3","A","40","Ambient","Amended",331.087321578506,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"10","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P5","A","40","Elevated","Ambient",3017.06549118388,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"11","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P6","B","20","Ambient","Amended",2790.78505457599,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"12","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P6","B","40","Ambient","Amended",2651.19647355164,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"13","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P3","B","40","Ambient","Amended",441.288832913518,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"14","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P7","A","20","Elevated","Amended",2501.32241813602,"Within_Range","CV_High","Spk_Bad Dup_Bad     ",2025-07-14,""
-"15","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P4","A","20","Elevated","Amended",2221.41057934509,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"16","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P4","A","40","Elevated","Amended",862.9932829555,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"17","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P5","B","20","Elevated","Ambient",2972.98488664987,"Within_Range","CV_High","Spk_Bad Dup_Bad     ",2025-07-14,""
-"18","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P4","B","20","Elevated","Amended",2571.85138539043,"Within_Range","CV_High","Spk_Bad Dup_Bad     ",2025-07-14,""
-"19","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P5","B","40","Elevated","Ambient",3014.12678421495,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"20","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P4","B","40","Elevated","Amended",2604.91183879093,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"21","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P6","A","20","Ambient","Amended",2708.50125944584,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"22","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P3","A","20","Ambient","Amended",228.967254408061,"Within_Range","CV_High","Spk_Bad Dup_Bad     ",2025-07-14,""
-"23","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P5","A","20","Elevated","Ambient",3318.28295549958,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"24","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P6","A","40","Ambient","Amended",2920.08816120907,"Within_Range","CV_Good","Spk_Bad Dup_Bad     ",2025-07-14,""
-"25","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P7","B","20","Elevated","Amended",2837.80436607893,"Within_Range","CV_Good","      ",2025-07-14,""
-"26","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P9","B","20","Elevated","Amended",2235.36943744752,"Within_Range","CV_Good","      ",2025-07-14,""
-"27","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P10","B","40","Elevated","Ambient",2926.70025188917,"Within_Range","CV_High","      ",2025-07-14,""
-"28","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P7","B","40","Elevated","Amended",2905.3946263644,"Within_Range","CV_Good","      ",2025-07-14,""
-"29","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P11","A","20","Ambient","Ambient",3384.40386230059,"Within_Range","CV_Good","      ",2025-07-14,""
-"30","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P8","A","20","Ambient","Ambient",1383.14441645676,"Within_Range","CV_Good","      ",2025-07-14,""
-"31","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P11","A","40","Ambient","Ambient",2631.36020151134,"Within_Range","CV_High","      ",2025-07-14,""
-"32","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P8","A","40","Ambient","Ambient",1725.50377833753,"Within_Range","CV_High","      ",2025-07-14,""
-"33","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P8","B","20","Ambient","Ambient",1606.48614609572,"Within_Range","CV_Good","      ",2025-07-14,""
-"34","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P9","B","40","Elevated","Amended",2437.40554156171,"Within_Range","CV_Good","      ",2025-07-14,""
-"35","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P8","B","40","Ambient","Ambient",2139.86146095718,"Within_Range","CV_Good","      ",2025-07-14,""
-"36","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P10","A","20","Elevated","Ambient",2648.99244332494,"Within_Range","CV_Good","      ",2025-07-14,""
-"37","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P9","A","20","Elevated","Amended",2333.8161209068,"Within_Range","CV_Good","      ",2025-07-14,""
-"38","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P10","A","40","Elevated","Ambient",2239.04282115869,"Within_Range","CV_High","      ",2025-07-14,""
-"39","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P7","A","40","Elevated","Amended",3162.5314861461,"Within_Range","CV_High","      ",2025-07-14,""
-"40","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P9","A","40","Elevated","Amended",2580.66750629723,"Within_Range","CV_Good","      ",2025-07-14,""
-"41","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P10","B","20","Elevated","Ambient",2287.5314861461,"Within_Range","CV_High","      ",2025-07-14,""
-"42","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P11","B","40","Ambient","Ambient",3177.22502099076,"Within_Range","CV_Good","      ",2025-07-14,""
-"43","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P12","A","20","Ambient","Amended",4134.50881612091,"Within_Range","CV_Good","      ",2025-07-14,""
-"44","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P12","A","40","Ambient","Amended",2996.49454240134,"Within_Range","CV_Good","      ",2025-07-14,""
-"45","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P12","B","20","Ambient","Amended",3141.96053736356,"Within_Range","CV_Good","      ",2025-07-14,""
-"46","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P12","B","40","Ambient","Amended",3330.03778337531,"Within_Range","CV_Good","      ",2025-07-14,""
-"47","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P3","B","20","Ambient","Amended",1.0088161209068,"Within_Range","CV_High","      ",2025-07-14,""
-"48","GCReW","CO2xNxPhrag","2025","July","PHAU","Phrag","P11","B","20","Ambient","Ambient",3034.69773299748,"Within_Range","CV_Good","      ",2025-07-14,""
+,Site,Project,Year,Month,Community,Nickname,Plot,SubPlot,Depth_cm,CO2_Treatment,N_Treatment,H2S_Conc_uM,H2S_Conc_Flag,H2S_CV_Flag,H2S_Flags,Analysis_rundate,Run_notes
+1,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P1,A,20,Ambient,Ambient,2239.777498,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+2,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P2,A,40,Elevated,Ambient,2812.09068,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+3,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P2,B,20,Elevated,Ambient,2668.828715,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+4,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P2,B,40,Elevated,Ambient,2783.438287,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+5,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P1,A,40,Ambient,Ambient,2211.859782,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+6,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P1,B,20,Ambient,Ambient,2921.557515,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+7,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P1,B,40,Ambient,Ambient,2219.206549,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+8,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P2,A,20,Elevated,Ambient,3040.575147,Within_Range,CV_Good,  Std0Chk_Bad    ,7/14/2025,
+9,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P3,A,40,Ambient,Amended,331.0873216,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+10,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P5,A,40,Elevated,Ambient,3017.065491,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+11,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P6,B,20,Ambient,Amended,2790.785055,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+12,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P6,B,40,Ambient,Amended,2651.196474,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+13,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P3,B,40,Ambient,Amended,441.2888329,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+14,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P7,A,20,Elevated,Amended,2501.322418,Within_Range,CV_High,Spk_Bad Dup_Bad     ,7/14/2025,
+15,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P4,A,20,Elevated,Amended,2221.410579,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+16,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P4,A,40,Elevated,Amended,862.993283,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+17,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P5,B,20,Elevated,Ambient,2972.984887,Within_Range,CV_High,Spk_Bad Dup_Bad     ,7/14/2025,
+18,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P4,B,20,Elevated,Amended,2571.851385,Within_Range,CV_High,Spk_Bad Dup_Bad     ,7/14/2025,
+19,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P5,B,40,Elevated,Ambient,3014.126784,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+20,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P4,B,40,Elevated,Amended,2604.911839,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+21,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P6,A,20,Ambient,Amended,2708.501259,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+22,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P3,A,20,Ambient,Amended,228.9672544,Within_Range,CV_High,Spk_Bad Dup_Bad     ,7/14/2025,
+23,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P5,A,20,Elevated,Ambient,3318.282955,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+24,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P6,A,40,Ambient,Amended,2920.088161,Within_Range,CV_Good,Spk_Bad Dup_Bad     ,7/14/2025,
+25,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P7,B,20,Elevated,Amended,2837.804366,Within_Range,CV_Good,      ,7/14/2025,
+26,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P9,B,20,Elevated,Amended,2235.369437,Within_Range,CV_Good,      ,7/14/2025,
+27,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P10,B,40,Elevated,Ambient,2926.700252,Within_Range,CV_High,      ,7/14/2025,
+28,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P7,B,40,Elevated,Amended,2905.394626,Within_Range,CV_Good,      ,7/14/2025,
+29,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P11,A,20,Ambient,Ambient,3384.403862,Within_Range,CV_Good,      ,7/14/2025,
+30,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P8,A,20,Ambient,Ambient,1383.144416,Within_Range,CV_Good,      ,7/14/2025,
+31,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P11,A,40,Ambient,Ambient,2631.360202,Within_Range,CV_High,      ,7/14/2025,
+32,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P8,A,40,Ambient,Ambient,1725.503778,Within_Range,CV_High,      ,7/14/2025,
+33,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P8,B,20,Ambient,Ambient,1606.486146,Within_Range,CV_Good,      ,7/14/2025,
+34,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P9,B,40,Elevated,Amended,2437.405542,Within_Range,CV_Good,      ,7/14/2025,
+35,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P8,B,40,Ambient,Ambient,2139.861461,Within_Range,CV_Good,      ,7/14/2025,
+36,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P10,A,20,Elevated,Ambient,2648.992443,Within_Range,CV_Good,      ,7/14/2025,
+37,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P9,A,20,Elevated,Amended,2333.816121,Within_Range,CV_Good,      ,7/14/2025,
+38,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P10,A,40,Elevated,Ambient,2239.042821,Within_Range,CV_High,      ,7/14/2025,
+39,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P7,A,40,Elevated,Amended,3162.531486,Within_Range,CV_High,      ,7/14/2025,
+40,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P9,A,40,Elevated,Amended,2580.667506,Within_Range,CV_Good,      ,7/14/2025,
+41,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P10,B,20,Elevated,Ambient,2287.531486,Within_Range,CV_High,      ,7/14/2025,
+42,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P11,B,40,Ambient,Ambient,3177.225021,Within_Range,CV_Good,      ,7/14/2025,
+43,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P12,A,20,Ambient,Amended,4134.508816,Within_Range,CV_Good,      ,7/14/2025,
+44,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P12,A,40,Ambient,Amended,2996.494542,Within_Range,CV_Good,      ,7/14/2025,
+45,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P12,B,20,Ambient,Amended,3141.960537,Within_Range,CV_Good,      ,7/14/2025,
+46,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P12,B,40,Ambient,Amended,3330.037783,Within_Range,CV_Good,      ,7/14/2025,
+47,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P3,B,20,Ambient,Amended,1.008816121,Within_Range,CV_High,      ,7/14/2025,
+48,GCReW,CO2xNxPhrag,2025,Sept,PHAU,Phrag,P11,B,20,Ambient,Ambient,3034.697733,Within_Range,CV_Good,      ,7/14/2025,
