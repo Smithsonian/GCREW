@@ -173,7 +173,7 @@ df1 <- df_combo %>%
 head(df)
 
 df_all <- df1 %>% mutate(Run_Number = as.numeric(Run_Number),
-         Run_Date = format(as.POSIXct(Run_Time,format='%m/%d/%Y %H:%M'),format='%m/%d/%Y')) %>% mutate(Sample_Name = ifelse(Sample_Name %ilike% "TEMPEST", gsub("TEMPEST", "TMP", Sample_Name),Sample_Name )) %>% mutate(across(c(Test, Run_Date), as.factor))
+         Run_Date = format(as.POSIXct(Run_Time,format='%m/%d/%Y %H:%M'),format='%m/%d/%Y')) %>% mutate(across(c(Test, Run_Date), as.factor))
 
 #Initialize Flags
 DF_Flags <- df_all %>% dplyr::select(Run_Date) %>% distinct() %>% na.omit()
