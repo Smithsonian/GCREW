@@ -67,7 +67,7 @@ L0_CombinedYearly_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Project
   
   #Subset to only useful columns
   keep <- c("site", "time2", "offset", "depth", "corrected_depth", "actual_conductivity", 
-            "electrical_conductivity","specific_conductivity", "pressure", 
+            "specific_conductivity", "pressure",  
             "resistivity", "salinity", "tds", "temperature", "water_density")
   
   dt2 <- subset(dt, select = keep)
@@ -100,13 +100,13 @@ L0_CombinedYearly_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Project
               col.names = TRUE, qmethod = c("escape", "double"))
   
   #Save long format
-  filename <- paste0("waterlevel_combined_LONG_", year, ".csv")
+  filename <- paste0("waterlevel_combined_TRUELONG_", year, ".csv")
   out_path <- file.path(L0_CombinedYearly_dir, filename)
   
   #Format timestamp nicely for midnight tzs
-  dt2$time2 <- format(as.character(dt2$time2))
+  dt_long$time2 <- format(as.character(dt2$time2))
 
-  write.table(dt2, out_path, append = FALSE, quote = FALSE, sep = ",",
+  write.table(dt_long, out_path, append = FALSE, quote = FALSE, sep = ",",
               na = "NA", dec = ".", row.names = FALSE,
               col.names = TRUE, qmethod = c("escape", "double"))
 

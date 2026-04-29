@@ -82,10 +82,10 @@ for (table in table_name){
     
     #Apply range limitation cleaning for variables that have been marked with a range 
     normalized_data <- apply_range_limitation_waterlevel(design_table, normalized_data)
-    
-    ##You can use the below lines when setting up the design tables to check if the range limitation constants you are using are appropriate. 
-    #plot <- plot_variable_waterlevel(normalized_data,normalized_data$barometric_pressure)
-    #plot
+
+    # #You can use the below lines when setting up the design tables to check if the range limitation constants you are using are appropriate.
+    # plot <- plot_variable_waterlevel(normalized_data,normalized_data$electrical_conductivity)
+    # plot
     
     #try to process data all together instead of grabbing files sporadically - it takes longer to process
     write_monthly_yearly_waterlevel(normalized_data, L0_NormalizedData_dir)

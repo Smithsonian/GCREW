@@ -18,11 +18,11 @@ library(tidyverse)
 
 #### Load Functions and Directories ####
 #relevant directories
-L0_CombinedYearly_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Projects/TEST/2_L0_NormalizedData/processed/combined/")
+L0_CombinedYearly_dir <- paste0(Sys.getenv("dropbox_filepath") , "Taylor_Projects/WaterLevelWorkflow_TEST/2_L0_NormalizedData/processed/combined/")
 offset_dir <- paste0(Sys.getenv("dropbox_filepath") , "GCREW_LOGGERNET_WORKFLOW/design documents/")
 
 # Get files
-i <-list.files(L0_CombinedYearly_dir, pattern = "combined_WIDE", all.files = FALSE,
+i <-list.files(L0_CombinedYearly_dir, pattern = paste0("combined_WIDE_", year, "_final"), all.files = FALSE,
                full.names = TRUE, recursive = F,
                ignore.case = FALSE, include.dirs = F)
 
@@ -31,8 +31,8 @@ i <-list.files(L0_CombinedYearly_dir, pattern = "combined_WIDE", all.files = FAL
 # I am going to do directional pairwise linear regressions between the corrected_depth variable at all sites.
 # The intercept of the linear model will be used as the offset.
 # Read in 2021 data
-
-dat_test <- fread(i[grepl(year, i)])
+yearmatrix <- "2024"
+dat_test <- fread(i[grepl(yearmatrix, i)])
 
 #C3, C4, Met, GENX, float
 #Linear regression: lm(y~x)
@@ -136,16 +136,17 @@ write.csv(offsets, paste0(offset_dir, "offset_matrix_fill_waterlevel_", year, ".
 # GENX: Fill with C4, GCREW MET, C3, float gauge
 # C4: Fill with GENX, GCREW_MET, C3, float gauge
 
-offsets <- read.csv(paste0(offset_dir, "offset_matrix_fill_waterlevel_", year, ".csv"))
+offsets <- read.csv(paste0(offset_dir, "offset_matrix_fill_waterlevel_", yearmatrix, ".csv"))
 rownames(offsets) <- offsets$X
 offsets <- offsets[, 2:5]
 
 for(n in 1:length(i)){
   # Read in data
-  dt <- fread(i[n])
+  # dt <- fread(i[n])
+  dt <- fread(i[grepl(year, i)])
   
   dt2 <- dt
-  # First fill C3 with C4
+
   # C3: Fill with GCREW MET, GENX, C4, float gauge
   dt2$filled_depth.c3 <- ifelse(is.na(dt2$corrected_depth.c3), 
                                 ifelse(!is.na(dt2$corrected_depth.gcrew_met), (dt2$corrected_depth.gcrew_met + offsets["GCREW_MET", "C3"]),
@@ -166,13 +167,15 @@ for(n in 1:length(i)){
   
   # GENX: Fill with C4, GCREW MET, C3, float gauge
   # GENX: For 2023, filled with GCREW MET, then C4, then C3, then float gauge
-  dt2$filled_depth.genx <- ifelse(is.na(dt2$corrected_depth.genx), 
-                                  ifelse(!is.na(dt2$corrected_depth.gcrew_met), (dt2$corrected_depth.gcrew_met + offsets["GCREW_MET", "GENX"]),
-                                         ifelse(!is.na(dt2$corrected_depth.c4), (dt2$corrected_depth.c4 + offsets["C4", "GENX"]),
-                                                ifelse(!is.na(dt2$corrected_depth.c3), (dt2$corrected_depth.c3 + offsets["C3", "GENX"]),
-                                                       ifelse(!is.na(dt2$corrected_depth.c3_floatgauge), (dt2$corrected_depth.c3_floatgauge + offsets["C3", "GENX"]),
-                                                              dt2$corrected_depth.genx)))),
-                                  dt2$corrected_depth.genx)
+  dt2$filled_depth.genx <- dt2$corrected_depth.genx
+  dt2$filled_depth.genx[1:20173] <- ifelse(is.na(dt2$corrected_depth.genx[1:20173]), 
+                                  ifelse(!is.na(dt2$corrected_depth.gcrew_met[1:20173]), (dt2$corrected_depth.gcrew_met[1:20173] + offsets["GCREW_MET", "GENX"]),
+                                         ifelse(!is.na(dt2$corrected_depth.c4[1:20173]), (dt2$corrected_depth.c4[1:20173] + offsets["C4", "GENX"]),
+                                                ifelse(!is.na(dt2$corrected_depth.c3[1:20173]), (dt2$corrected_depth.c3[1:20173] + offsets["C3", "GENX"]),
+                                                       ifelse(!is.na(dt2$corrected_depth.c3_floatgauge[1:20173]), (dt2$corrected_depth.c3_floatgauge[1:20173] + offsets["C3", "GENX"]),
+                                                              dt2$corrected_depth.genx[1:20173])))),
+                                  dt2$corrected_depth.genx[1:20173])
+  dt2$filled_depth.genx[20174:nrow(dt2)] <- NA
   
   # C4: Fill with GENX, GCREW_MET, C3, float gauge
   dt2$filled_depth.c4 <- ifelse(is.na(dt2$corrected_depth.c4), 
@@ -185,7 +188,7 @@ for(n in 1:length(i)){
   
   # Save as wide form first
   # Create output directory
-  filename <- paste0("waterlevel_combined_filled_wide_", year(dt2$time2[nrow(dt2)]), ".csv")
+  filename <- paste0("waterlevel_combined_filled_wide_adjgenx_", year, ".csv")
   final_path <- file.path(L0_CombinedYearly_dir, filename)
   
   # Format timestamp nicely for midnight tzs
@@ -204,7 +207,9 @@ i <-list.files(L0_CombinedYearly_dir, pattern = paste0("filled_wide_", year), al
                ignore.case = FALSE, include.dirs = F)
 
 for(n in 1:length(i)){
-  dt <- fread(i[n])
+  # dt <- fread(i[n])
+  dt <- fread(i[grepl(year, i)])
+  
   # Bring into long form
   dt_long <- melt(dt, id.vars = c("time2"), variable.name = "colnames", value.name = "value", na.rm = T)
   
@@ -223,7 +228,7 @@ for(n in 1:length(i)){
   dt_wide <- dcast(dt_long, time2+site ~ newname, subset = NULL, drop = TRUE, value.var = "value")
   
   # Create output directory
-  filename <- paste0("waterlevel_combined_filled_long_", year(dt_wide$time2[nrow(dt_wide)]), ".csv")
+  filename <- paste0("waterlevel_combined_filled_long_", year, ".csv")
   final_path <- file.path(L0_CombinedYearly_dir, filename)
   
   # Format timestamp nicely for midnight tzs

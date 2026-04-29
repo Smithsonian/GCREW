@@ -1,7 +1,7 @@
-site,logger,offset
-gcrew_met,gcrew_met,58
-genx,genx,76
-c3,c3log,45
-c4,c4log,65
-genxhydros,genxhydros,56
-compass,compass_gcw_w,85
+site,logger,offset,Notes
+gcrew_met,gcrew_met,58,
+genx,genx,76,
+c3,c3log,35.5,As of 2/24/2026
+c4,c4log,65,
+genxhydros,genxhydros,56,
+compass,compass_gcw_w,85,

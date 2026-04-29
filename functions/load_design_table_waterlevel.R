@@ -8,7 +8,8 @@ library(tidyverse)
 load_design_table <- function() {
   
   #the experimental design is organized into two documents. The first step is to merge them to one table. 
-  merged_design <- left_join(design, plotnames, by = "logger")
+  merged_design <- left_join(design, plotnames, by = "logger") %>%
+    select(-Notes)
   
   #may add if statement for if logger column is reading NA
   

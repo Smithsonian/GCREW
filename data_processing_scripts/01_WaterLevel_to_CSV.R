@@ -1,4 +1,4 @@
-#### Step 2 -- Convert raw loggernet file to a CSV. break the data into monthly chunks #### 
+#### Step 1 -- Convert raw loggernet file to a CSV. break the data into monthly chunks #### 
 #Description -- 
 #The raw data from loggernet are .dat files
 #Need to be .csv files to manipulate
@@ -13,8 +13,8 @@ invisible(lapply(list.files("functions/", pattern = "\\.R$", full.names = TRUE),
 
 #current relevant directories
 #will have to modify once dropbox folder is created
-rawData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/unprocessed_data/")
-rawDataArchive_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/archive_data/")
+rawData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/unprocessed_archive_data/")
+rawDataArchive_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/0_RawData/processed_archive_data/")
 rawCSVData_dir <- paste0(Sys.getenv("TE_dropbox_filepath") , "Taylor_Projects/TEST/1_RawCSVData/unprocessed/")
 
 #### Step 1  -- Convert to CSV ####
@@ -41,6 +41,10 @@ for (file in files){
   } else{
     filename <- substr(basename(file),1, (nchar(basename(file))-19))
   }
+  
+  #Make sure timestamps are stored properly
+  
+  dt$TIMESTAMP <- as.character(format(as.POSIXct(dt$TIMESTAMP, format = "%Y-%m-%d %H:%M:%S"), format = "%Y-%m-%d %H:%M:%S"))
   
   #write and move newly converted .csv file
   write_monthly_data_waterlevel_01(dt, rawCSVData_dir, filename)

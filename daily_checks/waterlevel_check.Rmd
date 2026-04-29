@@ -12,7 +12,7 @@ Last modified January 06 2026 by Taylor Smith
 ```{r setup, include=FALSE}
 # Get functions
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(knitr, tidyverse, data.table, lubridate, utils, ggpubr, plyr, gghighlight, kableExtra, geomtextpath, grid)
+pacman::p_load(knitr, tidyverse, data.table, lubridate, utils, ggpubr, plyr, gghighlight, kableExtra, geomtextpath, grid, Cairo)
 
 # Create load data function
 load_data<-function(dir, pattern){
@@ -27,7 +27,8 @@ load_data<-function(dir, pattern){
 }
 
 # Set figure output dimensions
-knitr::opts_chunk$set(fig.width=15, fig.height=10, echo = T)
+options(bitmapType="cairo")
+knitr::opts_chunk$set(fig.width=15, fig.height=10, dpi = 150, echo = T, dev = "ragg_png")
 
 ```
 
