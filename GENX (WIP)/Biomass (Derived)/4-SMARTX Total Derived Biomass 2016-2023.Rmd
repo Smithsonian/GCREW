@@ -1,0 +1,45 @@
+---
+title: "4-SMARTX Total Derived Biomass 2016-2023"
+output: html_document
+date: "2024-04-22"
+---
+```{r}
+# This program reads two files that contain the biomass and density of the all plant species in the elevated CO2 x Nitrogen experiment. It reports annual total aboveground biomass for the sedge Schoenoplectus americanus (formerly Scirpus olneyi), the grasses Spartina patens and Distichlis spicata. All data are in grams per m2
+
+# SAS-R Conversion 4.22.2024 by Chelsea Nitsch
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+```
+
+```{r}
+# Read the first CSV file
+Sedge <- read_csv("S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/1-SMARTX Sedge Shoot Biomass 2016-2023.csv")
+
+# Sort the Sedge data frame
+Sedge <- Sedge %>% 
+  arrange(Year, Plot, Temperature, CO2, Vegetation)
+
+# Read the second CSV file
+NonSedge <- read_csv("S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/2-SMARTX Non-Sedge Shoot Biomass 2016-2023.csv")
+
+# Sort the NonSedge data frame
+NonSedge <- NonSedge %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation)
+
+# Merge the two data frames
+MergeData <- full_join(Sedge, NonSedge, by = c("Year", "Plot", "Temperature", "CO2", "Vegetation"))
+
+# Create the final data frame
+AllShoots <- MergeData %>%
+  select(Year, Plot, Temperature, CO2, Vegetation, SCmass_m2, SCdensity_m2, SPmass_m2, SPdensity_m2, DImass_m2, DIdensity_m2, Other1mass_m2, Other1density_m2, Other2mass_m2, Other2density_m2)
+
+# Write the final data frame to a CSV file
+write_csv(AllShoots, "S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/4-SMARTX Total Shoot Biomass 2016-2023.csv")
+
+
+```
+

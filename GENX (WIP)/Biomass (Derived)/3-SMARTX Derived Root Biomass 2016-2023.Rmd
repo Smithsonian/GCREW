@@ -1,0 +1,83 @@
+---
+title: "3-SMARTX Derived Root Biomass 2016-2023"
+output: html_document
+date: "2024-04-08"
+---
+
+```{r}
+# This program calculates the annual production of belowground biomass as measured by ingrowth cores. They are from an experiment that begain in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from the belowground production that was measured by implanting bags filled with commerical sedge peat into three locations per chamber each year in November, and recovering them one year later. Each bag is 26 cm2 and 40 cm deept. Sample processing has varied over the years, with recoved belowground biomass being separated into fine roots, coarse roots, C3 rhizomes, C4 rhizomes. Contact Pat Megonigal for details.
+
+# SAS-R Conversion 4.8.2024 by Chelsea Nitsch
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+```
+
+```{r}
+
+# Import the CSV file
+Rootbiomass <- read_csv("S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/5-Root Ingrowth Data/SMARTX Master Root Ingrowth 2016-2023 (Published 02-23-2023).csv")
+
+# Sort the data
+Rootbiomass <- Rootbiomass %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation, Core, CoreSection, CoreLength, N_Labeled)
+
+# Create the rootdata dataframe
+rootdata <- Rootbiomass %>%
+  mutate(
+    RootMass = ifelse(RootMass == -99, NA, RootMass),
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    OtherRhizMass = ifelse(OtherRhizMass == -99, NA, OtherRhizMass),
+    RootMass_m2 = (RootMass / 113.0973) * 10000,
+    C3RhizMass_m2 = (C3RhizMass / 113.0973) * 10000,
+    C4RhizMass_m2 = (C4RhizMass / 113.0973) * 10000,
+    OtherRhizMass_m2 = (OtherRhizMass / 113.0973) * 10000,
+    TotalBelowMass_m2 = RootMass_m2 + C3RhizMass_m2 + C4RhizMass_m2 + OtherRhizMass_m2
+  )
+
+# Sort the rootdata dataframe
+rootdata <- rootdata %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation, Core, CoreSection, CoreLength, N_Labeled)
+
+# Combine Top and Bottom Core Sections
+ROOTdata <- rootdata %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation, Core) %>%
+  summarize(
+    RootMass_m2 = sum(RootMass_m2),
+    C3RhizMass_m2 = sum(C3RhizMass_m2),
+    C4RhizMass_m2 = sum(C4RhizMass_m2),
+    OtherRhizMass_m2 = sum(OtherRhizMass_m2),
+    TotalBelowMass_m2 = sum(TotalBelowMass_m2)
+  )
+
+# Calculate the biomass in each year in each chamber
+ROOTdata <- ROOTdata %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation) %>%
+  summarize(
+    RootMass_m2 = mean(RootMass_m2),
+    C3RhizMass_m2 = mean(C3RhizMass_m2),
+    C4RhizMass_m2 = mean(C4RhizMass_m2),
+    OtherRhizMass_m2 = mean(OtherRhizMass_m2),
+    TotalBelowMass_m2 = mean(TotalBelowMass_m2)
+  )
+
+# Replace missing values with 0
+ROOTBIOtype <- ROOTdata %>%
+  mutate(
+    RootMass_m2 = ifelse(is.na(RootMass_m2), 0, RootMass_m2),
+    C3RhizMass_m2 = ifelse(is.na(C3RhizMass_m2), 0, C3RhizMass_m2),
+    C4RhizMass_m2 = ifelse(is.na(C4RhizMass_m2), 0, C4RhizMass_m2),
+    OtherRhizMass_m2 = ifelse(is.na(OtherRhizMass_m2), 0, OtherRhizMass_m2),
+    TotalBelowMass_m2 = ifelse(is.na(TotalBelowMass_m2), 0, TotalBelowMass_m2)
+  )
+
+# Export the ROOTBIOtype dataframe to a CSV file
+write_csv(ROOTBIOtype, "S:/Biogeochemistry/GCREW/0-GCREW Archive/Archived Data/8-SMARTX/1-Biomass (Derived)/3-SMARTX Root Biomass by Category 2016-2023.csv")
+
+
+```
+
