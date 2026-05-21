@@ -1,0 +1,350 @@
+---
+title: "GENX: Porewater pH"
+author: "May 2026 Samples"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document:
+    toc: true
+    number_sections: true
+output_dir: "To Be Reviewed/PDF"
+---
+
+\newpage
+
+##Run Information 
+```{r run information, include=TRUE}
+cat("Run Information:  ") #lets you know what section you're in 
+#set the run date & user name 
+  sample_year <- "2026"
+  sample_month <- "May"
+  user <- "Brenden  Blakley"
+
+#identify the files you want to read in 
+  #read in as a list to accommodate multiple runs in a month
+  pH_file <- "Raw Data/GENX_pH_(May).csv"
+
+# Define the file path for  file - check year and month 
+  final_path <- "Processed Data/GCReW_GENX_Porewater_pH_202605.csv"
+
+#record any notes about the run or anything other info here: 
+  run_notes <- ""
+  
+  #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
+
+  cat(run_notes)
+```
+
+##Setup
+```{r setup, include=FALSE}
+
+#let you know which section you are in 
+cat("Setup")
+
+#load/install packages
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(
+  dplyr,
+  purrr,
+  ggplot2,
+  ggpubr,
+  tidyr,
+  tidyverse,
+  lubridate,
+  tinytex,
+  stringr,
+  writexl,
+  readr,
+  readxl,
+  purrr,
+  tinytex,
+  broom,
+  here)
+
+#Set up file path for metadata 
+  #downloaded metadata csv - downloaded from Google drive as csv for this year
+  #Raw_Metadata = "Raw Data/Sample_IDs_LTREB_SMARTX_2024.csv"
+  #Raw_Metadata = "..GCReW/GCReW_Project_Treatment_Metadata.csv"
+
+  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+  
+
+```
+
+##Read in metadata and create similar sample IDs for matching to samples 
+```{r pull in metadata for later, include=FALSE}
+
+#read in the raw metadata file 
+raw_metadata <- read.csv(Raw_Metadata)
+
+#clean up columns in metadata file:
+  #Pull out only SMARTX Rows 
+  #Create a Sample_Name column to match the SEAL
+metadata <- raw_metadata %>%
+  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = Sample.ID) %>%
+  mutate(Month = sample_month) %>%
+  mutate(Year = sample_year) %>%
+    rename(
+    Sample_ID = Sample.ID,
+  ) %>%
+  select(-N_Treatment)
+
+
+```
+
+```{r Import Data, include=FALSE}
+cat("Import Data")
+
+#set file path for data - in run info chunk 
+path <- ("file path")
+
+#Read in Raw Data 
+data_pH <- map(pH_file, read.csv)
+
+# Combining Files
+df_combo <- bind_rows(data_pH)
+
+# Select needed columns & rename 
+df_all <- df_combo %>%
+  mutate(Sample_Name = paste0(Plot, "-",Depth)) %>%
+  mutate(Analysis_rundate = paste0(match(Month, month.name), "/", Day, "/", Year)) %>%
+select(
+         Sample_Name = Sample_Name,
+         pH = pH, 
+         Analysis_rundate = Analysis_rundate,
+       )
+
+#Checking column headers
+
+
+
+
+```
+
+
+## Merge samples with Metadata & check all samples are present 
+```{r check sample ids with metadata, echo=FALSE}
+
+cat("Merge Samples with Metadata")
+
+#check to see if all samples are present in the metadata 
+all_present <- all(metadata$Sample_Name %in% df_all$Sample_Name)
+
+if (all_present) {
+  message("All sample IDs are present in data.")
+} else {
+  message("Some sample IDs are missing from data.")
+  
+  # Optional: Which ones are missing?
+  missing_ids <- setdiff(metadata$Sample_Name, df_all$Sample_Name)
+  print(missing_ids)
+}
+
+
+#merge metadata with sample run data 
+merged_data <- df_all %>%
+  left_join(metadata, by = c("Sample_Name" = "Sample_Name"))
+
+#might want to include a flag or something to see that all the samples are included? 
+
+df_all_clean <- merged_data 
+
+```
+
+\newpage
+
+## Visualize Data
+```{r Visualize Data, fig.height=10, echo=FALSE}
+cat("Visualize Data")
+
+### Ammonia 
+pH_forplot <- df_all_clean
+
+pH_forplot$Depth_cm <- 
+  as.numeric(pH_forplot$Depth_cm)
+
+#group the data for plotting
+pH_forplot <- pH_forplot %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Treatment = factor(Treatment, levels = c(
+      "+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C")))
+
+#create plot
+viz_pH_plot <- ggplot(data = pH_forplot, aes(
+  x = as.factor(Temp_Treatment),
+  y = pH,
+  fill = as.factor(Treatment)
+)) +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.25, 
+                                      width = 1.5, 
+                                      preserve =  "single" )) +
+  facet_grid(as.numeric(Depth_cm) ~ ., 
+             scales = "free_x") +
+  scale_fill_manual(
+    breaks = c(
+      "+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C"),
+    values = c(
+      "+0 C" = "#fc9ca2",
+      "+0.75 C" = "#fb747d",
+      "+1.5 C" = "#fa4c58",
+    "+2.25 C" = "#f92432",
+    "+3 C" = "#e30613",
+    "+3.75 C" = "#c70512",
+    "+4.5 C" = "#9f040e",
+    "+5.25 C" = "#77030b",
+    "+6 C" = "#500207"),
+    name = "Treatment:",
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "pH",
+    title = "GENX: Porewater pH"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE, limits = rev) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black")
+    ) + 
+  coord_flip(ylim = c(5.5,7.1))
+print(viz_pH_plot)
+
+```
+\newpage
+
+\newpage
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+pH_forplot <- pH_forplot %>%
+  mutate(Replicate = case_when(
+    Plot == "Ch1" ~ "1",
+    Plot == "Ch2" ~ "2",
+    Plot == "Ch3" ~ "1",
+    Plot == "Ch4" ~ "1",
+    Plot == "Ch5" ~ "1",
+    Plot == "Ch6" ~ "2",
+    Plot == "Ch7" ~ "1",
+    Plot == "Ch8" ~ "1",
+    Plot == "Ch9" ~ "2",
+    Plot == "Ch10" ~ "1",
+    Plot == "Ch11" ~ "1",
+    Plot == "Ch12" ~ "1",
+    
+    
+  )
+           )
+
+#make plot
+viz_pH_plot_2 <- ggplot(data = pH_forplot, 
+                            aes(x = pH, y = Depth_cm, color = Replicate)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(values = c(
+    "1" = "#FFD500",
+    "2" = "#00D0FF"
+  )) +
+  facet_grid(factor(
+    Treatment,
+    levels = c("+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C")) ~ ., scales = "free_x") +
+  labs(x = "pH", 
+       y = "Depth (cm)", 
+       title = "GENX: Porewater pH by Replicate") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  xlim(5.7, 7.1) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_pH_plot_2
+
+```
+\newpage
+
+
+##Export Data
+```{r, include=FALSE}
+#pull out what we need
+
+df_all_clean_cols <- df_all_clean %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot,
+    Depth_cm,
+    CO2_Treatment,
+    Temp_Treatment,
+    pH,
+    Analysis_rundate
+  )
+
+final_data_labeled <- df_all_clean_cols %>%
+  mutate(
+    Run_notes = run_notes,# new column with notes about the run 
+    )
+
+#Order Columns for Final Data Frame
+All_Clean_Data <- final_data_labeled %>%
+  select(
+    Site,
+    Project,
+    Year,
+    Month,
+    Community,
+    Nickname,
+    Plot,
+    Depth_cm,
+    CO2_Treatment,
+    Temp_Treatment,
+    pH,
+    Analysis_rundate,
+    Run_notes
+  )
+#head(Samples1)
+
+write.csv(All_Clean_Data, final_path)
+```
+

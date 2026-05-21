@@ -1,6 +1,6 @@
 ---
-title: "SMARTX: Porewater Ammonium"
-author: "Septmeber 2025 Samples"
+title: "GENX: Porewater Ammonium"
+author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -31,9 +31,6 @@ cat("Run Information:  ") #lets you know what section you're in
 
 #record any notes about the run or anything other info here: 
   run_notes <- ""
-  
-#Add SMARTX Prefix if necessary to samples
-  Add_Prefix <- "YES"
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -118,15 +115,14 @@ raw_metadata <- read.csv(Raw_Metadata)
   #Pull out only SMARTX Rows 
   #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("SMARTX", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = paste0(Project, "_", Sample.ID)) %>%
+  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = Sample.ID) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
     rename(
     Sample_ID = Sample.ID,
   ) %>%
-  dplyr::select(-N_Treatment)
-
+  select(-N_Treatment)
 
 ```
 
@@ -491,7 +487,7 @@ blks_df <- df_all %>% filter(str_detect(Sample_Name, "CCB") | str_detect(Sample_
 
 #Pull out samples from df_all to calc quantile
 samples <- df_all %>% 
-  filter(grepl(pattern = "^\\d{3}-\\d{2,}$", Sample_Name) | grepl(pattern = "^SMARTX_\\d{3}-\\d{2,}$", Sample_Name)) %>% filter(!str_detect(Sample_Name, c("mg"))) %>% 
+  filter(grepl(pattern = "^Ch\\d{1,2}-\\d{1,2}$", Sample_Name)) %>% filter(!str_detect(Sample_Name, c("mg"))) %>% 
   group_by(Test, Run_Date) %>% 
   mutate(Quant = quantile(Conc, prob=c(.25)) ) %>% 
   dplyr::select(Test, Run_Date, Quant) %>% 
@@ -723,7 +719,7 @@ Matrix_Flags_join <- Flags_Matrix
 ```{r Add unit conversion, include=FALSE}
 
 #Pull out samples 
-samples <- df_all_cor %>% filter(grepl(pattern = "^\\d{3}-\\d{2,}$", Sample_Name) | grepl(pattern = "^SMARTX_\\d{3}-\\d{2,}$", Sample_Name))  %>% mutate(PFix = Add_Prefix) %>% mutate(Sample_Name = ifelse(PFix == "YES", paste0("SMARTX_", Sample_Name)))
+samples <- df_all_cor %>% filter(grepl(pattern = "^Ch\\d{1,2}-\\d{1,2}$", Sample_Name)) 
 
 
 #Convert values based on the Test ID 
@@ -877,72 +873,74 @@ df_all_clean <- merged_data
 \newpage
 
 ## Visualize Data
-```{r Visualize Data C3, fig.height=10, echo=FALSE}
+```{r Visualize Data, fig.height=10, echo=FALSE}
 cat("Visualize Data")
 
 ### Ammonia 
-NH3_forplot <- df_all_clean %>%
-  filter(Test == "Ammonia 2")
+NH4_forplot <- df_all_clean
 
-#C3 plots
-NH3_forplot_C3 <- NH3_forplot %>%
-  filter(Nickname == "C3")
-
-NH3_forplot_C3$Depth_cm <- 
-  as.numeric(NH3_forplot_C3$Depth_cm)
+NH4_forplot$Depth_cm <- 
+  as.numeric(NH4_forplot$Depth_cm)
 
 #group the data for plotting
-NH3_forplot_C3 <- NH3_forplot_C3 %>%
+NH4_forplot <- NH4_forplot %>%
   group_by(Depth_cm) %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup() %>%
-  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "0 C + aCO2", "0 C + eCO2"), ifelse(Temp_Treatment == 1.7, "1.7 C + aCO2", ifelse(Temp_Treatment == 3.4, "3.4 C + aCO2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "5.1 C + aCO2", "5.1 C + eCO2"), NA)))))
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Treatment = factor(Treatment, levels = c(
+      "+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C")))
 
 #create plot
-viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
+viz_NH4_plot <- ggplot(data = NH4_forplot, aes(
   x = as.factor(Temp_Treatment),
   y = Conc,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
+  fill = as.factor(Treatment)
 )) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = c("total", "single"), )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.25, 
+                                      width = 1.5, 
+                                      preserve =  "single" )) +
+  facet_grid(as.numeric(Depth_cm) ~ ., 
+             scales = "free_x") +
   scale_fill_manual(
+    breaks = c(
+      "+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C"),
     values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "white",
-      "5.1 C + eCO2" = "white"
-    ),
+      "+0 C" = "#fc9ca2",
+      "+0.75 C" = "#fb747d",
+      "+1.5 C" = "#fa4c58",
+    "+2.25 C" = "#f92432",
+    "+3 C" = "#e30613",
+    "+3.75 C" = "#c70512",
+    "+4.5 C" = "#9f040e",
+    "+5.25 C" = "#77030b",
+    "+6 C" = "#500207"),
     name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
-  ) +
-  scale_color_manual(
-    values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "blue",
-      "5.1 C + eCO2" = "red"
-    ),
-    name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
   ) +
   theme_classic() +
   labs(
     x = " ",
-    y = "NH3 (mg/L)",
-    title = "C3: Porewater NH3",
-    fill = "CO2 Treatment",
-    color = "+Temp. (C)"
+    y = "NH4 Concentration",
+    title = "GENX: Porewater NH4"
   ) +
   theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
+  scale_x_discrete(drop = TRUE, limits = rev) +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
     panel.border = element_rect(
@@ -951,108 +949,61 @@ viz_NH3_plot_C3 <- ggplot(data = NH3_forplot_C3, aes(
       linewidth = 0.8),
       legend.key = element_rect("black")
     ) + 
-  coord_flip()
-print(viz_NH3_plot_C3)
+  coord_flip(ylim = c(5.5,7.1))
+print(viz_NH4_plot)
 
 ```
 \newpage
-```{r Visualize Data C4, fig.height=10, echo=FALSE}
-#C4 plots
-NH3_forplot_C4 <- NH3_forplot %>%
-  filter(Nickname == "C4")
 
-NH3_forplot_C4$Depth_cm <-
-  as.numeric(NH3_forplot_C4$Depth_cm)
-
-#group the data for plotting
-NH3_forplot_C4 <- NH3_forplot_C4 %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
-
-viz_NH3_plot_C4 <- ggplot(data = NH3_forplot_C4, aes(
-  x = as.factor(Temp_Treatment),
-  y = Conc,
-  fill = as.factor(Temp_Treatment)
-)) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.25, preserve = "single"), ) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
-  facet_grid(Depth_cm ~ ., scales = "free_x") +
-  scale_fill_manual(values = c(
-    "0" = "blue",
-    "1.7" = "green",
-    "3.4" = "orange",
-    "5.1" = "red"
-  )) +
-  
-  theme_classic() +
-  labs(x = " ",
-       y = "NH3 (mg/L)",
-       title = "C4: Porewater NH3",
-       fill = "+Temp. (C)") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    ),
-    legend.key = element_rect("black")
-    
-  ) +
-  coord_flip()
-print(viz_NH3_plot_C4) 
-
-```
 \newpage
-```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
 
 #get replicate value and treatment info
-NH3_forplot_C3 <- NH3_forplot_C3 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#ensure points are in correct order
-NH3_forplot_C3 <- NH3_forplot_C3[order(NH3_forplot_C3$Depth_cm), ]
+NH4_forplot <- NH4_forplot %>%
+  mutate(Replicate = case_when(
+    Plot == "Ch1" ~ "1",
+    Plot == "Ch2" ~ "2",
+    Plot == "Ch3" ~ "1",
+    Plot == "Ch4" ~ "1",
+    Plot == "Ch5" ~ "1",
+    Plot == "Ch6" ~ "2",
+    Plot == "Ch7" ~ "1",
+    Plot == "Ch8" ~ "1",
+    Plot == "Ch9" ~ "2",
+    Plot == "Ch10" ~ "1",
+    Plot == "Ch11" ~ "1",
+    Plot == "Ch12" ~ "1",
+    
+    
+  )
+           )
 
 #make plot
-viz_NH3_plot_C3_2 <- ggplot(data = NH3_forplot_C3, 
+viz_NH4_plot_2 <- ggplot(data = NH4_forplot, 
                             aes(x = Conc, y = Depth_cm, color = Replicate)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
   scale_color_manual(values = c(
     "1" = "#FFD500",
-    "2" = "#00D0FF",
-    "3" = "#FF0075"
+    "2" = "#00D0FF"
   )) +
   facet_grid(factor(
-    Treatment1,
-    levels = c("eCO2 + 0 C", "+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C", "eCO2 + 5.1 C")
-  ) ~ ., scales = "free_x") +
-  labs(x = "NH3 (mg/L)", 
+    Treatment,
+    levels = c("+0 C",
+      "+0.75 C",
+      "+1.5 C",
+    "+2.25 C",
+    "+3 C",
+    "+3.75 C",
+    "+4.5 C",
+    "+5.25 C",
+    "+6 C")) ~ ., scales = "free_x") +
+  labs(x = "NH4 Concentration", 
        y = "Depth (cm)", 
-       title = "C3: Porewater NH3 by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  #xlim(0, 12) +
+       title = "GENX: Porewater NH4 by Replicate") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  xlim(5.7, 7.1) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -1063,66 +1014,7 @@ viz_NH3_plot_C3_2 <- ggplot(data = NH3_forplot_C3,
     )
   )
 
-viz_NH3_plot_C3_2
-
-```
-\newpage
-
-```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
-
-#get replicate value and treatment info
-NH3_forplot_C4 <- NH3_forplot_C4 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#make sure point are in correct order
-NH3_forplot_C4 <- NH3_forplot_C4[order(NH3_forplot_C4$Depth_cm), ]
-
-#make plot
-viz_NH3_plot_C4_2 <- ggplot(data = NH3_forplot_C4, 
-                            aes(x = Conc, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "4" = "#FFD500",
-    "5" = "#00D0FF",
-    "6" = "#FF0075"
-  )) +
-  facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
-               ., scales = "free_x") +
-  labs(x = "NH3 (mg/L)", 
-       y = "Depth (cm)", 
-       title = "C4: Porewater NH3 by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  xlim(0, 10) +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-
-viz_NH3_plot_C4_2
+viz_NH4_plot_2
 
 ```
 
