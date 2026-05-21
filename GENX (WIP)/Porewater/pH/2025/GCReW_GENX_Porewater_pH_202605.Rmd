@@ -169,7 +169,7 @@ pH_forplot <- pH_forplot %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup() %>%
   mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
-      "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12")))
+      "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
 
 #create plot
 viz_pH_plot <- ggplot(data = pH_forplot, aes(
@@ -181,7 +181,7 @@ viz_pH_plot <- ggplot(data = pH_forplot, aes(
            position = position_dodge2(padding = 0.1, 
                                       width = 0.5, 
                                       preserve =  "single" )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., 
+  facet_grid(Depth ~ ., 
              scales = "free_x") +
   scale_fill_manual(
     breaks = c(
