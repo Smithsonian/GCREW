@@ -43,17 +43,17 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "MONTH"
-sample_year = "YEAR"
-Run_Date = as.Date("DATE", format = "%m/%d/%Y")
-Run_by = "NAME"#Instrument user
-Script_run_by ="NAME"#Code user
+sample_month = "May"
+sample_year = "2026"
+Run_Date = as.Date("5/20/2026", format = "%m/%d/%Y")
+Run_by = "Melanie Giessner"#Instrument user
+Script_run_by ="Melanie Giessner"#Code user
 
 Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10")
+plates<- c("Plate1","Plate2","Plate3","Plate4")
 
 folder_path_rawdata <- paste0("Raw Data")
 Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = "Plate")
@@ -61,8 +61,8 @@ head(Raw_plates)
 
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
-    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10"),
-    Run_Date = c("06/02/2025","06/02/2025","06/02/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025", "06/03/2025")
+    Plate = plates,
+    Run_Date = c("05/19/2026","05/19/2026","05/19/2026","05/20/2026")
   )
 
   Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
@@ -146,7 +146,7 @@ metadata <- raw_metadata %>%
     rename(
     Sample_ID = Sample.ID,
   ) %>%
-  select(-N_Treatment)
+  dplyr::select(-N_Treatment)
 
 
 ```
@@ -386,7 +386,7 @@ ints_chk
 
 Slopes_chk
 
-write.csv(unique_log, log_path)
+
 
 #Get done of original runs
 Date_1 <-as.Date(new_log_stds$Run_Date[which(new_log_stds$Plate == "Plate1")]) 
@@ -1549,6 +1549,7 @@ viz_H2S_plot_C4_2
 
 ##Export Data
 ```{r, echo=FALSE}
+write.csv(unique_log, log_path)
 
   Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within Range" | H2S_CV_Flag %like% "High")
 

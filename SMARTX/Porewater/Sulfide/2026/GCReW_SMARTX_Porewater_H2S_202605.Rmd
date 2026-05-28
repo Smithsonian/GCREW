@@ -1,6 +1,6 @@
 ---
-title: "GENX: Porewater Sulfide"
-author: "Month Year Samples"
+title: "SMARTX: Porewater Sulfide"
+author: "May 2025 Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -42,38 +42,39 @@ After_Reruns = "YES"
   #And Will Write a Rerun File
 
 ###things that need to be changed
-
-sample_month = "MONTH"
-sample_year = "YEAR"
-Run_Date = as.Date("DATE", format = "%m/%d/%Y")
-Run_by = "NAME"#Instrument user
-Script_run_by ="NAME"#Code user
+sample_month = "May"
+sample_year = "2026"
+Run_Date = as.Date("05/19/2026", format = "%m/%d/%Y")
+Run_by = "Melanie Giessner"#Instrument user
+Script_run_by ="Melanie Giessner"#Code user
 
 Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10")
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9")
+
 
 folder_path_rawdata <- paste0("Raw Data")
 Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = "Plate")
 head(Raw_plates)
 
+
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
-    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10"),
-    Run_Date = c("06/02/2025","06/02/2025","06/02/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025", "06/03/2025")
+    Plate = plates,
+    Run_Date = c("05/19/26","05/19/26","05/20/26","05/20/26","05/20/26","05/20/26","05/21/26","05/21/26", "05/21/26")
   )
 
-  Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
+  Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%y"))
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
 log_path <- "Processed Data/SMARTX_H2S_QAQC_2026.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_GENX_Porewater_H2S_202605.csv"
-rerun_path <- "Processed Data/GCReW_GENX_Porewater_H2S_202605_reruns.csv"
+final_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202605.csv"
+rerun_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202605_reruns.csv"
 
 
 ```
@@ -132,22 +133,25 @@ sigdigs <- 3
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in the raw metadata file 
-raw_metadata <- read.csv(Raw_Metadata)
+#read in metadata
 
+raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
+#Pull out only SMARTX Rows
+#Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
+  filter(grepl("SMARTX", Project, ignore.case = TRUE)) %>%
   mutate(Sample_Name = Sample.ID) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
     rename(
     Sample_ID = Sample.ID,
   ) %>%
-  select(-N_Treatment)
+  dplyr::select(-N_Treatment)
 
+#Bring in the collection date and any field notes if relevant
+#collection_metadata <- read.csv(Collection_Dates)
+#then we will merge the collection date for SMARTX based on the project and the chambers
 
 ```
 
@@ -341,11 +345,11 @@ new_log_stds <- STD_run_date %>% dplyr::select(Plate,
 
 #read in log file and format
 log <- read.csv(log_path)
-log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%Y-%m-%d"), Run = "Past Runs")
+log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%Y-%m-%d", "%m/%d/%y")), Run = "Past Runs")
 log_3 <- log_2[, -c(1)]
 log_4 <- rbind(log_3, new_log_stds)
 
-unique_log <- log_4 %>% distinct(.keep_all = TRUE)
+unique_log <- log_4 %>% distinct(Plate,Curve,R2,Slope,Intercept,.keep_all = TRUE) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%Y-%m-%d", "%m/%d/%y")))
 
 #Calculate Mean and SD and calculate 2SD range for slope and intercept
 mean_slope <- mean(unique_log$Slope, na.rm = TRUE)
@@ -386,7 +390,7 @@ ints_chk
 
 Slopes_chk
 
-write.csv(unique_log, log_path)
+
 
 #Get done of original runs
 Date_1 <-as.Date(new_log_stds$Run_Date[which(new_log_stds$Plate == "Plate1")]) 
@@ -951,7 +955,7 @@ Spike_Flag <- ifelse(length_bad/length_all > 0.4, paste0(">40% Spikes Fail"), ""
 ```{r check sample ids with metadata, echo=FALSE}
 #Get Samples Only
 H2S_spls_md <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(grepl("^Ch\\d{1,2}-", IDs)) %>%
+      filter(grepl("^\\d{3}-", IDs)) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE"))
 
@@ -1149,152 +1153,6 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Run_notes
   )
 #head(Samples1)
-
-```
-
-## Visualize Data
-```{r Visualize Data, fig.height=10, echo=FALSE}
-cat("Visualize Data")
-
-### Ammonia 
-H2S_forplot <- df_all_clean
-
-H2S_forplot$Depth_cm <- 
-  as.numeric(H2S_forplot$Depth_cm)
-
-#group the data for plotting
-H2S_forplot <- H2S_forplot %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup() %>%
-  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Treatment = factor(Treatment, levels = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")))
-
-#create plot
-viz_H2S_plot <- ggplot(data = H2S_forplot, aes(
-  x = as.factor(Temp_Treatment),
-  y = H2S_Conc_uM,
-  fill = as.factor(Treatment)
-)) +
-  geom_col(stat = "identity", 
-           position = position_dodge2(padding = 0.25, 
-                                      width = 1.5, 
-                                      preserve =  "single" )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., 
-             scales = "free_x") +
-  scale_fill_manual(
-    breaks = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C"),
-    values = c(
-      "+0 C" = "#fc9ca2",
-      "+0.75 C" = "#fb747d",
-      "+1.5 C" = "#fa4c58",
-    "+2.25 C" = "#f92432",
-    "+3 C" = "#e30613",
-    "+3.75 C" = "#c70512",
-    "+4.5 C" = "#9f040e",
-    "+5.25 C" = "#77030b",
-    "+6 C" = "#500207"),
-    name = "Treatment:",
-  ) +
-  theme_classic() +
-  labs(
-    x = " ",
-    y = "H2S Conc (uM)",
-    title = "GENX: Porewater H2S"
-  ) +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE, limits = rev) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8),
-      legend.key = element_rect("black")
-    ) + 
-  coord_flip(ylim = c(5.5,7.1))
-print(viz_H2S_plot)
-
-```
-\newpage
-
-\newpage
-```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
-
-#get replicate value and treatment info
-H2S_forplot <- H2S_forplot %>%
-  mutate(Replicate = case_when(
-    Plot == "Ch1" ~ "1",
-    Plot == "Ch2" ~ "2",
-    Plot == "Ch3" ~ "1",
-    Plot == "Ch4" ~ "1",
-    Plot == "Ch5" ~ "1",
-    Plot == "Ch6" ~ "2",
-    Plot == "Ch7" ~ "1",
-    Plot == "Ch8" ~ "1",
-    Plot == "Ch9" ~ "2",
-    Plot == "Ch10" ~ "1",
-    Plot == "Ch11" ~ "1",
-    Plot == "Ch12" ~ "1",
-    
-    
-  )
-           )
-
-#make plot
-viz_H2S_plot_2 <- ggplot(data = H2S_forplot, 
-                            aes(x = H2S_Conc_uM, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "1" = "#FFD500",
-    "2" = "#00D0FF"
-  )) +
-  facet_grid(factor(
-    Treatment,
-    levels = c("+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")) ~ ., scales = "free_x") +
-  labs(x = "H2S Conc (uM)", 
-       y = "Depth (cm)", 
-       title = "GENX: Porewater H2S by Replicate") +
-  scale_y_reverse(breaks = c(5, 20, 40, 80),
-                  limits = c(85, 0)) +
-  xlim(5.7, 7.1) +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-
-viz_H2S_plot_2
 
 ```
 
@@ -1549,7 +1407,7 @@ viz_H2S_plot_C4_2
 
 ##Export Data
 ```{r, echo=FALSE}
-
+write.csv(unique_log, log_path)
   Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within Range" | H2S_CV_Flag %like% "High")
 
 if(After_Reruns == "YES"){

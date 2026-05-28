@@ -1,5 +1,5 @@
 ---
-title: "GENX: Porewater Sulfide"
+title: "CO2xComm: Porewater Sulfide"
 author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:
@@ -8,8 +8,6 @@ output:
     number_sections: false
 geometry: left=2cm,right=2cm,top=1cm,bottom=2cm
 ---
-
-
 ## Code Set up 
 ```{r setup, include=FALSE}
 
@@ -43,37 +41,45 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "MONTH"
-sample_year = "YEAR"
-Run_Date = as.Date("DATE", format = "%m/%d/%Y")
-Run_by = "NAME"#Instrument user
-Script_run_by ="NAME"#Code user
+sample_month = "July"
+sample_year = "2025"
+Run_Date = as.Date("07/14/2025", format = "%m/%d/%Y")
+Run_by = "Melanie Giessner"#Instrument user
+Script_run_by ="Brenden Blakley"#Code user
 
 Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10")
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7", "Plate8", "Plate9", "Plate10", "Plate_rr")
 
-folder_path_rawdata <- paste0("Raw Data")
-Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = "Plate")
-head(Raw_plates)
+Raw_plates <- c("Raw Data/20250714_LTREB_H2S_Plate1.csv",
+                "Raw Data/20250714_LTREB_H2S_Plate2.csv",
+                "Raw Data/20250714_LTREB_H2S_Plate3.csv",
+                "Raw Data/20250714_LTREB_H2S_Plate4.csv",
+                "Raw Data/20250714_LTREB_H2S_Plate5.csv",
+                "Raw Data/20250714_LTREB_H2S_Plate6.csv",
+                "Raw Data/20250715_LTREB_H2S_Plate7.csv",
+                "Raw Data/20250715_LTREB_H2S_Plate8.csv",
+                "Raw Data/20250715_LTREB_H2S_Plate9.csv",
+                "Raw Data/20250715_LTREB_H2S_Plate10.csv", 
+                "Raw Data/20250716_LTREB_H2S_reruns.csv")
 
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
-    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10"),
-    Run_Date = c("06/02/2025","06/02/2025","06/02/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025","06/03/2025", "06/03/2025")
+    Plate = c("Plate1","Plate2","Plate3","Plate4","Plate5","Plate6","Plate7","Plate8","Plate9","Plate10", "Plate_rr"),
+    Run_Date = c("07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/14/2025","07/15/2025","07/15/2025", "07/15/2025", "07/15/2025", "07/16/2025")
   )
 
   Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/SMARTX_H2S_QAQC_2026.csv"
+log_path <- "Processed Data/LTREB_1M_H2S_QAQC_2025.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_GENX_Porewater_H2S_202605.csv"
-rerun_path <- "Processed Data/GCReW_GENX_Porewater_H2S_202605_reruns.csv"
+final_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_202507.csv"
+rerun_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_202507_reruns.csv"
 
 
 ```
@@ -132,22 +138,32 @@ sigdigs <- 3
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in the raw metadata file 
-raw_metadata <- read.csv(Raw_Metadata)
+#read in metadata
 
+raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = Sample.ID) %>%
+  filter(grepl("1-Meter", Nickname, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-    rename(
+  rename(
     Sample_ID = Sample.ID,
+    Plot_Name = Plot,
   ) %>%
-  select(-N_Treatment)
-
+  dplyr::select(-Temp_Treatment) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2_N",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2",
+      ifelse(CO2_Treatment == "Ambient" &
+               N_Treatment == "Amended"  , "N" , "Ambient")
+    )
+  )) 
 
 ```
 
@@ -679,7 +695,7 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
 
 #Filter samples and mark reruns
 H2S_Spl_pre_viz <- H2S_SPL_cv_new %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(grepl("^\\d{3}-", IDs)) %>%
+      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
@@ -713,7 +729,7 @@ H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = C
 H2S_Spl_Plot_Pre
 
 H2S_Spl_rmv_viz <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(grepl("^\\d{3}-", IDs)) %>%
+      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
   dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
@@ -951,7 +967,7 @@ Spike_Flag <- ifelse(length_bad/length_all > 0.4, paste0(">40% Spikes Fail"), ""
 ```{r check sample ids with metadata, echo=FALSE}
 #Get Samples Only
 H2S_spls_md <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(grepl("^Ch\\d{1,2}-", IDs)) %>%
+      filter(str_detect(IDs, "SP") | str_detect(IDs, "SC")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE"))
 
@@ -1105,10 +1121,10 @@ df_all_clean_cols <- df_all_clean %>%
     Month,
     Community,
     Nickname,
-    Plot,
+    Plot_Name,
     Depth_cm,
     CO2_Treatment,
-    Temp_Treatment,
+    N_Treatment,
     Conc,
     Conc_Flag,
     CV_Flag,
@@ -1125,6 +1141,7 @@ org_labeled_fin_data <- final_data_labeled %>%
   rename(
     H2S_Conc_uM = Conc,
     H2S_Conc_Flag = Conc_Flag,
+    Plot = Plot_Name,
     H2S_CV_Flag = CV_Flag
   )
 
@@ -1140,7 +1157,7 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Plot,
     Depth_cm,
     CO2_Treatment,
-    Temp_Treatment,
+    N_Treatment,
     H2S_Conc_uM,
     H2S_Conc_Flag,
     H2S_CV_Flag,
@@ -1152,138 +1169,130 @@ All_Clean_Data <- org_labeled_fin_data %>%
 
 ```
 
+
 ## Visualize Data
-```{r Visualize Data, fig.height=10, echo=FALSE}
+```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
 ### Ammonia 
-H2S_forplot <- df_all_clean
+H2S_forplot <- All_Clean_Data
 
-H2S_forplot$Depth_cm <- 
-  as.numeric(H2S_forplot$Depth_cm)
+#need to work out how best to plot these data 
 
-#group the data for plotting
-H2S_forplot <- H2S_forplot %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup() %>%
-  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Treatment = factor(Treatment, levels = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")))
-
-#create plot
-viz_H2S_plot <- ggplot(data = H2S_forplot, aes(
-  x = as.factor(Temp_Treatment),
+ H2S_forplot <- H2S_forplot %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      Community == "SPPA",
+    "eCO2_SPPA",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        Community == "SCAM",
+      "eCO2_SCAM",
+      ifelse(CO2_Treatment == "Ambient" &
+               Community == "SPPA"  , "aCO2_SPPA" , "aCO2_SCAM")
+    )
+  )) %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2")) %>%
+  mutate(Order = ifelse(CO2_Treatment == "Ambient", "1", "2"))
+ 
+ H2S_forplot <- H2S_forplot[order(H2S_forplot$CO2_Treatment), ]
+ 
+viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
+  x =  factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")), 
   y = H2S_Conc_uM,
+  color = as.factor(Treatment),
   fill = as.factor(Treatment)
 )) +
-  geom_col(stat = "identity", 
-           position = position_dodge2(padding = 0.25, 
-                                      width = 1.5, 
-                                      preserve =  "single" )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., 
-             scales = "free_x") +
+  geom_bar(
+    stat = "identity",
+    position = position_dodge2(padding = 0.5, preserve = "single")
+  ) +
+  facet_grid(Depth_cm ~ ., scales = "fixed", space = "free_x") +
   scale_fill_manual(
-    breaks = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C"),
     values = c(
-      "+0 C" = "#fc9ca2",
-      "+0.75 C" = "#fb747d",
-      "+1.5 C" = "#fa4c58",
-    "+2.25 C" = "#f92432",
-    "+3 C" = "#e30613",
-    "+3.75 C" = "#c70512",
-    "+4.5 C" = "#9f040e",
-    "+5.25 C" = "#77030b",
-    "+6 C" = "#500207"),
+    "eCO2_SPPA" = "#EAC435",
+    "eCO2_SCAM" = "#149911", 
+    "aCO2_SPPA" = "white",
+    "aCO2_SCAM" = "white"
+  ),
     name = "Treatment:",
+    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
+    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
+  ) +
+  scale_color_manual(values = c(
+    "eCO2_SPPA" = "#EAC435",
+    "eCO2_SCAM" = "#149911", 
+    "aCO2_SPPA" = "#EAC435",
+    "aCO2_SCAM" = "#149911"
+  ),
+    name = "Treatment:",
+    breaks = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM"),
+    labels = c("eCO2_SPPA", "eCO2_SCAM", "aCO2_SPPA", "aCO2_SCAM") 
   ) +
   theme_classic() +
-  labs(
-    x = " ",
-    y = "H2S Conc (uM)",
-    title = "GENX: Porewater H2S"
-  ) +
+  labs(x = " ",
+       y = "H2S (uM)",
+       title = "CO2xCOMM: Porewater Methane",
+       fill = "CO2 Treatment:",
+       color = "Community:") +
   theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE, limits = rev) +
+  scale_x_discrete(drop = TRUE) +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
     panel.border = element_rect(
       color = "black",
       fill = NA,
-      linewidth = 0.8),
-      legend.key = element_rect("black")
-    ) + 
-  coord_flip(ylim = c(5.5,7.1))
-print(viz_H2S_plot)
+      linewidth = 0.8
+    )
+  ) +
+coord_flip()
+print(viz_H2S_plot2)
+
 
 ```
-\newpage
+```{r, echo = FALSE}
+#ensure points are in correct order
+H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
 
-\newpage
-```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+color1 <- c("SC1", "SC2", "SP1", "SP2")
+color2 <- c("SC6", "SC4", "SP4", "SP5")
+color3 <- c("SC9", "SC8", "SP8", "SP9")
+color4 <- c("SC10", "SC12", "SP10", "SP11")
+color5 <- c("SC14", "SC15", "SP14", "SP13")
 
-#get replicate value and treatment info
 H2S_forplot <- H2S_forplot %>%
-  mutate(Replicate = case_when(
-    Plot == "Ch1" ~ "1",
-    Plot == "Ch2" ~ "2",
-    Plot == "Ch3" ~ "1",
-    Plot == "Ch4" ~ "1",
-    Plot == "Ch5" ~ "1",
-    Plot == "Ch6" ~ "2",
-    Plot == "Ch7" ~ "1",
-    Plot == "Ch8" ~ "1",
-    Plot == "Ch9" ~ "2",
-    Plot == "Ch10" ~ "1",
-    Plot == "Ch11" ~ "1",
-    Plot == "Ch12" ~ "1",
-    
-    
+  mutate(
+    Plot_Color = case_when(
+      Plot %in% color1 ~ "Color1",
+      Plot %in% color2 ~ "Color2",
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
+    )
   )
-           )
 
 #make plot
-viz_H2S_plot_2 <- ggplot(data = H2S_forplot, 
-                            aes(x = H2S_Conc_uM, y = Depth_cm, color = Replicate)) +
+viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "1" = "#FFD500",
-    "2" = "#00D0FF"
-  )) +
-  facet_grid(factor(
-    Treatment,
-    levels = c("+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")) ~ ., scales = "free_x") +
-  labs(x = "H2S Conc (uM)", 
-       y = "Depth (cm)", 
-       title = "GENX: Porewater H2S by Replicate") +
-  scale_y_reverse(breaks = c(5, 20, 40, 80),
-                  limits = c(85, 0)) +
-  xlim(5.7, 7.1) +
+  scale_color_manual(
+    values = c(
+      "Color1" = "#FFD500",
+      "Color2" = "#00D0FF",
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
+    ),
+    labels = c("1", "2", "3", "4", "5")
+  ) +
+  facet_grid(Treatment ~ ., scales = "fixed") +
+  labs(
+    x = "H2S (uM)",
+    y = "Depth (cm)",
+    title = "CO2xCOMM: Porewater H2S by Replicate",
+    color = "Replicate"
+  ) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -1295,255 +1304,6 @@ viz_H2S_plot_2 <- ggplot(data = H2S_forplot,
   )
 
 viz_H2S_plot_2
-
-```
-
-
-## Visualize Data
-```{r Visualize Data C3, fig.height=10, echo=FALSE}
-cat("Visualize Data")
-
-### Ammonia 
-H2S_forplot <- All_Clean_Data
-
-#C3 plots
-H2S_forplot_C3 <- H2S_forplot %>%
-  filter(Nickname == "C3")
-
-H2S_forplot_C3$Depth_cm <- 
-  as.numeric(H2S_forplot_C3$Depth_cm)
-
-#group the data for plotting
-H2S_forplot_C3 <- H2S_forplot_C3 %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup() %>%
-  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "0 C + aCO2", "0 C + eCO2"), ifelse(Temp_Treatment == 1.7, "1.7 C + aCO2", ifelse(Temp_Treatment == 3.4, "3.4 C + aCO2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "5.1 C + aCO2", "5.1 C + eCO2"), NA)))))
-
-#create plot
-viz_H2S_plot_C3 <- ggplot(data = H2S_forplot_C3, aes(
-  x = as.factor(Temp_Treatment),
-  y = H2S_Conc_uM,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
-)) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = c("total", "single"), )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
-  scale_fill_manual(
-    values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "white",
-      "5.1 C + eCO2" = "white"
-    ),
-    name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
-  ) +
-  scale_color_manual(
-    values = c(
-      "0 C + aCO2" = "blue",
-      "1.7 C + aCO2" = "green",
-      "3.4 C + aCO2" = "orange",
-      "5.1 C + aCO2" = "red",
-      "0 C + eCO2" = "blue",
-      "5.1 C + eCO2" = "red"
-    ),
-    name = "Treatment:",
-    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
-    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
-  ) +
-  theme_classic() +
-  labs(
-    x = " ",
-    y = "H2S (uM)",
-    title = "C3: Porewater H2S",
-    fill = "CO2 Treatment",
-    color = "+Temp. (C)"
-  ) +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8),
-      legend.key = element_rect("black")
-    ) + 
-  coord_flip()
-print(viz_H2S_plot_C3)
-
-```
-\newpage
-```{r Visualize Data C4, fig.height=10, echo=FALSE}
-#C4 plots
-H2S_forplot_C4 <- H2S_forplot %>%
-  filter(Nickname == "C4")
-
-H2S_forplot_C4$Depth_cm <-
-  as.numeric(H2S_forplot_C4$Depth_cm)
-
-#group the data for plotting
-H2S_forplot_C4 <- H2S_forplot_C4 %>%
-  group_by(Depth_cm) %>%
-  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
-  ungroup()
-
-viz_H2S_plot_C4 <- ggplot(data = H2S_forplot_C4, aes(
-  x = as.factor(Temp_Treatment),
-  y = H2S_Conc_uM,
-  fill = as.factor(Temp_Treatment)
-)) +
-  geom_bar(stat = "identity", position = position_dodge2(padding = 0.25, preserve = "single"), ) +
-  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
-  facet_grid(Depth_cm ~ ., scales = "free_x") +
-  scale_fill_manual(values = c(
-    "0" = "blue",
-    "1.7" = "green",
-    "3.4" = "orange",
-    "5.1" = "red"
-  )) +
-  
-  theme_classic() +
-  labs(x = " ",
-       y = "H2S (uM)",
-       title = "C4: Porewater H2S",
-       fill = "+Temp. (C)") +
-  theme(legend.position = "right") +
-  scale_x_discrete(drop = TRUE) +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    ),
-    legend.key = element_rect("black")
-    
-  ) +
-  coord_flip()
-print(viz_H2S_plot_C4) 
-
-```
-\newpage
-```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
-
-#get replicate value and treatment info
-H2S_forplot_C3 <- H2S_forplot_C3 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#ensure points are in correct order
-H2S_forplot_C3 <- H2S_forplot_C3[order(H2S_forplot_C3$Depth_cm), ]
-
-#make plot
-viz_H2S_plot_C3_2 <- ggplot(data = H2S_forplot_C3, 
-                            aes(x = H2S_Conc_uM, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(size = 1) +
-  scale_color_manual(values = c(
-    "1" = "#FFD500",
-    "2" = "#00D0FF",
-    "3" = "#FF0075"
-  )) +
-  facet_grid(factor(
-    Treatment1,
-    levels = c("eCO2 + 0 C", "+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C", "eCO2 + 5.1 C")
-  ) ~ ., scales = "free_x") +
-  labs(x = "H2S (uM)", 
-       y = "Depth (cm)", 
-       title = "C3: Porewater H2S by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-
-viz_H2S_plot_C3_2
-
-```
-\newpage
-
-```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
-
-#get replicate value and treatment info
-H2S_forplot_C4 <- H2S_forplot_C4 %>%
-  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
-  mutate(Treatment1 = ifelse(
-    Temp_Treatment == 0,
-    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
-    ifelse(
-      Temp_Treatment == 1.7,
-      "+ 1.7 C",
-      ifelse(
-        Temp_Treatment == 3.4,
-        "+ 3.4 C",
-        ifelse(
-          Temp_Treatment == 5.1,
-          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
-          NA
-        )
-      )
-    )
-  ))
-
-#make sure point are in correct order
-H2S_forplot_C4 <- H2S_forplot_C4[order(H2S_forplot_C4$Depth_cm), ]
-
-#make plot
-viz_H2S_plot_C4_2 <- ggplot(data = H2S_forplot_C4, 
-                            aes(x = H2S_Conc_uM, y = Depth_cm, color = Replicate)) +
-  geom_point(size = 3) +
-  geom_path(size = 1) +
-  scale_color_manual(values = c(
-    "4" = "#FFD500",
-    "5" = "#00D0FF",
-    "6" = "#FF0075"
-  )) +
-  facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
-               ., scales = "free_x") +
-  labs(x = "H2S (uM)", 
-       y = "Depth (cm)", 
-       title = "C4: Porewater H2S by Replicate") +
-  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
-                  limits = c(125, 5)) +
-  theme_classic() +
-  theme(
-    axis.text.x = element_text(angle = 0, hjust = 0.5),
-    panel.border = element_rect(
-      color = "black",
-      fill = NA,
-      linewidth = 0.8
-    )
-  )
-
-viz_H2S_plot_C4_2
-
 ```
 
 
