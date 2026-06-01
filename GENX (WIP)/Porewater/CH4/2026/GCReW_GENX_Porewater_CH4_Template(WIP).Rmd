@@ -42,6 +42,9 @@ volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (shou
 #record any notes about the run or anything other info here:
 run_notes <- ""
 
+#Metadata File Path
+  Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
 #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
 cat(run_notes)
@@ -111,37 +114,22 @@ exetainer_volume =12
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in metadata
+#read in the raw metadata file 
+raw_metadata <- read.csv(Raw_Metadata)
 
-# raw_metadata <- read.csv(Raw_Metadata)
-# #clean up columns in metadata file:
-# #Pull out only SMARTX Rows
-# #Create a Sample_Name column to match the SEAL
-# metadata <- raw_metadata %>%
-#   filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
-#   mutate(Sample_Name = paste0(Sample.ID)) %>%
-#   mutate(Month = sample_month) %>%
-#   mutate(Year = sample_year) %>%
-#   rename(
-#     Sample_ID = Sample.ID,
-#     Plot_Name = Plot,
-#   ) %>%
-#   select(-Temp_Treatment) %>%
-#   mutate(Treatment = ifelse(
-#     CO2_Treatment == "Elevated" &
-#       N_Treatment == "Amended",
-#     "eCO2_N",
-#     ifelse(
-#       CO2_Treatment == "Elevated" &
-#         N_Treatment == "Ambient",
-#       "eCO2",
-#       ifelse(CO2_Treatment == "Ambient" &
-#                N_Treatment == "Amended"  , "N" , "Ambient")
-#     )
-#   )) 
-#Bring in the collection date and any field notes if relevant
-#collection_metadata <- read.csv(Collection_Dates)
-#then we will merge the collection date for SMARTX based on the project and the chambers
+#clean up columns in metadata file:
+  #Pull out only SMARTX Rows 
+  #Create a Sample_Name column to match the SEAL
+metadata <- raw_metadata %>%
+  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = Sample.ID) %>%
+  mutate(Month = sample_month) %>%
+  mutate(Year = sample_year) %>%
+    rename(
+    Sample_ID = Sample.ID,
+  ) %>%
+  select(-N_Treatment)
+
 
 ```
 
@@ -1018,245 +1006,557 @@ N2O_samples1
 # Merge samples with Metadata & check all samples are present 
 ```{r check sample ids with metadata, echo=FALSE}
 
-# cat("Merge Samples with Metadata")
-# 
-# #check to see if all samples are present in the metadata
-# all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
-# 
-# if (all_present) {
-#   message("All sample IDs are present in data")
-# } else {
-#   message("Some sample IDs are missing from data.")
-#   
-#   # Optional: Which ones are missing?
-#   missing_ids <- setdiff(metadata$Sample_Name, Samples$Sample_ID)
-#   print(missing_ids)
-# }
-# 
-# 
-# #merge metadata with sample run data
-# merged_data <- metadata %>%
-#   mutate(Sample_ID = paste0("\\b", Sample_ID, "\\b")) %>%
-#   fuzzyjoin::regex_left_join(Samples, ., by = c(Sample_ID = "Sample_Name"))
-# 
-# #might want to include a flag or something to see that all the samples are included?
-# 
-# #add flags
-# 
-# merged_2 <- merge(merged_data, Flags_df)
-# merged_data <-merged_2 %>% mutate(CH4_Flags = Flag)
-# 
-# 
-# 
-# df_all_clean <- merged_data
+cat("Merge Samples with Metadata")
+
+Samples_A <- Samples %>% mutate(Sample_Date = as.Date(substr(Sample_ID,1, 8), format = "%Y%m%d")) %>% mutate(Sample_ID = substring(Sample_ID, first = 10)) %>% mutate(Sample_ID = str_sub(Sample_ID, end = -3)) %>% mutate(Sample_ID = str_replace(Sample_ID, "_", "-"))
+#check to see if all samples are present in the metadata
+all_present <- all(metadata$Sample_Name %in% Samples_A$Sample_ID)
+
+if (all_present) {
+  message("All sample IDs are present in data")
+} else {
+  message("Some sample IDs are missing from data.")
+
+  # Optional: Which ones are missing?
+  missing_ids <- setdiff(metadata$Sample_Name, Samples_A$Sample_ID)
+  print(missing_ids)
+}
+
+
+#merge metadata with sample run data
+merged_data <- metadata %>%
+  mutate(Sample_ID = paste0("\\b", Sample_ID, "\\b")) %>%
+  fuzzyjoin::regex_left_join(Samples_A, ., by = c(Sample_ID = "Sample_Name"))
+
+#might want to include a flag or something to see that all the samples are included?
+
+#add flags
+
+merged_2 <- merge(merged_data, Flags_df)
+merged_data <-merged_2 %>% mutate(CH4_Flags = Flag)
+
+
+
+df_all_clean <- merged_data
 
 ```
 
 ## Organize Data  
 ```{r, echo=FALSE}
-# #check results
-# #head(Samples)
-# 
-# #pull out what we need
-# 
-# df_all_clean_cols <- df_all_clean %>%
-#   select(
-#     Site,
-#     Project,
-#     Year,
-#     Month,
-#     Community,
-#     Nickname,
-#     Plot_Name,
-#     Depth_cm,
-#     CO2_Treatment,
-#     N_Treatment,
-#     CH4_Conc_ppm_dilcorr,
-#     CH4_Conc_uM,
-#     CH4_Flag,
-#     CH4_Flags,
-#     Run_Date
-#   )
-# 
-# final_data_labeled <- df_all_clean_cols %>%
-#   mutate(
-#     Run_notes = run_notes,# new column with notes about the run
-#     Analysis_rundate = Run_Date) 
-# 
-# #rename columns
-# org_labeled_fin_data <- final_data_labeled %>%
-#   rename(
-#     CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
-#     CH4_Conc_Flag = CH4_Flag,
-#     CH4_QAQC_Flags = CH4_Flags,
-#     Plot = Plot_Name
-#   )
-# 
-# #Order Columns for Final Data Frame
-# All_Clean_Data <- org_labeled_fin_data %>%
-#   select(
-#     Site,
-#     Project,
-#     Year,
-#     Month,
-#     Community,
-#     Nickname,
-#     Plot,
-#     Depth_cm,
-#     CO2_Treatment,
-#     N_Treatment,
-#     CH4_Conc_ppm,
-#     CH4_Conc_uM,
-#     CH4_Conc_Flag,
-#     CH4_QAQC_Flags,
-#     Analysis_rundate,
-#     Run_notes
-#   )
-# #head(Samples1)
+#check results
+  head(Samples)
+ 
+  #pull out what we need
+ 
+  df_all_clean_cols <- df_all_clean %>%
+    select(
+     Site,
+     Project,
+     Year,
+     Month,
+     Community,
+     Nickname,
+     Plot,
+     Depth_cm,
+     CO2_Treatment,
+     Temp_Treatment,
+      CH4_Conc_ppm_dilcorr,
+      CH4_Conc_uM,
+      CH4_Flag,
+      CH4_Flags,
+      Run_Date
+    )
+ 
+  final_data_labeled <- df_all_clean_cols %>%
+    mutate(
+      Run_notes = run_notes, #new column with notes about the run
+      Analysis_rundate = Run_Date)
+ 
+  #rename columns
+  org_labeled_fin_data <- final_data_labeled %>%
+    rename(
+      CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
+      CH4_Conc_Flag = CH4_Flag,
+      CH4_QAQC_Flags = CH4_Flags
+    )
+ 
+  #Order Columns for Final Data Frame
+  All_Clean_Data <- org_labeled_fin_data %>%
+    select(
+     Site,
+     Project,
+     Year,
+     Month,
+     Community,
+     Nickname,
+     Plot,
+     Depth_cm,
+     CO2_Treatment,
+     Temp_Treatment,
+      CH4_Conc_ppm,
+      CH4_Conc_uM,
+      CH4_Conc_Flag,
+      CH4_QAQC_Flags,
+      Analysis_rundate,
+      Run_notes
+    )
+  head(All_Clean_Data)
 
 ```
 
 
-## Visualize Data
-```{r Visualize Data, echo=FALSE}
+## Visualize Data CH4
+```{r Visualize Data, fig.height=10, echo=FALSE}
+cat("Visualize Data")
 
-# CH4_forplot <- All_Clean_Data
-# 
-# #ensure points are in correct order
-# 
-# CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
-# 
-# color1 <- c("L1", "L2", "L3", "L4")
-# color2 <- c("L5", "L6", "L8", "L10")
-# color3 <- c("L7", "L9", "L11", "L12")
-# color4 <- c("L13", "L14", "L16", "L15")
-# color5 <- c("L17", "L18", "L19", "L20")
-# 
-# CH4_forplot <- CH4_forplot %>%
-#   mutate(
-#     Plot_Color = case_when(
-#       Plot %in% color1 ~ "Color1",
-#       Plot %in% color2 ~ "Color2",
-#       Plot %in% color3 ~ "Color3",
-#       Plot %in% color4 ~ "Color4",
-#       Plot %in% color5 ~ "Color5"
-#     )
-#   ) %>%
-#   mutate(Treatment = ifelse(
-#     CO2_Treatment == "Elevated" &
-#       N_Treatment == "Amended",
-#     "eCO2 & eN",
-#     ifelse(
-#       CO2_Treatment == "Elevated" &
-#         N_Treatment == "Ambient",
-#       "eCO2 & aN",
-#       ifelse(
-#         CO2_Treatment == "Ambient" &
-#           N_Treatment == "Amended"  ,
-#         "aCO2 & eN" ,
-#         "aCO2 & aN"
-#       )
-#     )
-#   ))  %>%
-#   mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
-#   mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
-# #need to work out how best to plot these data
-# 
-# viz_CH4_plot2 <- ggplot(data = CH4_forplot, aes(
-#   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-#   y = CH4_Conc_uM,
-#   fill = as.factor(Treatment),
-#   color = as.factor(Treatment)
-# )) +
-#   geom_bar(
-#     stat = "identity",
-#     position = position_dodge2(padding = 0.25,preserve = "single")
-#   ) +
-#   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-#   scale_fill_manual(values = c(
-#     "eCO2 & eN" = "#DB5461",
-#     "eCO2 & aN" = "#454ADE", 
-#     "aCO2 & eN" = "white",
-#     "aCO2 & aN" = "white"
-#   ),
-#     name = "Treatment:",
-#     breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-#     labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
-#     
-#   ) +
-#   scale_color_manual(values = c(
-#     "eCO2 & eN" = "#DB5461",
-#     "eCO2 & aN" = "#454ADE", 
-#     "aCO2 & eN" = "#DB5461",
-#     "aCO2 & aN" = "#454ADE"
-#   ),
-#     name = "Treatment:",
-#     breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-#     labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
-#   ) +
-#   theme_classic() +
-#   labs(x = " ",
-#        y = "CH4 (uM)",
-#        title = "CO2xN: Porewater Methane"
-#        ) +
-#   theme(legend.position = "right") +
-#   scale_x_discrete(drop = TRUE) +
-#   theme(
-#     axis.text.x = element_text(angle = 0, hjust = 0.5),
-#     panel.border = element_rect(
-#       color = "black",
-#       fill = NA,
-#       linewidth = 0.8
-#     )
-#   ) +
-# coord_flip()
-# print(viz_CH4_plot2)
+### Ammonia 
+CH4_forplot <- df_all_clean
+
+CH4_forplot$Depth_cm <- 
+  as.numeric(CH4_forplot$Depth_cm)
+
+#group the data for plotting
+CH4_forplot <- CH4_forplot %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
+      "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
+
+#create plot
+viz_CH4_plot <- ggplot(data = CH4_forplot, aes(
+  x = as.factor(Chamber),
+  y = CH4_Conc_uM,
+  fill = as.factor(Chamber)
+)) +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.1, 
+                                      width = 0.5, 
+                                      preserve =  "single" )) +
+  facet_grid(Depth ~ ., 
+             scales = "free_x") +
+  scale_fill_manual(
+    breaks = c(
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Ch1" = "blue4",
+       "Ch2" = "blue3",
+       "Ch3" = "turquoise4",
+       "Ch4" = "lightseagreen",
+       "Ch5" = "mediumseagreen",
+       "Ch6" = "limegreen",
+       "Ch7" = "yellowgreen",
+       "Ch8" = "yellow2",
+       "Ch9" = "darkgoldenrod2",
+       "Ch10" = "darkorange2",
+       "Ch11" = "orangered1",
+       "Ch12" = "red2"),
+    name = "Chamber:"
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "CH4 Conc (uM)",
+    title = "GENX: Porewater CH4"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE, limits = rev) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black"),
+    legend.position = "none"
+    ) + 
+  coord_flip()
+print(viz_CH4_plot)
+
+```
+\newpage
+
+\newpage
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+CH4_forplot <- CH4_forplot %>%
+  mutate(Chamber = case_when(
+    Plot == "Ch1"  ~ "Chamber 1",
+    Plot == "Ch2"  ~ "Chamber 2",
+    Plot == "Ch3"  ~ "Chamber 3",
+    Plot == "Ch4"  ~ "Chamber 4",
+    Plot == "Ch5"  ~ "Chamber 5",
+    Plot == "Ch6"  ~ "Chamber 6",
+    Plot == "Ch7"  ~ "Chamber 7",
+    Plot == "Ch8"  ~ "Chamber 8",
+    Plot == "Ch9"  ~ "Chamber 9",
+    Plot == "Ch10"  ~ "Chamber 10",
+    Plot == "Ch11"  ~ "Chamber 11",
+    Plot == "Ch12"  ~ "Chamber 12"
+    
+    
+  )
+           ) %>% mutate(Chamber = factor(levels = c(
+             "Chamber 1",
+             "Chamber 2",
+             "Chamber 3",
+             "Chamber 4",
+             "Chamber 5",
+             "Chamber 6",
+             "Chamber 7",
+             "Chamber 8",
+             "Chamber 9",
+             "Chamber 10",
+             "Chamber 11",
+             "Chamber 12"
+           ), Chamber))
+
+#make plot
+viz_CH4_plot_2 <- ggplot(data = CH4_forplot, 
+                            aes(x = CH4_Conc_uM, y = Depth_cm, color = Chamber, shape = as.factor(Sample_Date))) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(breaks = c(
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Chamber 1" = "blue4",
+       "Chamber 2" = "blue3",
+       "Chamber 3" = "turquoise4",
+       "Chamber 4" = "lightseagreen",
+       "Chamber 5" = "mediumseagreen",
+       "Chamber 6" = "limegreen",
+       "Chamber 7" = "yellowgreen",
+       "Chamber 8" = "yellow2",
+       "Chamber 9" = "darkgoldenrod2",
+       "Chamber 10" = "darkorange2",
+       "Chamber 11" = "orangered1",
+       "Chamber 12" = "red2"),
+    name = "Chamber:") +
+  facet_wrap(~Chamber, ncol = 3, nrow = 4, scales = "free_x") +
+  labs(x = "CH4 Conc (uM)", 
+       y = "Depth (cm)", 
+       title = "GENX: Porewater CH4 by Chamber") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.position = "none"
+    )
+
+
+viz_CH4_plot_2
 
 ```
 
 
+##Visualize Data N2O
+```{r Visualize Data, fig.height=10, echo=FALSE}
+cat("Visualize Data")
 
-```{r, echo=FALSE}
-# #ensure points are in correct order
-# 
-# #make plot
-# viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
-#   geom_point(size = 3) +
-#   geom_path(linewidth = 1) +
-#   scale_color_manual(
-#     values = c(
-#       "Color1" = "#FFD500",
-#       "Color2" = "#00D0FF",
-#       "Color3" = "#FF0075",
-#       "Color4" = "#80d280",
-#       "Color5" = "#ff6040"
-#     ),
-#     labels = c("1", "2", "3", "4", "5")
-#   ) +
-#   facet_grid(Treatment ~ ., scales = "fixed") +
-#   labs(
-#     x = "CH4 (uM)",
-#     y = "Depth (cm)",
-#     title = "CO2xN: Porewater CH4 by Replicate",
-#     color = "Replicate"
-#   ) +
-#   scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
-#   theme_classic() +
-#   theme(
-#     axis.text.x = element_text(angle = 0, hjust = 0.5),
-#     panel.border = element_rect(
-#       color = "black",
-#       fill = NA,
-#       linewidth = 0.8
-#     )
-#   )
-# 
-# viz_CH4_plot_2
+### Ammonia 
+N2O_forplot <- All_Clean_Data
+
+N2O_forplot$Depth_cm <- 
+  as.numeric(N2O_forplot$Depth_cm)
+
+#group the data for plotting
+N2O_forplot <- N2O_forplot %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
+      "Ch1", "Ch2", "Ch3", "N2O", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
+
+#create plot
+viz_N2O_plot <- ggplot(data = N2O_forplot, aes(
+  x = as.factor(Chamber),
+  y = N2O_Conc_uM,
+  fill = as.factor(Chamber)
+)) +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.1, 
+                                      width = 0.5, 
+                                      preserve =  "single" )) +
+  facet_grid(Depth ~ ., 
+             scales = "free_x") +
+  scale_fill_manual(
+    breaks = c(
+       "Ch1", "Ch2", "Ch3", "N2O", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Ch1" = "blue4",
+       "Ch2" = "blue3",
+       "Ch3" = "turquoise4",
+       "N2O" = "lightseagreen",
+       "Ch5" = "mediumseagreen",
+       "Ch6" = "limegreen",
+       "Ch7" = "yellowgreen",
+       "Ch8" = "yellow2",
+       "Ch9" = "darkgoldenrod2",
+       "Ch10" = "darkorange2",
+       "Ch11" = "orangered1",
+       "Ch12" = "red2"),
+    name = "Chamber:"
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "N2O Conc (uM)",
+    title = "GENX: Porewater N2O"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE, limits = rev) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black"),
+    legend.position = "none"
+    ) + 
+  coord_flip()
+print(viz_N2O_plot)
+
 ```
+\newpage
+
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+N2O_forplot <- N2O_forplot %>%
+  mutate(Chamber = case_when(
+    Plot == "Ch1"  ~ "Chamber 1",
+    Plot == "Ch2"  ~ "Chamber 2",
+    Plot == "Ch3"  ~ "Chamber 3",
+    Plot == "N2O"  ~ "Chamber 4",
+    Plot == "Ch5"  ~ "Chamber 5",
+    Plot == "Ch6"  ~ "Chamber 6",
+    Plot == "Ch7"  ~ "Chamber 7",
+    Plot == "Ch8"  ~ "Chamber 8",
+    Plot == "Ch9"  ~ "Chamber 9",
+    Plot == "Ch10"  ~ "Chamber 10",
+    Plot == "Ch11"  ~ "Chamber 11",
+    Plot == "Ch12"  ~ "Chamber 12"
+    
+    
+  )
+           ) %>% mutate(Chamber = factor(levels = c(
+             "Chamber 1",
+             "Chamber 2",
+             "Chamber 3",
+             "Chamber 4",
+             "Chamber 5",
+             "Chamber 6",
+             "Chamber 7",
+             "Chamber 8",
+             "Chamber 9",
+             "Chamber 10",
+             "Chamber 11",
+             "Chamber 12"
+           ), Chamber))
+
+#make plot
+viz_N2O_plot_2 <- ggplot(data = N2O_forplot, 
+                            aes(x = N2O_Conc_uM, y = Depth_cm, color = Chamber, shape = as.factor(Sample_Date))) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(breaks = c(
+       "Ch1", "Ch2", "Ch3", "N2O", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Chamber 1" = "blue4",
+       "Chamber 2" = "blue3",
+       "Chamber 3" = "turquoise4",
+       "Chamber 4" = "lightseagreen",
+       "Chamber 5" = "mediumseagreen",
+       "Chamber 6" = "limegreen",
+       "Chamber 7" = "yellowgreen",
+       "Chamber 8" = "yellow2",
+       "Chamber 9" = "darkgoldenrod2",
+       "Chamber 10" = "darkorange2",
+       "Chamber 11" = "orangered1",
+       "Chamber 12" = "red2"),
+    name = "Chamber:") +
+  facet_wrap(~Chamber, ncol = 3, nrow = 4, scales = "free_x") +
+  labs(x = "N2O Conc (uM)", 
+       y = "Depth (cm)", 
+       title = "GENX: Porewater N2O by Chamber") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  xlim() +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.position = "none"
+    )
+
+
+viz_N2O_plot_2
+
+```
+
+##Visualize Data CO2
+```{r Visualize Data, fig.height=10, echo=FALSE}
+cat("Visualize Data")
+
+### Ammonia 
+CO2_forplot <- All_Clean_Data
+
+CO2_forplot$Depth_cm <- 
+  as.numeric(CO2_forplot$Depth_cm)
+
+#group the data for plotting
+CO2_forplot <- CO2_forplot %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
+      "Ch1", "Ch2", "Ch3", "CO2", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
+
+#create plot
+viz_CO2_plot <- ggplot(data = CO2_forplot, aes(
+  x = as.factor(Chamber),
+  y = CO2_Conc_uM,
+  fill = as.factor(Chamber)
+)) +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.1, 
+                                      width = 0.5, 
+                                      preserve =  "single" )) +
+  facet_grid(Depth ~ ., 
+             scales = "free_x") +
+  scale_fill_manual(
+    breaks = c(
+       "Ch1", "Ch2", "Ch3", "CO2", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Ch1" = "blue4",
+       "Ch2" = "blue3",
+       "Ch3" = "turquoise4",
+       "CO2" = "lightseagreen",
+       "Ch5" = "mediumseagreen",
+       "Ch6" = "limegreen",
+       "Ch7" = "yellowgreen",
+       "Ch8" = "yellow2",
+       "Ch9" = "darkgoldenrod2",
+       "Ch10" = "darkorange2",
+       "Ch11" = "orangered1",
+       "Ch12" = "red2"),
+    name = "Chamber:"
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "CO2 Conc (uM)",
+    title = "GENX: Porewater CO2"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE, limits = rev) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black"),
+    legend.position = "none"
+    ) + 
+  coord_flip()
+print(viz_CO2_plot)
+
+```
+\newpage
+
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+CO2_forplot <- CO2_forplot %>%
+  mutate(Chamber = case_when(
+    Plot == "Ch1"  ~ "Chamber 1",
+    Plot == "Ch2"  ~ "Chamber 2",
+    Plot == "Ch3"  ~ "Chamber 3",
+    Plot == "CO2"  ~ "Chamber 4",
+    Plot == "Ch5"  ~ "Chamber 5",
+    Plot == "Ch6"  ~ "Chamber 6",
+    Plot == "Ch7"  ~ "Chamber 7",
+    Plot == "Ch8"  ~ "Chamber 8",
+    Plot == "Ch9"  ~ "Chamber 9",
+    Plot == "Ch10"  ~ "Chamber 10",
+    Plot == "Ch11"  ~ "Chamber 11",
+    Plot == "Ch12"  ~ "Chamber 12"
+    
+    
+  )
+           ) %>% mutate(Chamber = factor(levels = c(
+             "Chamber 1",
+             "Chamber 2",
+             "Chamber 3",
+             "Chamber 4",
+             "Chamber 5",
+             "Chamber 6",
+             "Chamber 7",
+             "Chamber 8",
+             "Chamber 9",
+             "Chamber 10",
+             "Chamber 11",
+             "Chamber 12"
+           ), Chamber))
+
+#make plot
+viz_CO2_plot_2 <- ggplot(data = CO2_forplot, 
+                            aes(x = CO2_Conc_uM, y = Depth_cm, color = Chamber)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(breaks = c(
+       "Ch1", "Ch2", "Ch3", "CO2", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Chamber 1" = "blue4",
+       "Chamber 2" = "blue3",
+       "Chamber 3" = "turquoise4",
+       "Chamber 4" = "lightseagreen",
+       "Chamber 5" = "mediumseagreen",
+       "Chamber 6" = "limegreen",
+       "Chamber 7" = "yellowgreen",
+       "Chamber 8" = "yellow2",
+       "Chamber 9" = "darkgoldenrod2",
+       "Chamber 10" = "darkorange2",
+       "Chamber 11" = "orangered1",
+       "Chamber 12" = "red2"),
+    name = "Chamber:") +
+  facet_wrap(~Chamber, ncol = 3, nrow = 4, scales = "free_x") +
+  labs(x = "CO2 Conc (uM)", 
+       y = "Depth (cm)", 
+       title = "GENX: Porewater CO2 by Chamber") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  xlim() +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.position = "none"
+    )
+
+
+viz_CO2_plot_2
+
+```
+
+
 ##Export Data
 ```{r, echo=FALSE}
-final_data<-Samples %>% dplyr::select(Run_Date,N2O_Curve,CO2_Curve,CH4_Curve,Sample_ID,N2O_Area,CO2_Area,CH4_Area,N2O_Conc_uM,CO2_Conc_uM,CH4_Conc_uM,N2O_Flag,CO2_Flag,CH4_Flag,Notes)
-write.csv(final_data, final_path)
+write.csv(All_Clean_Data, final_path)
 #end
 ```
 

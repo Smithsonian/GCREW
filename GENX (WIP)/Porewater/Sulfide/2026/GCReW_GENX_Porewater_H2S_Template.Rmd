@@ -1159,6 +1159,157 @@ All_Clean_Data <- org_labeled_fin_data %>%
 
 ```
 
+
+## Visualize Data
+```{r Visualize Data, fig.height=10, echo=FALSE}
+cat("Visualize Data")
+
+### Ammonia 
+H2S_forplot <- df_all_clean
+
+H2S_forplot$Depth_cm <- 
+  as.numeric(H2S_forplot$Depth_cm)
+
+#group the data for plotting
+H2S_forplot <- H2S_forplot %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
+      "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
+
+#create plot
+viz_H2S_plot <- ggplot(data = H2S_forplot, aes(
+  x = as.factor(Chamber),
+  y = H2S_Conc_uM,
+  fill = as.factor(Chamber)
+)) +
+  geom_col(stat = "identity", 
+           position = position_dodge2(padding = 0.1, 
+                                      width = 0.5, 
+                                      preserve =  "single" )) +
+  facet_grid(Depth ~ ., 
+             scales = "free_x") +
+  scale_fill_manual(
+    breaks = c(
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Ch1" = "blue4",
+       "Ch2" = "blue3",
+       "Ch3" = "turquoise4",
+       "Ch4" = "lightseagreen",
+       "Ch5" = "mediumseagreen",
+       "Ch6" = "limegreen",
+       "Ch7" = "yellowgreen",
+       "Ch8" = "yellow2",
+       "Ch9" = "darkgoldenrod2",
+       "Ch10" = "darkorange2",
+       "Ch11" = "orangered1",
+       "Ch12" = "red2"),
+    name = "Chamber:"
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "H2S Conc (uM)",
+    title = "GENX: Porewater H2S"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE, limits = rev) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black"),
+    legend.position = "none"
+    ) + 
+  coord_flip(ylim = c(5.5,7.1))
+print(viz_H2S_plot)
+
+```
+\newpage
+
+\newpage
+```{r Visualize Data by Rep,  fig.height=8.5, echo=FALSE}
+
+#get replicate value and treatment info
+H2S_forplot <- H2S_forplot %>%
+  mutate(Chamber = case_when(
+    Plot == "Ch1"  ~ "Chamber 1",
+    Plot == "Ch2"  ~ "Chamber 2",
+    Plot == "Ch3"  ~ "Chamber 3",
+    Plot == "Ch4"  ~ "Chamber 4",
+    Plot == "Ch5"  ~ "Chamber 5",
+    Plot == "Ch6"  ~ "Chamber 6",
+    Plot == "Ch7"  ~ "Chamber 7",
+    Plot == "Ch8"  ~ "Chamber 8",
+    Plot == "Ch9"  ~ "Chamber 9",
+    Plot == "Ch10"  ~ "Chamber 10",
+    Plot == "Ch11"  ~ "Chamber 11",
+    Plot == "Ch12"  ~ "Chamber 12"
+    
+    
+  )
+           ) %>% mutate(Chamber = factor(levels = c(
+             "Chamber 1",
+             "Chamber 2",
+             "Chamber 3",
+             "Chamber 4",
+             "Chamber 5",
+             "Chamber 6",
+             "Chamber 7",
+             "Chamber 8",
+             "Chamber 9",
+             "Chamber 10",
+             "Chamber 11",
+             "Chamber 12"
+           ), Chamber))
+
+#make plot
+viz_H2S_plot_2 <- ggplot(data = H2S_forplot, 
+                            aes(x = H2S_Conc_uM, y = Depth_cm, color = Chamber)) +
+  geom_point(size = 3) +
+  geom_path(linewidth = 1) +
+  scale_color_manual(breaks = c(
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Chamber 1" = "blue4",
+       "Chamber 2" = "blue3",
+       "Chamber 3" = "turquoise4",
+       "Chamber 4" = "lightseagreen",
+       "Chamber 5" = "mediumseagreen",
+       "Chamber 6" = "limegreen",
+       "Chamber 7" = "yellowgreen",
+       "Chamber 8" = "yellow2",
+       "Chamber 9" = "darkgoldenrod2",
+       "Chamber 10" = "darkorange2",
+       "Chamber 11" = "orangered1",
+       "Chamber 12" = "red2"),
+    name = "Chamber:") +
+  facet_wrap(~Chamber, ncol = 3, nrow = 4, scales = "free_x") +
+  labs(x = "H2S Conc (uM)", 
+       y = "Depth (cm)", 
+       title = "GENX: Porewater H2S by Chamber") +
+  scale_y_reverse(breaks = c(5, 20, 40, 80),
+                  limits = c(85, 0)) +
+  xlim(5.7, 7.1) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.position = "none"
+    )
+
+viz_H2S_plot_2
+
+```
+
+
 ## Visualize Data
 ```{r Visualize Data, fig.height=10, echo=FALSE}
 cat("Visualize Data")
