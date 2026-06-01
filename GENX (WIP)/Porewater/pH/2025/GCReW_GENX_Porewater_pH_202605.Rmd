@@ -294,10 +294,10 @@ viz_pH_plot_2 <- ggplot(data = pH_forplot,
     panel.border = element_rect(
       color = "black",
       fill = NA,
-      linewidth = 0.8,
+      linewidth = 0.8),
       legend.position = "none"
     )
-  )
+
 
 viz_pH_plot_2
 
