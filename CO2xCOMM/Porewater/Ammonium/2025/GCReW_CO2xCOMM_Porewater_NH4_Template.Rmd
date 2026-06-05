@@ -113,7 +113,7 @@ NH3_pe <- 1.034
 raw_metadata <- read.csv(Raw_Metadata)
 
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
+  #Pull out only CO2xComm Rows 
   #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
   filter(grepl("CO2xComm", Experiment, ignore.case = TRUE)) %>%
@@ -230,7 +230,7 @@ Slope_raw_list <- map(
  Slope_Std_Crvs <- Slope_raw %>% 
    dplyr::select(Run_Date, R2, Slope, Intercept, Test) %>% 
    distinct() %>% 
-   mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Pass", "R2_Fail"))
+   mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Pass - PROCEED", "R2_Fail - REASSESS"))
 
  #join standard curve CVs and regression values
  
@@ -818,7 +818,7 @@ Flags_6 <- left_join(Flags_5, Dup_Flags_join, by = join_by(Test, Run_Date) )
   
 Flags_joined <- left_join(Flags_6, Matrix_Flags_join, by = join_by(Test, Run_Date) )
 
-Flags_Bad <- Flags_joined %>% mutate(across(!1:2, \(x) ifelse(x %ilike% "PROCEED" | x %ilike% "PASS" | x %ilike% "NA" | is.na(x), "", x))) %>% distinct()
+Flags_Bad <- Flags_joined %>% mutate(across(!1:2, \(x) ifelse(x %ilike% "PROCEED" | x %ilike% "NA" | is.na(x), "", x))) %>% distinct()
 
 Flags_Fin <- Flags_Bad %>% mutate(QAQC_Flag = paste0(R2_Flag, PE_Flag, CHK_Flag, BLK_Pct_Flag, Dup_Flags, Spike_Flags, Matrix_Flags)) %>% dplyr::select(Test, Run_Date, QAQC_Flag)
 ```

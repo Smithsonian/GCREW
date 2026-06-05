@@ -18,17 +18,17 @@ library(tidyverse)
 
 year <- "2025"
 
-path <- "CO2xN_Porewater_"
+path <- "CO2xComm_Porewater_"
 
-CH4_dat <- read.csv(here("..", "GCREW","CO2xN", "Porewater", "CH4", year, "Compiled_Data", paste0(path, "CH4_", year, ".csv")))
+CH4_dat <- read.csv(here("..", "GCREW","CO2xCOMM", "Porewater", "CH4", year, "Compiled_Data", paste0(path, "CH4_", year, ".csv")))
   
-NH3_dat <- read.csv(here("..", "GCREW","CO2xN", "Porewater", "Ammonium", year, "Compiled_Data", paste0(path, "NH4_", year, ".csv"))) 
+NH3_dat <- read.csv(here("..", "GCREW","CO2xCOMM", "Porewater", "Ammonium", year, "Compiled_Data", paste0(path, "NH4_", year, ".csv"))) 
 
-pH_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "pH", year, "Compiled_Data", paste0(path, "pH_", year, ".csv"))) 
+pH_dat <-  read.csv(here("..", "GCREW","CO2xCOMM", "Porewater", "pH", year, "Compiled_Data", paste0(path, "pH_", year, ".csv"))) 
 
-SO4_dat <- read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfate_Chloride", year, "Compiled_Data", paste0(path, "SO4_Cl_", year,  ".csv"))) 
+SO4_dat <- read.csv(here("..", "GCREW","CO2xCOMM", "Porewater", "Sulfate_Chloride", year, "Compiled_Data", paste0(path, "SO4_Cl_", year,  ".csv"))) 
   
-H2S_dat <-  read.csv(here("..", "GCREW","CO2xN", "Porewater", "Sulfide", year, "Compiled_Data", paste0(path, "H2S_", year, ".csv"))) 
+H2S_dat <-  read.csv(here("..", "GCREW","CO2xCOMM", "Porewater", "Sulfide", year, "Compiled_Data", paste0(path, "H2S_", year, ".csv"))) 
 
 
 
@@ -72,6 +72,6 @@ All_join <- full_join(CH4_NH3_pH_SO4_join, H2S_sel)
 ##Write Data
 ```{r}
 
-write.csv(All_join, paste0("CO2xN_Porewater_", year, ".csv"),row.names = FALSE)
+write.csv(All_join, paste0("CO2xCOMM_Porewater_", year, ".csv"),row.names = FALSE)
 
 ```
