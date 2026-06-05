@@ -1,5 +1,5 @@
 ---
-title: "GCReW_CO2xN_Porewater_Collation"
+title: "GCReW_CO2xComm_Porewater_Collation"
 output: html_document
 date: "2026-01-28"
 ---
@@ -18,7 +18,7 @@ library(tidyverse)
 
 year <- "2025"
 
-path <- "CO2xN_Porewater_"
+path <- "CO2xComm_Porewater_"
 
 CH4_dat <- read.csv(here("..", "GCREW","CO2xN", "Porewater", "CH4", year, "Compiled_Data", paste0(path, "CH4_", year, ".csv")))
   

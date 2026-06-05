@@ -1,5 +1,5 @@
 ---
-title: "SMARTX: Porewater pH"
+title: "CO2xComm: Porewater pH"
 author: "May 2025 Samples"
 date: "`r Sys.Date()`"
 output: 
@@ -71,28 +71,40 @@ pacman::p_load(
 ```
 
 ##Read in metadata and create similar sample IDs for matching to samples 
-##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in metadata
-
+#read in the raw metadata file 
 raw_metadata <- read.csv(Raw_Metadata)
+
 #clean up columns in metadata file:
-#Pull out only 1 Meter Rows
-#Create a Sample_Name column to match the SEAL
+  #Pullout only 1M files
 metadata <- raw_metadata %>%
-  filter(grepl("1-Meter", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("CO2xComm", Experiment, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-  rename(
+    rename(
     Sample_ID = Sample.ID,
-    Plot_Name = Plot,
-  )
+    Plot_Name = Chamber.Plot.Name, 
+    CO2_Treatment = CO2.Treatment, 
+    N_Treatment = N.Treatment,
+    Temp_Treatment = Temp.Treatment
+  ) %>%
+  select(-Temp_Treatment)
 
-#Bring in the collection date and any field notes if relevant
+#Bring in the collection date and any field notes if relevant 
 #collection_metadata <- read.csv(Collection_Dates)
-#then we will merge the collection date for project based on the project and the chambers
+  #then we will merge the collection date for SMARTX based on the project and the chambers 
+
+#create a column for C3 or C4 plants 
+metadata <- metadata %>%
+  mutate(
+    Community = case_when(
+      startsWith(as.character(Plot_Name), "SP") ~ "Spartina",
+      startsWith(as.character(Plot_Name), "SC") ~ "Scirpus",
+      TRUE ~ NA_character_  # if other values exist
+    )
+  )
 
 ```
 

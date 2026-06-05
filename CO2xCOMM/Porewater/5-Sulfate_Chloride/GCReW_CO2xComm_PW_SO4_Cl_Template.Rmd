@@ -52,7 +52,6 @@ lapply(c(
   processed_file_name = "Processed Data/GCReW_CO2xCOMM_PW_Processed_Cl_SO4_202407.csv" 
 
 ###### Log Files - PLEASE CHECK 
-#downloaded metadata csv - downloaded from Google drive as csv for this year
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
@@ -116,41 +115,26 @@ Dilution = 100
 raw_metadata <- read.csv(Raw_Metadata)
 
 #clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
-dionex_metadata <- raw_metadata %>%
-  filter(grepl(Project_name, Project, ignore.case = TRUE)) %>%
-  mutate(Sample.ID = gsub("-", "_", Sample.ID)) %>% 
-  mutate(Cl_SO4_ID = paste0(Sample.ID, "_", sample_month, "_", sample_year)) %>%
+  #Pullout only 1M files
+metadata <- raw_metadata %>%
+  filter(grepl("CO2xComm", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-  select(-N_Treatment)
-
-#create a column for C3 or C4 plants 
-#metadata <- metadata %>%
-#  mutate(
-#    Nickname = case_when(
-#      startsWith(as.character(Plot), "3") ~ "C3",
-#      startsWith(as.character(Plot), "6") ~ "C3",
-#      startsWith(as.character(Plot), "4") ~ "C4",
-#      TRUE ~ NA_character_  # if other values exist
- #   )
-#  )
-
-#create a column for dominant plant communities  
-#metadata <- metadata %>%
-#  mutate(
- #   Community = case_when(
- #     startsWith(as.character(Plot), "3") ~ "SCAM",
-  #    startsWith(as.character(Plot), "6") ~ "SCAM",
-#      startsWith(as.character(Plot), "4") ~ "SPPA, DISP",
-  #    TRUE ~ NA_character_  # if other values exist
- #   )
- # )
+    dplyr::select(
+    Plot,
+    Project,
+    Site,
+    Nickname,
+    Sample_Name,
+    Depth_cm,
+    Community,
+    CO2_Treatment
+  )
 
 #Bring in the collection date and any field notes if relevant 
 #collection_metadata <- read.csv(Collection_Dates)
-  #then we will merge the collection date for SMARTX based on the project and the chambers 
+
 
 ```
 
@@ -1025,7 +1009,7 @@ colnames(final_data)
 final_data <- final_data %>%
   select(
          Site, Project, Year, Month, 
-         Community, Nickname, Plot, Depth_cm, CO2_Treatment, Temp_Treatment, 
+         Community, Nickname, Plot, Depth_cm, CO2_Treatment, 
          SO4_Conc_mM, SO4_Conc_flag, SO4_QAQC_flag, Cl_Conc_mM, Cl_Conc_flag, Cl_QAQC_flag, salinity,
          Analysis_rundate,  Run_notes
         # list columns in the order you want them
@@ -1039,7 +1023,7 @@ head(final_data)
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia 
+### Sulfate
 SO4_forplot <- final_data
 
 #need to work out how best to plot these data 
@@ -1175,7 +1159,7 @@ viz_SO4_plot_2
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia 
+### Chloride
 Cl_forplot <- final_data
 
 #need to work out how best to plot these data 

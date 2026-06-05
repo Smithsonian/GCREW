@@ -134,36 +134,33 @@ sigdigs <- 3
 
 ```
 
-
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
 
-#read in metadata
-
+#read in the raw metadata file 
 raw_metadata <- read.csv(Raw_Metadata)
+
 #clean up columns in metadata file:
+  #Pullout only 1M files
 metadata <- raw_metadata %>%
-  filter(grepl("1-Meter", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("CO2xComm", Project, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-  rename(
-    Sample_ID = Sample.ID,
-    Plot_Name = Plot,
-  ) %>%
-  dplyr::select(-Temp_Treatment) %>%
-  mutate(Treatment = ifelse(
-    CO2_Treatment == "Elevated" &
-      N_Treatment == "Amended",
-    "eCO2_N",
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Ambient",
-      "eCO2",
-      ifelse(CO2_Treatment == "Ambient" &
-               N_Treatment == "Amended"  , "N" , "Ambient")
-    )
-  )) 
+    dplyr::select(
+    Plot,
+    Project,
+    Site,
+    Nickname,
+    Sample_Name,
+    Depth_cm,
+    Community,
+    CO2_Treatment
+  )
+
+#Bring in the collection date and any field notes if relevant 
+#collection_metadata <- read.csv(Collection_Dates)
+
 
 ```
 
@@ -1121,10 +1118,9 @@ df_all_clean_cols <- df_all_clean %>%
     Month,
     Community,
     Nickname,
-    Plot_Name,
+    Plot,
     Depth_cm,
     CO2_Treatment,
-    N_Treatment,
     Conc,
     Conc_Flag,
     CV_Flag,
@@ -1141,7 +1137,6 @@ org_labeled_fin_data <- final_data_labeled %>%
   rename(
     H2S_Conc_uM = Conc,
     H2S_Conc_Flag = Conc_Flag,
-    Plot = Plot_Name,
     H2S_CV_Flag = CV_Flag
   )
 
@@ -1157,7 +1152,6 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Plot,
     Depth_cm,
     CO2_Treatment,
-    N_Treatment,
     H2S_Conc_uM,
     H2S_Conc_Flag,
     H2S_CV_Flag,
@@ -1174,10 +1168,8 @@ All_Clean_Data <- org_labeled_fin_data %>%
 ```{r Visualize Data, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia 
 H2S_forplot <- All_Clean_Data
 
-#need to work out how best to plot these data 
 
  H2S_forplot <- H2S_forplot %>%
   mutate(Treatment = ifelse(
@@ -1232,7 +1224,7 @@ viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "H2S (uM)",
-       title = "CO2xCOMM: Porewater Methane",
+       title = "CO2xCOMM: Porewater Sulfide",
        fill = "CO2 Treatment:",
        color = "Community:") +
   theme(legend.position = "right") +
@@ -1250,6 +1242,7 @@ print(viz_H2S_plot2)
 
 
 ```
+
 ```{r, echo = FALSE}
 #ensure points are in correct order
 H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
