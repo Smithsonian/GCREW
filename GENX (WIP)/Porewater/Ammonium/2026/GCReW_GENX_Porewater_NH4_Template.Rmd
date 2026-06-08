@@ -211,7 +211,7 @@ Slope_raw_list <- map(
  Slope_Std_Crvs <- Slope_raw %>% 
    dplyr::select(Run_Date, R2, Slope, Intercept, Test) %>% 
    distinct() %>% 
-   mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Pass", "R2_Fail"))
+   mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Pass - PROCEED", "R2_Fail - REASSESS"))
 
  #join standard curve CVs and regression values
  
@@ -791,7 +791,7 @@ Flags_6 <- left_join(Flags_5, Dup_Flags_join, by = join_by(Test, Run_Date) )
   
 Flags_joined <- left_join(Flags_6, Matrix_Flags_join, by = join_by(Test, Run_Date) )
 
-Flags_Bad <- Flags_joined %>% mutate(across(!1:2, \(x) ifelse(x %ilike% "PROCEED" | x %ilike% "PASS" | x %ilike% "NA" | is.na(x), "", x))) %>% distinct()
+Flags_Bad <- Flags_joined %>% mutate(across(!1:2, \(x) ifelse(x %ilike% "PROCEED" | x %ilike% "NA" | is.na(x), "", x))) %>% distinct()
 
 Flags_Fin <- Flags_Bad %>% mutate(QAQC_Flag = paste0(R2_Flag, PE_Flag, CHK_Flag, BLK_Pct_Flag, Dup_Flags, Spike_Flags, Matrix_Flags)) %>% dplyr::select(Test, Run_Date, QAQC_Flag)
 ```
@@ -871,7 +871,6 @@ df_all_clean <- merged_data
 ```
 
 \newpage
-
 ## Visualize Data
 ```{r Visualize Data, fig.height=10, echo=FALSE}
 cat("Visualize Data")
@@ -887,56 +886,43 @@ NH4_forplot <- NH4_forplot %>%
   group_by(Depth_cm) %>%
   mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
   ungroup() %>%
-  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Treatment = factor(Treatment, levels = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")))
+  mutate(Treatment = paste0("+", Temp_Treatment, " " ,"C")) %>% mutate(Chamber = factor(Plot, levels = c(
+      "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
 
 #create plot
-viz_NH4_plot <- ggplot(data = NH4_forplot, aes(
-  x = as.factor(Temp_Treatment),
-  y = Conc,
-  fill = as.factor(Treatment)
+viz_NH4_plot <- ggplot(data = Conc_forplot, aes(
+  x = as.factor(Chamber),
+  y = NH4,
+  fill = as.factor(Chamber)
 )) +
   geom_col(stat = "identity", 
-           position = position_dodge2(padding = 0.25, 
-                                      width = 1.5, 
+           position = position_dodge2(padding = 0.1, 
+                                      width = 0.5, 
                                       preserve =  "single" )) +
-  facet_grid(as.numeric(Depth_cm) ~ ., 
+  facet_grid(Depth ~ ., 
              scales = "free_x") +
   scale_fill_manual(
     breaks = c(
-      "+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C"),
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
     values = c(
-      "+0 C" = "#fc9ca2",
-      "+0.75 C" = "#fb747d",
-      "+1.5 C" = "#fa4c58",
-    "+2.25 C" = "#f92432",
-    "+3 C" = "#e30613",
-    "+3.75 C" = "#c70512",
-    "+4.5 C" = "#9f040e",
-    "+5.25 C" = "#77030b",
-    "+6 C" = "#500207"),
-    name = "Treatment:",
+       "Ch1" = "blue4",
+       "Ch2" = "blue3",
+       "Ch3" = "turquoise4",
+       "Ch4" = "lightseagreen",
+       "Ch5" = "mediumseagreen",
+       "Ch6" = "limegreen",
+       "Ch7" = "yellowgreen",
+       "Ch8" = "yellow2",
+       "Ch9" = "darkgoldenrod2",
+       "Ch10" = "darkorange2",
+       "Ch11" = "orangered1",
+       "Ch12" = "red2"),
+    name = "Chamber:"
   ) +
   theme_classic() +
   labs(
     x = " ",
-    y = "NH4 Concentration",
+    y = "NH4",
     title = "GENX: Porewater NH4"
   ) +
   theme(legend.position = "right") +
@@ -947,7 +933,8 @@ viz_NH4_plot <- ggplot(data = NH4_forplot, aes(
       color = "black",
       fill = NA,
       linewidth = 0.8),
-      legend.key = element_rect("black")
+      legend.key = element_rect("black"),
+    legend.position = "none"
     ) + 
   coord_flip(ylim = c(5.5,7.1))
 print(viz_NH4_plot)
@@ -960,47 +947,62 @@ print(viz_NH4_plot)
 
 #get replicate value and treatment info
 NH4_forplot <- NH4_forplot %>%
-  mutate(Replicate = case_when(
-    Plot == "Ch1" ~ "1",
-    Plot == "Ch2" ~ "2",
-    Plot == "Ch3" ~ "1",
-    Plot == "Ch4" ~ "1",
-    Plot == "Ch5" ~ "1",
-    Plot == "Ch6" ~ "2",
-    Plot == "Ch7" ~ "1",
-    Plot == "Ch8" ~ "1",
-    Plot == "Ch9" ~ "2",
-    Plot == "Ch10" ~ "1",
-    Plot == "Ch11" ~ "1",
-    Plot == "Ch12" ~ "1",
+  mutate(Chamber = case_when(
+    Plot == "Ch1"  ~ "Chamber 1",
+    Plot == "Ch2"  ~ "Chamber 2",
+    Plot == "Ch3"  ~ "Chamber 3",
+    Plot == "Ch4"  ~ "Chamber 4",
+    Plot == "Ch5"  ~ "Chamber 5",
+    Plot == "Ch6"  ~ "Chamber 6",
+    Plot == "Ch7"  ~ "Chamber 7",
+    Plot == "Ch8"  ~ "Chamber 8",
+    Plot == "Ch9"  ~ "Chamber 9",
+    Plot == "Ch10"  ~ "Chamber 10",
+    Plot == "Ch11"  ~ "Chamber 11",
+    Plot == "Ch12"  ~ "Chamber 12"
     
     
   )
-           )
+           ) %>% mutate(Chamber = factor(levels = c(
+             "Chamber 1",
+             "Chamber 2",
+             "Chamber 3",
+             "Chamber 4",
+             "Chamber 5",
+             "Chamber 6",
+             "Chamber 7",
+             "Chamber 8",
+             "Chamber 9",
+             "Chamber 10",
+             "Chamber 11",
+             "Chamber 12"
+           ), Chamber))
 
 #make plot
 viz_NH4_plot_2 <- ggplot(data = NH4_forplot, 
-                            aes(x = Conc, y = Depth_cm, color = Replicate)) +
+                            aes(x = Conc, y = Depth_cm, color = Chamber)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
-  scale_color_manual(values = c(
-    "1" = "#FFD500",
-    "2" = "#00D0FF"
-  )) +
-  facet_grid(factor(
-    Treatment,
-    levels = c("+0 C",
-      "+0.75 C",
-      "+1.5 C",
-    "+2.25 C",
-    "+3 C",
-    "+3.75 C",
-    "+4.5 C",
-    "+5.25 C",
-    "+6 C")) ~ ., scales = "free_x") +
-  labs(x = "NH4 Concentration", 
+  scale_color_manual(breaks = c(
+       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"),
+    values = c(
+       "Chamber 1" = "blue4",
+       "Chamber 2" = "blue3",
+       "Chamber 3" = "turquoise4",
+       "Chamber 4" = "lightseagreen",
+       "Chamber 5" = "mediumseagreen",
+       "Chamber 6" = "limegreen",
+       "Chamber 7" = "yellowgreen",
+       "Chamber 8" = "yellow2",
+       "Chamber 9" = "darkgoldenrod2",
+       "Chamber 10" = "darkorange2",
+       "Chamber 11" = "orangered1",
+       "Chamber 12" = "red2"),
+    name = "Chamber:") +
+  facet_wrap(~Chamber, ncol = 3, nrow = 4, scales = "free_x") +
+  labs(x = "NH4", 
        y = "Depth (cm)", 
-       title = "GENX: Porewater NH4 by Replicate") +
+       title = "GENX: Porewater NH4 by Chamber") +
   scale_y_reverse(breaks = c(5, 20, 40, 80),
                   limits = c(85, 0)) +
   xlim(5.7, 7.1) +
@@ -1010,15 +1012,14 @@ viz_NH4_plot_2 <- ggplot(data = NH4_forplot,
     panel.border = element_rect(
       color = "black",
       fill = NA,
-      linewidth = 0.8
-    )
+      linewidth = 0.8),
+      legend.position = "none"
+    
   )
 
 viz_NH4_plot_2
 
 ```
-
-
 
 
 ## Organize

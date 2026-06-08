@@ -1,0 +1,66 @@
+---
+title: "4-CO2xN Total Derived Biomass 2005-2025"
+output: html_document
+date: "2026-01-07"
+---
+
+```{r}
+
+# This program reads two files that contain the biomass and density of the all plant species in the elevated CO2 x Nitrogen experiment. It reports annual total aboveground biomass for the sedge Schoenoplectus americanus (formerly Scirpus olneyi), the grasses Spartina patens and Distichlis spicata.
+# All data are in grams per m2
+
+# Updated 2/14/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+year=2025
+previous_year=2024
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import Sedge data
+Sedge_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-CO2xN Sedge Shoot Biomass 2005-',year,'.csv'))
+
+#Filter out current year
+Sedge <- Sedge_allyears[Sedge_allyears$Year == year,]
+
+# Sort Sedge data
+Sedge <- Sedge %>% arrange(Year, Chamber, CO2, Nitrogen, Treatment)
+
+# Import NonSedge data
+NonSedge_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/2-CO2xN Non-Sedge Shoot Biomass 2005-',year,'.csv'))
+
+#Filter out current year
+NonSedge <- NonSedge_allyears[NonSedge_allyears$Year == year,]
+
+# Sort NonSedge data
+NonSedge <- NonSedge %>% arrange(Year, Chamber, CO2, Nitrogen, Treatment)
+
+# Merge data
+MergeData <- full_join(Sedge, NonSedge, by = c("Year", "Chamber", "CO2", "Nitrogen", "Treatment"))
+
+# Create AllShoots data
+AllShoots <- MergeData %>%
+  select(Year, Chamber, CO2, Nitrogen, Treatment, SCmass_m2, SCdensity_m2, SPmass_m2, SPdensity_m2, DImass_m2, DIdensity_m2, LitterMass_m2)
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/4-CO2xN Total Shoot Biomass 2005-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+AllShoots_allyears <- rbind(past_years, AllShoots)
+
+# Export AllShoots data
+write.csv(AllShoots_allyears, paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/4-CO2xN Total Shoot Biomass 2005-',year,'.csv'), row.names = FALSE)
+
+```
+

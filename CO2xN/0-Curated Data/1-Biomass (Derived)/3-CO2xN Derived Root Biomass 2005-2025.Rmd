@@ -1,0 +1,90 @@
+---
+title: "3-CO2xN Derived Root Biomass 2005-2025"
+output: html_document
+date: "2026-05-04"
+---
+
+```{r}
+
+# This program calculates the annual production of below ground biomass as measured by ingrowth cores. They are from an experiment that began in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from the belowground production that was measured by implanting bags filled with commercial sedge peat into three locations per chamber each year in November, and recovering them one year later. Each bag is 26 cm2 and 40 cm dept. Sample processing has varied over the years, with recovered belowground biomass being separated into fine roots, coarse roots, C3 rhizomes, C4 rhizomes. Contact Pat Megonigal for details.
+
+# Updated 2/14/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+previous_year=2024
+year=2025
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import the CSV file
+rootbiomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/5-Root Ingrowth Data/CO2xN Master Root Ingrowth 2005-',year,' (published 05-04-2026).csv'))
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+rootbiomass <- rootbiomass_allyears[rootbiomass_allyears$Year == year,]
+
+# Clean and transform the data
+rootdata <- rootbiomass %>%
+  mutate(
+    # Replace -99 with NA
+    RootMass = ifelse(RootMass == -99, NA, RootMass),
+    CoarseRootMass = ifelse(CoarseRootMass == -99, NA, CoarseRootMass),
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    RootLitterMass = ifelse(RootLitterMass == -99, NA, RootLitterMass),
+    # Convert masses to per square meter (m2)
+    RootMass_m2 = (RootMass / 25.5176) * 10000,
+    CoarseRootMass_m2 = (CoarseRootMass / 25.5176) * 10000,
+    C3RhizMass_m2 = (C3RhizMass / 25.5176) * 10000,
+    C4RhizMass_m2 = (C4RhizMass / 25.5176) * 10000,
+    RootLitterMass_m2 = (RootLitterMass / 25.5176) * 10000,
+    # Calculate Total Belowground Mass
+    TotalBelowMass_m2 = RootMass_m2 + C3RhizMass_m2 + C4RhizMass_m2 ) 
+
+
+# Calculate mean for each group
+root_means <- rootdata %>%
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment) %>%
+  summarise(
+    RootMass_m2 = mean(RootMass_m2, na.rm = TRUE),
+    CoarseRootMass_m2 = mean(CoarseRootMass_m2, na.rm = TRUE),
+    C3RhizMass_m2 = mean(C3RhizMass_m2, na.rm = TRUE),
+    C4RhizMass_m2 = mean(C4RhizMass_m2, na.rm = TRUE),
+    TotalBelowMass_m2 = mean(TotalBelowMass_m2, na.rm = TRUE),
+    RootLitterMass_m2 = mean(RootLitterMass_m2, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+# Create ROOTBIOtype dataset, filtering out the year 2005 and replacing NAs with -99
+ROOTBIOtype <- root_means %>%
+  mutate(
+    RootMass_m2 = ifelse(is.na(RootMass_m2), -99, RootMass_m2),
+    CoarseRootMass_m2 = ifelse(is.na(CoarseRootMass_m2), -99, CoarseRootMass_m2),
+    C3RhizMass_m2 = ifelse(is.na(C3RhizMass_m2), -99, C3RhizMass_m2),
+    C4RhizMass_m2 = ifelse(is.na(C4RhizMass_m2), -99, C4RhizMass_m2),
+    TotalBelowMass_m2 = ifelse(is.na(TotalBelowMass_m2), -99, TotalBelowMass_m2),
+    RootLitterMass_m2 = ifelse(is.na(RootLitterMass_m2), -99, RootLitterMass_m2)
+  )
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xN Root Biomass by Category 2006-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+TOTALroot_allyears <- rbind(past_years, ROOTBIOtype)
+
+# Export ROOTBIOtype to a CSV file
+write.csv(TOTALroot_allyears, paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xN Root Biomass by Category 2006-',year,'.csv'), row.names=FALSE)
+
+
+```
+
