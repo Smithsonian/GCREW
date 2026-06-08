@@ -1,0 +1,257 @@
+---
+title: "1-PhragCensusQAQC"
+output: html_document
+date: "2025-11-20"
+---
+
+```{r}
+######################################################################################
+############ PROGRAMS FOR ERROR CHECKING AND TRANSFERRING CENSUS DATA ###########
+######################################################################################
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+library(dplyr)
+# These lines of code download any required packages for the code to function.
+
+# set year
+year=2025
+
+```
+
+```{r}
+######################################################################################
+############ STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA #############
+######################################################################################
+
+#PHRAG ONLY CENSUS DATA#
+
+# Read in Census data 
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/1-Phrag CO2xN Phrag Census (Filled).csv')) %>%
+  select(- Notes)
+
+#Select columns being checked for values
+columns_to_check <- c("Total_Height", "Width", "Herbivory", "Cut_Stem")
+
+Census_filtered <- Census_data %>%
+  mutate(
+    Width = as.numeric(Width),
+    Total_Height = as.numeric(Total_Height)
+  ) %>%
+  filter(if_any(all_of(columns_to_check), ~ . != 0))
+  
+# Data cleaning and flagging
+CensusQAQC <- Census_filtered %>%
+  mutate(HFlag = ifelse(Total_Height > 500 | (Total_Height < 10 & Total_Height > 0), 1, 0),
+         WFlag = ifelse(!is.na(Total_Height) & Total_Height >= 200 & (Width > 10.5 | Width < 0.2), 1, 0),
+         ZFlag = ifelse(is.na(Total_Height) | is.na(Width), 1, 0)) %>%
+  subset(HFlag != 0 | WFlag != 0 | ZFlag != 0)
+
+# Export the error report
+write.csv(CensusQAQC, paste0( 'S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/1-PhragCensusQAQC Error Report.csv'), row.names = FALSE)
+
+```
+
+
+```{r}
+############################################################################
+############ STEP 2 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ############
+############################################################################
+
+#PHRAG ONLY CENSUS DATA#
+
+# Importing the Census dataset
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/1-Phrag CO2xN Phrag Census (Filled).csv'))%>%
+  select(-Notes)
+
+#Select columns being checked for values
+columns_to_check <- c("Total_Height", "Width", "Herbivory", "Cut_Stem")
+
+# Remove rows where all specified columns contain zeros
+Census <- Census_data %>%
+  filter(rowSums(select(., all_of(columns_to_check)) != 0) > 0) %>%
+select(-starts_with("X"))
+
+# Creating CensusTransfer dataset
+CensusTransfer <- Census %>%
+  mutate(
+    Flower = -99,
+    Cut_Stem = ifelse(Cut_Stem == "Y", "F", Cut_Stem),
+    Cut_Stem = ifelse(Cut_Stem == "0", "-99", Cut_Stem))
+
+# Exporting the CensusTransfer dataset
+write.csv(CensusTransfer, paste0( 'S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/1-PhragCensusQAQC (for_transfer).csv'), row.names = FALSE)
+
+```
+
+```{r}
+######################################################################################
+############ STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA #############
+######################################################################################
+
+#SCAM ONLY CENSUS DATA#
+
+# Read in Census data 
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/2-Phrag CO2xN SCAM Census (Filled).csv'))
+
+
+# Replace -99 with 0 in the entire dataset
+Census_data <- Census_data %>%
+  mutate(across(everything(), ~ ifelse(. == -99, 0, .))) %>%
+  mutate(Green_Height = as.numeric(Green_Height))
+
+#Select columns being checked for values
+columns_to_check <- c("Total_Height", "Green_Height", "Width")
+
+# Remove rows where all specified columns contain zeros
+Census <- Census_data %>%
+  filter(rowSums(select(., all_of(columns_to_check)) != 0) > 0)
+  
+# Data cleaning and flagging
+CensusQAQC <- Census %>%
+  mutate(HFlag = ifelse(Total_Height < Green_Height, 1, 0),
+         HFlag = ifelse(Total_Height > 223 | (Total_Height < 5 & Total_Height > 0), 1, HFlag),
+         WFlag = ifelse(Width > 8.4 | (Width < 0.2 & Width > 0), 1, 0),
+         ZFlag = ifelse(is.na(Total_Height) | is.na(Green_Height) | is.na(Width), 1, 0)) %>%
+  subset(HFlag != 0 | WFlag != 0 | ZFlag != 0)
+
+# Export the error report
+write.csv(CensusQAQC, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/2-SCAMCensusQAQC Error Report.csv'), row.names = FALSE)
+
+```
+
+```{r}
+############################################################################
+############ STEP 2 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ############
+############################################################################
+
+#SCAM ONLY CENSUS DATA#
+
+# Importing the Census dataset
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/2-Phrag CO2xN SCAM Census (Filled).csv'))
+
+# Replace -99 with 0 in the entire dataset
+Census_data <- Census_data %>%
+  mutate(across(everything(), ~ ifelse(. == -99, 0, .))) %>%
+  mutate(Green_Height = as.numeric(Green_Height))
+
+value_cols <- c("Total_Height", "Green_Height", "Width")
+numeric_cols <- value_cols  # numeric columns to fill with -99 for Count != 1
+
+CensusTransfer <- Census_data %>%
+  filter(
+    (Count == 1 & rowSums(across(all_of(value_cols), ~ !is.na(.) & . != 0)) > 0) |
+    (Count > 1)
+  ) %>%
+  
+  mutate(Flower = "-99") %>%
+  mutate(across(all_of(numeric_cols), ~ if_else(Count != 1, -99, .))) %>%
+  mutate(Cut_Stem = if_else(
+    Count != 1,
+    "-99",
+    case_when(
+      is.na(Cut_Stem) | Cut_Stem == 0 | Cut_Stem == "0" ~ "N",
+      Cut_Stem == 1 | Cut_Stem == "Y"                     ~ "F",
+      TRUE                                                ~ as.character(Cut_Stem)
+    )
+  )) %>%
+  
+  # Step 5: Move Flower before Cut_Stem
+  relocate(Flower, .before = Cut_Stem)
+
+# Exporting the CensusTransfer dataset
+write.csv(CensusTransfer, paste0( 'S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/2-SCAMCensusQAQC (for_transfer).csv'), row.names = FALSE)
+
+
+```
+
+
+
+```{r}
+######################################################################################
+############ STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA #############
+######################################################################################
+
+#OTHER SPECIES ONLY CENSUS DATA#
+
+# Read in Census data 
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/3-Phrag CO2xN Other Species Census (Filled).csv'))%>%
+  select(-Notes)
+
+# Replace -99 with 0 in the entire dataset
+Census_data <- Census_data %>%
+  mutate(across(everything(), ~ ifelse(. == -99, 0, .)))
+
+#Select columns being checked for values
+columns_to_check <- c("Total_Height", "Width", "Flower", "Herbivory", "Cut_Stem")
+
+# Remove rows where all specified columns contain zeros
+Census <- Census_data %>%
+  filter(rowSums(select(., all_of(columns_to_check)) != 0) > 0)
+  
+# Data cleaning and flagging
+CensusQAQC <- Census %>%
+  mutate(HFlag = ifelse(Total_Height > 500 | (Total_Height < 8 & Total_Height > 0), 1, 0),
+         WFlag = ifelse(Width > 22 | (Width < 0.2 & Width > 0), 1, 0),
+         ZFlag = ifelse(is.na(Total_Height) | is.na(Width), 1, 0)) %>%
+  subset(HFlag != 0 | WFlag != 0 | ZFlag != 0)
+
+# Export the error report
+write.csv(CensusQAQC, paste0( 'S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/3-OTHERSPPCensusQAQC Error Report.csv'), row.names = FALSE)
+
+```
+
+
+```{r}
+############################################################################
+############ STEP 2 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ############
+############################################################################
+
+#OTHER SPECIES ONLY CENSUS DATA#
+
+# Importing the Census dataset
+Census_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/3-Phrag CO2xN Other Species Census (Filled).csv'))%>%
+  select(-Notes)
+
+# Replace -99 with 0 in the entire dataset
+Census_data <- Census_data %>%
+  mutate(across(everything(), ~ ifelse(. == -99, 0, .)))
+
+#Select columns being checked for values
+columns_to_check <- c("Total_Height", "Width", "Herbivory", "Cut_Stem")
+
+# Remove rows where all specified columns contain zeros
+CensusTransfer <- Census_data %>%
+  filter(rowSums(select(., all_of(columns_to_check)) != 0) > 0) %>%
+  mutate(
+    Cut_Stem = case_when(
+      is.na(Cut_Stem) | Cut_Stem == 0 | Cut_Stem == "0" ~ "N",
+      Cut_Stem == 1 | Cut_Stem == "1"                   ~ "F",
+      Cut_Stem == "C"                                   ~ "C",
+      TRUE                                              ~ as.character(Cut_Stem)
+    )
+  )
+
+CensusTransfer <- CensusTransfer %>%
+  mutate(
+    Flower = -99,
+    Herbivory = as.numeric(-99)
+  ) %>%
+  relocate(Flower, .before = Cut_Stem)
+
+
+final_columns <- c("Year", "Chamber", "In_Out", "CO2", "Nitrogen", "Treatment", 
+                   "Column", "Row", "Species", "Count", "Total_Height", "Width", 
+                   "Flower", "Herbivory", "Cut_Stem")
+
+CensusTransfer <- CensusTransfer %>%
+  select(all_of(final_columns))
+
+
+
+# Exporting the CensusTransfer dataset
+write.csv(CensusTransfer, paste0( 'S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant Biomass & CN Data/Shoot Biomass Data/',year,'/Data/3-OTHERSPPCensusQAQC (for_transfer).csv'), row.names = FALSE)
+
+```
