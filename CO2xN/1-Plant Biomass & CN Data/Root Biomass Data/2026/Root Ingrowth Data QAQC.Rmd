@@ -1,0 +1,65 @@
+---
+title: "RootQAQC - CO2xN"
+output: html_document
+date: "2026-05-04"
+---
+
+```{r}
+###############################################################################
+################ PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ###############
+###############################################################################
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year
+year=2025
+
+```
+
+```{r}
+
+#################################################################################
+########### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ###############
+#################################################################################
+
+# Read in Root Ingrowth data 
+Root <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN Data/Root Biomass Data/',year,'/CO2xN Root Ingrowth Data (Filled).csv'))
+
+RootQAQC <- Root %>%
+  mutate(
+    Root_Mass = ifelse(Root_Mass == -99, NA, Root_Mass),
+    C3_Rhiz_Mass = ifelse(C3_Rhiz_Mass == -99, NA, C3_Rhiz_Mass),
+    C4_Rhiz_Mass = ifelse(C4_Rhiz_Mass == -99, NA, C4_Rhiz_Mass)
+  ) %>%
+# Any -99 value is converted into NA.
+  mutate(
+    RFlag = ifelse(Root_Mass > 4.38, 1,0),
+    C3RFlag = ifelse(C3_Rhiz_Mass > 7.37, 1,0),
+    C4RFlag = ifelse(C4_Rhiz_Mass > 1.37, 1,0)
+# This is a rare category so any entries should be double checked
+  ) %>%
+# Assign Error Flags
+  filter(RFlag == 1 | C3RFlag == 1 | C4RFlag == 1)
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(RootQAQC, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN Data/Root Biomass Data/',year,'/',year,' Root Ingrowth Data QAQC.csv'))
+# Exports the RootQAQC.csv to the Shared drive.
+
+```
+
+```{r}
+
+#################################################################################
+########### STEP 2 -- GENERATE ROOT INGROWTH OUTPUT FILE FOR TRANSFER ###############
+#################################################################################
+
+Root_transfer <- Root
+
+write.csv(Root_transfer, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN Data/Root Biomass Data/',year,'/Root Ingrowth Data (for transfer).csv'))
+# Export the Root Ingrowth (For Transfer).csv to shared drive.
+
+```
