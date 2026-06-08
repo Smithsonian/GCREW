@@ -1,0 +1,73 @@
+---
+title: "RootQAQC"
+output: html_document
+date: "2026-05-04"
+---
+
+
+```{r}
+##############################################################################
+############### PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ###############
+##############################################################################
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year
+year=2025
+
+```
+
+
+```{r}
+#################################################################################
+####### STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING ROOT INGROWTH DATA ######
+#################################################################################
+
+# Read in Root Ingrowth data 
+root <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant biomass & CN data/Root Biomass Data/',year,'/Phrag Root Ingrowth Data (Filled).csv'))
+  
+
+root_qaqc <- root %>%
+  mutate(
+    RootMass = ifelse(RootMass == -99, NA, RootMass),
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    PhragRhizMass = ifelse(PhragRhizMass == -99, NA, PhragRhizMass),
+    OtherMass = ifelse(OtherMass == -99, MA, OtherMass)
+  ) %>%
+# Any -99 value is converted into NA.
+  mutate(
+    FRFlag = ifelse(RootMass > 4.38, 1,0),
+    C3RFlag = ifelse(C3RhizMass > 7.37, 1,0),
+    C4RFlag = ifelse(C4RhizMass > 1.37, 1,0),
+    PRFlag = ifelse(PhragRhizMass > 5.0, 1,0),
+    OFlag = ifelse(OtherMass > 1.0, 1,0)
+# This is a rare category so any entries should be double checked
+  ) %>%
+# Assign Error Flags
+  filter(FRFlag == 1 | C3RFlag == 1 | C4RFlag == 1 | PRFlag == 1 | OFlag == 1)
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(root_qaqc, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant biomass & CN data/Root Biomass Data/',year,'/RootQAQC.csv'), row.names = FALSE)
+# Exports the RootQAQC.csv to the Shared drive.
+
+```
+
+```{r}
+#################################################################################
+########### STEP 2 -- GENERATE ROOT INGROWTH OUTPUT FILE FOR TRANSFER ###########
+#################################################################################
+
+root[is.na(root)] <- 0
+
+root_transfer <- root
+
+write.csv(root_transfer, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/1-Plant biomass & CN data/Root Biomass Data/',year,'/Phragmites Root Ingrowth Data (For Transfer).csv'), row.names = FALSE)
+# Export the SMARTX Root Ingrowth (For Transfer).csv to shared drive.
+
+```
+
