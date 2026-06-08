@@ -1,0 +1,102 @@
+---
+title: "3-SMARTX Derived Root Biomass 2016-2025"
+output: html_document
+date: "2026-05-04"
+---
+
+```{r}
+# This program calculates the annual production of belowground biomass as measured by ingrowth cores. They are from an experiment that began in 2016 with a combination of whole-ecosystem warming and increased atmospheric CO2. The program ingests data from the belowground production that was measured by implanting bags filled with commericial sedge peat into three locations per chamber each year in November, and recovering them one year later. Each bag is 28.58 cm2 and 40 cm deep. Sample processing has varied over the years, with recoved belowground biomass being separated into fine roots, coarse roots, C3 rhizomes, C4 rhizomes. Contact Pat Megonigal for details.
+
+# Updated 3/14/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+previous_year=2024
+year=2025
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each year.
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import the CSV file
+Rootbiomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/4-SMARTX/0-Curated Data/5-Root Ingrowth Data/SMARTX Master Root Ingrowth 2016-',year,' (published 05-04-2026).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+Rootbiomass <- Rootbiomass_allyears[Rootbiomass_allyears$Year == year,]
+
+# Sort the data
+Rootbiomass <- Rootbiomass %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation, Core, CoreSection, CoreLength, N_Labeled)
+
+# Create the rootdata dataframe
+rootdata <- Rootbiomass %>%
+  mutate(
+    # Replace -99 with NA
+    RootMass = ifelse(RootMass == -99, NA, RootMass),
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    OtherRhizMass = ifelse(OtherRhizMass == -99, NA, OtherRhizMass),
+    # Convert masses to per square meter (m2)
+    RootMass_m2 = (as.numeric(RootMass) / 28.58) * 10000,
+    C3RhizMass_m2 = (as.numeric(C3RhizMass) / 28.58) * 10000,
+    C4RhizMass_m2 = (as.numeric(C4RhizMass) / 28.58) * 10000,
+    OtherRhizMass_m2 = (OtherRhizMass / 28.58) * 10000,
+    # Calculate Total Belowground Mass
+    TotalBelowMass_m2 = RootMass_m2 + C3RhizMass_m2 + C4RhizMass_m2 + OtherRhizMass_m2
+  )
+
+# Sort the rootdata dataframe
+rootdata <- rootdata %>%
+  arrange(Year, Plot, Temperature, CO2, Vegetation, Core, CoreSection, CoreLength, N_Labeled)
+
+# Combine Top and Bottom Core Sections
+ROOTdata <- rootdata %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation, Core) %>%
+  dplyr::summarize(
+    RootMass_m2 = sum(RootMass_m2),
+    C3RhizMass_m2 = sum(C3RhizMass_m2),
+    C4RhizMass_m2 = sum(C4RhizMass_m2),
+    OtherRhizMass_m2 = sum(OtherRhizMass_m2),
+    TotalBelowMass_m2 = sum(TotalBelowMass_m2)
+  )
+
+# Calculate the biomass in each year in each chamber
+ROOTdata <- ROOTdata %>%
+  group_by(Year, Plot, Temperature, CO2, Vegetation) %>%
+  dplyr::summarize(
+    RootMass_m2 = mean(RootMass_m2),
+    C3RhizMass_m2 = mean(C3RhizMass_m2),
+    C4RhizMass_m2 = mean(C4RhizMass_m2),
+    OtherRhizMass_m2 = mean(OtherRhizMass_m2),
+    TotalBelowMass_m2 = mean(TotalBelowMass_m2)
+  )
+
+# Replace missing values with 0
+ROOTBIOtype <- ROOTdata %>%
+  mutate(
+    RootMass_m2 = ifelse(is.na(RootMass_m2), 0, RootMass_m2),
+    C3RhizMass_m2 = ifelse(is.na(C3RhizMass_m2), 0, C3RhizMass_m2),
+    C4RhizMass_m2 = ifelse(is.na(C4RhizMass_m2), 0, C4RhizMass_m2),
+    OtherRhizMass_m2 = ifelse(is.na(OtherRhizMass_m2), 0, OtherRhizMass_m2),
+    TotalBelowMass_m2 = ifelse(is.na(TotalBelowMass_m2), 0, TotalBelowMass_m2)
+  )
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/4-SMARTX/0-Curated Data/1-Biomass (Derived)/3-SMARTX Root Biomass by Category 2016-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+TOTALroot_allyears <- rbind(past_years, ROOTBIOtype)
+
+# Export the ROOTBIOtype dataframe as a CSV file to S Drive 
+write.csv(TOTALroot_allyears, paste0('S:/Biogeochemistry/GCREW/4-SMARTX/0-Curated Data/1-Biomass (Derived)/3-SMARTX Root Biomass by Category 2016-',year,'.csv'), row.names=FALSE)
+
+```
+
