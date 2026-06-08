@@ -427,7 +427,7 @@ mean_slope_fin <- mean(stdcrv_filtered$Slope, na.rm = TRUE)
 mean_int_fin <- mean(stdcrv_filtered$Intercept, na.rm = TRUE)
 
 #Attach Slope and Intercept to Plates
-Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame()
+Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame() %>% distinct()
 
 std_curves <-  Std_crv_calc %>% dplyr::select(Plate, Curve_RMVD) %>% filter(Curve_RMVD != "RMVD") %>% distinct()
 

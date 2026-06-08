@@ -52,7 +52,7 @@ Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5")
+plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","rrPlate1","rrPlate2")
 
 folder_path_rawdata <- paste0("Raw Data")
 Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = "Plate")
@@ -62,10 +62,10 @@ head(Raw_plates)
 #Import Run Date for Each Plate for Std curve qaqc
 Run_dates <- tibble(
     Plate = plates,
-    Run_Date = c("05/18/2026","05/18/2026","05/18/2026","05/18/2026","05/19/2026")
+    Run_Date = c("05/18/2026","05/18/2026","05/18/2026","05/18/2026","05/19/2026","06/01/2026","06/01/2026")
   )
 
-  Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, format = "%m/%d/%Y"))
+  Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, tryFormats = c("%Y-%m-%d", "%m/%d/%Y", "%m/%d/%y")))
 
 # Define the file path for QAQC log file - NO Need to change just check year
 log_path <- "Processed Data/LTREB_2M_H2S_QAQC_2026.csv"
@@ -356,11 +356,11 @@ new_log_stds <- STD_run_date %>% dplyr::select(Plate,
 
 #read in log file and format
 log <- read.csv(log_path)
-log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%Y-%m-%d"), Run = "Past Runs")
+log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%Y-%m-%d", "%m/%d/%Y")), Run = "Past Runs")
 log_3 <- log_2[, -c(1)]
 log_4 <- rbind(log_3, new_log_stds)
 
-unique_log <- log_4 %>% distinct(.keep_all = TRUE)
+unique_log <- log_4 %>% distinct(Plate,Curve,R2,Slope,Intercept,.keep_all = TRUE)
 
 #Calculate Mean and SD and calculate 2SD range for slope and intercept
 mean_slope <- mean(unique_log$Slope, na.rm = TRUE)
@@ -432,19 +432,23 @@ stdcrv_tagged <- new_log_stds %>% mutate(
 
 #Calculate Combo Std Crv
 stdcrv_filtered <- stdcrv_tagged %>% filter(Date_Close == "Yes")
-
+stdcrv_filtered_no <- stdcrv_tagged %>% filter(Date_Close == "No")
 mean_slope_fin <- mean(stdcrv_filtered$Slope, na.rm = TRUE)
-  
+mean_slope_no <- mean(stdcrv_filtered_no$Slope, na.rm = TRUE)  
 mean_int_fin <- mean(stdcrv_filtered$Intercept, na.rm = TRUE)
+mean_int_no <- mean(stdcrv_filtered_no$Intercept, na.rm = TRUE)
 
 #Attach Slope and Intercept to Plates
-Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, Slope), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, Intercept)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame()
+Std_crv_calc <- stdcrv_tagged %>% mutate(Slope_Calc = ifelse(Date_Close == "Yes", mean_slope_fin, mean_slope_no), Int_Calc = ifelse(Date_Close == "Yes", mean_int_fin, mean_int_no)) %>% dplyr::select(Plate, Slope_Calc, Int_Calc, Curve_RMVD, Slope_Flag, Int_Flag) %>% as.data.frame()
 
 std_curves <-  Std_crv_calc %>% dplyr::select(Plate, Curve_RMVD) %>% filter(Curve_RMVD != "RMVD") %>% distinct()
 
 Curve_Flags <- Std_crv_calc %>% dplyr::select(Plate, Slope_Flag, Int_Flag) %>% distinct()
 
 Curve_Flags_forJoin <- Curve_Flags %>% mutate(Slope_Flag = ifelse(Slope_Flag %like% "Good", "", Slope_Flag), Int_Flag = ifelse(Int_Flag %like% "Good", "", Int_Flag)) 
+
+
+Std_crv_calc <-Std_crv_calc %>% distinct()
 ```
 
 ## Return Flags For Standard Curve
@@ -969,10 +973,10 @@ H2S_spls_md <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
   filter(!str_detect(IDs, "SPIKE"))
 
 #Check for reruns and replace
-H2S_spl_rrn <- H2S_spls_md %>%
-  filter(Plate %like% "rr") %>% 
-  dplyr::select(IDs, Mean_Conc, Conc_Flag) %>%
-  rename(RRN_Conc = Mean_Conc, Conc_Flag_rr = Conc_Flag) %>% 
+H2S_spl_rrn <- H2S_spls_md %>%group_by(IDs,Plate) %>%
+  filter(Plate %like% "rr") %>% ungroup() %>% 
+  dplyr::select(IDs, Mean_Conc, Conc_Flag, Dilution) %>%
+  rename(RRN_Conc = Mean_Conc, Conc_Flag_rr = Conc_Flag, Dilution_rr = Dilution) %>% 
   distinct(.keep_all = TRUE) 
 
 RRN_IDs <- as.vector(H2S_spl_rrn$IDs)
@@ -987,7 +991,8 @@ H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) )
 
 Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
   Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
-  Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)
+  Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag),
+  Dilution = ifelse(Rerun == "RRN", Dilution_rr, Dilution)
 ) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% ungroup() %>% group_by(Sample_ID) %>% mutate(
   Min_CV = ifelse(CV == min(CV), "KEEP", "RMV"), # get if CV is lowest of reruns
   Within_Range = "Within_Range" %in% Conc_Flag, #Get if any are within range
