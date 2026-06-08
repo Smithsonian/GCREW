@@ -1,0 +1,81 @@
+---
+title: "2-Phrag CO2xN Derived Root Biomass (2011-2025)"
+output: html_document
+date: "2026-05-04"
+---
+
+```{r}
+
+# This program calculates the annual production of belowground biomass as measured by ingrowth cores. They are from an experiment that began in 2011 in which the air CO2 concentration was increased and N was fertilized in native spices and invasive Phragmites chambers. The program ingests data from the belowground production that was measured by implanting bags filled  with commercial sedge peat into three locations per chamber each year in November, and recovering them one year later. Each bag is 26 cm2 and 40 cm depth. The belowground biomass being  separated into fine roots, C3 rhizomes, C4 rhizomes and Phragmites rhizomes. Contact Pat Megonigal for details.
+
+# Updated 3/25/2025 to only run current year data and append to previous years data
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+# set year & previous year
+previous_year=2024
+year=2025
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import the data
+Rootbiomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/6-Root Ingrowth Data/Phrag CO2xN Master Root Ingrowth 2011-',year,' (published 05-04-2026).csv'))
+
+#Filter out current year
+Rootbiomass <- Rootbiomass_allyears[Rootbiomass_allyears$Year == year,]
+
+# Sort the data
+Rootbiomass <- Rootbiomass %>%
+  arrange(Year, Chamber, CO2, Nitrogen, Treatment, Core, Category)
+# Data transformation
+rootdata <- Rootbiomass %>%
+  mutate(
+    RootMass = ifelse(RootMass == -99, NA, RootMass), # identifying missing values
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    PhragRhizMass = ifelse(PhragRhizMass == -99, NA, PhragRhizMass),
+    OtherMass = ifelse(OtherMass == -99, NA, OtherMass),
+    RootMass_m2 = (RootMass / 25.5176) * 10000, # calculate the area based (AB) rootbiomass in each core. Area of root ingrowth cores = 25.5176 cm2 (lengths are provided for volume conversions if desired)
+    C3RhizMass_m2 = (C3RhizMass / 25.5176) * 10000,
+    C4RhizMass_m2 = (C4RhizMass / 25.5176) * 10000,
+    PhragRhizMass_m2 = (PhragRhizMass / 25.5176) * 10000,
+    OtherRootRhizMass_m2 = (OtherMass / 25.5176) * 10000
+  ) %>%
+  mutate(OtherRootRhizMass_m2 = ifelse(is.na(OtherRootRhizMass_m2), -99, OtherRootRhizMass_m2)) %>%
+  rowwise() %>%
+  mutate(TotalBelowMass_m2 = sum(c_across(RootMass_m2:OtherRootRhizMass_m2), na.rm = TRUE)) # Total root C3, C4 and Phrag Rhiz biomass as the variables
+# Sort the data again
+rootdata <- rootdata %>%
+  arrange(Year, Chamber, CO2, Nitrogen, Treatment, Category) # calculate the biomass in each year in each chamber
+# Calculate means
+ROOTdata <- rootdata %>%
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment, Category) %>%
+  summarise(
+    RootMass_m2 = mean(RootMass_m2, na.rm = TRUE),
+    C3RhizMass_m2 = mean(C3RhizMass_m2, na.rm = TRUE),
+    C4RhizMass_m2 = mean(C4RhizMass_m2, na.rm = TRUE),
+    PhragRhizMass_m2 = mean(PhragRhizMass_m2, na.rm = TRUE),
+    OtherRootRhizMass_m2 = mean(OtherRootRhizMass_m2, na.rm = TRUE),
+    TotalBelowMass_m2 = mean(TotalBelowMass_m2, na.rm = TRUE)
+  ) %>%
+  ungroup()
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/2-Phrag CO2xN Root Biomass by Category 2011-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+ROOTdata_allyears <- rbind(past_years, ROOTdata)
+
+# Export the data
+write.csv(ROOTdata_allyears, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/2-Phrag CO2xN Root Biomass by Category 2011-',year,'.csv'), row.names = FALSE)
+
+
+```
+

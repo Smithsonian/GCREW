@@ -1,0 +1,62 @@
+---
+title: "1-Phrag CO2xN Derived Shoot Biomass (2011-2024)"
+output: html_document
+date: "2025-11-26"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of Phragmites australis from the Phrag CO2xN experiment*
+
+# Updated 5/5/2025 to only run current year data and append to previous years data
+
+install.packages("readr")
+install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+
+# set year & previous year
+previous_year=2024
+year=2025
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import Phrag Census data
+PHcensus_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/2-Phrag Census Data/Phrag CO2xN Master Phrag Census 2011-',year,' (published 11-21-2025).csv'))
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+PHcensus <- PHcensus_allyears[PHcensus_allyears$Year == year,]
+
+# The code in this section uses the allometric equations developed by Jon Bakker to calculate the biomass of each stem measured
+
+# Process the data
+PHRAGbiomass <- PHcensus %>%
+  mutate(Total_Height = ifelse(Total_Height == -99 | Total_Height == 0, NA, Total_Height),
+         Width = ifelse(Width == -99 | Width == 0, NA, Width)) %>%
+  filter(In_Out != 0) %>%
+  filter(!(is.na(Width) & is.na(Total_Height))) %>%
+  mutate(Total_Height = as.numeric(Total_Height),  # Ensure numeric type
+         Width = as.numeric(Width),  # Ensure numeric type
+         Phrag_Mass = ifelse(!is.na(Width),
+                              (0.3151554 + 0.0065096 * Total_Height + 0.1600525 * Width - 0.000088606438 * Total_Height * Width)^3,
+                              (0.6263727 + 0.0091227 * Total_Height)^3)) %>%
+  select(-In_Out, -Row, -Column, -Number, -Flower, -Herbivory, -Cut_Stem)
+# From 2011-2015 we measured the height and width of all stems. From 2016 forward we measured width only when stems were > 200 cm tall
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-Phrag CO2xN Shoot Biomass 2011-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+PHRAGbiomass_allyears <- rbind(past_years, PHRAGbiomass)
+
+# Export the data
+write.csv(PHRAGbiomass_allyears, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-Phrag CO2xN Shoot Biomass 2011-',year,'.csv'), row.names = FALSE)
+
+
+```
+

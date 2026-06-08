@@ -1,0 +1,260 @@
+---
+title: "Phrag Total Chamber Biomass 2011-2025"
+author: "Victoria Ellis"
+date: "2025-11-26"
+output: html_document
+---
+
+
+```{r}
+
+# This program calculates total biomass within each chamber of all plant species in the Phragmites x CO2 x Nitrogen Experiment. It reports annual total aboveground biomass for the sedge Schoenoplectus americanus (formerly Scirpus olneyi), the grasses Spartina patens, Distichlis spicata, .
+
+# All data are in grams per m2
+
+install.packages("readr")
+install.packages("tidyverse")
+install.packages("tidyr")
+install.packages("dyplr")
+library(readr)
+library(tidyverse)
+library(tidyr)
+library(dplyr)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+year=2025
+previous_year=2024
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+### SEDGE BIOMASS ###
+
+# Import Sedge data
+SCcensus <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/4-Non-Phrag Census Data/Phrag CO2xN SCAM Census Data 2011-',year,' (published 11-21-2025).csv'))
+
+
+meanplantbiomass <- SCcensus %>%
+  filter(In_Out != 0) %>%
+  mutate(
+    
+        Total_Height = as.numeric(ifelse(Total_Height %in% c(-99, 0), NA, Total_Height)),
+    Width        = as.numeric(ifelse(Width        %in% c(-99, 0), NA, Width)),
+    Green_Height = as.numeric(ifelse(Green_Height %in% c(-99, 0), NA, Green_Height)),
+    Count       = as.numeric(ifelse(Count %in% c(-99, 0), NA, Count)),
+    
+    biomass = ifelse(
+  !is.na(Total_Height) & !is.na(Width) & Total_Height > 0 & Width > 0,
+  (0.0713672 +
+   0.0058842 * Total_Height +
+   0.0984255 * Width -
+   0.00027383247 * Total_Height * Width)^3,
+  NA_real_)
+  
+  ) %>%
+  
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment) %>%
+  summarise(
+    n_stems = sum(ifelse(Chamber != 1, Count, 0), na.rm = TRUE),  # sum of Count excluding Chamber==1
+    total_biomass = mean(biomass, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    mean_biomass_per_stem = (total_biomass * n_stems)/3.125  # Mean biomass per individual
+  )
+
+write.csv(meanplantbiomass, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/biomass_SCAM_',year,'.csv'), row.names = FALSE)
+```
+
+```{r}
+
+### GRASSES & ASTER BIOMASS ###
+
+# Import data
+Harvest <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/3-Harvest Data/Phrag CO2xN Master Harvest 2011-',year,' (published 11-21-2025).csv'))
+
+grass_results <- Harvest %>%
+  filter(InOut != 0) %>%
+  mutate(
+    across(c(SPMass, DIMass), ~ as.numeric(ifelse(.x == -99, NA, .x)))
+  ) %>%
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment) %>%
+  summarise(
+    mean_SPMass = sum(SPMass, na.rm = TRUE),
+    mean_DIMass = sum(DIMass, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    biomass_SP_m2 = mean_SPMass / 0.049,
+    biomass_DI_m2 = mean_DIMass / 0.049
+  )
+
+transfer_results <- grass_results %>%
+  select(Year, Chamber, CO2, Nitrogen, Treatment,
+         biomass_SP_m2, biomass_DI_m2)
+
+write.csv(transfer_results, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/biomass_SP,DI_',year,'.csv'), row.names = FALSE)
+```
+
+
+
+```{r}
+
+### ALL OTHER SPP BIOMASS ###
+
+# Import data
+OtherSpp <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/4-Non-Phrag Census Data/Phrag CO2xN Other Species Census Data 2011-2023 (published 07-07-2025).csv'))
+
+equation_map <- list(
+  AMCA2 = function(Total_Height, Width) 
+    exp(-2.842442 + 
+        0.0222302 * Total_Height + 
+        0.3860227 * Width - 
+        0.0013233 * Total_Height * Width),
+
+  ATPA4 = function(Total_Height, Width) 
+    exp(-2.7329351 + 
+        0.0186166 * Total_Height + 
+        0.5311123 * Width + 
+        1.3978766e-4 * Total_Height * Width),
+
+  IVFR = function(Total_Height, Width) 
+    (1.097467 + 
+      0.005553 * Total_Height + 
+      0.0367448 * Width + 
+      0.0014406 * Total_Height * Width)^3,
+
+  KOVI = function(Total_Height, Width) 
+     exp(-1.7303871 + 
+        0.0219061 * Total_Height + 
+        0.3908119 * Width - 
+        0.0014053 * Total_Height * Width),
+
+  POHY = function(Total_Height, Width) 
+     1 / ((3.5315709 - 
+      0.0333569 * Total_Height - 
+      0.9409375 * Width + 
+      0.0103463 * Total_Height * Width)^3),
+
+  SOSE = function(Total_Height, Width) 
+     exp(-0.4709861 + 
+         0.0168132 * Total_Height + 
+         0.2234765 * Width - 
+         1.4081026e-4 * Total_Height * Width),
+
+  SPCY = function(Total_Height, Width) 
+     exp(0.7104917 + 
+         0.0059962 * Total_Height + 
+         0.0965718 * Width + 
+         1.9822987e-4 * Total_Height * Width)
+)
+
+biomass_data <- OtherSpp %>%
+  mutate(across(where(is.numeric), ~ ifelse(.x == -99, 0, .x))) %>% 
+  filter(Species %in% names(equation_map)) %>%
+  rowwise() %>%
+  mutate(
+    stem_biomass = equation_map[[Species]](Total_Height, Width)
+  ) %>%
+  ungroup()
+
+species_biomass_summary <- biomass_data %>%
+  group_by(Year, Chamber, Species) %>%
+  summarise(
+    biomass_per_m2 = sum(stem_biomass, na.rm = TRUE) / 3.125,
+    .groups = "drop"
+  ) %>%
+  mutate(biomass_per_m2 = round(biomass_per_m2, 1)) %>%
+  pivot_wider(
+    names_from = Species,
+    values_from = biomass_per_m2,
+    values_fill = 0  
+  )
+
+write.csv(species_biomass_summary, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/biomass_OTHER.csv'), row.names = FALSE)
+```
+
+```{r}
+
+### ALL PHRAG BIOMASS ###
+
+# Import data
+Phrag_data <- read.csv(paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-Phrag CO2xN Shoot Biomass 2011-2023.csv'))
+
+Phrag_results <- Phrag_data %>% 
+    filter(In_Out != 0) %>%   # remove outside-control samples
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment) %>%
+  summarise(
+    summed_mass = sum(Phrag_Mass, na.rm = TRUE),     # total biomass per chamber
+    .groups = "drop"
+  ) %>%
+  mutate(
+    total_chamber_mass = summed_mass / 3.125         # scale by chamber area
+  )
+
+transfer_results_phrag <- Phrag_results %>%
+  select(Year, Chamber, CO2, Nitrogen, Treatment,
+         total_chamber_mass)
+
+write.csv(transfer_results_phrag, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/biomass_PHRAG.csv'), row.names = FALSE)
+```
+
+
+```{r}
+
+### MERGE SCAM, GRASSES & AM, OTHERSPP, AND PHRAG BIOMASS INTO SAME FILE ###
+
+combined_biomass <- transfer_results %>%
+  full_join(meanplantbiomass, by = c("Year", "Chamber")) %>%
+  full_join(species_biomass_summary, by = c("Year", "Chamber")) %>%
+  full_join(transfer_results_phrag, by = c("Year", "Chamber"))
+
+combined_biomass <- combined_biomass %>%
+  mutate(across(where(is.numeric), ~ ifelse(is.na(.x), 0, .x)))
+
+cleaned_biomass <- combined_biomass %>%
+  select(-CO2.x, -CO2.y, -Nitrogen.x, -Nitrogen.y, -Treatment.x, -Treatment.y, -n_stems, -CO2, -Nitrogen, -total_biomass)  
+
+renamed_biomass <- cleaned_biomass %>%
+  rename(
+    SCAM = mean_biomass_per_stem,
+    Phragmites = total_chamber_mass,
+    SPPA = biomass_SP_m2,
+    SPCY = SPCY,
+    DISP = biomass_DI_m2,
+    IVFR = IVFR,
+    AMCA = AMCA2,
+    ATPA = ATPA4,
+    POHY = POHY,
+    KOVI = KOVI,
+    SOSE = SOSE,
+  )
+
+final_output <- renamed_biomass %>%
+  relocate(Treatment, .after = Chamber)
+
+final_output <- final_output %>%
+  mutate(Treatment = recode(Treatment,
+    `1` = "A",
+    `2` = "N",
+    `3` = "E",
+    `4` = "EN"
+  ))
+
+final_output <- final_output %>%
+  mutate(
+    Chamber_Biomass_per_m2 = rowSums(select(., SPPA, DISP, IVFR, AMCA, ATPA,
+                                          SCAM, Phragmites, POHY, KOVI,
+                                          SOSE, SPCY)),
+    Total_Grass_Biomass = SPPA + SPCY + DISP,
+    Total_Forb_Biomass = AMCA + ATPA + POHY + KOVI + SOSE
+  ) %>%
+  mutate(across(where(is.numeric), ~ round(.x, 1)))
+
+write.csv(final_output, paste0('S:/Biogeochemistry/GCREW/3-PhragmitesxCO2xN Experiment/0-Curated Data/1-Biomass (Derived)/Total_Chamber_Biomass.csv'), row.names = FALSE)
+```
