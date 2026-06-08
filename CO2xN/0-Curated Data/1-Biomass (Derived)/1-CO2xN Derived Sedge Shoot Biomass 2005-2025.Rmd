@@ -1,0 +1,99 @@
+---
+title: "1-CO2xN Derived Sedge Shoot Biomass 2005-2025"
+output: html_document
+date: "2025-11-17"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the sedge Schoenoplectus americanus (formerly Scirpus olneyi). They are from an experiment that began in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from two files. One file has the dimensions (height and width) of plants in each plot. This file is used to calculate the average mass of individual Stems. The second file has the density of plants in each plot. In 2023 EFien added code to calculate mean density from density Double Counts.The product of mass and density is plot biomass. Contact Pat Megonigal for details.
+
+# Updated 2/11/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+year=2025
+previous_year=2024
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import SC census data
+SCcensus_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/2-SC Census Data/CO2xN Master SC Census 2005-',year,' (published 11-20-2025).csv'))
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+SCcensus <- SCcensus_allyears[SCcensus_allyears$Year == year,]
+
+# The code in this section uses the allometric equations developed by Jon Bakker to calculate the biomass of each stem measured.
+# Data manipulation for biomass
+biomass <- SCcensus %>%
+  mutate(TotalHeight = ifelse(TotalHeight %in% c(-99, 0), NA, TotalHeight),# take out missing values.
+         Width = ifelse(Width %in% c(-99, 0), NA, Width),# take out zero values, these data were entered to occupy the columns. i.e. when the census stems were less than 30 stems per quadrat.
+         biomass = (0.0713672 + 0.0058842 * TotalHeight + 0.0984255 * Width - 0.00027383247 * TotalHeight * Width) ^ 3) %>% # From Jon's new equation (TotalHeight and Width). Ecology data paper, Final version.
+  filter(InOut != 0) # Q7 and Q8 (InOut=0) are outside controls, therefore we only calculate the biomass inside the chamber
+
+
+# Calculate mean biomass
+meanbiomass <- biomass %>%
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment, Quadrat) %>%
+  summarise(meanplantbio = mean(biomass, na.rm = TRUE), .groups = 'drop')
+
+# Import SC density data
+SCdensity_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/2-SC Census Data/CO2xN Master SC Density 2005-',year,' (published 11-20-2025).csv'))
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+SCdensity <- SCdensity_allyears[SCdensity_allyears$Year == year,]
+
+# This import step reads the census file with the stems count for each quadrat. Stem count (or density) is needed to convert the mass of individual stems in the step above to total chamber biomass
+
+# Data manipulation for density
+Density <- SCdensity %>%
+  mutate(StemCount = ifelse(StemCount == -99, NA, StemCount),
+         StemDoubleCount1 = ifelse(StemDoubleCount1 == -99, NA, StemDoubleCount1),
+         StemDoubleCount2 = ifelse(StemDoubleCount2 == -99, NA, StemDoubleCount2),
+         finalcount = case_when(
+           !is.na(StemDoubleCount1) & is.na(StemDoubleCount2) ~ StemDoubleCount1, #Added 2023 to process density double counts (Fien)
+           !is.na(StemDoubleCount1) & !is.na(StemDoubleCount2) ~ ceiling((StemDoubleCount1 + StemDoubleCount2) / 2), # Calculate mean of two counts and round up.
+           TRUE ~ StemCount
+         )) %>%
+  filter(InOut != 0)
+
+# Sort data
+Density <- Density %>%
+  arrange(Year, Chamber, CO2, Nitrogen, Treatment, Quadrat)
+
+# Merge mean biomass and density
+MergeData <- meanbiomass %>%
+  left_join(Density, by = c("Year", "Chamber", "CO2", "Nitrogen", "Treatment", "Quadrat")) %>%
+  mutate(SCmass_m2 = meanplantbio * finalcount / QuadratArea, # Convert the total per quadrat to meter square by dividing by the area of the quadrat (0.09 m2).
+         SCdensity_m2 = finalcount / QuadratArea, # Convert the total number of stems per quadrat to meter square by dividing by the area of the quadrat.
+         SCmass_m2 = ifelse(SCdensity_m2 == 0, 0, SCmass_m2))
+
+# This means statement was the only way we could find to drop variables from MergeData without causing an explained error when opening the output Excel file
+# Calculate mean SC mass and density
+SCshoots <- MergeData %>%
+  group_by(Year, Chamber, CO2, Nitrogen, Treatment) %>%
+  summarise(SCmass_m2 = mean(SCmass_m2, na.rm = TRUE),
+            SCdensity_m2 = mean(SCdensity_m2, na.rm = TRUE), .groups = 'drop')
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-CO2xN Sedge Shoot Biomass 2005-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+SCshoots_allyears <- rbind(past_years, SCshoots)
+
+# Export data
+write.csv(SCshoots_allyears, paste0('S:/Biogeochemistry/GCREW/2-CO2xN Experiment/0-Curated Data/1-Biomass (Derived)/1-CO2xN Sedge Shoot Biomass 2005-',year,'.csv'), row.names=FALSE)
+
+```
