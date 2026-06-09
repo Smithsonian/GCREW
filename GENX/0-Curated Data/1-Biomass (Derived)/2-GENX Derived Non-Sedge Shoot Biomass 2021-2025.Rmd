@@ -1,0 +1,107 @@
+---
+title: "2-GENX Derived Non-Sedge Shoot Biomass 2021-2025"
+output: html_document
+date: "2026-03-03"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the non-sedge C4 grass Spartina patens (Aiton) Muhl. and Distichlis spicata (L.) Greene. They are from an experiment that began in 2005 in which the air CO2 concentration was increased and N was fertilized. The program ingests data from the file that has stem count and dry weight from each clipped plot. This file is used to calculate the area based dry mass for C4 grass and litter. Contact Pat Megonigal for details.
+
+# Updated 3/14/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+year=2025
+previous_year=2024
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each year.
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+# Importing the Master Harvest CSV file
+sp_biomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/4-All Harvest Data/GENX Master Harvest 2021-',year,' (published 02-27-2026).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+sp_biomass <- sp_biomass_allyears[sp_biomass_allyears$Year == year,]
+
+# Order the data
+sp_biomass <- sp_biomass %>%
+  arrange(Year, Chamber)
+
+# Assign NA's to -99 values in dataset
+sp_biomass <- sp_biomass %>%
+  mutate(SP_Count = ifelse(SP_Count == -99, NA, SP_Count),
+         SP_Total_Mass = ifelse(SP_Total_Mass == -99, NA, SP_Total_Mass),
+         DI_Count = ifelse(DI_Count == -99, NA, DI_Count),
+         DI_Total_Mass = ifelse(DI_Total_Mass == -99, NA, DI_Total_Mass),
+         Other_1_Count = ifelse(Other_1_Count == -99, NA, Other_1_Count),
+         Other_1_Mass = ifelse(Other_1_Mass == -99, NA, Other_1_Mass),
+         Other_2_Count = ifelse(Other_2_Count == -99, NA, Other_2_Count),
+         Other_2_Mass = ifelse(Other_2_Mass == -99, NA, Other_2_Mass))
+
+# Calculate the area-based dry mass and density per m2
+sp_biomass <- sp_biomass %>%
+  mutate(SPmass_m2 = SP_Total_Mass / 0.005,
+         DImass_m2 = DI_Total_Mass / 0.005,
+         Other1mass_m2 = Other_1_Mass / 0.005,
+         Other2mass_m2 = Other_2_Mass / 0.005,
+         SPdensity_m2 = SP_Count / 0.005,
+         DIdensity_m2 = DI_Count / 0.005,
+         Other1density_m2 = Other_1_Count / 0.005,
+         Other2density_m2 = Other_2_Count / 0.005)
+
+# Calculate the mean values for each plot
+chamber_mass <- sp_biomass %>%
+  group_by(Year, Chamber) %>%
+  summarize(SPdensity_m2 = mean(SPdensity_m2),
+            SPmass_m2 = mean(SPmass_m2),
+            DIdensity_m2 = mean(DIdensity_m2),
+            DImass_m2 = mean(DImass_m2),
+            Other1density_m2 = mean(Other1density_m2),
+            Other1mass_m2 = mean(Other1mass_m2),
+            Other2density_m2 = mean(Other2density_m2),
+            Other2mass_m2 = mean(Other2mass_m2))
+
+# Create the final dataset
+all_non_sedge <- chamber_mass %>%
+  mutate(SPdensity_m2 = ifelse(is.na(SPdensity_m2), -99, SPdensity_m2),
+         SPmass_m2 = ifelse(is.na(SPmass_m2), -99, SPmass_m2),
+         DIdensity_m2 = ifelse(is.na(DIdensity_m2), -99, DIdensity_m2),
+         DImass_m2 = ifelse(is.na(DImass_m2), -99, DImass_m2),
+         Other1mass_m2 = ifelse(is.na(Other1mass_m2), 0, Other1mass_m2),
+         Other2mass_m2 = ifelse(is.na(Other2mass_m2), 0, Other2mass_m2),
+         Other1density_m2 = ifelse(is.na(Other1density_m2), 0, Other1density_m2),
+         Other2density_m2 = ifelse(is.na(Other2density_m2), 0, Other2density_m2))
+
+all_non_sedge <- all_non_sedge %>%
+  arrange(
+    Year,
+    grepl("Ref", Chamber),
+    as.numeric(gsub("Ref", "", Chamber))
+  ) %>%
+  mutate(
+    TotalC4mass_m2 = rowSums(
+      cbind(SPmass_m2, DImass_m2),
+      na.rm = TRUE
+    )
+  )
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/2-GENX Non-Sedge Shoot Biomass 2021-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+AllNonSedge_allyears <- rbind(past_years, all_non_sedge)
+
+# # Export the final dataset .csv to S Drive 
+write.csv(AllNonSedge_allyears, paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/2-GENX Non-Sedge Shoot Biomass 2021-',year,'.csv'), row.names=FALSE)
+
+```
+

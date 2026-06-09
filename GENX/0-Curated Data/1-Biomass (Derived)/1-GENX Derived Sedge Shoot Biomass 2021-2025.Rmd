@@ -1,0 +1,112 @@
+---
+title: "GENX Biomass 2021-2025"
+author: "VE"
+date: "2026-02-27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Load required libraries
+library(dplyr)
+library(readxl)
+
+previous_year=2024
+year=2025
+```
+
+```{r}
+
+# Importing the Census CSV file
+SCcensus_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/2-SC Census Data/GENX Master SC Census 2021-',year,' (published 02-27-2026).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+SCcensus <- SCcensus_allyears[SCcensus_allyears$Year == year,]
+
+# Replace invalid values with NA
+biomass <- SCcensus %>%
+  mutate(
+    Total_Height = ifelse(Total_Height <= 0 | Total_Height == -99, NA, Total_Height),
+    Width  = ifelse(Width <= 0 | Width == -99, NA, Width)
+  )
+
+# Optional: remove cut stems if column exists
+if("Flower_Cut" %in% colnames(biomass)) {
+  biomass <- biomass %>% filter(Flower_Cut == 'N')
+}
+```
+
+```{r}
+# Use Lu et al. 2016 allometric equation
+biomass <- biomass %>%
+  mutate(
+    stem_biomass = (0.0713672 + 
+                    0.0058842 * Total_Height + 
+                    0.0984255 * Width - 
+                    0.00027383247 * Total_Height * Width)^3
+  )
+
+# Compute mean biomass per stem per chamber
+mean_biomass <- biomass %>%
+  group_by(Year, Chamber) %>%
+  summarise(
+    meanplantbio = mean(stem_biomass, na.rm = TRUE),
+    .groups = "drop"
+  )
+```
+
+```{r}
+# Importing the Density CSV file
+SCdensity_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/2-SC Census Data/GENX Master SC Density 2021-',year,' (published 02-27-2026).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+SCdensity <- SCdensity_allyears[SCdensity_allyears$Year == year,]
+
+# Replace invalid counts with NA
+Density <- SCdensity %>%
+  mutate(StemCount = ifelse(StemCount <= 0 | StemCount == -99, NA, StemCount))
+```
+
+
+```{r}
+# Merge mean biomass with density
+MergeData <- merge(mean_biomass, Density, by = c("Year", "Chamber"))
+
+MergeData$Chamber <- as.character(MergeData$Chamber)
+
+MergeData <- MergeData %>%
+  mutate(
+    SCdensity_m2 = StemCount / 0.1772,  # stems per m²
+    SCmass_m2 = meanplantbio * SCdensity_m2
+  )
+
+SCshoots <- MergeData %>%
+  mutate(
+    Chamber = factor(
+      Chamber,
+      levels = c(
+        as.character(1:12),
+        paste0("Ref", 1:12)
+      )
+    )
+  ) %>%
+  arrange(Year, Chamber) %>%
+  select(Year, Chamber, SCmass_m2)
+
+```
+
+```{r}
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/1-GENX Sedge Shoot Biomass 2021-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+SCshoots_allyears <- rbind(past_years, SCshoots)
+
+# Export .csv to S Drive 
+write.csv(SCshoots_allyears, paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/1-GENX Sedge Shoot Biomass 2021-',year,'.csv'), row.names=FALSE)
+
+```
+
+
+

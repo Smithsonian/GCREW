@@ -1,0 +1,73 @@
+---
+title: "4-GENX Total Derived Biomass 2021-2025"
+output: html_document
+date: "2026-03-03"
+---
+
+
+```{r}
+# This program reads two files that contain the biomass and density of the all plant species in the elevated CO2 x Nitrogen experiment. It reports annual total aboveground biomass for the sedge Schoenoplectus americanus (formerly Scirpus olneyi), the grasses Spartina patens and Distichlis spicata. All data are in grams per m2
+
+# Updated 2/14/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+previous_year=2024
+year=2025
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+# Read the sedge CSV file
+Sedge_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/1-GENX Sedge Shoot Biomass 2021-',year,'.csv'), header = TRUE, sep = ",")
+
+#Filter out current year
+Sedge <- Sedge_allyears[Sedge_allyears$Year == year,]
+
+# Sort the Sedge data frame
+Sedge <- Sedge %>%
+  arrange(
+    Year,
+    grepl("Ref", Chamber),
+    as.numeric(gsub("Ref", "", Chamber))
+  ) 
+
+# Read the second CSV file
+NonSedge_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/2-GENX Non-Sedge Shoot Biomass 2021-',year,'.csv'), header = TRUE, sep = ",")
+
+#Filter out current year
+NonSedge <- NonSedge_allyears[NonSedge_allyears$Year == year,]
+
+# Sort the NonSedge data frame
+NonSedge <- NonSedge %>%
+  arrange(
+    Year,
+    grepl("Ref", Chamber),
+    as.numeric(gsub("Ref", "", Chamber))
+  )
+
+# Merge the two data frames
+MergeData <- full_join(Sedge, NonSedge, by = c("Year", "Chamber"))
+
+# Create the final data frame
+AllShoots <- MergeData %>%
+  select(Year, Chamber, SCmass_m2, SPmass_m2, DImass_m2, TotalC4mass_m2, Other1mass_m2, Other2mass_m2)
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/4-GENX Total Shoot Biomass 2021-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+AllShoots_allyears <- rbind(past_years, AllShoots)
+
+# Write the final data frame to a CSV file
+write.csv(AllShoots_allyears, paste0('S:/Biogeochemistry/GCREW/5-GENX/0-Curated Data/1-Biomass (Derived)/4-GENX Total Shoot Biomass 2021-',year,'.csv'), row.names = FALSE)
+
+```
+
