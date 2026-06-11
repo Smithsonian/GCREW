@@ -1,6 +1,6 @@
 ---
-title: "CO2xN: Porewater Methane"
-author: "Month Year Samples"
+title: "GENX: Porewater Methane"
+author: "May 2026 Samples"
 date: "`r Sys.Date()`"
 output:  
   pdf_document:
