@@ -1,5 +1,5 @@
 ---
-title: "CO2xN: Porewater Methane"
+title: "GENX: Porewater Methane"
 author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:  
@@ -25,7 +25,7 @@ user <- "Melanie Giessner"
 GHG_files <- c("Raw Data/20260417_GENX_GHGdata.csv","Raw Data/20260501_GENX_GHGdata.csv" )
 
 
-# Define the file path for QAQC log file - NO Need to change just check year
+# Define the file path for QAQC log file - NO Need to change
 log_path <- "Processed Data/ShimadzuGC_Slope_QAQC.csv"
 
 
