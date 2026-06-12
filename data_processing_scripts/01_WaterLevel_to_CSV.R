@@ -43,7 +43,7 @@ for (file in files){
   }
   
   #Make sure timestamps are stored properly
-  
+  dt$TIMESTAMP <- ifelse(nchar(dt$TIMESTAMP) == 10, paste0(dt$TIMESTAMP, " 00:00:00"), dt$TIMESTAMP)
   dt$TIMESTAMP <- as.character(format(as.POSIXct(dt$TIMESTAMP, format = "%Y-%m-%d %H:%M:%S"), format = "%Y-%m-%d %H:%M:%S"))
   
   #write and move newly converted .csv file
