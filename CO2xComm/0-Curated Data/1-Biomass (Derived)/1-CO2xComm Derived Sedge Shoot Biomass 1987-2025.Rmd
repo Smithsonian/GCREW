@@ -1,0 +1,109 @@
+---
+title: "1-CO2xComm Derived Sedge Shoot Biomass 1987-2024"
+output: html_document
+date: "2025-02-25"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the sedge Schoenoplectus americanus (formerly Scirpus olneyi). They are from an experiment that began in 1987 in which the air CO2 concentration was increased in three plant communities. The program ingests data from two files. One file has the dimensions (height and width) of plants in each plot. This file is used to calculate the average mass of individual stems. The second file has the density of plants in each plot. The product of mass and density is plot biomass. These file represent the data in a clean but largely unmodified form. Because methods varied over the course of this long-term study, there is code that makes a variety of adjustments to the input data in order arrive at a comparable annual figure for each plot. Contact Pat Megonigal for details.
+
+# Updated 2/11/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year
+year=2024
+previous_year=2023
+
+# Throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each year.
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Import census CSV file
+# Manually adjust the published date as this changes.
+SCcensus_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/2-SC Census Data/CO2xComm Master SC Census 1987-',year,' (published 01-31-2025).csv'), header = TRUE, sep = ",")
+
+#Filter out current year
+SCcensus <- SCcensus_allyears[SCcensus_allyears$Year == year,]
+
+
+# The code in this section uses the new allometric equations developed by Meng Lu, Josh Caplan and Jon Bakker to calculate the biomass of each stem measured. It is a departure from the files published in 2015 (i.e. for data collected through 2014) which used different equations developed by Jon Bakker.
+
+# The equation for 1987-1988 are based only on height because width was not measured. Biomass from 1989-present is based on height and width. We did not use the allometric equations developed by Arp that were used in previous publications (e.g. by Curtis et al., or Erickson et al. 2007) because we deemed the statistical strength of the new equations to be much greater due the the very large sample size of the Lu et al. analysis (published in Ecology)
+
+
+# Clean census data
+biomass <- SCcensus %>%
+  mutate(TotalHeight = ifelse(TotalHeight == -99, NA, TotalHeight),# take out missing values
+         Width = ifelse(Width == -99, NA, Width),
+         TotalHeight = ifelse(TotalHeight == 0, NA, TotalHeight),# take out zero values, these data were entered to occupy the columns. i.e. when the census stems were less than 30 stems per quadrat.
+         Width = ifelse(Width == 0, NA, Width),
+         biomass = (0.0713672 + 0.0058842 * TotalHeight + 0.0984255 * Width - 0.00027383247 * TotalHeight * Width)^3)# From Josh's new equation (TotalHeight and Width). Ecology data paper, Final version.
+
+
+# Import density CSV file
+# Manually adjust the published date as this changes
+SCQuadratDensity_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/2-SC Census Data/CO2xComm Master SC Density 1987-',year,' (published 02-25-2025).csv'), header = TRUE, sep = ",")
+
+#Filter out current year
+SCQuadratDensity <- SCQuadratDensity_allyears[SCQuadratDensity_allyears$Year == year,]
+
+# Sort data
+SCQuadratDensity <- SCQuadratDensity %>%
+  arrange(Year, Community, Treatment, Chamber, Quadrat)
+
+# Handle missing values
+SCQuadratDensity <- SCQuadratDensity %>%
+  mutate(StemCount = ifelse(StemCount == -99, NA, StemCount))
+
+
+# Density is counted by splitting the Chamber in four quarters. In 2014 we began to incorporate the Quadrats (quarters) into the electronic data files because this is how the data are recorded in the field. Thus, we need to sum across Quadrats to get a full-Chamber density
+
+
+# Calculate sum of StemCount by Year, Community, Treatment, and Chamber
+SCdensity <- SCQuadratDensity %>%
+  group_by(Year, Community, Treatment, Chamber) %>%
+  summarize(StemCount = sum(StemCount), ChamberArea = unique(ChamberArea))
+
+# Calculate mean biomass
+biomass <- biomass[order(biomass$Year, biomass$Community, biomass$Treatment, biomass$Chamber), ]
+
+meanbiomass <- aggregate(biomass$biomass, by = list(biomass$Year, biomass$Community, biomass$Treatment, biomass$Chamber), FUN = mean, na.rm = TRUE)
+colnames(meanbiomass) <- c("Year", "Community", "Treatment", "Chamber", "meanplantbio")
+meanbiomass <- meanbiomass[order(meanbiomass$Year, meanbiomass$Community, meanbiomass$Treatment, meanbiomass$Chamber, meanbiomass$meanplantbio), ]
+
+# Merge data
+MergeData <- left_join(meanbiomass, SCdensity, by = c("Year", "Community", "Treatment", "Chamber"))
+MergeData <- MergeData %>%
+  mutate(SCmass_m2 = meanplantbio * StemCount / ChamberArea,
+         SCdensity_m2 = StemCount / ChamberArea) %>%
+  mutate(SCmass_m2 = ifelse(SCdensity_m2 == 0, 0, SCmass_m2))
+# Convert the total per Chamber to meter square by dividing by the area of the Chamber.
+
+# Calculate mean of SCmass_m2 and SCdensity_m2
+SCshoots <- MergeData %>%
+  group_by(Year, Community, Treatment, Chamber) %>%
+  summarize(SCmass_m2 = mean(SCmass_m2),
+            SCdensity_m2 = mean(SCdensity_m2))
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/1-CO2xComm Sedge Shoot Biomass 1987-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+SCshoots_allyears <- rbind(past_years, SCshoots)
+
+# Export data
+write.csv(SCshoots_allyears, paste0( 'S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/1-CO2xComm Sedge Shoot Biomass 1987-',year,'.csv'), row.names=FALSE)
+
+```
+
+

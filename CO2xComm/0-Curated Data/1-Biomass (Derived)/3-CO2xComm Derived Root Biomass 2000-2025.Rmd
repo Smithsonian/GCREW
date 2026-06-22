@@ -1,0 +1,110 @@
+---
+title: "3-CO2xComm Derived Root Biomass 2000-2024"
+output: html_document
+date: "2025-03-03"
+---
+
+```{r}
+# This program calculates the annual production of belowground biomass as measured by ingrowth Cores. They are from an experiment that begain in 1987 in which the air CO2 concentration  was increased in three plant communities. The program ingests data from the belowground production that was measured by implanting bags filled with commerical sedge peat into three  locations per Chamber each Year in November, and recovering them one Year later. Each bag is 26 cm2 and 40 cm deep. Sample processing has varied over the Years, with recoved belowground  biomass being separated into roots, C3 rhizomes, C4 rhizomes or just total mass, and combinations thereof.  Staring in 2016 a new category was added, "Other Rhizome Biomass" which is  rarely used. Because methods varied over the course of this long-term study, there is code that makes a variety of adjustments to the input data in order arrive at a comparable annual figure for each plot. Contact Pat Megonigal for details.
+
+# Updated 03-03-2025 to only run current year data and append to previous years data
+
+# 1978-2017 do not align with SAS output. 2018 to present does.
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year & previous year
+previous_year=2023
+year=2024
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each year.
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+
+# Importing the rootbiomass CSV file
+rootbiomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/5-Root Ingrowth Data/CO2xComm Master Root Ingrowth 1987-',year,' (published 03-03-2025).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+rootbiomass <- rootbiomass_allyears[rootbiomass_allyears$Year == year,]
+
+# Clean and mutate the data
+rootdata <- rootbiomass %>%
+  mutate(
+    RootMass = ifelse(RootMass == -99, NA, RootMass),
+    C3RhizMass = ifelse(C3RhizMass == -99, NA, C3RhizMass),
+    C4RhizMass = ifelse(C4RhizMass == -99, NA, C4RhizMass),
+    OtherRhizMass = ifelse(OtherRhizMass == -99, 0, OtherRhizMass),
+    TotalRhizMass = ifelse(TotalRhizMass == -99, NA, TotalRhizMass),
+    RootRhizMass = ifelse(RootRhizMass == -99, NA, RootRhizMass),
+    # Convert masses to m2
+    RootMass_m2 = (RootMass / 25.5176) * 10000,
+    C3RhizMass_m2 = (C3RhizMass / 25.5176) * 10000,
+    C4RhizMass_m2 = (C4RhizMass / 25.5176) * 10000,
+    OtherRhizMass_m2 = (OtherRhizMass / 25.5176) * 10000,
+    RootRhizMass_m2 = (RootRhizMass / 25.5176) * 10000,
+    # Sum of RhizMass
+    RhizMass_m2 = C3RhizMass_m2 + C4RhizMass_m2 + OtherRhizMass_m2,
+    # Convert TotalRhizMass to m2
+    TotalRhizMass_m2 = (TotalRhizMass / 25.5176) * 10000,
+    # Calculate total belowground mass
+    TotalBelowMass_m2 = RootMass_m2 + RhizMass_m2
+  ) %>%
+  # Adjust TotalBelowMass_m2 based on Year conditions
+  mutate(TotalBelowMass_m2 = case_when(
+    Year == 1992 ~ RootRhizMass_m2,
+    Year %in% c(1997, 1998) ~ RootMass_m2 + RhizMass_m2,
+    TRUE ~ TotalBelowMass_m2
+  ))
+# Sort data by Year, Community, Treatment, Chamber, Core
+rootdata <- rootdata %>%
+  arrange(Year, Community, Treatment, Chamber, Core)
+# Calculate means by Year, Community, Treatment, Chamber
+root_means <- rootdata %>%
+  group_by(Year, Community, Treatment, Chamber) %>%
+  summarise(
+    RootMass_m2 = mean(RootMass_m2, na.rm = TRUE),
+    C3RhizMass_m2 = mean(C3RhizMass_m2, na.rm = TRUE),
+    C4RhizMass_m2 = mean(C4RhizMass_m2, na.rm = TRUE),
+    RhizMass_m2 = mean(RhizMass_m2, na.rm = TRUE),
+    TotalRhizMass_m2 = mean(TotalRhizMass_m2, na.rm = TRUE),
+    RootRhizMass_m2 = mean(RootRhizMass_m2, na.rm = TRUE),
+    TotalBelowMass_m2 = mean(TotalBelowMass_m2, na.rm = TRUE)
+  )
+# Create TOTALroot dataset, dropping specific columns
+TOTALroot <- root_means %>%
+  select(-RootMass_m2, -C3RhizMass_m2, -C4RhizMass_m2, -RhizMass_m2, -TotalRhizMass_m2, -RootRhizMass_m2) %>%
+  mutate(TotalBelowMass_m2 = ifelse(is.na(TotalBelowMass_m2), -99, TotalBelowMass_m2))
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xComm Total Root Biomass 1987-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+TOTALroot_allyears <- rbind(past_years, TOTALroot)
+
+# Export TOTALroot dataset
+write.csv(TOTALroot_allyears, paste0( 'S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xComm Total Root Biomass 1987-',year,'.csv'), row.names=FALSE)
+
+# Filter ROOTdata for Years >= 2000 and drop specific columns
+ROOTBIOtype <- root_means %>%
+  filter(Year >= 2000) %>%
+  select(-TotalRhizMass_m2, -RootRhizMass_m2)
+
+#Read in data set from previous years
+past_years_ROOTBIOtype <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xComm Root Biomass by Category 2000-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+ROOTBIOtype_allyears <- rbind(past_years_ROOTBIOtype, ROOTBIOtype)
+
+# Export ROOTBIOtype dataset
+write.csv(ROOTBIOtype_allyears, paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/3-CO2xComm Root Biomass by Category 2000-',year,'.csv'))
+
+```
+

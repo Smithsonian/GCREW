@@ -1,0 +1,99 @@
+---
+title: "2-CO2xComm Non-Sedge Shoot Biomass 1987-2025"
+output: html_document
+date: "2026-03-20"
+---
+
+```{r}
+
+# This program calculates the annual peak biomass of the non-sedge C4 grass Spartina patens and Distichlis spicata. Other species include Atriplex patula, Iva frutescens, Kosteletskya virginica, Lythrum lineare, and Polygonum hydropiper, etc. They are from an experiment that began in 1987 in which the air CO2 concentration was increased in three plant communities. The program ingests data from a file with stem count and dry weight from each clipped plot. This file is used to calculate the area-based dry mass for C4 grass and other species. This file contains the data in a clean but largely unmodified form. Because methods varied over the course of this long-term study, there is code that makes a variety of adjustments to the input data in order arrive at a comparable annual figure for each plot. Contact Pat Megonigal for details.
+  
+# Updated 2/25/2025 to only run current year data and append to previous years data
+
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year
+previous_year=2024
+year=2025
+# throughout this code, when importing .csv files you will need to manually add in the (published XX-XX-XXX) date as this changes each year.
+
+# DO NOT MOVE PREVIOUS YEAR FILES TO 'RETIRED' FOLDER UNTIL THIS CODE HAS BEEN RUN
+
+```
+
+```{r}
+##### READ QUADRAT-BASED & CHAMBER-BASED HARVEST DATA FOR NON-SEDGE BIOMASS #####
+
+# Import the data
+SPbiomass_allyears <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/4-All Harvest Data/CO2xComm Master Harvest 1987-',year,' (published 03-20-2026).csv'), header = TRUE, sep = ",")
+# you will need to manually adjust the published date as this changes.
+
+#Filter out current year
+SPbiomass <- SPbiomass_allyears[SPbiomass_allyears$Year == year,]
+
+# Sort the data
+SPbiomass <- SPbiomass %>% arrange(Year, Community, Treatment, Chamber, Quadrat)
+
+
+# In this section of code, data manipulation such as identifying missing values and summing the biomass and counts of the two "OTHER" species categories into one category will occur:
+
+
+Biomass <- SPbiomass %>%
+  # Identify missing values of -99 and replace with NA
+  mutate(across(c(SPCount, SPGreenMass, SPScenescentMass, SPTotalMass, DICount, DIGreenMass, DIScenescentMass, DITotalMass, Other1Count, Other1Mass, Other2Count, Other2Mass), 
+                ~ replace(., . == -99, NA))) %>%
+  # If TotalMass and ScenescentMass are NA, then use GreenMass for TotalMass. If ScenescentMass exists, then add
+  # it to GreenMass to get TotalMass
+  
+  mutate(SPTotalMass = ifelse(is.na(SPTotalMass), 
+                              ifelse(is.na(SPScenescentMass), SPGreenMass, SPGreenMass + SPScenescentMass),SPTotalMass),
+         DITotalMass = ifelse(is.na(DITotalMass), 
+                              ifelse(is.na(DIScenescentMass), DIGreenMass, DIGreenMass + DIScenescentMass), DITotalMass),
+         # Sum the biomass and counts of the two "OTHER" species categories into one category
+         OTHERMass = ifelse(is.na(Other1Mass), 
+                            ifelse(is.na(Other2Mass), NA, Other2Mass),
+                            ifelse(is.na(Other2Mass), Other1Mass, Other1Mass + Other2Mass)),
+         OTHERCount = ifelse(is.na(Other1Count), 
+                            ifelse(is.na(Other2Count), NA, as.numeric(Other2Count)),
+                            ifelse(is.na(Other2Count), as.numeric(Other1Count), 
+                                   as.numeric(Other1Count) + as.numeric(Other2Count)))) %>%
+  mutate(across(c(SPCount, SPTotalMass, DICount, DITotalMass, OTHERCount, OTHERMass), as.numeric))
+  
+                
+# QuadratMass calculation
+QuadMass <- Biomass %>%
+  group_by(Year, Community, Treatment, Chamber) %>%
+  summarise(across(c(SPTotalMass, DITotalMass, OTHERMass, SPCount, DICount, OTHERCount), mean, na.rm = TRUE), .groups = 'drop')
+
+# ChamberMass calculation
+ChamberMass <- QuadMass %>%
+  mutate(SPmass_m2 = SPTotalMass / 0.0025,
+         DImass_m2 = DITotalMass / 0.0025,
+         OTHERmass_m2 = OTHERMass / 0.0025,
+         SPdensity_m2 = SPCount / 0.0025,
+         DIdensity_m2 = DICount / 0.0025,
+         OTHERdensity_m2 = OTHERCount / 0.0025)
+# Divide by 0.0025 m2, the area in m2 of the 5cm x 5cm quadrats
+
+AllNonSedge <- ChamberMass %>%
+  group_by(Year, Community, Treatment, Chamber) %>%
+  summarise(across(c(SPmass_m2, DImass_m2, OTHERmass_m2, SPdensity_m2, DIdensity_m2,	OTHERdensity_m2), mean, na.rm = TRUE), .groups = 'drop') %>%
+    mutate(across(c(SPmass_m2, DImass_m2, OTHERmass_m2, SPdensity_m2, DIdensity_m2, OTHERdensity_m2), 
+                ~ ifelse(is.na(.), -99, .)))
+
+#Read in data set from previous years
+past_years <- read.csv(paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/2-CO2xComm Non-Sedge Shoot Biomass 1987-',previous_year,'.csv'), header = TRUE, sep = ",")
+
+#Append present year data to previous years
+AllNonSedge_allyears <- rbind(past_years, AllNonSedge)
+
+# Export the datasheet to S: drive
+write.csv(AllNonSedge_allyears, paste0('S:/Biogeochemistry/GCREW/1-CO2xCommunity Experiment/0-Curated Data/1-Biomass (Derived)/2-CO2xComm Non-Sedge Shoot Biomass 1987-',year,'.csv'),row.names=F)
+
+```
+
+
