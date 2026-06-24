@@ -1,0 +1,73 @@
+Sample ID,Type,Conc_CO2,Conc_CH4,Conc_N2O,CO2_Area,CH4_Area,N2O_Area,Notes,Run_Date,Sample_Volume
+20260513_LabAir,Lab air,unknown,unknown,unknown,150922,1220,835,,5/13/2026,
+20260513_Blank1,Blank,unknown,unknown,unknown,9100,79,33,,5/13/2026,
+20260513_Blank2,Blank,unknown,unknown,unknown,8930,118,23,,5/13/2026,
+20260513_0ppm,Standard,0,0,0,9793,69,0,,5/13/2026,
+20260513_3mlLowTri,Standard,500,2.5,1.25,159880,1617,3042,,5/13/2026,
+20260513_6mlLowTri,Standard,1000,5,2.5,312003,3179,5885,,5/13/2026,
+20260513_9mlLowTri,Standard,1500,7.5,3.75,455887,4638,8897,,5/13/2026,
+20260513_12mlLowTri,Standard,2000,10,5,594104,5968,11742,,5/13/2026,
+20260513_3mlMidTri,Standard,5000,25,12.55,1412650,14927,28472,,5/13/2026,
+20260513_6mlMidTri,Standard,10000,50,25.1,2616172,29097,53475,,5/13/2026,
+20260513_9mlMidTri,Standard,15000,75,37.65,3816462,44597,79390,,5/13/2026,
+20260513_12mlMidTri,Standard,20000,100,50.2,4867987,59218,102751,,5/13/2026,
+20260513_3mlHighTri,Standard,12525,251.5,125,3498924,159617,214421,,5/13/2026,
+20260513_6mlHighTri,Standard,25050,503,250,5932879,296981,360910,,5/13/2026,
+20260513_9mlHighTri,Standard,37575,754.5,375,8259256,441704,505295,,5/13/2026,
+20260513_12mlHighTri,Standard,50100,1006,500,10587934,599693,649969,,5/13/2026,
+20260513_3ml_10000CH4,Standard,unknown,2500,unknown,58116,1523429,4964,,5/13/2026,
+20260513_6ml_10000CH4,Standard,unknown,5000,unknown,166817,3047885,1822,,5/13/2026,
+20260513_9ml_10000CH4,Standard,unknown,7500,unknown,15358,4493466,597,,5/13/2026,
+20260513_12ml_10000CH4,Standard,unknown,10000,unknown,10185,5833568,289,,5/13/2026,
+Blank3,Blank,unknown,unknown,unknown,7965,7619,178,,5/13/2026,
+Blank4,Blank,unknown,unknown,unknown,10899,1001,316,,5/13/2026,
+ChkStd_12mLLowTri1,Standard,2000,10,5,583661,6381,12460,,5/13/2026,
+Blank5,Blank,unknown,unknown,unknown,10231,336,196,,5/13/2026,
+STEEP_GWI_WC_B_T0,Sample,unknown,unknown,unknown,7492304,838,3862,,5/13/2026,
+STEEP_GWI_WC_B_T1,Sample,unknown,unknown,unknown,7054612,1331,3938,,5/13/2026,
+STEEP_GWI_WC_B_T2,Sample,unknown,unknown,unknown,7388265,1022,5115,,5/13/2026,
+STEEP_GWI_WC_B_T3,Sample,unknown,unknown,unknown,5933054,396,6228,,5/13/2026,
+STEEP_GWI_WC_B_T4,Sample,unknown,unknown,unknown,7551227,699,9293,,5/13/2026,
+STEEP_GWI_WC_B_T5,Sample,unknown,unknown,unknown,7126026,669,3983,,5/13/2026,
+STEEP_GWI_WC_B_T6,Sample,unknown,unknown,unknown,8240573,880,3364,,5/13/2026,
+STEEP_GWI_WC_C_T0,Sample,unknown,unknown,unknown,10848235,1304,3420,,5/13/2026,
+STEEP_GWI_WC_C_T1,Sample,unknown,unknown,unknown,8512642,1007,8956,,5/13/2026,
+STEEP_GWI_WC_C_T2,Sample,unknown,unknown,unknown,7987736,49737,8984,,5/13/2026,
+ChkStd_12mLLowTri2,ChkStd,unknown,unknown,unknown,600113,6149,35617,,5/13/2026,
+Blank 6,Blank,unknown,unknown,unknown,21281,98,543,,5/13/2026,
+STEEP_GWI_WC_C_T3,Sample,unknown,unknown,unknown,9192745,92429,3617,,5/13/2026,
+STEEP_GWI_WC_C_T4,Sample,unknown,unknown,unknown,8490556,1505,5873,,5/13/2026,
+STEEP_GWI_WC_C_T5,Sample,unknown,unknown,unknown,8496229,1320,14234,,5/13/2026,
+STEEP_GWI_WC_C_T6,Sample,unknown,unknown,unknown,12944409,84,11049,,5/13/2026,
+20260505_Ch1_5cm,Sample,unknown,unknown,unknown,4440043,133134,1945,,5/13/2026,12
+20260505_Ch1_20cm,Sample,unknown,unknown,unknown,4140942,509564,2226,,5/13/2026,12
+20260505_Ch2_5cm,Sample,unknown,unknown,unknown,3334986,32888,1844,,5/13/2026,12
+20260505_Ch2_20cm,Sample,unknown,unknown,unknown,3829078,294343,1870,,5/13/2026,12
+20260505_Ch3_5cm,Sample,unknown,unknown,unknown,4456799,154352,0,,5/13/2026,12
+20260505_Ch3_20cm,Sample,unknown,unknown,unknown,3537562,207155,434,,5/13/2026,12
+ChkStd_12mLLowTri3,ChkStd,unknown,unknown,unknown,503979,6133,12063,,5/13/2026,
+Blank7,Blank,unknown,unknown,unknown,13357,133,131,,5/13/2026,
+20260505_Ch4_5cm,Sample,unknown,unknown,unknown,5988484,169995,444,,5/13/2026,12
+20260505_Ch4_20cm,Sample,unknown,unknown,unknown,4893123,622160,706,,5/13/2026,12
+20260505_Ch5_5cm,Sample,unknown,unknown,unknown,3821746,80194,1319,,5/13/2026,12
+20260505_Ch5_20cm,Sample,unknown,unknown,unknown,3542223,336471,1622,,5/13/2026,12
+20260505_Ch6_5cm,Sample,unknown,unknown,unknown,4189660,19092,408,,5/13/2026,12
+20260505_Ch6_20cm,Sample,unknown,unknown,unknown,3352544,364494,473,,5/13/2026,12
+20260505_Ch7_5cm,Sample,unknown,unknown,unknown,4564092,166424,708,,5/13/2026,12
+20260505_Ch7_20cm,Sample,unknown,unknown,unknown,3895113,1001112,557,,5/13/2026,12
+20260505_Ch8_5cm,Sample,unknown,unknown,unknown,3670414,971818,1310,,5/13/2026,12
+20260505_Ch8_20cm,Sample,unknown,unknown,unknown,4489660,2457605,1015,,5/13/2026,12
+ChkStd_12mLLowTri4,ChkStd,unknown,unknown,unknown,576218,10529,13100,,5/13/2026,
+Blank 8,Blank,unknown,unknown,unknown,13150,408,0,,5/13/2026,
+20260505_Ch9_5cm,Sample,unknown,unknown,unknown,3851174,20928,638,,5/13/2026,12
+20260505_Ch9_20cm,Sample,unknown,unknown,unknown,3573817,718416,505,,5/13/2026,12
+20260505_Ch10_5cm,Sample,unknown,unknown,unknown,4299866,343343,0,,5/13/2026,12
+20260505_Ch10_20cm,Sample,unknown,unknown,unknown,4141734,2033705,575,,5/13/2026,12
+20260505_Ch11_5cm,Sample,unknown,unknown,unknown,2884877,98681,565,,5/13/2026,12
+20260505_Ch11_20cm,Sample,unknown,unknown,unknown,3265740,1159492,344,,5/13/2026,12
+20260505_Ch12_5cm,Sample,unknown,unknown,unknown,4167055,201819,281,,5/13/2026,12
+20260505_Ch12_20cm,Sample,unknown,unknown,unknown,5000550,5385477,559,,5/13/2026,12
+20260414_Ch12_20cm_2,Sample,unknown,unknown,unknown,4187651,4299909,500,,5/13/2026,12
+ChkStd_12mLLowTri5,ChkStd,unknown,unknown,unknown,374468,13943,18743,,5/13/2026,
+Blank 9,Blank,unknown,unknown,unknown,11426,606,0,,5/13/2026,
+Blank 10,Blank,unknown,unknown,unknown,6527,160,0,,5/13/2026,
