@@ -140,7 +140,7 @@ all <- all[with(all, order(Year, Month, Chamber, Well, Depth)),]
 all
 
 all <- subset(all, select = c(Year, Month, Sample_Date, SampleID, Chamber, Well, Depth, CO2, Nitrogen, Treatment, 
-                              H2S, pH, CH4, NH4, SO4, Cl, Salinity))
+                              H2S, pH, CH4, NH4, SO4, Cl, Salinity)) %>% rename(SubPlot = Well)
 
 
 all <- all %>%
