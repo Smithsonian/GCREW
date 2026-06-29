@@ -51,20 +51,10 @@ Run_notes=""#any notes from run
 
 #Import Plate Data
 
-plates<- c("Plate1","Plate2","Plate3","Plate4","Plate5","rrPlate1","rrPlate2")
-
 folder_path_rawdata <- paste0("Raw Data")
 Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = "Plate")
 head(Raw_plates)
 
-
-#Import Run Date for Each Plate for Std curve qaqc
-Run_dates <- tibble(
-    Plate = plates,
-    Run_Date = c("05/18/2026","05/18/2026","05/18/2026","05/18/2026","05/19/2026","06/01/2026","06/01/2026")
-  )
-
-  Run_dates <- Run_dates %>% mutate(Run_Date = as.Date(Run_Date, tryFormats = c("%Y-%m-%d", "%m/%d/%y", "%m/%d/%Y")))
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
@@ -163,16 +153,25 @@ metadata <- raw_metadata %>%
 ##Read in data
 ```{r read in plates,echo=FALSE,include=FALSE}
 
+
 #read in the csv files
 dat<-read_plates(
   files = Raw_plates,#list of all file paths
-  plate_names = plates ,  #list of plate names          
+  plate_names = Raw_plates ,  #list of plate names          
   well_ids_column = "Wells",    # name to give column of well IDs (optional)
   sep = ","                     # separator used in the csv file (optional)
 ) %>%
   rename("Abs"=values,
          "IDs"=values.2,
          "Dilution"=values.3)
+
+dat <- dat %>%
+  mutate(file_name = Plate) %>% 
+  mutate(Plate = str_extract(file_name, "Plate[0-9]+")) %>% 
+  mutate(Run_Date = str_extract(file_name, "\\d{4}\\d{2}\\d{2}")) %>% 
+  mutate(Run_Date = as.Date(Run_Date, format = "%Y%m%d")) %>% 
+  dplyr::select(-file_name)
+
 head(dat)
   
 ```
@@ -204,7 +203,8 @@ Abs_rm = ifelse(Removed == "RMVD", NA, Abs)) %>%
   mutate(CV_Flag2 = ifelse(CV2 >= cv_flag_stds, "CV_High", "CV_Good")) %>% ungroup()
 
 #organize data
-H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate,
+H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Run_Date, 
+                                                   Plate,
                                                    Wells,
                                                    Abs,
                                                    Removed,
@@ -215,7 +215,7 @@ H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate,
                                                    CV2,
                                                    CV_Flag2) %>% 
   mutate(Mean_Abs = Mean_Abs2, CV_Flag = CV_Flag2, CV = CV2) %>% 
-                                  dplyr::select(Plate, 
+                                  dplyr::select(Run_Date, Plate, 
                                                 Wells,                                                                                    Abs,
                                                 Removed,
                                                 IDs,
@@ -231,7 +231,7 @@ H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Plate,
 
 ##Check R2 & Remove Standards if Necessary
 ```{r, echo=FALSE}
-split_data <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %like% "Chk") %>% dplyr::select(Plate, IDs, Conc, Mean_Abs, Abs, Removed, CV_Flag) %>% filter(!Removed == "RMVD") %>% #Split Data by Plate
+split_data <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %like% "Chk") %>% dplyr::select(Run_Date, Plate, IDs, Conc, Mean_Abs, Abs, Removed, CV_Flag) %>% filter(!Removed == "RMVD") %>% #Split Data by Plate
       distinct() %>%
       group_by(Plate) %>%
       group_split()
@@ -246,13 +246,14 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
  Slope_H2S_raw <- bind_rows(Slope_H2S_raw_list)
   
  #check R2 and flag
- Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select(Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
+ Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select( Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
 
  #join standard curve CVs and regression values
  R2_Check_Raw <- left_join(Slope_H2S_Std_Crvs, H2S_STD_CV_fin, by = "Plate")
  
  R2_Check <- R2_Check_Raw %>% 
-   dplyr::select(Plate,
+   dplyr::select(Run_Date,
+                 Plate,
                  IDs,
                  Abs,
                  Removed,
@@ -300,12 +301,12 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
                                        R2_RMV
                                      )) %>% mutate(R2_RMVD = ifelse(is.na(R2_RMV_CV), "KEPT", R2_RMV_CV)) %>% dplyr::select(-R2_RMV, -R2_RMV_CV)
  
-R2_Removed_forPair <- R2_Check_RMVBL %>% dplyr::select(Plate, IDs, R2_RMVD) %>% distinct()
+R2_Removed_forPair <- R2_Check_RMVBL %>% dplyr::select(Run_Date, Plate, IDs, R2_RMVD) %>% distinct()
 
-H2S_STDs_Pair <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %like% "Chk") %>% dplyr::select(Plate, IDs, Conc, Mean_Abs, Abs, Removed, CV_Flag) %>% filter(!Removed == "RMVD") %>% distinct() %>% left_join(R2_Removed_forPair)
+H2S_STDs_Pair <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %like% "Chk") %>% dplyr::select(Run_Date, Plate, IDs, Conc, Mean_Abs, Abs, Removed, CV_Flag) %>% filter(!Removed == "RMVD") %>% distinct() %>% left_join(R2_Removed_forPair)
  
    
-  R2_Check_fin <- H2S_STDs_Pair %>% mutate(STD_ABS_rmv = ifelse(R2_RMVD == "RMVD", NA, Abs)) %>% group_by(Plate) %>% mutate(Points = ifelse("RMVD" %in% R2_RMVD, "Point_Removed", "ALL_KEPT")) %>% dplyr::select(Plate, IDs, Conc, STD_ABS_rmv, CV_Flag, Points) %>% ungroup() %>% na.omit()
+  R2_Check_fin <- H2S_STDs_Pair %>% mutate(STD_ABS_rmv = ifelse(R2_RMVD == "RMVD", NA, Abs)) %>% group_by(Plate) %>% mutate(Points = ifelse("RMVD" %in% R2_RMVD, "Point_Removed", "ALL_KEPT")) %>% dplyr::select(Run_Date, Plate, IDs, Conc, STD_ABS_rmv, CV_Flag, Points) %>% ungroup() %>% na.omit()
  
  #separate plates for new regression
  split_data_rmv <- R2_Check_fin %>%
@@ -321,7 +322,7 @@ H2S_STDs_Pair <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %li
 
  Slope_H2S_raw_rm <- bind_rows(Slope_H2S_raw_list_rm)
   
- Slope_H2S_Std_Crvs_rm <- Slope_H2S_raw_rm %>% dplyr::select(Plate, Curve, R2, Slope, Intercept, CV_Flag, Points) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
+ Slope_H2S_Std_Crvs_rm <- Slope_H2S_raw_rm %>% dplyr::select(Run_Date, Plate, Curve, R2, Slope, Intercept, CV_Flag, Points) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
  
 
 ```
@@ -338,8 +339,7 @@ H2S_Curve <- ggplot(Slope_H2S_raw_rm, aes(STD_ABS_rmv, Conc, color = Plate, line
 H2S_Curve
 
 #Add dates to plate and format data
-STD_run_date <- left_join(Run_dates, Slope_H2S_Std_Crvs_rm, by = join_by(Plate))
-new_log_stds <- STD_run_date %>% dplyr::select(Plate,
+new_log_stds <- Slope_H2S_Std_Crvs_rm %>% dplyr::select(Plate,
    Curve,
    R2,
    Slope,
@@ -446,7 +446,7 @@ Std_crv_calc <-Std_crv_calc %>% distinct()
 ## Return Flags For Standard Curve
 ```{r, echo=FALSE}
 
-STD_CRV_flags <- full_join(Slope_H2S_Std_Crvs_rm, Run_dates, by = join_by(Plate))
+STD_CRV_flags <- Slope_H2S_Std_Crvs_rm
 
 STD_CRV_flags_table1 <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag)
 
@@ -1058,11 +1058,9 @@ STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mu
   STDCV_Flags = ifelse(STDCV_Flags %like% "Good", NA, STDCV_Flags)
 ) %>% na.omit()
 
-Flags_Int <- tibble(Plate = c(plates))
-
 #Join Flags
 
-Flags_Joined_1 <-left_join(Flags_Int, Dup_Flags_2, by = join_by(Plate))
+Flags_Joined_1 <- Dup_Flags_2
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Spk_Flags_2, by = join_by(Plate))
 
