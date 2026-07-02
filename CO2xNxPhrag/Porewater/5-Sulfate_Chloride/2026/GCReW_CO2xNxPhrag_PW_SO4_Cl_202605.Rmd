@@ -37,7 +37,7 @@ lapply(c(
   sample_month <- "May"
   Site = "GCReW"
   Project_name = "CO2xNxPhrag"
-  run_notes = "
+  run_notes = "Stds 1 and 2 were low; need to remake them. Std curve looked amazing though. 
   " #any notes from the run
 
 ###### File Names - PLEASE CHANGE 
