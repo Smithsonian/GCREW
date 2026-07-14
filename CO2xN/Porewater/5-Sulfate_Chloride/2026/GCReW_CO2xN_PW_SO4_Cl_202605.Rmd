@@ -1,13 +1,15 @@
 ---
-title: "CO2xN: Porewater SO4/Cl"
-author: "Month Year Samples"
+title: 'CO2xN: Porewater SO4/Cl'
+author: "May 2026 Samples"
 date: "`r Sys.Date()`"
-output: 
+output:
   pdf_document:
     toc: true
     number_sections: true
-
-output_dir: "To Be Reviewed/PDF"
+  html_document:
+    toc: true
+    df_print: paged
+output_dir: To Be Reviewed/PDF
 ---
 
 \newpage
@@ -30,23 +32,25 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "2025-08-19"  #Date that instrument was run
-  Run_by = "Zoe Read"  #Instrument user 
-  Script_run_by = "Zoe Read" #Code user 
-  sample_year <- "2024"
-  sample_month <- "July"
+  Date_Run = "2026-07-07"  #Date that instrument was run
+  Run_by = "Victoria Ellis"  #Instrument user 
+  Script_run_by = "Victoria Ellis" #Code user 
+  sample_year <- "2026"
+  sample_month <- "May"
   Site = "GCReW"
   Project_name = "CO2xN"
-  run_notes = "
+  run_notes = "One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
   " #any notes from the run
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/CO2xN_202407_Cl.txt"
-  raw_file_name_so4 = "Raw Data/CO2xN_202407_SO4.txt"
+  raw_file_name_cl = "Raw Data/CO2xN_202605_Cl.txt"
+  raw_file_name_so4 = "Raw Data/CO2xN_202605_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/GCReW_CO2xN_PW_Processed_Cl_SO4_202407.csv" 
+  processed_file_name = "Processed Data/GCReW_CO2xN_PW_Processed_Cl_SO4_202605.csv" 
 
 ###### Log Files - PLEASE CHECK 
 #downloaded metadata csv - downloaded from Google drive as csv for this year
@@ -1034,7 +1038,7 @@ head(final_data)
 ```
 
 ## Visualize Data SO4
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data SO4, echo=FALSE}
 
 SO4_forplot <- final_data
 
@@ -1171,7 +1175,7 @@ viz_SO4_plot_2
 ```
 
 ## Visualize Data Cl
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data Cl, echo=FALSE}
 
 Cl_forplot <- final_data
 
