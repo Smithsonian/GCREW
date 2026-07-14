@@ -1,0 +1,241 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","N_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xN","2026","May","SCAM","2-Meter","L1",20,"Elevated","Amended",21.034382407985,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",178.563737658674,"Within_Range","",11.4384886915,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"2","GCReW","CO2xN","2026","May","SCAM","2-Meter","L1",40,"Elevated","Amended",18.7836494073612,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",185.800812411848,"Within_Range","",11.9020823116,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"3","GCReW","CO2xN","2026","May","SCAM","2-Meter","L1",80,"Elevated","Amended",11.4863537117904,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",176.418939351199,"Within_Range","",11.3010968798,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"4","GCReW","CO2xN","2026","May","SCAM","2-Meter","L2",20,"Ambient","Ambient",25.2661759201497,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",184.732256699577,"Within_Range","",11.8336326095,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"5","GCReW","CO2xN","2026","May","SCAM","2-Meter","L2",40,"Ambient","Ambient",20.4053742981909,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",185.517393511989,"Within_Range","",11.8839270212,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"6","GCReW","CO2xN","2026","May","SCAM","2-Meter","L2",80,"Ambient","Ambient",17.5264628820961,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",179.889334273625,"Within_Range","",11.5234039583,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"7","GCReW","CO2xN","2026","May","SCAM","2-Meter","L3",20,"Elevated","Ambient",11.0953587024329,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",178.500784203103,"Within_Range","",11.4344560096,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"8","GCReW","CO2xN","2026","May","SCAM","2-Meter","L3",40,"Elevated","Ambient",10.0004834684966,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",173.759557122708,"Within_Range","",11.1307417741,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"9","GCReW","CO2xN","2026","May","SCAM","2-Meter","L3",80,"Elevated","Ambient",13.0966531503431,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",174.542510578279,"Within_Range","",11.180896324,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"10","GCReW","CO2xN","2026","May","SCAM","2-Meter","L4",20,"Ambient","Amended",28.4586993137866,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",176.945957686883,"Within_Range","",11.3348566994,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"11","GCReW","CO2xN","2026","May","SCAM","2-Meter","L4",40,"Ambient","Amended",26.4364285714286,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",200.343523272214,"Within_Range","",12.8336614653,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"12","GCReW","CO2xN","2026","May","SCAM","2-Meter","L4",80,"Ambient","Amended",15.1833374922021,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",179.499142454161,"Within_Range","",11.4984089922,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"13","GCReW","CO2xN","2026","May","SCAM","2-Meter","L5",20,"Elevated","Amended",21.8743761696818,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",160.488411847673,"Within_Range","",10.2806167594,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"14","GCReW","CO2xN","2026","May","SCAM","2-Meter","L5",40,"Elevated","Amended",22.0366250779788,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",188.31047954866,"Within_Range","",12.0628469455,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"15","GCReW","CO2xN","2026","May","SCAM","2-Meter","L5",80,"Elevated","Amended",15.2572645040549,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",175.433921015515,"Within_Range","",11.2379984275,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"16","GCReW","CO2xN","2026","May","SCAM","2-Meter","L6",20,"Ambient","Ambient",19.7887679351216,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",185.969887165021,"Within_Range","",11.9129129275,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"17","GCReW","CO2xN","2026","May","SCAM","2-Meter","L6",40,"Ambient","Ambient",18.5969681846538,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",187.084767277856,"Within_Range","",11.984330085,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"18","GCReW","CO2xN","2026","May","SCAM","2-Meter","L6",80,"Ambient","Ambient",14.1391172800998,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",178.399286318759,"Within_Range","",11.4279542429,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"19","GCReW","CO2xN","2026","May","SCAM","2-Meter","L7",20,"Ambient","Ambient",26.2626824703681,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",184.695844851904,"Within_Range","",11.8313001339,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"20","GCReW","CO2xN","2026","May","SCAM","2-Meter","L7",40,"Ambient","Ambient",25.2736026200873,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",193.112135401975,"Within_Range","",12.3704321364,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"21","GCReW","CO2xN","2026","May","SCAM","2-Meter","L7",80,"Ambient","Ambient",19.2306363069245,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",180.957830747532,"Within_Range","",11.5918498657,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"22","GCReW","CO2xN","2026","May","SCAM","2-Meter","L8",20,"Elevated","Ambient",20.150892077355,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",175.749418899859,"Within_Range","",11.2582086383,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"23","GCReW","CO2xN","2026","May","SCAM","2-Meter","L8",40,"Elevated","Ambient",24.392301933874,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",194.602047954866,"Within_Range","",12.4658731782,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"24","GCReW","CO2xN","2026","May","SCAM","2-Meter","L8",80,"Elevated","Ambient",16.4991827822832,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",177.000820874471,"Within_Range","",11.3383711337,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"25","GCReW","CO2xN","2026","May","SCAM","2-Meter","L9",20,"Elevated","Ambient",23.1817311291329,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",171.22389280677,"Within_Range","",10.968311809,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"26","GCReW","CO2xN","2026","May","SCAM","2-Meter","L9",40,"Elevated","Ambient",28.2538116032439,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",201.525619181946,"Within_Range","",12.9093843424,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"27","GCReW","CO2xN","2026","May","SCAM","2-Meter","L9",80,"Elevated","Ambient",19.8842202121023,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",186.86901551481,"Within_Range","",11.9705094262,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"28","GCReW","CO2xN","2026","May","SCAM","2-Meter","L10",20,"Ambient","Amended",26.3691203992514,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",201.258964739069,"Within_Range","",12.8923029521,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"29","GCReW","CO2xN","2026","May","SCAM","2-Meter","L10",40,"Ambient","Amended",22.6040954460387,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",186.868569816643,"Within_Range","",11.9704808756,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"30","GCReW","CO2xN","2026","May","SCAM","2-Meter","L10",80,"Ambient","Amended",16.6553805364941,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",184.706730606488,"Within_Range","",11.8319974552,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"31","GCReW","CO2xN","2026","May","SCAM","2-Meter","L11",20,"Ambient","Amended",13.7466250779788,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",137.076245416079,"Within_Range","",8.7808766903,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"32","GCReW","CO2xN","2026","May","SCAM","2-Meter","L11",40,"Ambient","Amended",24.6076169681847,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",190.995703808181,"Within_Range","",12.2348574439,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"33","GCReW","CO2xN","2026","May","SCAM","2-Meter","L11",80,"Ambient","Amended",16.5858951965065,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",159.520510578279,"Within_Range","",10.2186147947,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"34","GCReW","CO2xN","2026","May","SCAM","2-Meter","L12",20,"Elevated","Amended",19.4123830318153,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",150.384067700987,"Within_Range","",9.6333511664,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"35","GCReW","CO2xN","2026","May","SCAM","2-Meter","L12",40,"Elevated","Amended",23.842217716781,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",186.710691114245,"Within_Range","",11.960367458,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"36","GCReW","CO2xN","2026","May","SCAM","2-Meter","L12",80,"Elevated","Amended",19.8010698689956,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",184.899035260931,"Within_Range","",11.8443161356,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"37","GCReW","CO2xN","2026","May","SCAM","2-Meter","L13",20,"Elevated","Ambient",24.1202401746725,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",169.426843441467,"Within_Range","",10.8531961512,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"38","GCReW","CO2xN","2026","May","SCAM","2-Meter","L13",40,"Elevated","Ambient",22.3423892701185,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",195.280699576869,"Within_Range","",12.5093463456,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"39","GCReW","CO2xN","2026","May","SCAM","2-Meter","L13",80,"Elevated","Ambient",16.098574547723,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",182.491768688293,"Within_Range","",11.6901110924,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"40","GCReW","CO2xN","2026","May","SCAM","2-Meter","L14",20,"Ambient","Amended",26.0638833437305,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",186.528011283498,"Within_Range","",11.948665326,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"41","GCReW","CO2xN","2026","May","SCAM","2-Meter","L14",40,"Ambient","Amended",21.6777947598253,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",194.006141043724,"Within_Range","",12.4277004839,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"42","GCReW","CO2xN","2026","May","SCAM","2-Meter","L14",80,"Ambient","Amended",16.9928758577667,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",182.118679830748,"Within_Range","",11.6662117104,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"43","GCReW","CO2xN","2026","May","SCAM","2-Meter","L15",20,"Elevated","Amended",15.2909201497193,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",172.553706629055,"Within_Range","",11.0534972223,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"44","GCReW","CO2xN","2026","May","SCAM","2-Meter","L15",40,"Elevated","Amended",17.4245321272614,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",182.802789844852,"Within_Range","",11.7100345323,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"45","GCReW","CO2xN","2026","May","SCAM","2-Meter","L15",80,"Elevated","Amended",14.77445102932,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",179.439703808181,"Within_Range","",11.4946014625,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"46","GCReW","CO2xN","2026","May","SCAM","2-Meter","L16",20,"Ambient","Ambient",15.1294946974423,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",174.240299012694,"Within_Range","",11.1615372102,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"47","GCReW","CO2xN","2026","May","SCAM","2-Meter","L16",40,"Ambient","Ambient",13.8788084840923,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",173.09736248237,"Within_Range","",11.0883228105,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"48","GCReW","CO2xN","2026","May","SCAM","2-Meter","L16",80,"Ambient","Ambient",12.4749906425452,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",176.487963328632,"Within_Range","",11.3055184281,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"49","GCReW","CO2xN","2026","May","SCAM","2-Meter","L17",20,"Ambient","Ambient",23.2108328134747,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",160.529619181946,"Within_Range","",10.283256425,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"50","GCReW","CO2xN","2026","May","SCAM","2-Meter","L17",40,"Ambient","Ambient",19.9100873362445,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",161.634330042313,"Within_Range","",10.354022159,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"51","GCReW","CO2xN","2026","May","SCAM","2-Meter","L17",80,"Ambient","Ambient",11.0806113537118,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",138.9842651622,"Within_Range","",8.9031009054,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"52","GCReW","CO2xN","2026","May","SCAM","2-Meter","L18",20,"Elevated","Amended",38.5797504678727,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",300.248423131171,"Within_Range","",19.2333845262,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"53","GCReW","CO2xN","2026","May","SCAM","2-Meter","L18",40,"Elevated","Amended",15.0097878976918,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",156.131816643159,"Within_Range","",10.0015413303,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"54","GCReW","CO2xN","2026","May","SCAM","2-Meter","L18",80,"Elevated","Amended",0,"bdl","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",0,"bdl","",2.6e-05,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"55","GCReW","CO2xN","2026","May","SCAM","2-Meter","L19",20,"Elevated","Ambient",7.24033998752339,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",172.84234696756,"Within_Range","",11.0719869884,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"56","GCReW","CO2xN","2026","May","SCAM","2-Meter","L19",40,"Elevated","Ambient",8.50342170929507,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",169.555300423131,"Within_Range","",10.8614248678,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"57","GCReW","CO2xN","2026","May","SCAM","2-Meter","L19",80,"Elevated","Ambient",7.91667810355583,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",161.240758815233,"Within_Range","",10.3288107143,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"58","GCReW","CO2xN","2026","May","SCAM","2-Meter","L20",20,"Ambient","Amended",22.4158858390518,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",189.183816643159,"Within_Range","",12.1187913041,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"59","GCReW","CO2xN","2026","May","SCAM","2-Meter","L20",40,"Ambient","Amended",21.7313505926388,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",206.894905500705,"Within_Range","",13.2533308908,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
+"60","GCReW","CO2xN","2026","May","SCAM","2-Meter","L20",80,"Ambient","Amended",16.0424454148472,"Within_Range","SO4 checks perc diff out of range; SO4 dups cv out of range; SO4 dups perc diff out of range",189.729723554302,"Within_Range","",12.1537610909,"2026-07-07","One bad DUP from Cl, two bad DUPS from SO4. 
+One bad SPK. Standard curve looks mostly good but the first standards are still low (despite remaking them). 
+We might need to re-purchase the standards.
+  "
