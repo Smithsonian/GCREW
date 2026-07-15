@@ -991,8 +991,7 @@ H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) )
 
 Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
   Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
-  Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag),
-  Dilution = ifelse(Rerun == "RRN", Dilution_rr, Dilution)
+  Conc_Flag = ifelse(Rerun == "RRN", Conc_Flag_rr, Conc_Flag)
 ) %>% dplyr::select(IDs, Conc, Conc_Flag, CV_Flag, Plate, Dilution, CV) %>% rename(Sample_ID = IDs) %>% ungroup() %>% group_by(Sample_ID) %>% mutate(
   Min_CV = ifelse(CV == min(CV), "KEEP", "RMV"), # get if CV is lowest of reruns
   Within_Range = "Within_Range" %in% Conc_Flag, #Get if any are within range
@@ -1003,26 +1002,22 @@ Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
   CV_Check = CV == min(CV[which(Dilution == Max_Dil)]), #Get if CV is lowest of highest dilution for reruns
   Number = length(Conc) #get number of times ran
 ) %>% ungroup() %>%
-  mutate(Remove = ifelse(Number == 1, #check if sample was reran
-                         "KEEP", 
-                         ifelse(All_Good, #check if multiple samples meet all criteria
-    ifelse(Min_CV == "KEEP", #Keep only lowest CV
-           "KEEP1",
-           "RMV1"),
-    ifelse(Conc_Flag == "Within_Range" & CV_Flag == "CV_Good", #If only one sample meets all criteria keep that one
-      "KEEP2", ifelse(Conc_Flag == "Within_Range", "KEEP2a",
-      ifelse(!(Within_Range) & BDL, #Check if none are within range but are under detection limit
-        ifelse(Dilution == Min_Dil, #keep lowest dilution
-               "KEEP3",
-               "RMV3"),
-        ifelse(!(Within_Range) & CV_Check, #if all are above detection limit keep lowest CV of highest dilution
-               "KEEP4",
-               "RMV4")
-      )
-    )
-  ))))
+  mutate(Remove = case_when(
+  Number == 1 ~ "KEEP",   #check if sample was reran
+  All_Good & Min_CV == "KEEP" ~ "KEEP1", #check if multiple samples meet all criteria #Keep only lowest CV
+  All_Good & !Min_CV == "KEEP" ~ "RMV1", #Keep only lowest CV
+  Conc_Flag == "Within_Range" & CV_Flag == "CV_Good" ~ "KEEP2", #If only one sample meets all criteria keep that one
+  Conc_Flag == "Within_Range" ~ "KEEP2a",
+  !(Within_Range) & BDL & Dilution == Min_Dil ~ "KEEP3", #Check if none are within range but are under detection limit #keep lowest dilution
+  !(Within_Range) & BDL & !Dilution == Min_Dil ~ "RMV3", #keep lowest dilution
+  !(Within_Range) & CV_Check~ "KEEP4", #if all are above detection limit keep lowest CV of highest dilution
+  .default = "RMV4"
+) )
 
-Samples <- Samples_Tagged %>% filter(Remove %like% "KEEP")
+
+
+Samples <- Samples_Tagged %>% filter(Remove %like% "KEEP") %>% group_by(Sample_ID) %>% mutate(Number = length(Conc) ) %>% ungroup() %>% filter(Number == 1 | !Remove == "KEEP2a") %>% group_by(Sample_ID) %>% mutate(Number = length(Conc))# this makes sure there is only on data point for each sample
+
 
 #check to see if all samples are present in the metadata
 all_present <- all(metadata$Sample_ID %in% Samples$Sample_ID)
