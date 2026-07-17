@@ -288,7 +288,7 @@ viz_pH_plot_v2 <- ggplot(
   theme_classic() +
   labs(x = " ",
        y = "pH",
-       title = "CO2xN: Porewater pH"
+       title = "CO2xNxPhrag: Porewater pH"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
