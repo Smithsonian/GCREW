@@ -1000,7 +1000,7 @@ df_all_clean <- all_data_flagged %>%
 
 ```
 
-## Visualize Data
+## Visualize Data Cl
 ```{r Visualize Cl Data, echo=FALSE}
 cat("Visualize Data")
 
@@ -1081,8 +1081,8 @@ viz_Cl_plot_v2 <- ggplot(
   aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = Cl_Conc_mM,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
 )) +
   geom_bar(
     stat = "identity",
@@ -1113,7 +1113,7 @@ viz_Cl_plot_v2 <- ggplot(
   theme_classic() +
   labs(x = " ",
        y = "Cl (mM)",
-       title = "CO2xNxPhrag: Porewater Methane"
+       title = "CO2xN: Porewater Cl"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -1248,11 +1248,11 @@ SO4_forplot <- SO4_forplot[order(SO4_forplot$Depth_cm), ]
 
 viz_SO4_plot_v2 <- ggplot(
   data = SO4_forplot,
-  aes(
+ aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = SO4_Conc_mM,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
 )) +
   geom_bar(
     stat = "identity",
@@ -1283,7 +1283,7 @@ viz_SO4_plot_v2 <- ggplot(
   theme_classic() +
   labs(x = " ",
        y = "SO4 (uM)",
-       title = "CO2xNxPhrag: Porewater Methane"
+       title = "CO2xNxPhrag: Porewater SO4"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +

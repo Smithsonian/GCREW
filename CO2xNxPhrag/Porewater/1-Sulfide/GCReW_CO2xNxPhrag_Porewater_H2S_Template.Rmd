@@ -1259,11 +1259,11 @@ H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
 
 viz_H2S_plot_v2 <- ggplot(
   data = H2S_forplot,
-aes(
+ aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = H2S_Conc_uM,
-  fill = as.factor(Treatment),
-  color = as.factor(Treatment)
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
 )) +
   geom_bar(
     stat = "identity",
@@ -1315,10 +1315,9 @@ print(viz_H2S_plot_v2)
 ```{r, echo = FALSE}
 #make plot
 
-H2S_forplot <- H2S_forplot %>% 
-  mutate(Sub_Plot = ifelse(SubPlot == "A", "Phrag", "Native"))
+H2S_forplot <- H2S_forplot
 
-viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color, shape = Sub_Plot)) +
+viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
   scale_color_manual(
