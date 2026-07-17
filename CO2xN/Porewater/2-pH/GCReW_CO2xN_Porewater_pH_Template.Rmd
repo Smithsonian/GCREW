@@ -230,7 +230,7 @@ viz_pH_plot2 <- ggplot(data = pH_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "pH",
-       title = "CO2xN: Porewater Methane (Alternate View)"
+       title = "CO2xN: Porewater pH"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +

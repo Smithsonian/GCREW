@@ -1118,7 +1118,7 @@ viz_SO4_plot2 <- ggplot(data = SO4_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "SO4 (uM)",
-       title = "CO2xN: Porewater Methane"
+       title = "CO2xN: Porewater SO4"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -1255,7 +1255,7 @@ viz_Cl_plot2 <- ggplot(data = Cl_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "Cl (mM)",
-       title = "CO2xN: Porewater Methane"
+       title = "CO2xN: Porewater Cl"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +

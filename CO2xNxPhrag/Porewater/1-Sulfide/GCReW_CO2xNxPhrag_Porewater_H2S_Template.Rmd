@@ -1259,133 +1259,43 @@ H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
 
 viz_H2S_plot_v2 <- ggplot(
   data = H2S_forplot,
-  aes(
-    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-    y = H2S_Conc_uM,
-    fill = as.factor(Treatment),
-    color = as.factor(Treatment),
-    pattern = as.factor(Treatment)
-  )
-) +
-  geom_bar_pattern(
+ aes(
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+  y = H2S_Conc_uM,
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
+)) +
+  geom_bar(
     stat = "identity",
-    position = position_dodge2(padding = 0.25, preserve = "single"),
-    pattern_angle = 45,
-    pattern_density = 0.1,
-    pattern_spacing = 0.025,
-    pattern_key_scale_factor = 0.6
+    position = position_dodge2(padding = 0.25,preserve = "single")
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "white",
-      "aCO2_aN_Phrag" = "white",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "white",
-      "aCO2_aN_Native" = "white"
-    ),
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
     
   ) +
-  scale_color_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "#DB5461",
-      "aCO2_aN_Phrag" = "#454ADE",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "#DB5461",
-      "aCO2_aN_Native" = "#454ADE"
-    ),
+  scale_color_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
-    
-  ) +
-  scale_pattern_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "stripe",
-      "eCO2_aN_Phrag" = "stripe",
-      "aCO2_eN_Phrag" = "stripe",
-      "aCO2_aN_Phrag" = "stripe",
-      "eCO2_eN_Native" = "none",
-      "eCO2_aN_Native" = "none",
-      "aCO2_eN_Native" = "none",
-      "aCO2_aN_Native" = "none"
-    ),
-    name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
   ) +
   theme_classic() +
-  labs(
-    x = " ",
-    y = "H2S (uM)",
-    title = "CO2xNxPhrag: Porewater Sulfide",
-    fill = "CO2 Treatment:",
-    color = "N Treatment:",
-    pattern = "Subplot:"
-  ) +
+  labs(x = " ",
+       y = "H2S (uM)",
+       title = "CO2xNxPhrag: Porewater Sulfide"
+       ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1396,7 +1306,7 @@ viz_H2S_plot_v2 <- ggplot(
       linewidth = 0.8
     )
   ) +
-  coord_flip()
+coord_flip()
 print(viz_H2S_plot_v2)
 
 
@@ -1405,10 +1315,9 @@ print(viz_H2S_plot_v2)
 ```{r, echo = FALSE}
 #make plot
 
-H2S_forplot <- H2S_forplot %>% 
-  mutate(Sub_Plot = ifelse(SubPlot == "A", "Phrag", "Native"))
+H2S_forplot <- H2S_forplot
 
-viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color, shape = Sub_Plot)) +
+viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
   scale_color_manual(
