@@ -1,5 +1,5 @@
 ---
-title: "CO2xNxPhrag: Porewater Methane"
+title: "SMARTX: Porewater Methane"
 author: "May 2026 Samples"
 date: "`r Sys.Date()`"
 output:  
@@ -16,24 +16,24 @@ output_dir: "To Be Reviewed/PDF"
 ```{r run information, include=TRUE}
 cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
 #set the run date & user name
-run_date <- "06/12/2026"
 sample_year <- "2026"
 sample_month <- "May"
 user <- "Brenden Blakley"
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 
-GHG_files <- c("Raw Data/20260612_GHGdata_LTREB_Phrag.csv")
+GHG_files <- c("Raw Data/20260625_SMARTX_GHG_May2026.csv",  "Raw Data/20260629_SMARTX_GHG_May2026.csv", "Raw Data/20260630_SMARTX_GHG_May2026.csv", "Raw Data/20260702_SMARTX_GHG_May2026.csv", "Raw Data/20260706_SMARTX_GHG_May2026.csv")
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_Phrag_ShimadzuGC_QAQC_2026.csv"
+log_path <- "Processed Data/SMARTX_ShimadzuGC_QAQC_2026.csv"
+
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202505.csv"
+final_path <- "Processed Data/GCReW_SMARTX_Porewater_CH4_202605.csv"
 
 #Gas in Water Calculations
-# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
+# "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
 TempC = 25 #Equilibration Temperature (Celsius)
 
 volume_g = 0.015 #volume of gas (in liters) in syringe when equilibrized
@@ -41,8 +41,6 @@ volume_w = 0.015 #volume of water (in liters) in syringe when equilibrized (shou
 
 #record any notes about the run or anything other info here:
 run_notes <- ""
-
-
 
 #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -62,11 +60,8 @@ pacman::p_load(
   ggplot2,
   ggpubr,
   stringr,
-  here, 
-  ggpattern)
-
-#Metadata file path
-Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+  here,
+  data.table)
 
 ##Low & High Standard Curve Cutoffs
 low_std_crv_cutoff <- 1000
@@ -77,19 +72,18 @@ r2_cutoff <- 0.990
 R <- 0.08206
 CTK <- 273.15
 
+#Metadata file path
+Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
-
-##Detection Limits (Typically 50-20000 ppm )
+##Detection Limits
 adl_cutoff <- 20000
 bdl_cutoff <- 50
 
-##Blank & Check Standard QAQC values
+##Check Standard Concentration
 level_ch4 <- 1000      #ppm
 chks_flag = 60
 blks_flag = 60
 
-#initialize flags
-flags <- ""
 
 
 ```
@@ -105,27 +99,14 @@ raw_metadata <- read.csv(Raw_Metadata)
 #Pull out only SMARTX Rows
 #Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("Phrag", Nickname, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = paste0(Sample.ID)) %>%
+  filter(grepl("SMARTX", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = paste0(Project, "_", Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
-  rename(
+    rename(
     Sample_ID = Sample.ID,
-    Plot_Name = Plot,
   ) %>%
-  select(-Temp_Treatment) %>%
-  mutate(Treatment = ifelse(
-    CO2_Treatment == "Elevated" &
-      N_Treatment == "Amended",
-    "eCO2_N",
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Ambient",
-      "eCO2",
-      ifelse(CO2_Treatment == "Ambient" &
-               N_Treatment == "Amended"  , "N" , "Ambient")
-    )
-  ))
+  select(-N_Treatment)
 
 #Bring in the collection date and any field notes if relevant
 #collection_metadata <- read.csv(Collection_Dates)
@@ -134,7 +115,7 @@ metadata <- raw_metadata %>%
 ```
 
 # Read in data files
-```{r , echo=FALSE}
+```{r , include=FALSE}
 
 #Read in Nov Data
 raw_list <- map(GHG_files, read.csv)
@@ -147,6 +128,8 @@ raw <- bind_rows(raw_list)
 
 #rename column
 colnames(raw)[1] <- "Sample_ID"
+
+#head(stds_ch4) 
 
 ```
 
@@ -161,8 +144,6 @@ stds_ch4[, "Conc_CH4"] <- as.numeric(stds_ch4[, "Conc_CH4"])
 
 #Separate Into Low and High
 
-mnmx_stds <- stds_ch4 %>% filter(Conc_CH4 > 0) %>% group_by(Run_Date) %>% mutate(Min = min(Conc_CH4), Max = max(Conc_CH4)) %>% select(Run_Date, Min, Max) %>% unique()
-
 low_stds_ch4 <- stds_ch4  %>%
   filter(!Conc_CH4 > low_std_crv_cutoff)
 
@@ -175,7 +156,8 @@ high_stds_ch4 <- stds_ch4  %>%
 high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
 
 #High Curve for CH4
-CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size = 4) +
+CH4_Curve <- ggplot(high_stds_ch4, aes(Conc_CH4, CH4_Area, color = Run_Date)) + geom_point(size =
+                                                                           4) +
   geom_smooth(method = "lm", se = FALSE) + labs(title = "High CH4 Std Curve")
 CH4_Curve
 
@@ -232,8 +214,6 @@ Slope_CH4_raw_list_l <- map(split_data_l, ~ .x %>% mutate(Curve = "Low",
  Slope_CH4_Low <- Slope_CH4_raw_l %>% select(Run_Date, Curve, R2, Slope, Intercept) %>% distinct()
  
  Slope_CH4 <- rbind(Slope_CH4_High, Slope_CH4_Low)
- 
- Slope_CH4_m <- left_join(Slope_CH4, mnmx_stds)
 
 #add new standard curve data to log
 log <- read.csv(log_path)
@@ -269,26 +249,23 @@ Flags_df <- rbind(High_R2_Flags, Low_R2_Flags)
 
 ```
 
-
-
-## Now calculate the CH4 & CO2 concentrations in ppm  
+## Now calculate the CH4 in ppm  
 ```{r Calculate Concetration, echo=FALSE}
 #head(raw)
 
 #pull out CO2xN Samples
-Samples_1 <-  raw %>%
-  filter(!str_detect(Type, "Lab air")) %>%
-  filter(!str_detect(Type, "Standard")) %>%
-  filter(!str_detect(Type, "Blank")) %>%
-  filter(!str_detect(Type, "Chk_STD")) %>%
-  filter(!str_detect(Type, "ChkStd")) %>%
+Samples_1 <-  raw %>%  
+  filter(!str_detect(Type, "Lab air")) %>%  
+  filter(!str_detect(Type, "Standard")) %>%  
+  filter(!str_detect(Type, "Blank")) %>%  
+  filter(!str_detect(Type, "Chk_STD")) %>%  
+   filter(!str_detect(Type, "ChkStd")) %>%
   filter(!str_detect(Type, "NA")) %>%
-  filter(str_detect(Sample_ID, c("P"))) %>%
-  mutate(Sample_ID = str_replace_all(Sample_ID, "_", "-")) %>%
+    filter(str_detect(Sample_ID, "[0-9]{3}-[0-9]{2,3}")) %>%
   mutate(Curve = ifelse(CH4_Area >= low_std_crv_area_cutoff, "High", "Low"))
 #head(Samples)
 
-Samples_2 <- merge(Samples_1, Slope_CH4_m)
+Samples_2 <- merge(Samples_1, Slope_CH4)
 
 #Calculate CH4 concentrations in ppm
 Samples <- Samples_2 %>% 
@@ -296,12 +273,13 @@ Samples <- Samples_2 %>%
 
 ##########make flags for any dilutions needed 
 
-Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > Samples$Max, "ADL", ifelse(Samples$CH4_Conc_ppm < Samples$Min, "BDL", "Within Range"))
+Samples$CH4_Flag <- ifelse(Samples$CH4_Conc_ppm > adl_cutoff, "Needs Dilution", "Within Range")
 
+#head(Samples)
 
 ```
 
-# Anlayze the Check Standards 
+# Aanlayze the Check Standards 
 ```{r Asses Check Standards, echo=FALSE}
 
 chks_1 <-  raw %>%
@@ -342,7 +320,7 @@ if (CH4_chks_percent >= chks_flag) {
 ch4_chk <-  ggplot(data = chks, aes(x = Run_Date, y = CH4_Conc_ppm, fill =
                                       CH4_diff_flag)) +
   geom_bar(stat = 'identity',
-    position = position_dodge2(preserve = "single")) +
+    position = position_dodge2(padding = 0.25,preserve = "single")) +
   scale_fill_manual(values = c("NO, rerun" = "darkgrey", "YES" = "darkgreen")) +
   theme_classic() + labs(x = " ", y = "Concentration (ppm)", title =
                            "Check Stds: CH4") +
@@ -383,7 +361,7 @@ CH4_blks <-  raw %>%
 #Pull out samples from df_all to calc quantile
 samples_blanks <- raw %>%
   filter(str_detect(Type, c("Sample"))) %>%
-  filter(str_detect(Sample_ID, c("P")))#have to do this because CO2xN ids start with L
+  filter(str_detect(Sample_ID, "[0-9]{3}-[0-9]{2,3}"))#have to do this because CO2xN ids start with L
 
 #Calculating the lowest 25% of sample concentrations to compare to the blank concentrations
 
@@ -405,7 +383,7 @@ if (CH4_blks_percent >= blks_flag) {
 CH4_blks_plot <-  ggplot(data = CH4_blks, aes(x = Run_Date, y = CH4_Area, fill =
                                                 CH4_diff_flag)) +
   geom_bar(stat = 'identity',
-    position = position_dodge2(preserve = "single")) +
+    position = position_dodge2(padding = 0.25,preserve = "single")) +
   scale_fill_manual(values = c(
     "YES" = "deepskyblue3",
     "NO, rerun" = "darkred"
@@ -458,12 +436,14 @@ Samples$CH4_Conc_ppm_dilcorr <- ((0.5 * Samples$CH4_Conc_ppm) * (12 + Samples$Sa
 #check results
 #head(Samples)
 
+Samples_dil <- Samples %>% mutate(Sample_ID = str_sub(Sample_ID, 8, 13))
+
 #quick first look at the samples
-ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill = CH4_Flag)) +
-  geom_bar(stat = 'identity') +
-  scale_fill_manual(values = c("Within Range" = "darkgreen",
-                    "ADL" = "darkred",
-                    "BDL" = "darkblue")) +
+ch4_samples <-  ggplot(data = Samples_dil, aes(x = Sample_ID, y = CH4_Conc_ppm, fill =
+                                             CH4_Flag)) +
+  geom_bar(stat = 'identity',
+    position = position_dodge2(padding = 0.25,preserve = "single"))+
+  scale_fill_manual(values = c("darkgreen", "red")) +
   theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range (Not Dil Cor)") +
   theme(axis.text.x = element_text(
     angle = 90,
@@ -473,12 +453,11 @@ ch4_samples <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm, fill
   theme(legend.position = "none")
 
 #corrected for different dilutions
-ch4_samples_cor <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
+ch4_samples_cor <-  ggplot(data = Samples_dil, aes(x = Sample_ID, y = CH4_Conc_ppm_dilcorr, fill =
                                              CH4_Flag)) +
-  geom_bar(stat = 'identity') +
-  scale_fill_manual(values = c("Within Range" = "green4",
-                    "ADL" = "red3",
-                    "BDL" = "blue3")) +
+  geom_bar(stat = 'identity',
+    position = position_dodge2(padding = 0.25,preserve = "single"))+
+  scale_fill_manual(values = c("green4", "darkred")) +
   theme_classic() + labs(x = " ", y = "CH4 (ppm)", title = "CH4: Green = Within Range") +
   theme(axis.text.x = element_text(
     angle = 90,
@@ -508,6 +487,8 @@ ch4_samples_cor
 
 #Calculate CH4 uM from ppm
 
+Samples_dil$CH4_Conc_uM <- (Samples_dil$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (TempC + CTK) )))/ volume_w
+
 Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (TempC + CTK) )))/ volume_w
 
 #old equation
@@ -515,8 +496,9 @@ Samples$CH4_Conc_uM <- (Samples$CH4_Conc_ppm_dilcorr * (( 1 * volume_g )/(R * (T
 
 
 #quick first look at the samples
-ch4_samples1 <-  ggplot(data = Samples, aes(x = Sample_ID, y = CH4_Conc_uM)) +
-  geom_bar(stat = 'identity', fill = "darkblue") +
+ch4_samples1 <-  ggplot(data = Samples_dil, aes(x = Sample_ID, y = CH4_Conc_uM)) +
+  geom_bar(stat = 'identity', fill = "darkblue",
+    position = position_dodge2(padding = 0.25,preserve = "single"))+
   theme_classic() +
   labs(x = " ", y = "CH4 (uM)", title = "CH4 Gas in Water") +
   theme(axis.text.x = element_text(
@@ -535,6 +517,8 @@ ch4_samples1
 ```{r check sample ids with metadata, echo=FALSE}
 
 cat("Merge Samples with Metadata")
+
+Samples <- Samples %>% mutate(Sample_ID = ifelse(Sample_ID %ilike% "SMARTX", Sample_ID, paste0("SMARTX_", Sample_ID)))
 
 #check to see if all samples are present in the metadata
 all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
@@ -559,17 +543,16 @@ merged_data <- metadata %>%
 
 #add flags
 
-merged_data$CH4_Flags <- flags
+merged_2 <- merge(merged_data, Flags_df)
+merged_data <-merged_2 %>% mutate(CH4_Flags = Flag)
+
+
 
 df_all_clean <- merged_data
 
 ```
 
-
-
-
-
-## Organize Data
+## Organize Data  
 ```{r, echo=FALSE}
 #check results
 #head(Samples)
@@ -584,31 +567,28 @@ df_all_clean_cols <- df_all_clean %>%
     Month,
     Community,
     Nickname,
-    Plot_Name,
-    SubPlot,
+    Plot,
     Depth_cm,
     CO2_Treatment,
-    N_Treatment,
-    Run_Date,
+    Temp_Treatment,
     CH4_Conc_ppm_dilcorr,
     CH4_Conc_uM,
     CH4_Flag,
-    CH4_Flags
+    CH4_Flags,
+    Run_Date
   )
 
 final_data_labeled <- df_all_clean_cols %>%
   mutate(
     Run_notes = run_notes,# new column with notes about the run
-    Analysis_rundate = Run_Date
-  )
+    Analysis_rundate = Run_Date) 
 
 #rename columns
 org_labeled_fin_data <- final_data_labeled %>%
   rename(
     CH4_Conc_ppm = CH4_Conc_ppm_dilcorr,
     CH4_Conc_Flag = CH4_Flag,
-    CH4_QAQC_Flags = CH4_Flags,
-    Plot = Plot_Name
+    CH4_QAQC_Flags = CH4_Flags
   )
 
 #Order Columns for Final Data Frame
@@ -621,10 +601,9 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Community,
     Nickname,
     Plot,
-    SubPlot,
     Depth_cm,
     CO2_Treatment,
-    N_Treatment,
+    Temp_Treatment,
     CH4_Conc_ppm,
     CH4_Conc_uM,
     CH4_Conc_Flag,
@@ -634,127 +613,122 @@ All_Clean_Data <- org_labeled_fin_data %>%
   )
 #head(Samples1)
 
-
-
 ```
+
+
 ## Visualize Data
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data C3, fig.height=10, echo=FALSE}
 cat("Visualize Data")
 
-### Ammonia
+### Ammonia 
 CH4_forplot <- All_Clean_Data
 
-color1 <- c("P1", "P2", "P3", "P4")
-color2 <- c("P5", "P6", "P7", "P8")
-color3 <- c("P10", "P9", "P11", "P12")
+#C3 plots
+CH4_forplot_C3 <- CH4_forplot %>%
+  filter(Nickname == "C3")
 
+CH4_forplot_C3$Depth_cm <- 
+  as.numeric(CH4_forplot_C3$Depth_cm)
 
-CH4_forplot <- CH4_forplot %>%
-  mutate(
-    Treatment1 = ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2 & eN",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2 & aN",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2 & eN" ,
-          "aCO2 & aN"
-        )
-      )
-    )
-  ) %>%
-  mutate(Treatment = ifelse(
-    SubPlot == "A",
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2_eN_Phrag",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2_aN_Phrag",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2_eN_Phrag" ,
-          "aCO2_aN_Phrag"
-        )
-      )
-    ),
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2_eN_Native",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2_aN_Native",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2_eN_Native" ,
-          "aCO2_aN_Native"
-        )
-      )
-    )
-  ))  %>%
-  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
-  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
-  mutate(
-    Plot_Color = case_when(
-      Plot %in% color1 ~ "Color1",
-      Plot %in% color2 ~ "Color2",
-      Plot %in% color3 ~ "Color3"
-    )
-  )
+#group the data for plotting
+CH4_forplot_C3 <- CH4_forplot_C3 %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup() %>%
+  mutate(Treatment = ifelse(Temp_Treatment == 0, ifelse(CO2_Treatment == "Ambient", "0 C + aCO2", "0 C + eCO2"), ifelse(Temp_Treatment == 1.7, "1.7 C + aCO2", ifelse(Temp_Treatment == 3.4, "3.4 C + aCO2", ifelse(Temp_Treatment == 5.1, ifelse(CO2_Treatment == "Ambient", "5.1 C + aCO2", "5.1 C + eCO2"), NA)))))
 
-
-CH4_forplot <- CH4_forplot[order(CH4_forplot$Depth_cm), ]
-
-viz_CH4_plot_v2 <- ggplot(
-  data = CH4_forplot,
-  aes(
-  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+#create plot
+viz_CH4_plot_C3 <- ggplot(data = CH4_forplot_C3, aes(
+  x = as.factor(Temp_Treatment),
   y = CH4_Conc_uM,
-  fill = as.factor(Treatment1),
-  color = as.factor(Treatment1)
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
 )) +
-  geom_bar(
-    stat = "identity",
-    position = position_dodge2(padding = 0.25,preserve = "single")
+  geom_bar(stat = "identity", position = position_dodge2(padding = 0.4, preserve = c("total", "single"), )) +
+  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+  scale_fill_manual(
+    values = c(
+      "0 C + aCO2" = "blue",
+      "1.7 C + aCO2" = "green",
+      "3.4 C + aCO2" = "orange",
+      "5.1 C + aCO2" = "red",
+      "0 C + eCO2" = "white",
+      "5.1 C + eCO2" = "white"
+    ),
+    name = "Treatment:",
+    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
+    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
   ) +
-  facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
+  scale_color_manual(
+    values = c(
+      "0 C + aCO2" = "blue",
+      "1.7 C + aCO2" = "green",
+      "3.4 C + aCO2" = "orange",
+      "5.1 C + aCO2" = "red",
+      "0 C + eCO2" = "blue",
+      "5.1 C + eCO2" = "red"
+    ),
+    name = "Treatment:",
+    breaks = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2"),
+    labels = c("0 C + aCO2", "1.7 C + aCO2", "3.4 C + aCO2", "5.1 C + aCO2", "0 C + eCO2", "5.1 C + eCO2")
+  ) +
+  theme_classic() +
+  labs(
+    x = " ",
+    y = "CH4 (uM)",
+    title = "C3: Porewater CH4",
+    fill = "CO2 Treatment",
+    color = "+Temp. (C)"
+  ) +
+  theme(legend.position = "right") +
+  scale_x_discrete(drop = TRUE) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8),
+      legend.key = element_rect("black")
+    ) + 
+  coord_flip()
+print(viz_CH4_plot_C3)
+
+```
+\newpage
+```{r Visualize Data C4, fig.height=10, echo=FALSE}
+#C4 plots
+CH4_forplot_C4 <- CH4_forplot %>%
+  filter(Nickname == "C4")
+
+CH4_forplot_C4$Depth_cm <-
+  as.numeric(CH4_forplot_C4$Depth_cm)
+
+#group the data for plotting
+CH4_forplot_C4 <- CH4_forplot_C4 %>%
+  group_by(Depth_cm) %>%
+  mutate(row_num = factor(row_number())) %>%  # create row_num as factor per group
+  ungroup()
+
+viz_CH4_plot_C4 <- ggplot(data = CH4_forplot_C4, aes(
+  x = as.factor(Temp_Treatment),
+  y = CH4_Conc_uM,
+  fill = as.factor(Temp_Treatment)
+)) +
+  geom_bar(stat = "identity", position = position_dodge2(padding = 0.25, preserve = "single"), ) +
+  facet_grid(as.numeric(Depth_cm) ~ ., scales = "free_x") +
+  facet_grid(Depth_cm ~ ., scales = "free_x") +
   scale_fill_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "white",
-    "aCO2 & aN" = "white"
-  ),
-    name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
-    
-  ) +
-  scale_color_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "#DB5461",
-    "aCO2 & aN" = "#454ADE"
-  ),
-    name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
-  ) +
+    "0" = "blue",
+    "1.7" = "green",
+    "3.4" = "orange",
+    "5.1" = "red"
+  )) +
+  
   theme_classic() +
   labs(x = " ",
        y = "CH4 (uM)",
-       title = "CO2xNxPhrag: Porewater Methane"
-       ) +
+       title = "C4: Porewater CH4",
+       fill = "+Temp. (C)") +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -763,41 +737,61 @@ viz_CH4_plot_v2 <- ggplot(
       color = "black",
       fill = NA,
       linewidth = 0.8
-    )
+    ),
+    legend.key = element_rect("black")
+    
   ) +
-coord_flip()
-print(viz_CH4_plot_v2)
-
+  coord_flip()
+print(viz_CH4_plot_C4) 
 
 ```
+\newpage
+```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
 
+#get replicate value and treatment info
+CH4_forplot_C3 <- CH4_forplot_C3 %>%
+  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
+  mutate(Treatment1 = ifelse(
+    Temp_Treatment == 0,
+    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
+    ifelse(
+      Temp_Treatment == 1.7,
+      "+ 1.7 C",
+      ifelse(
+        Temp_Treatment == 3.4,
+        "+ 3.4 C",
+        ifelse(
+          Temp_Treatment == 5.1,
+          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
+          NA
+        )
+      )
+    )
+  ))
 
-```{r, echo = FALSE}
+#ensure points are in correct order
+CH4_forplot_C3 <- CH4_forplot_C3[order(CH4_forplot_C3$Depth_cm), ]
+
 #make plot
-
-CH4_forplot <- CH4_forplot %>% 
-  mutate(Sub_Plot = ifelse(SubPlot == "A", "Phrag", "Native"))
-
-viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
+viz_CH4_plot_C3_2 <- ggplot(data = CH4_forplot_C3, 
+                            aes(x = CH4_Conc_uM, y = Depth_cm, color = Replicate)) +
   geom_point(size = 3) +
-  geom_path(linewidth = 1) +
-  scale_color_manual(
-    values = c(
-      "Color1" = "#FFD500",
-      "Color2" = "#00D0FF",
-      "Color3" = "#FF0075"
-   
-    ),
-    labels = c("1", "2", "3")
-  ) +
-  facet_grid(Treatment1 ~ ., scales = "fixed") +
-  labs(
-    x = "CH4 (uM)",
-    y = "Depth (cm)",
-    title = "CO2xNxPhrag: Porewater CH4 by Replicate",
-    color = "Replicate"
-  ) +
-  scale_y_reverse(breaks = c(20, 40), limits = c(45, 15)) +
+  geom_path(size = 1) +
+  scale_color_manual(values = c(
+    "1" = "#FFD500",
+    "2" = "#00D0FF",
+    "3" = "#FF0075"
+  )) +
+  facet_grid(factor(
+    Treatment1,
+    levels = c("eCO2 + 0 C", "+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C", "eCO2 + 5.1 C")
+  ) ~ ., scales = "free_x") +
+  labs(x = "CH4 (uM)", 
+       y = "Depth (cm)", 
+       title = "C3: Porewater CH4 by Replicate") +
+  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
+                  limits = c(125, 5)) +
+  xlim(0,750) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -808,12 +802,71 @@ viz_CH4_plot_2 <- ggplot(data = CH4_forplot, aes(x = CH4_Conc_uM, y = as.numeric
     )
   )
 
-viz_CH4_plot_2
-```
+viz_CH4_plot_C3_2
 
-#Export Processed Data
-```{r}
+```
+\newpage
+
+```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
+
+#get replicate value and treatment info
+CH4_forplot_C4 <- CH4_forplot_C4 %>%
+  mutate(Replicate = str_sub(Plot, 2, 2)) %>%
+  mutate(Treatment1 = ifelse(
+    Temp_Treatment == 0,
+    ifelse(CO2_Treatment == "Ambient", "+ 0 C", "eCO2 + 0 C"),
+    ifelse(
+      Temp_Treatment == 1.7,
+      "+ 1.7 C",
+      ifelse(
+        Temp_Treatment == 3.4,
+        "+ 3.4 C",
+        ifelse(
+          Temp_Treatment == 5.1,
+          ifelse(CO2_Treatment == "Ambient", "+ 5.1 C", "eCO2 + 5.1 C"),
+          NA
+        )
+      )
+    )
+  ))
+
+#make sure point are in correct order
+CH4_forplot_C4 <- CH4_forplot_C4[order(CH4_forplot_C4$Depth_cm), ]
+
+#make plot
+viz_CH4_plot_C4_2 <- ggplot(data = CH4_forplot_C4, 
+                            aes(x = CH4_Conc_uM, y = Depth_cm, color = Replicate)) +
+  geom_point(size = 3) +
+  geom_path(size = 1) +
+  scale_color_manual(values = c(
+    "4" = "#FFD500",
+    "5" = "#00D0FF",
+    "6" = "#FF0075"
+  )) +
+  facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
+               ., scales = "free_x") +
+  labs(x = "CH4 (uM)", 
+       y = "Depth (cm)", 
+       title = "C4: Porewater CH4 by Replicate") +
+  scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
+                  limits = c(125, 5)) +
+  xlim(0,750) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    panel.border = element_rect(
+      color = "black",
+      fill = NA,
+      linewidth = 0.8
+    )
+  )
+
+viz_CH4_plot_C4_2
+
+```
+##Export Data
+```{r, echo=FALSE}
 write.csv(All_Clean_Data, final_path)
+#end
 ```
-
 #end
