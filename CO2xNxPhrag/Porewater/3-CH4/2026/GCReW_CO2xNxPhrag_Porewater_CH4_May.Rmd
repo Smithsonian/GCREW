@@ -244,9 +244,11 @@ log <- rbind(log, Slope_CH4)
 
 #remove possible duplicates from multiple QAQC attempts 
 
-unique_log <- log %>% distinct(.keep_all = TRUE) %>% mutate(Run_Date = mdy(Run_Date))
+unique_log <- log %>% distinct(.keep_all = TRUE)
 
-Slopes_chk <- ggplot(unique_log, aes(x = Run_Date, y = Slope, col = Curve)) +
+plot_log <- unique_log %>% mutate(Run_Date = mdy(Run_Date))
+
+Slopes_chk <- ggplot(plot_log, aes(x = Run_Date, y = Slope, col = Curve)) +
   geom_point(size = 4) +
   ylim(400, 800) +
   theme_bw()
