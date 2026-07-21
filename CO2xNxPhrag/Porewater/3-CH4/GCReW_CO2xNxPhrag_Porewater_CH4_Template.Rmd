@@ -63,7 +63,8 @@ pacman::p_load(
   ggpubr,
   stringr,
   here, 
-  ggpattern)
+  ggpattern,
+  lubridate)
 
 #Metadata file path
 Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
@@ -243,9 +244,9 @@ log <- rbind(log, Slope_CH4)
 
 #remove possible duplicates from multiple QAQC attempts 
 
-unique_log <- log %>% distinct(.keep_all = TRUE)
+unique_log <- log %>% distinct(.keep_all = TRUE) %>% mutate(Run_Date = mdy(Run_Date))
 
-Slopes_chk <- ggplot(log, aes(x = Run_Date, y = Slope, col = Curve)) +
+Slopes_chk <- ggplot(unique_log, aes(x = Run_Date, y = Slope, col = Curve)) +
   geom_point(size = 4) +
   ylim(400, 800) +
   theme_bw()
