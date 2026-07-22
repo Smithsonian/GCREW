@@ -37,12 +37,12 @@ knitr::opts_chunk$set(fig.width=15, fig.height=10, dpi = 150, echo = T, dev = "r
 dir <- paste0(Sys.getenv("dropbox_filepath"), "GCREW_LOGGERNET_DATA/current_data", sep = "")
 
 # Read in GENX Water level data
-pattern <- "GENX_WaterlevelHydros"
+pattern <- "GENX_Waterlevel200"
 dt_genx <- load_data(dir=dir, pattern=pattern)
 dt_genx$logger <- "GENX"
-dt_genx <- dt_genx %>%
-  dplyr::mutate(H21_Depth = as.numeric(H21_Depth), H21_Depth = H21_Depth/10) %>%
-  dplyr::rename(Depth = H21_Depth, Salinity = Derived_Salinity, Temperature = H21_Temperature)
+# dt_genx <- dt_genx %>%
+#   dplyr::mutate(H21_Depth = as.numeric(H21_Depth), H21_Depth = H21_Depth/10) %>%
+#   dplyr::rename(Depth = H21_Depth, Salinity = Derived_Salinity, Temperature = H21_Temperature)
 
 # Read in C3LOG water level data
 pattern <- "C3LOG_WaterLevel"
@@ -138,7 +138,7 @@ dt_waterlevel2 <- dt_waterlevel2 %>%
   mutate(corrected_depth = case_when(logger == "C3LOG" ~ (Depth-45),
                                      logger == "C4LOG" ~ (Depth-65),
                                      logger == "GCREW_MET" ~ (Depth-58),
-                                     logger == "GENX" ~ (Depth-76)))
+                                     logger == "GENX" ~ (Depth-131.5)))
 
 dt_waterlevel2 %>%
   ggplot(aes(x = TIMESTAMP, y = corrected_depth, colour = logger))+
