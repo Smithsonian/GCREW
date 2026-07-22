@@ -1,25 +1,24 @@
-"Test","Intercept","Slope","R_Squared","User","Run_Date","Run"
-NA,NA,NA,NA,NA,NA,"Past_Runs"
-"NH3",-0.024201522,2.073278402,0.99895913,"Victoria Ellis","8/18/2025","Past_Runs"
-"NH3",-0.0365,1.8916,0.9986,"Stephanie Wilson","2/3/2024","Past_Runs"
-"NH3",-0.0826,1.8786,0.9989,"Max Wegner","2/18/2025","Past_Runs"
-"NH3",-0.0441,2.0617,0.9974,"Victoria Ellis","9/12/2025","Past_Runs"
-"NH3",-0.0339,2.1226,0.9997,"Victoria Ellis","9/23/2025","Past_Runs"
-"NH3",-0.03,1.924,0.9991,"Brenden Blakley","1/14/2026","Past_Runs"
-"NH3",-0.0284,1.94,0.9991,"Victoria Ellis","1/13/2026","Past_Runs"
-"NH3",-0.0316,1.9089,0.9992,"Victoria Ellis","12/18/2025","Past_Runs"
-"NH3",-0.03653452,1.891621177,0.998624558,"Stephanie Wilson","2/3/2024","Past_Runs"
-"NH3",-0.026515462,1.842127756,0.999464581,"Max Wegner","3/17/2025","Past_Runs"
-"NH3",-0.019383439,1.82337594,0.998955146,"Max Wegner","3/20/2025","Past_Runs"
-"NH3",-0.075345188,2.065428632,0.999625029,"Victoria Ellis","9/17/2025","Past_Runs"
-"NH3",-0.024035326,1.999408995,0.998067262,"Victoria Ellis","9/23/2025","Past_Runs"
-"NH3",-0.026286626,1.869918414,0.999763331,"Brenden Blakley","1/14/2026","Past_Runs"
-"NH3",-0.0240353258582963,1.99940899454896,0.998067262032102,"Max Wegner","May","Past_Runs"
-"NH3",-0.0329,1.8672,0.9992,"Instrument User Name","9/19/2024","Past_Runs"
-"NH3",-0.033,1.7716,0.9939,"Max Wegner","1/13/2025","Past_Runs"
-"NH3",-0.0255,1.8161,0.9994,"Max Wegner","5/8/2025","Past_Runs"
-"NH3",-0.02,2.008,0.9983,"Victoria Ellis","8/12/2025","Past_Runs"
-"NH3",-0.0296,1.9937,0.9984,"Victoria Ellis","10/6/2025","Past_Runs"
-"NH3",-0.0296,1.7982,0.9995,"Brenden Blakley","2/13/2026","Past_Runs"
-"NH3",-0.0161,1.8248,0.9999,"Brenden Blakley","2/17/2026","Past_Runs"
-"NH3",-0.0166,1.8219,1,"Brenden Blakley","2/18/2026","Past_Runs"
+Test,Intercept,Slope,R_Squared,User,Run_Date,Run
+NH3,-0.024201522,2.073278402,0.99895913,Victoria Ellis,8/18/2025,Past_Runs
+NH3,-0.0365,1.8916,0.9986,Stephanie Wilson,2/3/2024,Past_Runs
+NH3,-0.0826,1.8786,0.9989,Max Wegner,2/18/2025,Past_Runs
+NH3,-0.0441,2.0617,0.9974,Victoria Ellis,9/12/2025,Past_Runs
+NH3,-0.0339,2.1226,0.9997,Victoria Ellis,9/23/2025,Past_Runs
+NH3,-0.03,1.924,0.9991,Brenden Blakley,1/14/2026,Past_Runs
+NH3,-0.0284,1.94,0.9991,Victoria Ellis,1/13/2026,Past_Runs
+NH3,-0.0316,1.9089,0.9992,Victoria Ellis,12/18/2025,Past_Runs
+NH3,-0.03653452,1.891621177,0.998624558,Stephanie Wilson,2/3/2024,Past_Runs
+NH3,-0.026515462,1.842127756,0.999464581,Max Wegner,3/17/2025,Past_Runs
+NH3,-0.019383439,1.82337594,0.998955146,Max Wegner,3/20/2025,Past_Runs
+NH3,-0.075345188,2.065428632,0.999625029,Victoria Ellis,9/17/2025,Past_Runs
+NH3,-0.024035326,1.999408995,0.998067262,Victoria Ellis,9/23/2025,Past_Runs
+NH3,-0.026286626,1.869918414,0.999763331,Brenden Blakley,1/14/2026,Past_Runs
+NH3,-0.024035326,1.999408995,0.998067262,Max Wegner,5/1/2025,Past_Runs
+NH3,-0.0329,1.8672,0.9992,Instrument User Name,9/19/2024,Past_Runs
+NH3,-0.033,1.7716,0.9939,Max Wegner,1/13/2025,Past_Runs
+NH3,-0.0255,1.8161,0.9994,Max Wegner,5/8/2025,Past_Runs
+NH3,-0.02,2.008,0.9983,Victoria Ellis,8/12/2025,Past_Runs
+NH3,-0.0296,1.9937,0.9984,Victoria Ellis,10/6/2025,Past_Runs
+NH3,-0.0296,1.7982,0.9995,Brenden Blakley,2/13/2026,Past_Runs
+NH3,-0.0161,1.8248,0.9999,Brenden Blakley,2/17/2026,Past_Runs
+NH3,-0.0166,1.8219,1,Brenden Blakley,2/18/2026,Past_Runs
