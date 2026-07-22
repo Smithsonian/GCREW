@@ -1458,7 +1458,7 @@ viz_H2S_plot_2
 ```{r, echo=FALSE}
 write.csv(unique_log, log_path)
 
-  Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within Range" | H2S_CV_Flag %like% "High")
+  Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within_Range" | H2S_CV_Flag %like% "High")
 
 if(After_Reruns == "YES"){
   write.csv(All_Clean_Data, final_path)} else {
