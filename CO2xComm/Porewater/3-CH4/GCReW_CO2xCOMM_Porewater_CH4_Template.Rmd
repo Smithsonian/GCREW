@@ -26,7 +26,7 @@ GHG_files <- c("Raw Data/20250821_GHGdata_LTREB_2M_1M.csv", "Raw Data/20250911_G
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_1M_ShimadzuGC_QAQC_2025.csv"
+log_path <- here("Porewater QAQC Logs", "GCReW_CH4_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
 final_path <- "Processed Data/GCReW_CO2xCOMM_Porewater_CH4_202507.csv"
@@ -227,7 +227,6 @@ Slope_CH4_raw_list_l <- map(split_data_l, ~ .x %>% mutate(Curve = "Low",
 #add new standard curve data to log
 log <- read.csv(log_path)
 head(log)
-log <- log[, -c(1)]
 log <- rbind(log, Slope_CH4)
 
 #remove possible duplicates from multiple QAQC attempts 
@@ -241,7 +240,7 @@ Slopes_chk <- ggplot(log, aes(x = Run_Date, y = Slope, col = Curve)) +
 
 Slopes_chk
 
-write.csv(unique_log, log_path)
+write.csv(unique_log, log_path, row.names = FALSE)
 
 #check r2
 

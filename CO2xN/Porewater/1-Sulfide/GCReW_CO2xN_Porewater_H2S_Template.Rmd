@@ -58,7 +58,7 @@ head(Raw_plates)
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_2M_H2S_QAQC_2026.csv"
+log_path <- here("Porewater QAQC Logs", "GCReW_H2S_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
 final_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202605.csv"
@@ -350,8 +350,7 @@ new_log_stds <- Slope_H2S_Std_Crvs_rm %>% dplyr::select(Plate,
 #read in log file and format
 log <- read.csv(log_path)
 log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%Y-%m-%d", "%m/%d/%Y")), Run = "Past Runs")
-log_3 <- log_2[, -c(1)]
-log_4 <- rbind(log_3, new_log_stds)
+log_4 <- rbind(log_2, new_log_stds)
 
 unique_log <- log_4 %>% distinct(Plate,Curve,R2,Slope,Intercept,.keep_all = TRUE)
 
@@ -1298,7 +1297,7 @@ viz_H2S_plot_2
 
 ##Export Data
 ```{r, echo=FALSE}
-write.csv(unique_log, log_path)
+write.csv(unique_log, log_path, row.names = FALSE)
 
   Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within_Range" | H2S_CV_Flag %like% "High")
 
