@@ -1,5 +1,5 @@
 ---
-title: "CO2xN: Porewater Methane"
+title: "GENX: Porewater Methane"
 author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:  
@@ -14,11 +14,11 @@ output_dir: "To Be Reviewed/PDF"
 
 ##Run Information
 ```{r run information, include=TRUE}
-cat("Run Information: Melanie Giessner ") #lets you know what section you're in
+cat("Run Information: NAME ") #lets you know what section you're in
 #set the run date & user name
-sample_year <- "2026"
-sample_month <- "April"
-user <- "Melanie Giessner"
+sample_year <- ""
+sample_month <- ""
+user <- ""
 #identify the files you want to read in
 #read in as a list to accommodate multiple runs in a month
 

@@ -37,11 +37,8 @@ lapply(c(
   sample_month <- "July"
   Site = "GCReW"
   Project_name = "CO2xN"
-  run_notes = "Std 1 chk stds lower than expected value. 
+  run_notes = "
   " #any notes from the run
-  samples <- c("GCW", "GWI", "MSM", "SWH") #whatever identifies your samples within the same names 
-  samples_pattern <- paste(samples, collapse = "|") 
-    #samples_pattern <- "GCW" #use this instead of the line above if you have only one site code 
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
@@ -56,7 +53,7 @@ lapply(c(
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
-  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2024.csv"
+  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2026.csv"
 
 ```
 
@@ -68,7 +65,7 @@ lapply(c(
   #steph will add this soon 
 
 #Dilution
-Dilution = 100
+Dilution = 99.6667
 
 #Coefficients / constants that are needed for calculations 
   cl_mw <- 35.45     #molecular weight of Chloride, g/mol
@@ -123,8 +120,7 @@ dionex_metadata <- raw_metadata %>%
   mutate(Sample.ID = gsub("-", "_", Sample.ID)) %>% 
   mutate(Cl_SO4_ID = paste0(Sample.ID, "_", sample_month, "_", sample_year)) %>%
   mutate(Month = sample_month) %>%
-  mutate(Year = sample_year) %>%
-  select(-Temp_Treatment)
+  mutate(Year = sample_year) 
 
 #create a column for C3 or C4 plants 
 #metadata <- metadata %>%
@@ -814,12 +810,12 @@ spks <- all_dat %>%
   filter(str_detect(sample_ID, "SPK"))      #have to change this to match data
 # head(spks)
 
-#create a new dataframe and remove dups from sample dataframe 
+#create a new dataframe and remove spks from sample dataframe 
 dat_spks <- all_dat %>%  
   filter(!str_detect(sample_ID, "SPK")) %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_ppm,  Cl_Conc_mM, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag, salinity))
 
-#remove the dup from these IDs so we will have duplicate sample names
+#remove the spk from these IDs so we will have duplicate sample names
 spks <- spks %>%
   mutate(sample_ID = gsub("_SPK", "", as.character(sample_ID))) %>%
   rename(
@@ -838,9 +834,8 @@ QAspks$SO4_spk_Conc <- spk_Conc     # mmoles of SO4 in spike
 
 #Set Sample volumes in uL 
 QAspks$SampleVol <- 1
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 50, 1483, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 100, 1466, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 200, 1458, QAspks$SampleVol)
+QAspks$SampleVol <-  ifelse(QAspks$Dilution == 99.6667, 1495, QAspks$SampleVol)
+
 
 #change sample volume to L 
 QAspks$SampleVol <- QAspks$SampleVol/Con1
@@ -850,7 +845,7 @@ QAspks$SampleVol <- QAspks$SampleVol/Con1
 QAspks$SO4_Total_unspkd <- (QAspks$SO4_Conc_mM/QAspks$Dilution)*(QAspks$SampleVol) 
 
 #gives us the total SO4 in the spiked sample in mmoles
-QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/QAspks$Dilution)*(QAspks$SampleVol+spkvol) 
+QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/100.3333)*(QAspks$SampleVol+spkvol) 
 
 #gives us expected SO4 in the spiked sample in mmoles
 QAspks$SO4_expctd_spkd <-  (QAspks$SO4_Total_unspkd + QAspks$SO4_spk_Conc)
@@ -982,7 +977,7 @@ all_data_flagged <- dat_flagged %>%
   filter(!str_detect(sample_ID, "SPK"))
   #select(!Excess_Info)
 
-#change sample IDs to match metdata
+#change sample IDs to match metadata
 all_data_flagged <- all_data_flagged %>%
   mutate(sample_ID = paste0(sample_ID, "_", sample_month, "_", sample_year))
 
@@ -1118,7 +1113,7 @@ viz_SO4_plot2 <- ggplot(data = SO4_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "SO4 (uM)",
-       title = "CO2xN: Porewater Methane"
+       title = "CO2xN: Porewater SO4"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -1255,7 +1250,7 @@ viz_Cl_plot2 <- ggplot(data = Cl_forplot, aes(
   theme_classic() +
   labs(x = " ",
        y = "Cl (mM)",
-       title = "CO2xN: Porewater Methane"
+       title = "CO2xN: Porewater Cl"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +

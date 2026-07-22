@@ -1,6 +1,6 @@
 ---
 title: "CO2xNxPhrag: Porewater SO4/Cl"
-author: "May 2025 Samples"
+author: "May 2026 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -30,10 +30,10 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "2026-01-14"  #Date that instrument was run
-  Run_by = "Zoe Read"  #Instrument user 
-  Script_run_by = "Zoe Read" #Code user 
-  sample_year <- "2025"
+  Date_Run = "2026-07-01"  #Date that instrument was run
+  Run_by = "Zoe Read & Victoria Ellis"  #Instrument user 
+  Script_run_by = "Zoe Read & Victoria Ellis" #Code user 
+  sample_year <- "2026"
   sample_month <- "May"
   Site = "GCReW"
   Project_name = "CO2xNxPhrag"
@@ -42,18 +42,18 @@ lapply(c(
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/CO2xNxPhrag_202505_Cl.txt"
-  raw_file_name_so4 = "Raw Data/CO2xNxPhrag_202505_SO4.txt"
+  raw_file_name_cl = "Raw Data/CO2xNxPhrag_202605_Cl.txt"
+  raw_file_name_so4 = "Raw Data/CO2xNxPhrag_202605_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/GCReW_CO2xNxPhrag_PW_Processed_Cl_SO4_202505.csv" 
+  processed_file_name = "Processed Data/GCReW_CO2xNxPhrag_PW_Processed_Cl_SO4_202605.csv" 
 
 ###### Log Files - PLEASE CHECK 
 #downloaded metadata csv - downloaded from Google drive as csv for this year
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
-  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2025.csv"
+  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2026.csv"
 
 ```
 
@@ -65,7 +65,7 @@ lapply(c(
   #steph will add this soon 
 
 #Dilution
-Dilution = 100
+Dilution = 99.6667
 
 #Coefficients / constants that are needed for calculations 
   cl_mw <- 35.45     #molecular weight of Chloride, g/mol
@@ -810,12 +810,12 @@ spks <- all_dat %>%
   filter(str_detect(sample_ID, "SPK"))      #have to change this to match data
 # head(spks)
 
-#create a new dataframe and remove dups from sample dataframe 
+#create a new dataframe and remove spks from sample dataframe 
 dat_spks <- all_dat %>%  
   filter(!str_detect(sample_ID, "SPK")) %>%  
   select(!c(sample_name, sample_type, SO4_area, Cl_ppm,  Cl_Conc_mM, Cl_area, Cl_QAQC_flag, SO4_QAQC_flag, salinity))
 
-#remove the dup from these IDs so we will have duplicate sample names
+#remove the spk from these IDs so we will have duplicate sample names
 spks <- spks %>%
   mutate(sample_ID = gsub("_SPK", "", as.character(sample_ID))) %>%
   rename(
@@ -834,9 +834,8 @@ QAspks$SO4_spk_Conc <- spk_Conc     # mmoles of SO4 in spike
 
 #Set Sample volumes in uL 
 QAspks$SampleVol <- 1
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 50, 1483, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 100, 1466, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 200, 1458, QAspks$SampleVol)
+QAspks$SampleVol <-  ifelse(QAspks$Dilution == 99.6667, 1495, QAspks$SampleVol)
+
 
 #change sample volume to L 
 QAspks$SampleVol <- QAspks$SampleVol/Con1
@@ -846,7 +845,7 @@ QAspks$SampleVol <- QAspks$SampleVol/Con1
 QAspks$SO4_Total_unspkd <- (QAspks$SO4_Conc_mM/QAspks$Dilution)*(QAspks$SampleVol) 
 
 #gives us the total SO4 in the spiked sample in mmoles
-QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/QAspks$Dilution)*(QAspks$SampleVol+spkvol) 
+QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/100.3333)*(QAspks$SampleVol+spkvol) 
 
 #gives us expected SO4 in the spiked sample in mmoles
 QAspks$SO4_expctd_spkd <-  (QAspks$SO4_Total_unspkd + QAspks$SO4_spk_Conc)
@@ -1001,8 +1000,8 @@ df_all_clean <- all_data_flagged %>%
 
 ```
 
-## Visualize Data
-```{r Visualize Data, echo=FALSE}
+## Visualize Data Cl
+```{r Visualize Cl Data, echo=FALSE}
 cat("Visualize Data")
 
 ### Ammonia
@@ -1033,8 +1032,6 @@ Cl_forplot <- Cl_forplot %>%
     )
   ) %>%
   mutate(Treatment = ifelse(
-    SubPlot == "A",
-    ifelse(
       CO2_Treatment == "Elevated" &
         N_Treatment == "Amended",
       "eCO2_eN_Phrag",
@@ -1066,7 +1063,7 @@ Cl_forplot <- Cl_forplot %>%
         )
       )
     )
-  ))  %>%
+  )  %>%
   mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
   mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
   mutate(
@@ -1082,132 +1079,42 @@ Cl_forplot <- Cl_forplot[order(Cl_forplot$Depth_cm), ]
 viz_Cl_plot_v2 <- ggplot(
   data = Cl_forplot,
   aes(
-    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-    y = Cl_Conc_mM,
-    fill = as.factor(Treatment),
-    color = as.factor(Treatment),
-    pattern = as.factor(Treatment)
-  )
-) +
-  geom_bar_pattern(
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+  y = Cl_Conc_mM,
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
+)) +
+  geom_bar(
     stat = "identity",
-    position = position_dodge2(padding = 0.25, preserve = "single"),
-    pattern_angle = 45,
-    pattern_density = 0.1,
-    pattern_spacing = 0.025,
-    pattern_key_scale_factor = 0.6
+    position = position_dodge2(padding = 0.25,preserve = "single")
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "white",
-      "aCO2_aN_Phrag" = "white",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "white",
-      "aCO2_aN_Native" = "white"
-    ),
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
     
   ) +
-  scale_color_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "#DB5461",
-      "aCO2_aN_Phrag" = "#454ADE",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "#DB5461",
-      "aCO2_aN_Native" = "#454ADE"
-    ),
+  scale_color_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
-    
-  ) +
-  scale_pattern_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "stripe",
-      "eCO2_aN_Phrag" = "stripe",
-      "aCO2_eN_Phrag" = "stripe",
-      "aCO2_aN_Phrag" = "stripe",
-      "eCO2_eN_Native" = "none",
-      "eCO2_aN_Native" = "none",
-      "aCO2_eN_Native" = "none",
-      "aCO2_aN_Native" = "none"
-    ),
-    name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
   ) +
   theme_classic() +
-  labs(
-    x = " ",
-    y = "Cl (mM)",
-    title = "CO2xNxPhrag: Porewater Chloride",
-    fill = "CO2 Treatment:",
-    color = "N Treatment:",
-    pattern = "Subplot:"
-  ) +
+  labs(x = " ",
+       y = "Cl (mM)",
+       title = "CO2xN: Porewater Cl"
+       ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1218,7 +1125,7 @@ viz_Cl_plot_v2 <- ggplot(
       linewidth = 0.8
     )
   ) +
-  coord_flip()
+coord_flip()
 print(viz_Cl_plot_v2)
 
 
@@ -1265,7 +1172,7 @@ viz_Cl_plot_2
 ```
 
 ```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
+cat("Visualize SO4 Data")
 
 ### Ammonia
 SO4_forplot <- df_all_clean
@@ -1295,8 +1202,6 @@ SO4_forplot <- SO4_forplot %>%
     )
   ) %>%
   mutate(Treatment = ifelse(
-    SubPlot == "A",
-    ifelse(
       CO2_Treatment == "Elevated" &
         N_Treatment == "Amended",
       "eCO2_eN_Phrag",
@@ -1328,7 +1233,7 @@ SO4_forplot <- SO4_forplot %>%
         )
       )
     )
-  ))  %>%
+  )  %>%
   mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
   mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
   mutate(
@@ -1343,133 +1248,43 @@ SO4_forplot <- SO4_forplot[order(SO4_forplot$Depth_cm), ]
 
 viz_SO4_plot_v2 <- ggplot(
   data = SO4_forplot,
-  aes(
-    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-    y = SO4_Conc_mM,
-    fill = as.factor(Treatment),
-    color = as.factor(Treatment),
-    pattern = as.factor(Treatment)
-  )
-) +
-  geom_bar_pattern(
+ aes(
+  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+  y = SO4_Conc_mM,
+  fill = as.factor(Treatment1),
+  color = as.factor(Treatment1)
+)) +
+  geom_bar(
     stat = "identity",
-    position = position_dodge2(padding = 0.25, preserve = "single"),
-    pattern_angle = 45,
-    pattern_density = 0.1,
-    pattern_spacing = 0.025,
-    pattern_key_scale_factor = 0.6
+    position = position_dodge2(padding = 0.25,preserve = "single")
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "white",
-      "aCO2_aN_Phrag" = "white",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "white",
-      "aCO2_aN_Native" = "white"
-    ),
+  scale_fill_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "white",
+    "aCO2 & aN" = "white"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
     
   ) +
-  scale_color_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "#DB5461",
-      "eCO2_aN_Phrag" = "#454ADE",
-      "aCO2_eN_Phrag" = "#DB5461",
-      "aCO2_aN_Phrag" = "#454ADE",
-      "eCO2_eN_Native" = "#DB5461",
-      "eCO2_aN_Native" = "#454ADE",
-      "aCO2_eN_Native" = "#DB5461",
-      "aCO2_aN_Native" = "#454ADE"
-    ),
+  scale_color_manual(values = c(
+    "eCO2 & eN" = "#DB5461",
+    "eCO2 & aN" = "#454ADE", 
+    "aCO2 & eN" = "#DB5461",
+    "aCO2 & aN" = "#454ADE"
+  ),
     name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
-    
+    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
+    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
   ) +
-  scale_pattern_manual(
-    values = c(
-      "eCO2_eN_Phrag" = "stripe",
-      "eCO2_aN_Phrag" = "stripe",
-      "aCO2_eN_Phrag" = "stripe",
-      "aCO2_aN_Phrag" = "stripe",
-      "eCO2_eN_Native" = "none",
-      "eCO2_aN_Native" = "none",
-      "aCO2_eN_Native" = "none",
-      "aCO2_aN_Native" = "none"
-    ),
-    name = "Treatment:",
-    breaks = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    ),
-    labels = c(
-      "eCO2_eN_Phrag",
-      "eCO2_aN_Phrag",
-      "aCO2_aN_Phrag",
-      "aCO2_eN_Phrag",
-      "eCO2_eN_Native",
-      "eCO2_aN_Native",
-      "aCO2_aN_Native",
-      "aCO2_eN_Native"
-    )
-  ) +
-  theme_SO4assic() +
-  labs(
-    x = " ",
-    y = "SO4 (mM)",
-    title = "CO2xNxPhrag: Porewater Sulfate",
-    fill = "CO2 Treatment:",
-    color = "N Treatment:",
-    pattern = "Subplot:"
-  ) +
+  theme_classic() +
+  labs(x = " ",
+       y = "SO4 (uM)",
+       title = "CO2xNxPhrag: Porewater SO4"
+       ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1480,7 +1295,7 @@ viz_SO4_plot_v2 <- ggplot(
       linewidth = 0.8
     )
   ) +
-  coord_flip()
+coord_flip()
 print(viz_SO4_plot_v2)
 
 
@@ -1513,7 +1328,7 @@ viz_SO4_plot_2 <- ggplot(data = SO4_forplot, aes(x = SO4_Conc_mM, y = as.numeric
     color = "Replicate"
   ) +
   scale_y_reverse(breaks = c(20, 40), limits = c(45, 15)) +
-  theme_SO4assic() +
+  theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
     panel.border = element_rect(
