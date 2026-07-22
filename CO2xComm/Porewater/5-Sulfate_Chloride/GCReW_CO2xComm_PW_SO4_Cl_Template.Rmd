@@ -55,7 +55,7 @@ lapply(c(
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
-  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2024.csv"
+  Log_path = here("Porewater QAQC Logs", "GCReW_SO4_Cl_QAQC_Log.csv")
 
 ```
 
@@ -329,8 +329,6 @@ if (file.exists(Log_path)) {
   print("QAQC log file does not exist. It has been created.")
   }
 
-log <- log[ ,-c(1)]
-
 #make sure they both have dates in Date format
 log$run_date <- as.Date(log$run_date, format = "%Y-%m-%d")
 log$analyte <- as.character(log$analyte)
@@ -352,7 +350,7 @@ Slopes_chk <- ggplot(log, aes(run_date, slope, col=curve)) +
 Slopes_chk
 
 #write out the log file with the added lines for this run  
-write.csv(log, Log_path)
+write.csv(log, Log_path, row.names = FALSE)
 
 #Grab the highest r2 that is available for this run 
 r2_Cl = max(lm_results_cl$r2)
