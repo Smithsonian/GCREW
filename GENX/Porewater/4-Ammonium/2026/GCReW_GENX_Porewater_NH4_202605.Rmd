@@ -31,7 +31,7 @@ library(here)
   final_path <- "Processed Data/GCReW_GENX_Porewater_NH4_202605.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- ""
+  run_notes <- "20260608 run stopped part way through; ch1-80 not collected"
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
@@ -269,7 +269,7 @@ add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
   rename(R_Squared = R2)#Format new run data for log
 
 
-new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(.,-Run, -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(., -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
 Reg_Coef <- new_log %>% group_by(Test) %>% reframe(Mean_Slope = mean(Slope, na.rm = TRUE), SD_Slope = sd(Slope, na.rm = TRUE), Mean_Int = mean(Intercept, na.rm = TRUE), SD_Int = sd(Intercept, na.rm = TRUE)) %>% distinct() %>% 
   mutate(
   SD_Slope_Max = Mean_Slope + 2*SD_Slope, SD_Int_Max = Mean_Int + 2*SD_Int,
