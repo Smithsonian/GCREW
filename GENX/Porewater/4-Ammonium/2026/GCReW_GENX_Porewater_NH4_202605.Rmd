@@ -1,6 +1,6 @@
 ---
 title: "GENX: Porewater Ammonium"
-author: "Month Year Samples"
+author: "May 2026 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -13,22 +13,22 @@ output_dir: "To Be Reviewed/PDF"
 
 ##Run Information 
 ```{r run information, include=TRUE}
-cat("Run Information:  ") #lets you know what section you're in 
+cat("Run Information: Brenden Blakley") #lets you know what section you're in 
+library(here)
 #set the run date & user name 
-  sample_year <- "2025"
-  sample_month <- "September"
+  sample_year <- "2026"
+  sample_month <- "May"
   user <- "Brenden Blakley"
 
 #identify the files you want to read in 
   #read in as a list to accommodate multiple runs in a month
-  NH3_files <- c("Raw Data/20260213_SMARTX_Sept2025_Run1.csv",
-                 "Raw Data/20260217_SMARTX_Sept2025_Run2.csv",
-                 "Raw Data/20260218_SMARTX_Sept_2025_Run3.csv")
+  NH3_files <- c("Raw Data/20260608_2m_GENXrr_May_NH4.csv",
+                 "Raw Data/20260624_GENXrr_2Mrr_May2026.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
   file_path <- here("Porewater QAQC Logs", "GCReW_NH4_QAQC_Log.csv")
-  file_path_qaqc <- here("Porewater QAQC Logs", "GCReW_SEAL_Check_QAQC_Log.csv")
-  final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202509.csv"
+  file_path_QAQC <- here("Porewater QAQC Logs", "GCReW_SEAL_Check_QAQC_Log.csv")
+  final_path <- "Processed Data/GCReW_GENX_Porewater_NH4_202605.csv"
 
 #record any notes about the run or anything other info here: 
   run_notes <- ""
@@ -123,7 +123,7 @@ metadata <- raw_metadata %>%
     rename(
     Sample_ID = Sample.ID,
   ) %>%
-  select(-N_Treatment)
+  dplyr::select(-N_Treatment)
 
 ```
 
@@ -265,7 +265,8 @@ old_log <- read.csv(file_path) %>% mutate(Run_Date = as.Date(as.character(Run_Da
 add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
   mutate(Test = case_when(
     Test == "Ammonia 2" ~ "NH3"
-  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs")#Format new run data for log
+  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs") %>%
+  rename(R_Squared = R2)#Format new run data for log
 
 
 new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(.,-Run, -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
@@ -798,7 +799,7 @@ Flags_Fin <- Flags_Bad %>% mutate(QAQC_Flag = paste0(R2_Flag, PE_Flag, CHK_Flag,
 ```
 
 ## Create Log for QAQC
-```{r}
+```{r QAQC Checks Log, echo = FALSE}
 # Old_Log_QAQC <- tibble(Test = c(), Mean_PE_Conc= c(), Spike_CV= c(), Top_Std_Absorbance= c(), Run_Date= c()) #create standard log in proper format
 Old_Log_QAQC <- read.csv(file_path_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")
 
@@ -806,12 +807,12 @@ Top_Standards <- Slope_raw %>% group_by(Test, Run_Date) %>% filter(Sample_Name =
 
 PE_Check <- NH3_peChk %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Mean_Chk_Conc) %>% rename(Mean_PE_Conc = Mean_Chk_Conc) %>% ungroup()
 
-Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_CV) %>% ungroup()
+Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_Diff) %>% rename(Spike_Percent_Diff = Spike_Diff) %>% ungroup()
 
 Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
   left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% distinct()
 
-Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_CV)) +
+Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_Percent_Diff)) +
   geom_point(size = 3, aes(col = Run)) +
  # geom_path(linewidth = 1) +
   facet_grid(~Test, scales = "free") +
@@ -838,7 +839,7 @@ PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc)) +
 
 PE_Log_Plot
 
-write.csv(Joined_QAQC, file_path_qaqc, row.names = FALSE)
+write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
 
 
 ```
@@ -858,14 +859,14 @@ if (all_present) {
   message("Some sample IDs are missing from data.")
   
   # Optional: Which ones are missing?
-  missing_ids <- setdiff(metadata$Sample_Name, Flagged_Samples$Sample_Name)
+  missing_ids <- setdiff(metadata$Sample_Name, samples_flagged1$Sample_Name)
   print(missing_ids)
 }
 
 
 #merge metadata with sample run data 
 merged_data <- samples_flagged1 %>%
-  left_join(metadata, by = c("Sample_Name" = "Sample_Name"))  %>% left_join(Flags_Fin, by = join_by(Test, Run_Date))
+  right_join(metadata, by = c("Sample_Name" = "Sample_Name"))  %>% left_join(Flags_Fin, by = join_by(Test, Run_Date))
 
 #might want to include a flag or something to see that all the samples are included? 
 
@@ -893,9 +894,9 @@ NH4_forplot <- NH4_forplot %>%
       "Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12"))) %>% mutate(Depth1 = paste0(Depth_cm, " cm")) %>% mutate(Depth = factor(Depth1, levels = c("5 cm", "20 cm", "40 cm", "80 cm")))
 
 #create plot
-viz_NH4_plot <- ggplot(data = Conc_forplot, aes(
+viz_NH4_plot <- ggplot(data = NH4_forplot, aes(
   x = as.factor(Chamber),
-  y = NH4,
+  y = Conc,
   fill = as.factor(Chamber)
 )) +
   geom_col(stat = "identity", 
@@ -939,7 +940,7 @@ viz_NH4_plot <- ggplot(data = Conc_forplot, aes(
       legend.key = element_rect("black"),
     legend.position = "none"
     ) + 
-  coord_flip(ylim = c(5.5,7.1))
+  coord_flip()
 print(viz_NH4_plot)
 
 ```
@@ -1008,7 +1009,6 @@ viz_NH4_plot_2 <- ggplot(data = NH4_forplot,
        title = "GENX: Porewater NH4 by Chamber") +
   scale_y_reverse(breaks = c(5, 20, 40, 80),
                   limits = c(85, 0)) +
-  xlim(5.7, 7.1) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
