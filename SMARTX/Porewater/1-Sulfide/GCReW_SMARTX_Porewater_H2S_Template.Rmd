@@ -1,6 +1,6 @@
 ---
 title: "SMARTX: Porewater Sulfide"
-author: "May 2025 Samples"
+author: "Month Year Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -638,10 +638,10 @@ dl_data <- right_join(High_Std, calc_data, by = join_by(Plate))
 ```{r, echo=FALSE}
 
 #Calculate CVs
-H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
+H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs, Dilution) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
 
 #calculate new cv getting best cv from points if cv was high
-H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs) %>%
+H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs, Dilution) %>%
   mutate(CV_New = map_dbl(row_number(), ~cv(Conc[-.x]))) %>%    #Calculate CVs without 1 point
   mutate(Removed = ifelse(             #Choose Lowest CV if CV is high
   CV_Flag == "CV_High",
@@ -1403,11 +1403,13 @@ viz_H2S_plot_C4_2
 ##Export Data
 ```{r, echo=FALSE}
 write.csv(unique_log, log_path, row.names = FALSE)
-  Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within Range" | H2S_CV_Flag %like% "High")
+  Rerun_Data <- df_all_clean %>% filter((Min_Dil != 1 & Conc_Flag == "bdl")| Conc_Flag == "adl" | CV_Flag %like% "High")
 
 if(After_Reruns == "YES"){
   write.csv(All_Clean_Data, final_path)} else {
-  write.csv(Rerun_Data, rerun_path) }
+  write.csv(Rerun_Data, rerun_path) 
+    knitr::kable(Rerun_Data[,1:6], caption = "Reruns")}
+  
 #end
 ```
 

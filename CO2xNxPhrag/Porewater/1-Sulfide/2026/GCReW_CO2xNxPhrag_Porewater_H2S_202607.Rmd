@@ -1,6 +1,6 @@
 ---
 title: "CO2xNxPhrag: Porewater Sulfide"
-author: "Month Year Samples"
+author: "July 2026 Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -42,9 +42,9 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "May"
+sample_month = "July"
 sample_year = "2026"
-Run_Date = as.Date("05/19/2026", format = "%m/%d/%Y")
+Run_Date = as.Date("07/23/2026", format = "%m/%d/%Y")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Melanie"#Code user
 
@@ -53,7 +53,7 @@ Run_notes=""#any notes from run
 #Import Plate Data
 
 folder_path_rawdata <- paste0("Raw Data")
-Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202605|202606)(.+Plate|.+Rerun)"))
+Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202607|202608)(.+Plate|.+Rerun)"))
 print(Raw_plates)
 
 
@@ -61,8 +61,8 @@ print(Raw_plates)
 log_path <- here("Porewater QAQC Logs", "GCReW_H2S_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_2026.csv"
-rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_2026_reruns.csv"
+final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202607.csv"
+rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_202607_reruns.csv"
 
 
 ```

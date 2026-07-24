@@ -1,6 +1,6 @@
 ---
-title: "CO2xNxPhrag: Porewater Sulfide"
-author: "Month Year Samples"
+title: "CO2xN: Porewater Sulfide"
+author: "July 2026 Samples"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
@@ -28,7 +28,6 @@ library(raster)
 library(knitr)  
 library(readxl)
 library(ggrepel)
-library(ggpattern)
 
 ```
 
@@ -42,9 +41,9 @@ After_Reruns = "YES"
 
 ###things that need to be changed
 
-sample_month = "May"
+sample_month = "July"
 sample_year = "2026"
-Run_Date = as.Date("05/19/2026", format = "%m/%d/%Y")
+Run_Date = as.Date("07/23/2026", format = "%m/%d/%Y")
 Run_by = "Melanie Giessner"#Instrument user
 Script_run_by ="Melanie"#Code user
 
@@ -53,17 +52,17 @@ Run_notes=""#any notes from run
 #Import Plate Data
 
 folder_path_rawdata <- paste0("Raw Data")
-Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202605|202606)(.+Plate|.+Rerun)"))
+Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202607|202608)(.+Plate|.+Rerun)"))
 print(Raw_plates)
+
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
 log_path <- here("Porewater QAQC Logs", "GCReW_H2S_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_2026.csv"
-rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_2026_reruns.csv"
-
+final_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202607.csv"
+rerun_path <- "Processed Data/GCReW_CO2xN_Porewater_H2S_202607_reruns.csv"
 
 ```
 
@@ -108,11 +107,12 @@ rerun_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_H2S_2026_reruns.csv"
 #Top standard Concentration- Update if running different standard curve: 
    Top_STD = 100
    
-   sigdigs = 3
-   
    
 #Metadata file path
 Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
+
+#Significant Digits
+sigdigs <- 3
 
 ```
 
@@ -124,10 +124,8 @@ Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
 raw_metadata <- read.csv(Raw_Metadata)
 #clean up columns in metadata file:
-#Pull out only SMARTX Rows
-#Create a Sample_Name column to match the SEAL
 metadata <- raw_metadata %>%
-  filter(grepl("Phrag", Nickname, ignore.case = TRUE)) %>%
+  filter(grepl("2-Meter", Nickname, ignore.case = TRUE)) %>%
   mutate(Sample_Name = paste0(Sample.ID)) %>%
   mutate(Month = sample_month) %>%
   mutate(Year = sample_year) %>%
@@ -147,19 +145,14 @@ metadata <- raw_metadata %>%
       ifelse(CO2_Treatment == "Ambient" &
                N_Treatment == "Amended"  , "N" , "Ambient")
     )
-  ))
-
-
-#Bring in the collection date and any field notes if relevant
-#collection_metadata <- read.csv(Collection_Dates)
-#then we will merge the collection date for SMARTX based on the project and the chambers
+  )) 
 
 ```
 
 
-
 ##Read in data
 ```{r read in plates,echo=FALSE,include=FALSE}
+
 
 #read in the csv files
 dat<-read_plates(
@@ -222,8 +215,7 @@ H2S_STD_CV_fin <- H2S_STD_cv_new %>% dplyr::select(Run_Date,
                                                    CV2,
                                                    CV_Flag2) %>% 
   mutate(Mean_Abs = Mean_Abs2, CV_Flag = CV_Flag2, CV = CV2) %>% 
-                                  dplyr::select(Run_Date, 
-                                                Plate, 
+                                  dplyr::select(Run_Date, Plate, 
                                                 Wells,                                                                                    Abs,
                                                 Removed,
                                                 IDs,
@@ -254,13 +246,13 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
  Slope_H2S_raw <- bind_rows(Slope_H2S_raw_list)
   
  #check R2 and flag
- Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select(Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
+ Slope_H2S_Std_Crvs <- Slope_H2S_raw %>% dplyr::select( Plate, Curve, R2, Slope, Intercept) %>% distinct() %>% mutate(R2_Flag = ifelse(R2 >= r2_cutoff, "R2_Good", "R2_Bad"))
 
  #join standard curve CVs and regression values
  R2_Check_Raw <- left_join(Slope_H2S_Std_Crvs, H2S_STD_CV_fin, by = "Plate")
  
  R2_Check <- R2_Check_Raw %>% 
-   dplyr::select(Run_Date, 
+   dplyr::select(Run_Date,
                  Plate,
                  IDs,
                  Abs,
@@ -309,7 +301,7 @@ Slope_H2S_raw_list <- map(split_data, ~ .x %>% mutate(Curve = "H2S",
                                        R2_RMV
                                      )) %>% mutate(R2_RMVD = ifelse(is.na(R2_RMV_CV), "KEPT", R2_RMV_CV)) %>% dplyr::select(-R2_RMV, -R2_RMV_CV)
  
-R2_Removed_forPair <- R2_Check_RMVBL %>% dplyr::select(Plate, IDs, R2_RMVD) %>% distinct()
+R2_Removed_forPair <- R2_Check_RMVBL %>% dplyr::select(Run_Date, Plate, IDs, R2_RMVD) %>% distinct()
 
 H2S_STDs_Pair <- H2S_STD_CV_fin %>% filter(IDs %like% "Std") %>% filter(!IDs %like% "Chk") %>% dplyr::select(Run_Date, Plate, IDs, Conc, Mean_Abs, Abs, Removed, CV_Flag) %>% filter(!Removed == "RMVD") %>% distinct() %>% left_join(R2_Removed_forPair)
  
@@ -400,7 +392,6 @@ ints_chk <- ggplot(unique_log, aes(x = Run_Date, y = Intercept, col = Run)) +
 ints_chk
 
 Slopes_chk
-
 
 
 #Get done of original runs
@@ -651,10 +642,10 @@ dl_data <- right_join(High_Std, calc_data, by = join_by(Plate))
 ```{r, echo=FALSE}
 
 #Calculate CVs
-H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs, Dilution) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
+H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
 
 #calculate new cv getting best cv from points if cv was high
-H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs, Dilution) %>%
+H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs) %>%
   mutate(CV_New = map_dbl(row_number(), ~cv(Conc[-.x]))) %>%    #Calculate CVs without 1 point
   mutate(Removed = ifelse(             #Choose Lowest CV if CV is high
   CV_Flag == "CV_High",
@@ -698,10 +689,10 @@ H2S_SPL_CV_fin <- H2S_SPL_cv_new %>% dplyr::select(Plate,
 
 #Filter samples and mark reruns
 H2S_Spl_pre_viz <- H2S_SPL_cv_new %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "^P")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
-  dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) 
+  dplyr::select(Plate, IDs, Mean_Conc, Conc_SD, CV_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
 
 #Plot Samples before corrections
 H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag)) +
@@ -720,6 +711,7 @@ H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = C
     position = position_dodge(.1)
   ) +
   theme_classic() +
+  facet_wrap(~ ForPlot ,, scale = "free_x", ncol = 1) +
   theme(legend.position = "bottom", axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -731,10 +723,10 @@ H2S_Spl_Plot_Pre <- ggplot(H2S_Spl_pre_viz, aes(y = Mean_Conc, x = IDs, fill = C
 H2S_Spl_Plot_Pre
 
 H2S_Spl_rmv_viz <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "^P")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE")) %>%
-  dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs))
+  dplyr::select(Plate, IDs, Mean_Conc, SD_Conc, CV_Flag, Conc_Flag) %>% distinct(.keep_all = TRUE) %>% mutate(IDs = ifelse(Plate %like% "rr", paste0(IDs, "_RR"), IDs)) %>% mutate(ForPlot = ifelse(row_number() <= 80, "A", "B"))
 
 #Plot samples after Corrections
 H2S_Spl_Plot_CV <- ggplot(H2S_Spl_rmv_viz, aes(y = Mean_Conc, x = IDs, fill = CV_Flag)) +
@@ -753,6 +745,7 @@ H2S_Spl_Plot_CV <- ggplot(H2S_Spl_rmv_viz, aes(y = Mean_Conc, x = IDs, fill = CV
     position = position_dodge(.1)
   ) +
   theme_classic() +
+   facet_wrap(~ForPlot, scales = "free_x", ncol = 1) +
   theme(legend.position = "bottom", axis.text.x = element_text(
     angle = 90,
     vjust = 0.5,
@@ -968,7 +961,7 @@ Spike_Flag <- ifelse(length_bad/length_all > 0.4, paste0(">40% Spikes Fail"), ""
 ```{r check sample ids with metadata, echo=FALSE}
 #Get Samples Only
 H2S_spls_md <- H2S_SPL_CV_fin %>%  mutate(IDs = toupper(IDs)) %>%
-      filter(str_detect(IDs, "^P")) %>%
+      filter(str_detect(IDs, "L")) %>%
   filter(!str_detect(IDs, "DUP")) %>%
   filter(!str_detect(IDs, "SPIKE"))
 
@@ -981,13 +974,13 @@ H2S_spl_rrn <- H2S_spls_md %>%group_by(IDs,Plate) %>%
 
 RRN_IDs <- as.vector(H2S_spl_rrn$IDs)
 
-H2S_spl_og <- H2S_spls_md %>%
-  filter(!Plate %like% "rr") %>% 
+H2S_spl_og <- H2S_spls_md %>% group_by(IDs,Plate) %>% 
+  filter(!Plate %like% "rr") %>% ungroup() %>% 
   dplyr::select(IDs, Mean_Conc, Conc_Flag, Plate, CV_Flag, Dilution, CV) %>% 
   distinct(.keep_all = TRUE) %>%
   mutate(Rerun = ifelse(IDs %in% RRN_IDs, "RRN", "Org"))
 
-H2S_spl_rr_join <- full_join(H2S_spl_rrn,H2S_spl_og, by = join_by(IDs) ) 
+H2S_spl_rr_join <- full_join(H2S_spl_rrn, H2S_spl_og, by = join_by(IDs) ) 
 
 Samples_Tagged <-  H2S_spl_rr_join %>% mutate(
   Conc = ifelse(Rerun == "RRN", RRN_Conc, Mean_Conc),
@@ -1020,7 +1013,7 @@ Samples <- Samples_Tagged %>% filter(Remove %like% "KEEP") %>% group_by(Sample_I
 
 
 #check to see if all samples are present in the metadata
-all_present <- all(metadata$Sample_ID %in% Samples$Sample_ID)
+all_present <- all(metadata$Sample_Name %in% Samples$Sample_ID)
 
 if (all_present) {
   message("All sample IDs are present in data")
@@ -1028,7 +1021,7 @@ if (all_present) {
   message("Some sample IDs are missing from data.")
   
   # Optional: Which ones are missing?
-  missing_ids <- setdiff(metadata$Sample_ID, Samples$Sample_ID)
+  missing_ids <- setdiff(metadata$Sample_Name, Samples$Sample_ID)
   print(missing_ids)
 }
 
@@ -1036,7 +1029,7 @@ if (all_present) {
 #merge metadata with sample run data
 merged_data <- metadata %>%
   mutate(Sample_ID = paste0("\\b", Sample_ID, "\\b")) %>%
-  fuzzyjoin::regex_left_join(Samples, ., by = c(Sample_ID = "Sample_ID"))
+  fuzzyjoin::regex_left_join(Samples, ., by = c(Sample_ID = "Sample_Name"))
 
 #might want to include a flag or something to see that all the samples are included?
 
@@ -1061,7 +1054,7 @@ STD_Flags_All <- STD_CRV_flags %>% dplyr::select(Plate, R2_Flag, CV_Flag) %>% mu
 
 #Join Flags
 
-Flags_Joined_1 <-Dup_Flags_2
+Flags_Joined_1 <- Dup_Flags_2
 
 Flags_Joined_2 <- left_join(Flags_Joined_1, Spk_Flags_2, by = join_by(Plate))
 
@@ -1117,7 +1110,6 @@ df_all_clean_cols <- df_all_clean %>%
     Community,
     Nickname,
     Plot_Name,
-    SubPlot,
     Depth_cm,
     CO2_Treatment,
     N_Treatment,
@@ -1151,7 +1143,6 @@ All_Clean_Data <- org_labeled_fin_data %>%
     Community,
     Nickname,
     Plot,
-    SubPlot,
     Depth_cm,
     CO2_Treatment,
     N_Treatment,
@@ -1166,92 +1157,56 @@ All_Clean_Data <- org_labeled_fin_data %>%
 
 ```
 
+
 ## Visualize Data
 ```{r Visualize Data, echo=FALSE}
-cat("Visualize Data")
 
-### Ammonia
 H2S_forplot <- All_Clean_Data
 
-color1 <- c("P1", "P2", "P3", "P4")
-color2 <- c("P5", "P6", "P7", "P8")
-color3 <- c("P10", "P9", "P11", "P12")
+#ensure points are in correct order
 
+H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
+
+color1 <- c("L1", "L2", "L3", "L4")
+color2 <- c("L5", "L6", "L8", "L10")
+color3 <- c("L7", "L9", "L11", "L12")
+color4 <- c("L13", "L14", "L16", "L15")
+color5 <- c("L17", "L18", "L19", "L20")
 
 H2S_forplot <- H2S_forplot %>%
-  mutate(
-    Treatment1 = ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2 & eN",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2 & aN",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2 & eN" ,
-          "aCO2 & aN"
-        )
-      )
-    )
-  ) %>%
-  mutate(Treatment = ifelse(
-    SubPlot == "A",
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2_eN_Phrag",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2_aN_Phrag",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2_eN_Phrag" ,
-          "aCO2_aN_Phrag"
-        )
-      )
-    ),
-    ifelse(
-      CO2_Treatment == "Elevated" &
-        N_Treatment == "Amended",
-      "eCO2_eN_Native",
-      ifelse(
-        CO2_Treatment == "Elevated" &
-          N_Treatment == "Ambient",
-        "eCO2_aN_Native",
-        ifelse(
-          CO2_Treatment == "Ambient" &
-            N_Treatment == "Amended"  ,
-          "aCO2_eN_Native" ,
-          "aCO2_aN_Native"
-        )
-      )
-    )
-  ))  %>%
-  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
-  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) %>%
   mutate(
     Plot_Color = case_when(
       Plot %in% color1 ~ "Color1",
       Plot %in% color2 ~ "Color2",
-      Plot %in% color3 ~ "Color3"
+      Plot %in% color3 ~ "Color3",
+      Plot %in% color4 ~ "Color4",
+      Plot %in% color5 ~ "Color5"
     )
-  )
+  ) %>%
+  mutate(Treatment = ifelse(
+    CO2_Treatment == "Elevated" &
+      N_Treatment == "Amended",
+    "eCO2 & eN",
+    ifelse(
+      CO2_Treatment == "Elevated" &
+        N_Treatment == "Ambient",
+      "eCO2 & aN",
+      ifelse(
+        CO2_Treatment == "Ambient" &
+          N_Treatment == "Amended"  ,
+        "aCO2 & eN" ,
+        "aCO2 & aN"
+      )
+    )
+  ))  %>%
+  mutate(CO2_Treatment = ifelse(CO2_Treatment == "Ambient", "aCO2", "eCO2"))  %>%
+  mutate(N_Treatment = ifelse(N_Treatment == "Ambient", "aN", "eN")) 
 
-
-H2S_forplot <- H2S_forplot[order(H2S_forplot$Depth_cm), ]
-
-viz_H2S_plot_v2 <- ggplot(
-  data = H2S_forplot,
- aes(
+viz_H2S_plot2 <- ggplot(data = H2S_forplot, aes(
   x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
   y = H2S_Conc_uM,
-  fill = as.factor(Treatment1),
-  color = as.factor(Treatment1)
+  fill = as.factor(Treatment),
+  color = as.factor(Treatment)
 )) +
   geom_bar(
     stat = "identity",
@@ -1282,7 +1237,7 @@ viz_H2S_plot_v2 <- ggplot(
   theme_classic() +
   labs(x = " ",
        y = "H2S (uM)",
-       title = "CO2xNxPhrag: Porewater Sulfide"
+       title = "CO2xN: Porewater Sulfide"
        ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
@@ -1295,16 +1250,16 @@ viz_H2S_plot_v2 <- ggplot(
     )
   ) +
 coord_flip()
-print(viz_H2S_plot_v2)
-
+print(viz_H2S_plot2)
 
 ```
 
-```{r, echo = FALSE}
+
+
+```{r, echo=FALSE}
+#ensure points are in correct order
+
 #make plot
-
-H2S_forplot <- H2S_forplot
-
 viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
@@ -1312,19 +1267,20 @@ viz_H2S_plot_2 <- ggplot(data = H2S_forplot, aes(x = H2S_Conc_uM, y = as.numeric
     values = c(
       "Color1" = "#FFD500",
       "Color2" = "#00D0FF",
-      "Color3" = "#FF0075"
-   
+      "Color3" = "#FF0075",
+      "Color4" = "#80d280",
+      "Color5" = "#ff6040"
     ),
-    labels = c("1", "2", "3")
+    labels = c("1", "2", "3", "4", "5")
   ) +
-  facet_grid(Treatment1 ~ ., scales = "fixed") +
+  facet_grid(Treatment ~ ., scales = "fixed") +
   labs(
     x = "H2S (uM)",
     y = "Depth (cm)",
-    title = "CO2xNxPhrag: Porewater H2S by Replicate",
+    title = "CO2xN: Porewater H2S by Replicate",
     color = "Replicate"
   ) +
-  scale_y_reverse(breaks = c(20, 40), limits = c(45, 15)) +
+  scale_y_reverse(breaks = c(20, 40, 80), limits = c(90, 10)) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -1339,17 +1295,15 @@ viz_H2S_plot_2
 ```
 
 
-
 ##Export Data
 ```{r, echo=FALSE}
 write.csv(unique_log, log_path, row.names = FALSE)
-  Rerun_Data <- df_all_clean %>% filter((Min_Dil != 1 & Conc_Flag == "bdl")| Conc_Flag == "adl" | CV_Flag %like% "High")
+
+  Rerun_Data <- All_Clean_Data %>% filter(H2S_Conc_Flag != "Within_Range" | H2S_CV_Flag %like% "High")
 
 if(After_Reruns == "YES"){
   write.csv(All_Clean_Data, final_path)} else {
-  write.csv(Rerun_Data, rerun_path) 
-    knitr::kable(Rerun_Data[,1:6], caption = "Reruns")}
-  
+  write.csv(Rerun_Data, rerun_path) }
 #end
 ```
 
