@@ -174,7 +174,7 @@ dat<-read_plates(
 
 dat <- dat %>%
   mutate(file_name = Plate) %>% 
-  mutate(Plate = str_extract(file_name, "Plate[0-9]+")) %>% 
+  mutate(Plate = str_extract(file_name, "Plate[0-9]+|Rerun[0-9]+")) %>% 
   mutate(Run_Date = str_extract(file_name, "\\d{4}\\d{2}\\d{2}")) %>% 
   mutate(Run_Date = as.Date(Run_Date, format = "%Y%m%d")) %>% 
   dplyr::select(-file_name)

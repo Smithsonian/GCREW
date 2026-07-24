@@ -37,7 +37,7 @@ library(ggrepel)
 ```{r Information to be changed}
 
 ##Before or After Reruns (YES or NO)
-After_Reruns = "NO"
+After_Reruns = "YES"
 #If NO will not write final data file
   #And Will Write a Rerun File
 
@@ -62,8 +62,8 @@ print(Raw_plates)
 log_path <- here("Porewater QAQC Logs", "GCReW_H2S_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202605.csv"
-rerun_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202605_reruns.csv"
+final_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202607.csv"
+rerun_path <- "Processed Data/GCReW_SMARTX_Porewater_H2S_202607_reruns.csv"
 
 
 ```

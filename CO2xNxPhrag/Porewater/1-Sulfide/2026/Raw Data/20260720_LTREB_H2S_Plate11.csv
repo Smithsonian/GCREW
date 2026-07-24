@@ -9,14 +9,14 @@ G,1.392,1.237,1.261,0.324,0.277,0.331,0.126,0.112,0.116,0.048,0.046,0.046
 H,0.13,0.133,0.158,0.712,0.79,0.896,0.516,0.584,0.572,0.812,0.832,0.765
 ,,,,,,,,,,,,
 ,1,2,3,4,5,6,7,8,9,10,11,12
-A,Std 0,Std 0,Std 0,Sp9-40,Sp9-40,Sp9-40,Sp14-40,Sp14-40,Sp14-40,Ch12-5,Ch12-5,Ch12-5
-B,Std 1,Std 1,Std 1,Sp10-20,Sp10-20,Sp10-20,ChkStd 0,ChkStd 0,ChkStd 0,Ch12-40,Ch12-40,Ch12-40
+A,Std 0,Std 0,Std 0,Sp9-40,Sp9-40,Sp9-40,Sp14-40,Sp14-40,Sp14-40,,,
+B,Std 1,Std 1,Std 1,Sp10-20,Sp10-20,Sp10-20,ChkStd 0,ChkStd 0,ChkStd 0,,,
 C,Std 2,Std 2,Std 2,Sp10-40,Sp10-40,Sp10-40,Sp14-40 Dup,Sp14-40 Dup,Sp14-40 Dup,,,
 D,Std 3,Std 3,Std 3,Sp11-20,Sp11-20,Sp11-20,ChkStd 3,ChkStd 3,ChkStd 3,Sp9-20 Spike,Sp9-20 Spike,Sp9-20 Spike
-E,Std 4,Std 4,Std 4,Sp11-40,Sp11-40,Sp11-40,P3-20,P3-20,P3-20,P3-20 Spike,P3-20 Spike,P3-20 Spike
-F,Std 5,Std 5,Std 5,Sp13-20,Sp13-20,Sp13-20,P3-20,P3-20,P3-20,ChkStd 0,ChkStd 0,ChkStd 0
+E,Std 4,Std 4,Std 4,Sp11-40,Sp11-40,Sp11-40,,,,P3-20 Spike,P3-20 Spike,P3-20 Spike
+F,Std 5,Std 5,Std 5,Sp13-20,Sp13-20,Sp13-20,,,,ChkStd 0,ChkStd 0,ChkStd 0
 G,MC: 10ppt S5,MC: 10ppt S5,MC: 10ppt S5,Sp13-40,Sp13-40,Sp13-40,Ch6-80,Ch6-80,Ch6-80,,,
-H,Sp9-20,Sp9-20,Sp9-20,Sp14-20,Sp14-20,Sp14-20,Ch12-5,Ch12-5,Ch12-5,ChkStd 4,ChkStd 4,ChkStd 4
+H,Sp9-20,Sp9-20,Sp9-20,Sp14-20,Sp14-20,Sp14-20,,,,ChkStd 4,ChkStd 4,ChkStd 4
 ,,,,,,,,,,,,
 ,1,2,3,4,5,6,7,8,9,10,11,12
 A,1,1,1,50,50,50,50,50,50,50,50,50
