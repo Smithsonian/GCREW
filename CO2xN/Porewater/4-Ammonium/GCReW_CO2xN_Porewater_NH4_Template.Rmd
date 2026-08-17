@@ -284,7 +284,11 @@ add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
   )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs") %>% rename(R_Squared = R2) #Format new run data for log
 
 
-new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(.,-Run, -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>%
+    group_by(dplyr::select(., -Run)) %>%
+    summarize(Run = Run[max(1, which(Run != "Past Runs"))][1]) %>%
+    ungroup() #bind rows, round data, and remove possible duplicate data from rerunning code
+
 Reg_Coef <- new_log %>% group_by(Test) %>% reframe(Mean_Slope = mean(Slope, na.rm = TRUE), SD_Slope = sd(Slope, na.rm = TRUE), Mean_Int = mean(Intercept, na.rm = TRUE), SD_Int = sd(Intercept, na.rm = TRUE)) %>% distinct() %>% 
   mutate(
   SD_Slope_Max = Mean_Slope + 2*SD_Slope, SD_Int_Max = Mean_Int + 2*SD_Int,
@@ -333,6 +337,11 @@ ints_chk <- ggplot(new_log_plot, aes(x = Run_Date, y = Intercept, fill = Test, c
 Slopes_chk
 
 ints_chk
+
+```
+
+##Write Standard Log
+```{r, echo = FALSE}
 
 write.csv(new_log, file_path, row.names = FALSE) #write out log
 
@@ -830,10 +839,15 @@ Top_Standards <- Slope_raw %>% group_by(Test, Run_Date) %>% filter(Sample_Name =
 
 PE_Check <- NH3_peChk %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Mean_Chk_Conc) %>% rename(Mean_PE_Conc = Mean_Chk_Conc) %>% ungroup()
 
-Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_Diff) %>% rename(Spike_Percent_Diff = Spike_Diff) %>% ungroup()
+Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_Diff) %>% rename(Spike_Percent_Diff = Spike_Diff) %>% reframe(Test = Test,
+                                                    Run_Date = Run_Date,
+                                                    Spike_Percent_Diff = mean(Spike_Percent_Diff)) %>% ungroup() %>% distinct()
 
 Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
-  left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% distinct()
+  left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>%
+    group_by(dplyr::select(., -Run)) %>%
+    summarize(Run = Run[max(1, which(Run != "Past Runs"))][1]) %>%
+    ungroup()
 
 Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_Percent_Diff)) +
   geom_point(size = 3, aes(col = Run)) +
@@ -862,8 +876,12 @@ PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc)) +
 
 PE_Log_Plot
 
-write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
+```
 
+##Write QAQC Log
+```{r, echo = FALSE}
+
+write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
 
 ```
 
