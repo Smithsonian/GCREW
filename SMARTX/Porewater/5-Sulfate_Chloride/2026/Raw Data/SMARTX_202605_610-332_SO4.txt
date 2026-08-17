@@ -1,0 +1,148 @@
+Inj.	Injection Name	Type 	Ret.Time	Amount	Rel.Area 	Area	Height
+No.	Selected Peak:		min	µg/mL	%	µS*min	µS
+			CD	CD	CD	CD	CD
+			IC-SO4	IC-SO4	IC-SO4	IC-SO4	IC-SO4
+1	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+2	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+3	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+4	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+5	Standard 1	Calibration Standard	4.31	0.5115	7.15	0.4637	2.95
+6	Standard 2	Calibration Standard	4.307	0.9431	6.63	0.8549	5.49
+7	Standard 3	Calibration Standard	4.3	1.8947	6.74	1.7176	11.04
+8	Standard 4	Calibration Standard	4.273	9.9142	6.94	8.9874	53.2
+9	Standard 5	Calibration Standard	4.24	20.0181	6.99	18.1467	98.74
+10	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+11	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+12	610_10_May	Unknown	4.287	743.6011	8.6	6.7634	40.99
+13	610_20_May	Unknown	4.28	835.7891	8.29	7.6019	45.61
+14	610_40_May	Unknown	4.277	713.8774	7.42	6.493	39.56
+15	610_80_May	Unknown	4.28	637.0353	6.24	5.7941	35.65
+16	610_120_May	Unknown	4.28	688.2008	7.16	6.2595	38.46
+17	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+18	310_10_May	Unknown	4.28	699.5102	8.79	6.3624	39.31
+19	310_20_May	Unknown	4.27	859.8111	9.06	7.8204	47.69
+20	310_40_May	Unknown	4.27	904.6473	8.72	8.2282	49.93
+21	310_80_May	Unknown	4.283	543.0495	5.9	4.9393	31.11
+22	310_80_May_DUP	Unknown	4.287	540.0195	5.89	4.9117	30.92
+23	310_120_May	Unknown	4.303	484.4741	5.34	4.4065	27.97
+24	310_120_May_SPK	Spiked	4.283	636.6339	6.98	5.752	35.91
+25	Standard 1	Check Standard	4.313	0.5142	7.21	0.4662	3.01
+26	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+27	311_10_May	Unknown	4.283	669.563	8.45	6.09	37.84
+28	311_20_May	Unknown	4.277	782.5678	8.21	7.1178	43.49
+29	311_40_May	Unknown	4.287	700.8393	6.93	6.3744	39.24
+30	311_80_May	Unknown	4.297	305.9673	3.44	2.7829	17.86
+31	311_120_May	Unknown	4.297	373.4393	4.19	3.3966	21.63
+32	312_10_May	Unknown	4.28	648.7702	8.53	5.9009	36.45
+33	312_20_May	Unknown	4.283	653.8001	6.88	5.9466	36.71
+34	312_40_May	Unknown	4.293	361.7111	3.78	3.2899	20.99
+35	312_80_May	Unknown	4.303	151.2977	1.8	1.3761	8.96
+36	312_80_May_DUP	Unknown	4.313	149.0819	1.8	1.356	8.84
+37	312_120_May	Unknown	4.293	576.7651	6.44	5.2459	32.6
+38	312_120_May_SPK	Spiked	4.28	738.0645	8.05	6.6684	40.79
+39	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+40	Standard 1	Check Standard	4.313	0.5179	7.26	0.4695	3.01
+41	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+42	313_10_May	Unknown	4.3	662.3667	8.06	6.0245	37.05
+43	313_20_May	Unknown	4.287	582.0255	6.24	5.2938	32.82
+44	313_40_May	Unknown	4.297	296.71	3.19	2.6987	17.25
+45	313_80_May	Unknown	4.297	432.0222	5.47	3.9294	24.61
+46	313_120_May	Unknown	4.293	415.8918	4.62	3.7827	23.64
+47	613_10_May	Unknown	4.283	552.4007	6.73	5.0243	30.84
+48	613_20_May	Unknown	4.293	346.423	3.83	3.1509	19.79
+49	613_40_May	Unknown	4.31	66.2297	0.71	0.6024	3.92
+50	613_80_May	Unknown	4.3	187.479	2.1	1.7052	10.88
+51	613_80_May_DUP	Unknown	4.31	190.6979	2.1	1.7345	11.07
+52	613_120_May	Unknown	4.287	505.0436	5.37	4.5936	28.32
+53	613_120_May_SPK	Spiked	4.28	671.2581	6.91	6.0648	36.8
+54	Lab Blank	Unknown	4.323	0.0232	18.5	0.0211	0.03
+55	Standard 1	Check Standard	4.313	0.5274	7.37	0.4781	3.02
+56	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+57	620_10_May	Unknown	4.287	714.7511	8.44	6.501	39.22
+58	620_20_May	Unknown	4.277	760.0264	7.89	6.9128	41.52
+59	620_40_May	Unknown	4.29	644.9478	6.67	5.8661	35.64
+60	620_80_May	Unknown	4.29	487.8215	5.45	4.437	27.44
+61	620_120_May	Unknown	4.287	648.3204	6.92	5.8968	35.83
+62	320_10_May	Unknown	4.28	753.3813	8.82	6.8523	41.16
+63	320_20_May	Unknown	4.273	860.9531	8.99	7.8307	46.51
+64	320_40_May	Unknown	4.28	724.0864	7.22	6.5859	39.7
+65	320_80_May	Unknown	4.29	472.1455	5.19	4.2944	26.62
+66	320_80_May_DUP	Unknown	4.29	477.8027	5.2	4.3458	26.83
+67	320_120_May	Unknown	4.277	745.2603	7.99	6.7785	40.82
+68	320_120_May_SPK	Spiked	4.28	891.5265	9.51	8.055	47.77
+69	Lab Blank	Unknown	4.317	0.0231	19.51	0.021	0.03
+70	Standard 2	Check Standard	4.31	0.9615	6.74	0.8717	5.54
+71	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+72	321_10_May	Unknown	4.277	775.9833	9.25	7.0579	42.2
+73	321_20_May	Unknown	4.28	734.2521	7.51	6.6783	40.05
+74	321_40_May	Unknown	4.29	614.7845	6.41	5.5917	33.95
+75	321_80_May	Unknown	4.303	219.7796	2.45	1.999	12.63
+76	321_120_May	Unknown	4.297	337.4898	3.72	3.0696	19.2
+77	322_10_May	Unknown	4.277	791.0985	9.57	7.1954	42.8
+78	322_20_May	Unknown	4.283	780.222	8.72	7.0965	42.31
+79	322_40_May	Unknown	4.283	608.3756	6.04	5.5334	33.56
+80	322_80_May	Unknown	4.307	249.7063	2.86	2.2712	14.29
+81	322_80_May_DUP	Unknown	4.3	249.5429	2.85	2.2697	14.28
+82	322_120_May	Unknown	4.307	168.2514	2.05	1.5303	9.72
+83	322_120_May_SPK	Spiked	4.297	323.9377	3.89	2.9268	18.27
+84	Lab Blank	Unknown	4.317	0.0215	20.71	0.0194	0.03
+85	Standard 2	Check Standard	4.317	0.9747	6.83	0.8836	5.58
+86	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+87	323_10_May	Unknown	4.283	657.8826	8.68	5.9837	35.94
+88	323_20_May	Unknown	4.283	581.5827	6.41	5.2898	31.98
+89	323_40_May	Unknown	4.297	330.6822	3.52	3.0077	18.67
+90	323_80_May	Unknown	4.307	150.7667	1.81	1.3713	8.65
+91	323_120_May	Unknown	4.293	402.2683	4.53	3.6588	22.44
+92	623_10_May	Unknown	4.283	653.4751	8.74	5.9436	35.4
+93	623_20_May	Unknown	4.283	690.892	8.07	6.284	37.18
+94	623_40_May	Unknown	4.277	783.2699	7.68	7.1242	41.67
+95	623_80_May	Unknown	4.29	453.4105	4.73	4.124	24.91
+96	623_80_May_DUP	Unknown	4.29	459.6101	4.73	4.1804	25.29
+97	623_120_May	Unknown	4.303	202.1383	2.29	1.8385	11.45
+98	623_120_May_SPK	Spiked	4.297	357.5878	4.01	3.2308	19.82
+99	Lab Blank	Unknown	4.317	0.0174	16.01	0.0158	0.03
+100	Standard 2	Check Standard	4.317	0.9697	6.8	0.8791	5.48
+101	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+102	630_10_May	Unknown	4.293	600.2011	8.2	5.4591	32.66
+103	630_20_May	Unknown	4.283	635.523	7.1	5.7804	34.48
+104	630_40_May	Unknown	4.287	543.0546	5.97	4.9393	29.75
+105	630_80_May	Unknown	4.293	557.6516	6.42	5.0721	30.46
+106	630_120_May	Unknown	4.28	746.8467	8.15	6.7929	40.07
+107	330_10_May	Unknown	4.283	612.1315	8.74	5.5676	33.21
+108	330_20_May	Unknown	4.287	636.1609	7.26	5.7862	34.42
+109	330_40_May	Unknown	4.283	637.0526	6.88	5.7943	34.55
+110	330_80_May	Unknown	4.29	447.7929	5.19	4.0729	24.69
+111	330_80_May_DUP	Unknown	4.29	450.3372	5.18	4.096	24.8
+112	330_120_May	Unknown	4.3	258.2711	3.21	2.3491	14.46
+113	330_120_May_SPK	Spiked	4.3	414.6195	5.09	3.7461	22.73
+114	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+115	Standard 3	Check Standard	4.303	1.9215	6.85	1.7419	10.71
+116	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+117	331_10_May	Unknown	4.29	644.2438	8.92	5.8597	34.28
+118	331_20_May	Unknown	4.29	584.5417	6.57	5.3167	31.2
+119	331_40_May	Unknown	4.293	370.1895	4.01	3.367	20.13
+120	331_80_May	Unknown	4.297	269.0502	3.11	2.4471	14.77
+121	331_120_May	Unknown	4.303	155.956	1.91	1.4185	8.65
+122	332_10_May	Unknown	4.29	630.7084	7.77	5.7366	33.28
+123	332_20_May	Unknown	4.293	561.2048	6.1	5.1044	29.79
+124	332_40_May	Unknown	4.297	289.2034	2.98	2.6304	15.8
+125	332_80_May	Unknown	4.3	4.1294	0.05	0.0376	0.24
+126	332_80_May_DUP	Unknown	4.31	4.0925	0.05	0.0372	0.24
+127	332_120_May	Unknown	4.303	129.2868	1.57	1.1759	7.19
+128	332_120_May_SPK	Spiked	4.297	286.2517	3.42	2.5863	15.5
+129	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+130	Standard 3	Check Standard	4.303	1.927	6.86	1.7469	10.51
+131	Lab Blank	Unknown	4.313	0.0331	17.3	0.03	0.04
+132	Standard 1	Calibration Standard	4.31	0.5271	7.37	0.4778	2.85
+133	Standard 2	Calibration Standard	4.307	0.9669	6.77	0.8765	5.28
+134	Standard 3	Calibration Standard	4.303	1.9194	6.84	1.74	10.44
+135	Standard 4	Calibration Standard	4.27	9.8343	6.93	8.9149	49.74
+136	Standard 5	Calibration Standard	4.237	20.1297	7	18.2478	94.69
+137	Lab Blank	Unknown	4.313	0.0555	50.37	0.0503	0.03
+138	Lab Blank	Unknown	4.313	0.0204	16.1	0.0185	0.03
+139	Lab Blank	Unknown	4.313	0.0272	14.38	0.0247	0.04
+Maximum			4.323	904.6473	50.37	18.2478	98.74
+Average			4.293	406.6293	6.99	4.2495	25.57
+Minimum			4.237	0.0174	0.05	0.0158	0.03
+Standard Deviation			0.014	287.6446	5.3	3.0566	17.37
+Relative Standard Deviation			0.34%	70.74%	75.81%	71.93%	67.90%
