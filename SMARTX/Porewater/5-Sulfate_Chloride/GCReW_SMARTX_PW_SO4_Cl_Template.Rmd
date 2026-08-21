@@ -1,6 +1,6 @@
 ---
 title: "SMARTX: Porewater SO4/Cl"
-author: "September 2025 Samples 610-332"
+author: "May 2026 Samples 610-332"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -30,28 +30,28 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "2026-1-3"  #Date that instrument was run
-  Run_by = "Zoe Read"  #Instrument user 
-  Script_run_by = "Zoe Read" #Code user 
-  sample_year <- "2025"
-  sample_month <- "Sept"
+  Date_Run = "2026-08-12"  #Date that instrument was run
+  Run_by = "Victoria Ellis"  #Instrument user 
+  Script_run_by = "Victoria Ellis" #Code user 
+  sample_year <- "2026"
+  sample_month <- "May"
   Site = "GCREW"
   run_notes = "" #any notes from the run
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/SMARTX_202509_610-332_Cl.txt"
-  raw_file_name_so4 = "Raw Data/SMARTX_202509_610-332_SO4.txt"
+  raw_file_name_cl = "Raw Data/SMARTX_202605_610-332_Cl.txt"
+  raw_file_name_so4 = "Raw Data/SMARTX_202605_610-332_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/GCReW_SMARTX_PW_Processed_Cl_SO4_202509_610-332.csv" 
+  processed_file_name = "Processed Data/GCReW_SMARTX_PW_Processed_Cl_SO4_202605_610-332.csv" 
 
 ###### Log Files - PLEASE CHECK 
 #downloaded metadata csv - downloaded from Google drive as csv for this year
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
-  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2025.csv"
+  Log_path = here("Porewater QAQC Logs", "GCReW_SO4_Cl_QAQC_Log.csv")
 
 ```
 
@@ -63,7 +63,7 @@ lapply(c(
   #steph will add this soon 
 
 #Dilution
-Dilution = 100
+Dilution = 99.6667
 
 #Coefficients / constants that are needed for calculations 
   cl_mw <- 35.45     #molecular weight of Chloride, g/mol
@@ -340,7 +340,6 @@ if (file.exists(Log_path)) {
   print("QAQC log file does not exist. It has been created.")
   }
 
-log <- log[ ,-c(1)]
 
 #make sure they both have dates in Date format
 log$run_date <- as.Date(log$run_date, format = "%Y-%m-%d")
@@ -363,7 +362,7 @@ Slopes_chk <- ggplot(log, aes(run_date, slope, col=curve)) +
 Slopes_chk
 
 #write out the log file with the added lines for this run  
-write.csv(log, Log_path)
+write.csv(log, Log_path, row.names = FALSE)
 
 #Grab the highest r2 that is available for this run 
 r2_Cl = max(lm_results_cl$r2)
@@ -832,7 +831,8 @@ QAspks$SO4_spk_Conc <- spk_Conc     # mmoles of SO4 in spike
 
 #Set Sample volumes in uL 
 QAspks$SampleVol <- 1
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 100, 1500, QAspks$SampleVol)
+QAspks$SampleVol <-  ifelse(QAspks$Dilution == 99.6667, 1495, QAspks$SampleVol)
+
 
 #change sample volume to L 
 QAspks$SampleVol <- QAspks$SampleVol/Con1
@@ -842,7 +842,7 @@ QAspks$SampleVol <- QAspks$SampleVol/Con1
 QAspks$SO4_Total_unspkd <- (QAspks$SO4_Conc_mM/QAspks$Dilution)*(QAspks$SampleVol) 
 
 #gives us the total SO4 in the spiked sample in mmoles
-QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/QAspks$Dilution)*(QAspks$SampleVol+spkvol) 
+QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/100.3333)*(QAspks$SampleVol+spkvol) 
 
 #gives us expected SO4 in the spiked sample in mmoles
 QAspks$SO4_expctd_spkd <-  (QAspks$SO4_Total_unspkd + QAspks$SO4_spk_Conc)
@@ -997,14 +997,11 @@ df_all_clean <- all_data_flagged %>%
 
 ```
 
-## Visualize Data
+## Visualize Data - Cl
 
-```{r Visualize Data C3, fig.height=10, echo=FALSE}
-cat("Visualize Data")
-
-### Ammonia 
-Cl_forplot <- df_all_clean %>%
-  filter(Test == "Ammonia 2")
+```{r Visualize Data C3 Cl, fig.height=10, echo=FALSE}
+cat("Visualize Data - Cl")
+Cl_forplot <- df_all_clean 
 
 #C3 plots
 Cl_forplot_C3 <- Cl_forplot %>%
@@ -1078,8 +1075,11 @@ print(viz_Cl_plot_C3)
 
 ```
 \newpage
-```{r Visualize Data C4, fig.height=10, echo=FALSE}
+```{r Visualize Data C4 Cl, fig.height=10, echo=FALSE}
 #C4 plots
+
+Cl_forplot <- df_all_clean
+
 Cl_forplot_C4 <- Cl_forplot %>%
   filter(Nickname == "C4")
 
@@ -1106,7 +1106,7 @@ viz_Cl_plot_C4 <- ggplot(data = Cl_forplot_C4, aes(
     "3.4" = "orange",
     "5.1" = "red"
   )) +
-  
+
   theme_classic() +
   labs(x = " ",
        y = "Cl (mM)",
@@ -1122,14 +1122,14 @@ viz_Cl_plot_C4 <- ggplot(data = Cl_forplot_C4, aes(
       linewidth = 0.8
     ),
     legend.key = element_rect("black")
-    
+
   ) +
   coord_flip()
-print(viz_Cl_plot_C4) 
+print(viz_Cl_plot_C4)
 
 ```
 \newpage
-```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
+```{r Visualize Data by Rep C3 Cl,  fig.height=8.5, echo=FALSE}
 
 #get replicate value and treatment info
 Cl_forplot_C3 <- Cl_forplot_C3 %>%
@@ -1190,7 +1190,7 @@ viz_Cl_plot_C3_2
 ```
 \newpage
 
-```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
+```{r Visualize Data by Rep C4 Cl,  fig.height=5.7, echo=FALSE}
 
 #get replicate value and treatment info
 Cl_forplot_C4 <- Cl_forplot_C4 %>%
@@ -1217,7 +1217,7 @@ Cl_forplot_C4 <- Cl_forplot_C4 %>%
 Cl_forplot_C4 <- Cl_forplot_C4[order(Cl_forplot_C4$Depth_cm), ]
 
 #make plot
-viz_Cl_plot_C4_2 <- ggplot(data = Cl_forplot_C4, 
+viz_Cl_plot_C4_2 <- ggplot(data = Cl_forplot_C4,
                             aes(x = Cl_Conc_mM, y = Depth_cm, color = Replicate)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
@@ -1228,12 +1228,12 @@ viz_Cl_plot_C4_2 <- ggplot(data = Cl_forplot_C4,
   )) +
   facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
                ., scales = "free_x") +
-  labs(x = "Cl (mM)", 
-       y = "Depth (cm)", 
+  labs(x = "Cl (mM)",
+       y = "Depth (cm)",
        title = "C4: Porewater Cl by Replicate") +
   scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
                   limits = c(125, 5)) +
-  xlim(0, 10) +
+  xlim(120, 175) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),
@@ -1249,12 +1249,11 @@ viz_Cl_plot_C4_2
 ```
 
 
-```{r Visualize Data C3, fig.height=10, echo=FALSE}
-cat("Visualize Data")
+```{r Visualize Data C3 SO4, fig.height=10, echo=FALSE}
+cat("Visualize Data - SO4")
 
 ### Ammonia 
-SO4_forplot <- df_all_clean %>%
-  filter(Test == "Ammonia 2")
+SO4_forplot <- df_all_clean
 
 #C3 plots
 SO4_forplot_C3 <- SO4_forplot %>%
@@ -1328,7 +1327,7 @@ print(viz_SO4_plot_C3)
 
 ```
 \newpage
-```{r Visualize Data C4, fig.height=10, echo=FALSE}
+```{r Visualize Data C4 SO4, fig.height=10, echo=FALSE}
 #C4 plots
 SO4_forplot_C4 <- SO4_forplot %>%
   filter(Nickname == "C4")
@@ -1356,7 +1355,7 @@ viz_SO4_plot_C4 <- ggplot(data = SO4_forplot_C4, aes(
     "3.4" = "orange",
     "5.1" = "red"
   )) +
-  
+
   theme_classic() +
   labs(x = " ",
        y = "SO4 (mM)",
@@ -1372,14 +1371,14 @@ viz_SO4_plot_C4 <- ggplot(data = SO4_forplot_C4, aes(
       linewidth = 0.8
     ),
     legend.key = element_rect("black")
-    
+
   ) +
   coord_flip()
-print(viz_SO4_plot_C4) 
+print(viz_SO4_plot_C4)
 
 ```
 \newpage
-```{r Visualize Data by Rep C3,  fig.height=8.5, echo=FALSE}
+```{r Visualize Data by Rep C3 SO4,  fig.height=8.5, echo=FALSE}
 
 #get replicate value and treatment info
 SO4_forplot_C3 <- SO4_forplot_C3 %>%
@@ -1440,7 +1439,7 @@ viz_SO4_plot_C3_2
 ```
 \newpage
 
-```{r Visualize Data by Rep C4,  fig.height=5.7, echo=FALSE}
+```{r Visualize Data by Rep C4 SO4,  fig.height=5.7, echo=FALSE}
 
 #get replicate value and treatment info
 SO4_forplot_C4 <- SO4_forplot_C4 %>%
@@ -1467,7 +1466,7 @@ SO4_forplot_C4 <- SO4_forplot_C4 %>%
 SO4_forplot_C4 <- SO4_forplot_C4[order(SO4_forplot_C4$Depth_cm), ]
 
 #make plot
-viz_SO4_plot_C4_2 <- ggplot(data = SO4_forplot_C4, 
+viz_SO4_plot_C4_2 <- ggplot(data = SO4_forplot_C4,
                             aes(x = SO4_Conc_mM, y = Depth_cm, color = Replicate)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
@@ -1478,12 +1477,12 @@ viz_SO4_plot_C4_2 <- ggplot(data = SO4_forplot_C4,
   )) +
   facet_grid(factor(Treatment1, levels = c("+ 0 C", "+ 1.7 C", "+ 3.4 C", "+ 5.1 C")) ~
                ., scales = "free_x") +
-  labs(x = "SO4 (mM)", 
-       y = "Depth (cm)", 
+  labs(x = "SO4 (mM)",
+       y = "Depth (cm)",
        title = "C4: Porewater SO4 by Replicate") +
   scale_y_reverse(breaks = c(10, 20, 40, 80, 120),
                   limits = c(125, 5)) +
-  xlim(0, 10) +
+  xlim(0, 25) +
   theme_classic() +
   theme(
     axis.text.x = element_text(angle = 0, hjust = 0.5),

@@ -1,0 +1,2 @@
+"","Sample_ID.x","Conc","Conc_Flag","CV_Flag","Dilution","CV","Min_CV","Within_Range","BDL","Max_Dil","Min_Dil","All_Good","CV_Check","Number","Remove","Site","Project","Nickname","Sample_ID.y","Plot","Depth_cm","Community","CO2_Treatment","Sample_Name","Month","Year","H2S_Flags"
+"1","SP10-40",5269.07894736842,"Within_Range","CV_High",50,11.3598542280771,"RMV",TRUE,FALSE,50,50,FALSE,FALSE,1,"KEEP2a","GCReW","CO2xCOMM","1-Meter","\bSP10-40\b","SP10",40,"SPPA","Elevated","SP10-40","July","2026","Spk_Bad Dup_Bad Std3Chk_Bad, Std5Chk_Bad    "

@@ -14,8 +14,8 @@ output_dir: "To Be Reviewed/PDF"
 ##Run Information 
 ```{r run information, include=TRUE}
 cat("Run Information: ") #lets you know what section you're in 
+library(here)
 #set the run date & user name 
-  run_date <- "01/30/2025"
   sample_year <- "2025"
   sample_month <- "Sept"
   user <- "Victoria Ellis"
@@ -26,6 +26,8 @@ cat("Run Information: ") #lets you know what section you're in
                  "Raw Data/LTREB_2M_Sept_2025_Run2.csv")
 
 # Define the file path for QAQC log file - NO Need to change just check year 
+  file_path <- here("Porewater QAQC Logs", "GCReW_NH4_QAQC_Log.csv")
+  file_path_QAQC <- here("Porewater QAQC Logs", "GCReW_SEAL_Check_QAQC_Log.csv")
   final_path <- "Processed Data/CO2xN_Porewater_NH4_202509.csv"
 
 #record any notes about the run or anything other info here: 
@@ -276,17 +278,21 @@ knitr::kable(R2_Flags) #display Regression flags and R2
 
 old_log <- read.csv(file_path) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")#read in log and format date
 
-add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept, Quadratic) %>%
+add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
   mutate(Test = case_when(
     Test == "Ammonia 2" ~ "NH3"
-  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs")#Format new run data for log
+  )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs") %>% rename(R_Squared = R2) #Format new run data for log
 
 
-new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(.,-Run, -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>%
+    group_by(dplyr::select(., -Run)) %>%
+    summarize(Run = Run[max(1, which(Run != "Past Runs"))][1]) %>%
+    ungroup() #bind rows, round data, and remove possible duplicate data from rerunning code
+
 Reg_Coef <- new_log %>% group_by(Test) %>% reframe(Mean_Slope = mean(Slope, na.rm = TRUE), SD_Slope = sd(Slope, na.rm = TRUE), Mean_Int = mean(Intercept, na.rm = TRUE), SD_Int = sd(Intercept, na.rm = TRUE)) %>% distinct() %>% 
   mutate(
-  SD_Slope_Max = Mean_Slope + 2*SD_Slope, SD_Int_Max = Mean_Int + 2*SD_Int, SD_Quad_Max = Mean_Quad + 2*SD_Quad,
-  SD_Slope_Min = Mean_Slope - 2*SD_Slope, SD_Int_Min = Mean_Int - 2*SD_Int, SD_Quad_Min = Mean_Quad - 2*SD_Quad
+  SD_Slope_Max = Mean_Slope + 2*SD_Slope, SD_Int_Max = Mean_Int + 2*SD_Int,
+  SD_Slope_Min = Mean_Slope - 2*SD_Slope, SD_Int_Min = Mean_Int - 2*SD_Int
                                                                                                        )
 
 new_log_plot <- left_join(new_log, Reg_Coef, by = join_by(Test)) %>% 
@@ -330,11 +336,14 @@ ints_chk <- ggplot(new_log_plot, aes(x = Run_Date, y = Intercept, fill = Test, c
 
 Slopes_chk
 
-quad_chk
-
 ints_chk
 
-write.csv(new_log, "Raw Data/SEAL_TEMPEST_QAQC_Log_2024.csv", row.names = FALSE) #write out log
+```
+
+##Write Standard Log
+```{r, echo = FALSE}
+
+write.csv(new_log, file_path, row.names = FALSE) #write out log
 
 
 
@@ -777,7 +786,9 @@ samples_flagged1 <- samples %>% mutate(Dilution = ifelse(Dilution == 0, 1, Dilut
 
       TRUE ~ NA_character_  # fallback for unexpected values
     )
-  )
+  ) %>% group_by(Sample_Name) %>%
+  filter(n() == 1 | as.POSIXct(Run_Date, format = "%m/%d/%Y") == max(as.POSIXct(Run_Date, format = "%m/%d/%Y"))) %>% 
+  ungroup()
 
 NH3_dl_df <- samples_flagged1 %>% filter(Test == "Ammonia 2")
 
@@ -821,45 +832,56 @@ Flags_Fin <- Flags_Bad %>% mutate(QAQC_Flag = paste0(R2_Flag, PE_Flag, CHK_Flag,
 
 ## Create Log for QAQC
 ```{r}
-#Old_Log_QAQC <- tibble(Test = c(), Mean_PE_Conc= c(), Spike_CV= c(), Top_Std_Absorbance= c(), Run_Date= c()) #create standard log in proper format
-# Old_Log_QAQC <- read.csv(file_path_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")
-# 
-# Top_Standards <- Slope_raw %>% group_by(Test, Run_Date) %>% filter(Sample_Name == "Standard 2.0000") %>% dplyr::select(Test, Run_Date, Absorbance) %>% distinct() %>% ungroup() %>% rename(Top_Std_Absorbance = Absorbance)
-# 
-# PE_Check <- NH3_peChk %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Mean_Chk_Conc) %>% rename(Mean_PE_Conc = Mean_Chk_Conc) %>% ungroup()
-# 
-# Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_CV) %>% ungroup()
-# 
-# Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
-#   left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% distinct()
-# 
-# Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_CV)) +
-#   geom_point(size = 3, aes(col = Run)) +
-#  # geom_path(linewidth = 1) +
-#   facet_grid(~Test, scales = "free") +
-#   labs(title = "Spike") +
-#   theme_classic()
-# 
-# Spike_Log_Plot
-# 
-# TopStd_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Top_Std_Absorbance)) +
-#   geom_point(size = 3, aes(col = Run)) +
-#  # geom_path(linewidth = 1) +
-#   facet_grid(~Test, scales = "free") +
-#   labs(title = "Top Standard Absorbance") +
-#   theme_classic()
-# 
-# TopStd_Log_Plot
-# 
-# PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc)) +
-#   geom_point(size = 3, aes(col = Run)) +
-#   #geom_path(linewidth = 1) +
-#   facet_grid(~Test, scales = "free") +
-#   labs(title = "Performance Check") +
-#   theme_classic()
-# 
-# PE_Log_Plot
+Old_Log_QAQC <- tibble(Test = c(), Mean_PE_Conc= c(), Spike_CV= c(), Top_Std_Absorbance= c(), Run_Date= c()) #create standard log in proper format
+Old_Log_QAQC <- read.csv(file_path_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% mutate(Run = "Past Runs")
 
+Top_Standards <- Slope_raw %>% group_by(Test, Run_Date) %>% filter(Sample_Name == "Standard 2.0000") %>% dplyr::select(Test, Run_Date, Absorbance) %>% distinct() %>% ungroup() %>% rename(Top_Std_Absorbance = Absorbance)
+
+PE_Check <- NH3_peChk %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Mean_Chk_Conc) %>% rename(Mean_PE_Conc = Mean_Chk_Conc) %>% ungroup()
+
+Spikes_Log <- Spike_plot_df %>% group_by(Test, Run_Date) %>% dplyr::select(Test, Run_Date, Spike_Diff) %>% rename(Spike_Percent_Diff = Spike_Diff) %>% reframe(Test = Test,
+                                                    Run_Date = Run_Date,
+                                                    Spike_Percent_Diff = mean(Spike_Percent_Diff)) %>% ungroup() %>% distinct()
+
+Joined_QAQC <- left_join(Top_Standards, PE_Check, by = join_by(Test, Run_Date)) %>%
+  left_join(Spikes_Log, by = join_by(Test, Run_Date)) %>% mutate(Run = "Current Runs") %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>% rbind(Old_Log_QAQC) %>% mutate(Run_Date = as.Date(as.character(Run_Date), tryFormats = c("%m/%d/%Y", "%Y-%m-%d"))) %>%
+    group_by(dplyr::select(., -Run)) %>%
+    summarize(Run = Run[max(1, which(Run != "Past Runs"))][1]) %>%
+    ungroup()
+
+Spike_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Spike_Percent_Diff)) +
+  geom_point(size = 3, aes(col = Run)) +
+ # geom_path(linewidth = 1) +
+  facet_grid(~Test, scales = "free") +
+  labs(title = "Spike") +
+  theme_classic()
+
+Spike_Log_Plot
+
+TopStd_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Top_Std_Absorbance)) +
+  geom_point(size = 3, aes(col = Run)) +
+ # geom_path(linewidth = 1) +
+  facet_grid(~Test, scales = "free") +
+  labs(title = "Top Standard Absorbance") +
+  theme_classic()
+
+TopStd_Log_Plot
+
+PE_Log_Plot <- ggplot(Joined_QAQC, aes(x = Run_Date, y = Mean_PE_Conc)) +
+  geom_point(size = 3, aes(col = Run)) +
+  #geom_path(linewidth = 1) +
+  facet_grid(~Test, scales = "free") +
+  labs(title = "Performance Check") +
+  theme_classic()
+
+PE_Log_Plot
+
+```
+
+##Write QAQC Log
+```{r, echo = FALSE}
+
+write.csv(Joined_QAQC, file_path_QAQC, row.names = FALSE)
 
 ```
 
@@ -878,7 +900,7 @@ if (all_present) {
   message("Some sample IDs are missing from data.")
   
   # Optional: Which ones are missing?
-  missing_ids <- setdiff(metadata$Sample_Name, Flagged_Samples$Sample_Name)
+  missing_ids <- setdiff(metadata$Sample_Name, samples_flagged1$Sample_Name)
   print(missing_ids)
 }
 

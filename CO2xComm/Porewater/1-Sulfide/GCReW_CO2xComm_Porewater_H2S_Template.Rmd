@@ -55,7 +55,7 @@ Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE, pattern 
 print(Raw_plates)
 
 # Define the file path for QAQC log file - NO Need to change just check year
-log_path <- "Processed Data/LTREB_1M_H2S_QAQC_2025.csv"
+log_path <- here("Porewater QAQC Logs", "GCReW_H2S_QAQC_Log.csv")
 
 # Define final path for data be sure to change year and month and run number
 final_path <- "Processed Data/GCReW_CO2xComm_Porewater_H2S_202507.csv"
@@ -340,8 +340,7 @@ new_log_stds <- STD_run_date %>% dplyr::select(Plate,
 #read in log file and format
 log <- read.csv(log_path)
 log_2 <- log %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%Y-%m-%d"), Run = "Past Runs")
-log_3 <- log_2[, -c(1)]
-log_4 <- rbind(log_3, new_log_stds)
+log_4 <- rbind(log_2, new_log_stds)
 
 unique_log <- log_4 %>% distinct(.keep_all = TRUE)
 
@@ -633,10 +632,10 @@ dl_data <- right_join(High_Std, calc_data, by = join_by(Plate))
 ```{r, echo=FALSE}
 
 #Calculate CVs
-H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
+H2S_SPL_cv <- dl_data  %>% group_by(Plate, IDs, Dilution) %>% mutate(Mean_Conc = mean(Conc)) %>% mutate(Conc_SD = sd(Conc)) %>% mutate(CV = cv(Conc)) %>% mutate(CV_Flag = ifelse(CV >= cv_flag_stds, "CV_High", "CV_Good")) %>% mutate(Mean_Abs = mean(Abs)) %>% mutate(Conc_Flag = ifelse(Mean_Abs < MDL, "bdl", ifelse(Mean_Abs > High_DL, "adl", "Within_Range"))) %>% ungroup()
 
 #calculate new cv getting best cv from points if cv was high
-H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs) %>%
+H2S_SPL_cv_new <- H2S_SPL_cv %>% group_by(Plate, IDs, Dilution) %>%
   mutate(CV_New = map_dbl(row_number(), ~cv(Conc[-.x]))) %>%    #Calculate CVs without 1 point
   mutate(Removed = ifelse(             #Choose Lowest CV if CV is high
   CV_Flag == "CV_High",
@@ -1285,13 +1284,14 @@ viz_H2S_plot_2
 
 ##Export Data
 ```{r, echo=FALSE}
-write.csv(unique_log, log_path)
-
-Rerun_Data <- All_Clean_Data %>% filter(!H2S_Conc_Flag == "Within_Range" | H2S_CV_Flag %like% "High")
+write.csv(unique_log, log_path, row.names = FALSE)
+  Rerun_Data <- df_all_clean %>% filter((Min_Dil != 1 & Conc_Flag == "bdl")| Conc_Flag == "adl" | CV_Flag %like% "High")
 
 if(After_Reruns == "YES"){
   write.csv(All_Clean_Data, final_path)} else {
-  write.csv(Rerun_Data, rerun_path) }
+  write.csv(Rerun_Data, rerun_path) 
+    knitr::kable(Rerun_Data[,1:6], caption = "Reruns")}
+  
 #end
 ```
 

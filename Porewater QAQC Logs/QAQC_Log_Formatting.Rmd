@@ -1,0 +1,87 @@
+---
+title: "Merge QAQC Logs"
+author: "Brenden Blakley"
+date: "2026-07-22"
+output: pdf_document
+---
+
+```{r}
+
+
+library(here)
+library(purrr)
+library(dplyr)
+
+```
+
+
+## Ammonia QAQC Log
+```{r Ammonia Logs}
+
+NH4_Files <- list.files("NH4_Old_Logs", full.names = TRUE)
+
+files <- map(NH4_Files, read.csv)
+
+NH4_old_files <- bind_rows(files)
+
+NH4_Logs_Formatted <- NH4_old_files %>% mutate(R_Squared_New = ifelse(is.na(R_squared), R2, R_squared),
+                                           User_New = ifelse(is.na(User), user, User),
+                                           Run_Date_New = ifelse(is.na(run_date), Run_Date, run_date),
+                                           Run = "Past_Runs") %>% dplyr::select(Test, Intercept, Slope, R_Squared_New, User_New, Run_Date_New, Run) %>% rename(R_Squared = R_Squared_New,
+                                                                                                                                                        User = User_New,
+                                                                                                                                                        Run_Date = Run_Date_New) %>% distinct()
+
+write.csv(NH4_Logs_Formatted, "GCReW_NH4_QAQC_Log.csv", row.names = FALSE)
+
+
+```
+
+## CH4 QAQC Log
+```{r}
+
+CH4_Files <- list.files("CH4_Old_Logs", full.names = TRUE)
+
+files <- map(CH4_Files, read.csv)
+
+CH4_old_files <- bind_rows(files)
+
+CH4_Logs_Formatted <- CH4_old_files %>% dplyr::select(-1) %>% distinct()
+
+write.csv(CH4_Logs_Formatted, "GCReW_CH4_QAQC_Log.csv", row.names = FALSE)
+
+```
+
+## SO4/Cl QAQC Log
+```{r}
+
+SO4_Cl_Files <- list.files("SO4_Cl_Old_Logs", full.names = TRUE)
+
+files <- map(SO4_Cl_Files, read.csv)
+
+SO4_Cl_old_files <- bind_rows(files)
+
+SO4_Cl_Logs_Formatted <- SO4_Cl_old_files %>% dplyr::select(-1) %>% distinct()
+
+write.csv(SO4_Cl_Logs_Formatted, "GCReW_SO4_Cl_QAQC_Log.csv", row.names = FALSE)
+
+```
+
+## H2S QAQC Log
+```{r}
+
+H2S_Files <- list.files("H2S_Old_Logs", full.names = TRUE)
+
+files <- map(H2S_Files, read.csv)
+
+H2S_old_files <- bind_rows(files)
+
+H2S_Logs_Formatted <- H2S_old_files %>% dplyr::select(-1) %>% distinct()
+
+write.csv(H2S_Logs_Formatted, "GCReW_H2S_QAQC_Log.csv", row.names = FALSE)
+
+```
+
+
+
+
+
