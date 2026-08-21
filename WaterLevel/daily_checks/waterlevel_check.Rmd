@@ -2,9 +2,24 @@
 title: "Water Level checks"
 author: "Selina Cheng"
 date: "`r Sys.Date()`"
-output: 
-  html_document:
-    theme: "yeti"
+output:
+  html_document: default
+  pdf_document: default
+
+knit: (function(inputFile, encoding) {
+  timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
+  
+  rmarkdown::render(inputFile,output_format = "html_document")
+  
+  rmarkdown::render(inputFile, output_format = "pdf_document",
+    output_file = paste0("waterlevel_check", timestamp, ".pdf"),
+    output_dir = file.path(Sys.getenv("TE_dropbox_filepath"), "TE_Rmarkdowns/1_GCREW/"),
+    intermediates_dir = dirname(inputFile),
+    knit_root_dir = dirname(inputFile))
+    
+  unlink(file.path(dirname(inputFile),"waterlevel_check_files","figure-latex"),recursive = TRUE)}
+  )
+
 ---
   
 Last modified January 06 2026 by Taylor Smith
@@ -28,7 +43,8 @@ load_data<-function(dir, pattern){
 
 # Set figure output dimensions
 options(bitmapType="cairo")
-knitr::opts_chunk$set(fig.width=15, fig.height=10, dpi = 150, echo = T, dev = "ragg_png")
+knitr::opts_chunk$set(fig.path = "waterlevel_check_files/figure-latex/", 
+                      fig.width=15, fig.height=10, dpi = 150, echo = T, dev = "ragg_png")
 
 ```
 
@@ -40,9 +56,6 @@ dir <- paste0(Sys.getenv("dropbox_filepath"), "GCREW_LOGGERNET_DATA/current_data
 pattern <- "GENX_Waterlevel200"
 dt_genx <- load_data(dir=dir, pattern=pattern)
 dt_genx$logger <- "GENX"
-# dt_genx <- dt_genx %>%
-#   dplyr::mutate(H21_Depth = as.numeric(H21_Depth), H21_Depth = H21_Depth/10) %>%
-#   dplyr::rename(Depth = H21_Depth, Salinity = Derived_Salinity, Temperature = H21_Temperature)
 
 # Read in C3LOG water level data
 pattern <- "C3LOG_WaterLevel"
