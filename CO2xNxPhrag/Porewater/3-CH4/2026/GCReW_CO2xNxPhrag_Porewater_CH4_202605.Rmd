@@ -30,7 +30,7 @@ GHG_files <- c("Raw Data/20260612_GHGdata_LTREB_Phrag.csv")
 log_path <- "Processed Data/LTREB_Phrag_ShimadzuGC_QAQC_2026.csv"
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202505.csv"
+final_path <- "Processed Data/GCReW_CO2xNxPhrag_Porewater_CH4_202605.csv"
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe
