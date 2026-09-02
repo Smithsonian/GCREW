@@ -14,15 +14,15 @@ output_dir: "To Be Reviewed/PDF"
 
 ##Run Information
 ```{r run information, include=TRUE}
-cat("Run Information: Brenden D. Blakley ") #lets you know what section you're in
+cat("Run Information: NAME ") #lets you know what section you're in
 #set the run date & user name
-sample_year <- "2025"
-sample_month <- "May"
-user <- "Brenden Blakley"
+sample_year <- "YEAR"
+sample_month <- "MONTH"
+user <- "NAME"
 #identify the files you want to read in
-#read in as a list to accommodate multiple runs in a month
+#read in as a list to accommodate multiple runs in a month (.txt file)
 
-GHG_files <- c("Raw Data/20250624_GHGdata_SMARTX.csv","Raw Data/20250813_GHGdata_SMARTX.csv","Raw Data/20250814_GHGdata_SMARTX.csv","Raw Data/20250815_GHGdata_SMARTX.csv" )
+GHG_files <- c()
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
@@ -30,7 +30,11 @@ log_path <- here("Porewater QAQC Logs", "GCReW_CH4_QAQC_Log.csv")
 
 
 # Define final path for data be sure to change year and month and run number
-final_path <- "Processed Data/GCReW_SMARTX_Porewater_CH4_202505.csv"
+final_path <- "Processed Data/GCReW_GENX_Porewater_CH4_202605.csv"
+
+#Samples with Volumes not 12 mL
+Sample_Vol_Data <- data.frame(Sample_Name = c(NA),
+                          Sample_Volume = c(NA))
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
@@ -60,7 +64,9 @@ pacman::p_load(
   ggplot2,
   ggpubr,
   stringr,
-  here)
+  here,
+  data.table,
+  tidyverse)
 
 ##Low & High Standard Curve Cutoffs
 low_std_crv_cutoff <- 1000
@@ -83,10 +89,42 @@ level_ch4 <- 1000      #ppm
 chks_flag = 60
 blks_flag = 60
 
+##CH4 Retention Time Cutoffs
+CH4_Low <- 2.00
+CH4_High <- 2.07
+
+##CO2 Retention Times Cutoffs
+CO2_Low <- 2.63
+CO2_High <- 2.70
+
+##N2O Retention Times Cutoffs
+N2O_Low <- 2.86
+N2O_High <- 2.93
+
+##Standard Type ("Actual" or "Half")
+ #LTREB, SMARTX, and GENX PW Samples use "Half", others should use "Actual"
+Standard_Type <- "Half"
+
+##Standard Concentrations (ppm)
+CH4_LowTri <- 10
+CO2_LowTri <- 2000
+N2O_LowTri <- 5.05
+
+CH4_MidTri <- 100
+CO2_MidTri <- 20000
+N2O_MidTri <- 50.2
+
+CH4_HighTri <- 1000
+CO2_HighTri <- 50000
+N2O_HighTri <- 500
+
+CH4_10K <- 10000
+CO2_10K <- 0
+N2O_10K <- 0
+
 
 
 ```
-
 
 ##Read in metadata and create similar sample IDs for matching to samples 
 ```{r pull in metadata for later, include=FALSE}
@@ -113,23 +151,206 @@ metadata <- raw_metadata %>%
 
 ```
 
-# Read in data files
-```{r , include=FALSE}
+##Read In Data Files
+```{r}
 
 #Read in Nov Data
-raw_list <- map(GHG_files, read.csv)
+raw_list <- map(GHG_files, read.delim, header = FALSE, row.names = NULL, sep = ",", quote = "", col.names = paste0("V", 1:21))
 
 
 # Combining Files
-raw <- bind_rows(raw_list)
+DataFile <- bind_rows(raw_list)
+
+
+```
+
+#Get Location of Each Sample in Main Data Frame
+```{r}
+Numbers <- c(which(DataFile$V1 == "[Header]"), (length(DataFile$V1)+1))
+```
+
+#Turn Each Sample into it's own Data Frame
+```{r}
+n_dfs <- (length(Numbers)-1)
+
+df_list <- replicate(n_dfs, data.frame(), simplify = FALSE)
+
+for(i in 1:n_dfs) {
+  df_loop1 <- as.data.frame(DataFile[(Numbers[i]):(Numbers[i+1] - 1),])
+  df_list[[i]] <- df_loop1
+}
+```
+
+#Get Only Area Tables and Retrieve Info
+```{r}
+
+Sample_Data <- data.frame(Sample_Name = c(NA), Area1 = c(NA), RTime1 = c(NA), Area2 = c(NA), RTime2 = c(NA), Area3 = c(NA), RTime3 = c(NA), NumPeakFID = c(NA), NumPeakECD = c(NA), Run_Date = c(as.Date(NA)))
+
+for(j in 1:(length(Numbers)-1)) {
+  
+#FID
+  df_loop2 <- df_list[[j]] #get only 1 sameple
+  peak_start <- which(df_loop2$V1 == "[Peak Table(Ch1)]") #find where peak data starts
+  peak_end <- which(df_loop2$V1 == "[Peak Table(Ch2)]") #find where peak data ends
+  sample <- df_loop2[which(df_loop2$V1 == "Sample Name"),]$V2 #get sample name
+  df_peaks <- df_loop2[peak_start:(peak_end-1),] #subset data to get only peak info
+  num_peaks <- df_peaks[which(df_peaks$V1 == "# of Peaks"),]$V2 #get number of found peaks (should be 2, possibly 1 if blank/low)
+  table_start <- which(df_peaks$V1 == "Peak#") #find where table headers start
+  area_col <- which(df_peaks[table_start,] == "Area") #get column of area
+  rtime_col <- which(df_peaks[table_start,] == "R.Time") #get column of retention time
+  if(num_peaks == 0) {peak1_area <- NA #get peak 1 info if present (should be CH4)
+                      peak1_rtime <- NA} else { 
+         peak1_area <- df_peaks[which(df_peaks$V1 == 1), area_col]
+         peak1_rtime <- df_peaks[which(df_peaks$V1 == 1), rtime_col]}
+  if(num_peaks <= 1) {peak2_area <- NA #get peak 2 info if present (should be CO2)
+                      peak2_rtime <- NA} else { 
+         peak2_area <- df_peaks[which(df_peaks$V1 == 2), area_col]
+         peak2_rtime <- df_peaks[which(df_peaks$V1 == 2), rtime_col]}
+  
+#ECD
+  ECD_peak_start <- which(df_loop2$V1 == "[Peak Table(Ch2)]") #Find ECD Peak Data start
+  ECD_peak_end <- nrow(df_loop2) #get peak data end
+  df_ecd_peaks <- df_loop2[ECD_peak_start:ECD_peak_end,] #get only ecd peak info
+  ecd_num_peaks <- df_ecd_peaks[which(df_ecd_peaks$V1 == "# of Peaks"),]$V2  #get number of found peaks (should be 1, possibly 0 if blank)
+  ecd_table_start <- which(df_ecd_peaks$V1 == "Peak#") #find ecd table headers
+  ecd_area_col <- which(df_ecd_peaks[table_start,] == "Area") #get column of area
+  ecd_rtime_col <- which(df_ecd_peaks[table_start,] == "R.Time") #get column of retention time
+  if(ecd_num_peaks == 0) {peak3_area <- NA #get peak info if present
+                         peak3_rtime <- NA } else {
+                           peak3_area <-df_ecd_peaks[which(df_ecd_peaks$V1 == 1), ecd_area_col]
+                           peak3_rtime <- df_ecd_peaks[which(df_ecd_peaks$V1 == 1), ecd_rtime_col]}
+  
+   sample_run_date <- as.Date(df_loop2$V2[which(df_loop2$V1 == "Acquired")[1]], format = "%m/%d/%Y %H:%M") #get the date sample was ran
+##Assign Values
+  Sample_Data[j,]$Sample_Name <- sample
+  Sample_Data[j,]$Area1 <- peak1_area
+  Sample_Data[j,]$RTime1 <- peak1_rtime
+  Sample_Data[j,]$Area2 <- peak2_area
+  Sample_Data[j,]$RTime2 <- peak2_rtime
+  Sample_Data[j,]$Area3 <- peak3_area
+  Sample_Data[j,]$RTime3 <- peak3_rtime
+  Sample_Data[j,]$NumPeakFID <- num_peaks
+  Sample_Data[j,]$NumPeakECD <- ecd_num_peaks
+  Sample_Data[j,]$Run_Date <- sample_run_date
+}
+
+```
+
+
+##QAQC Peak Count and Retention Time
+```{r}
+#Flag which samples have the wrong amount of peaks FID should have 2, ECD 1
+PeakFlags <- Sample_Data %>% mutate(FID_Peak_Flag = ifelse(NumPeakFID == 0, "Incorrect - No Peaks", ifelse(NumPeakFID == 1, "Incorrect - One Peak", ifelse(NumPeakFID == 2, "Correct", "Incorrect - Too Many Peaks")))) %>% mutate(ECD_Peak_Flag = ifelse(NumPeakECD == 0, "Incorrect - No Peaks", ifelse(NumPeakECD == 1, "Correct", "Incorrect - Too Many Peaks")))
+
+#Flag any retention times that are out of range for compound
+RTimeFlags <- PeakFlags %>% mutate(CH4_RTime_Flag = ifelse(RTime1 >= CH4_Low & RTime1 <= CH4_High, "Correct - CH4 RTime", "Incorrect - Wrong RTime")) %>% mutate(CO2_RTime_Flag = ifelse(RTime2 >= CO2_Low & RTime2 <= CO2_High, "Correct - CO2 RTime", "Incorrect - Wrong RTime")) %>% mutate(N2O_RTime_Flag = ifelse(RTime3 >= N2O_Low & RTime3 <= N2O_High, "Correct - N2O RTime", "Incorrect - Wrong RTime" ))
+
+#Display Flags
+paste0("If there are too many peaks there is likely a problem with the sample or run and the chromatogram should be checked, if there are too few they may be low/blanks, verify that concentration is low or get area manually")
+Flagged_FID_Peaks <- ifelse(RTimeFlags$FID_Peak_Flag %ilike% "Incorrect",paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$NumPeakFID), NA)
+Flagged_FID_Peaks2 <- na.omit(Flagged_FID_Peaks)
+paste("FID:",Flagged_FID_Peaks2)
+
+Flagged_ECD_Peaks <- ifelse(RTimeFlags$ECD_Peak_Flag %ilike% "Incorrect",paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$NumPeakECD), NA)
+Flagged_ECD_Peaks2 <- na.omit(Flagged_ECD_Peaks)
+paste("ECD:", Flagged_ECD_Peaks2)
+
+paste0("If RTime is wrong check that correct number of peaks were found, if not a peak may have been mislabeled, if peak number is correct then there may be a problem with the run, get area manually")
+CH4_Flagged_RTimes <- ifelse(RTimeFlags$CH4_RTime_Flag %ilike% "Incorrect", paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$RTime1), NA)
+CH4_Flagged_RTimes2 <- na.omit(CH4_Flagged_RTimes)
+paste("CH4: ", CH4_Flagged_RTimes2)
+
+CO2_Flagged_RTimes <- ifelse(RTimeFlags$CO2_RTime_Flag %ilike% "Incorrect", paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$RTime2), NA)
+CO2_Flagged_RTimes2 <- na.omit(CO2_Flagged_RTimes)
+paste("CO2: ", CO2_Flagged_RTimes2)
+
+N2O_Flagged_RTimes <- ifelse(RTimeFlags$N2O_RTime_Flag %ilike% "Incorrect", paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$RTime3), NA)
+N2O_Flagged_RTimes2 <- na.omit(N2O_Flagged_RTimes)
+paste("N2O: ", N2O_Flagged_RTimes2)
+
+Flagged_Data <- RTimeFlags
 
 
 
-#rename column
-colnames(raw)[1] <- "Sample_ID"
 
-#head(stds_ch4) 
+```
 
+##Format Data
+```{r}
+#Assign 0 to Blanks without peaks
+Data_Zero <- Flagged_Data %>% mutate(Area1 =  ifelse(is.na(Area1) & Sample_Name %ilike% "Blank|0ppm", 0, Area1),
+                                     Area2 = ifelse(is.na(Area2) & Sample_Name %ilike% "Blank|0ppm|10K", 0, Area2),
+                                     Area3 = ifelse(is.na(Area3) & Sample_Name %ilike% "Blank|0ppm|10K", 0, Area3))
+
+#Rename Columns
+Data_RNM <- Data_Zero %>% rename(Sample_ID = Sample_Name,
+                                    CH4_Area = Area1,
+                                    CO2_Area = Area2,
+                                    N2O_Area = Area3)
+
+#Get Only Relevant Columns
+Data_Sum <- Data_RNM %>% dplyr::select(Sample_ID,
+                                       Run_Date,
+                                       CH4_Area,
+                                       CH4_RTime_Flag,
+                                       CO2_Area,
+                                       CO2_RTime_Flag,
+                                       N2O_Area,
+                                       N2O_RTime_Flag,
+                                       FID_Peak_Flag,
+                                       ECD_Peak_Flag)
+```
+
+##Add Standard Concentrations
+```{r}
+
+#Assign Source Standard Concentrations
+Data_Stds <- Data_Sum %>% 
+  mutate(CH4_STD = ifelse(Sample_ID %ilike% "HighTri", CH4_HighTri, 
+                               ifelse(Sample_ID %ilike% "MidTri", CH4_MidTri, 
+                                      ifelse(Sample_ID %ilike% "LowTri", CH4_LowTri, 
+                                             ifelse(Sample_ID %ilike% "10K", CH4_10K, ifelse(Sample_ID %ilike% "0ppm", 0, NA)))))) %>% 
+  mutate(CO2_STD = ifelse(Sample_ID %ilike% "HighTri", CO2_HighTri, 
+                               ifelse(Sample_ID %ilike% "MidTri", CO2_MidTri, 
+                                      ifelse(Sample_ID %ilike% "LowTri", CO2_LowTri, 
+                                             ifelse(Sample_ID %ilike% "10K", CO2_10K, ifelse(Sample_ID %ilike% "0ppm", 0, NA)))))) %>% 
+  mutate(N2O_STD = ifelse(Sample_ID %ilike% "HighTri", N2O_HighTri, 
+                               ifelse(Sample_ID %ilike% "MidTri", N2O_MidTri, 
+                                      ifelse(Sample_ID %ilike% "LowTri", N2O_LowTri, 
+                                             ifelse(Sample_ID %ilike% "10K", N2O_10K, ifelse(Sample_ID %ilike% "0ppm", 0, NA)))))) %>%
+  mutate(mL_STD = ifelse(Sample_ID %ilike% "Tri|10K", sub(".*_([0-9]+)mL.*", "\\1", Sample_ID), NA)) %>% #Get mL of source standard
+  mutate(mL_STD = as.numeric(mL_STD), #Convert Values
+         CH4_STD = as.numeric(CH4_STD),
+         CO2_STD = as.numeric(CO2_STD),
+         N2O_STD = as.numeric(N2O_STD)) %>% 
+  mutate(Conc_CH4 = round(CH4_STD * mL_STD / 24, digits = 4), #Calculate Concentrations of Standards
+         Conc_CO2 = round(CO2_STD * mL_STD / 24, digits = 4),
+         Conc_N2O = round(N2O_STD * mL_STD / 24, digits = 4),)
+
+```
+
+##Finalize Data
+```{r}
+raw <-Data_Stds %>% mutate(Standard = Standard_Type) %>%
+  mutate(Conc_CH4 = ifelse(Standard == "Half", Conc_CH4 * 2, Conc_CH4), #Adjust standard concentrations for dilutions if necessary
+  Conc_CO2 = ifelse(Standard == "Half", Conc_CO2 * 2, Conc_CO2),
+   Conc_N2O = ifelse(Standard == "Half", Conc_N2O * 2, Conc_N2O)) %>% 
+  mutate(Type = ifelse(Sample_ID %ilike% "Std|0ppm" & !(Sample_ID %ilike% "Chk|Check"), "Standard", ifelse(Sample_ID %ilike% "Lab", "Lab air", ifelse(Sample_ID %ilike% "Blank", "Blank", ifelse(Sample_ID %ilike% "Chk|Check", "ChkStd", "Sample") )))) %>% #Add Type
+  dplyr::select(Sample_ID,
+                 Type,
+                 Run_Date,
+                 CH4_Area,
+                 Conc_CH4,
+                 CH4_RTime_Flag,
+                 CO2_Area,
+                 Conc_CO2,
+                 CO2_RTime_Flag,
+                 N2O_Area,
+                 Conc_N2O,
+                 N2O_RTime_Flag,
+                 FID_Peak_Flag,
+                 ECD_Peak_Flag) %>% #Select Wanted Columns
+   mutate(Sample_Volume = ifelse(Sample_ID %in% Sample_Vol_Data$Sample_Name, Sample_Vol_Data$Sample_Volume[which(Sample_Vol_Data$Sample_Name == Sample_ID)], 12)) #Add Volume Data
 ```
 
 # Assess standard curves
