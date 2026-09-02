@@ -20,9 +20,9 @@ sample_year <- "YEAR"
 sample_month <- "MONTH"
 user <- "NAME"
 #identify the files you want to read in
-#read in as a list to accommodate multiple runs in a month
+#read in as a list to accommodate multiple runs in a month (.txt file)
 
-GHG_files <- c("Raw Data/20260618_GHGdata_GENX_May_Run1.csv","Raw Data/20260623_GHGdata_GENX_May_Run2.csv" )
+GHG_files <- c()
 
 
 # Define the file path for QAQC log file - NO Need to change just check year
@@ -89,43 +89,6 @@ level_ch4 <- 1000      #ppm
 chks_flag = 60
 blks_flag = 60
 
-
-
-```
-
-
-##Read in metadata and create similar sample IDs for matching to samples 
-```{r pull in metadata for later, include=FALSE}
-
-#read in the raw metadata file 
-raw_metadata <- read.csv(Raw_Metadata)
-
-#clean up columns in metadata file:
-  #Pull out only SMARTX Rows 
-  #Create a Sample_Name column to match the SEAL
-metadata <- raw_metadata %>%
-  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = Sample.ID) %>%
-  mutate(Month = sample_month) %>%
-  mutate(Year = sample_year) %>%
-    rename(
-    Sample_ID = Sample.ID,
-  ) %>%
-  select(-N_Treatment)
-
-
-```
-
-```{r}
-#Change the extension .txt to .csv on original data file, open and save it
-  #If you can't see file extensions in file explorer go to view > show > file name extensions
-#Data File should be more than two columns when imported
-DataFile <- read.csv("20260817_GCReW_Phrag_GENX.csv", header = FALSE, row.names = NULL, sep = ",")
-
-Final_File <- "20260817_GCReW_Phrag_GENX_formatted.csv"
-
-RunDate <- as.Date(DataFile$V2[which(DataFile$V1 == "Acquired")[1]], format = "%m/%d/%Y %H:%M")
-
 ##CH4 Retention Time Cutoffs
 CH4_Low <- 2.00
 CH4_High <- 2.07
@@ -159,6 +122,44 @@ CH4_10K <- 10000
 CO2_10K <- 0
 N2O_10K <- 0
 
+
+
+```
+
+
+##Read in metadata and create similar sample IDs for matching to samples 
+```{r pull in metadata for later, include=FALSE}
+
+#read in the raw metadata file 
+raw_metadata <- read.csv(Raw_Metadata)
+
+#clean up columns in metadata file:
+  #Pull out only SMARTX Rows 
+  #Create a Sample_Name column to match the SEAL
+metadata <- raw_metadata %>%
+  filter(grepl("GENX", Project, ignore.case = TRUE)) %>%
+  mutate(Sample_Name = Sample.ID) %>%
+  mutate(Month = sample_month) %>%
+  mutate(Year = sample_year) %>%
+    rename(
+    Sample_ID = Sample.ID,
+  ) %>%
+  select(-N_Treatment)
+
+
+```
+
+##Read In Data Files
+```{r}
+
+#Read in Nov Data
+raw_list <- map(GHG_files, read.delim, header = FALSE, row.names = NULL, sep = ",", quote = "", col.names = paste0("V", 1:21))
+
+
+# Combining Files
+DataFile <- bind_rows(raw_list)
+
+
 ```
 
 #Get Location of Each Sample in Main Data Frame
@@ -172,7 +173,7 @@ n_dfs <- (length(Numbers)-1)
 
 df_list <- replicate(n_dfs, data.frame(), simplify = FALSE)
 
-for(i in 1:(length(Numbers)-1)) {
+for(i in 1:n_dfs) {
   df_loop1 <- as.data.frame(DataFile[(Numbers[i]):(Numbers[i+1] - 1),])
   df_list[[i]] <- df_loop1
 }
@@ -181,7 +182,7 @@ for(i in 1:(length(Numbers)-1)) {
 #Get Only Area Tables and Retrieve Info
 ```{r}
 
-Sample_Data <- data.frame(Sample_Name = c(NA), Area1 = c(NA), RTime1 = c(NA), Area2 = c(NA), RTime2 = c(NA), Area3 = c(NA), RTime3 = c(NA), NumPeakFID = c(NA), NumPeakECD = c(NA))
+Sample_Data <- data.frame(Sample_Name = c(NA), Area1 = c(NA), RTime1 = c(NA), Area2 = c(NA), RTime2 = c(NA), Area3 = c(NA), RTime3 = c(NA), NumPeakFID = c(NA), NumPeakECD = c(NA), Run_Date = c(as.Date(NA)))
 
 for(j in 1:(length(Numbers)-1)) {
   
@@ -216,6 +217,8 @@ for(j in 1:(length(Numbers)-1)) {
                          peak3_rtime <- NA } else {
                            peak3_area <-df_ecd_peaks[which(df_ecd_peaks$V1 == 1), ecd_area_col]
                            peak3_rtime <- df_ecd_peaks[which(df_ecd_peaks$V1 == 1), ecd_rtime_col]}
+  
+   sample_run_date <- as.Date(df_loop2$V2[which(df_loop2$V1 == "Acquired")[1]], format = "%m/%d/%Y %H:%M") #get the date sample was ran
 ##Assign Values
   Sample_Data[j,]$Sample_Name <- sample
   Sample_Data[j,]$Area1 <- peak1_area
@@ -226,7 +229,7 @@ for(j in 1:(length(Numbers)-1)) {
   Sample_Data[j,]$RTime3 <- peak3_rtime
   Sample_Data[j,]$NumPeakFID <- num_peaks
   Sample_Data[j,]$NumPeakECD <- ecd_num_peaks
-  
+  Sample_Data[j,]$Run_Date <- sample_run_date
 }
 
 ```
@@ -241,7 +244,7 @@ PeakFlags <- Sample_Data %>% mutate(FID_Peak_Flag = ifelse(NumPeakFID == 0, "Inc
 RTimeFlags <- PeakFlags %>% mutate(CH4_RTime_Flag = ifelse(RTime1 >= CH4_Low & RTime1 <= CH4_High, "Correct - CH4 RTime", "Incorrect - Wrong RTime")) %>% mutate(CO2_RTime_Flag = ifelse(RTime2 >= CO2_Low & RTime2 <= CO2_High, "Correct - CO2 RTime", "Incorrect - Wrong RTime")) %>% mutate(N2O_RTime_Flag = ifelse(RTime3 >= N2O_Low & RTime3 <= N2O_High, "Correct - N2O RTime", "Incorrect - Wrong RTime" ))
 
 #Display Flags
-paste0("If there are too many peaks there is likely a problem with the sample or run, if there are too few they may be low/blanks, verify that concentration is low or get area manually")
+paste0("If there are too many peaks there is likely a problem with the sample or run and the chromatogram should be checked, if there are too few they may be low/blanks, verify that concentration is low or get area manually")
 Flagged_FID_Peaks <- ifelse(RTimeFlags$FID_Peak_Flag %ilike% "Incorrect",paste0(RTimeFlags$Sample_Name, "; ", RTimeFlags$NumPeakFID), NA)
 Flagged_FID_Peaks2 <- na.omit(Flagged_FID_Peaks)
 paste("FID:",Flagged_FID_Peaks2)
@@ -269,6 +272,7 @@ Flagged_Data <- RTimeFlags
 
 
 ```
+
 ##Format Data
 ```{r}
 #Assign 0 to Blanks without peaks
@@ -284,6 +288,7 @@ Data_RNM <- Data_Zero %>% rename(Sample_ID = Sample_Name,
 
 #Get Only Relevant Columns
 Data_Sum <- Data_RNM %>% dplyr::select(Sample_ID,
+                                       Run_Date,
                                        CH4_Area,
                                        CH4_RTime_Flag,
                                        CO2_Area,
@@ -322,13 +327,12 @@ Data_Stds <- Data_Sum %>%
 
 ```
 
-##Finalize Raw Data
+##Finalize Data
 ```{r}
 raw <-Data_Stds %>% mutate(Standard = Standard_Type) %>%
   mutate(Conc_CH4 = ifelse(Standard == "Half", Conc_CH4 * 2, Conc_CH4), #Adjust standard concentrations for dilutions if necessary
   Conc_CO2 = ifelse(Standard == "Half", Conc_CO2 * 2, Conc_CO2),
    Conc_N2O = ifelse(Standard == "Half", Conc_N2O * 2, Conc_N2O)) %>% 
-  mutate(Run_Date = RunDate) %>% #Add Run Date
   mutate(Type = ifelse(Sample_ID %ilike% "Std|0ppm" & !(Sample_ID %ilike% "Chk|Check"), "Standard", ifelse(Sample_ID %ilike% "Lab", "Lab air", ifelse(Sample_ID %ilike% "Blank", "Blank", ifelse(Sample_ID %ilike% "Chk|Check", "ChkStd", "Sample") )))) %>% #Add Type
   dplyr::select(Sample_ID,
                  Type,
@@ -343,8 +347,8 @@ raw <-Data_Stds %>% mutate(Standard = Standard_Type) %>%
                  Conc_N2O,
                  N2O_RTime_Flag,
                  FID_Peak_Flag,
-                 ECD_Peak_Flag) %>%
-  mutate(Sample_Volume = ifelse(Sample_ID %in% Sample_Vol_Data$Sample_Name, Sample_Vol_Data$Sample_Volume[which(Sample_ID == Sample_Vol_Data$Sample_Name)], 12)) #Select columns for export
+                 ECD_Peak_Flag) %>% #Select Wanted Columns
+   mutate(Sample_Volume = ifelse(Sample_ID %in% Sample_Vol_Data$Sample_Name, Sample_Vol_Data$Sample_Volume[which(Sample_Vol_Data$Sample_Name == Sample_ID)], 12)) #Add Volume Data
 ```
 
 # Assess standard curves
