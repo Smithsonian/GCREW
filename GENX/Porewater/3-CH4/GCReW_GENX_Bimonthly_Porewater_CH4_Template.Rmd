@@ -33,8 +33,8 @@ log_path <- here("Porewater QAQC Logs", "GCReW_CH4_QAQC_Log.csv")
 final_path <- "Processed Data/GCReW_GENX_Porewater_CH4_202605.csv"
 
 #Samples with Volumes not 12 mL
-Sample_Vol_Data <- data.frame(Sample_Name = c(),
-                          Sample_Volume = c())
+Sample_Vol_Data <- data.frame(Sample_Name = c(NA),
+                          Sample_Volume = c(NA))
 
 #Gas in Water Calculations
 # "TempC" column value in Celsius (equilibration temperature) and volume of gas (in liters) in syringe (not changing currently)
@@ -344,7 +344,7 @@ raw <-Data_Stds %>% mutate(Standard = Standard_Type) %>%
                  N2O_RTime_Flag,
                  FID_Peak_Flag,
                  ECD_Peak_Flag) %>%
-  mutate(Sample_Volume = ifelse(Sample_ID %in% Sample_Vol_Data$Sample_Name, sample_Vol_Data$Sample_Volume[which(Sample_ID == Sample_Vol_Data$Sample_Name)], 12)) #Select columns for export
+  mutate(Sample_Volume = ifelse(Sample_ID %in% Sample_Vol_Data$Sample_Name, Sample_Vol_Data$Sample_Volume[which(Sample_ID == Sample_Vol_Data$Sample_Name)], 12)) #Select columns for export
 ```
 
 # Assess standard curves
