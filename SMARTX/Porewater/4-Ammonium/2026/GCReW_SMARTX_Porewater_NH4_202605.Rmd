@@ -35,7 +35,7 @@ library(here)
   final_path <- "Processed Data/GCReW_SMARTX_Porewater_NH4_202605.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- "SMARTX_441-80 Not Collected; One PE Check Passes One Fails 20260626"
+  run_notes <- "SMARTX_441-80 Not Collected; One PE Check Passes One Fails on 20260626, likely air bubble"
   
 #Add SMARTX Prefix if necessary to samples
   Add_Prefix <- "YES"
@@ -338,8 +338,8 @@ write.csv(new_log, file_path, row.names = FALSE) #write out log
 
 ## Dilution Corrections - ensure the latest dilution is kept
 ```{r Dilution Corrections, echo=FALSE}
-df_all_cor <- df_all %>% na.omit() %>% group_by(Run_Date, Sample_Name, Test) %>%
-  mutate(Keep = ifelse(Dilution == max(Dilution), "Keep", "Rmv")) %>% 
+df_all_cor <- df_all %>% na.omit() %>% group_by(Sample_Name, Test) %>%
+  mutate(Keep = ifelse(Dilution == max(Dilution) | Sample_Name == "Duplicate" | Sample_Name == "Auto Spike", "Keep", "Rmv")) %>% 
   filter(Keep == "Keep") %>% ungroup() %>% #keep only latest dilution
   mutate(Pair_ID = ifelse(
   grepl("Duplicate", Sample_Name, ignore.case = TRUE),
