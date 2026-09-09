@@ -1,0 +1,95 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch1",5,"Ambient",0,19.1636743605739,"Within_Range","",144.843833568406,"Within_Range","",9.2784540173,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"2","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch1",20,"Ambient",0,24.1538739862757,"Within_Range","",168.087613540197,"Within_Range","",10.7674075613,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"3","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch1",40,"Ambient",0,24.0941640673737,"Within_Range","",209.615740479549,"Within_Range","",13.427622546,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"4","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch2",5,"Ambient",0,19.9204772301934,"Within_Range","",134.11408180536,"Within_Range","",8.5911259694,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"5","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch2",20,"Ambient",0,22.9807080474111,"Within_Range","",163.434981664316,"Within_Range","",10.4693685707,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"6","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch2",40,"Ambient",0,19.1504585152838,"Within_Range","",180.240282087447,"Within_Range","",11.545885026,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"7","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch2",80,"Ambient",0,29.8692326887087,"Within_Range","",321.660262341326,"Within_Range","",20.6049873341,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"8","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch3",5,"Ambient",0.75,25.7061322520274,"Within_Range","",168.767856135402,"Within_Range","",10.8109826435,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"9","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch3",20,"Ambient",0.75,23.4064971927636,"Within_Range","",154.195258110014,"Within_Range","",9.8774889733,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"10","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch3",40,"Ambient",0.75,26.838452900811,"Within_Range","",189.544033850494,"Within_Range","",12.141866152,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"11","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch3",80,"Ambient",0.75,16.3531004366812,"Within_Range","",176.652451339915,"Within_Range","",11.3160552258,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"12","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch4",5,"Ambient",1.5,16.203384279476,"Within_Range","",151.694572637518,"Within_Range","",9.7172996882,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"13","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch4",20,"Ambient",1.5,28.7854865876482,"Within_Range","",200.342860366714,"Within_Range","",12.8336190008,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"14","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch4",40,"Ambient",1.5,22.3715814098565,"Within_Range","",199.904527503526,"Within_Range","",12.8055402085,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"15","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch4",80,"Ambient",1.5,9.18286961946351,"Within_Range","",169.988815232722,"Within_Range","",10.8891950245,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"16","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch5",5,"Ambient",2.25,19.3218527760449,"Within_Range","",126.106843441467,"Within_Range","",8.0781970932,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"17","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch5",20,"Ambient",2.25,20.1405364940736,"Within_Range","",143.193689703808,"Within_Range","",9.1727488541,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"18","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch5",40,"Ambient",2.25,15.4646818465377,"Within_Range","",168.375069111425,"Within_Range","",10.7858214334,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"19","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch5",80,"Ambient",2.25,4.92567997504679,"Within_Range","",147.955241184767,"Within_Range","",9.4777650331,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"20","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch6",5,"Ambient",2.25,21.2772364316906,"Within_Range","",128.576166431594,"Within_Range","",8.2363773557,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"21","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch6",20,"Ambient",2.25,23.5171771678104,"Within_Range","",149.484011283498,"Within_Range","",9.5756952174,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"22","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch6",40,"Ambient",2.25,27.8441671865253,"Within_Range","",185.463009873061,"Within_Range","",11.8804433059,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"23","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch6",80,"Ambient",2.25,13.1231441048035,"Within_Range","",164.944262341326,"Within_Range","",10.5660502987,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"24","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch7",5,"Ambient",3,20.9516406737367,"Within_Range","",135.18525528914,"Within_Range","",8.6597433611,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"25","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch7",20,"Ambient",3,24.7678415470992,"Within_Range","",161.916660084626,"Within_Range","",10.3721076992,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"26","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch7",40,"Ambient",3,28.843384279476,"Within_Range","",204.375249647391,"Within_Range","",13.0919263982,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"27","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch7",80,"Ambient",3,21.4735152838428,"Within_Range","",137.873537376587,"Within_Range","",8.8319497383,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"28","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch8",5,"Ambient",3.75,19.3189987523394,"Within_Range","",130.393647390691,"Within_Range","",8.3528018236,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"29","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch8",20,"Ambient",3.75,18.5095913911416,"Within_Range","",153.311291960508,"Within_Range","",9.8208637371,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"30","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch8",40,"Ambient",3.75,12.2286369307548,"Within_Range","",170.70834696756,"Within_Range","",10.9352868963,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"31","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch8",80,"Ambient",3.75,1.13825015595758,"Within_Range","",152.336335684062,"Within_Range","",9.7584098417,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"32","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch9",5,"Ambient",3.75,20.376958827199,"Within_Range","",129.994242595204,"Within_Range","",8.3272166913,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"33","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch9",20,"Ambient",3.75,26.0497348721148,"Within_Range","",166.125779971791,"Within_Range","",10.6417361323,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"34","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch9",40,"Ambient",3.75,27.5183780411728,"Within_Range","",192.431055007052,"Within_Range","",12.3268033863,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"35","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch9",80,"Ambient",3.75,11.6044853399875,"Within_Range","",173.370067700987,"Within_Range","",11.1057918023,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"36","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch10",5,"Ambient",4.5,23.7354709918902,"Within_Range","",148.011517630465,"Within_Range","",9.4813699981,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"37","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch10",20,"Ambient",4.5,24.48972551466,"Within_Range","",165.428733427362,"Within_Range","",10.5970846202,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"38","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch10",40,"Ambient",4.5,18.6307236431691,"Within_Range","",180.619407616361,"Within_Range","",11.570171106,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"39","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch10",80,"Ambient",4.5,6.62409544603868,"Within_Range","",170.64941325811,"Within_Range","",10.9315117119,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"40","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch11",5,"Ambient",5.25,22.0616094822208,"Within_Range","",136.885007052186,"Within_Range","",8.7686263145,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"41","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch11",20,"Ambient",5.25,19.6753306300686,"Within_Range","",158.614152327221,"Within_Range","",10.1605551619,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"42","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch11",40,"Ambient",5.25,19.5746194635059,"Within_Range","",185.307686882934,"Within_Range","",11.8704936025,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"43","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch11",80,"Ambient",5.25,11.9260012476606,"Within_Range","",174.933133991537,"Within_Range","",11.2059189372,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"44","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch12",5,"Ambient",6,28.3269401122895,"Within_Range","",155.852764456982,"Within_Range","",9.9836657635,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"45","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch12",20,"Ambient",6,18.6552526512789,"Within_Range","",175.138299012694,"Within_Range","",11.2190614289,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"46","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch12",40,"Ambient",6,13.9846257018091,"Within_Range","",185.814076163611,"Within_Range","",11.902931963,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
+"47","GCReW","GENX","2026","May","SCAM, SPPA, DISP","GENX","Ch12",80,"Ambient",6,0.551715533374922,"Within_Range","",154.989715091678,"Within_Range","",9.9283804178,"2026-09-02","CH2-80 Cl is very high (321mM) with a bad spike, 
+        likely human error, will re-run with GENX July run"
