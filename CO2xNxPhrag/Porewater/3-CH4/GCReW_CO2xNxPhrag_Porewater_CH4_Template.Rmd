@@ -378,8 +378,7 @@ stds_ch4[, "Conc_CH4"] <- as.numeric(stds_ch4[, "Conc_CH4"])
 
 mnmx_stds <- stds_ch4 %>% filter(Conc_CH4 > 0) %>% group_by(Run_Date) %>% mutate(Min = min(Conc_CH4), Max = max(Conc_CH4)) %>% select(Run_Date, Min, Max) %>% unique()
 
-low_stds_ch4 <- stds_ch4  %>%
-  filter(!Conc_CH4 > low_std_crv_cutoff)
+low_stds_ch4 <- stds_ch4
 
 low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_ch4$Conc_CH4)
 
