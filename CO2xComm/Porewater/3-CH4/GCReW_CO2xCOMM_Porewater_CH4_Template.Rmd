@@ -377,8 +377,7 @@ low_stds_ch4 <- stds_ch4  %>%
 low_stds_ch4$Conc_CH4 <- as.numeric(low_stds_ch4$Conc_CH4)
 
 
-high_stds_ch4 <- stds_ch4  %>%
-  filter(!Conc_CH4 < low_std_crv_cutoff)
+high_stds_ch4 <- stds_ch4
 
 high_stds_ch4$Conc_CH4 <- as.numeric(high_stds_ch4$Conc_CH4)
 
