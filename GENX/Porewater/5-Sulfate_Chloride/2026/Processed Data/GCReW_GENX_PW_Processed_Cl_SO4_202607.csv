@@ -1,0 +1,93 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch1",5,"Ambient",0,29.0740018714909,"Within_Range","",220.073633286319,"Within_Range","",14.0975358121,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"2","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch1",20,"Ambient",0,27.534519650655,"Within_Range","",201.143348377997,"Within_Range","",12.8848967819,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"3","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch1",40,"Ambient",0,24.9894135995009,"Within_Range","",203.410911142454,"Within_Range","",13.0301526576,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"4","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch2",5,"Ambient",0,23.556974422957,"Within_Range","",178.878648801128,"Within_Range","",11.4586613167,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"5","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch2",20,"Ambient",0,17.3845508421709,"Within_Range","",135.789246826516,"Within_Range","",8.6984339416,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"6","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch2",40,"Ambient",0,18.0852620087336,"Within_Range","",163.988648801128,"Within_Range","",10.5048354632,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"7","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch2",80,"Ambient",0,12.6029694323144,"Within_Range","",144.343083215797,"Within_Range","",9.2463768761,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"8","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch3",5,"Ambient",0.75,21.6397099189021,"Within_Range","",183.850425952045,"Within_Range","",11.7771441632,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"9","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch3",20,"Ambient",0.75,20.4705739238927,"Within_Range","",166.61722425952,"Within_Range","",10.6732171442,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"10","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch3",40,"Ambient",0.75,22.534519650655,"Within_Range","",167.042998589563,"Within_Range","",10.7004914601,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"11","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch3",80,"Ambient",0.75,16.7727354959451,"Within_Range","",172.521898448519,"Within_Range","",11.0514596491,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"12","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch4",5,"Ambient",1.5,26.9062414223331,"Within_Range","",216.124104372355,"Within_Range","",13.8445362965,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"13","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch4",20,"Ambient",1.5,18.5631222707424,"Within_Range","",172.594558533145,"Within_Range","",11.0561141197,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"14","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch4",40,"Ambient",1.5,22.9833094198378,"Within_Range","",189.42642877292,"Within_Range","",12.1343325883,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"15","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch4",80,"Ambient",1.5,9.89136930754835,"Within_Range","",170.526318758815,"Within_Range","",10.923626506,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"16","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch5",5,"Ambient",2.25,26.1939363693075,"Within_Range","",192.253269393512,"Within_Range","",12.3154147688,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"17","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch5",20,"Ambient",2.25,21.352027448534,"Within_Range","",173.195768688293,"Within_Range","",11.09462653,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"18","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch5",40,"Ambient",2.25,16.2812102308172,"Within_Range","",157.573074753173,"Within_Range","",10.0938656585,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"19","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch5",80,"Ambient",2.25,6.09323767935122,"Within_Range","",148.122722143865,"Within_Range","",9.4884935535,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"20","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch6",5,"Ambient",2.25,26.9550779787898,"Within_Range","",207.029774330042,"Within_Range","",13.2619703385,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"21","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch6",20,"Ambient",2.25,17.9321771678104,"Within_Range","",156.316566995769,"Within_Range","",10.0133760961,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"22","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch6",40,"Ambient",2.25,22.4940424204616,"Within_Range","",164.924324400564,"Within_Range","",10.5647731111,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"23","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch6",80,"Ambient",2.25,14.7029101684342,"Within_Range","",170.373100141044,"Within_Range","",10.9138116048,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"24","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch7",5,"Ambient",3,28.7112819713038,"Within_Range","",210.616358251058,"Within_Range","",13.4917202693,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"25","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch7",20,"Ambient",3,23.4854210854648,"Within_Range","",182.160493653032,"Within_Range","",11.6688902265,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"26","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch7",40,"Ambient",3,24.8118091079226,"Within_Range","",184.451957686883,"Within_Range","",11.8156771733,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"27","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch7",80,"Ambient",3,10.9917155333749,"Within_Range","",171.436724964739,"Within_Range","",10.9819454433,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"28","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch8",5,"Ambient",3.75,22.6006331877729,"Within_Range","",185.149796897038,"Within_Range","",11.8603794621,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"29","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch8",20,"Ambient",3.75,16.8898378041173,"Within_Range","",169.654877291961,"Within_Range","",10.8678035778,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"30","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch8",40,"Ambient",3.75,10.344519650655,"Within_Range","",162.004823695346,"Within_Range","",10.377755297,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"31","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch8",80,"Ambient",3.75,5.10710542732377,"Within_Range","",153.21495909732,"Within_Range","",9.8146928321,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"32","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch9",5,"Ambient",3.75,25.1997099189021,"Within_Range","",193.900778561354,"Within_Range","",12.4209511582,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"33","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch9",20,"Ambient",3.75,19.0824953212726,"Within_Range","",161.680741889986,"Within_Range","",10.3569952161,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"34","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch9",40,"Ambient",3.75,23.4541391141609,"Within_Range","",173.81389280677,"Within_Range","",11.1342224175,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"35","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch9",80,"Ambient",3.75,11.6788022457891,"Within_Range","",169.354070521862,"Within_Range","",10.8485344526,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"36","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch10",5,"Ambient",4.5,27.8937866500312,"Within_Range","",225.606705218618,"Within_Range","",14.4519741639,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"37","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch10",20,"Ambient",4.5,21.760343106675,"Within_Range","",181.364992947814,"Within_Range","",11.617931923,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"38","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch10",40,"Ambient",4.5,19.289809731753,"Within_Range","",176.101779971791,"Within_Range","",11.2807802367,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"39","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch10",80,"Ambient",4.5,7.61701497192764,"Within_Range","",169.14967842031,"Within_Range","",10.8354414727,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"40","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch11",5,"Ambient",5.25,29.1483063006862,"Within_Range","",216.075370944993,"Within_Range","",13.8414145233,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"41","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch11",20,"Ambient",5.25,20.5094479101684,"Within_Range","",172.398685472496,"Within_Range","",11.0435668538,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"42","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch11",40,"Ambient",5.25,14.8275015595758,"Within_Range","",160.572217207334,"Within_Range","",10.2859851757,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"43","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch12",5,"Ambient",6,26.886974422957,"Within_Range","",172.20621438646,"Within_Range","",11.0312375121,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"44","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch12",20,"Ambient",6,16.5723424828447,"Within_Range","",180.526578279267,"Within_Range","",11.5642246304,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"45","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch12",40,"Ambient",6,18.3743574547723,"Within_Range","",185.323576868829,"Within_Range","",11.8715114856,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."
+"46","GCReW","GENX","2026","July","SCAM, SPPA, DISP","GENX","Ch12",80,"Ambient",6,2.06951029320025,"Within_Range","",159.277568406206,"Within_Range","",10.2030523686,"2026-09-09","Removed May re-run (Ch2-80) and added QAQC'd data to May processed file.
+                  One bad duplicate."

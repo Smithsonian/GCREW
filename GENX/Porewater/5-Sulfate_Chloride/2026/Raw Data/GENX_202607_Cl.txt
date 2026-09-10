@@ -1,0 +1,104 @@
+Inj.	Injection Name	Type 	Ret.Time	Amount	Rel.Area 	Area	Height
+No.	Selected Peak:		min	µg/mL	%	µS*min	µS
+			CD	CD	CD	CD	CD
+			IC-Cl	IC-Cl	IC-Cl	IC-Cl	IC-Cl
+1	Lab Blank	Unknown	3.127	0.0501	13.44	0.0615	0.14
+2	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+3	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+4	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+5	Standard 1	Calibration Standard	3.13	4.9921	93.22	6.1319	44.68
+6	Standard 2	Calibration Standard	3.127	10.0691	93.33	12.368	88.52
+7	Standard 3	Calibration Standard	3.123	20.2283	93.15	24.8466	174.7
+8	Standard 4	Calibration Standard	3.113	99.8749	92.96	122.6772	835.58
+9	Standard 5	Calibration Standard	3.117	199.7911	92.92	245.4051	1701.45
+10	Lab Blank	Unknown	3.133	0.0149	99.87	0.0183	0.12
+11	Lab Blank	Unknown	3.133	0.0115	99.66	0.0141	0.09
+12	Ch1-5	Unknown	3.117	7801.6103	88.59	96.1483	647.62
+13	Ch1-20	Unknown	3.117	7130.5317	88.32	87.8778	591.1
+14	Ch1-40	Unknown	3.117	7210.9168	89.31	88.8685	597.42
+15	Ch2-5	Unknown	3.117	6341.2481	83.23	78.1506	558.28
+16	Ch2-20	Unknown	3.123	4813.7288	82.38	59.3252	426.59
+17	Ch2-40	Unknown	3.117	5813.3976	88.82	71.6452	479.56
+18	Ch2-40_DUP	Unknown	3.117	5387.4537	83.09	66.3958	475.1
+19	Ch2-80	Unknown	3.117	5116.9623	84.62	63.0623	451.82
+20	Ch2-80_SPK	Spiked	3.117	5390.4628	88.72	65.9916	441.84
+21	Lab Blank	Unknown	3.127	0.0155	31.06	0.0191	0.1
+22	Standard 1	Check Standard	3.137	5.0766	91.46	6.2356	43.88
+23	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+24	Ch3-5	Unknown	3.117	6517.4976	89	80.3227	535.56
+25	Ch3-20	Unknown	3.117	5906.5806	88.74	72.7937	486.14
+26	Ch3-40	Unknown	3.117	5921.6743	87.66	72.9797	487.03
+27	Ch3-80	Unknown	3.123	6115.9013	89.82	75.3734	502.08
+28	Ch4-5	Unknown	3.12	7661.5995	88.96	94.4228	629.25
+29	Ch4-20	Unknown	3.123	6118.4771	89.26	75.4051	502.38
+30	Ch4-40	Unknown	3.12	6715.1669	88.79	82.7588	551.32
+31	Ch4-40_DUP	Unknown	3.12	6748.3403	88.97	83.1676	554.88
+32	Ch4-80	Unknown	3.12	6045.158	92.52	74.5015	497.13
+33	Ch4-80_SPK	Spiked	3.12	6122.3124	90.89	74.9511	500.69
+34	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+35	Standard 1	Check Standard	3.133	5.0491	90.23	6.2019	43.92
+36	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+37	Ch5-5	Unknown	3.117	6815.3784	88.07	83.9938	559.47
+38	Ch5-20	Unknown	3.123	6139.79	88.83	75.6678	504.7
+39	Ch5-40	Unknown	3.127	5585.9655	89.49	68.8423	459.84
+40	Ch5-80	Unknown	3.123	5250.9505	92.98	64.7136	433.04
+41	Ch6-5	Unknown	3.113	7339.2055	88.65	90.4496	603.39
+42	Ch6-20	Unknown	3.123	5541.4223	88.8	68.2934	456.79
+43	Ch6-40	Unknown	3.117	5846.5673	87.55	72.054	481.62
+44	Ch6-40_DUP	Unknown	3.117	5785.3438	87.59	71.2995	476.65
+45	Ch6-80	Unknown	3.127	6039.7264	90.63	74.4346	497.27
+46	Ch6-80_SPK	Spiked	3.123	6018.4994	89.01	73.6802	492.49
+47	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+48	Standard 1	Check Standard	3.127	4.7092	87.24	5.7844	43.87
+49	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+50	Ch7-5	Unknown	3.117	7466.3499	88.24	92.0165	613.03
+51	Ch7-20	Unknown	3.123	6457.5895	88.46	79.5844	530.7
+52	Ch7-40	Unknown	3.117	6538.8219	88.1	80.5855	537.65
+53	Ch7-80	Unknown	3.117	6077.4319	91.93	74.8993	499.74
+54	Ch8-5	Unknown	3.123	6563.5603	88.74	80.8904	538.74
+55	Ch8-20	Unknown	3.117	6014.2654	89.85	74.1208	494.93
+56	Ch8-40	Unknown	3.117	5743.071	91.68	70.7785	473.41
+57	Ch8-40_DUP	Unknown	3.123	5781.4249	91.72	71.2512	476.23
+58	Ch8-80	Unknown	3.117	5431.4703	93.48	66.9383	447.8
+59	Ch8-80_SPK	Spiked	3.117	5545.1264	91.64	67.885	453.57
+60	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+61	Standard 2	Check Standard	3.127	9.4864	87.53	11.6522	86.86
+62	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+63	Ch9-5	Unknown	3.117	6873.7826	88.53	84.7136	564.61
+64	Ch9-20	Unknown	3.123	5731.5823	88.58	70.6369	471.62
+65	Ch9-40	Unknown	3.117	6161.7025	87.96	75.9378	506.69
+66	Ch9-80	Unknown	3.117	6003.6018	91.61	73.9894	494.83
+67	Ch10-5	Unknown	3.123	7997.7577	89.46	98.5657	658.94
+68	Ch10-20	Unknown	3.117	6429.389	88.88	79.2368	530.25
+69	Ch10-40	Unknown	3.117	6242.8081	89.45	76.9374	515.05
+70	Ch10-40_DUP	Unknown	3.117	6211.1073	89.41	76.5467	512.75
+71	Ch10-80	Unknown	3.117	5996.3561	93.18	73.9001	494.2
+72	Ch10-80_SPK	Spiked	3.117	5922.1876	91.5	72.5011	484.74
+73	Lab Blank	Unknown	3.127	0.0134	100	0.0164	0.1
+74	Standard 2	Check Standard	3.127	9.4691	87.19	11.631	86.97
+75	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+76	Ch11-5	Unknown	3.117	7659.8719	88.52	94.4015	630.73
+77	Ch11-20	Unknown	3.117	6111.5334	88.86	75.3195	503.73
+78	Ch11-40	Unknown	3.117	5692.2851	90.12	70.1526	470.07
+80	Ch12-5	Unknown	3.117	6104.7103	81.63	75.2354	541.5
+81	Ch12-20	Unknown	3.117	6399.6672	90.56	78.8705	529.27
+82	Ch12-40	Unknown	3.117	6569.7208	91.75	80.9663	545.21
+83	Ch12-40_DUP	Unknown	3.117	6541.5706	91.71	80.6194	543.12
+84	Ch12-80	Unknown	3.117	5646.3898	94.9	69.587	471.49
+85	Ch12-80_SPK	Spiked	3.123	5625.578	93.03	68.8699	466.42
+86	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+87	Standard 3	Check Standard	3.123	19.017	87.01	23.3588	174.23
+88	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+89	Standard 1	Calibration Standard	3.13	4.7105	87.04	5.786	44.4
+90	Standard 2	Calibration Standard	3.127	9.4578	87.12	11.6171	88.03
+91	Standard 3	Calibration Standard	3.133	19.0213	87.03	23.364	174.21
+92	Standard 4	Calibration Standard	3.11	100.356	92.93	123.2681	836.3
+93	Standard 5	Calibration Standard	3.117	200.1996	92.91	245.9069	1700.84
+94	Lab Blank	Unknown	3.13	0.019	22.46	0.0234	0.1
+95	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+96	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+Maximum			3.137	7997.7577	100	245.9069	1701.45
+Average			3.121	4529.8674	87.37	66.6251	450.61
+Minimum			3.11	0.0115	13.44	0.0141	0.09
+Standard Deviation			0.006	2824.2857	13.31	42.2475	288.02
+Relative Standard Deviation			0.18%	62.35%	15.23%	63.41%	63.92%
