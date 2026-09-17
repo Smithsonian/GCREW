@@ -1,6 +1,6 @@
 ---
 title: "CO2xNxPhrag: Porewater SO4/Cl"
-author: "May 2026 Samples"
+author: "July 2026 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -30,30 +30,29 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "2026-07-01"  #Date that instrument was run
-  Run_by = "Zoe Read & Victoria Ellis"  #Instrument user 
-  Script_run_by = "Zoe Read & Victoria Ellis" #Code user 
+  Date_Run = "2026-09-14"  #Date that instrument was run
+  Run_by = "Victoria Ellis"  #Instrument user 
+  Script_run_by = "Victoria Ellis" #Code user 
   sample_year <- "2026"
-  sample_month <- "May"
+  sample_month <- "July"
   Site = "GCReW"
   Project_name = "CO2xNxPhrag"
-  run_notes = "
-  " #any notes from the run
+  run_notes = "" #any notes from the run
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/CO2xNxPhrag_202605_Cl.txt"
-  raw_file_name_so4 = "Raw Data/CO2xNxPhrag_202605_SO4.txt"
+  raw_file_name_cl = "Raw Data/CO2xNxPhrag_202607_Cl.txt"
+  raw_file_name_so4 = "Raw Data/CO2xNxPhrag_202607_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/GCReW_CO2xNxPhrag_PW_Processed_Cl_SO4_202605.csv" 
+  processed_file_name = "Processed Data/GCReW_CO2xNxPhrag_PW_Processed_Cl_SO4_202607.csv" 
 
 ###### Log Files - PLEASE CHECK 
 #downloaded metadata csv - downloaded from Google drive as csv for this year
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
 
   #qaqc log file path for this year 
-  Log_path = here("Porewater QAQC Logs", "GCReW_SO4_Cl_QAQC_Log.csv")
+  Log_path = "Raw Data/COMPASS_Synoptic_Cl_SO4_QAQClog_2026.csv"
 
 ```
 
@@ -341,6 +340,7 @@ if (file.exists(Log_path)) {
   print("QAQC log file does not exist. It has been created.")
   }
 
+log <- log[ ,-c(1)]
 
 #make sure they both have dates in Date format
 log$run_date <- as.Date(log$run_date, format = "%Y-%m-%d")
@@ -363,7 +363,7 @@ Slopes_chk <- ggplot(log, aes(run_date, slope, col=curve)) +
 Slopes_chk
 
 #write out the log file with the added lines for this run  
-write.csv(log, Log_path, row.names = FALSE)
+write.csv(log, Log_path)
 
 #Grab the highest r2 that is available for this run 
 r2_Cl = max(lm_results_cl$r2)
@@ -999,7 +999,7 @@ df_all_clean <- all_data_flagged %>%
 
 ```
 
-## Visualize Data Cl
+## Visualize Data
 ```{r Visualize Cl Data, echo=FALSE}
 cat("Visualize Data")
 
@@ -1078,42 +1078,131 @@ Cl_forplot <- Cl_forplot[order(Cl_forplot$Depth_cm), ]
 viz_Cl_plot_v2 <- ggplot(
   data = Cl_forplot,
   aes(
-  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-  y = Cl_Conc_mM,
-  fill = as.factor(Treatment1),
-  color = as.factor(Treatment1)
-)) +
-  geom_bar(
+    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+    y = Cl_Conc_mM,
+    fill = as.factor(Treatment),
+    color = as.factor(Treatment),
+    pattern = as.factor(Treatment)
+  )
+) +
+  geom_bar_pattern(
     stat = "identity",
-    position = position_dodge2(padding = 0.25,preserve = "single")
+    position = position_dodge2(padding = 0.25, preserve = "single"),
+    pattern_angle = 45,
+    pattern_density = 0.1,
+    pattern_spacing = 0.025,
+    pattern_key_scale_factor = 0.6
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "white",
-    "aCO2 & aN" = "white"
-  ),
+  scale_fill_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "white",
+      "aCO2_aN_Phrag" = "white",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "white",
+      "aCO2_aN_Native" = "white"
+    ),
     name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
     
   ) +
-  scale_color_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "#DB5461",
-    "aCO2 & aN" = "#454ADE"
-  ),
+  scale_color_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "#DB5461",
+      "aCO2_aN_Phrag" = "#454ADE",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "#DB5461",
+      "aCO2_aN_Native" = "#454ADE"
+    ),
     name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
+  ) +
+  scale_pattern_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "stripe",
+      "eCO2_aN_Phrag" = "stripe",
+      "aCO2_eN_Phrag" = "stripe",
+      "aCO2_aN_Phrag" = "stripe",
+      "eCO2_eN_Native" = "none",
+      "eCO2_aN_Native" = "none",
+      "aCO2_eN_Native" = "none",
+      "aCO2_aN_Native" = "none"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
   ) +
   theme_classic() +
-  labs(x = " ",
-       y = "Cl (mM)",
-       title = "CO2xN: Porewater Cl"
-       ) +
+  labs(
+    x = " ",
+    y = "Cl (mM)",
+    title = "CO2xNxPhrag: Porewater Chloride",
+    fill = "CO2 Treatment:",
+    color = "N Treatment:"
+  ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1124,7 +1213,7 @@ viz_Cl_plot_v2 <- ggplot(
       linewidth = 0.8
     )
   ) +
-coord_flip()
+  coord_flip()
 print(viz_Cl_plot_v2)
 
 
@@ -1247,43 +1336,132 @@ SO4_forplot <- SO4_forplot[order(SO4_forplot$Depth_cm), ]
 
 viz_SO4_plot_v2 <- ggplot(
   data = SO4_forplot,
- aes(
-  x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
-  y = SO4_Conc_mM,
-  fill = as.factor(Treatment1),
-  color = as.factor(Treatment1)
-)) +
-  geom_bar(
+  aes(
+    x = factor(as.factor(CO2_Treatment), levels = c("eCO2", "aCO2")),
+    y = SO4_Conc_mM,
+    fill = as.factor(Treatment),
+    color = as.factor(Treatment),
+    pattern = as.factor(Treatment)
+  )
+) +
+  geom_bar_pattern(
     stat = "identity",
-    position = position_dodge2(padding = 0.25,preserve = "single")
+    position = position_dodge2(padding = 0.25, preserve = "single"),
+    pattern_angle = 45,
+    pattern_density = 0.1,
+    pattern_spacing = 0.025,
+    pattern_key_scale_factor = 0.6
   ) +
   facet_grid(Depth_cm ~ N_Treatment, scales = "fixed") +
-  scale_fill_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "white",
-    "aCO2 & aN" = "white"
-  ),
+  scale_fill_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "white",
+      "aCO2_aN_Phrag" = "white",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "white",
+      "aCO2_aN_Native" = "white"
+    ),
     name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
     
   ) +
-  scale_color_manual(values = c(
-    "eCO2 & eN" = "#DB5461",
-    "eCO2 & aN" = "#454ADE", 
-    "aCO2 & eN" = "#DB5461",
-    "aCO2 & aN" = "#454ADE"
-  ),
+  scale_color_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "#DB5461",
+      "eCO2_aN_Phrag" = "#454ADE",
+      "aCO2_eN_Phrag" = "#DB5461",
+      "aCO2_aN_Phrag" = "#454ADE",
+      "eCO2_eN_Native" = "#DB5461",
+      "eCO2_aN_Native" = "#454ADE",
+      "aCO2_eN_Native" = "#DB5461",
+      "aCO2_aN_Native" = "#454ADE"
+    ),
     name = "Treatment:",
-    breaks = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN"),
-    labels = c("eCO2 & eN", "eCO2 & aN", "aCO2 & aN", "aCO2 & eN")
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
+    
+  ) +
+  scale_pattern_manual(
+    values = c(
+      "eCO2_eN_Phrag" = "stripe",
+      "eCO2_aN_Phrag" = "stripe",
+      "aCO2_eN_Phrag" = "stripe",
+      "aCO2_aN_Phrag" = "stripe",
+      "eCO2_eN_Native" = "none",
+      "eCO2_aN_Native" = "none",
+      "aCO2_eN_Native" = "none",
+      "aCO2_aN_Native" = "none"
+    ),
+    name = "Treatment:",
+    breaks = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    ),
+    labels = c(
+      "eCO2_eN_Phrag",
+      "eCO2_aN_Phrag",
+      "aCO2_aN_Phrag",
+      "aCO2_eN_Phrag",
+      "eCO2_eN_Native",
+      "eCO2_aN_Native",
+      "aCO2_aN_Native",
+      "aCO2_eN_Native"
+    )
   ) +
   theme_classic() +
-  labs(x = " ",
-       y = "SO4 (uM)",
-       title = "CO2xNxPhrag: Porewater SO4"
-       ) +
+  labs(
+    x = " ",
+    y = "SO4 (mM)",
+    title = "CO2xNxPhrag: Porewater Sulfate",
+    fill = "CO2 Treatment:",
+    color = "N Treatment:"
+  ) +
   theme(legend.position = "right") +
   scale_x_discrete(drop = TRUE) +
   theme(
@@ -1294,7 +1472,7 @@ viz_SO4_plot_v2 <- ggplot(
       linewidth = 0.8
     )
   ) +
-coord_flip()
+  coord_flip()
 print(viz_SO4_plot_v2)
 
 
