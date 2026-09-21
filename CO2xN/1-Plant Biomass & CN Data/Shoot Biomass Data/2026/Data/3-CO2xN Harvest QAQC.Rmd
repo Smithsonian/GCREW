@@ -1,7 +1,7 @@
 ---
 title: "3-CO2xN Harvest QAQC"
 output: html_document
-date: "2024-02-13"
+date: "2026-09-21"
 ---
 
 ```{r}
@@ -16,7 +16,7 @@ library(tidyverse)
 # These lines of code download any required packages for the code to function.
 
 # set year
-year=2023
+year=2026
 
 ```
 
@@ -58,7 +58,7 @@ HarvestQAQC$ZFlag <- ifelse(is.na(HarvestQAQC$SC_Count) | is.na(HarvestQAQC$SP_C
 HarvestQAQC <- subset(HarvestQAQC, SCCFlag1 != 0 | SPCFlag1 != 0 | DICFlag1 != 0 | SCMFlag != 0 | SPMFlag != 0 | DIMFlag != 0 | ZFlag != 0)
 # This step deletes measurements that have "0" in all of the flag columns, meaning there are no errors. Any measurement with a flag (signified by a "1" value in a flag column), are kept and listed in the HarvestQAQC Error Report. 
 
-write.csv(HarvestQAQC, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/',year,'/Data/3-HarvestQAQC Error Report_R.csv'))
+write.csv(HarvestQAQC, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/',year,'/Data/3-HarvestQAQC Error Report.csv'))
 # Exports the HarvestQAQC Error Report.csv to the Shared drive.
 
 ```
@@ -79,6 +79,6 @@ HarvestTransfer <- HarvestTransfer %>%
   select(Year, Chamber, Quadrat, In_Out, CO2, Nitrogen, Treatment, SC_Count, SC_Total_Mass, SP_Count, SP_Total_Mass, DI_Count, DI_Total_Mass, Litter_Total_Mass, Other_1_Species, Other_1_Count, Other_1_Mass, Other_2_Species, Other_2_Count, Other_2_Mass)
 
 # Exports the Harvest (for transfer).csv to the Shared drive.
-write.csv(HarvestTransfer, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/',year,'/Data/3-Harvest (for transfer)_R.csv'))
+write.csv(HarvestTransfer, paste0( 'S:/Biogeochemistry/GCREW/2-CO2xN Experiment/1-Plant Biomass & CN data/Shoot Biomass Data/',year,'/Data/3-Harvest (for transfer).csv'))
 
 ```
