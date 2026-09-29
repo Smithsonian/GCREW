@@ -36,7 +36,7 @@ library(ggpattern)
 ```{r Information to be changed}
 
 ##Before or After Reruns (YES or NO)
-After_Reruns = "NO"
+After_Reruns = "YES"
 #If NO will not write final data file
   #And Will Write a Rerun File
 
@@ -53,7 +53,7 @@ Run_notes=""#any notes from run
 #Import Plate Data
 
 folder_path_rawdata <- paste0("Raw Data")
-Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202609|2026010)(.+Plate|.+Rerun)"))
+Raw_plates <- list.files(path = folder_path_rawdata, full.names = TRUE,pattern = ("(202609|202610)(.+Plate|.+Rerun)"))
 print(Raw_plates)
 
 

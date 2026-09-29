@@ -37,7 +37,7 @@ library(ggrepel)
 ```{r Information to be changed}
 
 ##Before or After Reruns (YES or NO)
-After_Reruns = "NO"
+After_Reruns = "YES"
 #If NO will not write final data file
   #And Will Write a Rerun File
 
