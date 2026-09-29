@@ -1,0 +1,2 @@
+"","Sample_ID.x","Conc","Conc_Flag","CV_Flag","Dilution","CV","Min_CV","Within_Range","BDL","Max_Dil","Min_Dil","All_Good","CV_Check","Number","Remove","Site","Project","Nickname","Sample_ID.y","Plot","SubPlot","Depth_cm","Community","CO2_Treatment","Temp_Treatment","Sample_Name","Month","Year","H2S_Flags"
+"1","323-10",4733.03303303303,"Within_Range","CV_High",100,12.7863354253008,"KEEP",TRUE,FALSE,100,100,FALSE,TRUE,1,"KEEP","GCReW","SMARTX","C3","\b323-10\b","323",NA,10,"SCAM","Ambient",5.1,"323-10","September","2026","Spk_Bad  Std3Chk_Bad    "
