@@ -1,0 +1,2 @@
+"","Sample_ID.x","Conc","Conc_Flag","CV_Flag","Dilution","CV","Min_CV","Within_Range","BDL","Max_Dil","Min_Dil","All_Good","CV_Check","Number","Remove","Site","Project","Nickname","Sample_ID.y","Plot_Name","SubPlot","Depth_cm","Community","CO2_Treatment","N_Treatment","Sample_Name","Month","Year","Treatment","H2S_Flags"
+"1","P2-40",2138.70056497175,"Within_Range","CV_High",50,10.0868488136504,"KEEP",TRUE,FALSE,50,50,FALSE,TRUE,1,"KEEP","GCReW","CO2xNxPhrag","Phrag","\bP2-40\b","P2",NA,40,"PHAU","Elevated","Ambient","P2-40","September","2026","eCO2","Spk_Bad      "
