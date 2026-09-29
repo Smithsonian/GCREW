@@ -1,0 +1,43 @@
+Inj.	Injection Name	Type 	Ret.Time	Amount	Rel.Area 	Area	Height
+No.	Selected Peak:		min	µg/mL	%	µS*min	µS
+			CD	CD	CD	CD	CD
+			IC-SO4	IC-SO4	IC-SO4	IC-SO4	IC-SO4
+1	Lab Blank	Unknown	4.22	0.0628	20.25	0.0555	0.06
+2	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+3	Lab Blank	Unknown	3.867	0.0291	9.88	0.0257	0.06
+4	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+5	Standard 1	Calibration Standard	4.22	0.5395	7.06	0.4773	2.38
+6	Standard 2	Calibration Standard	4.22	1.1172	7.27	0.9884	4.88
+7	Standard 3	Calibration Standard	4.207	2.1218	6.98	1.8771	9.81
+8	Standard 4	Calibration Standard	4.177	10.6641	7.09	9.4346	45.14
+9	Standard 5	Calibration Standard	4.153	19.6489	7.03	17.3836	75.71
+10	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+11	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+12	L1_20	Unknown	4.18	827.8308	7.91	7.3484	36
+13	L1_40	Unknown	4.193	654.4208	6.41	5.8091	28.84
+14	L1_80	Unknown	4.197	418.7934	4.42	3.7175	18.7
+15	L2_20	Unknown	4.183	781.4425	7.84	6.9366	34.02
+16	L2_40	Unknown	4.187	731.3281	7.07	6.4918	31.93
+17	L2_80	Unknown	4.187	619.6729	6.32	5.5006	27.35
+18	L3_20	Unknown	4.2	355.0716	3.8	3.1519	15.78
+19	L3_40	Unknown	4.207	384.393	4.1	3.4121	17.02
+20	L3_40_DUP	Unknown	4.207	389.8189	4.1	3.4603	17.2
+21	L3_80	Unknown	4.207	391.0453	4.26	3.4712	17.28
+22	L3_80_SPK	Spiked	4.193	560.773	5.99	4.9447	24.56
+23	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+24	Standard 1	Check Standard	4.217	0.5063	6.57	0.4479	2.44
+25	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+26	L4_20	Unknown	4.183	914.0051	8.71	8.1133	39.16
+27	L4_40	Unknown	4.187	899.8667	8.36	7.9878	38.59
+28	L4_80	Unknown	4.193	546.5238	5.59	4.8513	24.12
+29	L5_20	Unknown	4.183	796.3255	8.35	7.0687	34.38
+30	L5_40	Unknown	4.193	732.261	7.42	6.5001	31.83
+31	L5_80	Unknown	4.193	497.4007	5.47	4.4153	21.93
+32	L6_20	Unknown	4.187	651.6647	6.84	5.7846	28.52
+33	L6_40	Unknown	4.187	650.1974	6.44	5.7716	28.42
+34	L6_40_DUP	Unknown	4.197	651.9352	6.46	5.787	28.4
+Maximum			4.22	914.0051	20.25	17.3836	75.71
+Average			4.183	446.0522	7.07	5.0434	24.45
+Minimum			3.867	0.0291	3.8	0.0257	0.06
+Standard Deviation			0.064	320.6025	2.98	3.5549	16.12
+Relative Standard Deviation			1.52%	71.88%	42.19%	70.49%	65.93%
