@@ -1,6 +1,6 @@
 ---
 title: "CO2xComm: Porewater SO4/Cl"
-author: "July 2024 Samples"
+author: "July 2026 Samples"
 date: "`r Sys.Date()`"
 output: 
   pdf_document:
@@ -30,26 +30,23 @@ lapply(c(
 ```{r Run Information, echo=TRUE, message=FALSE, warning=FALSE}
 
 ###### Run information - PLEASE CHANGE
-  Date_Run = "2025-08-28"  #Date that instrument was run
-  Run_by = "Zoe Read"  #Instrument user 
-  Script_run_by = "Zoe Read" #Code user 
-  sample_year <- "2024"
+  Date_Run = "2026-09-28"  #Date that instrument was run
+  Run_by = "Victoria Ellis"  #Instrument user 
+  Script_run_by = "Victoria Ellis" #Code user 
+  sample_year <- "2026"
   sample_month <- "July"
   Site = "GCReW"
   Project_name = "CO2xCOMM"
-  run_notes = "One spk had slightly high (124%) recovery.  
-  " #any notes from the run
-  samples <- c("GCW", "GWI", "MSM", "SWH") #whatever identifies your samples within the same names 
-  samples_pattern <- paste(samples, collapse = "|") 
-    #samples_pattern <- "GCW" #use this instead of the line above if you have only one site code 
+  run_notes = "" #any notes from the run
+
 
 ###### File Names - PLEASE CHANGE 
 #file path and name for raw summary data file 
-  raw_file_name_cl = "Raw Data/CO2xCOMM_202407_Cl.txt"
-  raw_file_name_so4 = "Raw Data/CO2xCOMM_202407_SO4.txt"
+  raw_file_name_cl = "Raw Data/CO2xComm_202607_Cl.txt"
+  raw_file_name_so4 = "Raw Data/CO2xComm_202607_SO4.txt"
 
 #file path and name of processed data file 
-  processed_file_name = "Processed Data/GCReW_CO2xCOMM_PW_Processed_Cl_SO4_202407.csv" 
+  processed_file_name = "Processed Data/GCReW_CO2xCOMM_PW_Processed_Cl_SO4_202607.csv" 
 
 ###### Log Files - PLEASE CHECK 
   Raw_Metadata = here(".." , "GCReW", "GCReW_Project_Treatment_Metadata.csv")
@@ -67,7 +64,7 @@ lapply(c(
   #steph will add this soon 
 
 #Dilution
-Dilution = 100
+Dilution = 99.6667
 
 #Coefficients / constants that are needed for calculations 
   cl_mw <- 35.45     #molecular weight of Chloride, g/mol
@@ -116,21 +113,12 @@ raw_metadata <- read.csv(Raw_Metadata)
 
 #clean up columns in metadata file:
   #Pullout only 1M files
-metadata <- raw_metadata %>%
-  filter(grepl("CO2xComm", Project, ignore.case = TRUE)) %>%
-  mutate(Sample_Name = paste0(Sample.ID)) %>%
+dionex_metadata <- raw_metadata %>%
+  filter(grepl(Project_name, Project, ignore.case = TRUE)) %>%
+  mutate(Sample.ID = gsub("-", "_", Sample.ID)) %>% 
+  mutate(Cl_SO4_ID = paste0(Sample.ID, "_", sample_month, "_", sample_year)) %>%
   mutate(Month = sample_month) %>%
-  mutate(Year = sample_year) %>%
-    dplyr::select(
-    Plot,
-    Project,
-    Site,
-    Nickname,
-    Sample_Name,
-    Depth_cm,
-    Community,
-    CO2_Treatment
-  )
+  mutate(Year = sample_year) 
 
 #Bring in the collection date and any field notes if relevant 
 #collection_metadata <- read.csv(Collection_Dates)
@@ -820,9 +808,7 @@ QAspks$SO4_spk_Conc <- spk_Conc     # mmoles of SO4 in spike
 
 #Set Sample volumes in uL 
 QAspks$SampleVol <- 1
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 50, 1483, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 100, 1466, QAspks$SampleVol)
-QAspks$SampleVol <-  ifelse(QAspks$Dilution == 200, 1458, QAspks$SampleVol)
+QAspks$SampleVol <-  ifelse(QAspks$Dilution == 99.6667, 1495, QAspks$SampleVol)
 
 #change sample volume to L 
 QAspks$SampleVol <- QAspks$SampleVol/Con1
@@ -832,7 +818,7 @@ QAspks$SampleVol <- QAspks$SampleVol/Con1
 QAspks$SO4_Total_unspkd <- (QAspks$SO4_Conc_mM/QAspks$Dilution)*(QAspks$SampleVol) 
 
 #gives us the total SO4 in the spiked sample in mmoles
-QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/QAspks$Dilution)*(QAspks$SampleVol+spkvol) 
+QAspks$SO4_Total_spkd <- (QAspks$SO4_Conc_mM_spk/100.3333)*(QAspks$SampleVol+spkvol) 
 
 #gives us expected SO4 in the spiked sample in mmoles
 QAspks$SO4_expctd_spkd <-  (QAspks$SO4_Total_unspkd + QAspks$SO4_spk_Conc)
@@ -1018,7 +1004,7 @@ head(final_data)
 ```
 
 ## SO4 - Visualize Data
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data - SO4, echo=FALSE}
 cat("Visualize Data")
 
 ### Sulfate
@@ -1154,7 +1140,7 @@ viz_SO4_plot_2
 ```
 
 ## Cl - Visualize Data
-```{r Visualize Data, echo=FALSE}
+```{r Visualize Data - Cl, echo=FALSE}
 cat("Visualize Data")
 
 ### Chloride
