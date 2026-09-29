@@ -1,0 +1,87 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","N_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","CO2xN","2026","July","SCAM","2-Meter","L6",80,"Ambient","Ambient",15.8836899563319,"Within_Range","",182.535630465444,"Within_Range","",11.6929207967,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"2","GCReW","CO2xN","2026","July","SCAM","2-Meter","L7",20,"Ambient","Ambient",23.9133530879601,"Within_Range","",180.022581100141,"Within_Range","",11.5319395035,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"3","GCReW","CO2xN","2026","July","SCAM","2-Meter","L7",40,"Ambient","Ambient",26.2383624454148,"Within_Range","",199.275971791255,"Within_Range","",12.7652760924,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"4","GCReW","CO2xN","2026","July","SCAM","2-Meter","L7",80,"Ambient","Ambient",20.4051185277604,"Within_Range","",187.635590973202,"Within_Range","",12.0196148319,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"5","GCReW","CO2xN","2026","July","SCAM","2-Meter","L8",20,"Elevated","Ambient",20.1748315658141,"Within_Range","",174.542978843441,"Within_Range","",11.1809263202,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"6","GCReW","CO2xN","2026","July","SCAM","2-Meter","L8",40,"Elevated","Ambient",24.9034934497817,"Within_Range","",197.488468265162,"Within_Range","",12.6507719234,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"7","GCReW","CO2xN","2026","July","SCAM","2-Meter","L8",80,"Elevated","Ambient",17.5049189020586,"Within_Range","",183.641839210155,"Within_Range","",11.7637824824,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"8","GCReW","CO2xN","2026","July","SCAM","2-Meter","L9",20,"Elevated","Ambient",25.0506207111666,"Within_Range","",189.444770098731,"Within_Range","",12.1355074997,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"9","GCReW","CO2xN","2026","July","SCAM","2-Meter","L9",40,"Elevated","Ambient",26.7722956955708,"Within_Range","",203.655207334274,"Within_Range","",13.0458018197,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"10","GCReW","CO2xN","2026","July","SCAM","2-Meter","L9",80,"Elevated","Ambient",21.7440954460387,"Within_Range","",195.880778561354,"Within_Range","",12.5477862952,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"11","GCReW","CO2xN","2026","July","SCAM","2-Meter","L10",20,"Ambient","Amended",23.3023861509669,"Within_Range","",186.841368124118,"Within_Range","",11.9687383855,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"12","GCReW","CO2xN","2026","July","SCAM","2-Meter","L10",40,"Ambient","Amended",24.0813505926388,"Within_Range","",193.149407616361,"Within_Range","",12.3728197255,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"13","GCReW","CO2xN","2026","July","SCAM","2-Meter","L10",80,"Ambient","Amended",17.8455084217093,"Within_Range","",192.657590973202,"Within_Range","",12.3413148612,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"14","GCReW","CO2xN","2026","July","SCAM","2-Meter","L11",20,"Ambient","Amended",20.8573518402994,"Within_Range","",177.156891396333,"Within_Range","",11.3483687226,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"15","GCReW","CO2xN","2026","July","SCAM","2-Meter","L11",40,"Ambient","Amended",20.6312351840299,"Within_Range","",176.844905500705,"Within_Range","",11.3283834833,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"16","GCReW","CO2xN","2026","July","SCAM","2-Meter","L11",80,"Ambient","Amended",21.6653243917654,"Within_Range","",183.968341325811,"Within_Range","",11.7846976039,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"17","GCReW","CO2xN","2026","July","SCAM","2-Meter","L12",20,"Elevated","Amended",20.2549001871491,"Within_Range","",166.107277856135,"Within_Range","",10.640550921,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"18","GCReW","CO2xN","2026","July","SCAM","2-Meter","L12",40,"Elevated","Amended",24.1039145352464,"Within_Range","",186.989029619182,"Within_Range","",11.9781973077,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"19","GCReW","CO2xN","2026","July","SCAM","2-Meter","L12",80,"Elevated","Amended",20.08554897068,"Within_Range","",192.906657263752,"Within_Range","",12.357269587,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"20","GCReW","CO2xN","2026","July","SCAM","2-Meter","L13",20,"Elevated","Ambient",26.380327510917,"Within_Range","",182.198200282087,"Within_Range","",11.6713056434,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"21","GCReW","CO2xN","2026","July","SCAM","2-Meter","L13",40,"Elevated","Ambient",23.7646974422957,"Within_Range","",196.45808180536,"Within_Range","",12.584767273,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"22","GCReW","CO2xN","2026","July","SCAM","2-Meter","L13",80,"Elevated","Ambient",17.7901528384279,"Within_Range","",191.994101551481,"Within_Range","",12.2988129563,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"23","GCReW","CO2xN","2026","July","SCAM","2-Meter","L14",20,"Ambient","Amended",25.6247317529632,"Within_Range","",187.728987306065,"Within_Range","",12.0255976282,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"24","GCReW","CO2xN","2026","July","SCAM","2-Meter","L14",40,"Ambient","Amended",22.9866001247661,"Within_Range","",198.179537376587,"Within_Range","",12.6950405322,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"25","GCReW","CO2xN","2026","July","SCAM","2-Meter","L14",80,"Ambient","Amended",17.8993636930755,"Within_Range","",187.92461212976,"Within_Range","",12.0381289925,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"26","GCReW","CO2xN","2026","July","SCAM","2-Meter","L15",20,"Elevated","Amended",14.8967810355583,"Within_Range","",174.731712270804,"Within_Range","",11.1930162344,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"27","GCReW","CO2xN","2026","July","SCAM","2-Meter","L15",40,"Elevated","Amended",17.7776887086712,"Within_Range","",186.835980253879,"Within_Range","",11.9683932485,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"28","GCReW","CO2xN","2026","July","SCAM","2-Meter","L15",80,"Elevated","Amended",12.8247379912664,"Within_Range","",183.984064880113,"Within_Range","",11.7857048257,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"29","GCReW","CO2xN","2026","July","SCAM","2-Meter","L16",20,"Ambient","Ambient",15.6577698066126,"Within_Range","",188.251808180536,"Within_Range","",12.0590885662,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"30","GCReW","CO2xN","2026","July","SCAM","2-Meter","L16",40,"Ambient","Ambient",16.2189956331878,"Within_Range","",190.175994358251,"Within_Range","",12.182348373,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"31","GCReW","CO2xN","2026","July","SCAM","2-Meter","L16",80,"Ambient","Ambient",13.2496974422957,"Within_Range","",184.039235543018,"Within_Range","",11.7892389563,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"32","GCReW","CO2xN","2026","July","SCAM","2-Meter","L17",20,"Ambient","Ambient",23.134794135995,"Within_Range","",170.319433004231,"Within_Range","",10.9103737873,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"33","GCReW","CO2xN","2026","July","SCAM","2-Meter","L17",40,"Ambient","Ambient",22.0629538365565,"Within_Range","",170.177167842031,"Within_Range","",10.9012605442,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"34","GCReW","CO2xN","2026","July","SCAM","2-Meter","L17",80,"Ambient","Ambient",12.9271147847785,"Within_Range","",148.764925246826,"Within_Range","",9.5296318962,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"35","GCReW","CO2xN","2026","July","SCAM","2-Meter","L18",20,"Elevated","Amended",21.2208546475359,"Within_Range","",175.156502115656,"Within_Range","",11.220227486,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"36","GCReW","CO2xN","2026","July","SCAM","2-Meter","L18",40,"Elevated","Amended",21.2822395508422,"Within_Range","",170.974095909732,"Within_Range","",10.9523102819,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"37","GCReW","CO2xN","2026","July","SCAM","2-Meter","L18",80,"Elevated","Amended",17.7648471615721,"Within_Range","",172.668296191819,"Within_Range","",11.0608376177,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"38","GCReW","CO2xN","2026","July","SCAM","2-Meter","L19",20,"Elevated","Ambient",8.69823767935122,"Within_Range","",179.957847672779,"Within_Range","",11.5277927999,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"39","GCReW","CO2xN","2026","July","SCAM","2-Meter","L19",40,"Elevated","Ambient",9.82538989394885,"Within_Range","",181.121509167842,"Within_Range","",11.6023348025,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"40","GCReW","CO2xN","2026","July","SCAM","2-Meter","L19",80,"Elevated","Ambient",8.70382407985028,"Within_Range","",174.43730606488,"Within_Range","",11.1741571175,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"41","GCReW","CO2xN","2026","July","SCAM","2-Meter","L20",20,"Ambient","Amended",32.4054054897068,"Within_Range","",220.619373765867,"Within_Range","",14.1324949376,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"42","GCReW","CO2xN","2026","July","SCAM","2-Meter","L20",40,"Ambient","Amended",25.6138521522146,"Within_Range","",216.481695345557,"Within_Range","",13.8674429127,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
+"43","GCReW","CO2xN","2026","July","SCAM","2-Meter","L20",80,"Ambient","Amended",18.3998190892077,"Within_Range","",198.648600846262,"Within_Range","",12.7250878703,"2026-09-23","Had to split 2M July into two runs, computer restarted and halted run.
+  Needed to re-run standard curve"
