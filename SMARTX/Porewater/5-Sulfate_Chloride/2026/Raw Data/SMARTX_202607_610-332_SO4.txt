@@ -1,0 +1,148 @@
+Inj.	Injection Name	Type 	Ret.Time	Amount	Rel.Area 	Area	Height
+No.	Selected Peak:		min	µg/mL	%	µS*min	µS
+			CD	CD	CD	CD	CD
+			IC-SO4	IC-SO4	IC-SO4	IC-SO4	IC-SO4
+1	Lab Blank	Unknown	4.223	0.0284	20.65	0.0262	0.03
+2	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+3	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+4	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+5	Standard 1	Calibration Standard	4.23	0.4687	6.9	0.432	2.22
+6	Standard 2	Calibration Standard	4.233	0.8809	6.56	0.8119	4.33
+7	Standard 3	Calibration Standard	4.22	1.7935	6.73	1.6529	8.85
+8	Standard 4	Calibration Standard	4.193	9.4494	6.98	8.709	42.26
+9	Standard 5	Calibration Standard	4.163	20.2472	7.13	18.6608	81.29
+10	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+11	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+12	610_10_July	Unknown	4.19	890.521	8.17	8.2349	40.86
+13	610_20_July	Unknown	4.193	821.5763	8.31	7.5974	38.03
+14	610_40_July	Unknown	4.193	866.9812	7.9	8.0172	39.85
+15	610_80_July	Unknown	4.2	616.8075	6.49	5.7038	29.14
+16	610_120_July	Unknown	4.197	718.9388	7.5	6.6482	33.52
+17	Lab Blank	Unknown	4.23	2.1543	11.69	0.0199	0.05
+18	310_10_July	Unknown	4.193	8.0011	7.56	7.3742	36.86
+19	310_20_July	Unknown	4.19	824.9817	8.06	7.6288	38.04
+20	310_40_July	Unknown	4.193	857.6677	8.45	7.9311	39.51
+21	310_80_July	Unknown	4.2	604.8926	6.39	5.5936	28.56
+22	310_80_July_DUP	Unknown	4.2	638.1619	6.4	5.9013	29.98
+23	310_120_July	Unknown	4.203	543.0101	5.79	5.0214	25.8
+24	310_120_July_SPK	Spiked	4.197	679.3641	7.35	6.2823	31.87
+25	Standard 1	Check Standard	4.227	0.5178	7.43	0.4772	2.31
+26	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+27	311_10_July	Unknown	4.203	754.6976	7.23	6.9789	35.2
+28	311_20_July	Unknown	4.193	782.89	7.91	7.2396	36.45
+29	311_40_July	Unknown	4.197	726.2214	7.17	6.7156	33.98
+30	311_80_July	Unknown	4.22	322.003	3.44	2.9777	15.49
+31	311_120_July	Unknown	4.21	401.4247	4.46	3.7121	19.29
+32	312_10_July	Unknown	4.2	787.7469	7.24	7.2845	36.61
+33	312_20_July	Unknown	4.2	601.439	6.33	5.5617	28.53
+34	312_40_July	Unknown	4.22	330.1984	3.5	3.0534	15.86
+35	312_80_July	Unknown	4.227	185.0395	2.19	1.7111	8.78
+36	312_80_July_DUP	Unknown	4.22	183.8009	2.18	1.6997	8.73
+37	312_120_July	Unknown	4.197	675.1505	7.24	6.2433	31.83
+38	312_120_July_SPK	Spiked	4.19	828.9009	8.75	7.6142	38.26
+39	Lab Blank	Unknown	4.237	0.0111	41.21	0.0103	0.02
+40	Standard 1	Check Standard	4.227	0.5243	7.5	0.4832	2.4
+41	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+42	313_10_July	Unknown	4.193	762.4431	6.67	7.0505	35.46
+43	313_20_July	Unknown	4.207	476.1015	4.81	4.4026	22.74
+44	313_40_July	Unknown	4.217	260.9794	2.73	2.4134	12.5
+45	313_80_July	Unknown	4.227	173.1858	2.03	1.6015	8.18
+46	313_120_July	Unknown	4.22	324.5592	3.64	3.0013	15.64
+47	613_10_July	Unknown	4.21	555.8111	5.17	5.1397	26.33
+48	613_20_July	Unknown	4.217	380.123	3.88	3.5151	18.26
+49	613_40_July	Unknown	4.22	113.2453	1.17	1.0472	5.08
+50	613_80_July	Unknown	4.227	205.472	2.26	1.9001	9.72
+51	613_80_July_DUP	Unknown	4.217	209.8834	2.25	1.9409	9.94
+52	613_120_July	Unknown	4.203	528.0882	5.56	4.8834	25.08
+53	613_120_July_SPK	Spiked	4.203	682.0009	7.07	6.2648	31.88
+54	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+55	Standard 1	Check Standard	4.23	0.5156	7.43	0.4752	2.46
+56	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+57	620_10_July	Unknown	4.193	806.2366	8.15	7.4555	37.37
+58	620_20_July	Unknown	4.193	752.4903	7.77	6.9585	35.07
+59	620_40_July	Unknown	4.197	687.4141	6.87	6.3567	32.23
+60	620_80_July	Unknown	4.203	536.0268	5.66	4.9568	25.46
+61	620_120_July	Unknown	4.203	694.7275	7.23	6.4243	32.63
+62	320_10_July	Unknown	4.2	825.0364	7.79	7.6293	38.23
+63	320_20_July	Unknown	4.193	806.5314	8.13	7.4582	37.55
+64	320_40_July	Unknown	4.193	751.9083	7.46	6.9531	35.19
+65	320_80_July	Unknown	4.207	496.4162	5.39	4.5905	23.69
+66	320_80_July_DUP	Unknown	4.207	498.1974	5.4	4.607	23.74
+67	320_120_July	Unknown	4.193	747.1772	7.65	6.9094	34.91
+68	320_120_July_SPK	Spiked	4.19	900.3397	9.04	8.2704	41.35
+69	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+70	Standard 2	Check Standard	4.247	0.9732	7.09	0.897	4.7
+71	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+72	321_10_July	Unknown	4.197	877.1288	7.85	8.1111	40.61
+73	321_20_July	Unknown	4.193	754.4942	7.42	6.977	35.49
+74	321_40_July	Unknown	4.197	662.6718	6.44	6.1279	31.45
+75	321_80_July	Unknown	4.21	343.6924	3.65	3.1782	16.67
+76	321_120_July	Unknown	4.21	349.111	3.86	3.2283	16.97
+77	322_10_July	Unknown	4.19	873.4599	7.55	8.0771	40.76
+78	322_20_July	Unknown	4.19	877.3594	8.01	8.1132	41.02
+79	322_40_July	Unknown	4.207	609.4554	6.07	5.6358	29.16
+80	322_80_July	Unknown	4.207	436.9201	4.61	4.0403	21.09
+81	322_80_July_DUP	Unknown	4.21	435.2624	4.6	4.025	21.09
+82	322_120_July	Unknown	4.23	133.8134	1.53	1.2374	6.24
+83	322_120_July_SPK	Spiked	4.213	289.8458	3.24	2.6625	14
+84	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+85	Standard 2	Check Standard	4.227	0.9694	7.11	0.8934	4.78
+86	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+87	323_10_July	Unknown	4.207	642.0507	6.03	5.9372	30.75
+88	323_20_July	Unknown	4.2	552.8953	5.4	5.1128	26.68
+89	323_40_July	Unknown	4.213	396.9496	4.11	3.6707	19.34
+90	323_80_July	Unknown	4.227	187.4292	1.95	1.7332	8.93
+91	323_120_July	Unknown	4.217	437.8197	4.81	4.0486	21.32
+92	623_10_July	Unknown	4.203	564.4057	5.56	5.2192	27.22
+93	623_20_July	Unknown	4.203	557.3218	6.22	5.1537	26.99
+94	623_40_July	Unknown	4.207	623.8838	6.4	5.7692	29.97
+95	623_80_July	Unknown	4.207	480.8299	4.88	4.4464	23.3
+96	623_80_July_DUP	Unknown	4.207	475.3426	4.88	4.3956	23.04
+97	623_120_July	Unknown	4.217	219.5127	2.42	2.0299	10.58
+98	623_120_July_SPK	Spiked	4.21	374.9358	4.04	3.4441	18.11
+99	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+100	Standard 2	Check Standard	4.227	0.9645	7.08	0.8889	4.75
+101	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+102	630_10_July	Unknown	4.197	711.7461	7.3	6.5817	33.98
+103	630_20_July	Unknown	4.197	657.4904	7.38	6.08	31.61
+104	630_40_July	Unknown	4.2	609.1312	6.52	5.6328	29.34
+105	630_80_July	Unknown	4.2	584.5418	6.57	5.4054	28.24
+106	630_120_July	Unknown	4.193	733.258	7.98	6.7806	34.85
+107	330_10_July	Unknown	4.2	793.3128	7.41	7.336	37.4
+108	330_20_July	Unknown	4.2	666.0244	7.21	6.1589	31.75
+109	330_40_July	Unknown	4.2	650.696	7.12	6.0172	31.05
+110	330_80_July	Unknown	4.213	521.7368	5.84	4.8247	25.16
+111	330_80_July_DUP	Unknown	4.203	512.8	5.84	4.742	24.74
+112	330_120_July	Unknown	4.217	291.0814	3.55	2.6917	14.16
+113	330_120_July_SPK	Spiked	4.213	21.2885	0.25	0.1956	0.58
+114	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+115	Standard 3	Check Standard	4.22	1.892	7.05	1.7437	9.29
+116	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+117	331_10_July	Unknown	4.193	791.0426	7.18	7.315	37.21
+118	331_20_July	Unknown	4.2	623.5176	6.79	5.7658	29.93
+119	331_40_July	Unknown	4.21	417.7938	4.44	3.8635	20.31
+120	331_80_July	Unknown	4.223	266.9952	3.01	2.469	12.92
+121	331_120_July	Unknown	4.23	147.9862	2.3	1.3685	7.1
+122	332_10_July	Unknown	4.193	795.459	7.15	7.3558	37.59
+123	332_20_July	Unknown	4.207	454.5559	4.85	4.2034	22.05
+124	332_40_July	Unknown	4.217	258.4945	2.69	2.3904	12.46
+125	332_80_July	Unknown	4.803	38.1192	0.45	0.3525	0.67
+126	332_80_July_DUP	Unknown	4.207	452.3029	5.32	4.1826	21.99
+127	332_120_July	Unknown	4.23	123.8355	1.5	1.1451	5.66
+128	332_120_July_SPK	Spiked	4.217	272.8458	3.24	2.5063	13.13
+129	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+130	Standard 3	Check Standard	4.22	1.8856	7.02	1.7378	9.28
+131	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+132	Standard 1	Calibration Standard	4.227	0.5394	7.77	0.4971	2.53
+133	Standard 2	Calibration Standard	4.233	0.9744	7.16	0.898	4.69
+134	Standard 3	Calibration Standard	4.22	1.8947	7.06	1.7462	9.27
+135	Standard 4	Calibration Standard	4.197	9.5158	7.02	8.7702	43.29
+136	Standard 5	Calibration Standard	4.157	20.3084	7.16	18.7171	83.1
+137	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+138	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+139	Lab Blank	Unknown	n.a.	n.a.	n.a.	n.a.	n.a.
+Maximum			4.803	900.3397	41.21	18.7171	83.1
+Average			4.213	439.7775	6.28	4.7072	23.81
+Minimum			4.157	0.0111	0.25	0.0103	0.02
+Standard Deviation			0.057	296.5351	4.12	3.1275	14.83
+Relative Standard Deviation			1.35%	67.43%	65.52%	66.44%	62.30%

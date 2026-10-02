@@ -1,0 +1,161 @@
+"","Site","Project","Year","Month","Community","Nickname","Plot","Depth_cm","CO2_Treatment","Temp_Treatment","SO4_Conc_mM","SO4_Conc_flag","SO4_QAQC_flag","Cl_Conc_mM","Cl_Conc_flag","Cl_QAQC_flag","salinity","Analysis_rundate","Run_notes"
+"1","GCReW","SMARTX","2026","July","SCAM","C3","610",10,"Elevated",0,27.776699937617,"Within_Range","",208.883565585331,"Within_Range","",13.3807207768,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"2","GCReW","SMARTX","2026","July","SCAM","C3","610",20,"Elevated",0,25.6262102308172,"Within_Range","",189.113348377997,"Within_Range","",12.1142772374,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"3","GCReW","SMARTX","2026","July","SCAM","C3","610",40,"Elevated",0,27.0424578914535,"Within_Range","",211.43981100141,"Within_Range","",13.5444691291,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"4","GCReW","SMARTX","2026","July","SCAM","C3","610",80,"Elevated",0,19.2391609482221,"Within_Range","",186.211559943583,"Within_Range","",11.9283940386,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"5","GCReW","SMARTX","2026","July","SCAM","C3","610",120,"Elevated",0,22.4247910168434,"Within_Range","",185.553283497884,"Within_Range","",11.8862260673,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"6","GCReW","SMARTX","2026","July","SCAM","C3","310",10,"Ambient",0,0.249566437928883,"Within_Range","",2.05211001410437,"Within_Range","",0.1314803711,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"7","GCReW","SMARTX","2026","July","SCAM","C3","310",20,"Ambient",0,25.7324298190892,"Within_Range","",196.818310296192,"Within_Range","",12.6078428437,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"8","GCReW","SMARTX","2026","July","SCAM","C3","310",40,"Ambient",0,26.7519557080474,"Within_Range","",194.88581100141,"Within_Range","",12.484050514,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"9","GCReW","SMARTX","2026","July","SCAM","C3","310",80,"Ambient",0,18.8675171553337,"Within_Range","",184.977937940762,"Within_Range","",11.8493704953,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"10","GCReW","SMARTX","2026","July","SCAM","C3","310",120,"Ambient",0,16.9373081721772,"Within_Range","",184.662098730606,"Within_Range","",11.8291384198,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"11","GCReW","SMARTX","2026","July","SCAM","C3","311",10,"Ambient",1.7,23.5401621958827,"Within_Range","",202.828665726375,"Within_Range","",12.9928550934,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"12","GCReW","SMARTX","2026","July","SCAM","C3","311",20,"Ambient",1.7,24.4195258889582,"Within_Range","",190.989322990127,"Within_Range","",12.2344487005,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"13","GCReW","SMARTX","2026","July","SCAM","C3","311",40,"Ambient",1.7,22.6519463505926,"Within_Range","",197.045229901269,"Within_Range","",12.6223788938,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"14","GCReW","SMARTX","2026","July","SCAM","C3","311",80,"Ambient",1.7,10.0437616968185,"Within_Range","",188.73687729196,"Within_Range","",12.0901611961,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"15","GCReW","SMARTX","2026","July","SCAM","C3","311",120,"Ambient",1.7,12.5210449157829,"Within_Range","",179.957940761636,"Within_Range","",11.527798763,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"16","GCReW","SMARTX","2026","July","SCAM","C3","312",10,"Ambient",3.4,24.5710199625702,"Within_Range","",211.795269393512,"Within_Range","",13.5672391361,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"17","GCReW","SMARTX","2026","July","SCAM","C3","312",20,"Ambient",3.4,18.759794135995,"Within_Range","",186.30994922426,"Within_Range","",11.9346966739,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"18","GCReW","SMARTX","2026","July","SCAM","C3","312",40,"Ambient",3.4,10.2993886462882,"Within_Range","",188.784146685472,"Within_Range","",12.093189186,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"19","GCReW","SMARTX","2026","July","SCAM","C3","312",80,"Ambient",3.4,5.77166250779788,"Within_Range","",170.160259520451,"Within_Range","",10.9001774284,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"20","GCReW","SMARTX","2026","July","SCAM","C3","312",120,"Ambient",3.4,21.0589675608235,"Within_Range","",178.625816643159,"Within_Range","",11.4424653564,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"21","GCReW","SMARTX","2026","July","SCAM","C3","313",10,"Ambient",5.1,23.7817560823456,"Within_Range","",224.516911142454,"Within_Range","",14.3821639715,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"22","GCReW","SMARTX","2026","July","SCAM","C3","313",20,"Ambient",5.1,14.850327510917,"Within_Range","",198.531441466855,"Within_Range","",12.7175828572,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"23","GCReW","SMARTX","2026","July","SCAM","C3","313",40,"Ambient",5.1,8.14034310667498,"Within_Range","",195.386064880113,"Within_Range","",12.516095852,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"24","GCReW","SMARTX","2026","July","SCAM","C3","313",80,"Ambient",5.1,5.40192763568309,"Within_Range","",175.19477574048,"Within_Range","",11.2226792236,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"25","GCReW","SMARTX","2026","July","SCAM","C3","313",120,"Ambient",5.1,10.1234934497817,"Within_Range","",180.160823695346,"Within_Range","",11.5407950684,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"26","GCReW","SMARTX","2026","July","SCAM","C3","613",10,"Elevated",5.1,17.3365907673113,"Within_Range","",214.437325811001,"Within_Range","",13.7364843824,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"27","GCReW","SMARTX","2026","July","SCAM","C3","613",20,"Elevated",5.1,11.8566126013724,"Within_Range","",197.662806770099,"Within_Range","",12.6619397255,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"28","GCReW","SMARTX","2026","July","SCAM","C3","613",40,"Elevated",5.1,3.53229257641921,"Within_Range","",201.845616361072,"Within_Range","",12.9298827697,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"29","GCReW","SMARTX","2026","July","SCAM","C3","613",80,"Elevated",5.1,6.40898315658141,"Within_Range","",186.274502115656,"Within_Range","",11.9324259977,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"30","GCReW","SMARTX","2026","July","SCAM","C3","613",120,"Elevated",5.1,16.4718714909545,"Within_Range","",188.209322990127,"Within_Range","",12.0563670435,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"31","GCReW","SMARTX","2026","July","SCAM","C3","620",10,"Elevated",0,25.1477417342483,"Within_Range","",190.163399153738,"Within_Range","",12.1815415475,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"32","GCReW","SMARTX","2026","July","SCAM","C3","620",20,"Elevated",0,23.4713131628197,"Within_Range","",187.072569816643,"Within_Range","",11.9835487382,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"33","GCReW","SMARTX","2026","July","SCAM","C3","620",40,"Elevated",0,21.4414878353088,"Within_Range","",195.582180535966,"Within_Range","",12.5286586581,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"34","GCReW","SMARTX","2026","July","SCAM","C3","620",80,"Elevated",0,16.7194884591391,"Within_Range","",189.016172073343,"Within_Range","",12.1080523031,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"35","GCReW","SMARTX","2026","July","SCAM","C3","620",120,"Elevated",0,21.669603867748,"Within_Range","",186.742392101551,"Within_Range","",11.9623981646,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"36","GCReW","SMARTX","2026","July","SCAM","C3","320",10,"Ambient",0,25.7341359950094,"Within_Range","",204.668603667137,"Within_Range","",13.110718114,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"37","GCReW","SMARTX","2026","July","SCAM","C3","320",20,"Ambient",0,25.1569369931379,"Within_Range","",190.598256699577,"Within_Range","",12.2093977174,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"38","GCReW","SMARTX","2026","July","SCAM","C3","320",40,"Ambient",0,23.4531597005614,"Within_Range","",195.390363892807,"Within_Range","",12.5163712388,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"39","GCReW","SMARTX","2026","July","SCAM","C3","320",80,"Ambient",0,15.4839737991266,"Within_Range","",182.236177715092,"Within_Range","",11.6737384075,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"40","GCReW","SMARTX","2026","July","SCAM","C3","320",120,"Ambient",0,23.3055895196507,"Within_Range","",188.003043723554,"Within_Range","",12.0431531753,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"41","GCReW","SMARTX","2026","July","SCAM","C3","321",10,"Ambient",1.7,27.3589769182782,"Within_Range","",216.205190409027,"Within_Range","",13.849730518,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"42","GCReW","SMARTX","2026","July","SCAM","C3","321",20,"Ambient",1.7,23.5338178415471,"Within_Range","",197.654267983075,"Within_Range","",12.6613927466,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"43","GCReW","SMARTX","2026","July","SCAM","C3","321",40,"Ambient",1.7,20.6697379912664,"Within_Range","",202.060200282087,"Within_Range","",12.9436286187,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"44","GCReW","SMARTX","2026","July","SCAM","C3","321",80,"Ambient",1.7,10.7202869619463,"Within_Range","",190.318502115656,"Within_Range","",12.1914771563,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"45","GCReW","SMARTX","2026","July","SCAM","C3","321",120,"Ambient",1.7,10.8893013100437,"Within_Range","",182.436220028209,"Within_Range","",11.686552748,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"46","GCReW","SMARTX","2026","July","SCAM","C3","322",10,"Ambient",3.4,27.2445383655646,"Within_Range","",224.719684062059,"Within_Range","",14.3951532296,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"47","GCReW","SMARTX","2026","July","SCAM","C3","322",20,"Ambient",3.4,27.3661696818465,"Within_Range","",211.920716502116,"Within_Range","",13.5752750458,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"48","GCReW","SMARTX","2026","July","SCAM","C3","322",40,"Ambient",3.4,19.0098378041173,"Within_Range","",198.456070521862,"Within_Range","",12.7127547339,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"49","GCReW","SMARTX","2026","July","SCAM","C3","322",80,"Ambient",3.4,13.6282002495321,"Within_Range","",189.11784203103,"Within_Range","",12.1145650925,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"50","GCReW","SMARTX","2026","July","SCAM","C3","322",120,"Ambient",3.4,4.17384279475982,"Within_Range","",180.784513399154,"Within_Range","",11.580747477,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"51","GCReW","SMARTX","2026","July","SCAM","C3","323",10,"Ambient",5.1,20.0265346225827,"Within_Range","",207.238160789845,"Within_Range","",13.2753191896,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"52","GCReW","SMARTX","2026","July","SCAM","C3","323",20,"Ambient",5.1,17.2456425452277,"Within_Range","",200.593359661495,"Within_Range","",12.8496655222,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"53","GCReW","SMARTX","2026","July","SCAM","C3","323",40,"Ambient",5.1,12.3814597629445,"Within_Range","",191.73794922426,"Within_Range","",12.2824043121,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"54","GCReW","SMARTX","2026","July","SCAM","C3","323",80,"Ambient",5.1,5.84620087336245,"Within_Range","",194.769342736248,"Within_Range","",12.4765897724,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"55","GCReW","SMARTX","2026","July","SCAM","C3","323",120,"Ambient",5.1,13.6562601372427,"Within_Range","",179.118761636107,"Within_Range","",11.4740425007,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"56","GCReW","SMARTX","2026","July","SCAM","C3","623",10,"Elevated",5.1,17.6046693699314,"Within_Range","",198.533887165021,"Within_Range","",12.7177395241,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"57","GCReW","SMARTX","2026","July","SCAM","C3","623",20,"Elevated",5.1,17.383711790393,"Within_Range","",173.570228490832,"Within_Range","",11.1186137322,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"58","GCReW","SMARTX","2026","July","SCAM","C3","623",40,"Elevated",5.1,19.4598814722395,"Within_Range","",188.981782792666,"Within_Range","",12.1058493894,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"59","GCReW","SMARTX","2026","July","SCAM","C3","623",80,"Elevated",5.1,14.9978134747349,"Within_Range","",194.465483779972,"Within_Range","",12.4571251298,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"60","GCReW","SMARTX","2026","July","SCAM","C3","623",120,"Elevated",5.1,6.84693387398628,"Within_Range","",183.089816643159,"Within_Range","",11.728420938,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"61","GCReW","SMARTX","2026","July","SCAM","C3","630",10,"Elevated",0,22.2004398003743,"Within_Range","",187.383511988716,"Within_Range","",12.0034671185,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"62","GCReW","SMARTX","2026","July","SCAM","C3","630",20,"Elevated",0,20.5081222707424,"Within_Range","",170.052609308886,"Within_Range","",10.893281555,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"63","GCReW","SMARTX","2026","July","SCAM","C3","630",40,"Elevated",0,18.99972551466,"Within_Range","",180.94352045134,"Within_Range","",11.5909331746,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"64","GCReW","SMARTX","2026","July","SCAM","C3","630",80,"Elevated",0,18.2327448533999,"Within_Range","",171.482059238364,"Within_Range","",10.984849473,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"65","GCReW","SMARTX","2026","July","SCAM","C3","630",120,"Elevated",0,22.8714285714286,"Within_Range","",174.509297602257,"Within_Range","",11.1787687622,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"66","GCReW","SMARTX","2026","July","SCAM","C3","330",10,"Ambient",0,24.7446288209607,"Within_Range","",206.102750352609,"Within_Range","",13.2025868975,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"67","GCReW","SMARTX","2026","July","SCAM","C3","330",20,"Ambient",0,20.7743106674984,"Within_Range","",176.7257348378,"Within_Range","",11.3207496311,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"68","GCReW","SMARTX","2026","July","SCAM","C3","330",40,"Ambient",0,20.2961946350593,"Within_Range","",175.222902679831,"Within_Range","",11.2244809833,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"69","GCReW","SMARTX","2026","July","SCAM","C3","330",80,"Ambient",0,16.2737616968185,"Within_Range","",173.253060648801,"Within_Range","",11.098296547,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"70","GCReW","SMARTX","2026","July","SCAM","C3","330",120,"Ambient",0,9.07927011852776,"Within_Range","",162.998002820874,"Within_Range","",10.4413765144,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"71","GCReW","SMARTX","2026","July","SCAM","C3","331",10,"Ambient",1.7,24.6738178415471,"Within_Range","",212.661763046544,"Within_Range","",13.6227451165,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"72","GCReW","SMARTX","2026","July","SCAM","C3","331",20,"Ambient",1.7,19.4484591391142,"Within_Range","",176.890456981664,"Within_Range","",11.3313014269,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"73","GCReW","SMARTX","2026","July","SCAM","C3","331",40,"Ambient",1.7,13.0316219588272,"Within_Range","",186.42954583921,"Within_Range","",11.9423578118,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"74","GCReW","SMARTX","2026","July","SCAM","C3","331",80,"Ambient",1.7,8.32798502807236,"Within_Range","",177.619737658674,"Within_Range","",11.3780177979,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"75","GCReW","SMARTX","2026","July","SCAM","C3","331",120,"Ambient",1.7,4.61591391141609,"Within_Range","",129.2618674189,"Within_Range","",8.2803020924,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"76","GCReW","SMARTX","2026","July","SCAM","C3","332",10,"Ambient",3.4,24.8115720524017,"Within_Range","",215.242533145275,"Within_Range","",13.7880644746,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"77","GCReW","SMARTX","2026","July","SCAM","C3","332",20,"Ambient",3.4,14.1782875857767,"Within_Range","",184.612183356841,"Within_Range","",11.8259409333,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"78","GCReW","SMARTX","2026","July","SCAM","C3","332",40,"Ambient",3.4,8.06283530879601,"Within_Range","",194.301904090268,"Within_Range","",12.4466465175,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"79","GCReW","SMARTX","2026","July","SCAM","C3","332",80,"Ambient",3.4,1.18899563318777,"Within_Range","",174.722510578279,"Within_Range","",11.192426791,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
+"80","GCReW","SMARTX","2026","July","SCAM","C3","332",120,"Ambient",3.4,3.86261696818465,"Within_Range","",167.245376586742,"Within_Range","",10.7134554202,"2026-09-30","One bad duplicate, one bad blank, one bad spike. 
+  Will re-run 310-10, SO4 & Cl concentrations very low"
