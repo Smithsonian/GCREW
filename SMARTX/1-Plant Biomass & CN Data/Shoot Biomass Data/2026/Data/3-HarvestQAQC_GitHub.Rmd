@@ -27,8 +27,8 @@ year=2026
 Date_Run = "2026-10-05"
 Run_by = "Victoria Ellis"
 Script_run_by = "Victoria Ellis"
-year <- "2026"
 Site = "GCREW"
+Project = "SMARTX"
 
 # Harvest data
 Harvest_file <- "3-SMARTX All Harvest (Filled).csv"
@@ -38,8 +38,7 @@ Data_folder <- here("SMARTX", "1-Plant Biomass & CN Data", "Shoot Biomass Data",
 
 # Read in data
 Harvest <- read.csv(
-  file.path(Data_folder, Harvest_file)
-)
+  file.path(Data_folder, Harvest_file))
 
 ```
 
