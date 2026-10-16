@@ -1,0 +1,103 @@
+---
+title: "GENX Census QAQC"
+output: html_document
+date: " "
+---
+
+```{r}
+###############################################################################
+########## PROGRAMS FOR ERROR CHECKING AND TRANSFERRING CENSUS DATA ########### 
+###############################################################################
+  
+# install.packages("readr")
+# install.packages("tidyverse")
+library(readr)
+library(tidyverse)
+# These lines of code download any required packages for the code to function.
+
+# set year
+year=
+
+```
+
+
+```{r}
+###############################################################################
+######## STEP 1 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING CENSUS DATA ##########
+###############################################################################
+
+# Read in Census data 
+Census <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/1-GENX SC Census (Filled).csv'))
+
+CensusQAQC <- Census
+CensusQAQC <- subset(CensusQAQC, Rep != 99)
+CensusQAQC$HFlag <- ifelse(CensusQAQC$Total_Height < CensusQAQC$Green_Height, 1, 0)
+CensusQAQC$HFlag <- ifelse(CensusQAQC$Total_Height > 223 | (0 < CensusQAQC$Total_Height & CensusQAQC$Total_Height < 5), 1, CensusQAQC$HFlag)
+CensusQAQC$WFlag <- ifelse(CensusQAQC$Width > 6.4 | (0 < CensusQAQC$Width & CensusQAQC$Width < 0.2), 1, 0)
+CensusQAQC$ZFlag <- ifelse(is.na(CensusQAQC$Total_Height) | is.na(CensusQAQC$Green_Height) | is.na(CensusQAQC$Width)| is.na(CensusQAQC$Flower_Cut), 1, 0)
+CensusQAQC <- subset(CensusQAQC, HFlag != 0 | WFlag != 0 | ZFlag != 0)
+# This step deletes records that have "0" in all of the flag columns, meaning there are no errors, leaving for output those records with errors
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(CensusQAQC, paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/1-CensusQAQC Error Report.csv'))
+
+```
+
+
+
+```{r}
+###############################################################################
+######## STEP 2 -- RUN QA/QC PROGRAMS FOR ERROR CHECKING DENSITY DATA #########
+###############################################################################
+
+# Read in Density data 
+Density <- read.csv(paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/2-GENX SC Density (Filled).csv')) %>%
+  select(-Notes)
+
+DensityQAQC <- Density
+DensityQAQC$QDFlag <- ifelse(DensityQAQC$StemCount > 180,  1, 0)
+DensityQAQC$ZFlag <- ifelse(is.na(DensityQAQC$StemCount), 1, 0)
+# this step adds an NA if there are any blank cells in the rows.
+DensityQAQC <- subset(DensityQAQC, QDFlag != 0 | ZFlag != 0)
+# This step deletes records that have "0" in all of the flag columns, meaning there are no errors, leaving for output those records with errors or NAs.
+# Keep observations where any one of the flags is marked as 1
+
+write.csv(DensityQAQC, paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/2-Density QAQC Error Report.csv'))
+
+```
+
+
+
+
+```{r}
+###############################################################################
+######## STEP 3 -- GENERATE CENSUS OUTPUT FILE FOR TRANSFER ################### 
+###############################################################################
+
+CensusTransfer <- Census[, c("Year", "Chamber", "Total_Height", "Green_Height", "Width", "Flower_Cut")]
+
+CensusTransfer <- CensusTransfer %>%
+  mutate(
+    across(c(Total_Height, Green_Height, Width),
+           ~ replace_na(., 0)),
+    Flower_Cut = ifelse(is.na(Flower_Cut) | Flower_Cut == "", "N", Flower_Cut)
+  )
+
+write.csv(CensusTransfer, paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/1-Census (for transfer).csv'), row.names = FALSE)
+# File for transfer keeps flagged measurements in spreadsheet.
+
+```
+
+
+```{r}
+###############################################################################
+######## STEP 4 -- GENERATE DENSITY OUTPUT FILE FOR TRANSFER ##################
+###############################################################################
+  
+DensityTransfer <- Density
+
+write.csv(DensityTransfer, paste0('S:/Biogeochemistry/GCREW/5-GENX/1-Data/1-Plant biomass & CN data/Shoot Biomass Data/',year,'/Data/2-Density (for transfer).csv'), row.names = FALSE)
+# File for transfer keeps flagged measurements in spreadsheet.
+
+```
+
