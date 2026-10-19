@@ -282,7 +282,10 @@ add_log <- R2_Check %>% dplyr::select(Test, Run_Date, R2, Slope, Intercept) %>%
   )) %>% mutate(Run_Date = as.Date(as.character(Run_Date), format = "%m/%d/%Y")) %>% mutate(User = user) %>% mutate(Run = "Current Runs") %>% rename(R_Squared = R2) #Format new run data for log
 
 
-new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>% distinct(dplyr::select(.,-Run, -User), .keep_all = TRUE) #bind rows, round data, and remove possible duplicate data from rerunning code
+new_log <- rbind(old_log, add_log) %>% mutate(across(where(is.numeric), \(x) round(x, digits = 4))) %>%
+    group_by(dplyr::select(., -Run)) %>%
+    summarize(Run = Run[max(1, which(Run != "Past Runs"))][1]) %>%
+    ungroup() #bind rows, round data, and remove possible duplicate data from rerunning code
 Reg_Coef <- new_log %>% group_by(Test) %>% reframe(Mean_Slope = mean(Slope, na.rm = TRUE), SD_Slope = sd(Slope, na.rm = TRUE), Mean_Int = mean(Intercept, na.rm = TRUE), SD_Int = sd(Intercept, na.rm = TRUE)) %>% distinct() %>% 
   mutate(
   SD_Slope_Max = Mean_Slope + 2*SD_Slope, SD_Int_Max = Mean_Int + 2*SD_Int, 
