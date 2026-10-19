@@ -740,7 +740,8 @@ Matrix_Flags_join <- Flags_Matrix
 
 #Pull out samples 
 samples <- df_all_cor %>%  
-  filter(str_detect(Sample_Name, c("P")))
+  filter(str_detect(Sample_Name, c("P"))) %>%
+  filter(!(Sample_Name %ilike% "PE"))
 
 
 #Convert values based on the Test ID 
@@ -912,7 +913,7 @@ df_all_clean <- merged_data
 cat("Export Processed Data")
 
 df_all_clean_cols <- merged_data %>%
-  select(
+  dplyr::select(
     Site,
     Project,
     Year,
@@ -948,7 +949,7 @@ org_labeled_fin_data <- final_data_labeled %>%
 
 #Order Columns for Final Data Frame
 All_Clean_Data <- org_labeled_fin_data %>%
-  select(
+  dplyr::select(
     Site,
     Project,
     Year,
@@ -1113,7 +1114,7 @@ print(viz_NH3_plot_v2)
 NH3_forplot <- NH3_forplot %>% 
   mutate(Sub_Plot = ifelse(SubPlot == "A", "Phrag", "Native"))
 
-viz_NH3_plot_2 <- ggplot(data = NH3_forplot, aes(x = NH3_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color, shape = Sub_Plot)) +
+viz_NH3_plot_2 <- ggplot(data = NH3_forplot, aes(x = NH3_Conc_uM, y = as.numeric(Depth_cm), color = Plot_Color)) +
   geom_point(size = 3) +
   geom_path(linewidth = 1) +
   scale_color_manual(
