@@ -31,7 +31,7 @@ library(here)
   final_path <- "Processed Data/CO2xN_Porewater_NH4_202607.csv"
 
 #record any notes about the run or anything other info here: 
-  run_notes <- ""
+  run_notes <- "Slope slightly out of range, all other checks pass - runs kept"
   
   #Collection_Dates = "Raw Data/Sample_Collection_Dates_2024.csv"
 
