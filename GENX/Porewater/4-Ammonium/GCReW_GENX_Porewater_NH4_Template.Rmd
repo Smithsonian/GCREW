@@ -123,7 +123,7 @@ metadata <- raw_metadata %>%
     rename(
     Sample_ID = Sample.ID,
   ) %>%
-  select(-N_Treatment)
+  dplyr::select(-N_Treatment)
 
 ```
 
@@ -495,7 +495,8 @@ blks_df <- df_all %>% filter(str_detect(Sample_Name, "CCB") | str_detect(Sample_
 
 #Pull out samples from df_all to calc quantile
 samples <- df_all %>% 
-  filter(grepl(pattern = "^Ch\\d{1,2}-\\d{1,2}$", Sample_Name)) %>% filter(!str_detect(Sample_Name, c("mg"))) %>% 
+   filter(str_detect(Sample_Name, c("CH"))) %>%
+  filter(!str_detect(Sample_Name, c("mg"))) %>% 
   group_by(Test, Run_Date) %>% 
   mutate(Quant = quantile(Conc, prob=c(.25)) ) %>% 
   dplyr::select(Test, Run_Date, Quant) %>% 
@@ -874,7 +875,7 @@ if (all_present) {
   message("Some sample IDs are missing from data.")
   
   # Optional: Which ones are missing?
-  missing_ids <- setdiff(metadata$Sample_Name, Flagged_Samples$Sample_Name)
+  missing_ids <- setdiff(metadata$Sample_Name, samples_flagged1$Sample_Name)
   print(missing_ids)
 }
 
